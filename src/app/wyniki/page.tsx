@@ -3,6 +3,7 @@ import Nav from '@/components/Nav';
 import Stats from '@/components/Stats';
 import WeeklyResults from '@/components/WeeklyResults';
 import Footer from '@/components/Footer';
+import RevealOnScroll from '@/components/RevealOnScroll';
 
 export const metadata: Metadata = {
   title: 'Wyniki',
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 export default function WynikiPage() {
   return (
     <>
+      <RevealOnScroll />
       <Nav />
       <main style={{ paddingTop: '80px' }}>
         <Stats />
