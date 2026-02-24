@@ -16,16 +16,9 @@ export default function Nav() {
 
       <ul className="nav-links">
         <li><Link href="/#wyniki">Wyniki</Link></li>
-        <li><Link href="/blog">Blog</Link></li>
+        <li><Link href="/#wyniki-tygodniowe">Tygodnik</Link></li>
+        <li><Link href="/blog" style={{ color: pathname === '/blog' ? 'var(--cyan)' : undefined }}>Blog</Link></li>
         <li><Link href="/#newsletter">Newsletter</Link></li>
-        <li>
-          <Link
-            href="/blog"
-            style={{ color: pathname === '/blog' ? 'var(--cyan)' : undefined }}
-          >
-            Artykuły
-          </Link>
-        </li>
       </ul>
 
       <button className="nav-cta">Dołącz teraz</button>
