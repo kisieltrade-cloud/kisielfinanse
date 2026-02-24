@@ -1,0 +1,34 @@
+'use client';
+
+import Link from 'next/link';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+
+export default function Nav() {
+  const pathname = usePathname();
+
+  return (
+    <nav className="nav">
+      <Link href="/" className="nav-logo">
+        <Image src="/logo.svg" alt="NysethTrading logo" width={32} height={32} />
+        NYSETHTRADING
+      </Link>
+
+      <ul className="nav-links">
+        <li><Link href="/#wyniki">Wyniki</Link></li>
+        <li><Link href="/blog">Blog</Link></li>
+        <li><Link href="/#newsletter">Newsletter</Link></li>
+        <li>
+          <Link
+            href="/blog"
+            style={{ color: pathname === '/blog' ? 'var(--cyan)' : undefined }}
+          >
+            Artykuły
+          </Link>
+        </li>
+      </ul>
+
+      <button className="nav-cta">Dołącz teraz</button>
+    </nav>
+  );
+}
