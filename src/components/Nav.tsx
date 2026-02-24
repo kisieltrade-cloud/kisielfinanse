@@ -19,6 +19,7 @@ export default function Nav() {
         <li><Link href="/wyniki" style={{ color: pathname === '/wyniki' ? 'var(--cyan)' : undefined }}>Wyniki</Link></li>
         <li><Link href="/o-mnie" style={{ color: pathname === '/o-mnie' ? 'var(--cyan)' : undefined }}>O mnie</Link></li>
         <li><Link href="/blog" style={{ color: pathname === '/blog' ? 'var(--cyan)' : undefined }}>Blog</Link></li>
+        <li><Link href="/wspolpraca" style={{ color: pathname === '/wspolpraca' ? 'var(--cyan)' : undefined }}>Współpraca</Link></li>
         <li><Link href="/#newsletter">Newsletter</Link></li>
       </ul>
 
