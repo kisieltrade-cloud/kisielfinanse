@@ -4,23 +4,35 @@ import './globals.css';
 export const metadata: Metadata = {
   title: {
     template: '%s | NysethTrading',
-    default: 'NysethTrading — Trade Smarter, Live Freer',
+    default: 'NysethTrading — Transparentny Trading na Żywo',
   },
   description:
-    'Transparentne wyniki tradingowe, analiza rynkowa i strategie, które działają. Dołącz do społeczności poważnych traderów.',
-  keywords: ['trading', 'forex', 'krypto', 'strategie', 'analiza rynkowa', 'wyniki'],
+    'Trader z Wrocławia z 7-letnim doświadczeniem. Transparentne wyniki tygodniowe, day trading na Forexie, krypto i futures. Dołącz i śledź moje wyniki na żywo.',
+  keywords: [
+    'trading', 'forex', 'krypto', 'bitcoin', 'day trading', 'futures',
+    'wyniki tradingowe', 'trader Polska', 'NAS100', 'S&P500',
+    'transparentny trader', 'nauka tradingu',
+  ],
+  authors: [{ name: 'Nyseth' }],
+  creator: 'Nyseth',
   openGraph: {
     type: 'website',
     locale: 'pl_PL',
-    url: 'https://nysethtrading.pl',
+    url: 'https://nyseth-trading.vercel.app',
     siteName: 'NysethTrading',
-    title: 'NysethTrading — Trade Smarter, Live Freer',
-    description: 'Transparentne wyniki tradingowe, analiza rynkowa i strategie, które działają.',
+    title: 'NysethTrading — Transparentny Trading na Żywo',
+    description:
+      'Trader z Wrocławia z 7-letnim doświadczeniem. Wyniki tygodniowe, day trading na Forexie, krypto i futures.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NysethTrading',
-    description: 'Transparentne wyniki tradingowe i analiza rynkowa.',
+    title: 'NysethTrading — Transparentny Trading na Żywo',
+    description:
+      'Wyniki tygodniowe, day trading na Forexie, krypto i futures. Bez filtrów.',
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -34,6 +46,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap"
           rel="stylesheet"
         />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/favicon.svg" />
       </head>
       <body>{children}</body>
     </html>

@@ -7,7 +7,14 @@ import RevealOnScroll from '@/components/RevealOnScroll';
 
 export const metadata: Metadata = {
   title: 'Wyniki',
-  description: 'Transparentne wyniki tradingowe — miesięczne i tygodniowe statystyki NysethTrading.',
+  description:
+    'Transparentne wyniki tradingowe — tygodniowe i miesięczne statystyki z rachunku własnego. Forex, krypto, futures. Bez owijania w bawełnę.',
+  keywords: ['wyniki tradingowe', 'transparentny trader', 'forex wyniki', 'krypto trading wyniki', 'day trading statystyki'],
+  openGraph: {
+    title: 'Wyniki Tradingowe | NysethTrading',
+    description: 'Tygodniowe i miesięczne wyniki z rachunku własnego. Forex, krypto, futures — bez filtrów.',
+    url: 'https://nyseth-trading.vercel.app/wyniki',
+  },
 };
 
 export default function WynikiPage() {
