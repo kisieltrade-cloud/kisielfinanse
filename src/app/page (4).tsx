@@ -7,6 +7,7 @@ import BlogSection from '@/components/BlogSection';
 import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
 import RevealOnScroll from '@/components/RevealOnScroll';
+import About from '@/components/About';
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
       <main>
         <Hero />
         <Ticker />
+        <Stats />
         <Stats />
         <WeeklyResults />
         <BlogSection />
