@@ -18,7 +18,7 @@ export default function HomePage() {
         <Hero />
         <Ticker />
         <Stats />
-        <Stats />
+        <About />
         <WeeklyResults />
         <BlogSection />
         <Newsletter />
