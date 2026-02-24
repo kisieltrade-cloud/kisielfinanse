@@ -22,7 +22,7 @@ const TIMELINE = [
     color: 'var(--yellow)',
   },
   {
-    year: '2024',
+    year: '2026',
     title: 'NysethTrading',
     desc: 'Decyzja o jawności — publikowanie wyników, dzielenie się wiedzą i budowanie społeczności traderów, którzy traktują to poważnie.',
     color: 'var(--pink)',
@@ -50,17 +50,21 @@ const VALUES = [
   },
 ];
 
+// ─────────────────────────────────────
+// AKTUALIZUJ WIN RATE CO TYDZIEŃ
+// ─────────────────────────────────────
+const CURRENT_WIN_RATE = '—';  // wpisz np. '68%' kiedy będziesz mieć dane
+
 export default function About() {
   const [tlIdx, setTlIdx] = useState(0);
 
   return (
     <section className="about-section" id="o-mnie">
-      {/* Decorative background */}
       <div className="about-bg-grid" />
       <div className="about-glow" />
 
       <div className="about-inner">
-        {/* ── HERO BIO ── */}
+
         <div className="about-hero">
           <div className="section-label">// kim jestem</div>
           <h2 className="section-title" style={{ marginBottom: 24 }}>
@@ -71,37 +75,33 @@ export default function About() {
 
           <p className="about-bio">
             Trader z <strong>Wrocławia</strong> z blisko{' '}
-            <strong>7-letnim doświadczeniem</strong>. Zacząłem od krypto w 2018,
-            dziś day tradeuję na Forexie, futures i indeksach. Wierzę, że
-            transparentność i dyscyplina to jedyna droga do długoterminowego
-            sukcesu na rynkach.
+            <strong>7-letnim doświadczeniem</strong> na rynkach finansowych.
+            Zajmuję się day tradingiem na Forexie, rynku krypto oraz kontraktach
+            futures na indeksy giełdowe. Wierzę, że konsekwencja, zarządzanie
+            ryzykiem i chłodna głowa są ważniejsze niż jakikolwiek system czy
+            strategia.
           </p>
 
           <div className="about-tags">
-            {['Day Trading', 'Forex', 'Krypto', 'Futures / Indeksy', 'Wrocław 🇵🇱'].map((tag) => (
+            {['Day Trading', 'Forex', 'Krypto', 'Futures / Indeksy'].map((tag) => (
               <span key={tag} className="about-tag">{tag}</span>
             ))}
           </div>
         </div>
 
-        {/* ── STATS ── */}
         <div className="about-stats">
           {[
             { val: '7', label: 'Lat doświadczenia' },
-            { val: '3', label: 'Rynki jednocześnie' },
-            { val: '847+', label: 'Zamkniętych pozycji' },
-            { val: '68%', label: 'Średni Win Rate', yellow: true },
+            { val: '1000+', label: 'Zamkniętych pozycji' },
+            { val: CURRENT_WIN_RATE, label: 'Aktualny Win Rate' },
           ].map((s) => (
             <div key={s.label} className="about-stat-card">
-              <span className="about-stat-num" style={s.yellow ? { color: 'var(--yellow)' } : {}}>
-                {s.val}
-              </span>
+              <span className="about-stat-num">{s.val}</span>
               <span className="about-stat-label">{s.label}</span>
             </div>
           ))}
         </div>
 
-        {/* ── TIMELINE ── */}
         <div className="about-timeline-wrap">
           <div className="section-label">// moja droga</div>
           <h3 className="about-subtitle">
@@ -122,16 +122,12 @@ export default function About() {
             ))}
           </div>
 
-          <div
-            className="tl-content"
-            style={{ borderTopColor: TIMELINE[tlIdx].color }}
-          >
+          <div className="tl-content" style={{ borderTopColor: TIMELINE[tlIdx].color }}>
             <div className="tl-title">{TIMELINE[tlIdx].title}</div>
             <p className="tl-desc">{TIMELINE[tlIdx].desc}</p>
           </div>
         </div>
 
-        {/* ── VALUES ── */}
         <div className="about-values-wrap">
           <div className="section-label">// moja filozofia</div>
           <h3 className="about-subtitle">
@@ -150,7 +146,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* ── CTA ── */}
         <div className="about-cta">
           <div>
             <div className="about-cta-title">Śledź moje wyniki na żywo</div>
@@ -158,10 +153,11 @@ export default function About() {
               Co tydzień publikuję swoje wyniki. Bez filtrów, bez owijania w bawełnę.
             </div>
           </div>
-          <a href="#wyniki-tygodniowe" className="btn-primary">
+          <a href="/wyniki" className="btn-primary">
             ZOBACZ WYNIKI →
           </a>
         </div>
+
       </div>
     </section>
   );
