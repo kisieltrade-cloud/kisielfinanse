@@ -1743,3 +1743,66 @@ a { color: inherit; text-decoration: none; }
   white-space: nowrap;
   border: 0;
 }
+
+/* ──────────────────────────────────────
+   EQUITY CURVE
+────────────────────────────────────── */
+.equity-section {
+  padding: 100px 60px;
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+
+.equity-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+
+.equity-card {
+  background: var(--surface);
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.equity-card-val {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  letter-spacing: 2px;
+  line-height: 1;
+  color: var(--text);
+}
+
+.equity-card-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.equity-chart-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--cyan);
+  padding: 24px 16px 8px;
+  margin-bottom: 16px;
+}
+
+.equity-disclaimer {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .equity-section { padding: 60px 24px; }
+  .equity-cards { grid-template-columns: 1fr 1fr; }
+}

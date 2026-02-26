@@ -1,0 +1,26 @@
+import type { Metadata } from 'next';
+import Nav from '@/components/Nav';
+import Footer from '@/components/Footer';
+import Stats from '@/components/Stats';
+import WeeklyResults from '@/components/WeeklyResults';
+import EquityCurve from '@/components/EquityCurve';
+
+export const metadata: Metadata = {
+  title: 'Wyniki',
+  description: 'Transparentne wyniki tradingowe — tygodniowe i miesięczne statystyki z rachunku własnego. Forex, krypto, futures.',
+  keywords: ['wyniki tradingowe', 'transparentny trader', 'forex wyniki', 'equity curve', 'day trading wyniki'],
+};
+
+export default function WynikiPage() {
+  return (
+    <>
+      <Nav />
+      <main style={{ paddingTop: '80px' }}>
+        <Stats />
+        <EquityCurve />
+        <WeeklyResults />
+      </main>
+      <Footer />
+    </>
+  );
+}
