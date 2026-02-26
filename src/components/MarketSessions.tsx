@@ -6,165 +6,147 @@ interface Session {
   name: string;
   city: string;
   timezone: string;
-  open: number;  // hour in UTC
-  close: number; // hour in UTC
+  open: number;
+  close: number;
   color: string;
 }
 
 const SESSIONS: Session[] = [
-  { name: 'Sydney',  city: 'SYDNEY',  timezone: 'Australia/Sydney',   open: 21, close: 6,  color: '#f5c518' },
-  { name: 'Tokio',   city: 'TOKIO',   timezone: 'Asia/Tokyo',         open: 0,  close: 9,  color: '#b14aed' },
-  { name: 'Londyn',  city: 'LONDYN',  timezone: 'Europe/London',      open: 8,  close: 17, color: '#00f5d4' },
-  { name: 'Nowy Jork', city: 'NOWY JORK', timezone: 'America/New_York', open: 13, close: 22, color: '#ff2d78' },
+  { name: 'Sydney',    city: 'SYDNEY',    timezone: 'Australia/Sydney',  open: 21, close: 6,  color: '#f5c518' },
+  { name: 'Tokio',     city: 'TOKIO',     timezone: 'Asia/Tokyo',        open: 0,  close: 9,  color: '#b14aed' },
+  { name: 'Londyn',    city: 'LONDYN',    timezone: 'Europe/London',     open: 8,  close: 17, color: '#00f5d4' },
+  { name: 'Nowy Jork', city: 'NOWY JORK', timezone: 'America/New_York',  open: 13, close: 22, color: '#ff2d78' },
 ];
 
-function isSessionOpen(session: Session, utcHour: number, utcMin: number): boolean {
-  const nowMins = utcHour * 60 + utcMin;
-  if (session.open < session.close) {
-    return nowMins >= session.open * 60 && nowMins < session.close * 60;
-  } else {
-    // crosses midnight (Sydney)
-    return nowMins >= session.open * 60 || nowMins < session.close * 60;
-  }
+function isOpen(s: Session, utcH: number, utcM: number) {
+  const now = utcH * 60 + utcM;
+  if (s.open < s.close) return now >= s.open * 60 && now < s.close * 60;
+  return now >= s.open * 60 || now < s.close * 60;
 }
 
-function minsUntil(targetHour: number, utcHour: number, utcMin: number): number {
-  const nowMins = utcHour * 60 + utcMin;
-  const targetMins = targetHour * 60;
-  let diff = targetMins - nowMins;
-  if (diff < 0) diff += 24 * 60;
+function minsUntil(target: number, utcH: number, utcM: number) {
+  let diff = target * 60 - (utcH * 60 + utcM);
+  if (diff < 0) diff += 1440;
   return diff;
 }
 
-function formatCountdown(mins: number): string {
-  const h = Math.floor(mins / 60);
-  const m = mins % 60;
+function fmt(mins: number) {
+  const h = Math.floor(mins / 60), m = mins % 60;
   return h > 0 ? `${h}h ${m}m` : `${m}m`;
 }
 
-function getLocalTime(timezone: string): string {
-  return new Date().toLocaleTimeString('pl-PL', {
-    timeZone: timezone,
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+function localTime(tz: string) {
+  return new Date().toLocaleTimeString('pl-PL', { timeZone: tz, hour: '2-digit', minute: '2-digit' });
 }
 
 export default function MarketSessions() {
   const [now, setNow] = useState(new Date());
-
   useEffect(() => {
-    const interval = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(interval);
+    const t = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(t);
   }, []);
 
-  const utcHour = now.getUTCHours();
-  const utcMin = now.getUTCMinutes();
-
-  const openSessions = SESSIONS.filter(s => isSessionOpen(s, utcHour, utcMin));
-  const isOverlap = openSessions.length >= 2;
+  const H = now.getUTCHours(), M = now.getUTCMinutes();
+  const openSessions = SESSIONS.filter(s => isOpen(s, H, M));
+  const overlap = openSessions.length >= 2;
+  const utcTime = now.toLocaleTimeString('pl-PL', { timeZone: 'UTC', hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
   return (
-    <section className="sessions-section">
-      <div className="sessions-inner">
-        <div className="sessions-header">
+    <section style={{ padding: '100px 0', borderTop: '1px solid #1a2535' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 60px' }}>
+
+        {/* Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 32, flexWrap: 'wrap', gap: 16 }}>
           <div>
-            <div className="section-label">// live market clock</div>
-            <h2 className="section-title reveal">
-              <span aria-hidden="true">SESJE <span className="gradient-text-cp">RYNKOWE</span></span>
-              <span className="seo-only">Godziny sesji rynkowych Forex — Londyn, Nowy Jork, Tokio, Sydney</span>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: '#00f5d4', letterSpacing: '3px', marginBottom: 8 }}>
+              // live market clock
+            </div>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem,4vw,3rem)', letterSpacing: '3px', lineHeight: 1, margin: 0, color: '#e8edf5' }}>
+              SESJE <span style={{ background: 'linear-gradient(135deg,#00f5d4,#b14aed)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>RYNKOWE</span>
             </h2>
           </div>
-          <div className="sessions-utc reveal">
-            <div className="sessions-utc-label">// UTC</div>
-            <div className="sessions-utc-time">
-              {now.toLocaleTimeString('pl-PL', { timeZone: 'UTC', hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: '#00f5d4', letterSpacing: '2px', marginBottom: 4 }}>// UTC</div>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: '2.2rem', letterSpacing: '3px', color: '#e8edf5', lineHeight: 1 }}>
+              {utcTime}
             </div>
           </div>
         </div>
 
-        {/* Overlap indicator */}
-        {isOverlap && (
-          <div className="sessions-overlap reveal">
-            <span className="sessions-overlap-dot" />
+        {/* Overlap banner */}
+        {overlap && (
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 10,
+            background: 'rgba(0,245,212,0.06)', border: '1px solid rgba(0,245,212,0.2)',
+            borderLeft: '3px solid #00f5d4', padding: '10px 20px',
+            fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: '#00f5d4', marginBottom: 16,
+          }}>
+            <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#00f5d4', flexShrink: 0, boxShadow: '0 0 8px #00f5d4', display: 'inline-block' }} />
             Nakładanie sesji: {openSessions.map(s => s.name).join(' + ')} — najwyższa płynność
           </div>
         )}
 
-        {/* Session cards */}
-        <div className="sessions-grid reveal">
-          {SESSIONS.map((session) => {
-            const open = isSessionOpen(session, utcHour, utcMin);
-            const minsToClose = open ? minsUntil(session.close, utcHour, utcMin) : 0;
-            const minsToOpen  = !open ? minsUntil(session.open, utcHour, utcMin) : 0;
-            const localTime = getLocalTime(session.timezone);
+        {/* Grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 2 }}>
+          {SESSIONS.map(s => {
+            const open = isOpen(s, H, M);
+            const totalMins = s.open < s.close ? (s.close - s.open) * 60 : (24 - s.open + s.close) * 60;
+            const minsLeft = open ? minsUntil(s.close, H, M) : 0;
+            const progress = open ? Math.round((1 - minsLeft / totalMins) * 100) : 0;
+            const minsToOpen = !open ? minsUntil(s.open, H, M) : 0;
 
             return (
-              <div
-                key={session.name}
-                className={`session-card${open ? ' session-open' : ''}`}
-                style={{ borderTop: `3px solid ${open ? session.color : 'var(--border)'}` }}
-              >
-                {/* Status dot */}
-                <div className="session-card-top">
-                  <div
-                    className={`session-dot${open ? ' session-dot-active' : ''}`}
-                    style={{ background: open ? session.color : 'var(--muted)' }}
-                  />
-                  <span className="session-status" style={{ color: open ? session.color : 'var(--muted)' }}>
+              <div key={s.name} style={{
+                background: open ? '#0d1525' : '#080d14',
+                borderTop: `3px solid ${open ? s.color : '#1a2535'}`,
+                padding: '28px 22px', display: 'flex', flexDirection: 'column', gap: 8,
+              }}>
+                {/* Status */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{
+                    width: 7, height: 7, borderRadius: '50%', flexShrink: 0, display: 'inline-block',
+                    background: open ? s.color : '#2a3a4a',
+                    boxShadow: open ? `0 0 8px ${s.color}88` : 'none',
+                  }} />
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '2px', fontWeight: 700, color: open ? s.color : '#2a3a4a' }}>
                     {open ? 'OTWARTA' : 'ZAMKNIĘTA'}
                   </span>
                 </div>
 
-                {/* City name */}
-                <div className="session-city" style={{ color: open ? session.color : 'var(--muted)' }}>
-                  {session.city}
+                {/* City */}
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', letterSpacing: '2px', lineHeight: 1, color: open ? s.color : '#2a3a4a', marginTop: 4 }}>
+                  {s.city}
                 </div>
 
                 {/* Local time */}
-                <div className="session-local-time">{localTime}</div>
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', letterSpacing: '4px', color: '#e8edf5', lineHeight: 1 }}>
+                  {localTime(s.timezone)}
+                </div>
 
-                {/* Hours */}
-                <div className="session-hours">
-                  {String(session.open).padStart(2,'0')}:00 — {String(session.close).padStart(2,'0')}:00 UTC
+                {/* UTC hours */}
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: '#3a4a5a' }}>
+                  {String(s.open).padStart(2,'0')}:00 — {String(s.close).padStart(2,'0')}:00 UTC
                 </div>
 
                 {/* Countdown */}
-                <div className="session-countdown">
-                  {open ? (
-                    <span style={{ color: 'var(--cyan)' }}>
-                      Zamknięcie za <strong>{formatCountdown(minsToClose)}</strong>
-                    </span>
-                  ) : (
-                    <span style={{ color: 'var(--muted)' }}>
-                      Otwarcie za <strong style={{ color: 'var(--text)' }}>{formatCountdown(minsToOpen)}</strong>
-                    </span>
-                  )}
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', marginTop: 2 }}>
+                  {open
+                    ? <span style={{ color: '#8a9ab5' }}>Zamknięcie za <strong style={{ color: '#00f5d4' }}>{fmt(minsLeft)}</strong></span>
+                    : <span style={{ color: '#8a9ab5' }}>Otwarcie za <strong style={{ color: '#e8edf5' }}>{fmt(minsToOpen)}</strong></span>
+                  }
                 </div>
 
-                {/* Progress bar */}
-                {open && (
-                  <div className="session-progress-wrap">
-                    <div
-                      className="session-progress-bar"
-                      style={{
-                        width: `${100 - (minsToClose / (
-                          session.open < session.close
-                            ? (session.close - session.open)
-                            : (24 - session.open + session.close)
-                        ) / 60 * 100)}%`,
-                        background: session.color,
-                      }}
-                    />
-                  </div>
-                )}
+                {/* Progress */}
+                <div style={{ height: 2, background: '#1a2535', marginTop: 6, borderRadius: 1, overflow: 'hidden' }}>
+                  {open && <div style={{ height: '100%', width: `${progress}%`, background: s.color, transition: 'width 1s linear' }} />}
+                </div>
               </div>
             );
           })}
         </div>
 
-        <p className="sessions-note">
-          Godziny podane w UTC. W czasie letnim (DST) sesja londyńska: 07:00–16:00 UTC, nowojorska: 12:00–21:00 UTC.
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: '#2a3a4a', marginTop: 14, lineHeight: 1.6 }}>
+          Godziny podane w UTC. W czasie letnim (DST): Londyn 07:00–16:00 UTC, Nowy Jork 12:00–21:00 UTC.
         </p>
       </div>
     </section>
