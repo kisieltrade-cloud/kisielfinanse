@@ -23,6 +23,7 @@ export default function Nav() {
     { href: '/blog', label: 'Blog' },
     { href: '/wspolpraca', label: 'Współpraca' },
     { href: '/slownik', label: 'Słownik' },
+    { href: '/tygodnik', label: 'Tygodnik' },
     { href: '/#newsletter', label: 'Newsletter' },
   ];
 
