@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import BackToTop from '@/components/BackToTop';
+import PageTransition from '@/components/PageTransition';
+import BackToTop from '@/components/BackToTop';
 
 const BASE_URL = 'https://nyseth-trading.vercel.app';
 
@@ -72,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaPerson) }}
         />
       </head>
-      <body>{children}<BackToTop /></body>
+      <body><PageTransition>{children}</PageTransition><BackToTop /></body>
     </html>
   );
 }

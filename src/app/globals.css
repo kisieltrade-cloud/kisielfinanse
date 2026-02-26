@@ -2528,3 +2528,36 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 768px) {
   .back-to-top { bottom: 20px; right: 20px; }
 }
+
+/* ──────────────────────────────────────
+   NEWSLETTER EBOOK
+────────────────────────────────────── */
+.newsletter-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 20px;
+}
+
+.newsletter-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,245,212,0.08);
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  padding: 12px 24px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.newsletter-download:hover {
+  background: rgba(0,245,212,0.15);
+}
