@@ -4,50 +4,14 @@ export const revalidate = 30;
 
 const CRYPTO_SYMBOLS = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT'];
 
-// Stooq symbols — darmowe API bez klucza
-const STOOQ_INDICES = [
-  { stooq: '^ndx',  label: 'NAS100' },
-  { stooq: '^spx',  label: 'S&P500' },
-  { stooq: 'gc.f',  label: 'GOLD' },
-  { stooq: 'cl.f',  label: 'OIL' },
+// Statyczne wartości dla indeksów — aktualizowane co jakiś czas ręcznie
+// lub można podpiąć płatne API (Alpha Vantage, Twelve Data)
+const STATIC_INDICES = [
+  { symbol: 'NAS100', price: '—', change: 0, positive: true },
+  { symbol: 'S&P500', price: '—', change: 0, positive: true },
+  { symbol: 'GOLD',   price: '—', change: 0, positive: true },
+  { symbol: 'OIL',    price: '—', change: 0, positive: true },
 ];
-
-async function fetchIndices() {
-  const symbols = STOOQ_INDICES.map(s => s.stooq).join(',');
-  const url = `https://stooq.com/q/l/?s=${encodeURIComponent(symbols)}&f=sd2t2ohlcv&h&e=json`;
-
-  try {
-    const res = await fetch(url, { next: { revalidate: 60 } });
-    if (!res.ok) return null;
-
-    const data = await res.json();
-    const symbols_data: Array<{
-      Symbol: string;
-      Open: string;
-      Close: string;
-    }> = data?.symbols ?? [];
-
-    if (!symbols_data.length) return null;
-
-    return symbols_data.map((q, i) => {
-      const close = parseFloat(q.Close);
-      const open = parseFloat(q.Open);
-      const pct = open > 0 ? ((close - open) / open) * 100 : 0;
-      const label = STOOQ_INDICES[i]?.label ?? q.Symbol;
-
-      return {
-        symbol: label,
-        price: close > 0
-          ? close.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-          : '—',
-        change: Math.round(pct * 100) / 100,
-        positive: pct >= 0,
-      };
-    });
-  } catch {
-    return null;
-  }
-}
 
 export async function GET() {
   try {
@@ -59,11 +23,11 @@ export async function GET() {
       fetch('https://open.er-api.com/v6/latest/USD', { next: { revalidate: 3600 } }),
     ]);
 
-    // Crypto
+    // Crypto — Binance działa zawsze
     let crypto: object[] = [];
     if (cryptoRes.status === 'fulfilled' && cryptoRes.value.ok) {
-      const cryptoData = await cryptoRes.value.json();
-      crypto = cryptoData.map((t: { symbol: string; lastPrice: string; priceChangePercent: string }) => {
+      const d = await cryptoRes.value.json();
+      crypto = d.map((t: { symbol: string; lastPrice: string; priceChangePercent: string }) => {
         const pct = parseFloat(t.priceChangePercent);
         const price = parseFloat(t.lastPrice);
         const sym = t.symbol.replace('USDT', '');
@@ -78,17 +42,16 @@ export async function GET() {
       });
     }
 
-    // Forex
+    // Forex — open.er-api działa zawsze
     let forex: object[] = [];
     if (forexRes.status === 'fulfilled' && forexRes.value.ok) {
       const d = await forexRes.value.json();
       const rates: Record<string, number> = d.rates ?? {};
-      const fxPairs = [
+      forex = [
         { symbol: 'EUR/USD', base: 'EUR', quote: 'USD' },
         { symbol: 'GBP/USD', base: 'GBP', quote: 'USD' },
         { symbol: 'USD/PLN', base: 'USD', quote: 'PLN' },
-      ];
-      forex = fxPairs.map((pair) => {
+      ].map((pair) => {
         let price = 0;
         if (pair.base === 'USD') price = rates[pair.quote] || 0;
         else if (pair.quote === 'USD') price = 1 / (rates[pair.base] || 1);
@@ -102,13 +65,8 @@ export async function GET() {
       });
     }
 
-    // Indices via Stooq
-    const indices = await fetchIndices() ?? STOOQ_INDICES.map(s => ({
-      symbol: s.label, price: '—', change: 0, positive: true,
-    }));
-
     return NextResponse.json({
-      tickers: [...crypto, ...indices, ...forex],
+      tickers: [...crypto, ...STATIC_INDICES, ...forex],
       updatedAt: new Date().toISOString(),
     });
 
@@ -118,8 +76,6 @@ export async function GET() {
       tickers: [
         { symbol: 'BTC/USDT', price: '—', change: 0, positive: true },
         { symbol: 'ETH/USDT', price: '—', change: 0, positive: true },
-        { symbol: 'NAS100',   price: '—', change: 0, positive: true },
-        { symbol: 'S&P500',   price: '—', change: 0, positive: true },
         { symbol: 'EUR/USD',  price: '—', change: 0, positive: true, noChange: true },
       ],
       updatedAt: new Date().toISOString(),
