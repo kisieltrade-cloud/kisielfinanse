@@ -2492,3 +2492,39 @@ a { color: inherit; text-decoration: none; }
   .tygodnik-col-trades { display: none; }
   .tygodnik-summary { flex-wrap: wrap; }
 }
+
+/* ──────────────────────────────────────
+   BACK TO TOP
+────────────────────────────────────── */
+.back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--cyan);
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 100;
+  transition: opacity 0.3s, transform 0.3s, border-color 0.2s;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.back-to-top-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.back-to-top:hover {
+  border-color: var(--cyan);
+  background: rgba(0,245,212,0.08);
+}
+
+@media (max-width: 768px) {
+  .back-to-top { bottom: 20px; right: 20px; }
+}
