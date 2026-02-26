@@ -4,53 +4,29 @@
       <stop offset="0%" stop-color="#00f5d4"/>
       <stop offset="100%" stop-color="#b14aed"/>
     </linearGradient>
-    <linearGradient id="g2" x1="0" y1="48" x2="48" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#b14aed"/>
-      <stop offset="100%" stop-color="#ff2d78"/>
-    </linearGradient>
     <filter id="glow">
       <feGaussianBlur stdDeviation="1.5" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
 
-  <!-- Outer frame — clipped corner top-right -->
-  <path d="M4 4 L38 4 L44 10 L44 44 L4 44 Z"
+  <!-- Background -->
+  <rect width="48" height="48" fill="#080d14"/>
+
+  <!-- Clipped corner frame -->
+  <path d="M3 3 L37 3 L45 11 L45 45 L3 45 Z"
         fill="none"
         stroke="url(#g1)"
-        stroke-width="1.5"
-        opacity="0.5"/>
+        stroke-width="1.5"/>
 
-  <!-- Inner frame -->
-  <path d="M8 8 L36 8 L40 12 L40 40 L8 40 Z"
-        fill="none"
-        stroke="url(#g1)"
-        stroke-width="0.6"
-        opacity="0.2"/>
-
-  <!-- Corner accent top-right -->
-  <path d="M38 4 L44 10" stroke="url(#g2)" stroke-width="2" stroke-linecap="square" filter="url(#glow)"/>
-
-  <!-- N letter — stylized candlestick-chart shape -->
-  <!-- Left vertical bar -->
-  <rect x="12" y="14" width="4" height="20" fill="url(#g1)" rx="0.5"/>
-
-  <!-- Diagonal stroke of N -->
-  <path d="M16 14 L28 34" stroke="url(#g1)" stroke-width="3.5" stroke-linecap="square"/>
-
-  <!-- Right vertical bar -->
-  <rect x="28" y="14" width="4" height="20" fill="url(#g2)" rx="0.5"/>
-
-  <!-- Mini chart line at bottom -->
-  <path d="M12 38 L16 35 L20 36.5 L24 33 L28 34.5 L32 31 L36 32"
-        fill="none"
-        stroke="url(#g1)"
-        stroke-width="1.2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        opacity="0.7"
+  <!-- Corner accent glow -->
+  <path d="M37 3 L45 11"
+        stroke="#00f5d4"
+        stroke-width="2"
+        stroke-linecap="square"
         filter="url(#glow)"/>
 
-  <!-- Dot at end of chart line -->
-  <circle cx="36" cy="32" r="1.8" fill="#00f5d4" filter="url(#glow)"/>
+  <!-- Letter N — clean and bold -->
+  <path d="M13 13 L13 35 L17 35 L17 20 L27 35 L31 35 L31 13 L27 13 L27 28 L17 13 Z"
+        fill="url(#g1)"/>
 </svg>
