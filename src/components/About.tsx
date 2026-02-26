@@ -67,11 +67,11 @@ export default function About() {
 
         <div className="about-hero">
           <div className="section-label">// kim jestem</div>
-          <h2 className="section-title" style={{ marginBottom: 24 }}>
-            CZEŚĆ,<br />
-            JESTEM{' '}
-            <span className="gradient-text-cp">NYSETH</span>
-          </h2>
+          <h1 className="section-title" style={{ marginBottom: 24 }}>
+            <span aria-hidden="true">CZEŚĆ,<br />JESTEM{' '}
+            <span className="gradient-text-cp">NYSETH</span></span>
+            <span className="seo-only">Nyseth — Trader z Wrocławia | Day Trading Forex Krypto Futures | 7 lat doświadczenia</span>
+          </h1>
 
           <p className="about-bio">
             Trader z <strong>Wrocławia</strong> z blisko{' '}

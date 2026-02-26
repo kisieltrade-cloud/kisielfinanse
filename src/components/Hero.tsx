@@ -52,8 +52,11 @@ export default function Hero() {
         </div>
 
         <h1 className="hero-h1">
-          <span className="hero-h1-line1">TRADE</span>
-          <span className="hero-h1-line2">SMARTER</span>
+          <span className="hero-h1-line1" aria-hidden="true">TRADE</span>
+          <span className="hero-h1-line2" aria-hidden="true">SMARTER</span>
+          <span className="seo-only">
+            NysethTrading — Day Trading Forex, Krypto i Futures | Transparentne Wyniki Tradingowe
+          </span>
         </h1>
 
         <p className="hero-desc">

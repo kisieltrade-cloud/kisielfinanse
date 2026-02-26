@@ -127,9 +127,8 @@ export default function WeeklyResults() {
     <section className="weekly-section" id="wyniki-tygodniowe">
       <div className="section-label">// tygodniowy dziennik</div>
       <h2 className="section-title reveal">
-        WYNIKI
-        <br />
-        <span className="gradient-text-cp">TYGODNIOWE</span>
+        <span aria-hidden="true">WYNIKI<br /><span className="gradient-text-cp">TYGODNIOWE</span></span>
+        <span className="seo-only">Wyniki tradingowe tygodniowe — Forex, Krypto, Futures | NysethTrading</span>
       </h2>
 
       {/* Summary bar */}
