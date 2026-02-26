@@ -9,6 +9,8 @@ import { getPostBySlug, getAllSlugs, getAllPosts } from '@/lib/posts';
 import { remark } from 'remark';
 import remarkHtml from 'remark-html';
 
+const BASE_URL = 'https://nyseth-trading.vercel.app';
+
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -52,9 +54,33 @@ export default async function BlogPostPage({ params }: Props) {
 
   const t = TAG_CONFIG[post.tag?.toLowerCase()] ?? TAG_CONFIG['edukacja'];
 
+  const schemaArticle = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    author: {
+      '@type': 'Person',
+      name: 'Nyseth',
+      url: `${BASE_URL}/o-mnie`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'NysethTrading',
+      url: BASE_URL,
+    },
+    url: `${BASE_URL}/blog/${slug}`,
+    inLanguage: 'pl',
+    keywords: ['trading', post.tag],
+  };
+
   return (
     <>
       <ReadingProgress />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaArticle) }}
+      />
       <Nav />
       <main>
         {/* Hero */}

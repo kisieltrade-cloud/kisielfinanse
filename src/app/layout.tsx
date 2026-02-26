@@ -1,39 +1,54 @@
 import type { Metadata } from 'next';
 import './globals.css';
 
+const BASE_URL = 'https://nyseth-trading.vercel.app';
+
 export const metadata: Metadata = {
   title: {
     template: '%s | NysethTrading',
-    default: 'NysethTrading — Transparentny Trading na Żywo',
+    default: 'NysethTrading — Trade Smarter, Live Freer',
   },
   description:
-    'Trader z Wrocławia z 7-letnim doświadczeniem. Transparentne wyniki tygodniowe, day trading na Forexie, krypto i futures. Dołącz i śledź moje wyniki na żywo.',
-  keywords: [
-    'trading', 'forex', 'krypto', 'bitcoin', 'day trading', 'futures',
-    'wyniki tradingowe', 'trader Polska', 'NAS100', 'S&P500',
-    'transparentny trader', 'nauka tradingu',
-  ],
-  authors: [{ name: 'Nyseth' }],
-  creator: 'Nyseth',
+    'Transparentne wyniki tradingowe, analiza rynkowa i strategie, które działają. Dołącz do społeczności poważnych traderów.',
+  keywords: ['trading', 'forex', 'krypto', 'strategie', 'analiza rynkowa', 'wyniki'],
   openGraph: {
     type: 'website',
     locale: 'pl_PL',
-    url: 'https://nyseth-trading.vercel.app',
+    url: BASE_URL,
     siteName: 'NysethTrading',
-    title: 'NysethTrading — Transparentny Trading na Żywo',
-    description:
-      'Trader z Wrocławia z 7-letnim doświadczeniem. Wyniki tygodniowe, day trading na Forexie, krypto i futures.',
+    title: 'NysethTrading — Trade Smarter, Live Freer',
+    description: 'Transparentne wyniki tradingowe, analiza rynkowa i strategie, które działają.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NysethTrading — Transparentny Trading na Żywo',
-    description:
-      'Wyniki tygodniowe, day trading na Forexie, krypto i futures. Bez filtrów.',
+    title: 'NysethTrading',
+    description: 'Transparentne wyniki tradingowe i analiza rynkowa.',
   },
-  robots: {
-    index: true,
-    follow: true,
+};
+
+const schemaWebSite = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'NysethTrading',
+  url: BASE_URL,
+  description: 'Transparentne wyniki tradingowe — Forex, Krypto, Futures.',
+  inLanguage: 'pl',
+  author: {
+    '@type': 'Person',
+    name: 'Nyseth',
+    description: 'Trader z Wrocławia z 7-letnim doświadczeniem na rynkach Forex, krypto i futures.',
+    knowsAbout: ['Forex trading', 'Cryptocurrency trading', 'Futures trading', 'Day trading'],
+    url: `${BASE_URL}/o-mnie`,
   },
+};
+
+const schemaPerson = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Nyseth',
+  url: `${BASE_URL}/o-mnie`,
+  description: 'Trader z Wrocławia z 7-letnim doświadczeniem na rynkach Forex, krypto i futures.',
+  knowsAbout: ['Forex', 'Cryptocurrency', 'Futures', 'Day Trading', 'Technical Analysis'],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -47,7 +62,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="shortcut icon" href="/favicon.svg" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaWebSite) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaPerson) }}
+        />
       </head>
       <body>{children}</body>
     </html>
