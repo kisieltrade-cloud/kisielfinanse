@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+const FORMSPREE_URL = 'https://formspree.io/f/xreajlln';
+
 export default function Newsletter() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -12,12 +14,22 @@ export default function Newsletter() {
 
     setStatus('loading');
 
-    // Replace with your email service (Resend, Mailerlite, ConvertKit etc.)
-    // Example: await fetch('/api/newsletter', { method: 'POST', body: JSON.stringify({ email }) });
-    await new Promise((r) => setTimeout(r, 800)); // fake delay
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
 
-    setStatus('success');
-    setEmail('');
+      if (res.ok) {
+        setStatus('success');
+        setEmail('');
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -40,34 +52,46 @@ export default function Newsletter() {
       </p>
 
       {status === 'success' ? (
-        <div
-          style={{
-            fontFamily: 'var(--font-mono)',
-            color: 'var(--cyan)',
-            fontSize: '0.9rem',
-            border: '1px solid var(--border)',
-            padding: '16px 32px',
-            display: 'inline-block',
-            position: 'relative',
-            zIndex: 2,
-          }}
-        >
+        <div style={{
+          fontFamily: 'var(--font-mono)',
+          color: 'var(--cyan)',
+          fontSize: '0.9rem',
+          border: '1px solid var(--border)',
+          padding: '16px 32px',
+          display: 'inline-block',
+          position: 'relative',
+          zIndex: 2,
+        }}>
           ✓ Jesteś na liście. Do zobaczenia w skrzynce!
         </div>
       ) : (
-        <form className="newsletter-form" onSubmit={handleSubmit}>
-          <input
-            type="email"
-            className="newsletter-input"
-            placeholder="twoj@email.pl"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <button type="submit" className="newsletter-btn" disabled={status === 'loading'}>
-            {status === 'loading' ? '...' : 'ZAPISZ'}
-          </button>
-        </form>
+        <>
+          <form className="newsletter-form" onSubmit={handleSubmit}>
+            <input
+              type="email"
+              className="newsletter-input"
+              placeholder="twoj@email.pl"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <button type="submit" className="newsletter-btn" disabled={status === 'loading'}>
+              {status === 'loading' ? '...' : 'ZAPISZ'}
+            </button>
+          </form>
+          {status === 'error' && (
+            <p style={{
+              fontFamily: 'var(--font-mono)',
+              color: 'var(--pink)',
+              fontSize: '0.75rem',
+              marginTop: 12,
+              position: 'relative',
+              zIndex: 2,
+            }}>
+              Coś poszło nie tak. Spróbuj ponownie.
+            </p>
+          )}
+        </>
       )}
     </section>
   );
