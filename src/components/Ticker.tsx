@@ -1,54 +1,50 @@
 'use client';
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 interface TickerItem {
   symbol: string;
   price: string;
   change: number;
   positive: boolean;
-  noChange?: boolean;
-}
-
-interface ApiResponse {
-  tickers: TickerItem[];
-  updatedAt: string;
-  error?: boolean;
 }
 
 const FALLBACK: TickerItem[] = [
   { symbol: 'BTC/USDT', price: '98,421.00', change: 2.34,  positive: true  },
   { symbol: 'ETH/USDT', price: '3,742.50',  change: -0.87, positive: false },
   { symbol: 'SOL/USDT', price: '187.32',    change: 1.12,  positive: true  },
-  { symbol: 'NAS100',   price: '21,847.00', change: 0.54,  positive: true  },
-  { symbol: 'S&P500',   price: '5,962.00',  change: 0.31,  positive: true  },
-  { symbol: 'GOLD',     price: '2,631.40',  change: -0.22, positive: false },
-  { symbol: 'OIL',      price: '74.12',     change: 1.05,  positive: true  },
-  { symbol: 'EUR/USD',  price: '1.0821',    change: 0,     positive: true,  noChange: true },
-  { symbol: 'GBP/USD',  price: '1.2643',    change: 0,     positive: true,  noChange: true },
-  { symbol: 'USD/PLN',  price: '4.0731',    change: 0,     positive: true,  noChange: true },
+  { symbol: 'BNB/USDT', price: '612.40',    change: 0.45,  positive: true  },
+  { symbol: 'XRP/USDT', price: '0.6234',    change: -1.23, positive: false },
+  { symbol: 'DOGE/USDT',price: '0.1821',    change: 3.11,  positive: true  },
 ];
+
+const CRYPTO_SYMBOLS = ['BTCUSDT','ETHUSDT','SOLUSDT','BNBUSDT','XRPUSDT','DOGEUSDT'];
 
 export default function Ticker() {
   const [tickers, setTickers] = useState<TickerItem[]>(FALLBACK);
-  const [lastUpdate, setLastUpdate] = useState<string>('');
-  const trackRef = useRef<HTMLDivElement>(null);
 
   const fetchTickers = useCallback(async () => {
     try {
-      const res = await fetch('/api/trading', { cache: 'no-store' });
+      const res = await fetch(
+        `https://api.binance.com/api/v3/ticker/24hr?symbols=${JSON.stringify(CRYPTO_SYMBOLS)}`,
+        { cache: 'no-store' }
+      );
       if (!res.ok) return;
-      const data: ApiResponse = await res.json();
-      if (data.tickers?.length) {
-        setTickers(data.tickers);
-        setLastUpdate(new Date(data.updatedAt).toLocaleTimeString('pl-PL'));
-        // Restart animation after data update for smooth loop
-        if (trackRef.current) {
-          trackRef.current.style.animation = 'none';
-          void trackRef.current.offsetWidth; // reflow
-          trackRef.current.style.animation = '';
-        }
-      }
+      const data = await res.json();
+      const mapped: TickerItem[] = data.map((t: { symbol: string; lastPrice: string; priceChangePercent: string }) => {
+        const pct = parseFloat(t.priceChangePercent);
+        const price = parseFloat(t.lastPrice);
+        const sym = t.symbol.replace('USDT', '');
+        return {
+          symbol: `${sym}/USDT`,
+          price: price > 100
+            ? price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+            : price.toFixed(4),
+          change: Math.round(pct * 100) / 100,
+          positive: pct >= 0,
+        };
+      });
+      if (mapped.length) setTickers(mapped);
     } catch {
       // keep fallback
     }
@@ -60,21 +56,19 @@ export default function Ticker() {
     return () => clearInterval(interval);
   }, [fetchTickers]);
 
-  // 4x duplication for seamless loop on all screen sizes
-  const items = [...tickers, ...tickers, ...tickers, ...tickers];
+  // 3x duplication — enough for any screen width
+  const items = [...tickers, ...tickers, ...tickers];
 
   return (
-    <div className="ticker" title={lastUpdate ? `Ostatnia aktualizacja: ${lastUpdate}` : 'Dane przykładowe'}>
-      <div className="ticker-track" ref={trackRef}>
+    <div className="ticker">
+      <div className="ticker-track">
         {items.map((t, i) => (
           <div key={i} className="ticker-item">
             <span className="ticker-sym">{t.symbol}</span>
-            {!t.noChange && t.price !== '—' && (
-              <span className={t.positive ? 'ticker-up' : 'ticker-dn'}>
-                {t.positive ? '+' : ''}{t.change.toFixed(2)}%
-              </span>
-            )}
-            <span className={t.price === '—' ? 'ticker-dash' : ''}>{t.price}</span>
+            <span className={t.positive ? 'ticker-up' : 'ticker-dn'}>
+              {t.positive ? '+' : ''}{t.change.toFixed(2)}%
+            </span>
+            <span>{t.price}</span>
             <span className="ticker-sep">·</span>
           </div>
         ))}
