@@ -293,7 +293,7 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--border);
   border-top: 3px solid var(--cyan);
   padding: 28px;
-  margin-top: 260px;
+  margin-top: 80px;
   animation: fadeInRight 1s 0.3s ease both;
 }
 
@@ -1635,4 +1635,96 @@ a { color: inherit; text-decoration: none; }
   .about-stats { grid-template-columns: 1fr 1fr; }
   .about-cta { flex-direction: column; align-items: flex-start; }
   .tl-btn { font-size: 0.78rem; padding: 12px 8px; }
+}
+
+/* ──────────────────────────────────────
+   HAMBURGER & MOBILE MENU
+────────────────────────────────────── */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-cta-desktop { display: block; }
+
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  padding: 8px;
+}
+
+.nav-burger span {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--cyan);
+  transition: all 0.3s;
+  transform-origin: center;
+}
+
+.nav-burger-open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.nav-burger-open span:nth-child(2) {
+  opacity: 0;
+}
+.nav-burger-open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 73px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(3, 5, 8, 0.98);
+  backdrop-filter: blur(24px);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 24px;
+  border-top: 1px solid var(--border);
+  animation: fadeInDown 0.2s ease;
+}
+
+.mobile-menu-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.mobile-menu-link {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  letter-spacing: 3px;
+  color: var(--text);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s;
+}
+
+.mobile-menu-link:hover { color: var(--cyan); }
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .nav { padding: 18px 24px; }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .nav-cta-desktop { display: none; }
 }
