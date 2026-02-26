@@ -44,15 +44,29 @@ export default function Wspolpraca() {
     message: '',
   });
   const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: podłącz Resend / Formspree / EmailJS
-    setSent(true);
+    setStatus('loading');
+    try {
+      const res = await fetch('https://formspree.io/f/xykdoplw', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSent(true);
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -195,9 +209,14 @@ export default function Wspolpraca() {
                 />
               </div>
 
-              <button type="submit" className="collab-submit">
-                WYŚLIJ WIADOMOŚĆ →
+              <button type="submit" className="collab-submit" disabled={status === 'loading'}>
+                {status === 'loading' ? '...' : 'WYŚLIJ WIADOMOŚĆ →'}
               </button>
+              {status === 'error' && (
+                <p style={{ fontFamily: 'var(--font-mono)', color: 'var(--pink)', fontSize: '0.75rem', marginTop: -8 }}>
+                  Coś poszło nie tak. Spróbuj ponownie.
+                </p>
+              )}
 
               <p className="collab-disclaimer">
                 * Odpowiadam na wszystkie wiadomości w ciągu 48 godzin.
