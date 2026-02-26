@@ -1,29 +1,9 @@
 import { NextResponse } from 'next/server';
 
-export const runtime = 'edge';
 export const revalidate = 30;
-
-interface BinanceTicker {
-  symbol: string;
-  lastPrice: string;
-  priceChangePercent: string;
-}
-
-interface YahooQuote {
-  regularMarketPrice: number;
-  regularMarketChangePercent: number;
-  shortName: string;
-}
-
-interface YahooResponse {
-  quoteResponse: {
-    result: YahooQuote[];
-  };
-}
 
 const CRYPTO_SYMBOLS = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT'];
 
-// Yahoo Finance symbols for indices
 const INDEX_SYMBOLS = [
   { yahoo: 'NQ=F',  label: 'NAS100' },
   { yahoo: 'ES=F',  label: 'S&P500' },
@@ -31,100 +11,97 @@ const INDEX_SYMBOLS = [
   { yahoo: 'CL=F',  label: 'OIL' },
 ];
 
-export async function GET() {
+async function fetchIndices() {
+  const symbols = INDEX_SYMBOLS.map(s => s.yahoo).join(',');
+  const url = `https://query1.finance.yahoo.com/v8/finance/quote?symbols=${symbols}`;
+
   try {
-    const [cryptoRes, forexRes, indicesRes] = await Promise.allSettled([
-      // Crypto — Binance
-      fetch(
-        `https://api.binance.com/api/v3/ticker/24hr?symbols=${JSON.stringify(CRYPTO_SYMBOLS)}`,
-        { next: { revalidate: 30 } }
-      ),
-      // Forex — open.er-api
-      fetch('https://open.er-api.com/v6/latest/USD', { next: { revalidate: 3600 } }),
-      // Indices — Yahoo Finance
-      fetch(
-        `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${INDEX_SYMBOLS.map(s => s.yahoo).join(',')}&fields=regularMarketPrice,regularMarketChangePercent,shortName`,
-        {
-          headers: { 'User-Agent': 'Mozilla/5.0' },
-          next: { revalidate: 60 },
-        }
-      ),
-    ]);
+    const res = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'en-US,en;q=0.9',
+      },
+      next: { revalidate: 60 },
+    });
 
-    // ── Crypto ───────────────────────────────────────────────────────────
-    let cryptoData: BinanceTicker[] = [];
-    if (cryptoRes.status === 'fulfilled' && cryptoRes.value.ok) {
-      cryptoData = await cryptoRes.value.json();
-    }
+    if (!res.ok) return null;
+    const data = await res.json();
+    const results = data?.quoteResponse?.result ?? [];
+    if (!results.length) return null;
 
-    const crypto = cryptoData.map((t) => {
-      const pct = parseFloat(t.priceChangePercent);
-      const price = parseFloat(t.lastPrice);
-      const sym = t.symbol.replace('USDT', '');
+    return results.map((q: { regularMarketPrice?: number; regularMarketChangePercent?: number }, i: number) => {
+      const price = q.regularMarketPrice ?? 0;
+      const pct = q.regularMarketChangePercent ?? 0;
+      const label = INDEX_SYMBOLS[i]?.label ?? 'INDEX';
       return {
-        symbol: `${sym}/USDT`,
-        price: price > 1000
+        symbol: label,
+        price: price > 0
           ? price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-          : price.toFixed(3),
+          : '—',
         change: Math.round(pct * 100) / 100,
         positive: pct >= 0,
       };
     });
+  } catch {
+    return null;
+  }
+}
 
-    // ── Forex ─────────────────────────────────────────────────────────────
-    let forexRates: Record<string, number> = {};
-    if (forexRes.status === 'fulfilled' && forexRes.value.ok) {
-      const d = await forexRes.value.json();
-      forexRates = d.rates ?? {};
-    }
+export async function GET() {
+  try {
+    const [cryptoRes, forexRes] = await Promise.allSettled([
+      fetch(
+        `https://api.binance.com/api/v3/ticker/24hr?symbols=${JSON.stringify(CRYPTO_SYMBOLS)}`,
+        { next: { revalidate: 30 } }
+      ),
+      fetch('https://open.er-api.com/v6/latest/USD', { next: { revalidate: 3600 } }),
+    ]);
 
-    const fxPairs = [
-      { symbol: 'EUR/USD', base: 'EUR', quote: 'USD' },
-      { symbol: 'GBP/USD', base: 'GBP', quote: 'USD' },
-      { symbol: 'USD/PLN', base: 'USD', quote: 'PLN' },
-    ];
-
-    const forex = fxPairs.map((pair) => {
-      let price = 0;
-      if (pair.base === 'USD') price = forexRates[pair.quote] || 0;
-      else if (pair.quote === 'USD') price = 1 / (forexRates[pair.base] || 1);
-      return {
-        symbol: pair.symbol,
-        price: price > 0 ? price.toFixed(4) : '—',
-        change: 0,
-        positive: true,
-        noChange: true,
-      };
-    });
-
-    // ── Indices (Yahoo Finance) ───────────────────────────────────────────
-    let indices: { symbol: string; price: string; change: number; positive: boolean }[] = [];
-
-    if (indicesRes.status === 'fulfilled' && indicesRes.value.ok) {
-      const yahooData: YahooResponse = await indicesRes.value.json();
-      const results = yahooData?.quoteResponse?.result ?? [];
-      indices = results.map((q, i) => {
-        const pct = q.regularMarketChangePercent;
-        const price = q.regularMarketPrice;
-        const label = INDEX_SYMBOLS[i]?.label ?? 'INDEX';
+    let crypto: object[] = [];
+    if (cryptoRes.status === 'fulfilled' && cryptoRes.value.ok) {
+      const cryptoData = await cryptoRes.value.json();
+      crypto = cryptoData.map((t: { symbol: string; lastPrice: string; priceChangePercent: string }) => {
+        const pct = parseFloat(t.priceChangePercent);
+        const price = parseFloat(t.lastPrice);
+        const sym = t.symbol.replace('USDT', '');
         return {
-          symbol: label,
+          symbol: `${sym}/USDT`,
           price: price > 1000
             ? price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-            : price.toFixed(2),
+            : price.toFixed(3),
           change: Math.round(pct * 100) / 100,
           positive: pct >= 0,
         };
       });
-    } else {
-      // Static fallback for indices
-      indices = INDEX_SYMBOLS.map(s => ({
-        symbol: s.label,
-        price: '—',
-        change: 0,
-        positive: true,
-      }));
     }
+
+    let forex: object[] = [];
+    if (forexRes.status === 'fulfilled' && forexRes.value.ok) {
+      const d = await forexRes.value.json();
+      const rates: Record<string, number> = d.rates ?? {};
+      const fxPairs = [
+        { symbol: 'EUR/USD', base: 'EUR', quote: 'USD' },
+        { symbol: 'GBP/USD', base: 'GBP', quote: 'USD' },
+        { symbol: 'USD/PLN', base: 'USD', quote: 'PLN' },
+      ];
+      forex = fxPairs.map((pair) => {
+        let price = 0;
+        if (pair.base === 'USD') price = rates[pair.quote] || 0;
+        else if (pair.quote === 'USD') price = 1 / (rates[pair.base] || 1);
+        return {
+          symbol: pair.symbol,
+          price: price > 0 ? price.toFixed(4) : '—',
+          change: 0,
+          positive: true,
+          noChange: true,
+        };
+      });
+    }
+
+    const indices = await fetchIndices() ?? INDEX_SYMBOLS.map(s => ({
+      symbol: s.label, price: '—', change: 0, positive: true,
+    }));
 
     return NextResponse.json({
       tickers: [...crypto, ...indices, ...forex],
