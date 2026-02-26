@@ -2176,3 +2176,109 @@ a { color: inherit; text-decoration: none; }
   .blog-filters { gap: 6px; }
   .blog-filter-btn { padding: 7px 12px; font-size: 0.65rem; }
 }
+
+/* ──────────────────────────────────────
+   READING PROGRESS BAR
+────────────────────────────────────── */
+.reading-progress-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.05);
+  z-index: 200;
+}
+
+.reading-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px rgba(0,245,212,0.5);
+}
+
+/* ──────────────────────────────────────
+   RELATED POSTS
+────────────────────────────────────── */
+.related-section {
+  padding: 80px 60px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.related-header {
+  margin-bottom: 40px;
+}
+
+.related-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+}
+
+.related-card {
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.2s;
+}
+
+.related-card:hover { background: var(--surface2); }
+
+.related-card-accent {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  opacity: 0.6;
+}
+
+.related-card-body {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 0;
+}
+
+.related-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.related-card-title {
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+.related-card-excerpt {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.65;
+  flex: 1;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .related-section { padding: 60px 24px; }
+  .related-grid { grid-template-columns: 1fr; }
+}
