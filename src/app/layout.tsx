@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import BackToTop from '@/components/BackToTop';
 import PageTransition from '@/components/PageTransition';
-import BackToTop from '@/components/BackToTop';
 
 const BASE_URL = 'https://nyseth-trading.vercel.app';
 
