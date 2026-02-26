@@ -22,6 +22,7 @@ export default function Nav() {
     { href: '/o-mnie', label: 'O mnie' },
     { href: '/blog', label: 'Blog' },
     { href: '/wspolpraca', label: 'Współpraca' },
+    { href: '/slownik', label: 'Słownik' },
     { href: '/#newsletter', label: 'Newsletter' },
   ];
 
