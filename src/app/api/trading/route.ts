@@ -4,40 +4,41 @@ export const revalidate = 30;
 
 const CRYPTO_SYMBOLS = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT'];
 
-const INDEX_SYMBOLS = [
-  { yahoo: 'NQ=F',  label: 'NAS100' },
-  { yahoo: 'ES=F',  label: 'S&P500' },
-  { yahoo: 'GC=F',  label: 'GOLD' },
-  { yahoo: 'CL=F',  label: 'OIL' },
+// Stooq symbols — darmowe API bez klucza
+const STOOQ_INDICES = [
+  { stooq: '^ndx',  label: 'NAS100' },
+  { stooq: '^spx',  label: 'S&P500' },
+  { stooq: 'gc.f',  label: 'GOLD' },
+  { stooq: 'cl.f',  label: 'OIL' },
 ];
 
 async function fetchIndices() {
-  const symbols = INDEX_SYMBOLS.map(s => s.yahoo).join(',');
-  const url = `https://query1.finance.yahoo.com/v8/finance/quote?symbols=${symbols}`;
+  const symbols = STOOQ_INDICES.map(s => s.stooq).join(',');
+  const url = `https://stooq.com/q/l/?s=${encodeURIComponent(symbols)}&f=sd2t2ohlcv&h&e=json`;
 
   try {
-    const res = await fetch(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'application/json, text/plain, */*',
-        'Accept-Language': 'en-US,en;q=0.9',
-      },
-      next: { revalidate: 60 },
-    });
-
+    const res = await fetch(url, { next: { revalidate: 60 } });
     if (!res.ok) return null;
-    const data = await res.json();
-    const results = data?.quoteResponse?.result ?? [];
-    if (!results.length) return null;
 
-    return results.map((q: { regularMarketPrice?: number; regularMarketChangePercent?: number }, i: number) => {
-      const price = q.regularMarketPrice ?? 0;
-      const pct = q.regularMarketChangePercent ?? 0;
-      const label = INDEX_SYMBOLS[i]?.label ?? 'INDEX';
+    const data = await res.json();
+    const symbols_data: Array<{
+      Symbol: string;
+      Open: string;
+      Close: string;
+    }> = data?.symbols ?? [];
+
+    if (!symbols_data.length) return null;
+
+    return symbols_data.map((q, i) => {
+      const close = parseFloat(q.Close);
+      const open = parseFloat(q.Open);
+      const pct = open > 0 ? ((close - open) / open) * 100 : 0;
+      const label = STOOQ_INDICES[i]?.label ?? q.Symbol;
+
       return {
         symbol: label,
-        price: price > 0
-          ? price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        price: close > 0
+          ? close.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
           : '—',
         change: Math.round(pct * 100) / 100,
         positive: pct >= 0,
@@ -58,6 +59,7 @@ export async function GET() {
       fetch('https://open.er-api.com/v6/latest/USD', { next: { revalidate: 3600 } }),
     ]);
 
+    // Crypto
     let crypto: object[] = [];
     if (cryptoRes.status === 'fulfilled' && cryptoRes.value.ok) {
       const cryptoData = await cryptoRes.value.json();
@@ -76,6 +78,7 @@ export async function GET() {
       });
     }
 
+    // Forex
     let forex: object[] = [];
     if (forexRes.status === 'fulfilled' && forexRes.value.ok) {
       const d = await forexRes.value.json();
@@ -99,7 +102,8 @@ export async function GET() {
       });
     }
 
-    const indices = await fetchIndices() ?? INDEX_SYMBOLS.map(s => ({
+    // Indices via Stooq
+    const indices = await fetchIndices() ?? STOOQ_INDICES.map(s => ({
       symbol: s.label, price: '—', change: 0, positive: true,
     }));
 
