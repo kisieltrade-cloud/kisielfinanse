@@ -99,7 +99,7 @@ export default function Hero() {
             <div className="hero-chart-label">// equity curve 2026</div>
             <div className="hero-chart-title">NysethTrading</div>
           </div>
-          <div className="hero-chart-badge" style={{ fontSize: '0.62rem', letterSpacing: '1px', color: 'var(--muted)', border: '1px solid var(--border)', padding: '4px 10px', fontFamily: 'var(--font-mono)' }}>
+          <div className="hero-chart-badge" style={{ fontSize: '0.62rem', letterSpacing: '1px', color: 'var(--muted)', border: '1px solid var(--border)', padding: '5px 12px', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>
             // akt. 03.03.2026
           </div>
         </div>
@@ -161,11 +161,11 @@ export default function Hero() {
           ))}
 
           {/* P&L label */}
-          <rect x={W - 58} y={CHART_POINTS[CHART_POINTS.length - 1] - 28}
-            width={56} height={22} fill="rgba(0,245,212,0.1)"
+          <rect x={W - 100} y={CHART_POINTS[CHART_POINTS.length - 1] - 30}
+            width={96} height={22} fill="rgba(0,245,212,0.1)"
             stroke="rgba(0,245,212,0.3)" strokeWidth="1" rx="2" />
           <text
-            x={W - 30} y={CHART_POINTS[CHART_POINTS.length - 1] - 12}
+            x={W - 52} y={CHART_POINTS[CHART_POINTS.length - 1] - 14}
             fill="#00f5d4"
             fontFamily="JetBrains Mono, monospace"
             fontSize="11"
