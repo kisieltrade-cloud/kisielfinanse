@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { TERMS } from '@/lib/slownik-terms';
+
 export const dynamicParams = true;
 
 const BASE_URL = 'https://nysethtrading.pl';
@@ -13,21 +14,34 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return TERMS.map((t) => ({ slug: t.slug }));
+  // Filtrujemy tylko te elementy, które faktycznie mają zdefiniowany slug
+  return TERMS
+    .filter(t => t && t.slug) 
+    .map((t) => ({ 
+      slug: String(t.slug).trim() 
+    }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = params;
-  const term = TERMS.find((t) => t.slug && t.slug.trim().toLowerCase() === slug.trim().toLowerCase());
+  // Bezpieczne pobranie sluga z params
+  const slug = params?.slug;
+  if (!slug) return {};
+
+  // Szukamy terminu ignorując wielkość liter i spacje
+  const term = TERMS.find((t) => 
+    t && t.slug && String(t.slug).trim().toLowerCase() === String(slug).trim().toLowerCase()
+  );
+
   if (!term) return {};
+
   return {
     title: `${term.term} — co to jest? | Słownik Tradingowy NysethTrading`,
     description: term.short,
-    alternates: { canonical: `${BASE_URL}/slownik/${slug}` },
+    alternates: { canonical: `${BASE_URL}/slownik/${term.slug}` },
     openGraph: {
       title: `${term.term} — definicja tradingowa`,
       description: term.short,
-      url: `${BASE_URL}/slownik/${slug}`,
+      url: `${BASE_URL}/slownik/${term.slug}`,
     },
   };
 }
@@ -40,12 +54,23 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export default async function SlownikTermPage({ params }: Props) {
-  const { slug } = params;
-  const term = TERMS.find((t) => t.slug && t.slug.trim().toLowerCase() === slug.trim().toLowerCase());
+  const slug = params?.slug;
+  
+  // Jeśli brak sluga, od razu wyrzucamy 404 zamiast próbować go przetwarzać
+  if (!slug) notFound();
+
+  const term = TERMS.find((t) => 
+    t && t.slug && String(t.slug).trim().toLowerCase() === String(slug).trim().toLowerCase()
+  );
+
   if (!term) notFound();
 
   const color = CATEGORY_COLORS[term.category] ?? '#00f5d4';
-  const related = TERMS.filter((t) => t.category === term.category && t.slug !== slug).slice(0, 4);
+  
+  // Bezpieczne filtrowanie podobnych pojęć
+  const related = TERMS.filter((t) => 
+    t && t.category === term.category && t.slug !== term.slug
+  ).slice(0, 4);
 
   const schema = {
     '@context': 'https://schema.org',
@@ -57,7 +82,7 @@ export default async function SlownikTermPage({ params }: Props) {
       name: 'Słownik Tradingowy NysethTrading',
       url: `${BASE_URL}/slownik`,
     },
-    url: `${BASE_URL}/slownik/${slug}`,
+    url: `${BASE_URL}/slownik/${term.slug}`,
   };
 
   return (
