@@ -8,7 +8,7 @@ import { TERMS } from '@/lib/slownik-terms';
 const BASE_URL = 'https://nysethtrading.pl';
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 export async function generateStaticParams() {
@@ -16,7 +16,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
   const term = TERMS.find((t) => t.slug === slug);
   if (!term) return {};
   return {
@@ -39,7 +39,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export default async function SlownikTermPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug } = params;
   const term = TERMS.find((t) => t.slug === slug);
   if (!term) notFound();
 
