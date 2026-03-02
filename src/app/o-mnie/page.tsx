@@ -60,9 +60,32 @@ export default function OMnie() {
   return (
     <>
       <Nav />
-      <main>
+<main>
 
-        {/* ── HERO ── */}
+  {/* Schema.org Person — E-E-A-T sygnał dla Google */}
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Mateusz Nyseth',
+      alternateName: 'NysethTrading',
+      url: 'https://nysethtrading.pl/o-mnie',
+      jobTitle: 'Day Trader',
+      description: 'Trader z Wrocławia z 9-letnim doświadczeniem. Specjalizacja: day trading futures, forex i krypto. Autor transparentnego dziennika wyników tradingowych.',
+      knowsAbout: ['Day Trading', 'Forex', 'Futures', 'Kryptowaluty', 'Zarządzanie ryzykiem', 'US100', 'Gold'],
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Wrocław',
+        addressCountry: 'PL',
+      },
+      sameAs: [
+        'https://nysethtrading.pl',
+      ],
+    })}}
+  />
+
+  {/* ── HERO ── */}
         <section style={{
           minHeight: '70vh', display: 'flex', alignItems: 'center',
           padding: '120px 24px 80px', position: 'relative', overflow: 'hidden',
