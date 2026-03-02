@@ -1,104 +1,43 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 
-const STATS = {
-  annualReturn: 183,
-  annualReturnSuffix: '%',
-  annualReturnPrefix: '+',
-  annualReturnDecimals: 0,
-  annualReturnDelta: 'vs +67% rok wcześniej',
-  winRate: 68.4,
-  winRateSuffix: '%',
-  winRateDecimals: 1,
-  winRateDelta: 'z 847 zamkniętych pozycji',
-  profitFactor: 2.87,
-  profitFactorSuffix: '',
-  profitFactorDecimals: 2,
-  profitFactorDelta: 'zyski / straty (średnie)',
-  maxDrawdown: 8.2,
-  maxDrawdownSuffix: '%',
-  maxDrawdownPrefix: '-',
-  maxDrawdownDecimals: 1,
-  maxDrawdownDelta: 'kontrolowane ryzyko',
+// ─── EDYTUJ TUTAJ CO MIESIĄC ──────────────────────────────────────────────
+// Uzupełniaj pct gdy miesiąc się skończy. null = jeszcze nie zakończony.. null = jeszcze nie zakończony.
+
+const STATS_2026 = {
+  annualReturn: '—',
+  annualReturnNote: "start: marzec 2026",
+  winRate: '—',
+  winRateNote: 'aktualizowane co tydzień',
+  profitFactor: '—',
+  profitFactorNote: 'zyski / straty (średnie)',
+  maxDrawdown: '—',
+  maxDrawdownNote: 'kontrolowane ryzyko',
 };
 
-const MONTHLY_DATA: Record<string, Array<{ name: string; pct: number }>> = {
-  '2024': [
-    { name: 'STY', pct: 8.4 }, { name: 'LUT', pct: 12.1 }, { name: 'MAR', pct: -3.2 },
-    { name: 'KWI', pct: 15.7 }, { name: 'MAJ', pct: 6.3 }, { name: 'CZE', pct: -1.8 },
-    { name: 'LIP', pct: 22.4 }, { name: 'SIE', pct: 9.1 }, { name: 'WRZ', pct: -4.5 },
-    { name: 'PAŹ', pct: 18.9 }, { name: 'LIS', pct: 11.2 }, { name: 'GRU', pct: 14.6 },
-  ],
-  '2023': [
-    { name: 'STY', pct: 5.1 }, { name: 'LUT', pct: 8.3 }, { name: 'MAR', pct: -2.1 },
-    { name: 'KWI', pct: 7.4 }, { name: 'MAJ', pct: 3.8 }, { name: 'CZE', pct: -0.9 },
-    { name: 'LIP', pct: 11.2 }, { name: 'SIE', pct: 4.7 }, { name: 'WRZ', pct: -6.1 },
-    { name: 'PAŹ', pct: 9.8 }, { name: 'LIS', pct: 7.6 }, { name: 'GRU', pct: 10.4 },
-  ],
-};
-
-// ── Animated counter hook ─────────────────────────────────────────────────
-function useCountUp(target: number, decimals: number, started: boolean, duration = 1600) {
-  const [value, setValue] = useState(0);
-  useEffect(() => {
-    if (!started) return;
-    let startTime: number | null = null;
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-      setValue(parseFloat((eased * target).toFixed(decimals)));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [started, target, duration, decimals]);
-  return value;
-}
-
-// ── Single animated stat card ─────────────────────────────────────────────
-function StatCard({
-  label, target, prefix = '', suffix = '', decimals = 0, delta, color, delay = 0
-}: {
-  label: string; target: number; prefix?: string; suffix?: string;
-  decimals?: number; delta: string; color: string; delay?: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [started, setStarted] = useState(false);
-  const animated = useCountUp(target, decimals, started);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setStarted(true); },
-      { threshold: 0.3 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  const display = decimals > 0
-    ? animated.toFixed(decimals)
-    : Math.round(animated).toLocaleString('pl-PL');
-
-  return (
-    <div
-      ref={ref}
-      className="stat-card reveal"
-      style={{ transitionDelay: `${delay}ms`, borderTop: `3px solid ${color}` }}
-    >
-      <span className="stat-number" style={{ color }}>
-        {prefix}{display}{suffix}
-      </span>
-      <div className="stat-label">{label}</div>
-      <div className="stat-delta">{delta}</div>
-    </div>
-  );
-}
+const MONTHLY_2026: Array<{ name: string; pct: number | null; active: boolean }> = [
+  { name: 'STY', pct: null, active: false },
+  { name: 'LUT', pct: null, active: false },
+  { name: 'MAR', pct: null, active: true  }, // ← aktywny miesiąc
+  { name: 'KWI', pct: null, active: false },
+  { name: 'MAJ', pct: null, active: false },
+  { name: 'CZE', pct: null, active: false },
+  { name: 'LIP', pct: null, active: false },
+  { name: 'SIE', pct: null, active: false },
+  { name: 'WRZ', pct: null, active: false },
+  { name: 'PAŹ', pct: null, active: false },
+  { name: 'LIS', pct: null, active: false },
+  { name: 'GRU', pct: null, active: false },
+];
+// ──────────────────────────────────────────────────────────────────────────
 
 export default function Stats() {
-  const [year, setYear] = useState<'2024' | '2023'>('2024');
-  const months = MONTHLY_DATA[year];
-  const maxAbs = Math.max(...months.map((m) => Math.abs(m.pct)));
+  const months = MONTHLY_2026;
+  const completed = months.filter(m => m.pct !== null);
+  const maxAbs = completed.length > 0
+    ? Math.max(...completed.map(m => Math.abs(m.pct as number)))
+    : 1;
 
   return (
     <section className="wyniki-section" id="wyniki">
@@ -109,77 +48,95 @@ export default function Stats() {
         <span className="gradient-text-cp">STATYSTYKI</span>
       </h2>
 
-      <div className="stats-grid">
-        <StatCard
-          label="Zwrot roczny (2024)" target={STATS.annualReturn}
-          prefix={STATS.annualReturnPrefix} suffix={STATS.annualReturnSuffix}
-          decimals={STATS.annualReturnDecimals} delta={STATS.annualReturnDelta}
-          color="var(--cyan)" delay={0}
-        />
-        <StatCard
-          label="Win Rate" target={STATS.winRate}
-          suffix={STATS.winRateSuffix} decimals={STATS.winRateDecimals}
-          delta={STATS.winRateDelta} color="var(--purple)" delay={80}
-        />
-        <StatCard
-          label="Profit Factor" target={STATS.profitFactor}
-          suffix={STATS.profitFactorSuffix} decimals={STATS.profitFactorDecimals}
-          delta={STATS.profitFactorDelta} color="var(--yellow)" delay={160}
-        />
-        <StatCard
-          label="Max Drawdown" target={STATS.maxDrawdown}
-          prefix={STATS.maxDrawdownPrefix} suffix={STATS.maxDrawdownSuffix}
-          decimals={STATS.maxDrawdownDecimals} delta={STATS.maxDrawdownDelta}
-          color="var(--pink)" delay={240}
-        />
+      {/* Challenge info banner */}
+      <div className="reveal" style={{
+        display: 'flex', alignItems: 'center', gap: 10,
+        background: 'rgba(0,245,212,0.05)', border: '1px solid rgba(0,245,212,0.15)',
+        borderLeft: '3px solid var(--cyan)', padding: '10px 20px',
+        fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--cyan)',
+        marginBottom: 32, maxWidth: 600,
+      }}>
+        <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--cyan)', display: 'inline-block', boxShadow: '0 0 8px var(--cyan)', flexShrink: 0 }} />
+        Challenge start: Marzec 2026 — wyniki aktualizowane co tydzień
+      </div>
+
+      {/* KPI cards */}
+      <div className="stats-grid reveal">
+        {[
+          { value: STATS_2026.annualReturn, label: 'Zwrot (2026)', note: STATS_2026.annualReturnNote, color: 'var(--cyan)' },
+          { value: STATS_2026.winRate,      label: 'Win Rate',     note: STATS_2026.winRateNote,      color: 'var(--cyan)' },
+          { value: STATS_2026.profitFactor, label: 'Profit Factor',note: STATS_2026.profitFactorNote, color: '#f5c518'     },
+          { value: STATS_2026.maxDrawdown,  label: 'Max Drawdown', note: STATS_2026.maxDrawdownNote,  color: '#ff2d78'     },
+        ].map((s, i) => (
+          <div key={i} className="stat-card" style={{ borderTop: `3px solid ${s.color}22` }}>
+            <span className="stat-number" style={{ color: s.value === '—' ? 'var(--muted)' : s.color }}>
+              {s.value}
+            </span>
+            <div className="stat-label">{s.label}</div>
+            <div className="stat-delta">{s.note}</div>
+          </div>
+        ))}
       </div>
 
       {/* Monthly chart */}
-      <div className="chart-panel reveal">
-        <div className="chart-header">
-          <div>
-            <div className="chart-title">Miesięczne wyniki {year}</div>
-            <div className="chart-sub">% zwrotu na rachunku · dane własne</div>
-          </div>
-          <div className="chart-filters">
-            {(['2024', '2023'] as const).map((y) => (
-              <button
-                key={y}
-                className={`chart-filter-btn${year === y ? ' active' : ''}`}
-                onClick={() => setYear(y)}
-              >
-                {y}
-              </button>
-            ))}
-          </div>
+      <div className="monthly-chart reveal">
+        <div className="monthly-header">
+          <span className="monthly-title">Miesięczne wyniki 2026</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--muted)' }}>
+            % zwrotu na rachunku
+          </span>
         </div>
-        <div className="monthly-grid">
-          {months.map((m) => {
-            const pos = m.pct >= 0;
-            const h = (Math.abs(m.pct) / maxAbs) * 80;
-            return (
-              <div key={m.name} className="month-bar-wrap">
-                <div className="month-pct" style={{ color: pos ? 'var(--cyan)' : 'var(--pink)' }}>
-                  {pos ? '+' : ''}{m.pct}%
-                </div>
-                <div className="month-bar-track">
-                  <div className={`month-bar ${pos ? 'month-bar-pos' : 'month-bar-neg'}`}
-                    style={{ height: `${h}px` }} />
-                </div>
-                <div className="month-name">{m.name}</div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
 
-      <p style={{
-        marginTop: 20, fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
-        color: 'var(--muted)', lineHeight: 1.6, maxWidth: 600,
-      }}>
-        * Wyniki historyczne nie gwarantują przyszłych zwrotów. Trading wiąże się z ryzykiem utraty kapitału.
-        Dane pokazują wyniki własnego rachunku — nie są to wyniki zarządzanego funduszu.
-      </p>
+        <div className="monthly-bars">
+          {months.map((m) => (
+            <div key={m.name} className="monthly-bar-wrap">
+              {/* Value label */}
+              <div className="monthly-value" style={{
+                color: m.pct === null
+                  ? 'transparent'
+                  : m.pct >= 0 ? 'var(--cyan)' : '#ff2d78',
+              }}>
+                {m.pct !== null ? `${m.pct > 0 ? '+' : ''}${m.pct}%` : '—'}
+              </div>
+
+              {/* Bar */}
+              <div className="monthly-bar-track">
+                {m.pct !== null ? (
+                  <div
+                    className="monthly-bar-fill"
+                    style={{
+                      height: `${Math.abs(m.pct) / maxAbs * 100}%`,
+                      background: m.pct >= 0
+                        ? 'linear-gradient(to top, rgba(0,245,212,0.8), rgba(0,245,212,0.2))'
+                        : 'linear-gradient(to top, rgba(255,45,120,0.8), rgba(255,45,120,0.2))',
+                      alignSelf: 'flex-end',
+                    }}
+                  />
+                ) : (
+                  <div style={{
+                    width: '100%', height: m.active ? '4px' : '2px',
+                    background: m.active ? 'rgba(0,245,212,0.3)' : 'rgba(255,255,255,0.06)',
+                    alignSelf: 'flex-end', borderRadius: 1,
+                  }} />
+                )}
+              </div>
+
+              {/* Month name */}
+              <div className="monthly-name" style={{
+                color: m.active ? 'var(--cyan)' : m.pct !== null ? 'var(--muted)' : '#2a3a4a',
+              }}>
+                {m.name}
+                {m.active && <span style={{ display: 'block', fontSize: '0.45rem', letterSpacing: '1px', marginTop: 2 }}>LIVE</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p className="wyniki-disclaimer">
+          * Wyniki historyczne nie gwarantują przyszłych zwrotów. Trading wiąże się z ryzykiem utraty
+          kapitału. Dane pokazują wyniki własnego rachunku — nie są to wyniki zarządzanego funduszu.
+        </p>
+      </div>
     </section>
   );
 }

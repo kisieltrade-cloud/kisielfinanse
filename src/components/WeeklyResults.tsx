@@ -2,270 +2,169 @@
 
 import { useState } from 'react';
 
-// ─────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
 // TUTAJ DODAJESZ SWOJE WYNIKI CO TYDZIEŃ
-// Skopiuj ostatni obiekt, zmień dane i zapisz plik → git push
-// ─────────────────────────────────────────────────────────────
-export const WEEKLY_RESULTS = [
-  {
-    week: 'Tydzień 8',
-    dateRange: '17–21 lut 2025',
-    pnl: '+$1,240',
-    pct: '+3.1%',
-    trades: 12,
-    winRate: '75%',
-    markets: ['Forex', 'Krypto'],
-    highlight: 'Mocny setup na EUR/USD + long BTC po wybiciu',
-    positive: true,
-  },
-  {
-    week: 'Tydzień 7',
-    dateRange: '10–14 lut 2025',
-    pnl: '+$860',
-    pct: '+2.2%',
-    trades: 9,
-    winRate: '67%',
-    markets: ['Indeksy', 'Akcje'],
-    highlight: 'Dobre wejście na S&P500, NVDA long przy wsparciu',
-    positive: true,
-  },
-  {
-    week: 'Tydzień 6',
-    dateRange: '3–7 lut 2025',
-    pnl: '-$320',
-    pct: '-0.8%',
-    trades: 11,
-    winRate: '45%',
-    markets: ['Forex', 'Krypto'],
-    highlight: 'Trudny tydzień — rynek bez trendu, za dużo szumu',
-    positive: false,
-  },
-  {
-    week: 'Tydzień 5',
-    dateRange: '27–31 sty 2025',
-    pnl: '+$2,100',
-    pct: '+5.4%',
-    trades: 8,
-    winRate: '88%',
-    markets: ['Krypto', 'Indeksy'],
-    highlight: 'Najlepszy tydzień — BTC breakout + short NAS100',
-    positive: true,
-  },
-  {
-    week: 'Tydzień 4',
-    dateRange: '20–24 sty 2025',
-    pnl: '+$540',
-    pct: '+1.4%',
-    trades: 14,
-    winRate: '64%',
-    markets: ['Forex', 'Akcje'],
-    highlight: 'Spokojny tydzień, konsekwentne małe zyski',
-    positive: true,
-  },
-  {
-    week: 'Tydzień 3',
-    dateRange: '13–17 sty 2025',
-    pnl: '-$180',
-    pct: '-0.5%',
-    trades: 7,
-    winRate: '43%',
-    markets: ['Forex'],
-    highlight: 'News trading — zatrzymałem się po 3 stratach z rzędu',
-    positive: false,
-  },
-  {
-    week: 'Tydzień 2',
-    dateRange: '6–10 sty 2025',
-    pnl: '+$1,580',
-    pct: '+4.1%',
-    trades: 10,
-    winRate: '80%',
-    markets: ['Krypto', 'Indeksy', 'Akcje'],
-    highlight: 'Świetny początek roku — ETH i DAX zgodnie z planem',
-    positive: true,
-  },
-  {
-    week: 'Tydzień 1',
-    dateRange: '2–3 sty 2025',
-    pnl: '+$420',
-    pct: '+1.1%',
-    trades: 4,
-    winRate: '75%',
-    markets: ['Forex', 'Krypto'],
-    highlight: 'Krótki tydzień startowy, ostrożne wejścia',
-    positive: true,
-  },
+// Skopiuj blok poniżej, uzupełnij danymi i zapisz → git push
+//
+// Przykład:
+// {
+//   week: 'Tydzień 1',
+//   dateRange: '3–7 mar 2026',
+//   pnl: '+1 240 zł',
+//   pct: '+2.4%',
+//   trades: 8,
+//   winRate: '75%',
+//   markets: ['Forex', 'Krypto'],   // Forex | Krypto | Akcje | Indeksy
+//   highlight: 'Twój komentarz do tygodnia',
+//   positive: true,
+// },
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const WEEKLY_RESULTS: Array<{
+  week: string;
+  dateRange: string;
+  pnl: string;
+  pct: string;
+  trades: number;
+  winRate: string;
+  markets: string[];
+  highlight: string;
+  positive: boolean;
+}> = [
+  // ← Dodaj tutaj pierwszy tydzień gdy będzie gotowy
 ];
 
+// ─── Podsumowanie — wyliczane automatycznie ──────────────────────────────────
+function calcSummary() {
+  if (WEEKLY_RESULTS.length === 0) return null;
+  const greenWeeks = WEEKLY_RESULTS.filter(w => w.positive).length;
+  const totalTrades = WEEKLY_RESULTS.reduce((s, w) => s + w.trades, 0);
+  return { greenWeeks, totalWeeks: WEEKLY_RESULTS.length, totalTrades };
+}
+
 const MARKET_COLORS: Record<string, string> = {
-  Forex: 'var(--cyan)',
-  Krypto: 'var(--purple)',
-  Akcje: 'var(--yellow)',
-  Indeksy: 'var(--pink)',
+  Forex:   '#00f5d4',
+  Krypto:  '#b14aed',
+  Akcje:   '#f5c518',
+  Indeksy: '#ff2d78',
 };
 
 export default function WeeklyResults() {
-  const [expanded, setExpanded] = useState<number | null>(0);
-  const [filter, setFilter] = useState<string>('Wszystkie');
+  const [filter, setFilter] = useState<'Wszystkie' | 'Forex' | 'Krypto' | 'Akcje' | 'Indeksy'>('Wszystkie');
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const summary = calcSummary();
 
-  const markets = ['Wszystkie', 'Forex', 'Krypto', 'Akcje', 'Indeksy'];
-
-  const filtered =
-    filter === 'Wszystkie'
-      ? WEEKLY_RESULTS
-      : WEEKLY_RESULTS.filter((r) => r.markets.includes(filter));
-
-  // Summary stats
-  const totalPnl = WEEKLY_RESULTS.reduce((sum, r) => {
-    const val = parseFloat(r.pnl.replace(/[^0-9.-]/g, '')) * (r.positive ? 1 : -1);
-    return sum + val;
-  }, 0);
-  const greenWeeks = WEEKLY_RESULTS.filter((r) => r.positive).length;
-  const totalTrades = WEEKLY_RESULTS.reduce((sum, r) => sum + r.trades, 0);
+  const filtered = filter === 'Wszystkie'
+    ? WEEKLY_RESULTS
+    : WEEKLY_RESULTS.filter(w => w.markets.includes(filter));
 
   return (
     <section className="weekly-section" id="wyniki-tygodniowe">
-      <div className="section-label">// tygodniowy dziennik</div>
+      <div className="section-label">// archiwum tygodniowe</div>
       <h2 className="section-title reveal">
-        <span aria-hidden="true">WYNIKI<br /><span className="gradient-text-cp">TYGODNIOWE</span></span>
-        <span className="seo-only">Wyniki tradingowe tygodniowe — Forex, Krypto, Futures | NysethTrading</span>
+        WYNIKI
+        <br />
+        <span className="gradient-text-cp">TYGODNIOWE</span>
       </h2>
 
-      {/* Summary bar */}
+      {/* Summary cards */}
       <div className="weekly-summary reveal">
-        <div className="weekly-summary-item">
-          <span className="weekly-summary-num" style={{ color: 'var(--cyan)' }}>
-            +${totalPnl.toLocaleString('en-US', { minimumFractionDigits: 0 })}
-          </span>
-          <span className="weekly-summary-label">Łączny P&L (2025)</span>
-        </div>
-        <div className="weekly-summary-divider" />
-        <div className="weekly-summary-item">
-          <span className="weekly-summary-num" style={{ color: 'var(--cyan)' }}>
-            {greenWeeks}/{WEEKLY_RESULTS.length}
-          </span>
-          <span className="weekly-summary-label">Zielonych tygodni</span>
-        </div>
-        <div className="weekly-summary-divider" />
-        <div className="weekly-summary-item">
-          <span className="weekly-summary-num" style={{ color: 'var(--cyan)' }}>
-            {totalTrades}
-          </span>
-          <span className="weekly-summary-label">Łączna liczba transakcji</span>
-        </div>
-        <div className="weekly-summary-divider" />
-        <div className="weekly-summary-item">
-          <span className="weekly-summary-num" style={{ color: 'var(--yellow)' }}>
-            {Math.round((greenWeeks / WEEKLY_RESULTS.length) * 100)}%
-          </span>
-          <span className="weekly-summary-label">Skuteczność tygodni</span>
-        </div>
+        {summary ? (
+          <>
+            <div className="weekly-sum-card">
+              <div className="weekly-sum-label">ŁĄCZNA LICZBA TRANSAKCJI</div>
+              <div className="weekly-sum-value">{summary.totalTrades}</div>
+            </div>
+            <div className="weekly-sum-card">
+              <div className="weekly-sum-label">ZIELONYCH TYGODNI</div>
+              <div className="weekly-sum-value" style={{ color: 'var(--cyan)' }}>
+                {summary.greenWeeks}/{summary.totalWeeks}
+              </div>
+            </div>
+            <div className="weekly-sum-card">
+              <div className="weekly-sum-label">SKUTECZNOŚĆ TYGODNI</div>
+              <div className="weekly-sum-value" style={{ color: '#f5c518' }}>
+                {Math.round(summary.greenWeeks / summary.totalWeeks * 100)}%
+              </div>
+            </div>
+          </>
+        ) : (
+          <div style={{
+            gridColumn: '1 / -1',
+            fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
+            color: 'var(--muted)', padding: '32px 0', textAlign: 'center',
+          }}>
+            // challenge startuje w marcu 2026 — pierwsze wyniki pojawią się po zamknięciu tygodnia
+          </div>
+        )}
       </div>
 
-      {/* Market filter */}
+      {/* Filter tabs */}
       <div className="weekly-filters reveal">
-        {markets.map((m) => (
+        {(['Wszystkie', 'Forex', 'Krypto', 'Akcje', 'Indeksy'] as const).map(f => (
           <button
-            key={m}
-            className={`chart-filter-btn${filter === m ? ' active' : ''}`}
-            onClick={() => setFilter(m)}
+            key={f}
+            className={`weekly-filter-btn${filter === f ? ' active' : ''}`}
+            onClick={() => setFilter(f)}
+            style={filter === f && f !== 'Wszystkie' ? { borderColor: MARKET_COLORS[f], color: MARKET_COLORS[f] } : {}}
           >
-            {m}
+            {f}
           </button>
         ))}
       </div>
 
-      {/* Results list */}
+      {/* Weekly list */}
       <div className="weekly-list reveal">
-        {filtered.map((result, i) => (
-          <div
-            key={i}
-            className={`weekly-row${expanded === i ? ' weekly-row-open' : ''}`}
-            onClick={() => setExpanded(expanded === i ? null : i)}
-          >
-            {/* Row header */}
-            <div className="weekly-row-header">
-              <div className="weekly-row-left">
-                <div
-                  className="weekly-indicator"
-                  style={{ background: result.positive ? 'var(--cyan)' : 'var(--pink)' }}
-                />
-                <div>
-                  <div className="weekly-week">{result.week}</div>
-                  <div className="weekly-date">{result.dateRange}</div>
-                </div>
-              </div>
-
-              <div className="weekly-row-markets">
-                {result.markets.map((m) => (
-                  <span
-                    key={m}
-                    className="weekly-market-tag"
-                    style={{ borderColor: MARKET_COLORS[m], color: MARKET_COLORS[m] }}
-                  >
-                    {m}
-                  </span>
-                ))}
-              </div>
-
-              <div className="weekly-row-stats">
-                <div className="weekly-stat">
-                  <span className="weekly-stat-val">{result.trades}</span>
-                  <span className="weekly-stat-label">Transakcji</span>
-                </div>
-                <div className="weekly-stat">
-                  <span className="weekly-stat-val">{result.winRate}</span>
-                  <span className="weekly-stat-label">Win Rate</span>
-                </div>
-              </div>
-
-              <div className="weekly-row-right">
-                <div
-                  className="weekly-pct"
-                  style={{ color: result.positive ? 'var(--cyan)' : 'var(--pink)' }}
-                >
-                  {result.pct}
-                </div>
-                <div
-                  className="weekly-pnl"
-                  style={{ color: result.positive ? 'var(--cyan)' : 'var(--pink)' }}
-                >
-                  {result.pnl}
-                </div>
-              </div>
-
-              <div className="weekly-chevron">{expanded === i ? '↑' : '↓'}</div>
-            </div>
-
-            {/* Expanded detail */}
-            {expanded === i && (
-              <div className="weekly-row-detail">
-                <div className="weekly-highlight">
-                  <span style={{ color: 'var(--muted)', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', letterSpacing: '2px', textTransform: 'uppercase' }}>
-                    Komentarz tygodnia
-                  </span>
-                  <p style={{ marginTop: 8, color: 'var(--text)', fontSize: '0.92rem', lineHeight: 1.6 }}>
-                    {result.highlight}
-                  </p>
-                </div>
-              </div>
-            )}
+        {filtered.length === 0 ? (
+          <div style={{
+            padding: '60px 32px', textAlign: 'center',
+            fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--muted)',
+            border: '1px solid var(--border)',
+          }}>
+            {WEEKLY_RESULTS.length === 0
+              ? '// Brak wyników — challenge startuje w marcu 2026'
+              : `// Brak wyników dla kategorii "${filter}"`
+            }
           </div>
-        ))}
+        ) : (
+          filtered.map((w) => (
+            <div key={w.week} className={`weekly-row${expanded === w.week ? ' expanded' : ''}`}>
+              <div
+                className="weekly-row-main"
+                onClick={() => setExpanded(expanded === w.week ? null : w.week)}
+              >
+                <div className="weekly-row-left">
+                  <div className="weekly-row-accent" style={{ background: w.positive ? 'var(--cyan)' : '#ff2d78' }} />
+                  <div>
+                    <div className="weekly-week-name">{w.week}</div>
+                    <div className="weekly-date">{w.dateRange}</div>
+                  </div>
+                  <div className="weekly-markets">
+                    {w.markets.map(m => (
+                      <span key={m} className="market-tag" style={{ borderColor: MARKET_COLORS[m], color: MARKET_COLORS[m] }}>{m.toUpperCase()}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="weekly-row-right">
+                  <span className="weekly-trades">{w.trades} <span>transakcji</span></span>
+                  <span className="weekly-winrate">{w.winRate} <span>win rate</span></span>
+                  <span className={`weekly-pct${w.positive ? ' positive' : ' negative'}`}>
+                    {w.pct}
+                    <span className="weekly-pnl">{w.pnl}</span>
+                  </span>
+                  <span className="weekly-expand">{expanded === w.week ? '−' : '+'}</span>
+                </div>
+              </div>
+              {expanded === w.week && (
+                <div className="weekly-detail">
+                  <span className="weekly-detail-label">// komentarz tygodnia</span>
+                  <p>{w.highlight}</p>
+                </div>
+              )}
+            </div>
+          ))
+        )}
       </div>
-
-      <p
-        style={{
-          marginTop: 24,
-          fontFamily: 'var(--font-mono)',
-          fontSize: '0.62rem',
-          color: 'var(--muted)',
-          lineHeight: 1.6,
-        }}
-      >
-        * Wyniki własnego rachunku. Trading wiąże się z ryzykiem utraty kapitału.
-        Dane mają charakter informacyjny i nie stanowią doradztwa inwestycyjnego.
-      </p>
     </section>
   );
 }
