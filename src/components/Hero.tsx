@@ -99,9 +99,8 @@ export default function Hero() {
             <div className="hero-chart-label">// equity curve 2026</div>
             <div className="hero-chart-title">NysethTrading</div>
           </div>
-          <div className="hero-chart-badge">
-            <span className="hero-badge-dot" style={{ width: 8, height: 8 }} />
-            NA ŻYWO
+          <div className="hero-chart-badge" style={{ fontSize: '0.62rem', letterSpacing: '1px', color: 'var(--muted)', border: '1px solid var(--border)', padding: '4px 10px', fontFamily: 'var(--font-mono)' }}>
+            // akt. 03.03.2026
           </div>
         </div>
 
@@ -172,7 +171,7 @@ export default function Hero() {
             fontSize="11"
             fontWeight="600"
             textAnchor="middle"
-          >start: mar 2026</text>
+          >03.03.2026</text>
         </svg>
 
         {/* Chart footer stats */}
