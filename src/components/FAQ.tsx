@@ -5,7 +5,7 @@ import { useState } from 'react';
 const FAQS = [
   {
     q: 'Czym jest NysethTrading?',
-    a: 'NysethTrading to projekt transparentnego tradingu prowadzony przez Nyseth — tradera z Wrocławia z 7-letnim doświadczeniem na rynkach Forex, krypto i futures. Celem projektu jest pokazywanie realnych wyników tradingowych bez koloryzowania — zarówno zyskownych jak i stratnych tygodni.',
+    a: 'NysethTrading to projekt transparentnego tradingu prowadzony przez Nyseth — tradera z Wrocławia z 9-letnim doświadczeniem na rynkach Forex, krypto i futures. Celem projektu jest pokazywanie realnych wyników tradingowych bez koloryzowania — zarówno zyskownych jak i stratnych tygodni.',
   },
   {
     q: 'Jakie rynki traderujesz?',
@@ -25,7 +25,7 @@ const FAQS = [
   },
   {
     q: 'Jak dołączyć do newslettera?',
-    a: 'Przewiń na dół strony głównej i wpisz swój adres email w sekcji Newsletter. Wysyłam cotygodniowe podsumowanie rynków, moje setup\'y i przemyślenia których nie publikuję publicznie. Zero spamu — możesz się wypisać w każdej chwili.',
+    a: "Przewiń na dół strony głównej i wpisz swój adres email w sekcji Newsletter. Wysyłam cotygodniowe podsumowanie rynków, moje setup'y i przemyślenia których nie publikuję publicznie. Zero spamu — możesz się wypisać w każdej chwili.",
   },
   {
     q: 'Czy wyniki są audytowane?',
@@ -37,18 +37,34 @@ const FAQS = [
   },
 ];
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: f.a,
+    },
+  })),
+};
+
 export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
     <section className="faq-section" id="faq">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="faq-inner">
         <div className="section-label">// pytania i odpowiedzi</div>
         <h2 className="section-title reveal">
           <span aria-hidden="true">CZĘSTO ZADAWANE <span className="gradient-text-cp">PYTANIA</span></span>
           <span className="seo-only">FAQ — często zadawane pytania o trading, wyniki i NysethTrading</span>
         </h2>
-
         <div className="faq-list reveal">
           {FAQS.map((f, i) => (
             <div

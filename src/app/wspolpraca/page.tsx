@@ -7,7 +7,7 @@ import RevealOnScroll from '@/components/RevealOnScroll';
 export const metadata: Metadata = {
   title: 'Współpraca',
   description:
-    'Współpraca z NysethTrading — giełdy krypto, sponsoring, afiliacja. Trader z 7-letnim doświadczeniem, transparentne wyniki, aktywna społeczność.',
+    'Współpraca z NysethTrading — giełdy krypto, sponsoring, afiliacja. Trader z 9-letnim doświadczeniem, transparentne wyniki, aktywna społeczność.',
   keywords: ['współpraca trading', 'sponsoring trader', 'afiliacja krypto', 'partner giełda krypto'],
   openGraph: {
     title: 'Współpraca | NysethTrading',
