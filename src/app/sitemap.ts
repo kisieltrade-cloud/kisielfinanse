@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import fs from 'fs';
 import path from 'path';
+import { TERMS } from '@/lib/slownik-terms';
 
 const BASE_URL = 'https://nysethtrading.pl';
 
@@ -33,5 +34,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...blogPages];
+  const slownikPages: MetadataRoute.Sitemap = TERMS.map(term => ({
+    url: `${BASE_URL}/slownik/${term.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...blogPages, ...slownikPages];
 }
