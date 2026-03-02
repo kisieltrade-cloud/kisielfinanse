@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import CookieConsent, { CookieConsentInit } from '@/components/CookieConsent';
 
 const BASE_URL = 'https://nysethtrading.pl';
 
@@ -87,6 +88,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+        {/* Consent Mode v2 — musi być PRZED tagiem GA */}
+        <CookieConsentInit />
+
         {/* Google Analytics */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-RV480KYSX0" />
         <script dangerouslySetInnerHTML={{ __html: `
@@ -96,7 +100,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           gtag('config', 'G-RV480KYSX0', { anonymize_ip: true });
         `}} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <CookieConsent />
+      </body>
     </html>
   );
 }
