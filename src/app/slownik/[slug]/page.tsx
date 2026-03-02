@@ -4,8 +4,6 @@ import { notFound } from 'next/navigation';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 
-// --- TYMCZASOWA DEFINICJA DANYCH W PLIKU STRONY ---
-// To rozwiązanie wymusza na Vercelu widoczność danych podczas budowania
 const TERMS = [
   { slug: 'stop-loss', term: 'Stop Loss (SL)', short: 'Zlecenie automatycznego zamknięcia pozycji przy określonej stracie.', full: 'Stop Loss to zlecenie ustawiane z góry, które automatycznie zamyka pozycję gdy cena osiągnie określony poziom. Chroni kapitał przed zbyt dużymi stratami. Podstawowe narzędzie zarządzania ryzykiem — nigdy nie handluj bez stop lossa.', category: 'Ogólne' },
   { slug: 'take-profit', term: 'Take Profit (TP)', short: 'Zlecenie automatycznego zamknięcia pozycji przy określonym zysku.', full: 'Take Profit to poziom ceny, przy którym pozycja zostaje automatycznie zamknięta z zyskiem. Pomaga realizować zyski bez konieczności ciągłego monitorowania rynku i eliminuje emocjonalne decyzje o za wczesnym zamknięciu.', category: 'Ogólne' },
@@ -55,7 +53,6 @@ const TERMS = [
   { slug: 'supply-demand', term: 'Strefa Supply i Demand', short: 'Obszary cenowe gdzie historycznie dominowała podaż lub popyt instytucjonalny.', full: 'Supply zone (strefa podaży) to obszar gdzie duzi gracze sprzedawali — cena dynamicznie z niego spadła. Demand zone (strefa popytu) to obszar gdzie kupowali — cena dynamicznie wzrosła. Cena często wraca do tych stref zanim kontynuuje ruch. Podstawa smart money concepts (SMC).', category: 'Ogólne' },
   { slug: 'break-of-structure', term: 'Break of Structure (BOS)', short: 'Przebicie poprzedniego szczytu lub dołka potwierdzające zmianę struktury rynku.', full: 'Break of Structure to przebicie kluczowego poziomu struktury rynku — poprzedniego szczytu (w uptrend) lub poprzedniego dołka (w downtrend). BOS potwierdza kontynuację trendu. Jego odwrotność — Change of Character (CHoCH) — sygnalizuje możliwą zmianę trendu. Kluczowe pojęcia w SMC.', category: 'Ogólne' },
   { slug: 'liquidity', term: 'Liquidity (Płynność)', short: 'Obszary cenowe gdzie gromadzą się zlecenia stop — cele dla dużych graczy.', full: 'W smart money concepts płynność to skupiska zleceń stop loss (equal highs/lows, poprzednie szczyty/dołki). Duzi gracze (instytucje) potrzebują płynności do wypełnienia swoich dużych pozycji — celują w te poziomy. "Sweep of liquidity" (wybicie i powrót) to typowy ruch przed właściwym kierunkiem.', category: 'Ogólne' },
-  // DODAJ TUTAJ WSZYSTKIE INNE SWOJE WPISY Z PLIKU slownik-terms.ts w tym samym formacie!
 ];
 // --------------------------------------------------
 
