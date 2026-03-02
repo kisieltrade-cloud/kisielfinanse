@@ -66,7 +66,7 @@ interface Props {
 }
 
 // Wymusza generowanie tylko tych stron, które są zdefiniowane w TERMS
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 // 1. Funkcja generująca statyczne parametry (slugi) dla Vercela
 export async function generateStaticParams() {
