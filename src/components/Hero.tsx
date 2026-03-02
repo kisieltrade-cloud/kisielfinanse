@@ -172,22 +172,22 @@ export default function Hero() {
             fontSize="11"
             fontWeight="600"
             textAnchor="middle"
-          >+183%</text>
+          >start: mar 2026</text>
         </svg>
 
         {/* Chart footer stats */}
         <div className="hero-chart-stats">
           <div className="hero-chart-stat">
-            <span className="hero-chart-stat-val" style={{ color: 'var(--cyan)' }}>+$6,240</span>
-            <span className="hero-chart-stat-label">P&L 2026</span>
+            <span className="hero-chart-stat-val" style={{ color: 'var(--cyan)' }}>—</span>
+            <span className="hero-chart-stat-label">P&amp;L 2026</span>
           </div>
           <div className="hero-chart-stat">
-            <span className="hero-chart-stat-val">8/10</span>
+            <span className="hero-chart-stat-val">—</span>
             <span className="hero-chart-stat-label">Zielone tygodnie</span>
           </div>
           <div className="hero-chart-stat">
-            <span className="hero-chart-stat-val" style={{ color: 'var(--yellow)' }}>aktualizowane</span>
-            <span className="hero-chart-stat-label">Co tydzień</span>
+            <span className="hero-chart-stat-val" style={{ color: 'var(--yellow)' }}>co tydzień</span>
+            <span className="hero-chart-stat-label">Aktualizacja</span>
           </div>
         </div>
       </div>
