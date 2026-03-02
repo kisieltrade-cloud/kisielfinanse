@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { TERMS } from '@/lib/slownik-terms';
+export const dynamicParams = true;
 
 const BASE_URL = 'https://nysethtrading.pl';
 
