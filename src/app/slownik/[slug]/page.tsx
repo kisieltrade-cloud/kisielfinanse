@@ -76,7 +76,8 @@ export async function generateStaticParams() {
 
 // 2. Generowanie metadanych dla SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const slug = params?.slug;
+  const { slug } = await params;
+  
   if (!slug) return {};
 
   const term = TERMS.find((t) => 
@@ -106,7 +107,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 
 // 3. Główny komponent strony
 export default async function SlownikTermPage({ params }: Props) {
-  const slug = params?.slug;
+  const { slug } = await params;
   
   if (!slug) notFound();
 
