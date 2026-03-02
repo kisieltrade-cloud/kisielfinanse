@@ -30,7 +30,7 @@ const OFFERS = [
 ];
 
 const STATS = [
-  { val: '7', label: 'Lat na rynkach' },
+  { val: '9', label: 'Lat na rynkach' },
   { val: '1000+', label: 'Zamkniętych pozycji' },
   { val: '2026', label: 'Rok startu platformy' },
 ];
