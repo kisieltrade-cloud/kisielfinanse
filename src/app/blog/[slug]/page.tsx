@@ -9,7 +9,7 @@ import { getPostBySlug, getAllSlugs, getAllPosts } from '@/lib/posts';
 import { remark } from 'remark';
 import remarkHtml from 'remark-html';
 
-const BASE_URL = 'https://nyseth-trading.vercel.app';
+const BASE_URL = 'https://nysethtrading.pl';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -54,25 +54,38 @@ export default async function BlogPostPage({ params }: Props) {
 
   const t = TAG_CONFIG[post.tag?.toLowerCase()] ?? TAG_CONFIG['edukacja'];
 
-  const schemaArticle = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.excerpt,
-    author: {
-      '@type': 'Person',
-      name: 'Nyseth',
-      url: `${BASE_URL}/o-mnie`,
+ const schemaArticle = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.excerpt,
+  datePublished: post.date,
+  dateModified: post.date,
+  author: {
+    '@type': 'Person',
+    name: 'Mateusz Nyseth',
+    url: `${BASE_URL}/o-mnie`,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'NysethTrading',
+    url: BASE_URL,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${BASE_URL}/logo.svg`,
     },
-    publisher: {
-      '@type': 'Organization',
-      name: 'NysethTrading',
-      url: BASE_URL,
-    },
-    url: `${BASE_URL}/blog/${slug}`,
-    inLanguage: 'pl',
-    keywords: ['trading', post.tag],
-  };
+  },
+  url: `${BASE_URL}/blog/${slug}`,
+  mainEntityOfPage: `${BASE_URL}/blog/${slug}`,
+  inLanguage: 'pl-PL',
+  keywords: ['trading', 'forex', 'krypto', post.tag],
+  image: {
+    '@type': 'ImageObject',
+    url: `${BASE_URL}/og-image.png`,
+    width: 1200,
+    height: 630,
+  },
+};
 
   return (
     <>
