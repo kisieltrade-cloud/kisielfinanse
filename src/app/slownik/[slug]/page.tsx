@@ -18,7 +18,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = params;
-  const term = TERMS.find((t) => t.slug === slug);
+  const term = TERMS.find((t) => t.slug.trim().toLowerCase() === slug.trim().toLowerCase());
   if (!term) return {};
   return {
     title: `${term.term} — co to jest? | Słownik Tradingowy NysethTrading`,
@@ -41,7 +41,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 
 export default async function SlownikTermPage({ params }: Props) {
   const { slug } = params;
-  const term = TERMS.find((t) => t.slug === slug);
+  const term = TERMS.find((t) => t.slug.trim().toLowerCase() === slug.trim().toLowerCase());
   if (!term) notFound();
 
   const color = CATEGORY_COLORS[term.category] ?? '#00f5d4';
