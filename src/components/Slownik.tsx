@@ -1,6 +1,7 @@
 'use client';
-
 import { useState, useMemo } from 'react';
+import Link from 'next/link';
+import { TERMS } from '@/lib/slownik-terms';
 
 const TERMS = [
   // OGÓLNE
@@ -127,7 +128,9 @@ export default function Slownik() {
             <div className="slownik-item-header">
               <div className="slownik-item-left">
                 <span className="slownik-cat-badge">{t.category}</span>
-                <span className="slownik-term">{t.term}</span>
+                <Link href={`/slownik/${t.slug}`} onClick={e => e.stopPropagation()} style={{ color: 'inherit', textDecoration: 'none' }}>
+  <span className="slownik-term">{t.term}</span>
+</Link>
               </div>
               <span className="slownik-arrow">{expanded === t.term ? '−' : '+'}</span>
             </div>
