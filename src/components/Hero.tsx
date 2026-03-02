@@ -60,7 +60,7 @@ export default function Hero() {
         </h1>
 
         <p className="hero-desc">
-          Trader z Wrocławia z 7-letnim doświadczeniem. Zajmuję się day tradingiem
+          Trader z Wrocławia z 9-letnim doświadczeniem. Zajmuję się day tradingiem
           na Forexie, krypto i futures. Wyniki publikuję co tydzień — bez filtrów.
         </p>
 
@@ -76,7 +76,7 @@ export default function Hero() {
         {/* MINI STATS */}
         <div className="hero-mini-stats">
           <div className="hero-mini-stat">
-            <span className="hero-mini-val">7</span>
+            <span className="hero-mini-val">9</span>
             <span className="hero-mini-label">Lat doświadczenia</span>
           </div>
           <div className="hero-mini-divider" />
