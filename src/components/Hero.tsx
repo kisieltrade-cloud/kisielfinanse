@@ -51,13 +51,15 @@ export default function Hero() {
           AKTYWNY TRADER · TRANSPARENTNE WYNIKI
         </div>
 
-        <h1 className="hero-h1">
-          <span className="hero-h1-line1" aria-hidden="true">TRADE</span>
-          <span className="hero-h1-line2" aria-hidden="true">SMARTER</span>
-          <span className="seo-only">
-            NysethTrading — Day Trading Forex, Krypto i Futures | Transparentne Wyniki Tradingowe
-          </span>
-        </h1>
+    <div className="hero-h1-wrapper">
+  <div className="hero-h1" aria-hidden="true">
+    <span className="hero-h1-line1">TRADE</span>
+    <span className="hero-h1-line2">SMARTER</span>
+  </div>
+  <h1 className="seo-only">
+    NysethTrading — Transparentne Wyniki Tradingowe | Day Trading Forex i Krypto
+  </h1>
+</div>
 
         <p className="hero-desc">
           Trader z Wrocławia z 9-letnim doświadczeniem. Zajmuję się day tradingiem
