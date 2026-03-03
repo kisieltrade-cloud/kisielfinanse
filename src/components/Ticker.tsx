@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState, useCallback } from 'react';
 
@@ -56,7 +56,7 @@ export default function Ticker() {
     return () => clearInterval(interval);
   }, [fetchTickers]);
 
-  // 3x duplication — enough for any screen width
+  // 3x duplication â€” enough for any screen width
   const items = [...tickers, ...tickers, ...tickers];
 
   return (
@@ -76,3 +76,5 @@ export default function Ticker() {
     </div>
   );
 }
+
+

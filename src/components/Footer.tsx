@@ -8,7 +8,7 @@ export default function Footer() {
       <ul className="footer-links">
         <li><Link href="/polityka-prywatnosci">Polityka prywatności</Link></li>
         <li><Link href="/disclaimer">Disclaimer</Link></li>
-        <li><a href="mailto:kontakt@nysethtrading.pl">Kontakt</a></li>
+        <li><a href="mailto:nysethtrading@gmail.com">Kontakt</a></li>
       </ul>
 
       <div className="footer-disclaimer">
