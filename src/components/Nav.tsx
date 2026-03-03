@@ -1,5 +1,4 @@
 'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -10,20 +9,20 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => { setOpen(false); }, [pathname]);
-
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
   const links = [
-    { href: '/', label: 'Home' },
-    { href: '/wyniki', label: 'Wyniki' },
-    { href: '/o-mnie', label: 'O mnie' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/wspolpraca', label: 'Współpraca' },
-    { href: '/slownik', label: 'Słownik' },
-    { href: '/tygodnik', label: 'Tygodnik' },
+    { href: '/',            label: 'Home' },
+    { href: '/wyniki',      label: 'Wyniki' },
+    { href: '/o-mnie',      label: 'O mnie' },
+    { href: '/blog',        label: 'Blog' },
+    { href: '/wspolpraca',  label: 'Współpraca' },
+    { href: '/slownik',     label: 'Słownik' },
+    { href: '/tygodnik',    label: 'Tygodnik' },
+    { href: '/zasoby',      label: 'Zasoby' },
     { href: '/#newsletter', label: 'Newsletter' },
   ];
 
@@ -34,7 +33,6 @@ export default function Nav() {
           <Image src="/logo.svg" alt="NysethTrading logo" width={32} height={32} />
           NYSETHTRADING
         </Link>
-
         <ul className="nav-links">
           {links.map(l => (
             <li key={l.href}>
@@ -44,7 +42,6 @@ export default function Nav() {
             </li>
           ))}
         </ul>
-
         <div className="nav-right">
           <button className="nav-cta nav-cta-desktop">Dołącz teraz</button>
           <button
