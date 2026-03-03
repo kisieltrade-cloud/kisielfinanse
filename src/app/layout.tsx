@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import CookieConsent, { CookieConsentInit } from '@/components/CookieConsent';
+import SchemaOrg from '@/components/SchemaOrg';
 
 const BASE_URL = 'https://nysethtrading.pl';
 
@@ -90,6 +91,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Consent Mode v2 — musi być PRZED tagiem GA */}
         <CookieConsentInit />
+
+           {/* Schema.org JSON-LD */}
+        <SchemaOrg />
 
         {/* Google Analytics */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-RV480KYSX0" />
