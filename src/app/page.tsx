@@ -9,9 +9,9 @@ import Footer from '@/components/Footer';
 import RevealOnScroll from '@/components/RevealOnScroll';
 
 /* ─── Lazy load — ładowane dopiero gdy potrzebne (zmniejsza initial JS bundle) ─── */
-const Ticker = dynamic(() => import('@/components/Ticker'), { ssr: false });
-const MarketSessions = dynamic(() => import('@/components/MarketSessions'), { ssr: false });
-const WeeklyResults = dynamic(() => import('@/components/WeeklyResults'), { ssr: false });
+const Ticker = dynamic(() => import('@/components/Ticker'));
+const MarketSessions = dynamic(() => import('@/components/MarketSessions'));
+const WeeklyResults = dynamic(() => import('@/components/WeeklyResults'));
 
 export default function HomePage() {
   return (
