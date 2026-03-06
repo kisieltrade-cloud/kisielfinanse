@@ -2,6 +2,7 @@
 const nextConfig = {
   experimental: {
     mdxRs: true,
+    optimizePackageImports: ['lucide-react'],
   },
 
   // Image optimization — lazy loading automatycznie przez Next.js Image

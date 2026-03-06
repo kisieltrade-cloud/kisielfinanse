@@ -1,7 +1,31 @@
 import type { Metadata } from 'next';
+import { Syne, JetBrains_Mono, Bebas_Neue } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import CookieConsent, { CookieConsentInit } from '@/components/CookieConsent';
 import SchemaOrg from '@/components/SchemaOrg';
+
+/* ─── Fonty — hostowane lokalnie przez Next.js (zero render-blocking) ─── */
+const syne = Syne({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '600', '700', '800'],
+  display: 'swap',
+  variable: '--font-syne',
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['300', '400', '500'],
+  display: 'swap',
+  variable: '--font-jetbrains',
+});
+
+const bebas = Bebas_Neue({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+  variable: '--font-bebas',
+});
 
 const BASE_URL = 'https://nysethtrading.pl';
 
@@ -37,7 +61,7 @@ export const metadata: Metadata = {
       'Transparentne wyniki tradingowe, tygodniowe statystyki i strategie forex/krypto. Bez ściemy — tylko rzeczywiste wyniki.',
     images: [
       {
-        url: '/og-image.png',   // dodaj plik 1200×630px do /public/og-image.png
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: 'NysethTrading — Transparentne Wyniki Tradingowe',
@@ -48,7 +72,7 @@ export const metadata: Metadata = {
   // Twitter/X Card
   twitter: {
     card: 'summary_large_image',
-    site: '@nysethtrading',   // zmień na swój handle jeśli masz
+    site: '@nysethtrading',
     creator: '@nysethtrading',
     title: 'NysethTrading — Transparentne Wyniki Tradingowe',
     description: 'Transparentne wyniki tradingowe i analiza rynkowa. Forex, krypto, bez ściemy.',
@@ -67,23 +91,12 @@ export const metadata: Metadata = {
       'max-video-preview': -1,
     },
   },
-
-  // Weryfikacja Google Search Console — podmień na swój kod po dodaniu domeny
-  // verification: {
-  //   google: 'TWÓJ_KOD_WERYFIKACYJNY',
-  // },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pl">
+    <html lang="pl" className={`${syne.variable} ${jetbrains.variable} ${bebas.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap"
-          rel="stylesheet"
-        />
         {/* Favicon */}
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
@@ -91,21 +104,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Consent Mode v2 — musi być PRZED tagiem GA */}
         <CookieConsentInit />
 
-           {/* Schema.org JSON-LD */}
+        {/* Schema.org JSON-LD */}
         <SchemaOrg />
-
-        {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-RV480KYSX0" />
-        <script dangerouslySetInnerHTML={{ __html: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-RV480KYSX0', { anonymize_ip: true });
-        `}} />
       </head>
       <body>
         {children}
         <CookieConsent />
+
+        {/* Google Analytics — ładowane po interakcji, nie blokuje renderowania */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-RV480KYSX0"
+          strategy="afterInteractive"
+        />
+        <Script id="ga-config" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-RV480KYSX0', { anonymize_ip: true });
+          `}
+        </Script>
       </body>
     </html>
   );
