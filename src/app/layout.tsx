@@ -97,9 +97,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pl" className={`${syne.variable} ${jetbrains.variable} ${bebas.variable}`}>
       <head>
-        {/* Favicon */}
+        {/* Favicon — ICO dla Google, SVG dla nowoczesnych przeglądarek, Apple Touch */}
+        <link rel="icon" href="/favicon.ico" sizes="32x32 48x48" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
 
         {/* Consent Mode v2 — musi być PRZED tagiem GA */}
         <CookieConsentInit />
