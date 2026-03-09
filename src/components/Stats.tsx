@@ -1,31 +1,37 @@
 'use client';
 
 // ─── EDYTUJ TUTAJ CO MIESIĄC ──────────────────────────────────────────────
+const START_BALANCE = 25000;
+
 const STATS_2026 = {
   annualReturn: '+4.17%',
   annualReturnNote: 'start: marzec 2026',
   winRate: '100%',
   winRateNote: 'tydzień 01 (16 transakcji)',
-  profitFactor: '—',
-  profitFactorNote: 'zyski / straty (średnie)',
-  maxDrawdown: '—',
-  maxDrawdownNote: 'kontrolowane ryzyko',
+  profitFactor: '∞',
+  profitFactorNote: '16 winów / 0 strat',
+  maxDrawdown: '0 zł (0%)',
+  maxDrawdownNote: 'brak strat na zamkniętych',
 };
 
-const MONTHLY_2026: Array<{ name: string; pct: number | null; active: boolean }> = [
-  { name: 'STY', pct: null,  active: false },
-  { name: 'LUT', pct: null,  active: false },
-  { name: 'MAR', pct: 4.17,  active: true  }, // ← aktywny miesiąc
-  { name: 'KWI', pct: null,  active: false },
-  { name: 'MAJ', pct: null,  active: false },
-  { name: 'CZE', pct: null,  active: false },
-  { name: 'LIP', pct: null,  active: false },
-  { name: 'SIE', pct: null,  active: false },
-  { name: 'WRZ', pct: null,  active: false },
-  { name: 'PAŹ', pct: null,  active: false },
-  { name: 'LIS', pct: null,  active: false },
-  { name: 'GRU', pct: null,  active: false },
+const MONTHLY_2026: Array<{ name: string; pct: number | null; amount: number | null; active: boolean }> = [
+  { name: 'STY', pct: null,  amount: null,    active: false },
+  { name: 'LUT', pct: null,  amount: null,    active: false },
+  { name: 'MAR', pct: 4.17,  amount: 1041.30, active: true  }, // ← aktywny miesiąc
+  { name: 'KWI', pct: null,  amount: null,    active: false },
+  { name: 'MAJ', pct: null,  amount: null,    active: false },
+  { name: 'CZE', pct: null,  amount: null,    active: false },
+  { name: 'LIP', pct: null,  amount: null,    active: false },
+  { name: 'SIE', pct: null,  amount: null,    active: false },
+  { name: 'WRZ', pct: null,  amount: null,    active: false },
+  { name: 'PAŹ', pct: null,  amount: null,    active: false },
+  { name: 'LIS', pct: null,  amount: null,    active: false },
+  { name: 'GRU', pct: null,  amount: null,    active: false },
 ];
+
+// ─── AKTUALNA DATA AKTUALIZACJI ──────────────────────────────────────────
+const LAST_UPDATE = '09.03.2026';
+const TRADED_INSTRUMENTS = 'US100, US500';
 // ──────────────────────────────────────────────────────────────────────────
 
 export default function Stats() {
@@ -33,6 +39,12 @@ export default function Stats() {
   const maxAbs = completed.length > 0
     ? Math.max(...completed.map(m => Math.abs(m.pct as number)))
     : 1;
+
+  // Oblicz totale
+  const totalPnl = completed.reduce((sum, m) => sum + (m.amount ?? 0), 0);
+  const totalPct = ((totalPnl / START_BALANCE) * 100).toFixed(2);
+  const totalTrades = 16; // ← aktualizuj wraz z danymi
+  const totalWinRate = '100%';
 
   return (
     <section className="wyniki-section" id="wyniki">
@@ -87,12 +99,27 @@ export default function Stats() {
         <div className="monthly-grid">
           {MONTHLY_2026.map((m) => (
             <div key={m.name} className="month-bar-wrap">
-              {/* Value */}
+              {/* Value — % i kwota */}
               <div className="month-pct" style={{
                 color: m.pct === null ? 'transparent' : m.pct >= 0 ? 'var(--cyan)' : 'var(--pink)',
-                minHeight: '1.2em',
+                minHeight: '2.4em',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 2,
               }}>
-                {m.pct !== null ? `${m.pct > 0 ? '+' : ''}${m.pct}%` : ''}
+                {m.pct !== null && (
+                  <>
+                    <span>{m.pct > 0 ? '+' : ''}{m.pct}%</span>
+                    <span style={{
+                      fontSize: '0.55rem',
+                      opacity: 0.7,
+                      fontFamily: 'var(--font-mono)',
+                    }}>
+                      {m.amount !== null ? `${m.amount > 0 ? '+' : ''}${m.amount.toLocaleString('pl-PL', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} zł` : ''}
+                    </span>
+                  </>
+                )}
               </div>
 
               {/* Bar */}
@@ -129,6 +156,59 @@ export default function Stats() {
           * Wyniki historyczne nie gwarantują przyszłych zwrotów. Trading wiąże się z ryzykiem utraty
           kapitału. Dane pokazują wyniki własnego rachunku — nie są to wyniki zarządzanego funduszu.
         </p>
+      </div>
+
+      {/* Daily summary — data zamiast "dzisiaj" */}
+      <div className="reveal" style={{
+        marginTop: 48,
+        background: 'rgba(0,245,212,0.02)',
+        border: '1px solid rgba(255,255,255,0.06)',
+        borderRadius: 4,
+        padding: '24px 32px',
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--muted)', letterSpacing: '2px' }}>
+            // {LAST_UPDATE}
+          </span>
+          <span style={{
+            fontFamily: 'var(--font-mono)', fontSize: '0.55rem', letterSpacing: '2px',
+            color: 'var(--cyan)', border: '1px solid rgba(0,245,212,0.3)',
+            padding: '2px 10px', borderRadius: 2,
+          }}>
+            LIVE
+          </span>
+        </div>
+
+        <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', alignItems: 'baseline' }}>
+          <div>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', color: 'var(--cyan)', letterSpacing: '1px', fontWeight: 700 }}>
+              +{totalPnl.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} zł
+            </div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.55rem', color: 'var(--muted)', letterSpacing: '2px', marginTop: 4 }}>P&L</div>
+          </div>
+          <div>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', color: 'var(--cyan)', letterSpacing: '1px', fontWeight: 700 }}>
+              +{totalPct}%
+            </div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.55rem', color: 'var(--muted)', letterSpacing: '2px', marginTop: 4 }}>ZWROT</div>
+          </div>
+          <div>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', color: 'var(--text)', letterSpacing: '1px', fontWeight: 700 }}>
+              {totalTrades}
+            </div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.55rem', color: 'var(--muted)', letterSpacing: '2px', marginTop: 4 }}>TRANSAKCJI</div>
+          </div>
+          <div>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', color: 'var(--text)', letterSpacing: '1px', fontWeight: 700 }}>
+              {totalWinRate}
+            </div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.55rem', color: 'var(--muted)', letterSpacing: '2px', marginTop: 4 }}>WIN RATE</div>
+          </div>
+        </div>
+
+        <div style={{ marginTop: 16, fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: '#2a3a4a', letterSpacing: '1px' }}>
+          {TRADED_INSTRUMENTS}
+        </div>
       </div>
     </section>
   );

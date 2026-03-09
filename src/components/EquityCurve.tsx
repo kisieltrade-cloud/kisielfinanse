@@ -59,6 +59,7 @@ export default function EquityCurve() {
     setTooltip({ x: toX(closest), y: toY(d.value), date: d.date, value: d.value, pct });
   };
 
+  const pnl            = END_VALUE - START_VALUE;
   const totalReturn    = (((END_VALUE - START_VALUE) / START_VALUE) * 100).toFixed(2);
   const isPositive     = END_VALUE >= START_VALUE;
 
@@ -69,8 +70,20 @@ export default function EquityCurve() {
         <span aria-hidden="true">WZROST <span className="gradient-text-cp">KAPITAŁU</span></span>
       </h2>
 
-      {/* Stats row */}
+      {/* Stats row — 4 kafelki: P&L, ZWROT, START, AKTUALNIE */}
       <div className="equity-meta reveal" style={{ display: 'flex', gap: 32, marginBottom: 24, flexWrap: 'wrap' }}>
+        <div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--muted)', letterSpacing: '2px', marginBottom: 4 }}>P&L</div>
+          <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', color: HAS_DATA ? (isPositive ? 'var(--cyan)' : '#ff2d78') : 'var(--muted)', letterSpacing: '2px' }}>
+            {HAS_DATA ? `${pnl >= 0 ? '+' : ''}${pnl.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} zł` : '—'}
+          </div>
+        </div>
+        <div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--muted)', letterSpacing: '2px', marginBottom: 4 }}>ZWROT</div>
+          <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', color: HAS_DATA ? (isPositive ? 'var(--cyan)' : '#ff2d78') : 'var(--muted)', letterSpacing: '2px' }}>
+            {HAS_DATA ? `${isPositive ? '+' : ''}${totalReturn}%` : '—'}
+          </div>
+        </div>
         <div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--muted)', letterSpacing: '2px', marginBottom: 4 }}>START KAPITAŁU</div>
           <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', color: 'var(--text)', letterSpacing: '2px' }}>
@@ -80,13 +93,7 @@ export default function EquityCurve() {
         <div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--muted)', letterSpacing: '2px', marginBottom: 4 }}>AKTUALNIE</div>
           <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', color: HAS_DATA ? (isPositive ? 'var(--cyan)' : '#ff2d78') : 'var(--muted)', letterSpacing: '2px' }}>
-            {HAS_DATA ? `${END_VALUE.toLocaleString('pl-PL')} zł` : '—'}
-          </div>
-        </div>
-        <div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--muted)', letterSpacing: '2px', marginBottom: 4 }}>ZWROT</div>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', color: HAS_DATA ? (isPositive ? 'var(--cyan)' : '#ff2d78') : 'var(--muted)', letterSpacing: '2px' }}>
-            {HAS_DATA ? `${isPositive ? '+' : ''}${totalReturn}%` : '—'}
+            {HAS_DATA ? `${END_VALUE.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} zł` : '—'}
           </div>
         </div>
       </div>
