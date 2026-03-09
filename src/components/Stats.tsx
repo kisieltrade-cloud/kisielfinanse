@@ -1,10 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-
 // ─── EDYTUJ TUTAJ CO MIESIĄC ──────────────────────────────────────────────
-// Uzupełniaj pct gdy miesiąc się skończy. null = jeszcze nie zakończony.. null = jeszcze nie zakończony.
-
 const STATS_2026 = {
   annualReturn: '+4.17%',
   annualReturnNote: 'start: marzec 2026',
@@ -17,24 +13,23 @@ const STATS_2026 = {
 };
 
 const MONTHLY_2026: Array<{ name: string; pct: number | null; active: boolean }> = [
-  { name: 'STY', pct: null, active: false },
-  { name: 'LUT', pct: null, active: false },
-  { name: 'MAR', pct: 4.17, active: true  }, // ← aktywny miesiąc
-  { name: 'KWI', pct: null, active: false },
-  { name: 'MAJ', pct: null, active: false },
-  { name: 'CZE', pct: null, active: false },
-  { name: 'LIP', pct: null, active: false },
-  { name: 'SIE', pct: null, active: false },
-  { name: 'WRZ', pct: null, active: false },
-  { name: 'PAŹ', pct: null, active: false },
-  { name: 'LIS', pct: null, active: false },
-  { name: 'GRU', pct: null, active: false },
+  { name: 'STY', pct: null,  active: false },
+  { name: 'LUT', pct: null,  active: false },
+  { name: 'MAR', pct: 4.17,  active: true  }, // ← aktywny miesiąc
+  { name: 'KWI', pct: null,  active: false },
+  { name: 'MAJ', pct: null,  active: false },
+  { name: 'CZE', pct: null,  active: false },
+  { name: 'LIP', pct: null,  active: false },
+  { name: 'SIE', pct: null,  active: false },
+  { name: 'WRZ', pct: null,  active: false },
+  { name: 'PAŹ', pct: null,  active: false },
+  { name: 'LIS', pct: null,  active: false },
+  { name: 'GRU', pct: null,  active: false },
 ];
 // ──────────────────────────────────────────────────────────────────────────
 
 export default function Stats() {
-  const months = MONTHLY_2026;
-  const completed = months.filter(m => m.pct !== null);
+  const completed = MONTHLY_2026.filter(m => m.pct !== null);
   const maxAbs = completed.length > 0
     ? Math.max(...completed.map(m => Math.abs(m.pct as number)))
     : 1;
@@ -68,8 +63,12 @@ export default function Stats() {
           { value: STATS_2026.profitFactor, label: 'Profit Factor',note: STATS_2026.profitFactorNote, color: '#f5c518'     },
           { value: STATS_2026.maxDrawdown,  label: 'Max Drawdown', note: STATS_2026.maxDrawdownNote,  color: '#ff2d78'     },
         ].map((s, i) => (
-          <div key={i} className="stat-card" style={{ borderTop: `3px solid ${s.color}22` }}>
-            <span className="stat-number" style={{ color: s.value === '—' ? 'var(--muted)' : s.color }}>
+          <div key={i} className="stat-card" style={{ borderTop: `3px solid ${s.color}` }}>
+            <span className="stat-number" style={{
+              background: 'none',
+              WebkitTextFillColor: s.value === '—' ? 'var(--muted)' : s.color,
+              color: s.value === '—' ? 'var(--muted)' : s.color,
+            }}>
               {s.value}
             </span>
             <div className="stat-label">{s.label}</div>
@@ -79,60 +78,54 @@ export default function Stats() {
       </div>
 
       {/* Monthly chart */}
-      <div className="monthly-chart reveal">
-        <div className="monthly-header">
-          <span className="monthly-title">Miesięczne wyniki 2026</span>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--muted)' }}>
-            % zwrotu na rachunku
-          </span>
+      <div className="monthly-chart-section reveal">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+          <span style={{ fontWeight: 700, fontSize: '1rem' }}>Miesięczne wyniki 2026</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--muted)' }}>% zwrotu na rachunku</span>
         </div>
 
-        <div className="monthly-bars">
-          {months.map((m) => (
-            <div key={m.name} className="monthly-bar-wrap">
-              {/* Value label */}
-              <div className="monthly-value" style={{
-                color: m.pct === null
-                  ? 'transparent'
-                  : m.pct >= 0 ? 'var(--cyan)' : '#ff2d78',
+        <div className="monthly-grid">
+          {MONTHLY_2026.map((m) => (
+            <div key={m.name} className="month-bar-wrap">
+              {/* Value */}
+              <div className="month-pct" style={{
+                color: m.pct === null ? 'transparent' : m.pct >= 0 ? 'var(--cyan)' : 'var(--pink)',
+                minHeight: '1.2em',
               }}>
-                {m.pct !== null ? `${m.pct > 0 ? '+' : ''}${m.pct}%` : '—'}
+                {m.pct !== null ? `${m.pct > 0 ? '+' : ''}${m.pct}%` : ''}
               </div>
 
               {/* Bar */}
-              <div className="monthly-bar-track">
+              <div className="month-bar-track">
                 {m.pct !== null ? (
                   <div
-                    className="monthly-bar-fill"
-                    style={{
-                      height: `${Math.abs(m.pct) / maxAbs * 100}%`,
-                      background: m.pct >= 0
-                        ? 'linear-gradient(to top, rgba(0,245,212,0.8), rgba(0,245,212,0.2))'
-                        : 'linear-gradient(to top, rgba(255,45,120,0.8), rgba(255,45,120,0.2))',
-                      alignSelf: 'flex-end',
-                    }}
+                    className={`month-bar ${m.pct >= 0 ? 'month-bar-pos' : 'month-bar-neg'}`}
+                    style={{ height: `${Math.abs(m.pct) / maxAbs * 100}%` }}
                   />
                 ) : (
                   <div style={{
-                    width: '100%', height: m.active ? '4px' : '2px',
-                    background: m.active ? 'rgba(0,245,212,0.3)' : 'rgba(255,255,255,0.06)',
-                    alignSelf: 'flex-end', borderRadius: 1,
+                    width: '70%', height: m.active ? '3px' : '1px',
+                    background: m.active ? 'rgba(0,245,212,0.4)' : 'rgba(255,255,255,0.06)',
                   }} />
                 )}
               </div>
 
-              {/* Month name */}
-              <div className="monthly-name" style={{
+              {/* Name */}
+              <div className="month-name" style={{
                 color: m.active ? 'var(--cyan)' : m.pct !== null ? 'var(--muted)' : '#2a3a4a',
               }}>
                 {m.name}
-                {m.active && <span style={{ display: 'block', fontSize: '0.45rem', letterSpacing: '1px', marginTop: 2 }}>LIVE</span>}
+                {m.active && (
+                  <span style={{ display: 'block', fontSize: '0.45rem', letterSpacing: '1px', marginTop: 2, color: 'var(--cyan)' }}>
+                    LIVE
+                  </span>
+                )}
               </div>
             </div>
           ))}
         </div>
 
-        <p className="wyniki-disclaimer">
+        <p className="wyniki-disclaimer" style={{ marginTop: 24 }}>
           * Wyniki historyczne nie gwarantują przyszłych zwrotów. Trading wiąże się z ryzykiem utraty
           kapitału. Dane pokazują wyniki własnego rachunku — nie są to wyniki zarządzanego funduszu.
         </p>

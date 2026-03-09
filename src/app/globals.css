@@ -2684,6 +2684,13 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ──────────────────────────────────────
+   STATS — monthly chart section
+────────────────────────────────────── */
+.monthly-chart-section {
+  margin-top: 40px;
+}
+
+/* ──────────────────────────────────────
    WEEKLY RESULTS — brakujące klasy
 ────────────────────────────────────── */
 .weekly-filter-btn {
@@ -2730,28 +2737,19 @@ a { color: inherit; text-decoration: none; }
   padding: 20px 28px;
   gap: 16px;
 }
-
 .weekly-row-accent {
   width: 3px;
   height: 36px;
   border-radius: 2px;
   flex-shrink: 0;
 }
-
 .weekly-week-name {
   font-weight: 700;
   font-size: 0.9rem;
   letter-spacing: 0.5px;
   color: var(--text);
 }
-
-.weekly-markets {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-top: 4px;
-}
-
+.weekly-markets { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
 .market-tag {
   font-family: var(--font-mono);
   font-size: 0.6rem;
@@ -2760,15 +2758,12 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid;
   text-transform: uppercase;
 }
-
-.weekly-trades,
-.weekly-winrate {
+.weekly-trades, .weekly-winrate {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   color: var(--text);
 }
-.weekly-trades span,
-.weekly-winrate span {
+.weekly-trades span, .weekly-winrate span {
   display: block;
   font-size: 0.55rem;
   color: var(--muted);
@@ -2776,7 +2771,6 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   margin-top: 2px;
 }
-
 .weekly-expand {
   font-family: var(--font-mono);
   font-size: 1.2rem;
@@ -2784,7 +2778,6 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
   width: 28px;
 }
-
 .weekly-detail {
   border-top: 1px solid var(--border);
   padding: 20px 28px 24px;
@@ -2854,10 +2847,8 @@ a { color: inherit; text-decoration: none; }
 .daily-widget-stat:first-child { padding-left: 0; }
 .daily-widget-stat-main .daily-widget-val { font-size: 1.8rem; }
 .daily-widget-divider {
-  width: 1px;
-  height: 40px;
-  background: var(--border);
-  flex-shrink: 0;
+  width: 1px; height: 40px;
+  background: var(--border); flex-shrink: 0;
 }
 .daily-widget-val {
   font-family: var(--font-display);

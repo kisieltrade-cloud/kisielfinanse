@@ -3,11 +3,9 @@
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
-const CHART_POINTS = [
-  195, 188, 178, 170, 162, 158, 150, 145, 155, 148,
-  138, 130, 125, 118, 122, 112, 105, 98, 90, 95,
-  85, 78, 82, 72, 65, 58, 62, 50, 42, 35,
-];
+// Challenge dane: 25000 → 26041.30 PLN (+4.17%)
+// Punkty znormalizowane do SVG (H=220): niżej = wyższy kapitał
+const CHART_POINTS = [200, 185]; // start, dzień 1
 
 function buildPath(points: number[], w: number, h: number) {
   const step = w / (points.length - 1);
