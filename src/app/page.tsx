@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
 import Stats from '@/components/Stats';
+import DailyWidget from '@/components/DailyWidget';
 import BlogSection from '@/components/BlogSection';
 import FAQ from '@/components/FAQ';
 import Newsletter from '@/components/Newsletter';
@@ -22,6 +23,7 @@ export default function HomePage() {
         <Hero />
         <Ticker />
         <Stats />
+        <DailyWidget />
         <WeeklyResults />
         <MarketSessions />
         <BlogSection />
