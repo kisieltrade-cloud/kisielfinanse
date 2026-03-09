@@ -5,27 +5,18 @@ import { useState } from 'react';
 // ─────────────────────────────────────────────────────
 // AKTUALIZUJ CO TYDZIEŃ — dodaj nowy wpis na górę tablicy
 // ─────────────────────────────────────────────────────
-const WEEKLY_DATA: {
-  week: string;
-  dates: string;
-  result: string;
-  pnl: string;
-  trades: number;
-  winRate: string;
-  comment: string;
-  positive: boolean;
-}[] = [
-  // Przykład jak dodać tydzień:
-  // {
-  //   week: 'Tydzień 01',
-  //   dates: '03.03 – 07.03.2026',
-  //   result: '+2.1%',
-  //   pnl: '+1 050 zł',
-  //   trades: 10,
-  //   winRate: '70%',
-  //   comment: 'Komentarz do tygodnia.',
-  //   positive: true,
-  // },
+const WEEKLY_DATA = [
+  // → dodawaj nowe tygodnie na górze tej tablicy (co piątek)
+  {
+    week: 'Tydzień 01',
+    dates: '09.03 – 14.03.2026',
+    result: '+4.17%',
+    pnl: '+1 041 zł',
+    trades: 16,
+    winRate: '100%',
+    comment: '',
+    positive: true,
+  },
 ];
 
 export default function TygodnikArchive() {
@@ -34,9 +25,6 @@ export default function TygodnikArchive() {
 
   const positive = WEEKLY_DATA.filter(w => w.positive).length;
   const negative = WEEKLY_DATA.filter(w => !w.positive).length;
-  const totalPnl = WEEKLY_DATA.length
-    ? WEEKLY_DATA.reduce((s, w) => s + parseFloat(w.result), 0).toFixed(1) + '%'
-    : '—';
 
   return (
     <section className="tygodnik-section">
@@ -65,22 +53,24 @@ export default function TygodnikArchive() {
       {/* Summary bar */}
       <div className="tygodnik-summary reveal">
         <div className="tygodnik-sum-stat">
-          <span className="tygodnik-sum-val">{WEEKLY_DATA.length || '—'}</span>
+          <span className="tygodnik-sum-val">{WEEKLY_DATA.length}</span>
           <span className="tygodnik-sum-label">Tygodni</span>
         </div>
         <div className="tygodnik-sum-divider" />
         <div className="tygodnik-sum-stat">
-          <span className="tygodnik-sum-val" style={{ color: 'var(--cyan)' }}>{WEEKLY_DATA.length ? positive : '—'}</span>
+          <span className="tygodnik-sum-val" style={{ color: 'var(--cyan)' }}>{positive}</span>
           <span className="tygodnik-sum-label">Zielonych</span>
         </div>
         <div className="tygodnik-sum-divider" />
         <div className="tygodnik-sum-stat">
-          <span className="tygodnik-sum-val" style={{ color: 'var(--pink)' }}>{WEEKLY_DATA.length ? negative : '—'}</span>
+          <span className="tygodnik-sum-val" style={{ color: 'var(--pink)' }}>{negative}</span>
           <span className="tygodnik-sum-label">Czerwonych</span>
         </div>
         <div className="tygodnik-sum-divider" />
         <div className="tygodnik-sum-stat">
-          <span className="tygodnik-sum-val" style={{ color: 'var(--cyan)' }}>{totalPnl}</span>
+          <span className="tygodnik-sum-val" style={{ color: 'var(--cyan)' }}>
+            {WEEKLY_DATA.reduce((s, w) => s + parseFloat(w.result), 0).toFixed(1)}%
+          </span>
           <span className="tygodnik-sum-label">Łącznie {year}</span>
         </div>
       </div>
@@ -97,17 +87,6 @@ export default function TygodnikArchive() {
           <div className="tygodnik-col tygodnik-col-expand" />
         </div>
 
-        {/* Empty state */}
-        {WEEKLY_DATA.length === 0 && (
-          <div style={{
-            padding: '48px 24px', textAlign: 'center',
-            fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
-            color: 'var(--muted)', letterSpacing: '1px',
-          }}>
-            // challenge startuje w marcu 2026 — pierwsze wyniki pojawią się po zamknięciu tygodnia
-          </div>
-        )}
-
         {/* Rows */}
         {WEEKLY_DATA.map((w) => (
           <div key={w.week}>
@@ -120,12 +99,18 @@ export default function TygodnikArchive() {
                 <span className="tygodnik-dates">{w.dates}</span>
               </div>
               <div className="tygodnik-col tygodnik-col-result">
-                <span className="tygodnik-result" style={{ color: w.positive ? 'var(--cyan)' : 'var(--pink)' }}>
+                <span
+                  className="tygodnik-result"
+                  style={{ color: w.positive ? 'var(--cyan)' : 'var(--pink)' }}
+                >
                   {w.result}
                 </span>
               </div>
               <div className="tygodnik-col tygodnik-col-pnl">
-                <span className="tygodnik-pnl" style={{ color: w.positive ? 'var(--cyan)' : 'var(--pink)' }}>
+                <span
+                  className="tygodnik-pnl"
+                  style={{ color: w.positive ? 'var(--cyan)' : 'var(--pink)' }}
+                >
                   {w.pnl}
                 </span>
               </div>
@@ -136,10 +121,13 @@ export default function TygodnikArchive() {
                 <span className="tygodnik-wr">{w.winRate}</span>
               </div>
               <div className="tygodnik-col tygodnik-col-expand">
-                <span className="tygodnik-expand-icon">{expanded === w.week ? '−' : '+'}</span>
+                <span className="tygodnik-expand-icon">
+                  {expanded === w.week ? '−' : '+'}
+                </span>
               </div>
             </div>
 
+            {/* Expanded comment */}
             {expanded === w.week && (
               <div className="tygodnik-comment">
                 <div className="tygodnik-comment-label">// komentarz</div>
