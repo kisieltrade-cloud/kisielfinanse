@@ -6,10 +6,10 @@ import { useState } from 'react';
 // Uzupełniaj pct gdy miesiąc się skończy. null = jeszcze nie zakończony.. null = jeszcze nie zakończony.
 
 const STATS_2026 = {
-  annualReturn: '—',
-  annualReturnNote: "start: marzec 2026",
-  winRate: '—',
-  winRateNote: 'aktualizowane co tydzień',
+  annualReturn: '+4.17%',
+  annualReturnNote: 'start: marzec 2026',
+  winRate: '100%',
+  winRateNote: 'tydzień 01 (16 transakcji)',
   profitFactor: '—',
   profitFactorNote: 'zyski / straty (średnie)',
   maxDrawdown: '—',
@@ -19,7 +19,7 @@ const STATS_2026 = {
 const MONTHLY_2026: Array<{ name: string; pct: number | null; active: boolean }> = [
   { name: 'STY', pct: null, active: false },
   { name: 'LUT', pct: null, active: false },
-  { name: 'MAR', pct: null, active: true  }, // ← aktywny miesiąc
+  { name: 'MAR', pct: 4.17, active: true  }, // ← aktywny miesiąc
   { name: 'KWI', pct: null, active: false },
   { name: 'MAJ', pct: null, active: false },
   { name: 'CZE', pct: null, active: false },

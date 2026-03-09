@@ -2682,3 +2682,222 @@ a { color: inherit; text-decoration: none; }
   .daily-widget-stat-main .daily-widget-val { font-size: 1.2rem; }
   .daily-widget-val { font-size: 1.1rem; }
 }
+
+/* ──────────────────────────────────────
+   WEEKLY RESULTS — brakujące klasy
+────────────────────────────────────── */
+.weekly-filter-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 8px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.weekly-filter-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+.weekly-filter-btn.active { border-color: var(--cyan); color: var(--cyan); background: rgba(0,245,212,0.06); }
+
+.weekly-sum-card {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-right: 1px solid var(--border);
+}
+.weekly-sum-card:last-child { border-right: none; }
+.weekly-sum-value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 2px;
+  line-height: 1;
+  color: var(--text);
+}
+.weekly-sum-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.weekly-row-main {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 20px 28px;
+  gap: 16px;
+}
+
+.weekly-row-accent {
+  width: 3px;
+  height: 36px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.weekly-week-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  color: var(--text);
+}
+
+.weekly-markets {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.market-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border: 1px solid;
+  text-transform: uppercase;
+}
+
+.weekly-trades,
+.weekly-winrate {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text);
+}
+.weekly-trades span,
+.weekly-winrate span {
+  display: block;
+  font-size: 0.55rem;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.weekly-expand {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--cyan);
+  text-align: center;
+  width: 28px;
+}
+
+.weekly-detail {
+  border-top: 1px solid var(--border);
+  padding: 20px 28px 24px;
+  border-left: 3px solid var(--cyan);
+  animation: fadeInUp 0.2s ease both;
+}
+.weekly-detail-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--cyan);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.weekly-detail p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 700px;
+}
+
+/* ──────────────────────────────────────
+   DAILY WIDGET
+────────────────────────────────────── */
+.daily-widget {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--cyan);
+  background: rgba(0,245,212,0.02);
+  padding: 20px 28px;
+  margin: 0 60px 2px;
+}
+.daily-widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.daily-widget-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+}
+.daily-widget-badge {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 2px;
+  border: 1px solid;
+  padding: 2px 8px;
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+@keyframes pulse-badge {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
+}
+.daily-widget-stats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.daily-widget-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 24px;
+}
+.daily-widget-stat:first-child { padding-left: 0; }
+.daily-widget-stat-main .daily-widget-val { font-size: 1.8rem; }
+.daily-widget-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+.daily-widget-val {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: var(--text);
+}
+.daily-widget-key {
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.daily-widget-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.daily-widget-symbols {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+.daily-widget-link {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--cyan);
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: opacity .2s;
+}
+.daily-widget-link:hover { opacity: 0.65; }
+@media (max-width: 900px) {
+  .daily-widget { margin: 0 24px 2px; padding: 16px 20px; }
+  .daily-widget-stat { padding: 0 14px; }
+  .daily-widget-stat-main .daily-widget-val { font-size: 1.4rem; }
+  .daily-widget-divider { height: 30px; }
+}
