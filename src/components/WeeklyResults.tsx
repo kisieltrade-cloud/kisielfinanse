@@ -31,7 +31,17 @@ export const WEEKLY_RESULTS: Array<{
   highlight: string;
   positive: boolean;
 }> = [
-  // ← Dodaj tutaj pierwszy tydzień gdy będzie gotowy
+  {
+    week: 'Tydzień 01',
+    dateRange: '9–14 mar 2026',
+    pnl: '+1 041 zł',
+    pct: '+4.17%',
+    trades: 16,
+    winRate: '100%',
+    markets: ['Indeksy'],
+    highlight: '',
+    positive: true,
+  },
 ];
 
 // ─── Podsumowanie — wyliczane automatycznie ──────────────────────────────────
