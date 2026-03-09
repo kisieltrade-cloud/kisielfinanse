@@ -16,7 +16,7 @@ export default function DailyWidget() {
     <div className="daily-widget reveal">
       <div className="daily-widget-header">
         <span className="daily-widget-label">
-          {isToday ? '// dzisiaj' : `// ${day.dateDisplay}`}
+          // {day.dateDisplay}
         </span>
         <span
           className="daily-widget-badge"

@@ -11,7 +11,7 @@ const EQUITY_DATA: Array<{ date: string; value: number }> = [
   { date: '09.03', value: 25000 },    // ← start challange'u
   { date: '09.03', value: 26041.30 }, // ← po dniu 1: +1041.30 zł (+4.17%)
   // Kolejne tygodnie dodawaj tu np.:
-  // { date: '10.03', value: 26500 },
+  // { date: '16.03', value: 26500 },
 ];
 
 const START_VALUE = EQUITY_DATA[0].value;
@@ -70,7 +70,7 @@ export default function EquityCurve() {
         <span aria-hidden="true">WZROST <span className="gradient-text-cp">KAPITAŁU</span></span>
       </h2>
 
-      {/* Stats row — 4 kafelki: P&L, ZWROT, START, AKTUALNIE */}
+      {/* Stats row — P&L, ZWROT %, START, AKTUALNIE */}
       <div className="equity-meta reveal" style={{ display: 'flex', gap: 32, marginBottom: 24, flexWrap: 'wrap' }}>
         <div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--muted)', letterSpacing: '2px', marginBottom: 4 }}>P&L</div>
@@ -126,14 +126,12 @@ export default function EquityCurve() {
             <>
               <path d={fillPath} fill="url(#eqGrad)" />
               <path ref={pathRef} d={linePath} fill="none" stroke="#00f5d4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              {/* Dots */}
               {EQUITY_DATA.map((d, i) => (
                 <circle key={i} cx={toX(i)} cy={toY(d.value)} r="3" fill="#00f5d4" opacity="0.7" />
               ))}
             </>
           ) : (
             <>
-              {/* Empty state — flat line at start */}
               <line x1={PAD} y1={H / 2} x2={W - PAD} y2={H / 2} stroke="#1a2535" strokeWidth="1.5" strokeDasharray="6,4" />
               <circle cx={PAD} cy={H / 2} r="5" fill="#00f5d4" opacity="0.5" />
               <text x={W / 2} y={H / 2 - 20} textAnchor="middle" fill="#3a4a5a" fontSize="12" fontFamily="monospace">
