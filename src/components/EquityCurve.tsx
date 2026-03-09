@@ -8,10 +8,10 @@ import { useEffect, useRef, useState } from 'react';
 // Startuj od wartości bazowej (np. 50000 jeśli tyle wpłacasz)
 // ─────────────────────────────────────────────────────
 const EQUITY_DATA: Array<{ date: string; value: number }> = [
-  { date: '03.03', value: 50000 }, // ← punkt startowy, zmień na rzeczywistą kwotę
+  { date: '09.03', value: 25000 },    // ← start challange'u
+  { date: '09.03', value: 26041.30 }, // ← po dniu 1: +1041.30 zł (+4.17%)
   // Kolejne tygodnie dodawaj tu np.:
-  // { date: '10.03', value: 51240 },
-  // { date: '17.03', value: 52100 },
+  // { date: '10.03', value: 26500 },
 ];
 
 const START_VALUE = EQUITY_DATA[0].value;
