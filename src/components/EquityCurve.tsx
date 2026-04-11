@@ -25,9 +25,15 @@ const EQUITY_DATA: Array<{ date: string; value: number }> = [
   { date: '25.03', value: 106939.53 },  // +5 825 zł | +5.76%
   { date: '26.03', value: 111780.60 },  // +4 841 zł | +4.53%
   { date: '27.03', value: 114383.38 },  // +2 603 zł | +2.33% — koniec marca
+  { date: '31.03', value: 114695.00 },  // +312 zł   | +0.27%
+  { date: '01.04', value: 118125.51 },  // +3 431 zł | +2.99%
+  { date: '02.04', value: 126782.71 },  // +8 657 zł | +7.33%
+  { date: '03.04', value: 127905.55 },  // +1 123 zł | +0.89%
+  { date: '05.04', value: 128107.72 },  // +202 zł   | +0.16%
+  { date: '07.04', value: 132987.66 },  // +4 880 zł | +3.81%
 ];
 
-const LAST_UPDATED = '27.03.2026';
+const LAST_UPDATED = '07.04.2026';
 
 const START_VALUE = EQUITY_DATA[0].value;
 const END_VALUE   = EQUITY_DATA[EQUITY_DATA.length - 1].value;

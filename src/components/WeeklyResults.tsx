@@ -32,6 +32,28 @@ export const WEEKLY_RESULTS: Array<{
   positive: boolean;
 }> = [
   {
+    week: 'Tydzień 05',
+    dateRange: '5–7 kwi 2026',
+    pnl: '+5 082 zł',
+    pct: '+3.97%',
+    trades: 56,
+    winRate: '100%',
+    markets: ['Indeksy'],
+    highlight: 'Tydzień skrócony — dane do wtorku 07.04. Silny ruch na US100, 100% win rate.',
+    positive: true,
+  },
+  {
+    week: 'Tydzień 04',
+    dateRange: '30 mar – 3 kwi 2026',
+    pnl: '+13 522 zł',
+    pct: '+11.82%',
+    trades: 109,
+    winRate: '100%',
+    markets: ['Indeksy'],
+    highlight: 'Środa 02.04 najsilniejsza sesja tygodnia — ponad 8 600 zł. Dodatkowy instrument US30. Każda sesja zamknięta na plusie.',
+    positive: true,
+  },
+  {
     week: 'Tydzień 03',
     dateRange: '23–27 mar 2026',
     pnl: '+34 844 zł',

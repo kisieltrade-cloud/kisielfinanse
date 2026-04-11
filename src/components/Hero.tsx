@@ -3,9 +3,14 @@
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
-// Challenge dane: 25000 → 26041.30 PLN (+4.17%)
-// Punkty znormalizowane do SVG (H=220): niżej = wyższy kapitał
-const CHART_POINTS = [200, 185]; // start, dzień 1
+// Equity: 50 000 zł (start) → 132 987.66 zł (07.04.2026)
+// Y: 210 = min (50 000 zł), 10 = max (132 987 zł), niżej = wyższy kapitał
+const CHART_POINTS = [
+  210, 206, 204, 198, 193, 189, 187, // mar tyg1 (09–13.03)
+  177, 172, 165, 145, 139,           // mar tyg2 (15–20.03)
+  108,  87,  73,  61,  55,           // mar tyg3 (23–27.03)
+   54,  46,  25,  22,  22,  10,      // kwi (31.03–07.04)
+];
 
 function buildPath(points: number[], w: number, h: number) {
   const step = w / (points.length - 1);
@@ -100,7 +105,7 @@ export default function Hero() {
             <div className="hero-chart-title">NysethTrading</div>
           </div>
           <div className="hero-chart-badge" style={{ fontSize: '0.62rem', letterSpacing: '1px', color: 'var(--muted)', border: '1px solid var(--border)', padding: '5px 12px', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>
-            // akt. 09.03.2026
+            // akt. 07.04.2026
           </div>
         </div>
 
@@ -171,17 +176,17 @@ export default function Hero() {
             fontSize="11"
             fontWeight="600"
             textAnchor="middle"
-          >09.03.2026</text>
+          >+82 988 zł</text>
         </svg>
 
         {/* Chart footer stats */}
         <div className="hero-chart-stats">
           <div className="hero-chart-stat">
-            <span className="hero-chart-stat-val" style={{ color: 'var(--cyan)' }}>+1 041 zł</span>
+            <span className="hero-chart-stat-val" style={{ color: 'var(--cyan)' }}>+82 988 zł</span>
             <span className="hero-chart-stat-label">P&amp;L 2026</span>
           </div>
           <div className="hero-chart-stat">
-            <span className="hero-chart-stat-val" style={{ color: 'var(--cyan)' }}>1/1</span>
+            <span className="hero-chart-stat-val" style={{ color: 'var(--cyan)' }}>5/5</span>
             <span className="hero-chart-stat-label">Zielone tygodnie</span>
           </div>
           <div className="hero-chart-stat">

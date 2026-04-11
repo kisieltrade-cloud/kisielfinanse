@@ -2,12 +2,12 @@
 
 // ─── EDYTUJ TUTAJ CO MIESIĄC ──────────────────────────────────────────────
 const STATS_2026 = {
-  annualReturn: '+128.77%',
-  annualReturnNote: 'marzec 2026 (pełny miesiąc)',
-  winRate: '90%',
-  winRateNote: '1 795 / 1 993 transakcji',
-  profitFactor: '8.66',
-  profitFactorNote: '72 790 zł zysków / 8 406 zł strat',
+  annualReturn: '+165.98%',
+  annualReturnNote: 'marzec – kwiecień 2026',
+  winRate: '91%',
+  winRateNote: '1 960 / 2 158 transakcji',
+  profitFactor: '10.87',
+  profitFactorNote: '91 394 zł zysków / 8 406 zł strat',
   maxDrawdown: '0 zł (0%)',
   maxDrawdownNote: 'każdy dzień zamknięty na plusie',
 };
@@ -16,7 +16,7 @@ const MONTHLY_2026: Array<{ name: string; pct: number | null; amount: number | n
   { name: 'STY', pct: null,    amount: null,     active: false },
   { name: 'LUT', pct: null,    amount: null,     active: false },
   { name: 'MAR', pct: 128.77,  amount: 64383.38, active: false },
-  { name: 'KWI', pct: null,    amount: null,     active: true  }, // ← aktywny miesiąc
+  { name: 'KWI', pct: 16.26,   amount: 18604.28, active: true  }, // ← aktywny miesiąc
   { name: 'MAJ', pct: null,    amount: null,     active: false },
   { name: 'CZE', pct: null,    amount: null,     active: false },
   { name: 'LIP', pct: null,    amount: null,     active: false },
@@ -52,7 +52,7 @@ export default function Stats() {
         marginBottom: 32, maxWidth: 600,
       }}>
         <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--cyan)', display: 'inline-block', boxShadow: '0 0 8px var(--cyan)', flexShrink: 0 }} />
-        Challenge start: Marzec 2026 — wyniki aktualizowane co tydzień · Kwiecień 2026 w toku
+        Challenge start: Marzec 2026 — wyniki aktualizowane co tydzień · Kwiecień 2026 w toku (akt. 07.04)
       </div>
 
       {/* KPI cards */}
