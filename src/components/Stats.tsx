@@ -2,7 +2,7 @@
 
 // ─── EDYTUJ TUTAJ CO MIESIĄC ──────────────────────────────────────────────
 const STATS_2026 = {
-  annualReturn: '+257.53%',
+  annualReturn: '+128.77%',
   annualReturnNote: 'marzec 2026 (pełny miesiąc)',
   winRate: '90%',
   winRateNote: '1 795 / 1 993 transakcji',
@@ -15,7 +15,7 @@ const STATS_2026 = {
 const MONTHLY_2026: Array<{ name: string; pct: number | null; amount: number | null; active: boolean }> = [
   { name: 'STY', pct: null,    amount: null,     active: false },
   { name: 'LUT', pct: null,    amount: null,     active: false },
-  { name: 'MAR', pct: 257.53,  amount: 64383.38, active: false },
+  { name: 'MAR', pct: 128.77,  amount: 64383.38, active: false },
   { name: 'KWI', pct: null,    amount: null,     active: true  }, // ← aktywny miesiąc
   { name: 'MAJ', pct: null,    amount: null,     active: false },
   { name: 'CZE', pct: null,    amount: null,     active: false },
