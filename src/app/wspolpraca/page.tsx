@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Współpraca | NysethTrading',
     description: 'Giełdy krypto, sponsoring, afiliacja — nawiąż współpracę z aktywnym traderem.',
-    url: 'https://nyseth-trading.vercel.app/wspolpraca',
+    url: 'https://nysethtrading.pl/wspolpraca',
   },
 };
 

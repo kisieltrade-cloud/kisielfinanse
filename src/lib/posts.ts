@@ -29,12 +29,13 @@ export async function getAllPosts(): Promise<PostMeta[]> {
       const slug = file.replace(/\.(mdx|md)$/, '');
       const raw = fs.readFileSync(path.join(POSTS_DIR, file), 'utf-8');
       const { data } = matter(raw);
+      const rawDate = (data.date as string) || '';
 
       return {
         slug,
         title: data.title ?? 'Bez tytułu',
-        date: data.date
-          ? new Date(data.date).toLocaleDateString('pl-PL', {
+        date: rawDate
+          ? new Date(rawDate).toLocaleDateString('pl-PL', {
               day: '2-digit',
               month: 'short',
               year: 'numeric',
@@ -44,17 +45,12 @@ export async function getAllPosts(): Promise<PostMeta[]> {
         tag: data.tag ?? 'Trading',
         readTime: data.readTime ?? '5 min',
         published: data.published !== false,
-      } as PostMeta;
+        _rawDate: rawDate,
+      };
     })
     .filter((p) => p.published)
-    .sort((a, b) => {
-      // Sort by raw date string in frontmatter — re-parse for comparison
-      const af = fs.readFileSync(path.join(POSTS_DIR, `${a.slug}.mdx`), 'utf-8');
-      const bf = fs.readFileSync(path.join(POSTS_DIR, `${b.slug}.mdx`), 'utf-8');
-      const ad = matter(af).data.date as string;
-      const bd = matter(bf).data.date as string;
-      return new Date(bd).getTime() - new Date(ad).getTime();
-    });
+    .sort((a, b) => new Date(b._rawDate).getTime() - new Date(a._rawDate).getTime())
+    .map(({ _rawDate: _, ...p }) => p as PostMeta);
 
   return posts;
 }
