@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: 'Polityka Prywatności',
   description: 'Polityka prywatności serwisu NysethTrading.pl — informacje o przetwarzaniu danych osobowych.',
   robots: { index: true, follow: true },
+  alternates: { canonical: 'https://nysethtrading.pl/polityka-prywatnosci' },
 };
 
 const LAST_UPDATE = '03.03.2026';

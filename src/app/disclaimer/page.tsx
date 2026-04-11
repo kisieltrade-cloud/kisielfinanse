@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: 'Disclaimer — Zastrzeżenia Prawne',
   description: 'Zastrzeżenia prawne serwisu NysethTrading.pl. Treści publikowane na stronie mają charakter wyłącznie edukacyjny i nie stanowią doradztwa inwestycyjnego.',
   robots: { index: true, follow: true },
+  alternates: { canonical: 'https://nysethtrading.pl/disclaimer' },
 };
 
 const LAST_UPDATE = '03.03.2026';

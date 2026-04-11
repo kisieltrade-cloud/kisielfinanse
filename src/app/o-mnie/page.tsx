@@ -6,6 +6,12 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'O mnie — Kim jestem',
   description: 'Trader z Wrocławia z 9-letnim doświadczeniem. Gram futures: US100, złoto, surowce. Bez mentorów, bez kursów — tylko rynek.',
+  alternates: { canonical: 'https://nysethtrading.pl/o-mnie' },
+  openGraph: {
+    title: 'O mnie — NysethTrading',
+    description: 'Trader z Wrocławia z 9-letnim doświadczeniem. Gram futures: US100, złoto, surowce.',
+    url: 'https://nysethtrading.pl/o-mnie',
+  },
 };
 
 const timeline = [

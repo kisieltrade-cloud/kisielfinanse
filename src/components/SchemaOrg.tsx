@@ -8,7 +8,10 @@ export default function SchemaOrg() {
     name: 'Mateusz Nyseth',
     alternateName: 'Nyseth',
     url: 'https://nysethtrading.pl',
-    sameAs: [],
+    sameAs: [
+      'https://nysethtrading.pl',
+      'https://x.com/nysethtrading',
+    ],
     jobTitle: 'Trader',
     description: 'Trader z Wrocławia z 9-letnim doświadczeniem na rynkach futures, forex i krypto. Publikuje transparentne wyniki tygodniowe.',
     knowsAbout: ['trading', 'futures', 'forex', 'krypto', 'US100', 'złoto', 'zarządzanie ryzykiem'],

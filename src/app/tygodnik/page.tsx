@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: 'Dziennik Tygodniowy',
   description: 'Archiwum tygodniowych wyników tradingowych — każdy tydzień bez wyjątku. Wyniki, liczba transakcji, win rate i komentarz.',
   keywords: ['wyniki tygodniowe trading', 'dziennik tradera', 'transparentny trading', 'archiwum wyników forex'],
+  alternates: { canonical: 'https://nysethtrading.pl/tygodnik' },
+  openGraph: {
+    title: 'Dziennik Tygodniowy — NysethTrading',
+    description: 'Archiwum tygodniowych wyników tradingowych — każdy tydzień bez wyjątku.',
+    url: 'https://nysethtrading.pl/tygodnik',
+  },
 };
 
 export default function TygodnikPage() {

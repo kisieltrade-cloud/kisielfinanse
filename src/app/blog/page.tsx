@@ -9,6 +9,12 @@ export const metadata: Metadata = {
   title: 'Blog',
   description: 'Artykuły o tradingu, psychologii rynku, strategiach i zarządzaniu ryzykiem.',
   keywords: ['blog tradingowy', 'artykuły trading', 'psychologia tradingu', 'strategie forex'],
+  alternates: { canonical: 'https://nysethtrading.pl/blog' },
+  openGraph: {
+    title: 'Blog — NysethTrading',
+    description: 'Artykuły o tradingu, psychologii rynku, strategiach i zarządzaniu ryzykiem.',
+    url: 'https://nysethtrading.pl/blog',
+  },
 };
 
 export default async function BlogPage() {

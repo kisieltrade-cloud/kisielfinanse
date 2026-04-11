@@ -5,6 +5,12 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Zasoby — narzędzia i polecane platformy',
   description: 'Narzędzia, platformy i książki których używam na co dzień. Broker XTB, TradingView, książki o tradingu — sprawdzone przez 9 lat na rynkach.',
+  alternates: { canonical: 'https://nysethtrading.pl/zasoby' },
+  openGraph: {
+    title: 'Zasoby — NysethTrading',
+    description: 'Narzędzia, platformy i książki sprawdzone przez 9 lat na rynkach.',
+    url: 'https://nysethtrading.pl/zasoby',
+  },
 };
 
 const resources = [

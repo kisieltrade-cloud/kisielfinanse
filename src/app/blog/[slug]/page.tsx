@@ -28,6 +28,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.title,
     description: post.excerpt,
     keywords: ['trading', post.tag.toLowerCase(), 'nysethtrading'],
+    alternates: { canonical: `${BASE_URL}/blog/${slug}` },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: `${BASE_URL}/blog/${slug}`,
+      type: 'article',
+    },
   };
 }
 

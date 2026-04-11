@@ -10,6 +10,12 @@ export const metadata: Metadata = {
   title: 'Wyniki',
   description: 'Transparentne wyniki tradingowe — tygodniowe i miesięczne statystyki z rachunku własnego. Forex, krypto, futures.',
   keywords: ['wyniki tradingowe', 'transparentny trader', 'forex wyniki', 'equity curve', 'day trading wyniki'],
+  alternates: { canonical: 'https://nysethtrading.pl/wyniki' },
+  openGraph: {
+    title: 'Wyniki Tradingowe — NysethTrading',
+    description: 'Transparentne wyniki tradingowe — tygodniowe i miesięczne statystyki z rachunku własnego.',
+    url: 'https://nysethtrading.pl/wyniki',
+  },
 };
 
 export default function WynikiPage() {
