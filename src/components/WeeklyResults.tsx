@@ -1,92 +1,20 @@
 'use client';
 
 import { useState } from 'react';
+import { WEEKLY_DATA } from '@/data/weekly';
 
-// ─────────────────────────────────────────────────────────────────────────────
-// TUTAJ DODAJESZ SWOJE WYNIKI CO TYDZIEŃ
-// Skopiuj blok poniżej, uzupełnij danymi i zapisz → git push
-//
-// Przykład:
-// {
-//   week: 'Tydzień 1',
-//   dateRange: '3–7 mar 2026',
-//   pnl: '+1 240 zł',
-//   pct: '+2.4%',
-//   trades: 8,
-//   winRate: '75%',
-//   markets: ['Forex', 'Krypto'],   // Forex | Krypto | Akcje | Indeksy
-//   highlight: 'Twój komentarz do tygodnia',
-//   positive: true,
-// },
-// ─────────────────────────────────────────────────────────────────────────────
-
-export const WEEKLY_RESULTS: Array<{
-  week: string;
-  dateRange: string;
-  pnl: string;
-  pct: string;
-  trades: number;
-  winRate: string;
-  markets: string[];
-  highlight: string;
-  positive: boolean;
-}> = [
-  {
-    week: 'Tydzień 05',
-    dateRange: '5–7 kwi 2026',
-    pnl: '+5 082 zł',
-    pct: '+3.97%',
-    trades: 56,
-    winRate: '100%',
-    markets: ['Indeksy'],
-    highlight: 'Tydzień skrócony — dane do wtorku 07.04. Silny ruch na US100, 100% win rate.',
-    positive: true,
-  },
-  {
-    week: 'Tydzień 04',
-    dateRange: '30 mar – 3 kwi 2026',
-    pnl: '+13 522 zł',
-    pct: '+11.82%',
-    trades: 109,
-    winRate: '100%',
-    markets: ['Indeksy'],
-    highlight: 'Środa 02.04 najsilniejsza sesja tygodnia — ponad 8 600 zł. Dodatkowy instrument US30. Każda sesja zamknięta na plusie.',
-    positive: true,
-  },
-  {
-    week: 'Tydzień 03',
-    dateRange: '23–27 mar 2026',
-    pnl: '+34 844 zł',
-    pct: '+43.81%',
-    trades: 651,
-    winRate: '90%',
-    markets: ['Indeksy'],
-    highlight: 'Najlepszy tydzień miesiąca. Poniedziałek 23.03 przyniósł ponad 12 700 zł w jednym dniu. Każda sesja zamknięta na plusie.',
-    positive: true,
-  },
-  {
-    week: 'Tydzień 02',
-    dateRange: '15–20 mar 2026',
-    pnl: '+20 899 zł',
-    pct: '+35.64%',
-    trades: 1019,
-    winRate: '88%',
-    markets: ['Indeksy'],
-    highlight: 'Środa 18.03 z DE40 jako dodatkowym instrumentem. Czwartek 19.03 rekordowy dzień tygodnia — ponad 8 100 zł. Dobra płynność przez cały tydzień.',
-    positive: true,
-  },
-  {
-    week: 'Tydzień 01',
-    dateRange: '9–13 mar 2026',
-    pnl: '+8 641 zł',
-    pct: '+17.28%',
-    trades: 323,
-    winRate: '99%',
-    markets: ['Indeksy'],
-    highlight: 'Pierwszy tydzień challange\'u. Start 09.03 z wynikiem 100% win rate. Środa 11.03 i czwartek 12.03 najsilniejsze sesje tygodnia.',
-    positive: true,
-  },
-];
+// Adapter — mapuje wspólny format WeekResult na format wyświetlany w tej sekcji
+const WEEKLY_RESULTS = WEEKLY_DATA.map(w => ({
+  week: w.week,
+  dateRange: w.dates,
+  pnl: w.pnl,
+  pct: w.result,
+  trades: w.trades,
+  winRate: w.winRate,
+  markets: w.markets,
+  highlight: w.comment,
+  positive: w.positive,
+}));
 
 // ─── Podsumowanie — wyliczane automatycznie ──────────────────────────────────
 function calcSummary() {

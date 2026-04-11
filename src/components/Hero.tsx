@@ -17,10 +17,10 @@ function buildPath(points: number[], w: number, h: number) {
   return points.map((y, i) => `${i === 0 ? 'M' : 'L'}${i * step},${y}`).join(' ');
 }
 
-function buildFill(points: number[], w: number, h: number) {
+function buildFill(points: number[], w: number, height: number) {
   const step = w / (points.length - 1);
   const line = points.map((y, i) => `${i * step},${y}`).join(' L');
-  return `M0,${points[0]} L${line} L${w},${h} L0,${h} Z`;
+  return `M0,${points[0]} L${line} L${w},${height} L0,${height} Z`;
 }
 
 export default function Hero() {
@@ -154,10 +154,10 @@ export default function Hero() {
           <circle cx={W} cy={CHART_POINTS[CHART_POINTS.length - 1]} r="12"
             fill="rgba(0,245,212,0.12)" />
 
-          {/* X axis labels */}
-          {['STY', 'LUT', 'MAR', 'KWI', 'MAJ'].map((m, i) => (
+          {/* X axis labels — challenge startuje w marcu */}
+          {['MAR tyg1', 'MAR tyg2', 'MAR tyg3', 'KWI'].map((m, i) => (
             <text key={m}
-              x={i * (W / 4)}
+              x={i * (W / 3)}
               y={H + 22}
               fill="rgba(90,100,120,0.7)"
               fontFamily="JetBrains Mono, monospace"

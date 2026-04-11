@@ -1,12 +1,21 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 export default function Nav() {
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
+
+  const handleCta = () => {
+    if (pathname === '/') {
+      document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      router.push('/#newsletter');
+    }
+  };
 
   useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => {
@@ -43,7 +52,7 @@ export default function Nav() {
           ))}
         </ul>
         <div className="nav-right">
-          <button className="nav-cta nav-cta-desktop">Dołącz teraz</button>
+          <button className="nav-cta nav-cta-desktop" onClick={handleCta}>Dołącz teraz</button>
           <button
             className={`nav-burger${open ? ' nav-burger-open' : ''}`}
             onClick={() => setOpen(o => !o)}
@@ -72,7 +81,7 @@ export default function Nav() {
               </li>
             ))}
           </ul>
-          <button className="nav-cta" style={{ width: '100%', textAlign: 'center' }}>
+          <button className="nav-cta" style={{ width: '100%', textAlign: 'center' }} onClick={() => { setOpen(false); handleCta(); }}>
             Dołącz teraz
           </button>
         </div>
