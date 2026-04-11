@@ -8,10 +8,23 @@ import { useEffect, useRef, useState } from 'react';
 // Startuj od wartości bazowej (np. 50000 jeśli tyle wpłacasz)
 // ─────────────────────────────────────────────────────
 const EQUITY_DATA: Array<{ date: string; value: number }> = [
-  { date: '09.03', value: 25000 },    // ← start challange'u
-  { date: '09.03', value: 26041.30 }, // ← po dniu 1: +1041.30 zł (+4.17%)
-  // Kolejne tygodnie dodawaj tu np.:
-  // { date: '16.03', value: 26500 },
+  { date: '09.03', value: 25000 },     // start challange'u
+  { date: '09.03', value: 26627.21 },  // +1 627 zł | +6.51%
+  { date: '10.03', value: 27490.99 },  // +864 zł   | +3.24%
+  { date: '11.03', value: 30055.38 },  // +2 564 zł | +9.33%
+  { date: '12.03', value: 31914.72 },  // +1 859 zł | +6.19%
+  { date: '13.03', value: 33641.29 },  // +1 727 zł | +5.41%
+  { date: '15.03', value: 34493.43 },  // +852 zł   | +2.53%
+  { date: '16.03', value: 38875.22 },  // +4 382 zł | +12.70%
+  { date: '17.03', value: 40752.53 },  // +1 877 zł | +4.83%
+  { date: '18.03', value: 43705.25 },  // +2 953 zł | +7.25%
+  { date: '19.03', value: 51809.85 },  // +8 105 zł | +18.54%
+  { date: '20.03', value: 54539.81 },  // +2 730 zł | +5.27%
+  { date: '23.03', value: 67258.60 },  // +12 719 zł| +23.32%
+  { date: '24.03', value: 76114.30 },  // +8 856 zł | +13.17%
+  { date: '25.03', value: 81939.53 },  // +5 825 zł | +7.65%
+  { date: '26.03', value: 86780.60 },  // +4 841 zł | +5.91%
+  { date: '27.03', value: 89383.38 },  // +2 603 zł | +3.00% — koniec marca
 ];
 
 const START_VALUE = EQUITY_DATA[0].value;
