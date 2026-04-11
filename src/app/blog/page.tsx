@@ -17,9 +17,12 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: 'https://nysethtrading.pl/blog' },
   openGraph: {
+    type: 'website',
+    locale: 'pl_PL',
     title: 'Blog Tradingowy — Strategie, Psychologia, Analiza | NysethTrading',
     description: 'Praktyczna wiedza tradera z 9-letnim doświadczeniem. Strategie, psychologia, zarządzanie ryzykiem.',
     url: 'https://nysethtrading.pl/blog',
+    siteName: 'NysethTrading',
     images: [OG_IMAGE],
   },
   twitter: {

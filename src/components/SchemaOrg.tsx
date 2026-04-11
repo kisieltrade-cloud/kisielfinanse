@@ -7,7 +7,6 @@ export default function SchemaOrg() {
     url: 'https://nysethtrading.pl',
     image: 'https://nysethtrading.pl/og-image.png',
     sameAs: [
-      'https://nysethtrading.pl',
       'https://x.com/nysethtrading',
       'https://twitter.com/nysethtrading',
     ],
@@ -60,6 +59,7 @@ export default function SchemaOrg() {
     ],
     contactPoint: {
       '@type': 'ContactPoint',
+      email: 'nysethtrading@gmail.com',
       contactType: 'customer service',
       availableLanguage: 'Polish',
     },

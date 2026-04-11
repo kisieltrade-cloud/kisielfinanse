@@ -7,7 +7,8 @@ const POSTS_DIR = path.join(process.cwd(), 'src', 'content', 'blog');
 export interface PostMeta {
   slug: string;
   title: string;
-  date: string;
+  date: string;       // sformatowana dla wyświetlania, np. "03 MAR 2026"
+  dateISO: string;    // ISO 8601 dla schema.org i OG, np. "2026-03-03"
   excerpt: string;
   tag: string;
   readTime: string;
@@ -41,6 +42,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
               year: 'numeric',
             }).toUpperCase()
           : '',
+        dateISO: rawDate ? rawDate : '',
         excerpt: data.excerpt ?? '',
         tag: data.tag ?? 'Trading',
         readTime: data.readTime ?? '5 min',
@@ -73,16 +75,18 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   const raw = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(raw);
 
+  const rawDate = (data.date as string) || '';
   return {
     slug,
     title: data.title ?? 'Bez tytułu',
-    date: data.date
-      ? new Date(data.date).toLocaleDateString('pl-PL', {
+    date: rawDate
+      ? new Date(rawDate).toLocaleDateString('pl-PL', {
           day: '2-digit',
           month: 'long',
           year: 'numeric',
         })
       : '',
+    dateISO: rawDate,
     excerpt: data.excerpt ?? '',
     tag: data.tag ?? 'Trading',
     readTime: data.readTime ?? '5 min',

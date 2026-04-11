@@ -6,6 +6,7 @@ import WeeklyResults from '@/components/WeeklyResults';
 import EquityCurve from '@/components/EquityCurve';
 import RevealOnScroll from '@/components/RevealOnScroll';
 
+const BASE_URL = 'https://nysethtrading.pl';
 const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Wyniki Tradingowe — NysethTrading' };
 
 export const metadata: Metadata = {
@@ -16,11 +17,14 @@ export const metadata: Metadata = {
     'profit factor', 'day trading wyniki', 'forex wyniki', 'challenge tradingowy wyniki',
     'statystyki tradingowe', 'US100 wyniki',
   ],
-  alternates: { canonical: 'https://nysethtrading.pl/wyniki' },
+  alternates: { canonical: `${BASE_URL}/wyniki` },
   openGraph: {
+    type: 'website',
+    locale: 'pl_PL',
     title: 'Wyniki Tradingowe 2026 — NysethTrading',
     description: 'Equity curve, win rate 91%, profit factor 10.87 — transparentne wyniki z rachunku własnego. Bez selekcji, bez retuszu.',
-    url: 'https://nysethtrading.pl/wyniki',
+    url: `${BASE_URL}/wyniki`,
+    siteName: 'NysethTrading',
     images: [OG_IMAGE],
   },
   twitter: {
@@ -31,9 +35,22 @@ export const metadata: Metadata = {
   },
 };
 
+const schemaBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'NysethTrading', item: BASE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Wyniki Tradingowe', item: `${BASE_URL}/wyniki` },
+  ],
+};
+
 export default function WynikiPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }}
+      />
       <RevealOnScroll />
       <Nav />
       <main style={{ paddingTop: '80px' }}>

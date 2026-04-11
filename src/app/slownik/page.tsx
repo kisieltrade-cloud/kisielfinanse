@@ -21,10 +21,13 @@ export const metadata: Metadata = {
     canonical: `${BASE_URL}/slownik`,
   },
   openGraph: {
+    type: 'website',
+    locale: 'pl_PL',
     title: 'Słownik Tradingowy — Forex, Krypto, Futures | NysethTrading',
     description:
       'Baza wiedzy tradera — definicje i wyjaśnienia pojęć rynkowych. Price action, SMC, liquidity i wiele więcej.',
     url: `${BASE_URL}/slownik`,
+    siteName: 'NysethTrading',
     images: [OG_IMAGE],
   },
   twitter: {

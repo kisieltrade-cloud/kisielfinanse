@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import RevealOnScroll from '@/components/RevealOnScroll';
 import TygodnikArchive from '@/components/TygodnikArchive';
 
+const BASE_URL = 'https://nysethtrading.pl';
 const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Dziennik Tygodniowy — NysethTrading' };
 
 export const metadata: Metadata = {
@@ -14,11 +15,14 @@ export const metadata: Metadata = {
     'archiwum wyników forex', 'tygodniowe wyniki day trading', 'challenge tradingowy tygodnie',
     'win rate tygodniowy', 'dziennik inwestora',
   ],
-  alternates: { canonical: 'https://nysethtrading.pl/tygodnik' },
+  alternates: { canonical: `${BASE_URL}/tygodnik` },
   openGraph: {
+    type: 'website',
+    locale: 'pl_PL',
     title: 'Dziennik Tygodniowy — Archiwum Wyników 2026 | NysethTrading',
     description: '5/5 zielonych tygodni. Każdy tydzień — wyniki, transakcje, win rate i komentarz. Pełna transparentność.',
-    url: 'https://nysethtrading.pl/tygodnik',
+    url: `${BASE_URL}/tygodnik`,
+    siteName: 'NysethTrading',
     images: [OG_IMAGE],
   },
   twitter: {
@@ -29,9 +33,22 @@ export const metadata: Metadata = {
   },
 };
 
+const schemaBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'NysethTrading', item: BASE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Dziennik Tygodniowy', item: `${BASE_URL}/tygodnik` },
+  ],
+};
+
 export default function TygodnikPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }}
+      />
       <RevealOnScroll />
       <Nav />
       <main style={{ paddingTop: '80px' }}>

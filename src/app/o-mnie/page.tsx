@@ -15,9 +15,12 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: 'https://nysethtrading.pl/o-mnie' },
   openGraph: {
+    type: 'profile',
+    locale: 'pl_PL',
     title: 'Mateusz Nyseth — Trader z Wrocławia | NysethTrading',
     description: '9 lat na rynkach. Day trading futures, forex i krypto. Transparentne wyniki co tydzień — bez filtrów.',
     url: 'https://nysethtrading.pl/o-mnie',
+    siteName: 'NysethTrading',
     images: [OG_IMAGE],
   },
   twitter: {
@@ -76,14 +79,29 @@ const tradingFacts = [
   { label: 'Baza', value: 'Wrocław, Polska' },
 ];
 
+const schemaBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'NysethTrading', item: 'https://nysethtrading.pl' },
+    { '@type': 'ListItem', position: 2, name: 'O mnie', item: 'https://nysethtrading.pl/o-mnie' },
+  ],
+};
+
 export default function OMnie() {
   return (
     <>
       <Nav />
-<main>
+      <main style={{ paddingTop: '80px' }}>
 
-  {/* Schema.org Person — E-E-A-T sygnał dla Google */}
-  <script
+      {/* Schema.org BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }}
+      />
+
+      {/* Schema.org Person — E-E-A-T sygnał dla Google */}
+      <script
     type="application/ld+json"
     dangerouslySetInnerHTML={{ __html: JSON.stringify({
       '@context': 'https://schema.org',

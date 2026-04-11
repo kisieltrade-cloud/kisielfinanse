@@ -41,9 +41,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: [term.term.toLowerCase(), 'słownik tradingowy', 'definicja trading', term.category.toLowerCase(), 'nysethtrading'],
     alternates: { canonical: `${BASE_URL}/slownik/${term.slug}` },
     openGraph: {
+      type: 'article',
+      locale: 'pl_PL',
       title: `${term.term} — definicja tradingowa | NysethTrading`,
       description: term.short,
       url: `${BASE_URL}/slownik/${term.slug}`,
+      siteName: 'NysethTrading',
       images: [{ url: '/og-image.png', width: 1200, height: 630, alt: `${term.term} — Słownik Tradingowy` }],
     },
     twitter: {
