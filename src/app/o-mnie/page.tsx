@@ -3,14 +3,28 @@ import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 
+const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Mateusz Nyseth — Trader z Wrocławia' };
+
 export const metadata: Metadata = {
-  title: 'O mnie — Kim jestem',
-  description: 'Trader z Wrocławia z 9-letnim doświadczeniem. Gram futures: US100, złoto, surowce. Bez mentorów, bez kursów — tylko rynek.',
+  title: 'O mnie — Mateusz Nyseth, Trader z Wrocławia z 9-letnim doświadczeniem',
+  description: 'Trader z Wrocławia z 9-letnim doświadczeniem. Day trading futures: US100, złoto, surowce, krypto. Bez mentorów, bez kursów — tylko rynek i transparentne wyniki.',
+  keywords: [
+    'trader wrocław', 'mateusz nyseth', 'nysethtrading', 'day trader polska',
+    'trader z doświadczeniem', 'futures trader', 'US100 trader', 'transparentny trader',
+    'scalper forex', 'kim jest nyseth',
+  ],
   alternates: { canonical: 'https://nysethtrading.pl/o-mnie' },
   openGraph: {
-    title: 'O mnie — NysethTrading',
-    description: 'Trader z Wrocławia z 9-letnim doświadczeniem. Gram futures: US100, złoto, surowce.',
+    title: 'Mateusz Nyseth — Trader z Wrocławia | NysethTrading',
+    description: '9 lat na rynkach. Day trading futures, forex i krypto. Transparentne wyniki co tydzień — bez filtrów.',
     url: 'https://nysethtrading.pl/o-mnie',
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mateusz Nyseth — Trader z Wrocławia',
+    description: '9 lat na rynkach. US100, złoto, krypto. Transparentne wyniki.',
+    images: ['/og-image.png'],
   },
 };
 
@@ -87,6 +101,8 @@ export default function OMnie() {
       },
       sameAs: [
         'https://nysethtrading.pl',
+        'https://x.com/nysethtrading',
+        'https://twitter.com/nysethtrading',
       ],
     })}}
   />

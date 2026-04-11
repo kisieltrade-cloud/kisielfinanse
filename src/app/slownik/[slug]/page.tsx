@@ -36,13 +36,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!term) return {};
 
   return {
-    title: `${term.term} — co to jest? | Słownik Tradingowy NysethTrading`,
-    description: term.short,
+    title: `${term.term} — co to jest? Definicja | Słownik Tradingowy NysethTrading`,
+    description: `${term.short} Definicja pojęcia ${term.term} w kontekście tradingu — Słownik Tradingowy NysethTrading.`,
+    keywords: [term.term.toLowerCase(), 'słownik tradingowy', 'definicja trading', term.category.toLowerCase(), 'nysethtrading'],
     alternates: { canonical: `${BASE_URL}/slownik/${term.slug}` },
     openGraph: {
-      title: `${term.term} — definicja tradingowa`,
+      title: `${term.term} — definicja tradingowa | NysethTrading`,
       description: term.short,
       url: `${BASE_URL}/slownik/${term.slug}`,
+      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: `${term.term} — Słownik Tradingowy` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${term.term} — co to jest?`,
+      description: term.short,
+      images: ['/og-image.png'],
     },
   };
 }
@@ -86,11 +94,25 @@ export default async function SlownikTermPage({ params }: Props) {
     url: `${BASE_URL}/slownik/${term.slug}`,
   };
 
+  const schemaBreadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'NysethTrading', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Słownik Tradingowy', item: `${BASE_URL}/slownik` },
+      { '@type': 'ListItem', position: 3, name: term.term, item: `${BASE_URL}/slownik/${term.slug}` },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }}
       />
       <Nav />
       <main style={{ paddingTop: '80px', minHeight: '100vh' }}>

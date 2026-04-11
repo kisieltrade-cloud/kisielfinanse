@@ -2,14 +2,27 @@ import type { Metadata } from 'next';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 
+const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Zasoby Tradingowe — NysethTrading' };
+
 export const metadata: Metadata = {
-  title: 'Zasoby — narzędzia i polecane platformy',
-  description: 'Narzędzia, platformy i książki których używam na co dzień. Broker XTB, TradingView, książki o tradingu — sprawdzone przez 9 lat na rynkach.',
+  title: 'Zasoby — Narzędzia i Platformy Tradingowe | NysethTrading',
+  description: 'Narzędzia, platformy i książki których używam na co dzień. Broker XTB, TradingView, polecane lektury — sprawdzone przez 9 lat na rynkach. Bez sponsoringu — tylko to co faktycznie działa.',
+  keywords: [
+    'narzędzia tradingowe', 'platforma tradingowa', 'broker XTB', 'TradingView', 'polecany broker forex',
+    'książki o tradingu', 'zasoby dla traderów', 'najlepsze narzędzia trading', 'polecane platformy krypto',
+  ],
   alternates: { canonical: 'https://nysethtrading.pl/zasoby' },
   openGraph: {
-    title: 'Zasoby — NysethTrading',
-    description: 'Narzędzia, platformy i książki sprawdzone przez 9 lat na rynkach.',
+    title: 'Zasoby — Narzędzia i Platformy Tradingowe | NysethTrading',
+    description: 'XTB, TradingView, polecane lektury. Sprawdzone narzędzia po 9 latach na rynkach — tylko to co faktycznie działa.',
     url: 'https://nysethtrading.pl/zasoby',
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Zasoby Tradingowe — NysethTrading',
+    description: 'XTB, TradingView i więcej. Sprawdzone po 9 latach na rynkach.',
+    images: ['/og-image.png'],
   },
 };
 
