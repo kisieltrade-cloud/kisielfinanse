@@ -9,6 +9,7 @@ import BlogImageLightbox from '@/components/BlogImageLightbox';
 import { getPostBySlug, getAllSlugs, getAllPosts } from '@/lib/posts';
 import { remark } from 'remark';
 import remarkHtml from 'remark-html';
+import remarkGfm from 'remark-gfm';
 
 const BASE_URL = 'https://nysethtrading.pl';
 
@@ -70,7 +71,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post || !post.published) notFound();
 
-  const processed = await remark().use(remarkHtml).process(post.content);
+  const processed = await remark().use(remarkGfm).use(remarkHtml, { sanitize: false }).process(post.content);
   const contentHtml = processed.toString();
 
   const t = TAG_CONFIG[post.tag?.toLowerCase()] ?? TAG_CONFIG['edukacja'];
