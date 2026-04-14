@@ -5,6 +5,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ReadingProgress from '@/components/ReadingProgress';
 import RelatedPosts from '@/components/RelatedPosts';
+import BlogImageLightbox from '@/components/BlogImageLightbox';
 import { getPostBySlug, getAllSlugs, getAllPosts } from '@/lib/posts';
 import { remark } from 'remark';
 import remarkHtml from 'remark-html';
@@ -180,6 +181,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {/* Content */}
+        <BlogImageLightbox />
         <div
           className="blog-post-content"
           dangerouslySetInnerHTML={{ __html: contentHtml }}
