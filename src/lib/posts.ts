@@ -13,6 +13,7 @@ export interface PostMeta {
   tag: string;
   readTime: string;
   published: boolean;
+  keywords?: string[];
 }
 
 export interface Post extends PostMeta {
@@ -47,6 +48,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
         tag: data.tag ?? 'Trading',
         readTime: data.readTime ?? '5 min',
         published: data.published !== false,
+        keywords: data.keywords ?? [],
         _rawDate: rawDate,
       };
     })
@@ -91,6 +93,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     tag: data.tag ?? 'Trading',
     readTime: data.readTime ?? '5 min',
     published: data.published !== false,
+    keywords: data.keywords ?? [],
     content,
   };
 }

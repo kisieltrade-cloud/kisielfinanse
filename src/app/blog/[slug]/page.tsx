@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} | NysethTrading Blog`,
     description: post.excerpt,
-    keywords: ['trading', 'day trading', post.tag.toLowerCase(), 'nysethtrading', 'forex', 'futures'],
+    keywords: [...(post.keywords ?? []), 'trading', 'day trading', post.tag.toLowerCase(), 'nysethtrading', 'forex', 'futures'],
     authors: [{ name: 'Mateusz Nyseth', url: `${BASE_URL}/o-mnie` }],
     alternates: { canonical: `${BASE_URL}/blog/${slug}` },
     openGraph: {
