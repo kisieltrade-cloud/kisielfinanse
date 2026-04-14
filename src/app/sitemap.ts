@@ -10,7 +10,7 @@ const STATIC_DATES: Record<string, string> = {
   '/wyniki':                  '2026-04-07', // aktualizowane co tydzień
   '/tygodnik':                '2026-04-07', // aktualizowane co tydzień
   '/o-mnie':                  '2026-03-01',
-  '/blog':                    '2026-04-01', // zmienia się gdy pojawia się nowy post
+  '/blog':                    '2026-04-14', // zmienia się gdy pojawia się nowy post
   '/slownik':                 '2026-03-01',
   '/wspolpraca':              '2026-03-01',
   '/zasoby':                  '2026-03-01',
