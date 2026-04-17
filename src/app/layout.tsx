@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { Syne, JetBrains_Mono, Bebas_Neue } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
-import CookieConsent, { CookieConsentInit } from '@/components/CookieConsent';
+import CookieConsent from '@/components/CookieConsent';
+import { CookieConsentInit } from '@/components/CookieConsentInit';
 import SchemaOrg from '@/components/SchemaOrg';
 
 /* ─── Fonty — hostowane lokalnie przez Next.js (zero render-blocking) ─── */
