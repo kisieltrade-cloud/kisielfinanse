@@ -32,7 +32,6 @@ export default function Nav() {
     { href: '/slownik',     label: 'Słownik',      ebook: false },
     { href: '/tygodnik',    label: 'Tygodnik',     ebook: false },
     { href: '/zasoby',      label: 'Zasoby',       ebook: false },
-    { href: '/ebook',       label: '★ E-book',     ebook: true  },
     { href: '/#newsletter', label: 'Newsletter',   ebook: false },
   ];
 
