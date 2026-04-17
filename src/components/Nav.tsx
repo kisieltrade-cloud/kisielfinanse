@@ -23,16 +23,17 @@ export default function Nav() {
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
-  const links = [
-    { href: '/',            label: 'Home' },
-    { href: '/wyniki',      label: 'Wyniki' },
-    { href: '/o-mnie',      label: 'O mnie' },
-    { href: '/blog',        label: 'Blog' },
-    { href: '/wspolpraca',  label: 'Współpraca' },
-    { href: '/slownik',     label: 'Słownik' },
-    { href: '/tygodnik',    label: 'Tygodnik' },
-    { href: '/zasoby',      label: 'Zasoby' },
-    { href: '/#newsletter', label: 'Newsletter' },
+  const links: { href: string; label: string; ebook: boolean; edukacja?: boolean }[] = [
+    { href: '/',            label: 'Home',        ebook: false },
+    { href: '/wyniki',      label: 'Wyniki',       ebook: false },
+    { href: '/o-mnie',      label: 'O mnie',       ebook: false },
+    { href: '/blog',        label: 'Edukacja',     ebook: false, edukacja: true },
+    { href: '/wspolpraca',  label: 'Współpraca',   ebook: false },
+    { href: '/slownik',     label: 'Słownik',      ebook: false },
+    { href: '/tygodnik',    label: 'Tygodnik',     ebook: false },
+    { href: '/zasoby',      label: 'Zasoby',       ebook: false },
+    { href: '/ebook',       label: '★ E-book',     ebook: true  },
+    { href: '/#newsletter', label: 'Newsletter',   ebook: false },
   ];
 
   return (
@@ -45,7 +46,24 @@ export default function Nav() {
         <ul className="nav-links">
           {links.map(l => (
             <li key={l.href}>
-              <Link href={l.href} style={{ color: pathname === l.href ? 'var(--cyan)' : undefined }}>
+              <Link
+                href={l.href}
+                style={l.ebook ? {
+                  color: '#f5a623',
+                  border: '1px solid rgba(245,166,35,0.6)',
+                  padding: '4px 10px',
+                  fontWeight: 700,
+                  letterSpacing: '1px',
+                  background: 'rgba(245,166,35,0.08)',
+                } : l.edukacja ? {
+                  color: '#b14aed',
+                  fontWeight: 600,
+                  letterSpacing: '1px',
+                  textShadow: '0 0 10px rgba(177,74,237,0.4)',
+                } : {
+                  color: pathname === l.href ? 'var(--cyan)' : undefined,
+                }}
+              >
                 {l.label}
               </Link>
             </li>
@@ -73,7 +91,16 @@ export default function Nav() {
                 <Link
                   href={l.href}
                   className="mobile-menu-link"
-                  style={{ color: pathname === l.href ? 'var(--cyan)' : undefined }}
+                  style={l.ebook ? {
+                    color: '#f5a623',
+                    fontWeight: 700,
+                  } : l.edukacja ? {
+                    color: '#b14aed',
+                    fontWeight: 600,
+                    textShadow: '0 0 10px rgba(177,74,237,0.4)',
+                  } : {
+                    color: pathname === l.href ? 'var(--cyan)' : undefined,
+                  }}
                   onClick={() => setOpen(false)}
                 >
                   {l.label}
