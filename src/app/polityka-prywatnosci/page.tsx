@@ -46,6 +46,16 @@ const sections = [
     ],
   },
   {
+    title: '4. Odbiorcy danych',
+    content: `Dane osobowe mogą być przekazywane następującym kategoriom odbiorców:`,
+    list: [
+      'Dostawcy usług hostingowych — przetwarzający dane w imieniu administratora na podstawie umowy powierzenia',
+      'Dostawcy narzędzi analitycznych (np. Google LLC) — wyłącznie w przypadku ich wdrożenia i po uzyskaniu zgody użytkownika',
+      'Organy publiczne — wyłącznie gdy obowiązek przekazania danych wynika z przepisów prawa',
+    ],
+    extra: 'Administrator nie sprzedaje danych osobowych podmiotom trzecim ani nie udostępnia ich w celach marketingowych bez zgody użytkownika.',
+  },
+  {
     title: '5. Pliki cookies',
     content: `Serwis korzysta z plików cookies (ciasteczka) - małych plików tekstowych zapisywanych na Twoim urządzeniu. Cookies używane są do:`,
     list: [
@@ -127,7 +137,7 @@ export default function PolitykaPrywatnosci() {
 
         {/* Intro */}
         <div style={{
-          background: 'rgba(0,245,212,0.04)', border: '1px solid rgba(0,245,212,0.12)',
+          background: 'rgba(201,162,39,0.04)', border: '1px solid rgba(201,162,39,0.12)',
           borderLeft: '3px solid var(--cyan)', padding: '16px 20px',
           fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--muted)',
           lineHeight: 1.8, marginBottom: 48,

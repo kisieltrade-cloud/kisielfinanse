@@ -46,7 +46,7 @@ export default function TableOfContentsMobile({ items }: Props) {
         className="toc-mobile-btn"
         aria-expanded={open}
       >
-        <span style={{ color: '#00f5d4', fontSize: '0.7rem' }}>§</span>
+        <span style={{ color: '#c9a227', fontSize: '0.7rem' }}>§</span>
         <span style={{ flex: 1, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {activeItem ? activeItem.text : 'Spis treści'}
         </span>
@@ -80,10 +80,10 @@ export default function TableOfContentsMobile({ items }: Props) {
                       paddingLeft: item.level === 2 ? 16 : 28,
                       fontFamily: 'var(--font-mono)',
                       fontSize: item.level === 2 ? '0.72rem' : '0.66rem',
-                      color: isActive ? '#00f5d4' : item.level === 2 ? '#8a9ab5' : '#5a6478',
+                      color: isActive ? '#c9a227' : item.level === 2 ? '#8a9ab5' : '#5a6478',
                       fontWeight: isActive ? 600 : 400,
                       textDecoration: 'none',
-                      borderLeft: isActive ? '2px solid #00f5d4' : '2px solid transparent',
+                      borderLeft: isActive ? '2px solid #c9a227' : '2px solid transparent',
                       transition: 'color 0.15s, border-color 0.15s',
                       lineHeight: 1.4,
                     }}

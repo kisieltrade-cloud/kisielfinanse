@@ -32,7 +32,7 @@ const OFFERS = [
 const STATS = [
   { val: '9', label: 'Lat na rynkach' },
   { val: '2026', label: 'Rok startu portalu' },
-  { val: '100%', label: 'Niezależny portal' },
+  { val: '100%', label: 'Własna treść' },
 ];
 
 export default function Wspolpraca() {
@@ -83,7 +83,7 @@ export default function Wspolpraca() {
             <span className="gradient-text-cp">Z KISIEL</span>
           </h1>
           <p className="collab-intro">
-            Tworzę niezależny portal edukacyjny o finansach - trading, krypto, oszczędzanie, geopolityka.
+            Tworzę treści o finansach - trading, krypto, oszczędzanie, geopolityka.
             Jeśli Twój produkt lub usługa trafia do osób, które chcą świadomie zarządzać pieniędzmi,
             porozmawiajmy o tym, jak możemy razem dotrzeć do tej społeczności.
           </p>

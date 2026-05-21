@@ -1,148 +1,120 @@
-import { ImageResponse } from 'next/og';
-import { getPostBySlug } from '@/lib/posts';
+﻿import { ImageResponse } from 'next/og';
 
+export const runtime = 'edge';
+export const alt = 'KisielFinanse - Finanse. Wiedza. Wolność.';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-const TAG_COLORS: Record<string, string> = {
-  strategia: '#00f5d4',
-  psychologia: '#b14aed',
-  analiza: '#f5c518',
-  'risk management': '#ff2d78',
-  edukacja: '#00f5d4',
-  rynek: '#f5c518',
-  krypto: '#f5a623',
-  oszczędzanie: '#00f5d4',
-  geopolityka: '#ff2d78',
-  trading: '#00f5d4',
-  finanse: '#b14aed',
-};
-
-export default async function OgImage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
-
-  const title = post?.title ?? 'KisielFinanse';
-  const tag = post?.tag ?? 'Edukacja';
-  const date = post?.date ?? '';
-  const tagColor = TAG_COLORS[tag.toLowerCase()] ?? '#00f5d4';
-  const fontSize = title.length > 70 ? 48 : title.length > 50 ? 58 : title.length > 35 ? 68 : 78;
-
+export default function OgImage() {
   return new ImageResponse(
     (
       <div
         style={{
           width: 1200,
           height: 630,
-          background: '#030508',
           display: 'flex',
           flexDirection: 'column',
-          padding: '64px 80px',
+          alignItems: 'flex-start',
+          justifyContent: 'center',
+          background: '#030508',
+          padding: '80px 100px',
           position: 'relative',
           overflow: 'hidden',
         }}
       >
-        {/* Grid */}
+        {/* Grid overlay */}
         <div
           style={{
             position: 'absolute',
             inset: 0,
             backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
+              'linear-gradient(rgba(201,162,39,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,162,39,0.04) 1px, transparent 1px)',
             backgroundSize: '60px 60px',
             display: 'flex',
           }}
         />
 
-        {/* Glow */}
+        {/* Glow top-right */}
         <div
           style={{
             position: 'absolute',
-            top: -180,
-            right: -120,
-            width: 520,
-            height: 520,
+            top: -200,
+            right: -200,
+            width: 600,
+            height: 600,
             borderRadius: '50%',
-            background: `radial-gradient(ellipse, ${tagColor}28 0%, transparent 65%)`,
+            background: 'radial-gradient(ellipse, rgba(232,150,58,0.2) 0%, transparent 65%)',
             display: 'flex',
           }}
         />
 
-        {/* Tag pill */}
+        {/* Glow bottom-left */}
         <div
           style={{
+            position: 'absolute',
+            bottom: -150,
+            left: -100,
+            width: 500,
+            height: 500,
+            borderRadius: '50%',
+            background: 'radial-gradient(ellipse, rgba(201,162,39,0.12) 0%, transparent 65%)',
             display: 'flex',
-            marginBottom: 36,
+          }}
+        />
+
+        {/* Top label */}
+        <div
+          style={{
+            fontFamily: 'monospace',
+            fontSize: 18,
+            color: '#c9a227',
+            letterSpacing: 6,
+            marginBottom: 32,
+            display: 'flex',
           }}
         >
-          <div
-            style={{
-              background: `${tagColor}18`,
-              border: `1px solid ${tagColor}55`,
-              color: tagColor,
-              padding: '8px 20px',
-              fontSize: 17,
-              fontFamily: 'monospace',
-              letterSpacing: 4,
-              display: 'flex',
-            }}
-          >
-            {tag.toUpperCase()}
-          </div>
+          KISIELFINANSE.PL
         </div>
 
-        {/* Title */}
+        {/* Main headline */}
         <div
           style={{
-            fontSize,
+            fontSize: 110,
             fontWeight: 900,
-            color: '#e8edf5',
-            lineHeight: 1.15,
-            flex: 1,
+            lineHeight: 0.95,
+            letterSpacing: 8,
+            marginBottom: 40,
             display: 'flex',
-            alignItems: 'center',
-            maxWidth: 1000,
+            flexDirection: 'column',
           }}
         >
-          {title}
+          <span style={{ color: '#e8edf5' }}>FINANSE.</span>
+          <span
+            style={{
+              background: 'linear-gradient(90deg, #c9a227, #e8963a)',
+              backgroundClip: 'text',
+              color: 'transparent',
+            }}
+          >
+            WIEDZA.
+          </span>
+          <span style={{ color: '#e8edf5' }}>WOLNOŚĆ.</span>
+        </div>
+
+        {/* Subline */}
+        <div
+          style={{
+            fontFamily: 'monospace',
+            fontSize: 22,
+            color: '#5a6a80',
+            letterSpacing: 2,
+            display: 'flex',
+          }}
+        >
+          Trading · Krypto · Oszczędzanie · Geopolityka
         </div>
 
         {/* Bottom bar */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            borderTop: '1px solid rgba(255,255,255,0.07)',
-            paddingTop: 24,
-            marginTop: 24,
-          }}
-        >
-          <div
-            style={{
-              fontSize: 26,
-              fontWeight: 700,
-              color: tagColor,
-              fontFamily: 'monospace',
-              letterSpacing: 3,
-              display: 'flex',
-            }}
-          >
-            KisielFinanse
-          </div>
-          <div
-            style={{
-              fontSize: 18,
-              color: '#3a4a5a',
-              fontFamily: 'monospace',
-              display: 'flex',
-            }}
-          >
-            {date}
-          </div>
-        </div>
-
-        {/* Bottom gradient line */}
         <div
           style={{
             position: 'absolute',
@@ -150,7 +122,7 @@ export default async function OgImage({ params }: { params: Promise<{ slug: stri
             left: 0,
             right: 0,
             height: 4,
-            background: `linear-gradient(90deg, ${tagColor}, #b14aed)`,
+            background: 'linear-gradient(90deg, #c9a227, #e8963a)',
             display: 'flex',
           }}
         />

@@ -50,7 +50,7 @@ export default function KalkulatorPage() {
             lineHeight: 1.05,
           }}>
             KALKULATOR<br />
-            <span style={{ color: '#00f5d4' }}>FINANSOWY</span>
+            <span style={{ color: '#c9a227' }}>FINANSOWY</span>
           </h1>
           <p style={{
             fontFamily: 'var(--font-mono)',

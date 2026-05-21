@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useState } from 'react';
 
@@ -78,8 +78,8 @@ export default function CookieConsent() {
         width: 'min(520px, calc(100vw - 32px))',
         background: '#0c1220',
         border: '1px solid #1a2535',
-        borderTop: '3px solid #00f5d4',
-        boxShadow: '0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,245,212,0.06)',
+        borderTop: '3px solid #c9a227',
+        boxShadow: '0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,162,39,0.06)',
         animation: 'modalIn 0.35s ease',
       }}>
 
@@ -87,7 +87,7 @@ export default function CookieConsent() {
         <div style={{
           padding: '20px 24px 0',
           fontFamily: "'JetBrains Mono', monospace",
-          fontSize: '0.58rem', color: '#00f5d4', letterSpacing: '3px',
+          fontSize: '0.58rem', color: '#c9a227', letterSpacing: '3px',
         }}>
         </div>
 
@@ -98,7 +98,7 @@ export default function CookieConsent() {
             fontSize: '1.8rem', letterSpacing: '4px',
             color: '#e8edf5', margin: '0 0 14px',
           }}>
-            PLIKI <span style={{ color: '#00f5d4' }}>COOKIES</span>
+            PLIKI <span style={{ color: '#c9a227' }}>COOKIES</span>
           </h2>
 
           <p style={{
@@ -123,7 +123,7 @@ export default function CookieConsent() {
               display: 'flex', alignItems: 'center', gap: 6,
               transition: 'color .2s',
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#00f5d4')}
+            onMouseEnter={e => (e.currentTarget.style.color = '#c9a227')}
             onMouseLeave={e => (e.currentTarget.style.color = '#3a5a6a')}
           >
             <span style={{ fontSize: '0.7rem' }}>{showDetails ? '▲' : '▼'}</span>
@@ -138,13 +138,13 @@ export default function CookieConsent() {
                   name: 'Niezbędne',
                   desc: 'Działanie strony i zapamiętanie Twojego wyboru dotyczącego cookies.',
                   required: true,
-                  color: '#00f5d4',
+                  color: '#c9a227',
                 },
                 {
                   name: 'Analityczne',
                   desc: 'Google Analytics - anonimowe dane o ruchu (odwiedziny, źródła, podstrony). Bez śledzenia tożsamości.',
                   required: false,
-                  color: '#b14aed',
+                  color: '#e8963a',
                 },
               ].map(c => (
                 <div key={c.name} style={{
@@ -182,7 +182,7 @@ export default function CookieConsent() {
                 fontSize: '0.6rem', color: '#3a5a6a', paddingLeft: 2,
               }}>
                 Więcej:{' '}
-                <a href="/polityka-prywatnosci" style={{ color: '#00f5d4', textDecoration: 'none' }}>
+                <a href="/polityka-prywatnosci" style={{ color: '#c9a227', textDecoration: 'none' }}>
                   Polityka prywatności
                 </a>
               </div>
@@ -212,7 +212,7 @@ export default function CookieConsent() {
                 flex: 2,
                 fontFamily: "'JetBrains Mono', monospace",
                 fontSize: '0.72rem', letterSpacing: '2px', fontWeight: 700,
-                background: '#00f5d4', border: '1px solid #00f5d4',
+                background: '#c9a227', border: '1px solid #c9a227',
                 color: '#060a10', padding: '12px',
                 cursor: 'pointer', transition: 'opacity .2s',
               }}

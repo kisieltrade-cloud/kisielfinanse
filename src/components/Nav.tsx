@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
@@ -26,8 +25,9 @@ export default function Nav() {
     <>
       <nav className="nav">
         <Link href="/" className="nav-logo">
-          <Image src="/logo.png" alt="KisielFinanse logo" width={40} height={40} style={{ borderRadius: 8 }} />
-          KisielFinanse
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo-k.png" alt="" style={{ width: 48, height: 48, mixBlendMode: 'screen', display: 'block', transform: 'translateY(-12px)' }} />
+          <span style={{ color: '#ffffff' }}>Kisiel</span><span style={{ color: '#c9a227' }}>Finanse</span>
         </Link>
         <ul className="nav-links">
           {links.map(l => (
@@ -42,10 +42,10 @@ export default function Nav() {
                   letterSpacing: '1px',
                   background: 'rgba(245,166,35,0.08)',
                 } : l.edukacja ? {
-                  color: '#b14aed',
+                  color: '#e8963a',
                   fontWeight: 600,
                   letterSpacing: '1px',
-                  textShadow: '0 0 10px rgba(177,74,237,0.4)',
+                  textShadow: '0 0 10px rgba(232,150,58,0.4)',
                 } : {
                   color: pathname === l.href ? 'var(--cyan)' : undefined,
                 }}
@@ -80,9 +80,9 @@ export default function Nav() {
                     color: '#f5a623',
                     fontWeight: 700,
                   } : l.edukacja ? {
-                    color: '#b14aed',
+                    color: '#e8963a',
                     fontWeight: 600,
-                    textShadow: '0 0 10px rgba(177,74,237,0.4)',
+                    textShadow: '0 0 10px rgba(232,150,58,0.4)',
                   } : {
                     color: pathname === l.href ? 'var(--cyan)' : undefined,
                   }}

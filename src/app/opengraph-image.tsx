@@ -28,7 +28,7 @@ export default function OgImage() {
             position: 'absolute',
             inset: 0,
             backgroundImage:
-              'linear-gradient(rgba(0,245,212,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,245,212,0.04) 1px, transparent 1px)',
+              'linear-gradient(rgba(201,162,39,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,162,39,0.04) 1px, transparent 1px)',
             backgroundSize: '60px 60px',
             display: 'flex',
           }}
@@ -43,7 +43,7 @@ export default function OgImage() {
             width: 600,
             height: 600,
             borderRadius: '50%',
-            background: 'radial-gradient(ellipse, rgba(177,74,237,0.2) 0%, transparent 65%)',
+            background: 'radial-gradient(ellipse, rgba(232,150,58,0.2) 0%, transparent 65%)',
             display: 'flex',
           }}
         />
@@ -57,7 +57,7 @@ export default function OgImage() {
             width: 500,
             height: 500,
             borderRadius: '50%',
-            background: 'radial-gradient(ellipse, rgba(0,245,212,0.12) 0%, transparent 65%)',
+            background: 'radial-gradient(ellipse, rgba(201,162,39,0.12) 0%, transparent 65%)',
             display: 'flex',
           }}
         />
@@ -67,7 +67,7 @@ export default function OgImage() {
           style={{
             fontFamily: 'monospace',
             fontSize: 18,
-            color: '#00f5d4',
+            color: '#c9a227',
             letterSpacing: 6,
             marginBottom: 32,
             display: 'flex',
@@ -91,7 +91,7 @@ export default function OgImage() {
           <span style={{ color: '#e8edf5' }}>FINANSE.</span>
           <span
             style={{
-              background: 'linear-gradient(90deg, #00f5d4, #b14aed)',
+              background: 'linear-gradient(90deg, #c9a227, #e8963a)',
               backgroundClip: 'text',
               color: 'transparent',
             }}
@@ -122,7 +122,7 @@ export default function OgImage() {
             left: 0,
             right: 0,
             height: 4,
-            background: 'linear-gradient(90deg, #00f5d4, #b14aed)',
+            background: 'linear-gradient(90deg, #c9a227, #e8963a)',
             display: 'flex',
           }}
         />

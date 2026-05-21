@@ -14,8 +14,8 @@ export default async function Footer() {
             Finanse. Wiedza. Wolność.
           </p>
           <p className="footer-brand-desc">
-            Niezależny portal o finansach, tradingu, krypto i geopolityce.
-            Praktyczna wiedza bez ściemy i kursów za fortunę.
+            Praktyczna wiedza o finansach, tradingu, krypto i geopolityce.
+            Bez ściemy i kursów za fortunę.
           </p>
           <a
             href="https://x.com/KisielFinanse"
@@ -47,7 +47,7 @@ export default async function Footer() {
               <li key={slug}>
                 <Link href={`/blog/tag/${slug}`}>
                   {tag.charAt(0).toUpperCase() + tag.slice(1)}
-                  <span style={{ color: '#1e2d3d', marginLeft: 6, fontSize: '0.62rem' }}>({count})</span>
+                  <span style={{ color: '#5a6a7a', marginLeft: 6, fontSize: '0.62rem' }}>({count})</span>
                 </Link>
               </li>
             ))}
@@ -59,8 +59,8 @@ export default async function Footer() {
           <div className="footer-col-title">Kontakt</div>
           <ul className="footer-col-links" style={{ marginBottom: 28 }}>
             <li>
-              <a href="mailto:KisielFinanse@gmail.com">
-                KisielFinanse@gmail.com
+              <a href="mailto:kisieltrade@gmail.com">
+                kisieltrade@gmail.com
               </a>
             </li>
             <li><Link href="/wspolpraca">Współpraca reklamowa</Link></li>

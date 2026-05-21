@@ -42,7 +42,7 @@ export default function Breadcrumbs({ items }: Props) {
                   textDecoration: 'none',
                   transition: 'color 0.15s',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#00f5d4')}
+                onMouseEnter={e => (e.currentTarget.style.color = '#c9a227')}
                 onMouseLeave={e => (e.currentTarget.style.color = '#3a4a5a')}
               >
                 {crumb.label}

@@ -22,11 +22,11 @@ export default function ReadTimeRing({ readTime, size = 32, maxMinutes = 15 }: P
           viewBox={`0 0 ${size} ${size}`}
           style={{ transform: 'rotate(-90deg)', display: 'block' }}
         >
-          <circle cx={c} cy={c} r={r} fill="none" stroke="rgba(0,245,212,0.1)" strokeWidth={sw} />
+          <circle cx={c} cy={c} r={r} fill="none" stroke="rgba(201,162,39,0.1)" strokeWidth={sw} />
           <circle
             cx={c} cy={c} r={r}
             fill="none"
-            stroke="#00f5d4"
+            stroke="#c9a227"
             strokeWidth={sw}
             strokeDasharray={circ}
             strokeDashoffset={offset}
@@ -38,7 +38,7 @@ export default function ReadTimeRing({ readTime, size = 32, maxMinutes = 15 }: P
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontFamily: 'var(--font-mono)',
           fontSize: Math.round(size * 0.3) + 'px',
-          color: '#00f5d4',
+          color: '#c9a227',
           fontWeight: 600,
           lineHeight: 1,
         }}>

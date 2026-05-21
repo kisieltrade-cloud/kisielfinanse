@@ -10,7 +10,7 @@ const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Współ
 export const metadata: Metadata = {
   title: 'Współpraca - Sponsoring, Afiliacja, Partnerstwo | KisielFinanse',
   description:
-    'Współpraca z KisielFinanse - niezależnym portalem edukacyjnym o rynkach finansowych. Giełdy krypto, platformy tradingowe, sponsoring, afiliacja. Skontaktuj się.',
+    'Współpraca z KisielFinanse - edukacja o rynkach finansowych. Giełdy krypto, platformy tradingowe, sponsoring, afiliacja. Skontaktuj się.',
   keywords: [
     'współpraca trading', 'sponsoring portal tradingowy', 'afiliacja krypto', 'partner giełda krypto',
     'współpraca portal edukacyjny', 'partnerstwo forex', 'reklama portal tradingowy',
@@ -18,14 +18,14 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://kisielfinanse.pl/wspolpraca' },
   openGraph: {
     title: 'Współpraca - KisielFinanse',
-    description: 'Niezależny portal edukacyjny o rynkach finansowych. Giełdy krypto, platformy tradingowe, sponsoring, afiliacja.',
+    description: 'Edukacja o rynkach finansowych. Giełdy krypto, platformy tradingowe, sponsoring, afiliacja.',
     url: 'https://kisielfinanse.pl/wspolpraca',
     images: [OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Współpraca - KisielFinanse',
-    description: 'Sponsoring, afiliacja, partnerstwo. Niezależny portal edukacyjny o Forexie, krypto i futures.',
+    description: 'Sponsoring, afiliacja, partnerstwo. Edukacja o Forexie, krypto i futures.',
     images: ['/og-image.png'],
   },
 };

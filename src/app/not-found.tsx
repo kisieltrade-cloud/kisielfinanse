@@ -28,7 +28,7 @@ export default function NotFound() {
             fontSize: 'clamp(5rem, 20vw, 9rem)',
             fontWeight: 700,
             color: 'transparent',
-            backgroundImage: 'linear-gradient(135deg, #00f5d4, #7c3aed)',
+            backgroundImage: 'linear-gradient(135deg, #c9a227, #e8963a)',
             WebkitBackgroundClip: 'text',
             backgroundClip: 'text',
             lineHeight: 1,
@@ -64,7 +64,7 @@ export default function NotFound() {
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 padding: '12px 24px', borderRadius: 8,
-                background: 'linear-gradient(135deg, #00f5d4, #00c4aa)',
+                background: 'linear-gradient(135deg, #c9a227, #b8921f)',
                 color: '#030508', fontFamily: 'system-ui, sans-serif',
                 fontSize: '0.85rem', fontWeight: 600, textDecoration: 'none',
               }}

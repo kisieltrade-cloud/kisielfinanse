@@ -31,7 +31,7 @@ export default function NextArticleBar({ slug, title }: Props) {
       transform: visible ? 'translateY(0)' : 'translateY(100%)',
       transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
       background: 'rgba(8,13,20,0.97)',
-      borderTop: '1px solid rgba(0,245,212,0.18)',
+      borderTop: '1px solid rgba(201,162,39,0.18)',
       backdropFilter: 'blur(12px)',
       padding: '14px 24px',
     }}>
@@ -48,7 +48,7 @@ export default function NextArticleBar({ slug, title }: Props) {
             fontFamily: 'var(--font-mono)',
             fontSize: '0.55rem',
             letterSpacing: '2px',
-            color: '#00f5d4',
+            color: '#c9a227',
             textTransform: 'uppercase',
             marginBottom: 4,
           }}>
@@ -74,7 +74,7 @@ export default function NextArticleBar({ slug, title }: Props) {
             fontSize: '0.65rem',
             letterSpacing: '1.5px',
             color: '#060a10',
-            background: '#00f5d4',
+            background: '#c9a227',
             padding: '10px 22px',
             textDecoration: 'none',
             fontWeight: 700,

@@ -8,11 +8,11 @@ const INTERVAL = 4000;
 const FADE_MS  = 250;
 
 const TAG_COLORS: Record<string, { color: string; bg: string }> = {
-  strategia:         { color: '#00f5d4', bg: 'rgba(0,245,212,0.12)' },
-  psychologia:       { color: '#b14aed', bg: 'rgba(177,74,237,0.12)' },
+  strategia:         { color: '#c9a227', bg: 'rgba(201,162,39,0.12)' },
+  psychologia:       { color: '#e8963a', bg: 'rgba(232,150,58,0.12)' },
   analiza:           { color: '#f5c518', bg: 'rgba(245,197,24,0.12)' },
   'risk management': { color: '#ff2d78', bg: 'rgba(255,45,120,0.12)' },
-  edukacja:          { color: '#00f5d4', bg: 'rgba(0,245,212,0.12)' },
+  edukacja:          { color: '#c9a227', bg: 'rgba(201,162,39,0.12)' },
   rynek:             { color: '#f5c518', bg: 'rgba(245,197,24,0.12)' },
   finanse:           { color: '#60a5fa', bg: 'rgba(96,165,250,0.12)' },
   krypto:            { color: '#f97316', bg: 'rgba(249,115,22,0.12)' },

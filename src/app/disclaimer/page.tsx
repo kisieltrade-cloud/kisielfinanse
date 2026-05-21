@@ -182,8 +182,8 @@ export default function Disclaimer() {
             color: 'var(--muted)', lineHeight: 1.8, margin: 0,
           }}>
             W przypadku pytań dotyczących niniejszego disclaimera skontaktuj się:<br />
-            <a href="mailto:KisielFinanse@gmail.com" style={{ color: 'var(--pink)', textDecoration: 'none' }}>
-              KisielFinanse@gmail.com
+            <a href="mailto:kisieltrade@gmail.com" style={{ color: 'var(--pink)', textDecoration: 'none' }}>
+              kisieltrade@gmail.com
             </a>
           </p>
         </div>

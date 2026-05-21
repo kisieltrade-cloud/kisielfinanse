@@ -3,17 +3,17 @@ import { getAllPosts } from '@/lib/posts';
 import ReadTimeRing from '@/components/ReadTimeRing';
 
 const TAG_CONFIG: Record<string, { color: string; bg: string; label: string }> = {
-  strategia:        { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)',   label: 'Strategia' },
-  psychologia:      { color: '#b14aed', bg: 'rgba(177,74,237,0.08)',  label: 'Psychologia' },
+  strategia:        { color: '#c9a227', bg: 'rgba(201,162,39,0.08)',   label: 'Strategia' },
+  psychologia:      { color: '#e8963a', bg: 'rgba(232,150,58,0.08)',  label: 'Psychologia' },
   analiza:          { color: '#f5c518', bg: 'rgba(245,197,24,0.08)',   label: 'Analiza' },
   'risk management':{ color: '#ff2d78', bg: 'rgba(255,45,120,0.08)',  label: 'Risk Management' },
-  edukacja:         { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)',   label: 'Edukacja' },
+  edukacja:         { color: '#c9a227', bg: 'rgba(201,162,39,0.08)',   label: 'Edukacja' },
   rynek:            { color: '#f5c518', bg: 'rgba(245,197,24,0.08)',   label: 'Rynek' },
 };
 
 const CARD_GRADIENTS = [
-  'radial-gradient(ellipse at top left, rgba(0,245,212,0.07) 0%, transparent 60%)',
-  'radial-gradient(ellipse at top right, rgba(177,74,237,0.07) 0%, transparent 60%)',
+  'radial-gradient(ellipse at top left, rgba(201,162,39,0.07) 0%, transparent 60%)',
+  'radial-gradient(ellipse at top right, rgba(232,150,58,0.07) 0%, transparent 60%)',
   'radial-gradient(ellipse at bottom left, rgba(255,45,120,0.06) 0%, transparent 60%)',
 ];
 

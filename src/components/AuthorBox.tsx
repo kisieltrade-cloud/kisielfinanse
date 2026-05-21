@@ -9,7 +9,7 @@ export default function AuthorBox() {
       padding: '0 24px 60px',
     }}>
       <div style={{
-        borderTop: '1px solid rgba(0,245,212,0.12)',
+        borderTop: '1px solid rgba(201,162,39,0.12)',
         paddingTop: 40,
         display: 'flex',
         gap: 28,
@@ -25,7 +25,7 @@ export default function AuthorBox() {
               borderRadius: '50%',
               objectFit: 'cover',
               filter: 'grayscale(20%) contrast(1.05)',
-              border: '2px solid rgba(0,245,212,0.2)',
+              border: '2px solid rgba(201,162,39,0.2)',
               display: 'block',
             }}
           />
@@ -36,7 +36,7 @@ export default function AuthorBox() {
             fontFamily: 'var(--font-mono)',
             fontSize: '0.58rem',
             letterSpacing: '2px',
-            color: '#00f5d4',
+            color: '#c9a227',
             textTransform: 'uppercase',
             marginBottom: 8,
           }}>
@@ -72,9 +72,9 @@ export default function AuthorBox() {
               fontFamily: 'var(--font-mono)',
               fontSize: '0.65rem',
               letterSpacing: '1.5px',
-              color: '#00f5d4',
+              color: '#c9a227',
               textDecoration: 'none',
-              border: '1px solid rgba(0,245,212,0.25)',
+              border: '1px solid rgba(201,162,39,0.25)',
               padding: '7px 16px',
               display: 'inline-block',
               transition: 'border-color 0.2s, background 0.2s',

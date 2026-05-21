@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef } from 'react';
 
@@ -41,7 +41,7 @@ export default function GiscusComments({ slug }: Props) {
   return (
     <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 60px' }}>
       <div style={{
-        borderTop: '1px solid rgba(0,245,212,0.12)',
+        borderTop: '1px solid rgba(201,162,39,0.12)',
         paddingTop: 40,
         marginBottom: 32,
         display: 'flex',
@@ -52,12 +52,12 @@ export default function GiscusComments({ slug }: Props) {
           fontFamily: 'var(--font-mono)',
           fontSize: '0.58rem',
           letterSpacing: '2px',
-          color: '#00f5d4',
+          color: '#c9a227',
           textTransform: 'uppercase',
         }}>
           Komentarze
         </div>
-        <div style={{ flex: 1, height: 1, background: 'rgba(0,245,212,0.08)' }} />
+        <div style={{ flex: 1, height: 1, background: 'rgba(201,162,39,0.08)' }} />
       </div>
       <div ref={ref} />
     </div>

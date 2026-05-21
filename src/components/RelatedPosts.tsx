@@ -3,16 +3,16 @@ import { PostMeta } from '@/lib/posts';
 import ReadTimeRing from '@/components/ReadTimeRing';
 
 const TAG_CONFIG: Record<string, { color: string; bg: string }> = {
-  strategia:         { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
-  psychologia:       { color: '#b14aed', bg: 'rgba(177,74,237,0.08)' },
+  strategia:         { color: '#c9a227', bg: 'rgba(201,162,39,0.08)' },
+  psychologia:       { color: '#e8963a', bg: 'rgba(232,150,58,0.08)' },
   analiza:           { color: '#f5c518', bg: 'rgba(245,197,24,0.08)' },
   'risk management': { color: '#ff2d78', bg: 'rgba(255,45,120,0.08)' },
-  edukacja:          { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
+  edukacja:          { color: '#c9a227', bg: 'rgba(201,162,39,0.08)' },
   rynek:             { color: '#f5c518', bg: 'rgba(245,197,24,0.08)' },
 };
 
 const getTag = (tag: string) =>
-  TAG_CONFIG[tag?.toLowerCase()] ?? { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' };
+  TAG_CONFIG[tag?.toLowerCase()] ?? { color: '#c9a227', bg: 'rgba(201,162,39,0.08)' };
 
 interface Props {
   currentSlug: string;

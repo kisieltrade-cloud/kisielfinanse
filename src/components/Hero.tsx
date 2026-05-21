@@ -59,7 +59,7 @@ export default async function Hero() {
               letterSpacing: '-2px',
               color: i === 1 ? 'transparent' : 'var(--text)',
               backgroundImage: i === 1
-                ? 'linear-gradient(90deg, #00f5d4, #7c3aed)'
+                ? 'linear-gradient(90deg, #c9a227, #e8963a)'
                 : 'none',
               WebkitBackgroundClip: i === 1 ? 'text' : undefined,
               backgroundClip: i === 1 ? 'text' : undefined,

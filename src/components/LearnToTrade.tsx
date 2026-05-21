@@ -6,7 +6,7 @@ const STEPS = [
   {
     num: '01',
     title: 'Zrozum rynek',
-    accent: '#00f5d4',
+    accent: '#c9a227',
     summary: 'Wybierz jeden rynek i poznaj go na wylot.',
     content: `Nie próbuj ogarnąć wszystkiego na raz. Wybierz jeden rynek - forex, indeksy, krypto czy akcje - i poznaj go dogłębnie. Ja zaczynałem od EUR/USD i przez pierwsze miesiące nie dotykałem niczego innego. Nie dlatego, że to najlepszy instrument, ale dlatego, że dogłębna znajomość jednego rynku jest warta więcej niż powierzchowna znajomość dziesięciu.`,
     points: [
@@ -43,7 +43,7 @@ const STEPS = [
   {
     num: '04',
     title: 'Ćwicz na demo',
-    accent: '#b14aed',
+    accent: '#e8963a',
     summary: 'Minimum 2-3 miesiące przed realem.',
     content: `Nie wpłacaj ani złotówki, dopóki nie potrafisz konsekwentnie realizować planu na koncie demo. Konto demo działa identycznie jak prawdziwe - te same wykresy, ceny, spread. Jedyna różnica to brak emocji. Naucz się platformy, testuj strategię, prowadź dziennik każdej transakcji.`,
     points: [
@@ -55,7 +55,7 @@ const STEPS = [
   {
     num: '05',
     title: 'Stwórz trading plan',
-    accent: '#00f5d4',
+    accent: '#c9a227',
     summary: 'Twoja osobista instrukcja obsługi rynku.',
     content: `Trading plan to Twoja osobista instrukcja obsługi rynku. Bez niego reagujesz emocjonalnie na każdą świecę - a emocje to wróg numer jeden tradera. Zapisz plan, wydrukuj go, przyklej obok monitora.`,
     points: [
@@ -100,9 +100,9 @@ const WARNINGS = [
 ];
 
 const TIMELINE = [
-  { months: 'Miesiąc 1–2', label: 'TEORIA', desc: 'Czytaj, oglądaj, ucz się. Świece, wsparcia, trend, ryzyko. Otwórz demo, ogarnij platformę.', accent: '#00f5d4' },
+  { months: 'Miesiąc 1–2', label: 'TEORIA', desc: 'Czytaj, oglądaj, ucz się. Świece, wsparcia, trend, ryzyko. Otwórz demo, ogarnij platformę.', accent: '#c9a227' },
   { months: 'Miesiąc 3–4', label: 'DEMO', desc: 'Wybierz jedną strategię. Traduj codziennie. Prowadź dziennik. Nie zmieniaj strategii.', accent: '#f5c518' },
-  { months: 'Miesiąc 5–6', label: 'OCENA', desc: 'Przejrzyj dziennik. Winrate? Średnie RR? Trzymasz się planu? Jeśli tak - czas na real.', accent: '#b14aed' },
+  { months: 'Miesiąc 5–6', label: 'OCENA', desc: 'Przejrzyj dziennik. Winrate? Średnie RR? Trzymasz się planu? Jeśli tak - czas na real.', accent: '#e8963a' },
   { months: 'Miesiąc 7+', label: 'REAL', desc: 'Minimalny depozyt. Dalszy dziennik. Dalsze doskonalenie. Maraton, nie sprint.', accent: '#ff2d78' },
 ];
 
@@ -130,7 +130,7 @@ export default function LearnToTrade() {
           }}
         >
           NAUCZ SIĘ{' '}
-          <span style={{ color: '#00f5d4' }}>TRADOWAĆ</span>
+          <span style={{ color: '#c9a227' }}>TRADOWAĆ</span>
         </h2>
         <p
           style={{
@@ -345,14 +345,14 @@ export default function LearnToTrade() {
             color: 'var(--muted)',
             lineHeight: 1.85,
             padding: '24px',
-            background: 'rgba(0,245,212,0.03)',
-            border: '1px solid rgba(0,245,212,0.1)',
-            borderLeft: '3px solid #00f5d4',
+            background: 'rgba(201,162,39,0.03)',
+            border: '1px solid rgba(201,162,39,0.1)',
+            borderLeft: '3px solid #c9a227',
           }}
         >
           Trading to maraton, nie sprint. Nie ma skrótów, nie ma cheatcodów.
           Jest natomiast sprawdzona ścieżka:{' '}
-          <span style={{ color: '#00f5d4' }}>
+          <span style={{ color: '#c9a227' }}>
             nauka → demo → plan → dyscyplina → real → cierpliwość
           </span>
           . Większość osób potrzebuje 1-3 lat, żeby osiągnąć stabilność. Ale jeśli

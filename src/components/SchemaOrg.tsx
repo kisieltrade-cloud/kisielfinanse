@@ -59,7 +59,7 @@ export default function SchemaOrg() {
     ],
     contactPoint: {
       '@type': 'ContactPoint',
-      email: 'KisielFinanse@gmail.com',
+      email: 'kisieltrade@gmail.com',
       contactType: 'customer service',
       availableLanguage: 'Polish',
     },

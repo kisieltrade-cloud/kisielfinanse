@@ -50,13 +50,13 @@ const timeline = [
     year: '2020',
     title: 'Przełom - zarządzanie ryzykiem',
     desc: 'Kluczowe odkrycie: trading to nie przewidywanie kierunku, a zarządzanie ryzykiem i konsekwencja. Zmieniłem podejście z "ile mogę zarobić" na "ile mogę stracić". To był punkt zwrotny.',
-    color: '#b14aed',
+    color: '#e8963a',
   },
   {
     year: '2021-23',
     title: 'Rynki, krypto i szerszy obraz',
     desc: 'Rozszerzyłem działalność na futures (US100, złoto, surowce) i kryptowaluty. Zacząłem też głębiej rozumieć powiązania między polityką, geopolityką a rynkami finansowymi. Pieniądze mają kontekst.',
-    color: '#00f5d4',
+    color: '#c9a227',
   },
   {
     year: '2024-25',
@@ -68,7 +68,7 @@ const timeline = [
     year: '2026',
     title: 'KisielFinanse - finanse bez granic',
     desc: 'Stworzyłem KisielFinanse jako portal o finansach w szerokim sensie. Trading, krypto, oszczędzanie, sytuacje na świecie, wolność finansowa - miejsce, gdzie każdy znajdzie coś dla siebie.',
-    color: '#00f5d4',
+    color: '#c9a227',
   },
 ];
 
@@ -120,13 +120,13 @@ export default function OMnie() {
         }}>
           <div style={{
             position: 'absolute', inset: 0, zIndex: 0,
-            backgroundImage: 'linear-gradient(rgba(0,245,212,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,245,212,0.03) 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(rgba(201,162,39,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,162,39,0.03) 1px, transparent 1px)',
             backgroundSize: '60px 60px',
           }} />
           <div style={{
             position: 'absolute', top: '20%', right: '10%',
             width: 500, height: 500, borderRadius: '50%', zIndex: 0,
-            background: 'radial-gradient(circle, rgba(0,245,212,0.06) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(201,162,39,0.06) 0%, transparent 70%)',
           }} />
 
           <div style={{ maxWidth: 1100, margin: '0 auto', width: '100%', position: 'relative', zIndex: 1 }}>
@@ -140,7 +140,7 @@ export default function OMnie() {
                   lineHeight: 1,
                 }}>
                   <span style={{ color: '#e8edf5', display: 'block', marginBottom: 8 }}>MATEUSZ</span>
-                  <span style={{ color: '#00f5d4', display: 'block' }}>KISIEL</span>
+                  <span style={{ color: '#c9a227', display: 'block' }}>KISIEL</span>
                 </h1>
 
                 <p style={{
@@ -151,7 +151,7 @@ export default function OMnie() {
                   9 lat na rynkach nauczyło mnie jednego: pieniądze rządzą się prawami,
                   które{' '}<span style={{ color: '#e8edf5' }}>każdy może zrozumieć</span>.
                   Trading, krypto, oszczędzanie, geopolityka - wszystko jest ze sobą
-                  połączone. Tworzę <span style={{ color: '#00f5d4' }}>KisielFinanse</span>,
+                  połączone. Tworzę <span style={{ color: '#c9a227' }}>KisielFinanse</span>,
                   żeby tę wiedzę przekazać praktycznie - bez kursów za fortunę,
                   bez obietnic i bez ściemy.
                 </p>
@@ -159,8 +159,8 @@ export default function OMnie() {
                 <div style={{ display: 'flex', gap: 12 }}>
                   <Link href="/blog" style={{
                     fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
-                    letterSpacing: '2px', background: '#00f5d4', color: '#060a10',
-                    border: '1px solid #00f5d4', padding: '12px 24px',
+                    letterSpacing: '2px', background: '#c9a227', color: '#060a10',
+                    border: '1px solid #c9a227', padding: '12px 24px',
                     textDecoration: 'none', fontWeight: 700,
                   }}>
                     ZACZNIJ CZYTAĆ →
@@ -179,7 +179,7 @@ export default function OMnie() {
               <div style={{ position: 'relative', width: 320, flexShrink: 0 }}>
                 <div style={{
                   position: 'absolute', inset: -8,
-                  border: '1px solid rgba(0,245,212,0.15)',
+                  border: '1px solid rgba(201,162,39,0.15)',
                   pointerEvents: 'none', zIndex: 1,
                 }} />
                 <Image
@@ -205,7 +205,7 @@ export default function OMnie() {
         <section style={{
           padding: '80px 24px',
           borderTop: '1px solid #0d1a26',
-          background: 'linear-gradient(180deg, transparent, rgba(0,245,212,0.02), transparent)',
+          background: 'linear-gradient(180deg, transparent, rgba(201,162,39,0.02), transparent)',
         }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{
@@ -218,13 +218,13 @@ export default function OMnie() {
                   num: '01',
                   title: 'Trading i rynki',
                   desc: 'Forex, krypto, futures, akcje - jak naprawdę działają rynki finansowe, jak czytać wykresy, zarządzać ryzykiem i nie dać się emocjom. Wiedza z 9 lat praktyki.',
-                  color: '#00f5d4',
+                  color: '#c9a227',
                 },
                 {
                   num: '02',
                   title: 'Finanse i wolność',
                   desc: 'Oszczędzanie, inwestowanie, budowanie kapitału - droga do finansowej niezależności. Bo wolność finansowa to nie lottery, to świadome decyzje podejmowane każdego dnia.',
-                  color: '#b14aed',
+                  color: '#e8963a',
                 },
                 {
                   num: '03',
@@ -269,7 +269,7 @@ export default function OMnie() {
               fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
               letterSpacing: '4px', margin: '0 0 48px', color: '#e8edf5',
             }}>
-              9 LAT NA <span style={{ color: '#00f5d4' }}>RYNKACH</span>
+              9 LAT NA <span style={{ color: '#c9a227' }}>RYNKACH</span>
             </h2>
 
             <div style={{ position: 'relative' }}>
@@ -351,8 +351,8 @@ export default function OMnie() {
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link href="/blog" style={{
                 fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
-                letterSpacing: '2px', background: '#00f5d4', color: '#060a10',
-                border: '1px solid #00f5d4', padding: '14px 32px',
+                letterSpacing: '2px', background: '#c9a227', color: '#060a10',
+                border: '1px solid #c9a227', padding: '14px 32px',
                 textDecoration: 'none', fontWeight: 700,
               }}>
                 PRZEJDŹ DO ARTYKUŁÓW →
