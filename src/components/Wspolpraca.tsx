@@ -12,7 +12,7 @@ const OFFERS = [
   {
     icon: '◎',
     title: 'Sponsoring i lokowanie',
-    desc: 'Naturalne wplecenie produktu w treści — artykuły blogowe, sekcje na stronie, wzmianki w comiesięcznych podsumowaniach.',
+    desc: 'Naturalne wplecenie produktu w treści - artykuły blogowe, sekcje na stronie, wzmianki w comiesięcznych podsumowaniach.',
     color: 'var(--purple)',
   },
   {
@@ -24,15 +24,15 @@ const OFFERS = [
   {
     icon: '◉',
     title: 'Inne formy',
-    desc: 'Masz inny pomysł na współpracę? Jestem otwarty na niestandardowe propozycje — napisz i porozmawiajmy.',
+    desc: 'Masz inny pomysł na współpracę? Jestem otwarty na niestandardowe propozycje - napisz i porozmawiajmy.',
     color: 'var(--pink)',
   },
 ];
 
 const STATS = [
   { val: '9', label: 'Lat na rynkach' },
-  { val: '1000+', label: 'Zamkniętych pozycji' },
-  { val: '2026', label: 'Rok startu platformy' },
+  { val: '2026', label: 'Rok startu portalu' },
+  { val: '100%', label: 'Niezależny portal' },
 ];
 
 export default function Wspolpraca() {
@@ -78,15 +78,14 @@ export default function Wspolpraca() {
 
         {/* HEADER */}
         <div className="collab-header">
-          <div className="section-label">// partnerstwo</div>
           <h1 className="section-title">
             WSPÓŁPRACA<br />
-            <span className="gradient-text-cp">Z NYSETH</span>
+            <span className="gradient-text-cp">Z KISIEL</span>
           </h1>
           <p className="collab-intro">
-            Buduję markę opartą na transparentności i realnych wynikach.
-            Jeśli Twój produkt lub platforma jest skierowana do aktywnych traderów —
-            porozmawiajmy o tym jak możemy razem dotrzeć do tej społeczności.
+            Tworzę niezależny portal edukacyjny o finansach - trading, krypto, oszczędzanie, geopolityka.
+            Jeśli Twój produkt lub usługa trafia do osób, które chcą świadomie zarządzać pieniędzmi,
+            porozmawiajmy o tym, jak możemy razem dotrzeć do tej społeczności.
           </p>
         </div>
 
@@ -102,7 +101,6 @@ export default function Wspolpraca() {
 
         {/* CO OFERUJĘ */}
         <div className="collab-offers">
-          <div className="section-label">// co oferuję</div>
           <h2 className="collab-subtitle">
             FORMY <span className="gradient-text-pp">WSPÓŁPRACY</span>
           </h2>
@@ -124,7 +122,6 @@ export default function Wspolpraca() {
 
         {/* FORMULARZ */}
         <div className="collab-form-wrap">
-          <div className="section-label">// napisz do mnie</div>
           <h2 className="collab-subtitle">
             ZACZNIJMY <span className="gradient-text-cp">ROZMOWĘ</span>
           </h2>

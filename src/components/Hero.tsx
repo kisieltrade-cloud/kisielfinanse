@@ -1,200 +1,106 @@
-'use client';
-
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { getAllPosts } from '@/lib/posts';
+import HeroArticleRotator from '@/components/HeroArticleRotator';
+import AnimatedCounter from '@/components/AnimatedCounter';
 
-// Equity: 50 000 zł (start) → 132 987.66 zł (07.04.2026)
-// Y: 210 = min (50 000 zł), 10 = max (132 987 zł), niżej = wyższy kapitał
-const CHART_POINTS = [
-  210, 206, 204, 198, 193, 189, 187, // mar tyg1 (09–13.03)
-  177, 172, 165, 145, 139,           // mar tyg2 (15–20.03)
-  108,  87,  73,  61,  55,           // mar tyg3 (23–27.03)
-   54,  46,  25,  22,  22,  10,      // kwi (31.03–07.04)
-];
 
-function buildPath(points: number[], w: number, h: number) {
-  const step = w / (points.length - 1);
-  return points.map((y, i) => `${i === 0 ? 'M' : 'L'}${i * step},${y}`).join(' ');
-}
-
-function buildFill(points: number[], w: number, height: number) {
-  const step = w / (points.length - 1);
-  const line = points.map((y, i) => `${i * step},${y}`).join(' L');
-  return `M0,${points[0]} L${line} L${w},${height} L0,${height} Z`;
-}
-
-export default function Hero() {
-  const pathRef = useRef<SVGPathElement>(null);
-
-  useEffect(() => {
-    if (!pathRef.current) return;
-    const len = pathRef.current.getTotalLength();
-    pathRef.current.style.strokeDasharray = `${len}`;
-    pathRef.current.style.strokeDashoffset = `${len}`;
-    pathRef.current.style.transition = 'stroke-dashoffset 2s ease 0.5s';
-    requestAnimationFrame(() => {
-      if (pathRef.current) pathRef.current.style.strokeDashoffset = '0';
-    });
-  }, []);
-
-  const W = 560, H = 220;
-  const linePath = buildPath(CHART_POINTS, W, H);
-  const fillPath = buildFill(CHART_POINTS, W, H);
-
+export default async function Hero() {
+  const allPosts = await getAllPosts();
+  const recentPosts = allPosts.filter((p) => p.published).slice(0, 6);
   return (
-    <section className="hero" id="home">
-      <div className="hero-grid" />
-      <div className="hero-glow-1" />
-      <div className="hero-glow-2" />
+    <section className="hero" id="home" style={{ overflow: 'hidden', position: 'relative' }}>
 
-      {/* LEFT COLUMN */}
-      <div className="hero-content">
-        <div className="hero-badge">
-          <span className="hero-badge-dot" />
-          AKTYWNY TRADER · TRANSPARENTNE WYNIKI
+      {/* ── Layer 1: grid ── */}
+      <div className="hero-grid" />
+
+      {/* ── Layer 2: hero background image ── */}
+      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/hero-bg.png"
+          alt=""
+          aria-hidden="true"
+          style={{
+            width: '100%', height: '100%',
+            objectFit: 'cover', objectPosition: 'center right',
+            position: 'absolute', inset: 0,
+            opacity: 0.55,
+          }}
+        />
+        {/* Gradient overlay: dark left (tekst czytelny) → fade → bg right */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(90deg, rgba(3,5,8,0.97) 0%, rgba(3,5,8,0.88) 35%, rgba(3,5,8,0.55) 58%, var(--bg) 78%, var(--bg) 100%)',
+          zIndex: 2,
+        }} />
+        {/* Bottom fade */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(180deg, transparent 60%, var(--bg) 100%)',
+          zIndex: 3,
+        }} />
+      </div>
+
+      {/* ── Layer 3: glow accents ── */}
+      <div className="hero-glow-1" style={{ zIndex: 1 }} />
+      <div className="hero-glow-2" style={{ zIndex: 1 }} />
+
+      {/* ── LEFT COLUMN ── */}
+      <div className="hero-content" style={{ position: 'relative', zIndex: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+
+        {/* Headline */}
+        <div style={{ marginBottom: 28 }} aria-hidden="true">
+          {['FINANSE.', 'WIEDZA.', 'WOLNOŚĆ.'].map((word, i) => (
+            <div key={word} style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(3.2rem, 7vw, 5.6rem)',
+              fontWeight: 800,
+              lineHeight: 0.92,
+              letterSpacing: '-2px',
+              color: i === 1 ? 'transparent' : 'var(--text)',
+              backgroundImage: i === 1
+                ? 'linear-gradient(90deg, #00f5d4, #7c3aed)'
+                : 'none',
+              WebkitBackgroundClip: i === 1 ? 'text' : undefined,
+              backgroundClip: i === 1 ? 'text' : undefined,
+              marginBottom: 6,
+            }}>
+              {word}
+            </div>
+          ))}
         </div>
 
-    <div className="hero-h1-wrapper">
-  <div className="hero-h1" aria-hidden="true">
-    <span className="hero-h1-line1">TRADE</span>
-    <span className="hero-h1-line2">SMARTER</span>
-  </div>
-  <h1 className="seo-only">
-    NysethTrading — Transparentne Wyniki Tradingowe | Day Trading Forex i Krypto
-  </h1>
-</div>
+        {/* Visually hidden H1 for SEO */}
+        <h1 className="seo-only">
+          KisielFinanse - Edukacja finansowa | Trading, Krypto, Oszczędzanie
+        </h1>
 
         <p className="hero-desc">
-          Trader z Wrocławia z 9-letnim doświadczeniem. Zajmuję się day tradingiem
-          na Forexie, krypto i futures. Wyniki publikuję co tydzień — bez filtrów.
+          Świat się zmienia, rynki reagują, pieniądze się poruszają. Trading,
+          krypto, oszczędzanie, geopolityka - tu znajdziesz wiedzę, która
+          naprawdę robi różnicę. Bo wolność finansowa zaczyna się od rozumienia.
         </p>
 
         <div className="hero-actions">
-          <Link href="/wyniki" className="btn-primary">
-            ZOBACZ WYNIKI
+          <Link href="/blog" className="btn-primary">
+            ZACZNIJ SIĘ UCZYĆ
           </Link>
           <Link href="/o-mnie" className="btn-ghost">
             O MNIE →
           </Link>
         </div>
 
-        {/* MINI STATS */}
+        {/* Mini stats */}
         <div className="hero-mini-stats">
           <div className="hero-mini-stat">
-            <span className="hero-mini-val">9</span>
+            <span className="hero-mini-val"><AnimatedCounter target={9} /></span>
             <span className="hero-mini-label">Lat doświadczenia</span>
           </div>
-          <div className="hero-mini-divider" />
-          <div className="hero-mini-stat">
-            <span className="hero-mini-val">1000+</span>
-            <span className="hero-mini-label">Zamkniętych pozycji</span>
-          </div>
-          <div className="hero-mini-divider" />
-          <div className="hero-mini-stat">
-            <span className="hero-mini-val" style={{ color: 'var(--yellow)' }}>Forex</span>
-            <span className="hero-mini-label">Krypto · Futures</span>
-          </div>
         </div>
       </div>
 
-      {/* RIGHT COLUMN — CHART */}
-      <div className="hero-chart-wrap">
-        <div className="hero-chart-header">
-          <div>
-            <div className="hero-chart-label">// equity curve 2026</div>
-            <div className="hero-chart-title">NysethTrading</div>
-          </div>
-          <div className="hero-chart-badge" style={{ fontSize: '0.62rem', letterSpacing: '1px', color: 'var(--muted)', border: '1px solid var(--border)', padding: '5px 12px', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>
-            // akt. 07.04.2026
-          </div>
-        </div>
+      <HeroArticleRotator posts={recentPosts} />
 
-        <svg
-          width="100%"
-          viewBox={`0 0 ${W} ${H + 30}`}
-          style={{ display: 'block' }}
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <linearGradient id="fillGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#00f5d4" stopOpacity="0.18" />
-              <stop offset="100%" stopColor="#00f5d4" stopOpacity="0" />
-            </linearGradient>
-            <filter id="glowLine">
-              <feGaussianBlur stdDeviation="3" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          {/* Grid lines */}
-          {[55, 110, 165].map(y => (
-            <line key={y} x1="0" y1={y} x2={W} y2={y}
-              stroke="rgba(0,245,212,0.06)" strokeWidth="1" />
-          ))}
-
-          {/* Fill */}
-          <path d={fillPath} fill="url(#fillGrad)" />
-
-          {/* Line */}
-          <path
-            ref={pathRef}
-            d={linePath}
-            fill="none"
-            stroke="#00f5d4"
-            strokeWidth="2.5"
-            filter="url(#glowLine)"
-          />
-
-          {/* End dot */}
-          <circle cx={W} cy={CHART_POINTS[CHART_POINTS.length - 1]} r="5"
-            fill="#00f5d4" filter="url(#glowLine)" />
-          <circle cx={W} cy={CHART_POINTS[CHART_POINTS.length - 1]} r="12"
-            fill="rgba(0,245,212,0.12)" />
-
-          {/* X axis labels — challenge startuje w marcu */}
-          {['MAR tyg1', 'MAR tyg2', 'MAR tyg3', 'KWI'].map((m, i) => (
-            <text key={m}
-              x={i * (W / 3)}
-              y={H + 22}
-              fill="rgba(90,100,120,0.7)"
-              fontFamily="JetBrains Mono, monospace"
-              fontSize="9"
-            >{m}</text>
-          ))}
-
-          {/* P&L label */}
-          <rect x={W - 100} y={CHART_POINTS[CHART_POINTS.length - 1] - 30}
-            width={96} height={22} fill="rgba(0,245,212,0.1)"
-            stroke="rgba(0,245,212,0.3)" strokeWidth="1" rx="2" />
-          <text
-            x={W - 52} y={CHART_POINTS[CHART_POINTS.length - 1] - 14}
-            fill="#00f5d4"
-            fontFamily="JetBrains Mono, monospace"
-            fontSize="11"
-            fontWeight="600"
-            textAnchor="middle"
-          >+82 988 zł</text>
-        </svg>
-
-        {/* Chart footer stats */}
-        <div className="hero-chart-stats">
-          <div className="hero-chart-stat">
-            <span className="hero-chart-stat-val" style={{ color: 'var(--cyan)' }}>+82 988 zł</span>
-            <span className="hero-chart-stat-label">P&amp;L 2026</span>
-          </div>
-          <div className="hero-chart-stat">
-            <span className="hero-chart-stat-val" style={{ color: 'var(--cyan)' }}>5/5</span>
-            <span className="hero-chart-stat-label">Zielone tygodnie</span>
-          </div>
-          <div className="hero-chart-stat">
-            <span className="hero-chart-stat-val" style={{ color: 'var(--yellow)' }}>co tydzień</span>
-            <span className="hero-chart-stat-label">Aktualizacja</span>
-          </div>
-        </div>
-      </div>
     </section>
   );
 }

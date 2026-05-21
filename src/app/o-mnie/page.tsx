@@ -1,32 +1,34 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 
-const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Mateusz Nyseth — Trader z Wrocławia' };
+const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Mateusz Kisiel - KisielFinanse' };
 
 export const metadata: Metadata = {
-  title: 'O mnie — Mateusz Nyseth, Trader z Wrocławia z 9-letnim doświadczeniem',
-  description: 'Trader z Wrocławia z 9-letnim doświadczeniem. Day trading futures: US100, złoto, surowce, krypto. Bez mentorów, bez kursów — tylko rynek i transparentne wyniki.',
+  title: 'Mateusz Kisiel - Trader i twórca KisielFinanse',
+  description: 'Twórca KisielFinanse. 9 lat na rynkach finansowych - trading, krypto, inwestowanie. Portal o finansach osobistych, rynkach i wolności finansowej. Bez ściemy.',
   keywords: [
-    'trader wrocław', 'mateusz nyseth', 'nysethtrading', 'day trader polska',
-    'trader z doświadczeniem', 'futures trader', 'US100 trader', 'transparentny trader',
-    'scalper forex', 'kim jest nyseth',
+    'Mateusz Kisiel', 'KisielFinanse', 'finanse osobiste', 'edukacja finansowa',
+    'trading wrocław', 'kryptowaluty', 'inwestowanie', 'wolność finansowa',
+    'rynki finansowe', 'oszczędzanie', 'kim jest Kisiel',
   ],
-  alternates: { canonical: 'https://nysethtrading.pl/o-mnie' },
+  alternates: { canonical: 'https://kisielfinanse.pl/o-mnie' },
   openGraph: {
     type: 'profile',
     locale: 'pl_PL',
-    title: 'Mateusz Nyseth — Trader z Wrocławia | NysethTrading',
-    description: '9 lat na rynkach. Day trading futures, forex i krypto. Transparentne wyniki co tydzień — bez filtrów.',
-    url: 'https://nysethtrading.pl/o-mnie',
-    siteName: 'NysethTrading',
+    title: 'Mateusz Kisiel - Twórca KisielFinanse',
+    description: '9 lat na rynkach. Portal o finansach, tradingu, krypto i wolności finansowej. Praktyczna wiedza bez ściemy.',
+    url: 'https://kisielfinanse.pl/o-mnie',
+    siteName: 'KisielFinanse',
     images: [OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mateusz Nyseth — Trader z Wrocławia',
-    description: '9 lat na rynkach. US100, złoto, krypto. Transparentne wyniki.',
+    title: 'Mateusz Kisiel - KisielFinanse',
+    description: '9 lat na rynkach. Finanse, trading, krypto i wolność finansowa.',
     images: ['/og-image.png'],
   },
 };
@@ -35,56 +37,47 @@ const timeline = [
   {
     year: '2017',
     title: 'Pierwsze konto, pierwsze straty',
-    desc: 'Zacząłem od długoterminowego inwestowania w Bitcoina — wtedy jeszcze nie wiedziałem że to będzie wstęp do aktywnego tradingu. Równolegle pierwszy rachunek forexowy, bez planu, bez zarządzania ryzykiem. Rynek szybko pokazał co o tym myśli.',
+    desc: 'Zacząłem od Bitcoina i pierwszego rachunku forexowego - bez planu, bez zarządzania ryzykiem. Rynek szybko pokazał co o tym myśli. Ale to właśnie te pierwsze straty nauczyły mnie więcej niż jakikolwiek kurs.',
     color: '#ff2d78',
   },
   {
-    year: '2018–19',
+    year: '2018-19',
     title: 'Nauka przez ból',
-    desc: 'Żadnych kursów, żadnych mentorów. Tylko wykresy, logi transakcji i analiza własnych błędów. Setki godzin przed platformą po godzinach pracy.',
+    desc: 'Żadnych mentorów, żadnych kursów. Tylko wykresy, logi transakcji i analiza własnych błędów. Setki godzin przed platformą po godzinach pracy. Zrozumiałem, że jedynym skutecznym nauczycielem jest sam rynek.',
     color: '#f5c518',
   },
   {
     year: '2020',
-    title: 'Przełom — zarządzanie ryzykiem',
-    desc: 'Zrozumiałem że trading to nie przewidywanie kierunku, a zarządzanie ryzykiem i konsekwencja. Zmieniłem podejście z "ile mogę zarobić" na "ile mogę stracić".',
+    title: 'Przełom - zarządzanie ryzykiem',
+    desc: 'Kluczowe odkrycie: trading to nie przewidywanie kierunku, a zarządzanie ryzykiem i konsekwencja. Zmieniłem podejście z "ile mogę zarobić" na "ile mogę stracić". To był punkt zwrotny.',
     color: '#b14aed',
   },
   {
-    year: '2021–23',
-    title: 'Przejście na futures',
-    desc: 'Porzuciłem forex na rzecz US100, złota, surowców i krypto. Wyższy wolumen, lepsza płynność — i Bitcoin który zaczął zachowywać się jak normalny instrument techniczny.',
+    year: '2021-23',
+    title: 'Rynki, krypto i szerszy obraz',
+    desc: 'Rozszerzyłem działalność na futures (US100, złoto, surowce) i kryptowaluty. Zacząłem też głębiej rozumieć powiązania między polityką, geopolityką a rynkami finansowymi. Pieniądze mają kontekst.',
     color: '#00f5d4',
   },
   {
-    year: '2023',
-    title: 'Konsekwentne wyniki',
-    desc: 'Pierwszy rok gdzie emocje przestały grać rolę. System działa — niezależnie czy tydzień jest zielony czy czerwony.',
-    color: '#00f5d4',
+    year: '2024-25',
+    title: 'Finanse szerzej niż trading',
+    desc: 'Zrozumiałem, że wolność finansowa to nie tylko trading. To oszczędzanie, inwestowanie, rozumienie świata, w którym żyjemy. Zacząłem systematyzować wiedzę z wielu obszarów finansów.',
+    color: '#60a5fa',
   },
   {
     year: '2026',
-    title: 'NysethTrading — transparentność',
-    desc: 'Postanowiłem pokazać wyniki publicznie. Nie po to żeby chwalić się zyskami, ale żeby udowodnić że konsekwentny, zdyscyplinowany trading jest możliwy — bez kursów i bez ściemy.',
+    title: 'KisielFinanse - finanse bez granic',
+    desc: 'Stworzyłem KisielFinanse jako portal o finansach w szerokim sensie. Trading, krypto, oszczędzanie, sytuacje na świecie, wolność finansowa - miejsce, gdzie każdy znajdzie coś dla siebie.',
     color: '#00f5d4',
   },
-];
-
-const tradingFacts = [
-  { label: 'Rynki', value: 'US100 · GOLD · Krypto · Surowce' },
-  { label: 'Styl', value: 'Scalping + Day trading' },
-  { label: 'Platforma', value: 'XTB / xStation' },
-  { label: 'Sesje', value: 'Londyn · Nowy Jork' },
-  { label: 'Doświadczenie', value: '9 lat' },
-  { label: 'Baza', value: 'Wrocław, Polska' },
 ];
 
 const schemaBreadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'NysethTrading', item: 'https://nysethtrading.pl' },
-    { '@type': 'ListItem', position: 2, name: 'O mnie', item: 'https://nysethtrading.pl/o-mnie' },
+    { '@type': 'ListItem', position: 1, name: 'KisielFinanse', item: 'https://kisielfinanse.pl' },
+    { '@type': 'ListItem', position: 2, name: 'O mnie', item: 'https://kisielfinanse.pl/o-mnie' },
   ],
 };
 
@@ -93,50 +86,43 @@ export default function OMnie() {
     <>
       <Nav />
       <main style={{ paddingTop: '80px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '24px 24px 0' }}>
+          <Breadcrumbs items={[
+            { label: 'KisielFinanse', href: '/' },
+            { label: 'O mnie' },
+          ]} />
+        </div>
 
-      {/* Schema.org BreadcrumbList */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }}
-      />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Person',
+            name: 'Mateusz Kisiel',
+            alternateName: 'KisielFinanse',
+            url: 'https://kisielfinanse.pl/o-mnie',
+            jobTitle: 'Twórca portalu KisielFinanse',
+            description: 'Twórca KisielFinanse. 9 lat na rynkach finansowych. Pisze o tradingu, krypto, oszczędzaniu i wolności finansowej.',
+            knowsAbout: ['Trading', 'Forex', 'Futures', 'Kryptowaluty', 'Finanse osobiste', 'Oszczędzanie', 'Inwestowanie', 'Geopolityka', 'Zarządzanie ryzykiem'],
+            address: { '@type': 'PostalAddress', addressLocality: 'Wrocław', addressCountry: 'PL' },
+            sameAs: ['https://kisielfinanse.pl', 'https://x.com/KisielFinanse'],
+          })}}
+        />
 
-      {/* Schema.org Person — E-E-A-T sygnał dla Google */}
-      <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{ __html: JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Person',
-      name: 'Mateusz Nyseth',
-      alternateName: 'NysethTrading',
-      url: 'https://nysethtrading.pl/o-mnie',
-      jobTitle: 'Day Trader',
-      description: 'Trader z Wrocławia z 9-letnim doświadczeniem. Specjalizacja: day trading futures, forex i krypto. Autor transparentnego dziennika wyników tradingowych.',
-      knowsAbout: ['Day Trading', 'Forex', 'Futures', 'Kryptowaluty', 'Zarządzanie ryzykiem', 'US100', 'Gold'],
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Wrocław',
-        addressCountry: 'PL',
-      },
-      sameAs: [
-        'https://nysethtrading.pl',
-        'https://x.com/nysethtrading',
-        'https://twitter.com/nysethtrading',
-      ],
-    })}}
-  />
-
-  {/* ── HERO ── */}
+        {/* ── HERO ── */}
         <section style={{
           minHeight: '70vh', display: 'flex', alignItems: 'center',
           padding: '120px 24px 80px', position: 'relative', overflow: 'hidden',
         }}>
-          {/* bg grid */}
           <div style={{
             position: 'absolute', inset: 0, zIndex: 0,
             backgroundImage: 'linear-gradient(rgba(0,245,212,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,245,212,0.03) 1px, transparent 1px)',
             backgroundSize: '60px 60px',
           }} />
-          {/* glow */}
           <div style={{
             position: 'absolute', top: '20%', right: '10%',
             width: 500, height: 500, borderRadius: '50%', zIndex: 0,
@@ -146,30 +132,15 @@ export default function OMnie() {
           <div style={{ maxWidth: 1100, margin: '0 auto', width: '100%', position: 'relative', zIndex: 1 }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 64, alignItems: 'center' }}>
 
-              {/* Left */}
               <div>
-                <div style={{
-                  fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
-                  color: '#00f5d4', letterSpacing: '3px', marginBottom: 16,
-                }}>
-                  // kim jestem
-                </div>
-
-                <h1 style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-                  letterSpacing: '6px', margin: '0 0 8px',
-                  lineHeight: 1, color: '#e8edf5',
-                }}>
-                  MATEUSZ
-                </h1>
                 <h1 style={{
                   fontFamily: 'var(--font-display)',
                   fontSize: 'clamp(3rem, 7vw, 5.5rem)',
                   letterSpacing: '6px', margin: '0 0 32px',
-                  lineHeight: 1, color: '#00f5d4',
+                  lineHeight: 1,
                 }}>
-                  NYSETH
+                  <span style={{ color: '#e8edf5', display: 'block', marginBottom: 8 }}>MATEUSZ</span>
+                  <span style={{ color: '#00f5d4', display: 'block' }}>KISIEL</span>
                 </h1>
 
                 <p style={{
@@ -177,66 +148,53 @@ export default function OMnie() {
                   color: '#8a9ab5', lineHeight: 1.9, maxWidth: 560,
                   margin: '0 0 32px',
                 }}>
-                  9 lat na rynkach. Zaczynałem bez mentorów, bez kursów — tylko rynek
-                  jako nauczyciel. Dziś gram futures: <span style={{ color: '#f5c518' }}>US100</span>,{' '}
-                  <span style={{ color: '#f5c518' }}>złoto</span>, surowce i <span style={{ color: '#f5c518' }}>krypto</span>. Wyniki publikuję
-                  co tydzień — bez filtrów, bo transparentność to jedyna uczciwa forma
-                  obecności w tej branży.
+                  9 lat na rynkach nauczyło mnie jednego: pieniądze rządzą się prawami,
+                  które{' '}<span style={{ color: '#e8edf5' }}>każdy może zrozumieć</span>.
+                  Trading, krypto, oszczędzanie, geopolityka - wszystko jest ze sobą
+                  połączone. Tworzę <span style={{ color: '#00f5d4' }}>KisielFinanse</span>,
+                  żeby tę wiedzę przekazać praktycznie - bez kursów za fortunę,
+                  bez obietnic i bez ściemy.
                 </p>
 
                 <div style={{ display: 'flex', gap: 12 }}>
-                  <Link href="/wyniki" style={{
+                  <Link href="/blog" style={{
                     fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
                     letterSpacing: '2px', background: '#00f5d4', color: '#060a10',
                     border: '1px solid #00f5d4', padding: '12px 24px',
-                    textDecoration: 'none', fontWeight: 700, transition: 'opacity .2s',
+                    textDecoration: 'none', fontWeight: 700,
                   }}>
-                    WYNIKI →
+                    ZACZNIJ CZYTAĆ →
                   </Link>
                   <Link href="/wspolpraca" style={{
                     fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
                     letterSpacing: '2px', background: 'none', color: '#8a9ab5',
                     border: '1px solid #1a2535', padding: '12px 24px',
-                    textDecoration: 'none', transition: 'all .2s',
+                    textDecoration: 'none',
                   }}>
                     WSPÓŁPRACA
                   </Link>
                 </div>
               </div>
 
-              {/* Right — facts card */}
-              <div style={{
-                background: '#0c1220', border: '1px solid #1a2535',
-                borderTop: '3px solid #00f5d4', padding: '24px',
-                minWidth: 260,
-              }}>
+              <div style={{ position: 'relative', width: 320, flexShrink: 0 }}>
                 <div style={{
-                  fontFamily: 'var(--font-mono)', fontSize: '0.58rem',
-                  color: '#00f5d4', letterSpacing: '3px', marginBottom: 20,
-                }}>
-                  // profil tradera
-                </div>
-                {tradingFacts.map((f, i) => (
-                  <div key={i} style={{
-                    display: 'flex', justifyContent: 'space-between',
-                    alignItems: 'center', gap: 16,
-                    padding: '10px 0',
-                    borderBottom: i < tradingFacts.length - 1 ? '1px solid #0d1a26' : 'none',
-                  }}>
-                    <span style={{
-                      fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
-                      color: '#3a5a6a', letterSpacing: '1px',
-                    }}>
-                      {f.label.toUpperCase()}
-                    </span>
-                    <span style={{
-                      fontFamily: 'var(--font-mono)', fontSize: '0.7rem',
-                      color: '#e8edf5', textAlign: 'right',
-                    }}>
-                      {f.value}
-                    </span>
-                  </div>
-                ))}
+                  position: 'absolute', inset: -8,
+                  border: '1px solid rgba(0,245,212,0.15)',
+                  pointerEvents: 'none', zIndex: 1,
+                }} />
+                <Image
+                  src="/images/profile.png"
+                  alt="Mateusz Kisiel - KisielFinanse"
+                  width={320}
+                  height={430}
+                  priority
+                  style={{
+                    width: '100%', height: 'auto', display: 'block',
+                    objectFit: 'cover',
+                    filter: 'grayscale(10%) contrast(1.05)',
+                    border: '1px solid #1a2535',
+                  }}
+                />
               </div>
 
             </div>
@@ -251,12 +209,6 @@ export default function OMnie() {
         }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{
-              fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
-              color: '#00f5d4', letterSpacing: '3px', marginBottom: 16,
-            }}>
-              // filozofia
-            </div>
-            <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
               gap: 2,
@@ -264,20 +216,20 @@ export default function OMnie() {
               {[
                 {
                   num: '01',
-                  title: 'Ryzyko przed zyskiem',
-                  desc: 'Każdą transakcję zaczynam od pytania "ile mogę stracić" — nie "ile mogę zarobić". Zarządzanie ryzykiem to jedyna rzecz na którą mam pełną kontrolę.',
+                  title: 'Trading i rynki',
+                  desc: 'Forex, krypto, futures, akcje - jak naprawdę działają rynki finansowe, jak czytać wykresy, zarządzać ryzykiem i nie dać się emocjom. Wiedza z 9 lat praktyki.',
                   color: '#00f5d4',
                 },
                 {
                   num: '02',
-                  title: 'System, nie intuicja',
-                  desc: 'Trading oparty na emocjach to hazard. Mój edge pochodzi z powtarzalnego systemu z udokumentowanym backtestem — nie z "czucia rynku".',
+                  title: 'Finanse i wolność',
+                  desc: 'Oszczędzanie, inwestowanie, budowanie kapitału - droga do finansowej niezależności. Bo wolność finansowa to nie lottery, to świadome decyzje podejmowane każdego dnia.',
                   color: '#b14aed',
                 },
                 {
                   num: '03',
-                  title: 'Transparentność bez wyjątków',
-                  desc: 'Złe tygodnie publikuję tak samo jak dobre. Trader który pokazuje tylko zyski nie jest transparentny — jest influencerem.',
+                  title: 'Świat i pieniądze',
+                  desc: 'Geopolityka, inflacja, banki centralne, krypto i technologia - jak to wszystko wpływa na Twój portfel. Kontekst, którego brakuje w większości miejsc finansowych.',
                   color: '#f5c518',
                 },
               ].map((p, i) => (
@@ -313,12 +265,6 @@ export default function OMnie() {
         {/* ── TIMELINE ── */}
         <section style={{ padding: '80px 24px', borderTop: '1px solid #0d1a26' }}>
           <div style={{ maxWidth: 760, margin: '0 auto' }}>
-            <div style={{
-              fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
-              color: '#00f5d4', letterSpacing: '3px', marginBottom: 8,
-            }}>
-              // historia
-            </div>
             <h2 style={{
               fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
               letterSpacing: '4px', margin: '0 0 48px', color: '#e8edf5',
@@ -327,9 +273,8 @@ export default function OMnie() {
             </h2>
 
             <div style={{ position: 'relative' }}>
-              {/* vertical line */}
               <div style={{
-                position: 'absolute', left: 56, top: 0, bottom: 0,
+                position: 'absolute', left: 100, top: 0, bottom: 0,
                 width: 1, background: '#0d1a26',
               }} />
 
@@ -337,31 +282,30 @@ export default function OMnie() {
                 {timeline.map((t, i) => (
                   <div key={i} style={{
                     display: 'grid',
-                    gridTemplateColumns: '112px 1fr',
-                    gap: 24,
+                    gridTemplateColumns: '88px 24px 1fr',
+                    gap: '0 16px',
                     paddingBottom: i < timeline.length - 1 ? 36 : 0,
-                    position: 'relative',
+                    alignItems: 'start',
                   }}>
-                    {/* Year */}
-                    <div style={{ textAlign: 'right', paddingRight: 24, paddingTop: 2 }}>
+                    <div style={{ textAlign: 'right', paddingTop: 2 }}>
                       <span style={{
-                        fontFamily: 'var(--font-mono)', fontSize: '0.68rem',
-                        color: t.color, letterSpacing: '1px',
+                        fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
+                        color: t.color, letterSpacing: '1px', whiteSpace: 'nowrap',
                       }}>
                         {t.year}
                       </span>
                     </div>
 
-                    {/* dot */}
-                    <div style={{
-                      position: 'absolute', left: 50, top: 6,
-                      width: 13, height: 13, borderRadius: '50%',
-                      background: t.color,
-                      boxShadow: `0 0 12px ${t.color}`,
-                      border: '2px solid #060a10',
-                    }} />
+                    <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 4 }}>
+                      <div style={{
+                        width: 13, height: 13, borderRadius: '50%',
+                        background: t.color,
+                        boxShadow: `0 0 12px ${t.color}`,
+                        border: '2px solid #060a10',
+                        flexShrink: 0,
+                      }} />
+                    </div>
 
-                    {/* Content */}
                     <div>
                       <div style={{
                         fontFamily: 'var(--font-display)', fontSize: '0.95rem',
@@ -390,42 +334,36 @@ export default function OMnie() {
           textAlign: 'center',
         }}>
           <div style={{ maxWidth: 560, margin: '0 auto' }}>
-            <div style={{
-              fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
-              color: '#00f5d4', letterSpacing: '3px', marginBottom: 16,
-            }}>
-              // śledź wyniki
-            </div>
             <h2 style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
               letterSpacing: '4px', margin: '0 0 16px', color: '#e8edf5',
             }}>
-              ŻADNYCH TAJEMNIC.
+              FINANSE BEZ ŚCIEMY.
             </h2>
             <p style={{
               fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
               color: '#8a9ab5', lineHeight: 1.8, margin: '0 0 32px',
             }}>
-              Każdy tydzień — zyski i straty — opublikowany bez edycji.
-              Sprawdź wyniki i oceń sam.
+              Trading, krypto, oszczędzanie, wolność finansowa. Bez kursów za
+              fortunę, bez obietnic i bez lania wody. Tylko to, co naprawdę działa.
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/wyniki" style={{
+              <Link href="/blog" style={{
                 fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
                 letterSpacing: '2px', background: '#00f5d4', color: '#060a10',
                 border: '1px solid #00f5d4', padding: '14px 32px',
                 textDecoration: 'none', fontWeight: 700,
               }}>
-                WYNIKI TRADINGOWE →
+                PRZEJDŹ DO ARTYKUŁÓW →
               </Link>
-              <Link href="/blog" style={{
+              <Link href="/wspolpraca" style={{
                 fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
                 letterSpacing: '2px', background: 'none', color: '#8a9ab5',
                 border: '1px solid #1a2535', padding: '14px 32px',
                 textDecoration: 'none',
               }}>
-                BLOG
+                WSPÓŁPRACA
               </Link>
             </div>
           </div>

@@ -10,8 +10,16 @@ import { getPostBySlug, getAllSlugs, getAllPosts } from '@/lib/posts';
 import { remark } from 'remark';
 import remarkHtml from 'remark-html';
 import remarkGfm from 'remark-gfm';
+import TableOfContents from '@/components/TableOfContents';
+import TableOfContentsMobile from '@/components/TableOfContentsMobile';
+import { extractTocItems, slugifyHeading } from '@/lib/toc';
+import ShareButtons from '@/components/ShareButtons';
+import ReadTimeRing from '@/components/ReadTimeRing';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import AuthorBox from '@/components/AuthorBox';
+import NextArticleBar from '@/components/NextArticleBar';
 
-const BASE_URL = 'https://nysethtrading.pl';
+const BASE_URL = 'https://kisielfinanse.pl';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -27,10 +35,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug(slug);
   if (!post) return {};
   return {
-    title: `${post.title} | NysethTrading Blog`,
-    description: post.excerpt,
-    keywords: [...(post.keywords ?? []), 'trading', 'day trading', post.tag.toLowerCase(), 'nysethtrading', 'forex', 'futures'],
-    authors: [{ name: 'Mateusz Nyseth', url: `${BASE_URL}/o-mnie` }],
+    title: `${post.title} | KisielFinanse Blog`,
+    description: post.excerpt.length > 155 ? post.excerpt.slice(0, 152) + '...' : post.excerpt,
+    keywords: [...(post.keywords ?? []), post.tag.toLowerCase(), 'KisielFinanse', 'finanse', 'edukacja finansowa'],
+    authors: [{ name: 'Mateusz Kisiel', url: `${BASE_URL}/o-mnie` }],
     alternates: { canonical: `${BASE_URL}/blog/${slug}` },
     openGraph: {
       title: post.title,
@@ -40,15 +48,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale: 'pl_PL',
       publishedTime: post.dateISO,
       modifiedTime: post.dateISO,
-      authors: ['Mateusz Nyseth'],
-      tags: ['trading', post.tag],
-      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: post.title }],
+      authors: ['Mateusz'],
+      tags: [post.tag],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
-      images: ['/og-image.png'],
     },
   };
 }
@@ -60,6 +66,11 @@ const TAG_CONFIG: Record<string, { color: string; bg: string }> = {
   'risk management': { color: '#ff2d78', bg: 'rgba(255,45,120,0.08)' },
   edukacja:          { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
   rynek:             { color: '#f5c518', bg: 'rgba(245,197,24,0.08)' },
+  krypto:            { color: '#f5a623', bg: 'rgba(245,166,35,0.08)' },
+  oszczędzanie:      { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
+  geopolityka:       { color: '#ff2d78', bg: 'rgba(255,45,120,0.08)' },
+  trading:           { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
+  finanse:           { color: '#b14aed', bg: 'rgba(177,74,237,0.08)' },
 };
 
 export default async function BlogPostPage({ params }: Props) {
@@ -71,8 +82,20 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post || !post.published) notFound();
 
+  const published = allPosts.filter(p => p.published);
+  const currentIndex = published.findIndex(p => p.slug === slug);
+  const nextPost = published[(currentIndex + 1) % published.length];
+
   const processed = await remark().use(remarkGfm).use(remarkHtml, { sanitize: false }).process(post.content);
-  const contentHtml = processed.toString();
+  const rawHtml = processed.toString();
+
+  // Add IDs to headings so TOC anchor links work
+  const contentHtml = rawHtml.replace(
+    /<h([2-4])>(.*?)<\/h\1>/gi,
+    (_, level, inner) => `<h${level} id="${slugifyHeading(inner)}">${inner}</h${level}>`,
+  );
+
+  const tocItems = extractTocItems(post.content);
 
   const t = TAG_CONFIG[post.tag?.toLowerCase()] ?? TAG_CONFIG['edukacja'];
 
@@ -85,39 +108,36 @@ export default async function BlogPostPage({ params }: Props) {
     dateModified: post.dateISO,
     author: {
       '@type': 'Person',
-      name: 'Mateusz Nyseth',
+      name: 'Mateusz Kisiel',
       url: `${BASE_URL}/o-mnie`,
-      sameAs: ['https://nysethtrading.pl', 'https://x.com/nysethtrading'],
+      sameAs: ['https://kisielfinanse.pl', 'https://x.com/KisielFinanse'],
     },
     publisher: {
       '@type': 'Organization',
-      name: 'NysethTrading',
+      name: 'KisielFinanse',
       url: BASE_URL,
       logo: {
         '@type': 'ImageObject',
-        url: `${BASE_URL}/logo.svg`,
+        url: `${BASE_URL}/logo.png`,
         width: 200,
-        height: 60,
+        height: 200,
       },
     },
     url: `${BASE_URL}/blog/${slug}`,
     mainEntityOfPage: { '@type': 'WebPage', '@id': `${BASE_URL}/blog/${slug}` },
     inLanguage: 'pl-PL',
-    keywords: ['trading', 'day trading', 'forex', 'krypto', post.tag, 'nysethtrading'],
+    keywords: [...(post.keywords ?? []), post.tag, 'KisielFinanse', 'finanse', 'edukacja finansowa'].join(', '),
     articleSection: post.tag,
-    image: {
-      '@type': 'ImageObject',
-      url: `${BASE_URL}/og-image.png`,
-      width: 1200,
-      height: 630,
-    },
+    image: post.image
+      ? { '@type': 'ImageObject', url: post.image.startsWith('http') ? post.image : `${BASE_URL}${post.image}` }
+      : { '@type': 'ImageObject', url: `${BASE_URL}/og-image.png`, width: 1200, height: 630 },
   };
 
   const schemaBreadcrumb = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'NysethTrading', item: BASE_URL },
+      { '@type': 'ListItem', position: 1, name: 'KisielFinanse', item: BASE_URL },
       { '@type': 'ListItem', position: 2, name: 'Blog', item: `${BASE_URL}/blog` },
       { '@type': 'ListItem', position: 3, name: post.title, item: `${BASE_URL}/blog/${slug}` },
     ],
@@ -138,9 +158,11 @@ export default async function BlogPostPage({ params }: Props) {
       <main>
         {/* Hero */}
         <div className="blog-post-hero">
-          <Link href="/blog" className="back-link">
-            ← Wszystkie artykuły
-          </Link>
+          <Breadcrumbs items={[
+            { label: 'KisielFinanse', href: '/' },
+            { label: 'Blog', href: '/blog' },
+            { label: post.title },
+          ]} />
 
           <span
             className="blog-tag-v2"
@@ -170,7 +192,7 @@ export default async function BlogPostPage({ params }: Props) {
           }}>
             <span>{post.date}</span>
             <span>·</span>
-            <span>{post.readTime} czytania</span>
+            <ReadTimeRing readTime={post.readTime} size={38} />
           </div>
 
           <div style={{
@@ -181,6 +203,27 @@ export default async function BlogPostPage({ params }: Props) {
           }} />
         </div>
 
+        {/* Cover image */}
+        {post.image && (
+          <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 40px' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={post.image}
+              alt={post.title}
+              style={{
+                width: '100%', maxHeight: 460,
+                objectFit: 'cover', borderRadius: 12, display: 'block',
+                border: '1px solid rgba(255,255,255,0.06)',
+              }}
+            />
+          </div>
+        )}
+
+        {/* Mobile TOC — visible below 1360px */}
+        {tocItems.length >= 2 && (
+          <TableOfContentsMobile items={tocItems} />
+        )}
+
         {/* Content */}
         <BlogImageLightbox />
         <div
@@ -188,12 +231,30 @@ export default async function BlogPostPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         />
 
+        {/* Author */}
+        <AuthorBox />
+
+        {/* Share buttons */}
+        <ShareButtons title={post.title} slug={slug} />
+
+        {/* TOC — fixed sidebar, visible only on wide screens (≥1360px) */}
+        {tocItems.length >= 2 && (
+          <aside className="blog-toc-aside">
+            <TableOfContents items={tocItems} />
+          </aside>
+        )}
+
         {/* Related posts */}
         <RelatedPosts
           currentSlug={slug}
           currentTag={post.tag}
           allPosts={allPosts}
         />
+
+        {/* Next article sticky bar */}
+        {nextPost && nextPost.slug !== slug && (
+          <NextArticleBar slug={nextPost.slug} title={nextPost.title} />
+        )}
       </main>
       <Footer />
     </>

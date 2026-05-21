@@ -1,21 +1,12 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 export default function Nav() {
   const pathname = usePathname();
-  const router = useRouter();
   const [open, setOpen] = useState(false);
-
-  const handleCta = () => {
-    if (pathname === '/') {
-      document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      router.push('/#newsletter');
-    }
-  };
 
   useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => {
@@ -24,23 +15,19 @@ export default function Nav() {
   }, [open]);
 
   const links: { href: string; label: string; ebook: boolean; edukacja?: boolean }[] = [
-    { href: '/',            label: 'Home',        ebook: false },
-    { href: '/wyniki',      label: 'Wyniki',       ebook: false },
-    { href: '/o-mnie',      label: 'O mnie',       ebook: false },
-    { href: '/blog',        label: 'Edukacja',     ebook: false, edukacja: true },
-    { href: '/wspolpraca',  label: 'Współpraca',   ebook: false },
-    { href: '/slownik',     label: 'Słownik',      ebook: false },
-    { href: '/tygodnik',    label: 'Tygodnik',     ebook: false },
-    { href: '/zasoby',      label: 'Zasoby',       ebook: false },
-    { href: '/#newsletter', label: 'Newsletter',   ebook: false },
+    { href: '/',             label: 'Home',        ebook: false },
+    { href: '/o-mnie',       label: 'O mnie',      ebook: false },
+    { href: '/blog',         label: 'Edukacja',    ebook: false, edukacja: true },
+    { href: '/kalkulator',   label: 'Kalkulator',  ebook: false },
+    { href: '/wspolpraca',   label: 'Współpraca',  ebook: false },
   ];
 
   return (
     <>
       <nav className="nav">
         <Link href="/" className="nav-logo">
-          <Image src="/logo.svg" alt="NysethTrading logo" width={32} height={32} />
-          NYSETHTRADING
+          <Image src="/logo.png" alt="KisielFinanse logo" width={40} height={40} style={{ borderRadius: 8 }} />
+          KisielFinanse
         </Link>
         <ul className="nav-links">
           {links.map(l => (
@@ -69,7 +56,6 @@ export default function Nav() {
           ))}
         </ul>
         <div className="nav-right">
-          <button className="nav-cta nav-cta-desktop" onClick={handleCta}>Dołącz teraz</button>
           <button
             className={`nav-burger${open ? ' nav-burger-open' : ''}`}
             onClick={() => setOpen(o => !o)}
@@ -107,9 +93,6 @@ export default function Nav() {
               </li>
             ))}
           </ul>
-          <button className="nav-cta" style={{ width: '100%', textAlign: 'center' }} onClick={() => { setOpen(false); handleCta(); }}>
-            Dołącz teraz
-          </button>
         </div>
       )}
     </>

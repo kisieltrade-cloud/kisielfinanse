@@ -2,16 +2,16 @@ export default function SchemaOrg() {
   const personSchema = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Mateusz Nyseth',
-    alternateName: ['Nyseth', 'NysethTrading'],
-    url: 'https://nysethtrading.pl',
-    image: 'https://nysethtrading.pl/og-image.png',
+    name: 'Mateusz Kisiel',
+    alternateName: ['KISIEL', 'KisielFinanse'],
+    url: 'https://kisielfinanse.pl',
+    image: 'https://kisielfinanse.pl/og-image.png',
     sameAs: [
-      'https://x.com/nysethtrading',
-      'https://twitter.com/nysethtrading',
+      'https://x.com/KisielFinanse',
+      'https://twitter.com/KisielFinanse',
     ],
     jobTitle: 'Day Trader',
-    description: 'Trader z Wrocławia z 9-letnim doświadczeniem na rynkach futures, forex i krypto. Publikuje transparentne wyniki tygodniowe.',
+    description: 'Trader i analityk finansowy z Wrocławia. Edukacja z zakresu tradingu, krypto, oszczędzania i geopolityki finansowej.',
     knowsAbout: [
       'day trading', 'scalping', 'futures', 'forex', 'krypto',
       'US100', 'NAS100', 'złoto', 'zarządzanie ryzykiem',
@@ -25,28 +25,28 @@ export default function SchemaOrg() {
     },
     worksFor: {
       '@type': 'Organization',
-      name: 'NysethTrading',
-      url: 'https://nysethtrading.pl',
+      name: 'KisielFinanse',
+      url: 'https://kisielfinanse.pl',
     },
   };
 
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'NysethTrading',
-    url: 'https://nysethtrading.pl',
+    name: 'KisielFinanse',
+    url: 'https://kisielfinanse.pl',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://nysethtrading.pl/logo.svg',
+      url: 'https://kisielfinanse.pl/logo.png',
       width: 200,
       height: 60,
     },
-    image: 'https://nysethtrading.pl/og-image.png',
-    description: 'Transparentne wyniki tradingowe — tygodniowe statystyki, equity curve i edukacja. Forex, futures, krypto.',
+    image: 'https://kisielfinanse.pl/og-image.png',
+    description: 'Edukacja finansowa z zakresu tradingu, krypto, oszczędzania i geopolityki. Bez ściemy - tylko rzetelna wiedza.',
     foundingDate: '2026',
     founder: {
       '@type': 'Person',
-      name: 'Mateusz Nyseth',
+      name: 'Mateusz Kisiel',
     },
     address: {
       '@type': 'PostalAddress',
@@ -54,12 +54,12 @@ export default function SchemaOrg() {
       addressCountry: 'PL',
     },
     sameAs: [
-      'https://x.com/nysethtrading',
-      'https://twitter.com/nysethtrading',
+      'https://x.com/KisielFinanse',
+      'https://twitter.com/KisielFinanse',
     ],
     contactPoint: {
       '@type': 'ContactPoint',
-      email: 'nysethtrading@gmail.com',
+      email: 'KisielFinanse@gmail.com',
       contactType: 'customer service',
       availableLanguage: 'Polish',
     },
@@ -68,23 +68,22 @@ export default function SchemaOrg() {
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'NysethTrading',
-    url: 'https://nysethtrading.pl',
-    description: 'Transparentne wyniki tradingowe, tygodniowe statystyki i edukacja. Forex, futures, krypto.',
+    name: 'KisielFinanse',
+    url: 'https://kisielfinanse.pl',
+    description: 'Finanse, trading, krypto, oszczędzanie - edukacja finansowa dla każdego. KisielFinanse.pl',
     inLanguage: 'pl-PL',
     publisher: {
       '@type': 'Organization',
-      name: 'NysethTrading',
-      url: 'https://nysethtrading.pl',
+      name: 'KisielFinanse',
+      url: 'https://kisielfinanse.pl',
     },
     author: {
       '@type': 'Person',
-      name: 'Mateusz Nyseth',
+      name: 'Mateusz Kisiel',
     },
     potentialAction: {
-      '@type': 'SearchAction',
-      target: 'https://nysethtrading.pl/blog?q={search_term_string}',
-      'query-input': 'required name=search_term_string',
+      '@type': 'ReadAction',
+      target: ['https://kisielfinanse.pl/blog'],
     },
   };
 

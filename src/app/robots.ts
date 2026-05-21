@@ -2,14 +2,11 @@ import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [
-      {
-        userAgent: '*',
-        allow: '/',
-        disallow: ['/api/'],
-      },
-    ],
-    sitemap: 'https://nysethtrading.pl/sitemap.xml',
-    host: 'https://nysethtrading.pl',
+    rules: {
+      userAgent: '*',
+      allow: '/',
+      disallow: ['/api/'],
+    },
+    sitemap: 'https://kisielfinanse.pl/sitemap.xml',
   };
 }

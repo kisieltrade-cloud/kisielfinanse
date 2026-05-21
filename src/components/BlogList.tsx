@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { PostMeta } from '@/lib/posts';
+import ReadTimeRing from '@/components/ReadTimeRing';
 
 const TAG_CONFIG: Record<string, { color: string; bg: string }> = {
   strategia:         { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
@@ -11,6 +12,11 @@ const TAG_CONFIG: Record<string, { color: string; bg: string }> = {
   'risk management': { color: '#ff2d78', bg: 'rgba(255,45,120,0.08)' },
   edukacja:          { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
   rynek:             { color: '#f5c518', bg: 'rgba(245,197,24,0.08)' },
+  krypto:            { color: '#f5a623', bg: 'rgba(245,166,35,0.08)' },
+  oszczędzanie:      { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
+  geopolityka:       { color: '#ff2d78', bg: 'rgba(255,45,120,0.08)' },
+  trading:           { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
+  finanse:           { color: '#b14aed', bg: 'rgba(177,74,237,0.08)' },
 };
 
 const getTag = (tag: string) =>
@@ -83,18 +89,30 @@ export default function BlogList({ posts }: Props) {
                   style={{ background: `linear-gradient(90deg, ${t.color}22, transparent)` }}
                 />
 
-                {/* Deco chart line */}
-                <div className="blog-card-deco" aria-hidden="true">
-                  <svg width="100%" height="40" viewBox="0 0 200 40" preserveAspectRatio="none">
-                    <path
-                      d={`M0,32 L40,${24 + (i % 3) * 4} L80,${28 - (i % 2) * 6} L120,${16 + (i % 4) * 3} L160,${20 - (i % 3) * 4} L200,${8 + (i % 2) * 6}`}
-                      fill="none"
-                      stroke={t.color}
-                      strokeWidth="1.5"
-                      strokeOpacity="0.2"
+                {/* Cover image or deco chart line */}
+                {post.image ? (
+                  <div style={{ width: '100%', height: 160, overflow: 'hidden', borderRadius: '12px 12px 0 0', marginBottom: 0 }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      loading="lazy"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     />
-                  </svg>
-                </div>
+                  </div>
+                ) : (
+                  <div className="blog-card-deco" aria-hidden="true">
+                    <svg width="100%" height="40" viewBox="0 0 200 40" preserveAspectRatio="none">
+                      <path
+                        d={`M0,32 L40,${24 + (i % 3) * 4} L80,${28 - (i % 2) * 6} L120,${16 + (i % 4) * 3} L160,${20 - (i % 3) * 4} L200,${8 + (i % 2) * 6}`}
+                        fill="none"
+                        stroke={t.color}
+                        strokeWidth="1.5"
+                        strokeOpacity="0.2"
+                      />
+                    </svg>
+                  </div>
+                )}
 
                 <div className="blog-card-body">
                   <div className="blog-card-top">
@@ -104,7 +122,7 @@ export default function BlogList({ posts }: Props) {
                     >
                       {post.tag}
                     </span>
-                    <span className="blog-read-time">{post.readTime ?? '7 min'}</span>
+                    <ReadTimeRing readTime={post.readTime ?? '7 min'} />
                   </div>
 
                   <h3 className="blog-card-title" style={{ fontSize: '1.2rem' }}>

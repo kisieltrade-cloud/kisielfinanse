@@ -4,77 +4,82 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Polityka Prywatności',
-  description: 'Polityka prywatności serwisu NysethTrading.pl — informacje o przetwarzaniu danych osobowych.',
+  title: 'Polityka Prywatności | KisielFinanse',
+  description: 'Polityka prywatności serwisu KisielFinanse.pl — informacje o przetwarzaniu danych osobowych, plikach cookies i prawach użytkownika zgodnie z RODO.',
   robots: { index: true, follow: true },
-  alternates: { canonical: 'https://nysethtrading.pl/polityka-prywatnosci' },
+  alternates: { canonical: 'https://kisielfinanse.pl/polityka-prywatnosci' },
+  openGraph: {
+    title: 'Polityka Prywatności | KisielFinanse',
+    description: 'Informacje o przetwarzaniu danych osobowych, plikach cookies i prawach użytkownika zgodnie z RODO.',
+    url: 'https://kisielfinanse.pl/polityka-prywatnosci',
+    siteName: 'KisielFinanse',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Polityka Prywatności | KisielFinanse',
+    description: 'Informacje o przetwarzaniu danych osobowych i plikach cookies (RODO).',
+  },
 };
 
-const LAST_UPDATE = '03.03.2026';
+const LAST_UPDATE = '21.05.2026';
 
 const sections = [
   {
     title: '1. Administrator danych',
-    content: `Administratorem danych osobowych zbieranych za pośrednictwem serwisu nysethtrading.pl jest osoba fizyczna prowadząca serwis pod nazwą NysethTrading (imię i nazwisko dostępne na żądanie), adres e-mail: nysethtrading@gmail.com.`,
+    content: `Administratorem danych osobowych zbieranych za pośrednictwem serwisu KisielFinanse.pl jest osoba fizyczna prowadząca serwis pod nazwą KisielFinanse (imię i nazwisko dostępne na żądanie), adres e-mail: kisieltrade@gmail.com.`,
   },
   {
     title: '2. Jakie dane zbieramy',
     content: `Serwis może zbierać następujące dane:`,
     list: [
-      'Adres e-mail — wyłącznie w przypadku dobrowolnego zapisu do newslettera',
-      'Dane analityczne — anonimowe dane o ruchu na stronie (liczba odwiedzin, źródła ruchu, przeglądane podstrony) zbierane przez Google Analytics',
-      'Dane techniczne — adres IP, typ przeglądarki, system operacyjny — przetwarzane automatycznie przez serwery hostingowe',
+      'Dane analityczne - anonimowe dane o ruchu na stronie (liczba odwiedzin, źródła ruchu, przeglądane podstrony)',
+      'Dane techniczne - adres IP, typ przeglądarki, system operacyjny - przetwarzane automatycznie przez serwery hostingowe',
+      'Dane kontaktowe - adres e-mail wyłącznie w przypadku dobrowolnego kontaktu z administratorem',
     ],
   },
   {
     title: '3. Cel i podstawa przetwarzania danych',
     content: `Dane przetwarzane są w następujących celach:`,
     list: [
-      'Wysyłka newslettera — na podstawie wyrażonej zgody (art. 6 ust. 1 lit. a RODO)',
-      'Analiza ruchu i optymalizacja serwisu — na podstawie prawnie uzasadnionego interesu administratora (art. 6 ust. 1 lit. f RODO)',
-      'Obsługa zapytań kontaktowych — na podstawie prawnie uzasadnionego interesu administratora',
+      'Analiza ruchu i optymalizacja serwisu - na podstawie prawnie uzasadnionego interesu administratora (art. 6 ust. 1 lit. f RODO)',
+      'Obsługa zapytań kontaktowych - na podstawie prawnie uzasadnionego interesu administratora',
     ],
   },
   {
-    title: '4. Newsletter',
-    content: `Zapis do newslettera jest całkowicie dobrowolny. Podając adres e-mail, wyrażasz zgodę na otrzymywanie wiadomości dotyczących wyników tradingowych, analiz rynkowych i treści edukacyjnych. Zgodę możesz wycofać w dowolnym momencie, klikając link rezygnacji zawarty w każdej wiadomości lub pisząc na adres nysethtrading@gmail.com. Wycofanie zgody nie wpływa na zgodność z prawem przetwarzania dokonanego przed jej wycofaniem.`,
-  },
-  {
     title: '5. Pliki cookies',
-    content: `Serwis korzysta z plików cookies (ciasteczka) — małych plików tekstowych zapisywanych na Twoim urządzeniu. Cookies używane są do:`,
+    content: `Serwis korzysta z plików cookies (ciasteczka) - małych plików tekstowych zapisywanych na Twoim urządzeniu. Cookies używane są do:`,
     list: [
       'Zapewnienia prawidłowego działania serwisu (cookies niezbędne)',
-      'Analizy ruchu i statystyk (cookies analityczne — Google Analytics)',
+      'Analizy ruchu i statystyk (cookies analityczne - Google Analytics)',
       'Zapamiętywania preferencji użytkownika',
     ],
     extra: 'Możesz zarządzać plikami cookies w ustawieniach swojej przeglądarki. Wyłączenie cookies analitycznych nie wpłynie na działanie serwisu.',
   },
   {
-    title: '6. Google Analytics',
-    content: `Serwis korzysta z Google Analytics — usługi analizy oglądalności świadczonej przez Google LLC. Google Analytics używa plików cookies do analizy korzystania z serwisu. Dane generowane przez cookies (w tym adres IP) są przekazywane do serwerów Google. Korzystamy z funkcji anonimizacji IP — ostatni oktet adresu IP jest usuwany przed przekazaniem danych. Więcej informacji: https://policies.google.com/privacy`,
+    title: '6. Narzędzia analityczne',
+    content: `Serwis może korzystać z narzędzi analitycznych stron trzecich (np. Google Analytics) w celu analizy ruchu i optymalizacji treści. W przypadku wdrożenia takich narzędzi, dane o korzystaniu z serwisu (w tym zanonimizowany adres IP) mogą być przekazywane do dostawców tych usług. Użytkownicy zostaną poinformowani o wdrożeniu konkretnych narzędzi poprzez aktualizację niniejszej polityki. Możesz zarządzać ustawieniami cookies w swojej przeglądarce, aby ograniczyć zbieranie danych analitycznych.`,
   },
   {
     title: '7. Okres przechowywania danych',
     content: `Dane przechowywane są przez następujące okresy:`,
     list: [
-      'Adresy e-mail (newsletter) — do momentu wypisania się z newslettera',
-      'Dane analityczne Google Analytics — 26 miesięcy (domyślne ustawienie)',
-      'Dane kontaktowe — przez czas niezbędny do obsługi zapytania, nie dłużej niż 3 lata',
+      'Dane analityczne - zgodnie z ustawieniami wdrożonego narzędzia analitycznego',
+      'Dane kontaktowe (e-mail) - przez czas niezbędny do obsługi zapytania, nie dłużej niż 3 lata',
     ],
   },
   {
     title: '8. Twoje prawa',
     content: `Zgodnie z RODO przysługują Ci następujące prawa:`,
     list: [
-      'Prawo dostępu do danych — możesz zażądać informacji o przetwarzanych danych',
-      'Prawo do sprostowania — możesz żądać poprawienia nieprawidłowych danych',
-      'Prawo do usunięcia — możesz żądać usunięcia danych ("prawo do bycia zapomnianym")',
-      'Prawo do ograniczenia przetwarzania — możesz żądać ograniczenia przetwarzania danych',
-      'Prawo do przenoszenia danych — możesz otrzymać dane w ustrukturyzowanym formacie',
-      'Prawo do sprzeciwu — możesz sprzeciwić się przetwarzaniu danych opartemu na prawnie uzasadnionym interesie',
-      'Prawo do cofnięcia zgody — w zakresie danych przetwarzanych na podstawie zgody',
+      'Prawo dostępu do danych - możesz zażądać informacji o przetwarzanych danych',
+      'Prawo do sprostowania - możesz żądać poprawienia nieprawidłowych danych',
+      'Prawo do usunięcia - możesz żądać usunięcia danych ("prawo do bycia zapomnianym")',
+      'Prawo do ograniczenia przetwarzania - możesz żądać ograniczenia przetwarzania danych',
+      'Prawo do przenoszenia danych - możesz otrzymać dane w ustrukturyzowanym formacie',
+      'Prawo do sprzeciwu - możesz sprzeciwić się przetwarzaniu danych opartemu na prawnie uzasadnionym interesie',
+      'Prawo do cofnięcia zgody - w zakresie danych przetwarzanych na podstawie zgody',
     ],
-    extra: 'Aby skorzystać z powyższych praw, skontaktuj się pod adresem: nysethtrading@gmail.com. Masz również prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych (UODO), ul. Stawki 2, 00-193 Warszawa.',
+    extra: 'Aby skorzystać z powyższych praw, skontaktuj się pod adresem: kisieltrade@gmail.com. Masz również prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych (UODO), ul. Stawki 2, 00-193 Warszawa.',
   },
   {
     title: '9. Bezpieczeństwo danych',
@@ -82,11 +87,11 @@ const sections = [
   },
   {
     title: '10. Linki do zewnętrznych serwisów',
-    content: `Serwis może zawierać linki do zewnętrznych stron internetowych. Niniejsza polityka prywatności dotyczy wyłącznie serwisu nysethtrading.pl. Administrator nie ponosi odpowiedzialności za polityki prywatności innych serwisów.`,
+    content: `Serwis może zawierać linki do zewnętrznych stron internetowych. Niniejsza polityka prywatności dotyczy wyłącznie serwisu KisielFinanse.pl. Administrator nie ponosi odpowiedzialności za polityki prywatności innych serwisów.`,
   },
   {
     title: '11. Zmiany polityki prywatności',
-    content: `Administrator zastrzega sobie prawo do zmiany niniejszej polityki prywatności. O istotnych zmianach użytkownicy zapisani do newslettera zostaną powiadomieni drogą e-mail. Aktualna wersja polityki jest zawsze dostępna pod adresem nysethtrading.pl/polityka-prywatnosci.`,
+    content: `Administrator zastrzega sobie prawo do zmiany niniejszej polityki prywatności. O istotnych zmianach użytkownicy zapisani do newslettera zostaną powiadomieni drogą e-mail. Aktualna wersja polityki jest zawsze dostępna pod adresem KisielFinanse.pl/polityka-prywatnosci.`,
   },
 ];
 
@@ -114,7 +119,7 @@ export default function PolitykaPrywatnosci() {
             fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--muted)',
             display: 'flex', gap: 24, flexWrap: 'wrap',
           }}>
-            <span>Serwis: nysethtrading.pl</span>
+            <span>Serwis: KisielFinanse.pl</span>
             <span style={{ color: 'var(--border)' }}>|</span>
             <span>Ostatnia aktualizacja: {LAST_UPDATE}</span>
           </div>
@@ -128,7 +133,7 @@ export default function PolitykaPrywatnosci() {
           lineHeight: 1.8, marginBottom: 48,
         }}>
           Niniejsza polityka prywatności określa zasady przetwarzania i ochrony danych osobowych
-          użytkowników serwisu nysethtrading.pl. Dokument sporządzono zgodnie z Rozporządzeniem
+          użytkowników serwisu KisielFinanse.pl. Dokument sporządzono zgodnie z Rozporządzeniem
           Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. (RODO)
           oraz ustawą o świadczeniu usług drogą elektroniczną.
         </div>
@@ -196,8 +201,8 @@ export default function PolitykaPrywatnosci() {
             color: 'var(--muted)', lineHeight: 1.8, margin: 0,
           }}>
             W sprawach związanych z przetwarzaniem danych osobowych skontaktuj się:<br />
-            <a href="mailto:nysethtrading@gmail.com" style={{ color: 'var(--cyan)', textDecoration: 'none' }}>
-              nysethtrading@gmail.com
+            <a href="mailto:kisieltrade@gmail.com" style={{ color: 'var(--cyan)', textDecoration: 'none' }}>
+              kisieltrade@gmail.com
             </a>
           </p>
         </div>

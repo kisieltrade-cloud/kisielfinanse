@@ -4,36 +4,36 @@ import { useState } from 'react';
 
 const FAQS = [
   {
-    q: 'Czym jest NysethTrading?',
-    a: 'NysethTrading to projekt transparentnego tradingu prowadzony przez Nyseth — tradera z Wrocławia z 9-letnim doświadczeniem na rynkach Forex, krypto i futures. Celem projektu jest pokazywanie realnych wyników tradingowych bez koloryzowania — zarówno zyskownych jak i stratnych tygodni.',
+    q: 'Czym jest KisielFinanse?',
+    a: 'KisielFinanse to portal edukacyjny o finansach prowadzony przez Mateusza - tradera z Wrocławia z 9-letnim doświadczeniem na rynkach. Piszę o tradingu, krypto, oszczędzaniu, geopolityce i wszystkim, co wpływa na pieniądze. Bez lania wody - tylko rzeczy, które realnie działają.',
   },
   {
-    q: 'Jakie rynki traderujesz?',
-    a: 'Zajmuję się day tradingiem na trzech rynkach: Forex (głównie pary EUR/USD, GBP/USD), krypto (Bitcoin, Ethereum) oraz kontrakty futures na indeksy giełdowe (NAS100, S&P500). Każdy rynek ma swoją specyfikę — łączy je wspólny system zarządzania ryzykiem.',
+    q: 'O czym piszesz na blogu?',
+    a: 'Tematy są szerokie: strategie tradingowe, analiza rynków (forex, krypto, indeksy), geopolityka i jej wpływ na finanse, psychologia pieniędzy, oszczędzanie i budowanie majątku. Łączy je jeden mianownik - chcę żebyś po przeczytaniu wiedział więcej i myślał inaczej o pieniądzach.',
   },
   {
-    q: 'Jak często aktualizujesz wyniki?',
-    a: 'Wyniki tygodniowe publikuję co poniedziałek za poprzedni tydzień. Equity curve jest aktualizowana w tym samym rytmie. Nie ma tu opóźnień ani selekcji — publikuję wszystko, również stratne tygodnie.',
+    q: 'Czy treści są dla początkujących?',
+    a: 'Tak - staram się pisać tak, żeby każdy coś wyniósł. Artykuły podstawowe tłumaczą pojęcia od zera, bardziej zaawansowane wchodzą głębiej w strategie i analizę. Zacznij od Bloga i filtruj wg tematu który Cię interesuje.',
   },
   {
     q: 'Czy oferujesz sygnały tradingowe lub zarządzanie kapitałem?',
-    a: 'Nie. NysethTrading to projekt edukacyjny i transparentny dziennik wyników — nie zarządzam cudzym kapitałem ani nie sprzedaję sygnałów. Treści na stronie mają charakter wyłącznie informacyjny i nie stanowią doradztwa inwestycyjnego.',
+    a: 'Nie. KisielFinanse to portal edukacyjny - nie zarządzam cudzym kapitałem ani nie sprzedaję sygnałów. Wszystkie treści mają charakter wyłącznie informacyjny i nie stanowią doradztwa inwestycyjnego.',
   },
   {
-    q: 'Jak mogę się nauczyć tradingu?',
-    a: 'Zacznij od sekcji Blog i Słownika — znajdziesz tam artykuły o zarządzaniu ryzykiem, psychologii tradingu i podstawowych pojęciach. Dołącz też do newslettera — co tydzień wysyłam podsumowanie rynków i własne obserwacje, które nie trafiają na stronę.',
+    q: 'Jak zacząć naukę tradingu od zera?',
+    a: 'Zacznij od artykułów na Blogu - znajdziesz tam materiały o zarządzaniu ryzykiem, analizie technicznej i psychologii tradingu. Nie śpiesz się z realnym kapitałem - najpierw demo, potem małe pozycje, dopiero potem skalujesz.',
   },
   {
-    q: 'Jak dołączyć do newslettera?',
-    a: "Przewiń na dół strony głównej i wpisz swój adres email w sekcji Newsletter. Wysyłam cotygodniowe podsumowanie rynków, moje setup'y i przemyślenia których nie publikuję publicznie. Zero spamu — możesz się wypisać w każdej chwili.",
+    q: 'Jak często publikujesz nowe artykuły?',
+    a: 'Regularnie, bez sztucznego harmonogramu. Wolę opublikować mniej, ale porządnie - zamiast produkować content na siłę. Obserwuj profil na X (@KisielFinanse) żeby nie przegapić nowych materiałów.',
   },
   {
-    q: 'Czy wyniki są audytowane?',
-    a: 'Wyniki nie są audytowane przez zewnętrzny podmiot. Dane pochodzą bezpośrednio z mojego rachunku tradingowego i są publikowane bez selekcji. W przyszłości planuję integrację z narzędziem do weryfikacji wyników (Myfxbook lub podobnym) dla pełnej transparentności.',
+    q: 'Czy mogę napisać lub zadać pytanie?',
+    a: 'Tak - najłatwiej przez formularz na stronie Współpraca lub przez X (@KisielFinanse). Czytam wszystkie wiadomości, choć odpowiedź może zająć kilka dni.',
   },
   {
-    q: 'Czy mogę nawiązać współpracę?',
-    a: 'Tak — jeśli reprezentujesz giełdę krypto, platformę tradingową lub markę z branży finansowej, możemy porozmawiać o współpracy. Przejdź do zakładki Współpraca i wypełnij formularz kontaktowy.',
+    q: 'Czy mogę nawiązać współpracę biznesową?',
+    a: 'Tak - jeśli reprezentujesz markę z obszaru finansów, tradingu, krypto lub inwestycji, możemy porozmawiać. Przejdź do zakładki Współpraca i wypełnij krótki formularz kontaktowy.',
   },
 ];
 
@@ -60,10 +60,9 @@ export default function FAQ() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <div className="faq-inner">
-        <div className="section-label">// pytania i odpowiedzi</div>
         <h2 className="section-title reveal">
           <span aria-hidden="true">CZĘSTO ZADAWANE <span className="gradient-text-cp">PYTANIA</span></span>
-          <span className="seo-only">FAQ — często zadawane pytania o trading, wyniki i NysethTrading</span>
+          <span className="seo-only">FAQ - często zadawane pytania o finanse, trading, krypto i KisielFinanse</span>
         </h2>
         <div className="faq-list reveal">
           {FAQS.map((f, i) => (

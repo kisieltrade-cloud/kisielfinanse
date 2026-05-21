@@ -5,30 +5,30 @@ import RevealOnScroll from '@/components/RevealOnScroll';
 import BlogList from '@/components/BlogList';
 import { getAllPosts } from '@/lib/posts';
 
-const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Blog Tradingowy — NysethTrading' };
+const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Blog Tradingowy - KisielFinanse' };
 
 export const metadata: Metadata = {
-  title: 'Blog Tradingowy — Strategie, Psychologia, Analiza Rynku | NysethTrading',
-  description: 'Artykuły o day tradingu, psychologii rynku, strategiach i zarządzaniu ryzykiem. Praktyczna wiedza tradera z 9-letnim doświadczeniem. Forex, futures, krypto.',
+  title: 'Blog Finansowy - Trading, Krypto, Oszczędzanie | KisielFinanse',
+  description: 'Artykuły o tradingu, krypto, oszczędzaniu i geopolityce finansowej. Praktyczna wiedza bez ściemy - finanse które naprawdę robią różnicę.',
   keywords: [
-    'blog tradingowy', 'artykuły trading', 'psychologia tradingu', 'strategie forex',
-    'zarządzanie ryzykiem trading', 'day trading poradnik', 'scalping artykuły',
-    'analiza techniczna blog', 'edukacja trading', 'jak zacząć trading',
+    'edukacja finansowa', 'blog finansowy', 'trading artykuły', 'krypto poradnik',
+    'oszczędzanie inwestowanie', 'geopolityka finanse', 'psychologia pieniędzy',
+    'analiza rynku', 'wolność finansowa', 'jak inwestować',
   ],
-  alternates: { canonical: 'https://nysethtrading.pl/blog' },
+  alternates: { canonical: 'https://kisielfinanse.pl/blog' },
   openGraph: {
     type: 'website',
     locale: 'pl_PL',
-    title: 'Blog Tradingowy — Strategie, Psychologia, Analiza | NysethTrading',
-    description: 'Praktyczna wiedza tradera z 9-letnim doświadczeniem. Strategie, psychologia, zarządzanie ryzykiem.',
-    url: 'https://nysethtrading.pl/blog',
-    siteName: 'NysethTrading',
+    title: 'Blog Finansowy - Trading, Krypto, Oszczędzanie | KisielFinanse',
+    description: 'Artykuły o tradingu, krypto, oszczędzaniu i geopolityce. Finanse bez ściemy.',
+    url: 'https://kisielfinanse.pl/blog',
+    siteName: 'KisielFinanse',
     images: [OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog Tradingowy — NysethTrading',
-    description: 'Strategie, psychologia, analiza rynku. Praktyczna wiedza bez ściemy.',
+    title: 'Edukacja Finansowa - KisielFinanse',
+    description: 'Trading, krypto, oszczędzanie, geopolityka. Finanse bez ściemy.',
     images: ['/og-image.png'],
   },
 };
@@ -42,7 +42,6 @@ export default async function BlogPage() {
       <Nav />
       <main>
         <div className="blog-page">
-          <div className="section-label reveal">// wiedza i analiza</div>
           <h1 className="section-title reveal">
             WSZYSTKIE
             <br />

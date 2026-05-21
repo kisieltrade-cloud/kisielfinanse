@@ -4,10 +4,21 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Disclaimer — Zastrzeżenia Prawne',
-  description: 'Zastrzeżenia prawne serwisu NysethTrading.pl. Treści publikowane na stronie mają charakter wyłącznie edukacyjny i nie stanowią doradztwa inwestycyjnego.',
+  title: 'Disclaimer - Zastrzeżenia Prawne | KisielFinanse',
+  description: 'Zastrzeżenia prawne serwisu KisielFinanse.pl. Treści mają charakter wyłącznie edukacyjny i nie stanowią doradztwa inwestycyjnego. Trading wiąże się z ryzykiem.',
   robots: { index: true, follow: true },
-  alternates: { canonical: 'https://nysethtrading.pl/disclaimer' },
+  alternates: { canonical: 'https://kisielfinanse.pl/disclaimer' },
+  openGraph: {
+    title: 'Disclaimer - Zastrzeżenia Prawne | KisielFinanse',
+    description: 'Treści publikowane na stronie mają charakter wyłącznie edukacyjny i nie stanowią doradztwa inwestycyjnego.',
+    url: 'https://kisielfinanse.pl/disclaimer',
+    siteName: 'KisielFinanse',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Disclaimer | KisielFinanse',
+    description: 'Zastrzeżenia prawne. Treści edukacyjne, nie doradztwo inwestycyjne.',
+  },
 };
 
 const LAST_UPDATE = '03.03.2026';
@@ -15,7 +26,7 @@ const LAST_UPDATE = '03.03.2026';
 const sections = [
   {
     title: '1. Charakter publikowanych treści',
-    content: `Wszystkie treści publikowane w serwisie nysethtrading.pl — w tym wyniki tradingowe, analizy rynkowe, opisy strategii, wpisy blogowe, komentarze tygodniowe oraz wszelkie inne materiały — mają charakter wyłącznie informacyjny i edukacyjny.
+    content: `Wszystkie treści publikowane w serwisie KisielFinanse.pl - w tym wyniki tradingowe, analizy rynkowe, opisy strategii, wpisy blogowe, komentarze tygodniowe oraz wszelkie inne materiały - mają charakter wyłącznie informacyjny i edukacyjny.
 
 Żadna treść opublikowana w serwisie nie stanowi:`,
     list: [
@@ -27,19 +38,19 @@ const sections = [
     ],
   },
   {
-    title: '2. Wyniki historyczne',
-    content: `Wyniki tradingowe prezentowane w serwisie przedstawiają rzeczywiste wyniki osiągnięte na rachunku własnym autora. Należy jednak mieć na uwadze, że:`,
+    title: '2. Charakter treści edukacyjnych',
+    content: `Materiały edukacyjne publikowane w serwisie - w tym analizy rynkowe, opisy strategii, wpisy blogowe oraz wszelkie inne treści - powstają na podstawie własnego doświadczenia autora i mają charakter wyłącznie poglądowy. Należy mieć na uwadze, że:`,
     list: [
-      'Wyniki historyczne nie gwarantują podobnych wyników w przyszłości',
+      'Opisy strategii i analiz nie stanowią rekomendacji do ich stosowania',
       'Każda transakcja finansowa wiąże się z ryzykiem utraty części lub całości zainwestowanego kapitału',
       'Produkty lewarowane (forex, kontrakty CFD, futures) mogą prowadzić do strat przekraczających zainwestowany kapitał',
-      'Wyniki prezentowane w serwisie dotyczą wyłącznie rachunku własnego autora i mogą nie być powtarzalne przez inne osoby',
-      'Na wyniki tradingowe wpływają indywidualne czynniki takie jak: wielkość rachunku, dyscyplina, zarządzanie ryzykiem, warunki rynkowe oraz psychologia tradera',
+      'Skuteczność opisywanych metod może się różnić w zależności od indywidualnych warunków i umiejętności inwestora',
+      'Na wyniki inwestycyjne wpływają czynniki takie jak: wielkość rachunku, dyscyplina, zarządzanie ryzykiem, warunki rynkowe oraz psychologia tradera',
     ],
   },
   {
     title: '3. Brak licencji doradcy inwestycyjnego',
-    content: `Autor serwisu nysethtrading.pl nie jest licencjonowanym doradcą inwestycyjnym, maklerem papierów wartościowych ani podmiotem uprawnionym do świadczenia usług doradztwa inwestycyjnego w rozumieniu przepisów prawa polskiego i europejskiego.
+    content: `Autor serwisu KisielFinanse.pl nie jest licencjonowanym doradcą inwestycyjnym, maklerem papierów wartościowych ani podmiotem uprawnionym do świadczenia usług doradztwa inwestycyjnego w rozumieniu przepisów prawa polskiego i europejskiego.
 
 Serwis nie posiada zezwolenia Komisji Nadzoru Finansowego (KNF) na prowadzenie działalności w zakresie doradztwa inwestycyjnego ani zarządzania aktywami.`,
   },
@@ -66,7 +77,7 @@ Serwis nie posiada zezwolenia Komisji Nadzoru Finansowego (KNF) na prowadzenie d
     title: '7. Dokładność informacji',
     content: `Autor dokłada starań, aby publikowane treści były rzetelne i aktualne. Jednakże:`,
     list: [
-      'Informacje rynkowe mogą ulec dezaktualizacji — rynki finansowe zmieniają się w czasie rzeczywistym',
+      'Informacje rynkowe mogą ulec dezaktualizacji - rynki finansowe zmieniają się w czasie rzeczywistym',
       'Autor nie gwarantuje kompletności, dokładności ani aktualności żadnej z publikowanych informacji',
       'Wszelkie błędy w prezentowanych danych zostaną poprawione niezwłocznie po ich wykryciu',
       'Autor nie ponosi odpowiedzialności za decyzje podjęte na podstawie nieaktualnych lub błędnych informacji',
@@ -96,12 +107,6 @@ export default function Disclaimer() {
 
         {/* Header */}
         <div style={{ marginBottom: 48 }}>
-          <div style={{
-            fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
-            color: 'var(--pink)', letterSpacing: '3px', marginBottom: 12,
-          }}>
-            // zastrzeżenia prawne
-          </div>
           <h1 style={{
             fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3.5rem)',
             letterSpacing: '4px', margin: '0 0 16px', color: 'var(--text)',
@@ -112,7 +117,7 @@ export default function Disclaimer() {
             fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--muted)',
             display: 'flex', gap: 24, flexWrap: 'wrap',
           }}>
-            <span>Serwis: nysethtrading.pl</span>
+            <span>Serwis: KisielFinanse.pl</span>
             <span style={{ color: 'var(--border)' }}>|</span>
             <span>Ostatnia aktualizacja: {LAST_UPDATE}</span>
           </div>
@@ -172,19 +177,13 @@ export default function Disclaimer() {
           border: '1px solid var(--border)', borderTop: '3px solid var(--pink)',
           padding: '24px 28px',
         }}>
-          <div style={{
-            fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
-            color: 'var(--pink)', letterSpacing: '3px', marginBottom: 12,
-          }}>
-            // pytania dotyczące zastrzeżeń prawnych
-          </div>
           <p style={{
             fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
             color: 'var(--muted)', lineHeight: 1.8, margin: 0,
           }}>
             W przypadku pytań dotyczących niniejszego disclaimera skontaktuj się:<br />
-            <a href="mailto:nysethtrading@gmail.com" style={{ color: 'var(--pink)', textDecoration: 'none' }}>
-              nysethtrading@gmail.com
+            <a href="mailto:KisielFinanse@gmail.com" style={{ color: 'var(--pink)', textDecoration: 'none' }}>
+              KisielFinanse@gmail.com
             </a>
           </p>
         </div>

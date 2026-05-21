@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { PostMeta } from '@/lib/posts';
+import ReadTimeRing from '@/components/ReadTimeRing';
 
 const TAG_CONFIG: Record<string, { color: string; bg: string }> = {
   strategia:         { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
@@ -20,7 +21,7 @@ interface Props {
 }
 
 export default function RelatedPosts({ currentSlug, currentTag, allPosts }: Props) {
-  // First: same tag, then: any other posts — max 3
+  // First: same tag, then: any other posts - max 3
   const sameTag = allPosts.filter(p => p.slug !== currentSlug && p.tag === currentTag);
   const others  = allPosts.filter(p => p.slug !== currentSlug && p.tag !== currentTag);
   const related = [...sameTag, ...others].slice(0, 3);
@@ -30,7 +31,6 @@ export default function RelatedPosts({ currentSlug, currentTag, allPosts }: Prop
   return (
     <section className="related-section">
       <div className="related-header">
-        <div className="section-label">// czytaj dalej</div>
         <h2 className="related-title">
           POWIĄZANE <span style={{ color: 'var(--cyan)' }}>ARTYKUŁY</span>
         </h2>
@@ -41,7 +41,19 @@ export default function RelatedPosts({ currentSlug, currentTag, allPosts }: Prop
           const t = getTag(post.tag);
           return (
             <Link key={post.slug} href={`/blog/${post.slug}`} className="related-card">
-              <div className="related-card-accent" style={{ background: t.color }} />
+              {post.image ? (
+                <div style={{ width: '100%', height: 120, overflow: 'hidden', borderRadius: '12px 12px 0 0' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    loading="lazy"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                </div>
+              ) : (
+                <div className="related-card-accent" style={{ background: t.color }} />
+              )}
               <div className="related-card-body">
                 <div className="related-card-top">
                   <span
@@ -50,7 +62,7 @@ export default function RelatedPosts({ currentSlug, currentTag, allPosts }: Prop
                   >
                     {post.tag}
                   </span>
-                  <span className="blog-read-time">{post.readTime ?? '7 min'}</span>
+                  <ReadTimeRing readTime={post.readTime ?? '7 min'} size={28} />
                 </div>
                 <h3 className="related-card-title">{post.title}</h3>
                 <p className="related-card-excerpt">{post.excerpt}</p>

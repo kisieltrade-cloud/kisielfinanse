@@ -1,4 +1,4 @@
-// Komponent serwerowy — brak 'use client', renderuje się w HTML przed GA
+﻿// Komponent serwerowy - brak 'use client', renderuje się w HTML przed GA
 export function CookieConsentInit() {
   return (
     <script dangerouslySetInnerHTML={{ __html: `

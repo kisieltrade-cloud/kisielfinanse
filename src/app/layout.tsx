@@ -6,7 +6,7 @@ import CookieConsent from '@/components/CookieConsent';
 import { CookieConsentInit } from '@/components/CookieConsentInit';
 import SchemaOrg from '@/components/SchemaOrg';
 
-/* ─── Fonty — hostowane lokalnie przez Next.js (zero render-blocking) ─── */
+/* ─── Fonty - hostowane lokalnie przez Next.js (zero render-blocking) ─── */
 const syne = Syne({
   subsets: ['latin', 'latin-ext'],
   weight: ['400', '600', '700', '800'],
@@ -28,21 +28,21 @@ const bebas = Bebas_Neue({
   variable: '--font-bebas',
 });
 
-const BASE_URL = 'https://nysethtrading.pl';
+const BASE_URL = 'https://kisielfinanse.pl';
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
 
   title: {
-    template: '%s | NysethTrading',
-    default: 'NysethTrading — Transparentne Wyniki Tradingowe',
+    template: '%s | KisielFinanse',
+    default: 'KisielFinanse - Finanse. Wiedza. Wolność.',
   },
   description:
-    'Transparentne wyniki tradingowe, tygodniowe statystyki i strategie forex/krypto. Bez ściemy — tylko rzeczywiste wyniki z własnego rachunku.',
+    'Trading, krypto, oszczędzanie, geopolityka - edukacja finansowa bez ściemy. KisielFinanse to wiedza, która naprawdę robi różnicę.',
   keywords: [
-    'trading', 'forex', 'krypto', 'wyniki tradingowe', 'strategie tradingowe',
-    'transparentny trader', 'analiza rynkowa', 'challenge tradingowy',
-    'profit factor', 'win rate', 'XTB', 'day trading',
+    'trading', 'forex', 'krypto', 'finanse osobiste', 'oszczędzanie',
+    'edukacja finansowa', 'analiza rynkowa', 'geopolityka',
+    'wolność finansowa', 'inwestowanie', 'day trading',
   ],
 
   // Canonical i alternatywy językowe
@@ -51,21 +51,21 @@ export const metadata: Metadata = {
     languages: { 'pl-PL': BASE_URL },
   },
 
-  // Open Graph — podgląd przy udostępnianiu w social media
+  // Open Graph - podgląd przy udostępnianiu w social media
   openGraph: {
     type: 'website',
     locale: 'pl_PL',
     url: BASE_URL,
-    siteName: 'NysethTrading',
-    title: 'NysethTrading — Transparentne Wyniki Tradingowe',
+    siteName: 'KisielFinanse',
+    title: 'KisielFinanse - Finanse. Wiedza. Wolność.',
     description:
-      'Transparentne wyniki tradingowe, tygodniowe statystyki i strategie forex/krypto. Bez ściemy — tylko rzeczywiste wyniki.',
+      'Trading, krypto, oszczędzanie, geopolityka - edukacja finansowa bez ściemy. Wiedza, która naprawdę robi różnicę.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'NysethTrading — Transparentne Wyniki Tradingowe',
+        alt: 'KisielFinanse - Finanse. Wiedza. Wolność.',
       },
     ],
   },
@@ -73,10 +73,10 @@ export const metadata: Metadata = {
   // Twitter/X Card
   twitter: {
     card: 'summary_large_image',
-    site: '@nysethtrading',
-    creator: '@nysethtrading',
-    title: 'NysethTrading — Transparentne Wyniki Tradingowe',
-    description: 'Transparentne wyniki tradingowe i analiza rynkowa. Forex, krypto, bez ściemy.',
+    site: '@KisielFinanse',
+    creator: '@KisielFinanse',
+    title: 'KisielFinanse - Finanse. Wiedza. Wolność.',
+    description: 'Trading, krypto, oszczędzanie, geopolityka - edukacja finansowa bez ściemy.',
     images: ['/og-image.png'],
   },
 
@@ -98,14 +98,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pl" className={`${syne.variable} ${jetbrains.variable} ${bebas.variable}`}>
       <head>
-        {/* Favicon — PNG jako główny (Google preferuje rastrowy ≥48px), SVG dla przeglądarek */}
+        {/* Favicon - PNG jako główny (Google preferuje rastrowy ≥48px), SVG dla przeglądarek */}
         <link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png" />
+        <link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png" />
         <link rel="icon" href="/favicon.ico" sizes="48x48" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
+        <link rel="alternate" type="application/rss+xml" title="KisielFinanse RSS" href="/feed.xml" />
 
-        {/* Consent Mode v2 — musi być PRZED tagiem GA */}
+        {/* Consent Mode v2 - musi być PRZED tagiem GA */}
         <CookieConsentInit />
 
         {/* Schema.org JSON-LD */}
@@ -115,7 +116,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <CookieConsent />
 
-        {/* Google Analytics — ładowane po interakcji, nie blokuje renderowania */}
+        {/* Google Analytics - ładowane po interakcji, nie blokuje renderowania */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-RV480KYSX0"
           strategy="afterInteractive"

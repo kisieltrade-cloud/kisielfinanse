@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState } from 'react';
 
@@ -61,7 +61,7 @@ export default function CookieConsent() {
         .cookie-btn-accept:hover  { opacity: 0.85; }
       `}</style>
 
-      {/* Overlay — blokuje całą stronę */}
+      {/* Overlay - blokuje całą stronę */}
       <div style={{
         position: 'fixed', inset: 0, zIndex: 9998,
         background: 'rgba(6, 10, 16, 0.85)',
@@ -69,7 +69,7 @@ export default function CookieConsent() {
         animation: 'fadeIn 0.3s ease',
       }} />
 
-      {/* Modal — centrum ekranu */}
+      {/* Modal - centrum ekranu */}
       <div style={{
         position: 'fixed',
         top: '50%', left: '50%',
@@ -89,7 +89,6 @@ export default function CookieConsent() {
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: '0.58rem', color: '#00f5d4', letterSpacing: '3px',
         }}>
-          // cookies / prywatność
         </div>
 
         {/* Body */}
@@ -109,7 +108,7 @@ export default function CookieConsent() {
           }}>
             Używamy plików cookies do analizy ruchu na stronie (Google Analytics).
             Dane są anonimizowane i nie służą celom reklamowym. Możesz zaakceptować
-            lub odrzucić zbieranie danych analitycznych — serwis działa w obu przypadkach.
+            lub odrzucić zbieranie danych analitycznych - serwis działa w obu przypadkach.
           </p>
 
           {/* Details toggle */}
@@ -143,7 +142,7 @@ export default function CookieConsent() {
                 },
                 {
                   name: 'Analityczne',
-                  desc: 'Google Analytics — anonimowe dane o ruchu (odwiedziny, źródła, podstrony). Bez śledzenia tożsamości.',
+                  desc: 'Google Analytics - anonimowe dane o ruchu (odwiedziny, źródła, podstrony). Bez śledzenia tożsamości.',
                   required: false,
                   color: '#b14aed',
                 },
