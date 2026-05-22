@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/'],
+      disallow: ['/api/', '/kf-7q3x-cms/'],
     },
     sitemap: 'https://kisielfinanse.pl/sitemap.xml',
   };
