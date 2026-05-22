@@ -4,11 +4,16 @@ import ReadTimeRing from '@/components/ReadTimeRing';
 
 const TAG_CONFIG: Record<string, { color: string; bg: string }> = {
   strategia:         { color: '#c9a227', bg: 'rgba(201,162,39,0.08)' },
-  psychologia:       { color: '#e8963a', bg: 'rgba(232,150,58,0.08)' },
+  psychologia:       { color: '#b14aed', bg: 'rgba(177,74,237,0.08)' },
   analiza:           { color: '#f5c518', bg: 'rgba(245,197,24,0.08)' },
   'risk management': { color: '#ff2d78', bg: 'rgba(255,45,120,0.08)' },
-  edukacja:          { color: '#c9a227', bg: 'rgba(201,162,39,0.08)' },
+  edukacja:          { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
   rynek:             { color: '#f5c518', bg: 'rgba(245,197,24,0.08)' },
+  finanse:           { color: '#b14aed', bg: 'rgba(177,74,237,0.08)' },
+  geopolityka:       { color: '#ff2d78', bg: 'rgba(255,45,120,0.08)' },
+  krypto:            { color: '#f5a623', bg: 'rgba(245,166,35,0.08)' },
+  trading:           { color: '#c9a227', bg: 'rgba(201,162,39,0.08)' },
+  oszczędzanie:      { color: '#c9a227', bg: 'rgba(201,162,39,0.08)' },
 };
 
 const getTag = (tag: string) =>
