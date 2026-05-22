@@ -20,7 +20,7 @@ export default function AdminLoginPage() {
         body: JSON.stringify({ password }),
       });
       if (res.ok) {
-        router.push('/admin/dashboard');
+        router.push('/kf-7q3x-cms/dashboard');
       } else {
         const data = await res.json();
         setError(data.error ?? 'Błąd logowania');

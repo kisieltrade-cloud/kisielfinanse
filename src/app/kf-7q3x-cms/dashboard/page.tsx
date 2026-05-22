@@ -44,7 +44,7 @@ export default function DashboardPage() {
 
   async function handleLogout() {
     await fetch('/api/admin/auth', { method: 'DELETE' });
-    router.push('/admin');
+    router.push("/kf-7q3x-cms");
   }
 
   async function handleDelete(slug: string, title: string) {
@@ -129,7 +129,7 @@ export default function DashboardPage() {
               {loading ? '...' : `${stats.all} artykułów łącznie`}
             </div>
           </div>
-          <Link href="/admin/nowy" style={{
+          <Link href="/kf-7q3x-cms/nowy" style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             background: 'linear-gradient(135deg, #7c3aed, #a855f7)',
             color: '#fff', textDecoration: 'none',
@@ -370,7 +370,7 @@ function ArticleRow({
         }}>
           Podgląd ↗
         </Link>
-        <Link href={`/admin/edytuj/${post.slug}`} style={{
+        <Link href={`/kf-7q3x-cms/edytuj/${post.slug}`} style={{
           fontSize: '0.68rem', color: '#00f5d4', textDecoration: 'none',
           padding: '7px 14px', borderRadius: 6,
           border: '1px solid rgba(0,245,212,0.2)',

@@ -448,7 +448,7 @@ export default function ArticleEditor({ initialData, mode }: Props) {
       });
 
       if (res.ok) {
-        router.push('/admin/dashboard');
+        router.push("/kf-7q3x-cms/dashboard");
       } else {
         const data = await res.json();
         setSaveError(data.error ?? 'Błąd zapisu');
@@ -516,7 +516,7 @@ export default function ArticleEditor({ initialData, mode }: Props) {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
           <button
-            onClick={() => router.push('/admin/dashboard')}
+            onClick={() => router.push("/kf-7q3x-cms/dashboard")}
             style={{
               ...btnBase,
               background: 'transparent',

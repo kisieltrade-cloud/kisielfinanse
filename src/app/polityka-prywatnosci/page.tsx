@@ -101,7 +101,7 @@ const sections = [
   },
   {
     title: '11. Zmiany polityki prywatności',
-    content: `Administrator zastrzega sobie prawo do zmiany niniejszej polityki prywatności. O istotnych zmianach użytkownicy zapisani do newslettera zostaną powiadomieni drogą e-mail. Aktualna wersja polityki jest zawsze dostępna pod adresem KisielFinanse.pl/polityka-prywatnosci.`,
+    content: `Administrator zastrzega sobie prawo do zmiany niniejszej polityki prywatności. Aktualna wersja polityki jest zawsze dostępna pod adresem KisielFinanse.pl/polityka-prywatnosci. W przypadku istotnych zmian data ostatniej aktualizacji widoczna na górze dokumentu zostanie zaktualizowana.`,
   },
 ];
 
@@ -113,12 +113,6 @@ export default function PolitykaPrywatnosci() {
 
         {/* Header */}
         <div style={{ marginBottom: 48 }}>
-          <div style={{
-            fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
-            color: 'var(--cyan)', letterSpacing: '3px', marginBottom: 12,
-          }}>
-            // dokument prawny
-          </div>
           <h1 style={{
             fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3.5rem)',
             letterSpacing: '4px', margin: '0 0 16px', color: 'var(--text)',
@@ -201,10 +195,10 @@ export default function PolitykaPrywatnosci() {
           padding: '24px 28px',
         }}>
           <div style={{
-            fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
-            color: 'var(--cyan)', letterSpacing: '3px', marginBottom: 12,
+            fontFamily: 'var(--font-body)', fontSize: '0.72rem',
+            color: 'var(--muted)', fontWeight: 600, marginBottom: 10,
           }}>
-            // kontakt w sprawach danych osobowych
+            Kontakt w sprawach danych osobowych
           </div>
           <p style={{
             fontFamily: 'var(--font-mono)', fontSize: '0.78rem',

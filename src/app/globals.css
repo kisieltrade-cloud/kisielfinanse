@@ -108,10 +108,9 @@ a { color: inherit; text-decoration: none; }
 
 .nav-links a {
   color: var(--muted);
-  font-size: 0.78rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0px;
+  font-weight: 500;
   transition: color 0.25s;
 }
 
@@ -123,10 +122,9 @@ a { color: inherit; text-decoration: none; }
   color: var(--cyan);
   padding: 10px 24px;
   font-family: var(--font-body);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0px;
   cursor: pointer;
   transition: all 0.25s;
 }
@@ -242,23 +240,22 @@ a { color: inherit; text-decoration: none; }
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  background: var(--cyan);
   border: none;
   color: var(--bg);
   padding: 15px 36px;
   font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
   display: inline-block;
   transition: all 0.3s;
-  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 0 50px rgba(201, 162, 39, 0.45), 0 0 100px rgba(232, 150, 58, 0.2);
+  background: var(--purple);
   transform: translateY(-2px);
 }
 
@@ -444,11 +441,11 @@ a { color: inherit; text-decoration: none; }
    SECTION COMMON
 ────────────────────────────────────── */
 .section-label {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 4px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
   color: var(--cyan);
-  text-transform: uppercase;
+  font-weight: 600;
   margin-bottom: 14px;
 }
 
@@ -485,14 +482,13 @@ a { color: inherit; text-decoration: none; }
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  gap: 16px;
   margin-bottom: 48px;
 }
 
 .stat-card {
   background: var(--surface);
+  border: 1px solid var(--border);
   padding: 40px 32px;
   position: relative;
   overflow: hidden;
@@ -517,11 +513,8 @@ a { color: inherit; text-decoration: none; }
 .stat-number {
   font-family: var(--font-display);
   font-size: 3.2rem;
-  letter-spacing: 2px;
-  background: linear-gradient(135deg, var(--cyan), var(--purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: 1px;
+  color: var(--cyan);
   display: block;
 }
 
@@ -652,12 +645,12 @@ a { color: inherit; text-decoration: none; }
 .blog-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  gap: 2px;
-  background: var(--border);
+  gap: 20px;
 }
 
 .blog-card {
   background: var(--bg);
+  border: 1px solid var(--border);
   padding: 40px;
   position: relative;
   overflow: hidden;
@@ -665,10 +658,10 @@ a { color: inherit; text-decoration: none; }
   flex-direction: column;
   text-decoration: none;
   color: var(--text);
-  transition: transform 0.3s;
+  transition: transform 0.3s, border-color 0.3s;
 }
 
-.blog-card:hover { transform: translateY(-3px); }
+.blog-card:hover { transform: translateY(-3px); border-color: rgba(201,162,39,0.3); }
 
 .blog-card::before {
   content: '';
@@ -687,10 +680,10 @@ a { color: inherit; text-decoration: none; }
 .blog-card-feat { padding: 48px; }
 
 .blog-tag {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.3px;
+  font-weight: 600;
   margin-bottom: 18px;
   display: inline-block;
 }
@@ -727,8 +720,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 .blog-date {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
   color: var(--muted);
 }
 
@@ -936,8 +929,7 @@ a { color: inherit; text-decoration: none; }
 .blog-all-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  background: var(--border);
+  gap: 20px;
   margin-top: 48px;
 }
 
@@ -1065,11 +1057,8 @@ a { color: inherit; text-decoration: none; }
 .footer-logo {
   font-family: var(--font-display);
   font-size: 1.5rem;
-  letter-spacing: 4px;
-  background: linear-gradient(90deg, var(--cyan), var(--purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: 2px;
+  color: var(--text);
   display: inline-block;
   margin-bottom: 10px;
 }
@@ -1124,12 +1113,11 @@ a { color: inherit; text-decoration: none; }
 }
 
 .footer-col-links a {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
   color: #8a9ab5;
   text-decoration: none;
   transition: color 0.2s;
-  letter-spacing: 0.3px;
 }
 .footer-col-links a:hover { color: var(--text); }
 
@@ -1474,14 +1462,13 @@ a { color: inherit; text-decoration: none; }
 .collab-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  gap: 16px;
   margin-bottom: 64px;
 }
 
 .collab-stat {
   background: var(--surface);
+  border: 1px solid var(--border);
   padding: 28px 32px;
   display: flex;
   flex-direction: column;
@@ -1517,16 +1504,16 @@ a { color: inherit; text-decoration: none; }
 .collab-offers-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2px;
-  background: var(--border);
+  gap: 16px;
 }
 
 .collab-offer-card {
   background: var(--surface);
+  border: 1px solid var(--border);
   padding: 36px;
   position: relative;
   overflow: hidden;
-  transition: background 0.2s;
+  transition: background 0.2s, border-color 0.2s;
 }
 
 .collab-offer-card:hover { background: var(--surface2); }
@@ -1627,18 +1614,17 @@ a { color: inherit; text-decoration: none; }
 }
 
 .collab-submit {
-  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  background: var(--cyan);
   border: none;
   color: var(--bg);
-  padding: 18px 40px;
+  padding: 16px 40px;
   font-family: var(--font-body);
   font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 2px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
   cursor: pointer;
   align-self: flex-start;
-  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
-  transition: opacity 0.2s;
+  transition: background 0.2s;
 }
 
 .collab-submit:hover { opacity: 0.85; }
@@ -1791,13 +1777,12 @@ a { color: inherit; text-decoration: none; }
 .about-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  gap: 16px;
   margin-bottom: 64px;
 }
 .about-stat-card {
   background: var(--surface);
+  border: 1px solid var(--border);
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -1855,11 +1840,11 @@ a { color: inherit; text-decoration: none; }
 .about-values-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  background: var(--border);
+  gap: 16px;
 }
 .value-card {
   background: var(--surface);
+  border: 1px solid var(--border);
   padding: 36px;
   position: relative;
   overflow: hidden;
@@ -2033,14 +2018,13 @@ a { color: inherit; text-decoration: none; }
 .equity-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  gap: 16px;
   margin-bottom: 32px;
 }
 
 .equity-card {
   background: var(--surface);
+  border: 1px solid var(--border);
   padding: 28px 32px;
   display: flex;
   flex-direction: column;
@@ -2159,13 +2143,12 @@ a { color: inherit; text-decoration: none; }
 .slownik-list {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  gap: 6px;
 }
 
 .slownik-item {
   background: var(--surface);
+  border: 1px solid var(--border);
   padding: 20px 24px;
   cursor: pointer;
   transition: background 0.15s;
@@ -2262,13 +2245,12 @@ a { color: inherit; text-decoration: none; }
 .faq-list {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  gap: 6px;
 }
 
 .faq-item {
   background: var(--surface);
+  border: 1px solid var(--border);
   padding: 24px 28px;
   cursor: pointer;
   border-left: 3px solid transparent;
@@ -2496,19 +2478,19 @@ a { color: inherit; text-decoration: none; }
 .related-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  background: var(--border);
+  gap: 20px;
 }
 
 .related-card {
   background: var(--bg);
+  border: 1px solid var(--border);
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   text-decoration: none;
   color: var(--text);
-  transition: background 0.2s;
+  transition: background 0.2s, border-color 0.2s;
 }
 
 .related-card:hover { background: var(--surface2); }
