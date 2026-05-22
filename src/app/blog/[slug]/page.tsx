@@ -142,6 +142,16 @@ export default async function BlogPostPage({ params }: Props) {
     ],
   };
 
+  const schemaFaq = post.faq && post.faq.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: post.faq.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  } : null;
+
   return (
     <>
       <ReadingProgress />
@@ -153,6 +163,12 @@ export default async function BlogPostPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }}
       />
+      {schemaFaq && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFaq) }}
+        />
+      )}
       <Nav />
       <main>
         {/* Hero */}

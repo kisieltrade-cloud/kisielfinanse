@@ -4,6 +4,11 @@ import matter from 'gray-matter';
 
 const POSTS_DIR = path.join(process.cwd(), 'src', 'content', 'blog');
 
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
 function calcReadTime(content: string): string {
   const text = content
     .replace(/```[\s\S]*?```/g, '')
@@ -32,6 +37,7 @@ export interface PostMeta {
 
 export interface Post extends PostMeta {
   content: string;
+  faq: FaqItem[];
 }
 
 // ─── Read all posts (sorted by date desc) ────────────────────────────────────
@@ -112,6 +118,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     keywords: data.keywords ?? [],
     image: data.image ?? '',
     gallery: data.gallery ?? [],
+    faq: Array.isArray(data.faq) ? (data.faq as FaqItem[]) : [],
     content,
   };
 }
