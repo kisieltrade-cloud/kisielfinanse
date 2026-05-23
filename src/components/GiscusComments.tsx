@@ -6,17 +6,21 @@ interface Props {
   slug: string;
 }
 
-// Configure at https://giscus.app — fill in your repo details below
-const GISCUS_REPO = 'TWOJ_USERNAME/TWOJE_REPO';       // np. 'kisielfinanse/kisielfinanse.pl'
-const GISCUS_REPO_ID = 'REPO_ID_Z_GISCUS';             // z kreatora na giscus.app
-const GISCUS_CATEGORY = 'General';                      // nazwa kategorii Discussions
-const GISCUS_CATEGORY_ID = 'CATEGORY_ID_Z_GISCUS';     // z kreatora na giscus.app
+// Skonfiguruj na https://giscus.app, a następnie dodaj zmienne w Vercel:
+// NEXT_PUBLIC_GISCUS_REPO, NEXT_PUBLIC_GISCUS_REPO_ID,
+// NEXT_PUBLIC_GISCUS_CATEGORY, NEXT_PUBLIC_GISCUS_CATEGORY_ID
+const GISCUS_REPO        = process.env.NEXT_PUBLIC_GISCUS_REPO ?? '';
+const GISCUS_REPO_ID     = process.env.NEXT_PUBLIC_GISCUS_REPO_ID ?? '';
+const GISCUS_CATEGORY    = process.env.NEXT_PUBLIC_GISCUS_CATEGORY ?? 'General';
+const GISCUS_CATEGORY_ID = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID ?? '';
+
+const isConfigured = Boolean(GISCUS_REPO && GISCUS_REPO_ID && GISCUS_CATEGORY_ID);
 
 export default function GiscusComments({ slug }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!ref.current) return;
+    if (!ref.current || !isConfigured) return;
     ref.current.innerHTML = '';
 
     const script = document.createElement('script');
@@ -37,6 +41,8 @@ export default function GiscusComments({ slug }: Props) {
     script.async = true;
     ref.current.appendChild(script);
   }, [slug]);
+
+  if (!isConfigured) return null;
 
   return (
     <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 60px' }}>

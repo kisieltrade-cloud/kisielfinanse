@@ -5,7 +5,7 @@ export default function SchemaOrg() {
     name: 'Mateusz Kisiel',
     alternateName: ['KISIEL', 'KisielFinanse'],
     url: 'https://kisielfinanse.pl',
-    image: 'https://kisielfinanse.pl/og-image.png',
+    image: 'https://kisielfinanse.pl/images/profile.png',
     sameAs: [
       'https://x.com/KisielFinanse',
       'https://twitter.com/KisielFinanse',

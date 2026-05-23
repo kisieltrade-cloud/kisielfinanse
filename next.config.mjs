@@ -1,13 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    mdxRs: true,
     optimizePackageImports: ['lucide-react'],
   },
 
   // Image optimization — lazy loading automatycznie przez Next.js Image
   images: {
-    formats: ['image/webp', 'image/avif'],
+    formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     minimumCacheTTL: 3600,
     // Zewnętrzne domeny dla obrazków jeśli będziesz używać

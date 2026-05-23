@@ -26,6 +26,7 @@ export interface PostMeta {
   title: string;
   date: string;       // sformatowana dla wyświetlania, np. "03 MAR 2026"
   dateISO: string;    // ISO 8601 dla schema.org i OG, np. "2026-03-03"
+  updatedISO?: string; // ISO 8601 daty ostatniej aktualizacji (opcjonalne)
   excerpt: string;
   tag: string;
   readTime: string;
@@ -64,6 +65,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
             }).toUpperCase()
           : '',
         dateISO: rawDate ? rawDate : '',
+        updatedISO: (data.updated as string) || undefined,
         excerpt: data.excerpt ?? '',
         tag: data.tag ?? 'Trading',
         readTime: data.readTime ?? calcReadTime(content),
@@ -111,6 +113,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
         })
       : '',
     dateISO: rawDate,
+    updatedISO: (data.updated as string) || undefined,
     excerpt: data.excerpt ?? '',
     tag: data.tag ?? 'Trading',
     readTime: data.readTime ?? '5 min',
@@ -151,9 +154,6 @@ export async function getPostsByTag(tagSlug: string): Promise<{ posts: PostMeta[
 
 // ─── Get all slugs (for generateStaticParams) ─────────────────────────────────
 export async function getAllSlugs(): Promise<string[]> {
-  if (!fs.existsSync(POSTS_DIR)) return [];
-  return fs
-    .readdirSync(POSTS_DIR)
-    .filter((f) => f.endsWith('.mdx') || f.endsWith('.md'))
-    .map((f) => f.replace(/\.(mdx|md)$/, ''));
+  const posts = await getAllPosts(); // already filters published: false
+  return posts.map((p) => p.slug);
 }

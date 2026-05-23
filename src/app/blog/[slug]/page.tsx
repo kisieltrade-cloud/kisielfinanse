@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ReadingProgress from '@/components/ReadingProgress';
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       locale: 'pl_PL',
       publishedTime: post.dateISO,
-      modifiedTime: post.dateISO,
+      modifiedTime: post.updatedISO ?? post.dateISO,
       authors: ['Mateusz'],
       tags: [post.tag],
     },
@@ -104,7 +105,7 @@ export default async function BlogPostPage({ params }: Props) {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.dateISO,
-    dateModified: post.dateISO,
+    dateModified: post.updatedISO ?? post.dateISO,
     author: {
       '@type': 'Person',
       name: 'Mateusz Kisiel',
@@ -119,7 +120,7 @@ export default async function BlogPostPage({ params }: Props) {
         '@type': 'ImageObject',
         url: `${BASE_URL}/logo.png`,
         width: 200,
-        height: 200,
+        height: 60,
       },
     },
     url: `${BASE_URL}/blog/${slug}`,
@@ -221,16 +222,23 @@ export default async function BlogPostPage({ params }: Props) {
         {/* Cover image */}
         {post.image && (
           <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 40px' }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={post.image}
-              alt={post.title}
-              style={{
-                width: '100%', maxHeight: 460,
-                objectFit: 'cover', borderRadius: 12, display: 'block',
-                border: '1px solid rgba(255,255,255,0.06)',
-              }}
-            />
+            <div style={{
+              position: 'relative',
+              width: '100%',
+              height: 460,
+              borderRadius: 12,
+              overflow: 'hidden',
+              border: '1px solid rgba(255,255,255,0.06)',
+            }}>
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                priority
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 860px) 100vw, 860px"
+              />
+            </div>
           </div>
         )}
 

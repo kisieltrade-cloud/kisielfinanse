@@ -48,10 +48,24 @@ export default async function TagPage({ params }: Props) {
   const { posts, tag } = result;
   const capitalized = tag.charAt(0).toUpperCase() + tag.slice(1);
 
+  const schemaBreadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'KisielFinanse', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Blog',          item: `${BASE_URL}/blog` },
+      { '@type': 'ListItem', position: 3, name: capitalized,     item: `${BASE_URL}/blog/tag/${tagSlug}` },
+    ],
+  };
+
   return (
     <>
       <RevealOnScroll />
       <Nav />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }}
+      />
       <main>
         <div className="blog-page">
           <div style={{ maxWidth: 1100, margin: '0 auto', padding: '24px 24px 0' }}>

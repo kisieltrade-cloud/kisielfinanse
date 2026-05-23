@@ -30,11 +30,24 @@ export const metadata: Metadata = {
   },
 };
 
+const schemaBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'KisielFinanse', item: 'https://kisielfinanse.pl' },
+    { '@type': 'ListItem', position: 2, name: 'Współpraca',    item: 'https://kisielfinanse.pl/wspolpraca' },
+  ],
+};
+
 export default function WspolpracaPage() {
   return (
     <>
       <RevealOnScroll />
       <Nav />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }}
+      />
       <main style={{ paddingTop: '80px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', padding: '24px 24px 0' }}>
           <Breadcrumbs items={[

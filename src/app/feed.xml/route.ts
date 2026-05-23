@@ -20,7 +20,7 @@ export async function GET() {
       <description>${desc}</description>
       <pubDate>${pubDate}</pubDate>
       <category>${p.tag}</category>
-      ${p.image ? `<enclosure url="${BASE_URL}${p.image}" type="image/jpeg" length="0" />` : ''}
+      ${p.image ? `<enclosure url="${BASE_URL}${p.image}" type="${p.image.endsWith('.png') ? 'image/png' : p.image.endsWith('.webp') ? 'image/webp' : 'image/jpeg'}" length="0" />` : ''}
     </item>`;
     })
     .join('');

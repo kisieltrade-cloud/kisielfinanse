@@ -28,11 +28,55 @@ export const metadata: Metadata = {
   },
 };
 
+const schemaBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'KisielFinanse', item: 'https://kisielfinanse.pl' },
+    { '@type': 'ListItem', position: 2, name: 'Kalkulator',    item: 'https://kisielfinanse.pl/kalkulator' },
+  ],
+};
+
+const schemaApp = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Kalkulator Finansowy KisielFinanse',
+  url: 'https://kisielfinanse.pl/kalkulator',
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Web',
+  inLanguage: 'pl-PL',
+  isAccessibleForFree: true,
+  description: 'Darmowy kalkulator finansowy: procent składany oraz risk/reward dla traderów i inwestorów.',
+  author: {
+    '@type': 'Person',
+    name: 'Mateusz Kisiel',
+    url: 'https://kisielfinanse.pl/o-mnie',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'KisielFinanse',
+    url: 'https://kisielfinanse.pl',
+  },
+  featureList: [
+    'Kalkulator procentu składanego',
+    'Kalkulator risk/reward',
+    'Interaktywny wykres wzrostu kapitału',
+  ],
+};
+
 export default function KalkulatorPage() {
   return (
     <>
       <RevealOnScroll />
       <Nav />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaApp) }}
+      />
       <main style={{ paddingTop: '80px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto', padding: '24px 24px 0' }}>
           <Breadcrumbs items={[
