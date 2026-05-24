@@ -9,12 +9,12 @@ interface Props {
 // Skonfiguruj na https://giscus.app, a następnie dodaj zmienne w Vercel:
 // NEXT_PUBLIC_GISCUS_REPO, NEXT_PUBLIC_GISCUS_REPO_ID,
 // NEXT_PUBLIC_GISCUS_CATEGORY, NEXT_PUBLIC_GISCUS_CATEGORY_ID
-const GISCUS_REPO        = process.env.NEXT_PUBLIC_GISCUS_REPO ?? '';
-const GISCUS_REPO_ID     = process.env.NEXT_PUBLIC_GISCUS_REPO_ID ?? '';
+const GISCUS_REPO        = process.env.NEXT_PUBLIC_GISCUS_REPO ?? 'kisieltrade-cloud/kisielfinanse';
+const GISCUS_REPO_ID     = process.env.NEXT_PUBLIC_GISCUS_REPO_ID ?? 'R_kgDOSkS0-A';
 const GISCUS_CATEGORY    = process.env.NEXT_PUBLIC_GISCUS_CATEGORY ?? 'General';
-const GISCUS_CATEGORY_ID = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID ?? '';
+const GISCUS_CATEGORY_ID = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID ?? 'DIC_kwDOSkS0-M4C9vBH';
 
-const isConfigured = Boolean(GISCUS_REPO && GISCUS_REPO_ID && GISCUS_CATEGORY_ID);
+const isConfigured = true;
 
 export default function GiscusComments({ slug }: Props) {
   const ref = useRef<HTMLDivElement>(null);
