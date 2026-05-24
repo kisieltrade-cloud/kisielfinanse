@@ -50,7 +50,7 @@ export default function ShareButtons({ title, slug }: Props) {
     textDecoration: 'none',
     border: '1px solid rgba(255,255,255,0.1)',
     background: 'rgba(255,255,255,0.04)',
-    color: '#a0a8bc',
+    color: '#c8d4e8',
     transition: 'all 0.15s',
   };
 
@@ -76,7 +76,7 @@ export default function ShareButtons({ title, slug }: Props) {
           onMouseLeave={(e) => {
             e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
             e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-            e.currentTarget.style.color = '#a0a8bc';
+            e.currentTarget.style.color = '#c8d4e8';
           }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -99,7 +99,7 @@ export default function ShareButtons({ title, slug }: Props) {
           onMouseLeave={(e) => {
             e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
             e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-            e.currentTarget.style.color = '#a0a8bc';
+            e.currentTarget.style.color = '#c8d4e8';
           }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -128,7 +128,7 @@ export default function ShareButtons({ title, slug }: Props) {
           onMouseLeave={(e) => {
             if (!copied) {
               e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
-              e.currentTarget.style.color = '#a0a8bc';
+              e.currentTarget.style.color = '#c8d4e8';
             }
           }}
         >

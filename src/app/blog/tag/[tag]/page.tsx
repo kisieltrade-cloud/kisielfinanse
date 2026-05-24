@@ -30,11 +30,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${capitalized} - Artykuły | KisielFinanse`,
     description: `Artykuły o tematyce ${tag} na KisielFinanse. Praktyczna wiedza finansowa bez ściemy.`,
     keywords: [tag, 'KisielFinanse', 'edukacja finansowa', `blog ${tag}`, `artykuły ${tag}`],
-    alternates: { canonical: `${BASE_URL}/blog/tag/${tagSlug}` },
+    // Canonical wskazuje na główną stronę kategorii (nie duplikat /blog/tag/X)
+    alternates: { canonical: `${BASE_URL}/${tagSlug}` },
     openGraph: {
       title: `${capitalized} | KisielFinanse`,
       description: `Artykuły o ${tag} — praktyczna edukacja finansowa.`,
-      url: `${BASE_URL}/blog/tag/${tagSlug}`,
+      url: `${BASE_URL}/${tagSlug}`,
       images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     },
   };

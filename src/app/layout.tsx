@@ -118,7 +118,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Google Analytics - ładowane po interakcji, nie blokuje renderowania */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-RV480KYSX0"
+          src="https://www.googletagmanager.com/gtag/js?id=G-G52114VC2V"
           strategy="afterInteractive"
         />
         <Script id="ga-config" strategy="afterInteractive">
@@ -126,7 +126,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-RV480KYSX0', { anonymize_ip: true });
+            gtag('config', 'G-G52114VC2V', { anonymize_ip: true });
           `}
         </Script>
       </body>

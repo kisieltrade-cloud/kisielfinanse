@@ -139,17 +139,17 @@ export default function OMnie() {
                   letterSpacing: '6px', margin: '0 0 32px',
                   lineHeight: 1,
                 }}>
-                  <span style={{ color: '#e8edf5', display: 'block', marginBottom: 8 }}>MATEUSZ</span>
+                  <span style={{ color: '#ffffff', display: 'block', marginBottom: 8 }}>MATEUSZ</span>
                   <span style={{ color: '#c9a227', display: 'block' }}>KISIEL</span>
                 </h1>
 
                 <p style={{
                   fontFamily: 'var(--font-mono)', fontSize: '0.85rem',
-                  color: '#8a9ab5', lineHeight: 1.9, maxWidth: 560,
+                  color: '#c8d4e8', lineHeight: 1.9, maxWidth: 560,
                   margin: '0 0 32px',
                 }}>
                   9 lat na rynkach nauczyło mnie jednego: pieniądze rządzą się prawami,
-                  które{' '}<span style={{ color: '#e8edf5' }}>każdy może zrozumieć</span>.
+                  które{' '}<span style={{ color: '#ffffff' }}>każdy może zrozumieć</span>.
                   Trading, krypto, oszczędzanie, geopolityka - wszystko jest ze sobą
                   połączone. Tworzę <span style={{ color: '#c9a227' }}>KisielFinanse</span>,
                   żeby tę wiedzę przekazać praktycznie - bez kursów za fortunę,
@@ -167,7 +167,7 @@ export default function OMnie() {
                   </Link>
                   <Link href="/wspolpraca" style={{
                     fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
-                    letterSpacing: '2px', background: 'none', color: '#8a9ab5',
+                    letterSpacing: '2px', background: 'none', color: '#c8d4e8',
                     border: '1px solid #1a2535', padding: '12px 24px',
                     textDecoration: 'none',
                   }}>
@@ -246,13 +246,13 @@ export default function OMnie() {
                   </div>
                   <div style={{
                     fontFamily: 'var(--font-display)', fontSize: '1rem',
-                    letterSpacing: '2px', color: '#e8edf5', marginBottom: 12,
+                    letterSpacing: '2px', color: '#ffffff', marginBottom: 12,
                   }}>
                     {p.title.toUpperCase()}
                   </div>
                   <p style={{
                     fontFamily: 'var(--font-mono)', fontSize: '0.73rem',
-                    color: '#8a9ab5', lineHeight: 1.8, margin: 0,
+                    color: '#c8d4e8', lineHeight: 1.8, margin: 0,
                   }}>
                     {p.desc}
                   </p>
@@ -267,7 +267,7 @@ export default function OMnie() {
           <div style={{ maxWidth: 760, margin: '0 auto' }}>
             <h2 style={{
               fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-              letterSpacing: '4px', margin: '0 0 48px', color: '#e8edf5',
+              letterSpacing: '4px', margin: '0 0 48px', color: '#ffffff',
             }}>
               9 LAT NA <span style={{ color: '#c9a227' }}>RYNKACH</span>
             </h2>
@@ -309,13 +309,13 @@ export default function OMnie() {
                     <div>
                       <div style={{
                         fontFamily: 'var(--font-display)', fontSize: '0.95rem',
-                        letterSpacing: '2px', color: '#e8edf5', marginBottom: 8,
+                        letterSpacing: '2px', color: '#ffffff', marginBottom: 8,
                       }}>
                         {t.title.toUpperCase()}
                       </div>
                       <p style={{
                         fontFamily: 'var(--font-mono)', fontSize: '0.73rem',
-                        color: '#8a9ab5', lineHeight: 1.8, margin: 0,
+                        color: '#c8d4e8', lineHeight: 1.8, margin: 0,
                       }}>
                         {t.desc}
                       </p>
@@ -337,13 +337,13 @@ export default function OMnie() {
             <h2 style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-              letterSpacing: '4px', margin: '0 0 16px', color: '#e8edf5',
+              letterSpacing: '4px', margin: '0 0 16px', color: '#ffffff',
             }}>
               FINANSE BEZ ŚCIEMY.
             </h2>
             <p style={{
               fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
-              color: '#8a9ab5', lineHeight: 1.8, margin: '0 0 32px',
+              color: '#c8d4e8', lineHeight: 1.8, margin: '0 0 32px',
             }}>
               Trading, krypto, oszczędzanie, wolność finansowa. Bez kursów za
               fortunę, bez obietnic i bez lania wody. Tylko to, co naprawdę działa.
@@ -359,7 +359,7 @@ export default function OMnie() {
               </Link>
               <Link href="/wspolpraca" style={{
                 fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
-                letterSpacing: '2px', background: 'none', color: '#8a9ab5',
+                letterSpacing: '2px', background: 'none', color: '#c8d4e8',
                 border: '1px solid #1a2535', padding: '14px 32px',
                 textDecoration: 'none',
               }}>

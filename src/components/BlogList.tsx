@@ -6,21 +6,23 @@ import { PostMeta } from '@/lib/posts';
 import ReadTimeRing from '@/components/ReadTimeRing';
 
 const TAG_CONFIG: Record<string, { color: string; bg: string }> = {
-  strategia:         { color: '#c9a227', bg: 'rgba(201,162,39,0.08)' },
-  psychologia:       { color: '#e8963a', bg: 'rgba(232,150,58,0.08)' },
-  analiza:           { color: '#f5c518', bg: 'rgba(245,197,24,0.08)' },
-  'risk management': { color: '#ff2d78', bg: 'rgba(255,45,120,0.08)' },
-  edukacja:          { color: '#c9a227', bg: 'rgba(201,162,39,0.08)' },
-  rynek:             { color: '#f5c518', bg: 'rgba(245,197,24,0.08)' },
-  krypto:            { color: '#f5a623', bg: 'rgba(245,166,35,0.08)' },
-  oszczędzanie:      { color: '#c9a227', bg: 'rgba(201,162,39,0.08)' },
-  geopolityka:       { color: '#ff2d78', bg: 'rgba(255,45,120,0.08)' },
-  trading:           { color: '#c9a227', bg: 'rgba(201,162,39,0.08)' },
-  finanse:           { color: '#e8963a', bg: 'rgba(232,150,58,0.08)' },
+  trading:     { color: '#c9a227', bg: 'rgba(201,162,39,0.10)'  },
+  inwestycje:  { color: '#f5c518', bg: 'rgba(245,197,24,0.10)'  },
+  pieniadze:   { color: '#e8963a', bg: 'rgba(232,150,58,0.10)'  },
+  psychologia: { color: '#a78bfa', bg: 'rgba(167,139,250,0.10)' },
+  gospodarka:  { color: '#ff2d78', bg: 'rgba(255,45,120,0.10)'  },
 };
 
+function slugifyTag(tag: string): string {
+  return tag.toLowerCase()
+    .replace(/ą/g, 'a').replace(/ć/g, 'c').replace(/ę/g, 'e')
+    .replace(/ł/g, 'l').replace(/ń/g, 'n').replace(/ó/g, 'o')
+    .replace(/ś/g, 's').replace(/ź/g, 'z').replace(/ż/g, 'z')
+    .replace(/\s+/g, '-');
+}
+
 const getTag = (tag: string) =>
-  TAG_CONFIG[tag?.toLowerCase()] ?? { color: '#c9a227', bg: 'rgba(201,162,39,0.08)' };
+  TAG_CONFIG[slugifyTag(tag)] ?? { color: '#c9a227', bg: 'rgba(201,162,39,0.10)' };
 
 interface Props {
   posts: PostMeta[];

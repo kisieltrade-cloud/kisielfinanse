@@ -265,7 +265,7 @@ export default function LearnToTrade() {
                           style={{
                             fontFamily: 'var(--font-mono)',
                             fontSize: '0.72rem',
-                            color: '#b0b0b0',
+                            color: 'var(--muted)',
                             lineHeight: 1.7,
                           }}
                         >
@@ -289,11 +289,26 @@ export default function LearnToTrade() {
             fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
             letterSpacing: '2px',
             color: 'var(--text)',
-            margin: '0 0 24px',
+            margin: '0 0 20px',
           }}
         >
           PUŁAPKI <span style={{ color: '#ff2d78' }}>POCZĄTKUJĄCYCH</span>
         </h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 48 }}>
+          {WARNINGS.map((w, i) => (
+            <div key={i} style={{
+              display: 'flex', gap: 14, alignItems: 'flex-start',
+              padding: '12px 18px',
+              background: 'rgba(255,45,120,0.03)',
+              border: '1px solid rgba(255,45,120,0.08)',
+              borderLeft: '3px solid rgba(255,45,120,0.4)',
+            }}>
+              <span style={{ color: '#ff2d78', fontFamily: 'var(--font-mono)', fontSize: '0.65rem', marginTop: 3, flexShrink: 0 }}>✗</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--muted)', lineHeight: 1.7 }}>{w}</span>
+            </div>
+          ))}
+        </div>
+
         <h3
           style={{
             fontFamily: 'var(--font-display)',

@@ -47,7 +47,7 @@ export default function AuthorBox() {
             fontFamily: 'var(--font-display)',
             fontSize: '1.15rem',
             letterSpacing: '2px',
-            color: '#e8edf5',
+            color: '#ffffff',
             marginBottom: 10,
           }}>
             Mateusz Kisiel
@@ -56,7 +56,7 @@ export default function AuthorBox() {
           <p style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '0.72rem',
-            color: '#8a9ab5',
+            color: '#c8d4e8',
             lineHeight: 1.8,
             margin: '0 0 16px',
             maxWidth: 560,

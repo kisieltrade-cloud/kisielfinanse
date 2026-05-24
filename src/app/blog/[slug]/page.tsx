@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import ReadingProgress from '@/components/ReadingProgress';
 import RelatedPosts from '@/components/RelatedPosts';
 import BlogImageLightbox from '@/components/BlogImageLightbox';
-import { getPostBySlug, getAllSlugs, getAllPosts } from '@/lib/posts';
+import { getPostBySlug, getAllSlugs, getAllPosts, tagToSlug } from '@/lib/posts';
 import { remark } from 'remark';
 import remarkHtml from 'remark-html';
 import remarkGfm from 'remark-gfm';
@@ -20,6 +20,9 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import AuthorBox from '@/components/AuthorBox';
 import NextArticleBar from '@/components/NextArticleBar';
 import GiscusComments from '@/components/GiscusComments';
+
+// Odświeżaj co godzinę — przyszłe artykuły pojawią się automatycznie po dacie publikacji
+export const revalidate = 3600;
 
 const BASE_URL = 'https://kisielfinanse.pl';
 
@@ -62,17 +65,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const TAG_CONFIG: Record<string, { color: string; bg: string }> = {
-  strategia:         { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
-  psychologia:       { color: '#b14aed', bg: 'rgba(177,74,237,0.08)' },
-  analiza:           { color: '#f5c518', bg: 'rgba(245,197,24,0.08)' },
-  'risk management': { color: '#ff2d78', bg: 'rgba(255,45,120,0.08)' },
-  edukacja:          { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
-  rynek:             { color: '#f5c518', bg: 'rgba(245,197,24,0.08)' },
-  krypto:            { color: '#f5a623', bg: 'rgba(245,166,35,0.08)' },
-  oszczędzanie:      { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
-  geopolityka:       { color: '#ff2d78', bg: 'rgba(255,45,120,0.08)' },
-  trading:           { color: '#00f5d4', bg: 'rgba(0,245,212,0.08)' },
-  finanse:           { color: '#b14aed', bg: 'rgba(177,74,237,0.08)' },
+  trading:     { color: '#c9a227', bg: 'rgba(201,162,39,0.10)'  },
+  inwestycje:  { color: '#f5c518', bg: 'rgba(245,197,24,0.10)'  },
+  pieniadze:   { color: '#e8963a', bg: 'rgba(232,150,58,0.10)'  },
+  psychologia: { color: '#a78bfa', bg: 'rgba(167,139,250,0.10)' },
+  gospodarka:  { color: '#ff2d78', bg: 'rgba(255,45,120,0.10)'  },
 };
 
 export default async function BlogPostPage({ params }: Props) {
@@ -98,7 +95,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   const tocItems = extractTocItems(post.content);
 
-  const t = TAG_CONFIG[post.tag?.toLowerCase()] ?? TAG_CONFIG['edukacja'];
+  const t = TAG_CONFIG[tagToSlug(post.tag)] ?? TAG_CONFIG['trading'];
 
   const schemaArticle = {
     '@context': 'https://schema.org',

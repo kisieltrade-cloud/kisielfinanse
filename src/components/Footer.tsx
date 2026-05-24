@@ -45,9 +45,9 @@ export default async function Footer() {
           <ul className="footer-col-links">
             {tags.map(({ tag, slug, count }) => (
               <li key={slug}>
-                <Link href={`/blog/tag/${slug}`}>
+                <Link href={`/${slug}`}>
                   {tag.charAt(0).toUpperCase() + tag.slice(1)}
-                  <span style={{ color: '#5a6a7a', marginLeft: 6, fontSize: '0.62rem' }}>({count})</span>
+                  <span style={{ color: '#8a9ab5', marginLeft: 6, fontSize: '0.62rem' }}>({count})</span>
                 </Link>
               </li>
             ))}

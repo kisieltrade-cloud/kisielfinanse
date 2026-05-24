@@ -36,35 +36,13 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const {
-    slug,
-    title,
-    excerpt,
-    date,
-    tag,
-    readTime,
-    published,
-    content,
-    metaTitle,
-    metaDescription,
-    author,
-    image,
-    gallery,
-    keywords,
+    slug, title, excerpt, date, tag, readTime, published,
+    content, metaTitle, metaDescription, author, image, gallery, keywords,
   } = body as {
-    slug: string;
-    title: string;
-    excerpt?: string;
-    date?: string;
-    tag?: string;
-    readTime?: string;
-    published?: boolean;
-    content?: string;
-    metaTitle?: string;
-    metaDescription?: string;
-    author?: string;
-    image?: string;
-    gallery?: string[];
-    keywords?: string[];
+    slug: string; title: string; excerpt?: string; date?: string; tag?: string;
+    readTime?: string; published?: boolean; content?: string; metaTitle?: string;
+    metaDescription?: string; author?: string; image?: string;
+    gallery?: string[]; keywords?: string[];
   };
 
   if (!slug || !title)
@@ -75,12 +53,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Artykuł z tym slugiem już istnieje' }, { status: 409 });
 
   const frontmatterData: Record<string, unknown> = {
-    title,
-    excerpt,
-    date,
-    tag,
-    readTime: readTime || '5 min',
-    published: published ?? false,
+    title, excerpt, date, tag, readTime: readTime || '5 min', published: published ?? false,
   };
   if (author) frontmatterData.author = author;
   if (image) frontmatterData.image = image;
@@ -90,7 +63,6 @@ export async function POST(req: NextRequest) {
   if (keywords?.length) frontmatterData.keywords = keywords;
 
   const fileContent = matter.stringify(content ?? '', frontmatterData);
-
   if (!fs.existsSync(POSTS_DIR)) fs.mkdirSync(POSTS_DIR, { recursive: true });
   fs.writeFileSync(filePath, fileContent, 'utf-8');
   return NextResponse.json({ ok: true, slug });

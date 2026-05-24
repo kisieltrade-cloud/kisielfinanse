@@ -7,6 +7,9 @@ import { getAllPosts } from '@/lib/posts';
 
 const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Blog Tradingowy - KisielFinanse' };
 
+// Odświeżaj co godzinę — artykuły z przyszłą datą pojawią się automatycznie
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: 'Blog Finansowy - Trading, Krypto, Oszczędzanie | KisielFinanse',
   description: 'Artykuły o tradingu, krypto, oszczędzaniu i geopolityce finansowej. Praktyczna wiedza bez ściemy - finanse które naprawdę robią różnicę.',

@@ -1,38 +1,91 @@
 import { MetadataRoute } from 'next';
-import { getAllPosts, getAllTags } from '@/lib/posts';
+import { getAllPosts, tagToSlug } from '@/lib/posts';
+import { CATEGORIES } from '@/lib/categories';
 
 const BASE_URL = 'https://kisielfinanse.pl';
 
+// ISR — sitemap regeneruje się automatycznie co godzinę.
+// Po dodaniu nowego artykułu pojawi się w sitemapie w ciągu max 60 minut.
+export const revalidate = 3600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, tags] = await Promise.all([getAllPosts(), getAllTags()]);
+  const posts = await getAllPosts();
 
-  // Najnowszy opublikowany artykuł (posty posortowane malejąco po dacie)
-  const latestPost = posts[0];
-  const latestPostDate = latestPost?.dateISO ? new Date(latestPost.dateISO) : new Date();
+  // Najnowszy post w całym serwisie (do lastModified strony głównej i /blog)
+  const latestPostDate = posts[0]?.dateISO ? new Date(posts[0].dateISO) : new Date();
 
+  // Najnowszy post dla danej kategorii (dokładniejszy lastModified)
+  const categoryLatestDate = (slug: string): Date => {
+    const found = posts.find((p) => tagToSlug(p.tag) === slug);
+    return found?.dateISO ? new Date(found.dateISO) : latestPostDate;
+  };
+
+  // ── Strony statyczne ────────────────────────────────────────────────────────
   const staticPages: MetadataRoute.Sitemap = [
-    { url: BASE_URL,                              lastModified: latestPostDate,  changeFrequency: 'weekly',  priority: 1.0 },
-    { url: `${BASE_URL}/blog`,                    lastModified: latestPostDate,  changeFrequency: 'weekly',  priority: 0.9 },
-    { url: `${BASE_URL}/o-mnie`,                  lastModified: new Date('2026-05-21'), changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE_URL}/wspolpraca`,              lastModified: new Date('2026-05-21'), changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${BASE_URL}/kalkulator`,             lastModified: new Date('2026-05-21'), changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE_URL}/disclaimer`,              lastModified: new Date('2026-05-21'), changeFrequency: 'yearly',  priority: 0.3 },
-    { url: `${BASE_URL}/polityka-prywatnosci`,    lastModified: new Date('2026-05-21'), changeFrequency: 'yearly',  priority: 0.3 },
+    {
+      url: BASE_URL,
+      lastModified: latestPostDate,
+      changeFrequency: 'weekly',
+      priority: 1.0,
+    },
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: latestPostDate,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/o-mnie`,
+      lastModified: new Date('2026-05-21'),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/wspolpraca`,
+      lastModified: new Date('2026-05-21'),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/kalkulator`,
+      lastModified: new Date('2026-05-21'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/disclaimer`,
+      lastModified: new Date('2026-05-21'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/polityka-prywatnosci`,
+      lastModified: new Date('2026-05-21'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ];
 
+  // ── Strony kategorii (5 × najwyższy priorytet po stronie głównej) ───────────
+  const categoryPages: MetadataRoute.Sitemap = CATEGORIES.map((cat) => ({
+    url: `${BASE_URL}/${cat.slug}`,
+    lastModified: categoryLatestDate(cat.slug),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  }));
+
+  // ── Artykuły blogowe ────────────────────────────────────────────────────────
   const blogPages: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
-    lastModified: post.dateISO ? new Date(post.dateISO) : new Date(),
+    // Jeśli post był aktualizowany, używamy daty aktualizacji
+    lastModified: post.updatedISO
+      ? new Date(post.updatedISO)
+      : post.dateISO
+      ? new Date(post.dateISO)
+      : new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));
 
-  const tagPages: MetadataRoute.Sitemap = tags.map(({ slug }) => ({
-    url: `${BASE_URL}/blog/tag/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.6,
-  }));
-
-  return [...staticPages, ...blogPages, ...tagPages];
+  return [...staticPages, ...categoryPages, ...blogPages];
 }

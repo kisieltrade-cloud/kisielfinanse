@@ -23,7 +23,6 @@ export async function POST(req: NextRequest) {
   if (!file) return NextResponse.json({ error: 'Brak pliku' }, { status: 400 });
 
   const articleSlug = (formData.get('slug') as string | null)?.trim() ?? '';
-
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
@@ -36,7 +35,6 @@ export async function POST(req: NextRequest) {
   const ext = path.extname(baseName);
   const stem = path.basename(baseName, ext);
 
-  // Avoid collision: append -2, -3, ... if file already exists
   let finalName = baseName;
   let counter = 1;
   while (fs.existsSync(path.join(uploadDir, finalName))) {

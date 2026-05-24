@@ -103,7 +103,7 @@ export default function CookieConsent() {
 
           <p style={{
             fontFamily: "'JetBrains Mono', monospace",
-            fontSize: '0.73rem', color: '#8a9ab5',
+            fontSize: '0.73rem', color: '#c8d4e8',
             lineHeight: 1.8, margin: '0 0 20px',
           }}>
             Używamy plików cookies do analizy ruchu na stronie (Google Analytics).
@@ -118,7 +118,7 @@ export default function CookieConsent() {
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: '0.62rem', letterSpacing: '1px',
               background: 'none', border: 'none',
-              color: '#3a5a6a', cursor: 'pointer',
+              color: '#9ab0c0', cursor: 'pointer',
               padding: 0, marginBottom: showDetails ? 16 : 20,
               display: 'flex', alignItems: 'center', gap: 6,
               transition: 'color .2s',
@@ -165,12 +165,12 @@ export default function CookieConsent() {
                     }}>
                       {c.name.toUpperCase()}
                       {c.required && (
-                        <span style={{ fontSize: '0.52rem', color: '#3a5a6a' }}>ZAWSZE AKTYWNE</span>
+                        <span style={{ fontSize: '0.52rem', color: '#9ab0c0' }}>ZAWSZE AKTYWNE</span>
                       )}
                     </div>
                     <div style={{
                       fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: '0.62rem', color: '#8a9ab5', lineHeight: 1.7,
+                      fontSize: '0.62rem', color: '#c8d4e8', lineHeight: 1.7,
                     }}>
                       {c.desc}
                     </div>
@@ -179,7 +179,7 @@ export default function CookieConsent() {
               ))}
               <div style={{
                 fontFamily: "'JetBrains Mono', monospace",
-                fontSize: '0.6rem', color: '#3a5a6a', paddingLeft: 2,
+                fontSize: '0.6rem', color: '#9ab0c0', paddingLeft: 2,
               }}>
                 Więcej:{' '}
                 <a href="/polityka-prywatnosci" style={{ color: '#c9a227', textDecoration: 'none' }}>
@@ -199,7 +199,7 @@ export default function CookieConsent() {
                 fontFamily: "'JetBrains Mono', monospace",
                 fontSize: '0.72rem', letterSpacing: '2px',
                 background: 'none', border: '1px solid #1a2535',
-                color: '#8a9ab5', padding: '12px',
+                color: '#c8d4e8', padding: '12px',
                 cursor: 'pointer', transition: 'all .2s',
               }}
             >

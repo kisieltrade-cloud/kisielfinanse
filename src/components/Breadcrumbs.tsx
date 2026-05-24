@@ -18,7 +18,7 @@ export default function Breadcrumbs({ items }: Props) {
       style={{
         fontFamily: 'var(--font-mono)',
         fontSize: '0.68rem',
-        color: '#3a4a5a',
+        color: '#c8d4e8',
         letterSpacing: '0.5px',
         display: 'flex',
         alignItems: 'center',
@@ -32,23 +32,23 @@ export default function Breadcrumbs({ items }: Props) {
         return (
           <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             {i > 0 && (
-              <span style={{ color: '#1e2d3d', userSelect: 'none' }}>›</span>
+              <span style={{ color: '#8a9ab5', userSelect: 'none' }}>›</span>
             )}
             {crumb.href && !isLast ? (
               <Link
                 href={crumb.href}
                 style={{
-                  color: '#3a4a5a',
+                  color: '#c8d4e8',
                   textDecoration: 'none',
                   transition: 'color 0.15s',
                 }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#c9a227')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#3a4a5a')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#c8d4e8')}
               >
                 {crumb.label}
               </Link>
             ) : (
-              <span style={{ color: isLast ? '#8a9ab5' : '#3a4a5a' }}>
+              <span style={{ color: isLast ? '#ffffff' : '#c8d4e8' }}>
                 {crumb.label}
               </span>
             )}

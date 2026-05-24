@@ -47,6 +47,8 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 
   const files = fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith('.mdx') || f.endsWith('.md'));
 
+  const now = new Date();
+
   const posts = files
     .map((file) => {
       const slug = file.replace(/\.(mdx|md)$/, '');
@@ -76,7 +78,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
         _rawDate: rawDate,
       };
     })
-    .filter((p) => p.published)
+    .filter((p) => p.published && p._rawDate !== '' && new Date(p._rawDate) <= now)
     .sort((a, b) => new Date(b._rawDate).getTime() - new Date(a._rawDate).getTime())
     .map(({ _rawDate: _, ...p }) => p as PostMeta);
 

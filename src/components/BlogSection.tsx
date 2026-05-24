@@ -1,154 +1,177 @@
 import Link from 'next/link';
-import { getAllPosts } from '@/lib/posts';
+import { getAllPosts, tagToSlug } from '@/lib/posts';
 import ReadTimeRing from '@/components/ReadTimeRing';
 
-const TAG_CONFIG: Record<string, { color: string; bg: string; label: string }> = {
-  strategia:        { color: '#c9a227', bg: 'rgba(201,162,39,0.08)',   label: 'Strategia' },
-  psychologia:      { color: '#e8963a', bg: 'rgba(232,150,58,0.08)',  label: 'Psychologia' },
-  analiza:          { color: '#f5c518', bg: 'rgba(245,197,24,0.08)',   label: 'Analiza' },
-  'risk management':{ color: '#ff2d78', bg: 'rgba(255,45,120,0.08)',  label: 'Risk Management' },
-  edukacja:         { color: '#c9a227', bg: 'rgba(201,162,39,0.08)',   label: 'Edukacja' },
-  rynek:            { color: '#f5c518', bg: 'rgba(245,197,24,0.08)',   label: 'Rynek' },
+const TAG_CONFIG: Record<string, { color: string; bg: string }> = {
+  trading:    { color: '#c9a227', bg: 'rgba(201,162,39,0.15)'  },
+  inwestycje: { color: '#f5c518', bg: 'rgba(245,197,24,0.15)'  },
+  pieniadze:  { color: '#e8963a', bg: 'rgba(232,150,58,0.15)'  },
+  psychologia:{ color: '#a78bfa', bg: 'rgba(167,139,250,0.15)' },
+  gospodarka: { color: '#ff2d78', bg: 'rgba(255,45,120,0.15)'  },
 };
 
-const CARD_GRADIENTS = [
-  'radial-gradient(ellipse at top left, rgba(201,162,39,0.07) 0%, transparent 60%)',
-  'radial-gradient(ellipse at top right, rgba(232,150,58,0.07) 0%, transparent 60%)',
-  'radial-gradient(ellipse at bottom left, rgba(255,45,120,0.06) 0%, transparent 60%)',
-];
+const FALLBACK_GRADIENTS: Record<string, string> = {
+  trading:    'linear-gradient(135deg, #0d0a00 0%, #2a1f00 50%, #1a1200 100%)',
+  inwestycje: 'linear-gradient(135deg, #0d0c00 0%, #2a2500 50%, #1a1800 100%)',
+  pieniadze:  'linear-gradient(135deg, #0d0800 0%, #2a1500 50%, #1a0e00 100%)',
+  psychologia:'linear-gradient(135deg, #0a0814 0%, #1a1530 50%, #100d20 100%)',
+  gospodarka: 'linear-gradient(135deg, #14000a 0%, #300020 50%, #200015 100%)',
+};
+
+function getTag(tag: string) {
+  return TAG_CONFIG[tagToSlug(tag)] ?? TAG_CONFIG['trading'];
+}
+
+function getFallbackGradient(tag: string) {
+  return FALLBACK_GRADIENTS[tagToSlug(tag)] ?? FALLBACK_GRADIENTS['trading'];
+}
 
 export default async function BlogSection() {
   const posts = await getAllPosts();
-  const featured = posts[0];
-  const rest = posts.slice(1, 3);
+  const hero = posts[0];
+  const cards = posts.slice(1, 4);
 
-  if (!featured) return null;
+  if (!hero) return null;
 
-  const getTag = (tag: string) =>
-    TAG_CONFIG[tag?.toLowerCase()] ?? TAG_CONFIG['edukacja'];
+  const heroTag = getTag(hero.tag);
 
   return (
-    <section className="blog-section" id="blog">
-      <div className="blog-header">
-        <div>
-          <h2 className="section-title" style={{ marginBottom: 0 }}>
-            OSTATNIE
-            <br />
-            <span className="gradient-text-pp">ARTYKUŁY</span>
-          </h2>
-        </div>
-        <Link href="/blog" className="blog-view-all">
+    <section className="news-section" id="blog">
+
+      {/* Section header */}
+      <div className="news-section-header">
+        <h2 className="news-section-title">
+          OSTATNIE <span style={{ color: '#c9a227' }}>ARTYKUŁY</span>
+        </h2>
+        <Link href="/blog" className="news-view-all">
           Wszystkie artykuły →
         </Link>
       </div>
 
-      <div className="blog-grid stagger-wrap">
+      {/* ── HERO CARD ── */}
+      <Link href={`/blog/${hero.slug}`} className="news-hero">
 
-        {/* FEATURED CARD */}
-        <Link
-          href={`/blog/${featured.slug}`}
-          className="blog-card blog-card-feat"
-          data-stagger
-          style={{ background: `var(--bg) ${CARD_GRADIENTS[0]}` }}
-        >
-          {/* Cover image or decorative chart lines */}
-          {featured.image ? (
-            <div style={{ width: '100%', height: 180, overflow: 'hidden', borderRadius: '12px 12px 0 0' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={featured.image}
-                alt={featured.title}
-                loading="lazy"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-              />
-            </div>
-          ) : (
-            <div className="blog-card-deco" aria-hidden="true">
-              <svg width="100%" height="60" viewBox="0 0 300 60" preserveAspectRatio="none">
-                <path d="M0,45 L50,38 L100,42 L150,28 L200,32 L250,18 L300,10"
-                  fill="none" stroke={getTag(featured.tag).color}
-                  strokeWidth="1.5" strokeOpacity="0.25" />
-                <path d="M0,55 L60,48 L120,52 L180,38 L240,35 L300,25"
-                  fill="none" stroke={getTag(featured.tag).color}
-                  strokeWidth="1" strokeOpacity="0.12" />
-              </svg>
-            </div>
-          )}
-
-          <div className="blog-card-body">
-            <div className="blog-card-top">
-              <span
-                className="blog-tag-v2"
-                style={{ color: getTag(featured.tag).color, background: getTag(featured.tag).bg }}
-              >
-                {featured.tag}
-              </span>
-              <ReadTimeRing readTime={featured.readTime ?? '7 min'} />
-            </div>
-
-            <h3 className="blog-card-title">{featured.title}</h3>
-            <p className="blog-card-excerpt">{featured.excerpt}</p>
-
-            <div className="blog-meta">
-              <span className="blog-date">{featured.date}</span>
-              <div className="blog-cta-link" style={{ color: getTag(featured.tag).color }}>
-                Czytaj artykuł →
-              </div>
-            </div>
-          </div>
-        </Link>
-
-        {/* SIDE CARDS */}
-        {rest.map((post, i) => (
-          <Link
-            key={post.slug}
-            href={`/blog/${post.slug}`}
-            className="blog-card"
-            data-stagger
-            style={{ background: `var(--bg) ${CARD_GRADIENTS[i + 1]}` }}
+        {/* Background */}
+        {hero.image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={hero.image}
+            alt={hero.title}
+            className="news-hero-bg"
+          />
+        ) : (
+          <div
+            className="news-hero-bg"
+            style={{ background: getFallbackGradient(hero.tag) }}
           >
-            {post.image ? (
-              <div style={{ width: '100%', height: 140, overflow: 'hidden', borderRadius: '12px 12px 0 0' }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  loading="lazy"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                />
-              </div>
-            ) : (
-              <div className="blog-card-deco" aria-hidden="true">
-                <svg width="100%" height="40" viewBox="0 0 200 40" preserveAspectRatio="none">
-                  <path d="M0,30 L40,24 L80,28 L120,16 L160,20 L200,8"
-                    fill="none" stroke={getTag(post.tag).color}
-                    strokeWidth="1.5" strokeOpacity="0.2" />
-                </svg>
-              </div>
-            )}
+            {/* SVG chart decoration for no-image fallback */}
+            <svg
+              viewBox="0 0 1200 480"
+              preserveAspectRatio="none"
+              style={{ width: '100%', height: '100%', opacity: 0.12 }}
+            >
+              <polyline
+                points="0,380 150,310 300,340 480,230 640,270 800,160 960,190 1100,90 1200,50"
+                fill="none"
+                stroke={heroTag.color}
+                strokeWidth="3"
+              />
+              <path
+                d="M0,380 150,310 300,340 480,230 640,270 800,160 960,190 1100,90 1200,50 L1200,480 L0,480 Z"
+                fill={heroTag.color}
+                opacity="0.08"
+              />
+            </svg>
+          </div>
+        )}
 
-            <div className="blog-card-body">
-              <div className="blog-card-top">
-                <span
-                  className="blog-tag-v2"
-                  style={{ color: getTag(post.tag).color, background: getTag(post.tag).bg }}
-                >
-                  {post.tag}
-                </span>
-                <ReadTimeRing readTime={post.readTime ?? '7 min'} />
-              </div>
+        {/* Gradient overlay */}
+        <div className="news-hero-overlay" />
 
-              <h3 className="blog-card-title" style={{ fontSize: '1.15rem' }}>{post.title}</h3>
-              <p className="blog-card-excerpt">{post.excerpt}</p>
+        {/* Content */}
+        <div className="news-hero-content">
+          <div className="news-hero-meta-top">
+            <span
+              className="news-tag-chip"
+              style={{ color: heroTag.color, background: heroTag.bg, borderColor: heroTag.color + '55' }}
+            >
+              {hero.tag.toUpperCase()}
+            </span>
+            <span className="news-hero-author">
+              <span className="news-author-dot" style={{ background: heroTag.color }} />
+              {hero.author ?? 'Mateusz'}
+            </span>
+          </div>
 
-              <div className="blog-meta">
-                <span className="blog-date">{post.date}</span>
-                <div className="blog-arrow">↗</div>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
+          <h2 className="news-hero-title">{hero.title}</h2>
+
+          <div className="news-hero-bottom">
+            <span className="news-hero-date">{hero.date}</span>
+            <ReadTimeRing readTime={hero.readTime ?? '7 min'} />
+          </div>
+        </div>
+      </Link>
+
+      {/* ── SMALLER CARDS ── */}
+      {cards.length > 0 && (
+        <div className="news-cards-grid">
+          {cards.map((post) => {
+            const t = getTag(post.tag);
+            return (
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="news-card">
+
+                {/* Thumbnail */}
+                <div className="news-card-thumb">
+                  {post.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="news-card-thumb-img"
+                    />
+                  ) : (
+                    <div
+                      className="news-card-thumb-fallback"
+                      style={{ background: getFallbackGradient(post.tag) }}
+                    >
+                      <svg viewBox="0 0 300 180" style={{ width: '100%', height: '100%', opacity: 0.2 }}>
+                        <polyline
+                          points="0,140 60,110 120,125 180,80 240,95 300,40"
+                          fill="none"
+                          stroke={t.color}
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                  <span
+                    className="news-card-tag"
+                    style={{ color: t.color, background: t.bg }}
+                  >
+                    {post.tag}
+                  </span>
+                </div>
+
+                {/* Text */}
+                <div className="news-card-body">
+                  <span className="news-card-author">
+                    <span className="news-author-dot" style={{ background: t.color }} />
+                    {post.author ?? 'Mateusz'}
+                  </span>
+                  <h3 className="news-card-title">{post.title}</h3>
+                  <div className="news-card-footer">
+                    <span className="news-card-date">{post.date}</span>
+                    <ReadTimeRing readTime={post.readTime ?? '7 min'} />
+                  </div>
+                </div>
+
+              </Link>
+            );
+          })}
+        </div>
+      )}
+
     </section>
   );
 }

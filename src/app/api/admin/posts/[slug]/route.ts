@@ -37,42 +37,17 @@ export async function PUT(
 
   const body = await req.json();
   const {
-    title,
-    excerpt,
-    date,
-    tag,
-    readTime,
-    published,
-    content,
-    metaTitle,
-    metaDescription,
-    author,
-    image,
-    gallery,
-    keywords,
+    title, excerpt, date, tag, readTime, published,
+    content, metaTitle, metaDescription, author, image, gallery, keywords,
   } = body as {
-    title?: string;
-    excerpt?: string;
-    date?: string;
-    tag?: string;
-    readTime?: string;
-    published?: boolean;
-    content?: string;
-    metaTitle?: string;
-    metaDescription?: string;
-    author?: string;
-    image?: string;
-    gallery?: string[];
-    keywords?: string[];
+    title?: string; excerpt?: string; date?: string; tag?: string;
+    readTime?: string; published?: boolean; content?: string;
+    metaTitle?: string; metaDescription?: string; author?: string;
+    image?: string; gallery?: string[]; keywords?: string[];
   };
 
   const frontmatterData: Record<string, unknown> = {
-    title,
-    excerpt,
-    date,
-    tag,
-    readTime: readTime || '5 min',
-    published: published ?? false,
+    title, excerpt, date, tag, readTime: readTime || '5 min', published: published ?? false,
   };
   if (author) frontmatterData.author = author;
   if (image) frontmatterData.image = image;

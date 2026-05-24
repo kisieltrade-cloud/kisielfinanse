@@ -48,7 +48,7 @@ export default function TableOfContents({ items }: Props) {
         <div style={{ width: 3, height: 16, background: 'var(--cyan)', borderRadius: 2, flexShrink: 0 }} />
         <span style={{
           fontFamily: "'JetBrains Mono', monospace",
-          fontSize: '0.58rem', letterSpacing: '3px', color: '#5a6478',
+          fontSize: '0.58rem', letterSpacing: '3px', color: '#c8d4e8',
         }}>
           SPIS TREŚCI
         </span>
@@ -80,7 +80,7 @@ export default function TableOfContents({ items }: Props) {
                   fontFamily: 'system-ui, sans-serif',
                   fontSize: isH2 ? '0.8rem' : '0.74rem',
                   fontWeight: isH2 ? (isActive ? 600 : 500) : 400,
-                  color: isActive ? 'var(--cyan)' : isH2 ? '#8892a4' : '#5a6478',
+                  color: isActive ? 'var(--cyan)' : isH2 ? '#e0e8f4' : '#c8d4e8',
                   textDecoration: 'none',
                   lineHeight: 1.4,
                   transition: 'color 0.2s',

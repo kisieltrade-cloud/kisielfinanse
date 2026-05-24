@@ -4,6 +4,26 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react'],
   },
 
+  // ── 301 Redirecty — stare tagi → nowe strony kategorii ──────────────────────
+  // Chroni przed 404 po rebrandingu tagów (Edukacja→Trading, Strategia→Trading, etc.)
+  // Google automatycznie przenosi sygnały SEO ze starego URL na nowy (301 = permanent)
+  async redirects() {
+    return [
+      // Stare tagi przemianowane podczas rebrandingu
+      { source: '/blog/tag/edukacja',    destination: '/trading',     permanent: true },
+      { source: '/blog/tag/strategia',   destination: '/trading',     permanent: true },
+      { source: '/blog/tag/analiza',     destination: '/inwestycje',  permanent: true },
+      { source: '/blog/tag/geopolityka', destination: '/gospodarka',  permanent: true },
+      { source: '/blog/tag/finanse',     destination: '/pieniadze',   permanent: true },
+      // Nowe tagi — przekieruj /blog/tag/X na /X żeby uniknąć duplikatów
+      { source: '/blog/tag/trading',     destination: '/trading',     permanent: true },
+      { source: '/blog/tag/inwestycje',  destination: '/inwestycje',  permanent: true },
+      { source: '/blog/tag/pieniadze',   destination: '/pieniadze',   permanent: true },
+      { source: '/blog/tag/psychologia', destination: '/psychologia',  permanent: true },
+      { source: '/blog/tag/gospodarka',  destination: '/gospodarka',  permanent: true },
+    ];
+  },
+
   // Image optimization — lazy loading automatycznie przez Next.js Image
   images: {
     formats: ['image/avif', 'image/webp'],

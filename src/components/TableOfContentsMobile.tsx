@@ -54,7 +54,7 @@ export default function TableOfContentsMobile({ items }: Props) {
           transform: open ? 'rotate(180deg)' : 'none',
           transition: 'transform 0.2s',
           fontSize: '0.6rem',
-          color: '#3a4a5a',
+          color: '#c8d4e8',
         }}>▾</span>
       </button>
 
@@ -80,7 +80,7 @@ export default function TableOfContentsMobile({ items }: Props) {
                       paddingLeft: item.level === 2 ? 16 : 28,
                       fontFamily: 'var(--font-mono)',
                       fontSize: item.level === 2 ? '0.72rem' : '0.66rem',
-                      color: isActive ? '#c9a227' : item.level === 2 ? '#8a9ab5' : '#5a6478',
+                      color: isActive ? '#c9a227' : item.level === 2 ? '#e0e8f4' : '#c8d4e8',
                       fontWeight: isActive ? 600 : 400,
                       textDecoration: 'none',
                       borderLeft: isActive ? '2px solid #c9a227' : '2px solid transparent',

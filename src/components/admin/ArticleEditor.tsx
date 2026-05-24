@@ -568,19 +568,28 @@ export default function ArticleEditor({ initialData, mode }: Props) {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           {/* Status badge */}
-          <span
-            style={{
-              fontSize: '0.58rem',
-              letterSpacing: '1.5px',
-              padding: '4px 10px',
-              fontFamily: "'JetBrains Mono', monospace",
-              background: published ? 'rgba(0,245,212,0.1)' : 'rgba(90,100,120,0.15)',
-              color: published ? '#00f5d4' : '#5a6478',
-              border: `1px solid ${published ? 'rgba(0,245,212,0.2)' : 'rgba(90,100,120,0.2)'}`,
-            }}
-          >
-            {published ? 'LIVE' : 'SZKIC'}
-          </span>
+          {(() => {
+            const isScheduled = published && date && new Date(date) > new Date();
+            return (
+              <span
+                style={{
+                  fontSize: '0.58rem',
+                  letterSpacing: '1.5px',
+                  padding: '4px 10px',
+                  fontFamily: "'JetBrains Mono', monospace",
+                  background: isScheduled
+                    ? 'rgba(245,197,24,0.1)'
+                    : published
+                      ? 'rgba(0,245,212,0.1)'
+                      : 'rgba(90,100,120,0.15)',
+                  color: isScheduled ? '#f5c518' : published ? '#00f5d4' : '#5a6478',
+                  border: `1px solid ${isScheduled ? 'rgba(245,197,24,0.25)' : published ? 'rgba(0,245,212,0.2)' : 'rgba(90,100,120,0.2)'}`,
+                }}
+              >
+                {isScheduled ? `📅 ${new Date(date).toLocaleDateString('pl-PL', { day: '2-digit', month: 'short', year: 'numeric' })}` : published ? 'LIVE' : 'SZKIC'}
+              </span>
+            );
+          })()}
 
           {saveError && (
             <span
@@ -916,6 +925,51 @@ export default function ArticleEditor({ initialData, mode }: Props) {
           {/* Section: PUBLIKACJA */}
           <div style={{ marginBottom: '32px' }}>
             <div style={sectionHeaderStyle}>// PUBLIKACJA</div>
+
+            {/* Scheduled info box */}
+            {(() => {
+              const isScheduled = published && date && new Date(date) > new Date();
+              const isPast = published && date && new Date(date) <= new Date();
+              if (isScheduled) {
+                return (
+                  <div style={{
+                    display: 'flex', alignItems: 'flex-start', gap: 12,
+                    padding: '14px 16px', marginBottom: 12,
+                    background: 'rgba(245,197,24,0.06)',
+                    border: '1px solid rgba(245,197,24,0.2)',
+                    borderRadius: 8,
+                  }}>
+                    <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>📅</span>
+                    <div>
+                      <div style={{ fontFamily: 'system-ui', fontSize: '0.8rem', fontWeight: 600, color: '#f5c518', marginBottom: 3 }}>
+                        Zaplanowany — opublikuje się automatycznie
+                      </div>
+                      <div style={{ fontFamily: 'system-ui', fontSize: '0.72rem', color: '#a89030' }}>
+                        {new Date(date).toLocaleDateString('pl-PL', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' })}
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+              if (isPast) {
+                return (
+                  <div style={{
+                    display: 'flex', alignItems: 'center', gap: 10,
+                    padding: '10px 14px', marginBottom: 12,
+                    background: 'rgba(0,245,212,0.05)',
+                    border: '1px solid rgba(0,245,212,0.15)',
+                    borderRadius: 8,
+                  }}>
+                    <span style={{ fontSize: '0.9rem' }}>🟢</span>
+                    <span style={{ fontFamily: 'system-ui', fontSize: '0.75rem', color: '#00f5d4' }}>
+                      Artykuł jest widoczny publicznie od {new Date(date).toLocaleDateString('pl-PL', { day: '2-digit', month: 'long', year: 'numeric' })}
+                    </span>
+                  </div>
+                );
+              }
+              return null;
+            })()}
+
             <div
               style={{
                 display: 'flex',
@@ -924,6 +978,7 @@ export default function ArticleEditor({ initialData, mode }: Props) {
                 padding: '14px',
                 background: published ? 'rgba(0,245,212,0.04)' : 'rgba(90,100,120,0.05)',
                 border: `1px solid ${published ? 'rgba(0,245,212,0.12)' : 'rgba(90,100,120,0.15)'}`,
+                borderRadius: 8,
               }}
             >
               <input
@@ -933,20 +988,28 @@ export default function ArticleEditor({ initialData, mode }: Props) {
                 onChange={(e) => setPublished(e.target.checked)}
                 style={{ width: '16px', height: '16px', cursor: 'pointer', accentColor: '#00f5d4' }}
               />
-              <label
-                htmlFor="published"
-                style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: '0.72rem',
-                  color: published ? '#00f5d4' : '#5a6478',
-                  cursor: 'pointer',
-                  letterSpacing: '1px',
-                }}
-              >
-                {published
-                  ? '// ARTYKUŁ WIDOCZNY PUBLICZNIE'
-                  : '// SZKIC — NIEWIDOCZNY DLA CZYTELNIKÓW'}
-              </label>
+              <div>
+                <label
+                  htmlFor="published"
+                  style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: '0.72rem',
+                    color: published ? '#00f5d4' : '#5a6478',
+                    cursor: 'pointer',
+                    letterSpacing: '1px',
+                    display: 'block',
+                  }}
+                >
+                  {published
+                    ? '// ARTYKUŁ WIDOCZNY PUBLICZNIE'
+                    : '// SZKIC — NIEWIDOCZNY DLA CZYTELNIKÓW'}
+                </label>
+                {!published && (
+                  <div style={{ fontFamily: 'system-ui', fontSize: '0.65rem', color: '#3a4258', marginTop: 3 }}>
+                    Zaznacz + ustaw datę powyżej aby zaplanować publikację
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 

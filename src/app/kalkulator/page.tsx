@@ -99,7 +99,7 @@ export default function KalkulatorPage() {
           <p style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '0.8rem',
-            color: '#8a9ab5',
+            color: '#c8d4e8',
             lineHeight: 1.8,
             maxWidth: 560,
             marginBottom: 48,

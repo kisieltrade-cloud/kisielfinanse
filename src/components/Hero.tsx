@@ -1,12 +1,9 @@
 import Link from 'next/link';
-import { getAllPosts } from '@/lib/posts';
-import HeroArticleRotator from '@/components/HeroArticleRotator';
 import AnimatedCounter from '@/components/AnimatedCounter';
+import HeroArticles from '@/components/HeroArticles';
 
 
 export default async function Hero() {
-  const allPosts = await getAllPosts();
-  const recentPosts = allPosts.filter((p) => p.published).slice(0, 6);
   return (
     <section className="hero" id="home" style={{ overflow: 'hidden', position: 'relative' }}>
 
@@ -99,7 +96,7 @@ export default async function Hero() {
         </div>
       </div>
 
-      <HeroArticleRotator posts={recentPosts} />
+      <HeroArticles />
 
     </section>
   );
