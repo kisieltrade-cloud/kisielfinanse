@@ -110,7 +110,7 @@ export default async function BlogPostPage({ params }: Props) {
       '@type': 'Person',
       name: 'Mateusz Kisiel',
       url: `${BASE_URL}/o-mnie`,
-      sameAs: ['https://kisielfinanse.pl', 'https://x.com/KisielFinanse'],
+      sameAs: ['https://kisielfinanse.pl', 'https://x.com/Kisielfinanse'],
     },
     publisher: {
       '@type': 'Organization',

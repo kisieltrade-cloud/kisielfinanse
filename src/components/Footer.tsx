@@ -18,12 +18,12 @@ export default async function Footer() {
             Bez ściemy i kursów za fortunę.
           </p>
           <a
-            href="https://x.com/KisielFinanse"
+            href="https://x.com/Kisielfinanse"
             target="_blank"
             rel="noopener noreferrer"
             className="footer-social"
           >
-            𝕏 @KisielFinanse
+            𝕏 @Kisielfinanse
           </a>
         </div>
 

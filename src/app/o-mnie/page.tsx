@@ -109,7 +109,7 @@ export default function OMnie() {
             description: 'Twórca KisielFinanse. 9 lat na rynkach finansowych. Pisze o tradingu, krypto, oszczędzaniu i wolności finansowej.',
             knowsAbout: ['Trading', 'Forex', 'Futures', 'Kryptowaluty', 'Finanse osobiste', 'Oszczędzanie', 'Inwestowanie', 'Geopolityka', 'Zarządzanie ryzykiem'],
             address: { '@type': 'PostalAddress', addressLocality: 'Wrocław', addressCountry: 'PL' },
-            sameAs: ['https://kisielfinanse.pl', 'https://x.com/KisielFinanse'],
+            sameAs: ['https://kisielfinanse.pl', 'https://x.com/Kisielfinanse'],
           })}}
         />
 

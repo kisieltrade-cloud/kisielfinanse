@@ -7,8 +7,7 @@ export default function SchemaOrg() {
     url: 'https://kisielfinanse.pl',
     image: 'https://kisielfinanse.pl/images/profile.png',
     sameAs: [
-      'https://x.com/KisielFinanse',
-      'https://twitter.com/KisielFinanse',
+      'https://x.com/Kisielfinanse',
     ],
     jobTitle: 'Day Trader',
     description: 'Trader i analityk finansowy z Wrocławia. Edukacja z zakresu tradingu, krypto, oszczędzania i geopolityki finansowej.',
@@ -54,8 +53,7 @@ export default function SchemaOrg() {
       addressCountry: 'PL',
     },
     sameAs: [
-      'https://x.com/KisielFinanse',
-      'https://twitter.com/KisielFinanse',
+      'https://x.com/Kisielfinanse',
     ],
     contactPoint: {
       '@type': 'ContactPoint',
