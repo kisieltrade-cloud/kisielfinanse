@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { PostMeta, tagToSlug } from '@/lib/posts';
 import { postUrl } from '@/lib/url';
 import ReadTimeRing from '@/components/ReadTimeRing';
@@ -42,13 +43,13 @@ export default function RelatedPosts({ currentSlug, currentTag, allPosts }: Prop
           return (
             <Link key={post.slug} href={postUrl(post)} className="related-card">
               {post.image ? (
-                <div style={{ width: '100%', height: 120, overflow: 'hidden', borderRadius: '12px 12px 0 0' }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                <div style={{ position: 'relative', width: '100%', height: 120, overflow: 'hidden', borderRadius: '12px 12px 0 0' }}>
+                  <Image
                     src={post.image}
                     alt={post.title}
-                    loading="lazy"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 280px"
                   />
                 </div>
               ) : (

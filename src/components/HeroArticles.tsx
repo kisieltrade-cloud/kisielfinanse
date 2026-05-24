@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getAllPosts, tagToSlug } from '@/lib/posts';
 import { postUrl } from '@/lib/url';
 
@@ -41,8 +42,15 @@ export default async function HeroArticles() {
       <Link href={postUrl(hero)} className="hero-art-feat">
         {/* Background */}
         {hero.image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={hero.image} alt={hero.title} className="hero-art-feat-bg" />
+          <Image
+            src={hero.image}
+            alt={hero.title}
+            fill
+            priority
+            className="hero-art-feat-bg"
+            style={{ objectFit: 'cover' }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+          />
         ) : (
           <div className="hero-art-feat-bg" style={{ background: getFallback(hero.tag) }}>
             <svg viewBox="0 0 600 280" preserveAspectRatio="none"
@@ -83,10 +91,16 @@ export default async function HeroArticles() {
             return (
               <Link key={post.slug} href={postUrl(post)} className="hero-art-card">
                 {/* Thumbnail */}
-                <div className="hero-art-card-thumb">
+                <div className="hero-art-card-thumb" style={{ position: 'relative' }}>
                   {post.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={post.image} alt={post.title} className="hero-art-card-img" />
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="hero-art-card-img"
+                      style={{ objectFit: 'cover' }}
+                      sizes="(max-width: 640px) 100vw, 200px"
+                    />
                   ) : (
                     <div className="hero-art-card-img" style={{ background: getFallback(post.tag) }}>
                       <svg viewBox="0 0 120 80" style={{ width: '100%', height: '100%', opacity: 0.2 }}>

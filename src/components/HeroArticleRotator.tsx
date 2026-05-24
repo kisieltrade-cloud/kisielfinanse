@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { PostMeta } from '@/lib/posts';
 import { postUrl } from '@/lib/url';
 
@@ -68,10 +69,13 @@ export default function HeroArticleRotator({ posts }: { posts: PostMeta[] }) {
           <div style={{ position: 'relative', height: 260, borderRadius: 10, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)' }}>
 
             {post.image ? (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img
-                src={post.image} alt={post.title}
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                priority
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 100vw, 420px"
               />
             ) : (
               <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(135deg, rgba(3,5,8,0.92) 0%, ${t.bg} 100%)` }}>
@@ -118,8 +122,13 @@ export default function HeroArticleRotator({ posts }: { posts: PostMeta[] }) {
               <div style={{ display: 'flex', gap: 12, alignItems: 'center', padding: '10px 12px', background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
                 <div style={{ width: 60, height: 60, flexShrink: 0, borderRadius: 6, overflow: 'hidden', background: tc.bg, border: `1px solid ${tc.color}33`, position: 'relative' }}>
                   {p.image ? (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img src={p.image} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                    <Image
+                      src={p.image}
+                      alt={p.title}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      sizes="60px"
+                    />
                   ) : (
                     <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <svg viewBox="0 0 60 60" style={{ width: 34, height: 34, opacity: 0.4 }}>

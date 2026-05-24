@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { PostMeta } from '@/lib/posts';
 import { postUrl } from '@/lib/url';
@@ -94,13 +95,13 @@ export default function BlogList({ posts }: Props) {
 
                 {/* Cover image or deco chart line */}
                 {post.image ? (
-                  <div style={{ width: '100%', height: 160, overflow: 'hidden', borderRadius: '12px 12px 0 0', marginBottom: 0 }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                  <div style={{ position: 'relative', width: '100%', height: 160, overflow: 'hidden', borderRadius: '12px 12px 0 0' }}>
+                    <Image
                       src={post.image}
                       alt={post.title}
-                      loading="lazy"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
                     />
                   </div>
                 ) : (

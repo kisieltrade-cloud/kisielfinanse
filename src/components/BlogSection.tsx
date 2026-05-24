@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getAllPosts, tagToSlug } from '@/lib/posts';
 import { postUrl } from '@/lib/url';
 import ReadTimeRing from '@/components/ReadTimeRing';
@@ -54,11 +55,14 @@ export default async function BlogSection() {
 
         {/* Background */}
         {hero.image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={hero.image}
             alt={hero.title}
+            fill
+            priority
             className="news-hero-bg"
+            style={{ objectFit: 'cover' }}
+            sizes="(max-width: 768px) 100vw, 900px"
           />
         ) : (
           <div
@@ -124,11 +128,13 @@ export default async function BlogSection() {
                 {/* Thumbnail */}
                 <div className="news-card-thumb">
                   {post.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                       src={post.image}
                       alt={post.title}
+                      fill
                       className="news-card-thumb-img"
+                      style={{ objectFit: 'cover' }}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
                     />
                   ) : (
                     <div
