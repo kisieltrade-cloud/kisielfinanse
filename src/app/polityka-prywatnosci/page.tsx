@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
 };
 
-const LAST_UPDATE = '21.05.2026';
+const LAST_UPDATE = '24.05.2026';
 
 const sections = [
   {
@@ -67,7 +67,12 @@ const sections = [
   },
   {
     title: '6. Narzędzia analityczne',
-    content: `Serwis może korzystać z narzędzi analitycznych stron trzecich (np. Google Analytics) w celu analizy ruchu i optymalizacji treści. W przypadku wdrożenia takich narzędzi, dane o korzystaniu z serwisu (w tym zanonimizowany adres IP) mogą być przekazywane do dostawców tych usług. Użytkownicy zostaną poinformowani o wdrożeniu konkretnych narzędzi poprzez aktualizację niniejszej polityki. Możesz zarządzać ustawieniami cookies w swojej przeglądarce, aby ograniczyć zbieranie danych analitycznych.`,
+    content: `Serwis korzysta z następujących narzędzi analitycznych i usług stron trzecich:`,
+    list: [
+      'Google Analytics 4 (GA4) — narzędzie firmy Google LLC służące do analizy ruchu na stronie. Zbiera anonimowe dane o odwiedzinach (zanonimizowany adres IP, przeglądane podstrony, czas sesji, źródło ruchu). Dane przetwarzane są na serwerach Google, w tym poza EOG. Google Analytics uruchamiany jest wyłącznie po udzieleniu zgody przez użytkownika (Consent Mode v2). Więcej informacji: policies.google.com/privacy',
+      'Giscus (system komentarzy) — komentarze obsługiwane są przez serwis Giscus.app z wykorzystaniem GitHub Discussions. Dodanie komentarza wymaga zalogowania kontem GitHub — dane profilowe GitHub (nazwa użytkownika, avatar) są wówczas widoczne publicznie. Dane przechowywane są na serwerach GitHub (Microsoft). Polityka prywatności GitHub: docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement',
+    ],
+    extra: 'Możesz zarządzać plikami cookies analitycznych poprzez panel zgód dostępny na stronie lub ustawienia przeglądarki. Rezygnacja z komentowania w Giscus nie wymaga żadnych dodatkowych działań.',
   },
   {
     title: '7. Okres przechowywania danych',
