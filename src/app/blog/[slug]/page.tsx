@@ -19,6 +19,7 @@ import ReadTimeRing from '@/components/ReadTimeRing';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import AuthorBox from '@/components/AuthorBox';
 import NextArticleBar from '@/components/NextArticleBar';
+import GiscusComments from '@/components/GiscusComments';
 
 const BASE_URL = 'https://kisielfinanse.pl';
 
@@ -259,6 +260,9 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Share buttons */}
         <ShareButtons title={post.title} slug={slug} />
+
+        {/* Comments */}
+        <GiscusComments slug={slug} />
 
         {/* TOC sidebar */}
         {tocItems.length >= 2 && (
