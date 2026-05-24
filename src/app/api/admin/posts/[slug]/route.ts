@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { useGitHub, ghGetFileSha, ghWriteFile, ghDeleteFile } from '@/lib/github-cms';
 
 export const dynamic = 'force-dynamic';
 
@@ -32,8 +33,6 @@ export async function PUT(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
-  const filePath = findFile(slug);
-  if (!filePath) return NextResponse.json({ error: 'Nie znaleziono' }, { status: 404 });
 
   const body = await req.json();
   const {
@@ -57,6 +56,20 @@ export async function PUT(
   if (keywords?.length) frontmatterData.keywords = keywords;
 
   const fileContent = matter.stringify(content ?? '', frontmatterData);
+  const filename = `${slug}.mdx`;
+
+  if (useGitHub()) {
+    // Produkcja: commit przez GitHub API
+    const sha = await ghGetFileSha(filename);
+    if (!sha) return NextResponse.json({ error: 'Nie znaleziono pliku w repo' }, { status: 404 });
+    const result = await ghWriteFile(filename, fileContent, sha, `cms: update ${slug}`);
+    if (!result.ok) return NextResponse.json({ error: result.error }, { status: 500 });
+    return NextResponse.json({ ok: true });
+  }
+
+  // Lokalnie: zapis na dysk
+  const filePath = findFile(slug);
+  if (!filePath) return NextResponse.json({ error: 'Nie znaleziono' }, { status: 404 });
   fs.writeFileSync(filePath, fileContent, 'utf-8');
   return NextResponse.json({ ok: true });
 }
@@ -66,6 +79,18 @@ export async function DELETE(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
+  const filename = `${slug}.mdx`;
+
+  if (useGitHub()) {
+    // Produkcja: usuń przez GitHub API
+    const sha = await ghGetFileSha(filename);
+    if (!sha) return NextResponse.json({ error: 'Nie znaleziono pliku w repo' }, { status: 404 });
+    const result = await ghDeleteFile(filename, sha, `cms: delete ${slug}`);
+    if (!result.ok) return NextResponse.json({ error: result.error }, { status: 500 });
+    return NextResponse.json({ ok: true });
+  }
+
+  // Lokalnie: usuń plik z dysku
   const filePath = findFile(slug);
   if (!filePath) return NextResponse.json({ error: 'Nie znaleziono' }, { status: 404 });
   fs.unlinkSync(filePath);

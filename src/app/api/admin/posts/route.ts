@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { useGitHub, ghGetFileSha, ghWriteFile } from '@/lib/github-cms';
 
 export const dynamic = 'force-dynamic';
 
@@ -48,9 +49,7 @@ export async function POST(req: NextRequest) {
   if (!slug || !title)
     return NextResponse.json({ error: 'Slug i tytuł są wymagane' }, { status: 400 });
 
-  const filePath = path.join(POSTS_DIR, `${slug}.mdx`);
-  if (fs.existsSync(filePath))
-    return NextResponse.json({ error: 'Artykuł z tym slugiem już istnieje' }, { status: 409 });
+  const filename = `${slug}.mdx`;
 
   const frontmatterData: Record<string, unknown> = {
     title, excerpt, date, tag, readTime: readTime || '5 min', published: published ?? false,
@@ -63,6 +62,21 @@ export async function POST(req: NextRequest) {
   if (keywords?.length) frontmatterData.keywords = keywords;
 
   const fileContent = matter.stringify(content ?? '', frontmatterData);
+
+  if (useGitHub()) {
+    // Produkcja: sprawdź czy plik już istnieje w repo
+    const existing = await ghGetFileSha(filename);
+    if (existing) return NextResponse.json({ error: 'Artykuł z tym slugiem już istnieje' }, { status: 409 });
+    // Utwórz nowy plik (sha=null → create)
+    const result = await ghWriteFile(filename, fileContent, null, `cms: create ${slug}`);
+    if (!result.ok) return NextResponse.json({ error: result.error }, { status: 500 });
+    return NextResponse.json({ ok: true, slug });
+  }
+
+  // Lokalnie: zapis na dysk
+  const filePath = path.join(POSTS_DIR, filename);
+  if (fs.existsSync(filePath))
+    return NextResponse.json({ error: 'Artykuł z tym slugiem już istnieje' }, { status: 409 });
   if (!fs.existsSync(POSTS_DIR)) fs.mkdirSync(POSTS_DIR, { recursive: true });
   fs.writeFileSync(filePath, fileContent, 'utf-8');
   return NextResponse.json({ ok: true, slug });
