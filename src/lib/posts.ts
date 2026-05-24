@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { tagToSlug as _tagToSlug } from './url';
 
 const POSTS_DIR = path.join(process.cwd(), 'src', 'content', 'blog');
 
@@ -131,27 +132,21 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 }
 
 // ─── Tag utilities ────────────────────────────────────────────────────────────
-export function tagToSlug(tag: string): string {
-  return tag
-    .toLowerCase()
-    .replace(/ą/g, 'a').replace(/ć/g, 'c').replace(/ę/g, 'e')
-    .replace(/ł/g, 'l').replace(/ń/g, 'n').replace(/ó/g, 'o')
-    .replace(/ś/g, 's').replace(/ź/g, 'z').replace(/ż/g, 'z')
-    .replace(/\s+/g, '-');
-}
+// Re-export from url.ts so existing imports from @/lib/posts continue to work
+export { tagToSlug } from './url';
 
 export async function getAllTags(): Promise<{ tag: string; slug: string; count: number }[]> {
   const posts = await getAllPosts();
   const map = new Map<string, number>();
   posts.forEach((p) => map.set(p.tag, (map.get(p.tag) ?? 0) + 1));
   return Array.from(map.entries())
-    .map(([tag, count]) => ({ tag, slug: tagToSlug(tag), count }))
+    .map(([tag, count]) => ({ tag, slug: _tagToSlug(tag), count }))
     .sort((a, b) => b.count - a.count);
 }
 
 export async function getPostsByTag(tagSlug: string): Promise<{ posts: PostMeta[]; tag: string } | null> {
   const posts = await getAllPosts();
-  const matched = posts.filter((p) => tagToSlug(p.tag) === tagSlug);
+  const matched = posts.filter((p) => _tagToSlug(p.tag) === tagSlug);
   if (matched.length === 0) return null;
   return { posts: matched, tag: matched[0].tag };
 }

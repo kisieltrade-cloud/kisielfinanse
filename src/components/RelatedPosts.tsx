@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { PostMeta, tagToSlug } from '@/lib/posts';
+import { postUrl } from '@/lib/url';
 import ReadTimeRing from '@/components/ReadTimeRing';
 
 const TAG_CONFIG: Record<string, { color: string; bg: string }> = {
@@ -39,7 +40,7 @@ export default function RelatedPosts({ currentSlug, currentTag, allPosts }: Prop
         {related.map((post) => {
           const t = getTag(post.tag);
           return (
-            <Link key={post.slug} href={`/blog/${post.slug}`} className="related-card">
+            <Link key={post.slug} href={postUrl(post)} className="related-card">
               {post.image ? (
                 <div style={{ width: '100%', height: 120, overflow: 'hidden', borderRadius: '12px 12px 0 0' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}

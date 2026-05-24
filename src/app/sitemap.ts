@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllPosts, tagToSlug } from '@/lib/posts';
+import { postUrl } from '@/lib/url';
 import { CATEGORIES } from '@/lib/categories';
 
 const BASE_URL = 'https://kisielfinanse.pl';
@@ -76,7 +77,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // ── Artykuły blogowe ────────────────────────────────────────────────────────
   const blogPages: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${BASE_URL}/blog/${post.slug}`,
+    url: `${BASE_URL}${postUrl(post)}`,
     // Jeśli post był aktualizowany, używamy daty aktualizacji
     lastModified: post.updatedISO
       ? new Date(post.updatedISO)

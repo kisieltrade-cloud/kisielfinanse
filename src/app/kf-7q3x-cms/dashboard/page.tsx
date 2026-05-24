@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import { postUrl } from '@/lib/url';
 
 interface PostRow {
   slug: string;
@@ -362,7 +363,7 @@ function ArticleRow({
 
       {/* Actions */}
       <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
-        <Link href={`/blog/${post.slug}`} target="_blank" style={{
+        <Link href={postUrl(post)} target="_blank" style={{
           fontSize: '0.68rem', color: '#5a6478', textDecoration: 'none',
           padding: '7px 14px', borderRadius: 6,
           border: '1px solid rgba(255,255,255,0.06)',

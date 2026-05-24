@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getAllPosts, tagToSlug } from '@/lib/posts';
+import { postUrl } from '@/lib/url';
 
 const TAG_CONFIG: Record<string, { color: string; bg: string }> = {
   trading:     { color: '#c9a227', bg: 'rgba(201,162,39,0.15)'  },
@@ -37,7 +38,7 @@ export default async function HeroArticles() {
     <div className="hero-articles">
 
       {/* ── BIG HERO CARD ── */}
-      <Link href={`/blog/${hero.slug}`} className="hero-art-feat">
+      <Link href={postUrl(hero)} className="hero-art-feat">
         {/* Background */}
         {hero.image ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -80,7 +81,7 @@ export default async function HeroArticles() {
           {cards.map((post) => {
             const t = getTag(post.tag);
             return (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="hero-art-card">
+              <Link key={post.slug} href={postUrl(post)} className="hero-art-card">
                 {/* Thumbnail */}
                 <div className="hero-art-card-thumb">
                   {post.image ? (

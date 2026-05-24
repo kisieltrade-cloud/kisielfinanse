@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import type { PostMeta } from '@/lib/posts';
+import { postUrl } from '@/lib/url';
 
 const INTERVAL = 4000;
 const FADE_MS  = 250;
@@ -63,7 +64,7 @@ export default function HeroArticleRotator({ posts }: { posts: PostMeta[] }) {
       }}>
 
         {/* Featured card */}
-        <Link href={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+        <Link href={postUrl(post)} style={{ textDecoration: 'none', display: 'block' }}>
           <div style={{ position: 'relative', height: 260, borderRadius: 10, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)' }}>
 
             {post.image ? (
@@ -113,7 +114,7 @@ export default function HeroArticleRotator({ posts }: { posts: PostMeta[] }) {
         {rest.map((p) => {
           const tc = TAG_COLORS[p.tag?.toLowerCase()] ?? TAG_COLORS['edukacja'];
           return (
-            <Link key={p.slug} href={`/blog/${p.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+            <Link key={p.slug} href={postUrl(p)} style={{ textDecoration: 'none', display: 'block' }}>
               <div style={{ display: 'flex', gap: 12, alignItems: 'center', padding: '10px 12px', background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8 }}>
                 <div style={{ width: 60, height: 60, flexShrink: 0, borderRadius: 6, overflow: 'hidden', background: tc.bg, border: `1px solid ${tc.color}33`, position: 'relative' }}>
                   {p.image ? (

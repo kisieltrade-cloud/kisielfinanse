@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getAllPosts, tagToSlug } from '@/lib/posts';
+import { postUrl } from '@/lib/url';
 import ReadTimeRing from '@/components/ReadTimeRing';
 
 const TAG_CONFIG: Record<string, { color: string; bg: string }> = {
@@ -49,7 +50,7 @@ export default async function BlogSection() {
       </div>
 
       {/* ── HERO CARD ── */}
-      <Link href={`/blog/${hero.slug}`} className="news-hero">
+      <Link href={postUrl(hero)} className="news-hero">
 
         {/* Background */}
         {hero.image ? (
@@ -118,7 +119,7 @@ export default async function BlogSection() {
           {cards.map((post) => {
             const t = getTag(post.tag);
             return (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="news-card">
+              <Link key={post.slug} href={postUrl(post)} className="news-card">
 
                 {/* Thumbnail */}
                 <div className="news-card-thumb">

@@ -1,4 +1,5 @@
 import { getAllPosts } from '@/lib/posts';
+import { postUrl } from '@/lib/url';
 
 const BASE_URL = 'https://kisielfinanse.pl';
 
@@ -8,7 +9,7 @@ export async function GET() {
   const items = posts
     .filter((p) => p.published)
     .map((p) => {
-      const url = `${BASE_URL}/blog/${p.slug}`;
+      const url = `${BASE_URL}${postUrl(p)}`;
       const pubDate = p.dateISO ? new Date(p.dateISO).toUTCString() : new Date().toUTCString();
       const desc = p.excerpt.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       const title = p.title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

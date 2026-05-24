@@ -49,7 +49,25 @@ export const metadata: Metadata = {
   alternates: {
     canonical: BASE_URL,
     languages: { 'pl-PL': BASE_URL },
+    types: { 'application/rss+xml': `${BASE_URL}/feed.xml` },
   },
+
+  // Ikony — Next.js generuje <link> tagi automatycznie (wiarygodniejsze dla Google)
+  // favicon-96.png: 96×96px — powyżej wymaganego przez Google minimum 48×48px
+  icons: {
+    icon: [
+      { url: '/favicon-96.png',  sizes: '96x96',   type: 'image/png' },
+      { url: '/favicon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon.ico',     sizes: '32x32',   type: 'image/x-icon' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    other: [
+      { rel: 'mask-icon', url: '/favicon-96.png' },
+    ],
+  },
+
+  // PWA manifest
+  manifest: '/site.webmanifest',
 
   // Open Graph - podgląd przy udostępnianiu w social media
   openGraph: {
@@ -98,14 +116,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pl" className={`${syne.variable} ${jetbrains.variable} ${bebas.variable}`}>
       <head>
-        {/* Favicon - PNG jako główny (Google preferuje rastrowy ≥48px), SVG dla przeglądarek */}
-        <link rel="icon" href="/favicon-96.png" sizes="96x96" type="image/png" />
-        <link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png" />
-        <link rel="icon" href="/favicon.ico" sizes="48x48" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="alternate" type="application/rss+xml" title="KisielFinanse RSS" href="/feed.xml" />
-
         {/* Consent Mode v2 - musi być PRZED tagiem GA */}
         <CookieConsentInit />
 

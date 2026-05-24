@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 interface Props {
-  slug: string;
+  href: string;
   title: string;
 }
 
-export default function NextArticleBar({ slug, title }: Props) {
+export default function NextArticleBar({ href, title }: Props) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -68,7 +68,7 @@ export default function NextArticleBar({ slug, title }: Props) {
         </div>
 
         <Link
-          href={`/blog/${slug}`}
+          href={href}
           style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '0.65rem',

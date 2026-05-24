@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { PostMeta } from '@/lib/posts';
+import { postUrl } from '@/lib/url';
 import ReadTimeRing from '@/components/ReadTimeRing';
 
 const TAG_CONFIG: Record<string, { color: string; bg: string }> = {
@@ -78,7 +79,7 @@ export default function BlogList({ posts }: Props) {
             return (
               <Link
                 key={post.slug}
-                href={`/blog/${post.slug}`}
+                href={postUrl(post)}
                 className="blog-card blog-card-v2"
                 style={{
                   animationDelay: `${i * 60}ms`,

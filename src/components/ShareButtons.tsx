@@ -4,15 +4,16 @@ import { useState } from 'react';
 
 interface Props {
   title: string;
-  slug: string;
+  /** Kanoniczny URL artykułu, np. /trading/nazwa-artykulu */
+  url: string;
 }
 
 const BASE_URL = 'https://kisielfinanse.pl';
 
-export default function ShareButtons({ title, slug }: Props) {
+export default function ShareButtons({ title, url }: Props) {
   const [copied, setCopied] = useState(false);
 
-  const pageUrl = `${BASE_URL}/blog/${slug}`;
+  const pageUrl = url.startsWith('http') ? url : `${BASE_URL}${url}`;
   const encodedUrl = encodeURIComponent(pageUrl);
   const encodedTitle = encodeURIComponent(title);
 
