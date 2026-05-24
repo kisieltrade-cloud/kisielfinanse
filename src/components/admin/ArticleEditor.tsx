@@ -344,7 +344,9 @@ export default function ArticleEditor({ initialData, mode }: Props) {
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState('');
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [uploadingContentImage, setUploadingContentImage] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const contentImgInputRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
 
   const insertAtCursor = useCallback((before: string, after = '', placeholder = '') => {
@@ -482,6 +484,29 @@ export default function ArticleEditor({ initialData, mode }: Props) {
     } finally {
       setUploadingImage(false);
       if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
+  const handleContentImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingContentImage(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      if (slug) formData.append('slug', slug);
+      const res = await fetch('/api/admin/upload', { method: 'POST', body: formData });
+      if (res.ok) {
+        const data = await res.json();
+        insertAtCursor(`\n![](${data.url})\n`);
+      } else {
+        alert('Błąd przesyłania zdjęcia do treści');
+      }
+    } catch {
+      alert('Błąd połączenia przy przesyłaniu');
+    } finally {
+      setUploadingContentImage(false);
+      if (contentImgInputRef.current) contentImgInputRef.current.value = '';
     }
   };
 
@@ -972,6 +997,33 @@ export default function ArticleEditor({ initialData, mode }: Props) {
               <button title="Lista punktowana" onClick={() => insertLinePrefix('- ')} style={tbBtn}>•</button>
               <button title="Lista numerowana" onClick={() => insertLinePrefix('1. ')} style={tbBtn}>1.</button>
               <button title="Linia pozioma (separator)" onClick={() => insertAtCursor('\n\n---\n\n')} style={tbBtn}>—</button>
+              <TbSep />
+              {/* Content image upload */}
+              <input
+                ref={contentImgInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleContentImageUpload}
+                style={{ display: 'none' }}
+                id="content-image-upload"
+              />
+              <button
+                title="Wstaw zdjęcie w miejscu kursora"
+                disabled={uploadingContentImage}
+                onClick={() => contentImgInputRef.current?.click()}
+                style={{
+                  ...tbBtn,
+                  color: uploadingContentImage ? '#5a6478' : '#00f5d4',
+                  borderColor: uploadingContentImage ? 'rgba(255,255,255,0.07)' : 'rgba(0,245,212,0.25)',
+                  background: uploadingContentImage ? 'transparent' : 'rgba(0,245,212,0.04)',
+                  cursor: uploadingContentImage ? 'not-allowed' : 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 5,
+                }}
+              >
+                {uploadingContentImage ? '...' : '🖼 Wstaw'}
+              </button>
             </div>
 
             {/* Content textarea */}
