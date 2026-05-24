@@ -31,6 +31,7 @@ export interface PostMeta {
   tag: string;
   readTime: string;
   published: boolean;
+  author?: string;
   keywords?: string[];
   image?: string;
   gallery?: string[];
@@ -72,6 +73,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
         tag: data.tag ?? 'Trading',
         readTime: data.readTime ?? calcReadTime(content),
         published: data.published !== false,
+        author: (data.author as string) || undefined,
         keywords: data.keywords ?? [],
         image: data.image ?? '',
         gallery: data.gallery ?? [],
