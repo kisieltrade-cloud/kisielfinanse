@@ -1,3 +1,6 @@
+// Odświeżaj co godzinę — nowe artykuły pojawią się automatycznie po dacie publikacji
+export const revalidate = 3600;
+
 import type { Metadata } from 'next';
 import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';

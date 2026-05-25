@@ -8,6 +8,9 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { getPostsByTag } from '@/lib/posts';
 import { CATEGORIES, getCategoryBySlug } from '@/lib/categories';
 
+// Odświeżaj co godzinę — nowe artykuły pojawią się automatycznie po dacie publikacji
+export const revalidate = 3600;
+
 const BASE_URL = 'https://kisielfinanse.pl';
 
 export const dynamicParams = false;

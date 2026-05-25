@@ -31,7 +31,9 @@ interface Props {
   params: Promise<{ category: string; slug: string }>;
 }
 
-export const dynamicParams = false;
+// true = Next.js może renderować artykuły dynamicznie jeśli nie były w buildzie
+// (potrzebne dla artykułów zaplanowanych na przyszłość — pojawią się bez pełnego rebuildu)
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
