@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { marked } from 'marked';
+import { CATEGORIES } from '@/lib/categories';
 
 interface InitialData {
   slug: string;
@@ -26,16 +27,7 @@ interface Props {
   mode: 'new' | 'edit';
 }
 
-const TAGS = [
-  'Edukacja',
-  'Strategia',
-  'Psychologia',
-  'Analiza',
-  'Krypto',
-  'Forex',
-  'Futures',
-  'Risk Management',
-];
+const TAGS = CATEGORIES.map((c) => c.name);
 
 function generateSlug(title: string): string {
   return title
@@ -653,23 +645,39 @@ export default function ArticleEditor({ initialData, mode }: Props) {
               <InputField label="DATA PUBLIKACJI" value={date} onChange={setDate} type="date" />
               <div style={fieldGroupStyle}>
                 <label style={labelStyle}>KATEGORIA</label>
-                <select
-                  value={tag}
-                  onChange={(e) => setTag(e.target.value)}
-                  style={{
-                    ...inputStyle,
-                    cursor: 'pointer',
-                    appearance: 'none',
-                  }}
-                  onFocus={(e) => { e.currentTarget.style.borderColor = 'rgba(0,245,212,0.4)'; }}
-                  onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(0,245,212,0.1)'; }}
-                >
-                  {TAGS.map((t) => (
-                    <option key={t} value={t} style={{ background: '#0d1520' }}>
-                      {t}
-                    </option>
-                  ))}
-                </select>
+                <div style={{ position: 'relative' }}>
+                  {/* Color dot for selected category */}
+                  <span style={{
+                    position: 'absolute',
+                    left: 12,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    width: 8,
+                    height: 8,
+                    borderRadius: '50%',
+                    background: CATEGORIES.find((c) => c.name === tag)?.color ?? '#5a6478',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                  }} />
+                  <select
+                    value={tag}
+                    onChange={(e) => setTag(e.target.value)}
+                    style={{
+                      ...inputStyle,
+                      cursor: 'pointer',
+                      appearance: 'none',
+                      paddingLeft: 28,
+                    }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = 'rgba(0,245,212,0.4)'; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(0,245,212,0.1)'; }}
+                  >
+                    {CATEGORIES.map((c) => (
+                      <option key={c.slug} value={c.name} style={{ background: '#0d1520' }}>
+                        {c.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
 
