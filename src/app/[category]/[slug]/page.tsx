@@ -50,30 +50,51 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const canonicalUrl = `${BASE_URL}/${category}/${slug}`;
 
+  // FIX 1+2: jeśli w MDX jest metaTitle → { absolute } pomija globalny template z layout.tsx
+  // (bez tego: "Title | KisielFinanse | KisielFinanse")
+  // jeśli metaTitle brak → samo post.title → template dopiszuje "| KisielFinanse" raz
+  const htmlTitle = post.metaTitle
+    ? { absolute: post.metaTitle }
+    : post.title;
+
+  // FIX 2: custom metaDescription ma priorytet nad excerpt; obie wersje obcięte do 155 znaków
+  const htmlDesc = post.metaDescription
+    ? (post.metaDescription.length > 155 ? post.metaDescription.slice(0, 152) + '...' : post.metaDescription)
+    : (post.excerpt.length > 155 ? post.excerpt.slice(0, 152) + '...' : post.excerpt);
+
+  // OG/Twitter description może być dłuższy (Facebook akceptuje ~200 znaków)
+  const ogDesc = post.metaDescription || post.excerpt;
+
+  // FIX 4: OG image — dodane alt (wymagane przez wiele platform); fallback ma wymiary
+  const ogImageUrl = post.image
+    ? (post.image.startsWith('http') ? post.image : `${BASE_URL}${post.image}`)
+    : `${BASE_URL}/og-image.png`;
+  const ogImages = post.image
+    ? [{ url: ogImageUrl, alt: post.title }]
+    : [{ url: ogImageUrl, width: 1200, height: 630, alt: `KisielFinanse – ${post.title}` }];
+
   return {
-    title: `${post.title} | KisielFinanse`,
-    description: post.excerpt.length > 155 ? post.excerpt.slice(0, 152) + '...' : post.excerpt,
+    title: htmlTitle,
+    description: htmlDesc,
     keywords: [...(post.keywords ?? []), post.tag.toLowerCase(), 'KisielFinanse', 'finanse', 'edukacja finansowa'],
     authors: [{ name: 'Mateusz Kisiel', url: `${BASE_URL}/o-mnie` }],
     alternates: { canonical: canonicalUrl },
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title: post.title,   // OG title: sam tytuł artykułu, bez "| KisielFinanse"
+      description: ogDesc,
       url: canonicalUrl,
       type: 'article',
       locale: 'pl_PL',
       publishedTime: post.dateISO,
       modifiedTime: post.updatedISO ?? post.dateISO,
-      authors: ['Mateusz'],
+      authors: ['Mateusz Kisiel'], // FIX 5: pełne imię i nazwisko
       tags: [post.tag],
-      images: post.image
-        ? [{ url: post.image.startsWith('http') ? post.image : `${BASE_URL}${post.image}` }]
-        : [{ url: '/og-image.png', width: 1200, height: 630 }],
+      images: ogImages,
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
-      description: post.excerpt,
+      description: ogDesc,
     },
   };
 }

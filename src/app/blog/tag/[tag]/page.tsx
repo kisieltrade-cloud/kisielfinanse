@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const capitalized = tag.charAt(0).toUpperCase() + tag.slice(1);
 
   return {
-    title: `${capitalized} - Artykuły | KisielFinanse`,
+    title: { absolute: `${capitalized} - Artykuły | KisielFinanse` },
     description: `Artykuły o tematyce ${tag} na KisielFinanse. Praktyczna wiedza finansowa bez ściemy.`,
     keywords: [tag, 'KisielFinanse', 'edukacja finansowa', `blog ${tag}`, `artykuły ${tag}`],
     // Canonical wskazuje na główną stronę kategorii (nie duplikat /blog/tag/X)

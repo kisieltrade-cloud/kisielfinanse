@@ -6,7 +6,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import RevealOnScroll from '@/components/RevealOnScroll';
 
 export const metadata: Metadata = {
-  title: 'Kalkulator Finansowy - Procent Składany i Risk/Reward | KisielFinanse',
+  title: { absolute: 'Kalkulator Finansowy - Procent Składany i Risk/Reward | KisielFinanse' },
   description: 'Darmowy kalkulator finansowy: procent składany (kapitał startowy, wpłaty, stopa zwrotu) oraz risk/reward dla traderów. Oblicz wielkość pozycji i potencjalny zysk.',
   keywords: [
     'kalkulator procent składany', 'kalkulator risk reward', 'kalkulator inwestycji',

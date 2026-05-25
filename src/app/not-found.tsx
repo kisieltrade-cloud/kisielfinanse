@@ -4,7 +4,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: '404 - Strona nie znaleziona | KisielFinanse',
+  title: { absolute: '404 - Strona nie znaleziona | KisielFinanse' },
   robots: { index: false, follow: false },
 };
 

@@ -4,7 +4,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Disclaimer - Zastrzeżenia Prawne | KisielFinanse',
+  title: { absolute: 'Disclaimer - Zastrzeżenia Prawne | KisielFinanse' },
   description: 'Zastrzeżenia prawne serwisu KisielFinanse.pl. Treści mają charakter wyłącznie edukacyjny i nie stanowią doradztwa inwestycyjnego. Trading wiąże się z ryzykiem.',
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://kisielfinanse.pl/disclaimer' },

@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Mateusz Kisiel - KisielFinanse' };
 
 export const metadata: Metadata = {
-  title: 'Mateusz Kisiel - Trader i twórca KisielFinanse',
+  title: { absolute: 'Mateusz Kisiel - Trader i twórca KisielFinanse' },
   description: 'Twórca KisielFinanse. 9 lat na rynkach finansowych - trading, krypto, inwestowanie. Portal o finansach osobistych, rynkach i wolności finansowej. Bez ściemy.',
   keywords: [
     'Mateusz Kisiel', 'KisielFinanse', 'finanse osobiste', 'edukacja finansowa',

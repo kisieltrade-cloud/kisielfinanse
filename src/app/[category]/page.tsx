@@ -28,9 +28,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const config = getCategoryBySlug(slug);
   if (!config) return {};
 
+  // config.metaTitle już zawiera "| KisielFinanse" → { absolute } zapobiega podwójnemu suffixowi
+  // np. "Strategie tradingowe i day trading | KisielFinanse" (nie "... | KF | KF")
   return {
-    title: config.metaTitle,
+    title: { absolute: config.metaTitle },
     description: config.metaDesc,
+    // Słowa kluczowe: nazwa kategorii + tematy z desc (oddzielone przecinkami) + universalia
+    keywords: [
+      config.name,
+      ...config.desc.split(',').map((s) => s.trim()),
+      'KisielFinanse',
+      'edukacja finansowa',
+      'finanse osobiste',
+    ],
     alternates: { canonical: `${BASE_URL}/${slug}` },
     openGraph: {
       title: config.metaTitle,

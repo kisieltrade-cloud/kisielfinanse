@@ -36,6 +36,8 @@ export interface PostMeta {
   keywords?: string[];
   image?: string;
   gallery?: string[];
+  metaTitle?: string;       // custom SEO title (z CMS); jeśli brak → używamy title
+  metaDescription?: string; // custom meta description (z CMS); jeśli brak → używamy excerpt
 }
 
 export interface Post extends PostMeta {
@@ -78,6 +80,8 @@ export async function getAllPosts(): Promise<PostMeta[]> {
         keywords: data.keywords ?? [],
         image: data.image ?? '',
         gallery: data.gallery ?? [],
+        metaTitle: (data.metaTitle as string) || undefined,
+        metaDescription: (data.metaDescription as string) || undefined,
         _rawDate: rawDate,
       };
     })
@@ -126,6 +130,8 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     keywords: data.keywords ?? [],
     image: data.image ?? '',
     gallery: data.gallery ?? [],
+    metaTitle: (data.metaTitle as string) || undefined,
+    metaDescription: (data.metaDescription as string) || undefined,
     faq: Array.isArray(data.faq) ? (data.faq as FaqItem[]) : [],
     content,
   };

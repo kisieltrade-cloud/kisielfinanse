@@ -4,7 +4,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Polityka Prywatności | KisielFinanse',
+  title: { absolute: 'Polityka Prywatności | KisielFinanse' },
   description: 'Polityka prywatności serwisu KisielFinanse.pl — informacje o przetwarzaniu danych osobowych, plikach cookies i prawach użytkownika zgodnie z RODO.',
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://kisielfinanse.pl/polityka-prywatnosci' },

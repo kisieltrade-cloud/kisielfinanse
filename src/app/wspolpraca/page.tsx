@@ -8,7 +8,7 @@ import RevealOnScroll from '@/components/RevealOnScroll';
 const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Współpraca - KisielFinanse' };
 
 export const metadata: Metadata = {
-  title: 'Współpraca - Sponsoring, Afiliacja, Partnerstwo | KisielFinanse',
+  title: { absolute: 'Współpraca - Sponsoring, Afiliacja, Partnerstwo | KisielFinanse' },
   description:
     'Współpraca z KisielFinanse - edukacja o rynkach finansowych. Giełdy krypto, platformy tradingowe, sponsoring, afiliacja. Skontaktuj się.',
   keywords: [
