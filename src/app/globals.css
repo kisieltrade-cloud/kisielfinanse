@@ -1080,6 +1080,18 @@ a { color: inherit; text-decoration: none; }
 
 .blog-post-content strong { color: var(--text); font-weight: 700; }
 
+.blog-post-content a {
+  color: #c9a227;
+  text-decoration: underline;
+  text-decoration-color: rgba(201, 162, 39, 0.35);
+  text-underline-offset: 3px;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+.blog-post-content a:hover {
+  color: #e8b840;
+  text-decoration-color: rgba(232, 184, 64, 0.7);
+}
+
 .blog-post-content blockquote {
   border-left: 3px solid var(--cyan);
   padding: 16px 24px;
