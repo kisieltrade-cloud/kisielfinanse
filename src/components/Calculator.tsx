@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 
 type Tab = 'compound' | 'rr' | 'fire' | 'etf';
+export type { Tab };
 
 const fmt   = (n: number) => Math.round(n).toLocaleString('pl-PL');
 const short = (n: number) => {
@@ -302,16 +303,8 @@ function pickYears(max: number, n = 5): number[] {
 }
 
 // ─── GŁÓWNY KOMPONENT ────────────────────────────────────────────
-const VALID_TABS: Tab[] = ['compound', 'rr', 'fire', 'etf'];
-
-export default function Calculator() {
-  const [tab, setTab] = useState<Tab>('compound');
-
-  // Ustaw aktywną zakładkę na podstawie query param ?t=
-  useEffect(() => {
-    const t = new URLSearchParams(window.location.search).get('t');
-    if (t && VALID_TABS.includes(t as Tab)) setTab(t as Tab);
-  }, []);
+export default function Calculator({ initialTab = 'compound' }: { initialTab?: Tab }) {
+  const [tab, setTab] = useState<Tab>(initialTab);
 
   const [principal, setPrincipal] = useState('10000');
   const [monthly,   setMonthly]   = useState('500');

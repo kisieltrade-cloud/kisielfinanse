@@ -14,10 +14,10 @@ const UTIL_LINKS = [
 ];
 
 const CALC_ITEMS = [
-  { href: '/kalkulator?t=compound', label: 'Procent składany', icon: '📈' },
-  { href: '/kalkulator?t=rr',       label: 'Risk / Reward',    icon: '⚖️' },
-  { href: '/kalkulator?t=fire',     label: 'Kalkulator FIRE',  icon: '🔥' },
-  { href: '/kalkulator?t=etf',      label: 'Symulacja ETF',    icon: '📊' },
+  { href: '/kalkulator/procent-skladany', label: 'Procent składany', icon: '📈' },
+  { href: '/kalkulator/risk-reward',      label: 'Risk / Reward',    icon: '⚖️' },
+  { href: '/kalkulator/fire',             label: 'Kalkulator FIRE',  icon: '🔥' },
+  { href: '/kalkulator/etf',              label: 'Symulacja ETF',    icon: '📊' },
 ];
 
 export default function Nav() {
@@ -45,7 +45,7 @@ export default function Nav() {
   }, [calcOpen]);
 
   const isActive = (href: string) => pathname === href;
-  const isCalcActive = pathname === '/kalkulator' || pathname === '/kalkulator-hipoteczny';
+  const isCalcActive = pathname.startsWith('/kalkulator') && pathname !== '/kalkulator-hipoteczny';
 
   return (
     <>
