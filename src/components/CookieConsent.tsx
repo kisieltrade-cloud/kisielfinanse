@@ -3,19 +3,26 @@
 import { useEffect, useState } from 'react';
 
 // ── Google Consent Mode v2 ─────────────────────────────────────────────────────
-function gtag(...args: unknown[]) {
-  if (typeof window === 'undefined') return;
-  (window as any).dataLayer = (window as any).dataLayer || [];
-  (window as any).dataLayer.push(args);
-}
-
 function setConsent(analytics: boolean) {
+  if (typeof window === 'undefined') return;
+  // window.gtag jest dostępne bo GA ładuje się afterInteractive (przed kliknięciem bannera)
+  const gtag = (window as any).gtag;
+  if (typeof gtag !== 'function') return;
+
   gtag('consent', 'update', {
     analytics_storage: analytics ? 'granted' : 'denied',
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
+    ad_storage:        'denied',
+    ad_user_data:      'denied',
+    ad_personalization:'denied',
   });
+
+  // Po przyznaniu zgody wymuś page_view — GA mogło już wystrzelić hit z denied
+  if (analytics) {
+    gtag('event', 'page_view', {
+      page_location: window.location.href,
+      page_title:    document.title,
+    });
+  }
 }
 
 // ── Modal ──────────────────────────────────────────────────────────────────────
