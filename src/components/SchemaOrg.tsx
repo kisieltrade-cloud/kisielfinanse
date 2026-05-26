@@ -80,8 +80,12 @@ export default function SchemaOrg() {
       name: 'Mateusz Kisiel',
     },
     potentialAction: {
-      '@type': 'ReadAction',
-      target: ['https://kisielfinanse.pl/blog'],
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://kisielfinanse.pl/blog?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
     },
   };
 

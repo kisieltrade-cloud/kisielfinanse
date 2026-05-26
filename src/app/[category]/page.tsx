@@ -150,15 +150,15 @@ export default async function CategoryPage({ params }: Props) {
             <h1
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2.4rem, 7vw, 5rem)',
-                letterSpacing: '4px',
+                fontSize: 'clamp(1.8rem, 5vw, 3.6rem)',
+                letterSpacing: '3px',
                 margin: '0 0 20px',
                 color: config.color,
-                lineHeight: 1,
+                lineHeight: 1.1,
                 textTransform: 'uppercase',
               }}
             >
-              {config.name}
+              {config.metaTitle.replace(' | KisielFinanse', '')}
             </h1>
 
             <p

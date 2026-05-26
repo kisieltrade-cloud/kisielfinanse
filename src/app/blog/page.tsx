@@ -5,34 +5,62 @@ import RevealOnScroll from '@/components/RevealOnScroll';
 import BlogList from '@/components/BlogList';
 import { getAllPosts } from '@/lib/posts';
 
-const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Blog Tradingowy - KisielFinanse' };
+const BASE_URL = 'https://kisielfinanse.pl';
 
-// Odświeżaj co godzinę — artykuły z przyszłą datą pojawią się automatycznie
+// Odswiezaj co godzine - artykuly z przyszla data pojawia sie automatycznie
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: { absolute: 'Blog Finansowy - Trading, Krypto, Oszczędzanie | KisielFinanse' },
-  description: 'Artykuły o tradingu, krypto, oszczędzaniu i geopolityce finansowej. Praktyczna wiedza bez ściemy - finanse które naprawdę robią różnicę.',
+  title: { absolute: 'Blog Finansowy - Trading, Krypto, Oszczedzanie | KisielFinanse' },
+  description: 'Artykuly o tradingu, krypto, oszczedzaniu i geopolityce finansowej. Praktyczna wiedza bez sciemy - finanse ktore naprawde robia roznice.',
   keywords: [
-    'edukacja finansowa', 'blog finansowy', 'trading artykuły', 'krypto poradnik',
-    'oszczędzanie inwestowanie', 'geopolityka finanse', 'psychologia pieniędzy',
-    'analiza rynku', 'wolność finansowa', 'jak inwestować',
+    'edukacja finansowa', 'blog finansowy', 'trading artykuly', 'krypto poradnik',
+    'oszczedzanie inwestowanie', 'geopolityka finanse', 'psychologia pieniedzy',
+    'analiza rynku', 'wolnosc finansowa', 'jak inwestowac',
   ],
-  alternates: { canonical: 'https://kisielfinanse.pl/blog' },
+  alternates: { canonical: `${BASE_URL}/blog` },
   openGraph: {
     type: 'website',
     locale: 'pl_PL',
-    title: 'Blog Finansowy - Trading, Krypto, Oszczędzanie | KisielFinanse',
-    description: 'Artykuły o tradingu, krypto, oszczędzaniu i geopolityce. Finanse bez ściemy.',
-    url: 'https://kisielfinanse.pl/blog',
+    title: 'Blog Finansowy - Trading, Krypto, Oszczedzanie | KisielFinanse',
+    description: 'Artykuly o tradingu, krypto, oszczedzaniu i geopolityce. Finanse bez sciemy.',
+    url: `${BASE_URL}/blog`,
     siteName: 'KisielFinanse',
-    images: [OG_IMAGE],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Blog Finansowy - KisielFinanse' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Edukacja Finansowa - KisielFinanse',
-    description: 'Trading, krypto, oszczędzanie, geopolityka. Finanse bez ściemy.',
+    title: 'Blog Finansowy - KisielFinanse',
+    description: 'Trading, krypto, oszczedzanie, geopolityka. Finanse bez sciemy.',
     images: ['/og-image.png'],
+  },
+};
+
+const schemaBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'KisielFinanse', item: BASE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Blog',          item: `${BASE_URL}/blog` },
+  ],
+};
+
+const schemaBlog = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Blog Finansowy KisielFinanse',
+  description: 'Artykuly o tradingu, inwestycjach, oszczedzaniu i geopolityce finansowej.',
+  url: `${BASE_URL}/blog`,
+  inLanguage: 'pl-PL',
+  publisher: {
+    '@type': 'Organization',
+    name: 'KisielFinanse',
+    url: BASE_URL,
+  },
+  author: {
+    '@type': 'Person',
+    name: 'Mateusz Kisiel',
+    url: `${BASE_URL}/o-mnie`,
   },
 };
 
@@ -43,12 +71,13 @@ export default async function BlogPage() {
     <>
       <RevealOnScroll />
       <Nav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBlog) }} />
       <main>
         <div className="blog-page">
           <h1 className="section-title reveal">
-            WSZYSTKIE
-            <br />
-            <span className="gradient-text-pp">ARTYKUŁY</span>
+            BLOG<br />
+            <span className="gradient-text-pp">FINANSOWY</span>
           </h1>
           <BlogList posts={posts} />
         </div>
