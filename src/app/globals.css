@@ -1961,6 +1961,42 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ──────────────────────────────────────
+   MOBILE MENU — SCROLL FIX
+────────────────────────────────────── */
+.mobile-menu {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.mobile-menu-links {
+  overflow: visible;
+  padding-bottom: 40px;
+}
+.mobile-menu-link {
+  font-size: 1.6rem;
+}
+
+/* ──────────────────────────────────────
+   O-MNIE HERO GRID — RESPONSIVE
+────────────────────────────────────── */
+.about-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 64px;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .about-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .about-hero-grid > div:last-child {
+    width: 100% !important;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
+
+/* ──────────────────────────────────────
    ABOUT (NAPRAWA)
 ────────────────────────────────────── */
 .about-section {
@@ -2243,26 +2279,28 @@ a { color: inherit; text-decoration: none; }
   z-index: 99;
   display: flex;
   flex-direction: column;
-  padding: 40px 24px;
+  padding: 24px 24px 0;
   border-top: 1px solid var(--border);
   animation: fadeInDown 0.2s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-menu-links {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  flex: 1;
+  gap: 0;
+  padding-bottom: 48px;
 }
 
 .mobile-menu-link {
   display: block;
   font-family: var(--font-display);
-  font-size: 2.2rem;
-  letter-spacing: 3px;
+  font-size: 1.7rem;
+  letter-spacing: 2px;
   color: var(--text);
-  padding: 12px 0;
+  padding: 10px 0;
   border-bottom: 1px solid var(--border);
   transition: color 0.2s;
 }

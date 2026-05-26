@@ -150,8 +150,7 @@ export default function OMnie() {
           }} />
 
           <div style={{ maxWidth: 1100, margin: '0 auto', width: '100%', position: 'relative', zIndex: 1 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 64, alignItems: 'center' }}
-              className="about-hero-grid">
+            <div className="about-hero-grid">
 
               <div>
                 <h1 style={{
