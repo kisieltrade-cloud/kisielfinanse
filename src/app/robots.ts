@@ -8,8 +8,9 @@ export default function robots(): MetadataRoute.Robots {
       disallow: [
         '/api/',
         '/kf-7q3x-cms/',
-        '/_next/static/',   // skompilowane czcionki, JS, CSS — nie indeksuj
-        '/_next/image/',    // endpoint optymalizacji obrazków
+        // /_next/static/ i /_next/image/ celowo NIE są blokowane —
+        // Googlebot musi mieć dostęp do JS/CSS/fontów żeby wyrenderować stronę.
+        // Google nie indeksuje tych plików jako stron — blokowanie tylko szkodzi SEO.
       ],
     },
     sitemap: 'https://kisielfinanse.pl/sitemap.xml',
