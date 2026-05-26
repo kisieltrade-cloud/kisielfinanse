@@ -141,35 +141,58 @@ export default function KalkulatorHipotecznyPage() {
       />
 
       <main style={{ paddingTop: '80px' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', padding: '24px 24px 0' }}>
-          <Breadcrumbs items={[
-            { label: 'KisielFinanse',          href: '/' },
-            { label: 'Kalkulator hipoteczny' },
-          ]} />
-        </div>
 
-        <div style={{ maxWidth: 900, margin: '0 auto', padding: '40px 24px 0' }}>
-          <h1 style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(2rem, 5vw, 3.2rem)',
-            letterSpacing: '4px',
-            marginBottom: 12,
-            lineHeight: 1.05,
+        {/* ── Hero z zdjęciem domu ─────────────────────────────── */}
+        <div style={{ position: 'relative', overflow: 'hidden', minHeight: 320 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/kalkulator-hipoteczny/dom.png"
+            alt="Dom — kalkulator hipoteczny"
+            style={{
+              position: 'absolute', inset: 0,
+              width: '100%', height: '100%',
+              objectFit: 'cover', objectPosition: 'center 60%',
+            }}
+          />
+          {/* Gradient overlay — ciemny po lewej, lekki po prawej */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(to right, rgba(8,12,18,0.92) 0%, rgba(8,12,18,0.7) 55%, rgba(8,12,18,0.25) 100%)',
+          }} />
+
+          {/* Treść na zdjęciu */}
+          <div style={{
+            position: 'relative', zIndex: 1,
+            maxWidth: 900, margin: '0 auto',
+            padding: '32px 24px 48px',
           }}>
-            KALKULATOR<br />
-            <span style={{ color: '#c9a227' }}>HIPOTECZNY</span>
-          </h1>
-          <p style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.8rem',
-            color: '#c8d4e8',
-            lineHeight: 1.8,
-            maxWidth: 580,
-            marginBottom: 48,
-          }}>
-            Oblicz ratę miesięczną kredytu hipotecznego, całkowity koszt i porównaj
-            raty równe z ratami malejącymi. Bez rejestracji, bez reklam.
-          </p>
+            <Breadcrumbs items={[
+              { label: 'KisielFinanse', href: '/' },
+              { label: 'Kalkulator hipoteczny' },
+            ]} />
+
+            <h1 style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(2rem, 5vw, 3.2rem)',
+              letterSpacing: '4px',
+              marginBottom: 14,
+              lineHeight: 1.05,
+            }}>
+              KALKULATOR<br />
+              <span style={{ color: '#c9a227' }}>HIPOTECZNY</span>
+            </h1>
+            <p style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.8rem',
+              color: '#c8d4e8',
+              lineHeight: 1.8,
+              maxWidth: 480,
+              margin: 0,
+            }}>
+              Oblicz ratę miesięczną, całkowity koszt i porównaj
+              raty równe z malejącymi. Bez rejestracji, bez reklam.
+            </p>
+          </div>
         </div>
 
         <MortgageCalculator />

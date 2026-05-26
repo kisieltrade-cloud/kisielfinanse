@@ -1,30 +1,51 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { CATEGORIES } from '@/lib/categories';
 
 const MAIN_LINKS = [
-  { href: '/',           label: 'Home' },
-  { href: '/o-mnie',     label: 'O mnie' },
+  { href: '/',       label: 'Home' },
+  { href: '/o-mnie', label: 'O mnie' },
 ];
 
 const UTIL_LINKS = [
-  { href: '/kalkulator', label: 'Kalkulator' },
   { href: '/wspolpraca', label: 'Współpraca' },
+];
+
+const CALC_ITEMS = [
+  { href: '/kalkulator?t=compound', label: 'Procent składany', icon: '📈' },
+  { href: '/kalkulator?t=rr',       label: 'Risk / Reward',    icon: '⚖️' },
+  { href: '/kalkulator?t=fire',     label: 'Kalkulator FIRE',  icon: '🔥' },
+  { href: '/kalkulator?t=etf',      label: 'Symulacja ETF',    icon: '📊' },
 ];
 
 export default function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [calcOpen, setCalcOpen] = useState(false);
+  const calcRef = useRef<HTMLLIElement>(null);
 
-  useEffect(() => { setOpen(false); }, [pathname]);
+  useEffect(() => { setOpen(false); setCalcOpen(false); }, [pathname]);
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
+  // zamknij dropdown kalkulatory po kliknięciu poza nim
+  useEffect(() => {
+    if (!calcOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (calcRef.current && !calcRef.current.contains(e.target as Node)) {
+        setCalcOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [calcOpen]);
+
   const isActive = (href: string) => pathname === href;
+  const isCalcActive = pathname === '/kalkulator' || pathname === '/kalkulator-hipoteczny';
 
   return (
     <>
@@ -77,7 +98,42 @@ export default function Nav() {
           {/* Separator */}
           <li className="nav-sep" aria-hidden="true" />
 
-          {/* Kalkulator, Współpraca */}
+          {/* Kalkulator hipoteczny — osobny link obok dropdown */}
+          <li>
+            <Link
+              href="/kalkulator-hipoteczny"
+              style={{ color: isActive('/kalkulator-hipoteczny') ? 'var(--cyan)' : undefined }}
+            >
+              Kalkulator hipoteczny
+            </Link>
+          </li>
+
+          {/* Dropdown: Kalkulatory */}
+          <li className="nav-dropdown" ref={calcRef}>
+            <button
+              className={`nav-dropdown-trigger${pathname === '/kalkulator' ? ' nav-dropdown-trigger--active' : ''}`}
+              onClick={() => setCalcOpen((v) => !v)}
+              aria-expanded={calcOpen}
+            >
+              Kalkulatory
+              <span className={`nav-dropdown-arrow${calcOpen ? ' nav-dropdown-arrow--open' : ''}`}>▾</span>
+            </button>
+
+            {calcOpen && (
+              <ul className="nav-dropdown-menu">
+                {CALC_ITEMS.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href} className="nav-dropdown-item" onClick={() => setCalcOpen(false)}>
+                      <span className="nav-dropdown-item-icon">{item.icon}</span>
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+
+          {/* Współpraca */}
           {UTIL_LINKS.map((l) => (
             <li key={l.href}>
               <Link
@@ -131,6 +187,32 @@ export default function Nav() {
                   onClick={() => setOpen(false)}
                 >
                   {cat.name}
+                </Link>
+              </li>
+            ))}
+
+            <li className="mobile-menu-section">Kalkulatory</li>
+
+            <li>
+              <Link
+                href="/kalkulator-hipoteczny"
+                className="mobile-menu-link"
+                style={{ color: isActive('/kalkulator-hipoteczny') ? 'var(--cyan)' : undefined }}
+                onClick={() => setOpen(false)}
+              >
+                Kalkulator hipoteczny
+              </Link>
+            </li>
+
+            {CALC_ITEMS.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="mobile-menu-link"
+                  style={{ color: isActive('/kalkulator') ? 'var(--cyan)' : undefined }}
+                  onClick={() => setOpen(false)}
+                >
+                  {item.icon} {item.label}
                 </Link>
               </li>
             ))}
