@@ -11,7 +11,7 @@ const BASE_URL = 'https://kisielfinanse.pl';
 export const metadata: Metadata = {
   title: { absolute: 'Kalkulator Hipoteczny 2026 - Oblicz Ratę Kredytu | KisielFinanse' },
   description:
-    'Darmowy kalkulator hipoteczny online. Oblicz ratę kredytu hipotecznego, całkowity koszt kredytu i porównaj raty równe z ratami malejącymi. Szybko i bez rejestracji.',
+    'Darmowy kalkulator hipoteczny online. Oblicz ratę kredytu, całkowity koszt i porównaj raty równe z malejącymi. Bez rejestracji.',
   keywords: [
     'kalkulator hipoteczny',
     'kalkulator kredytu hipotecznego',

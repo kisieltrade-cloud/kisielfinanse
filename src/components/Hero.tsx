@@ -45,10 +45,11 @@ export default async function Hero() {
       {/* ── LEFT COLUMN ── */}
       <div className="hero-content" style={{ position: 'relative', zIndex: 3, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
 
-        {/* Headline */}
-        <div style={{ marginBottom: 28 }} aria-hidden="true">
+        {/* Headline — H1 widoczny dla użytkownika i Google */}
+        <h1 style={{ marginBottom: 28, fontStyle: 'normal' }}>
           {['FINANSE.', 'WIEDZA.', 'WOLNOŚĆ.'].map((word, i) => (
-            <div key={word} style={{
+            <span key={word} style={{
+              display: 'block',
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(3.2rem, 7vw, 5.6rem)',
               fontWeight: 800,
@@ -63,13 +64,8 @@ export default async function Hero() {
               marginBottom: 6,
             }}>
               {word}
-            </div>
+            </span>
           ))}
-        </div>
-
-        {/* Visually hidden H1 for SEO */}
-        <h1 className="seo-only">
-          KisielFinanse - Edukacja finansowa | Trading, Krypto, Oszczędzanie
         </h1>
 
         <p className="hero-desc">

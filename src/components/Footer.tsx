@@ -34,7 +34,8 @@ export default async function Footer() {
             <li><Link href="/">Home</Link></li>
             <li><Link href="/blog">Blog</Link></li>
             <li><Link href="/o-mnie">O mnie</Link></li>
-            <li><Link href="/kalkulator">Kalkulator</Link></li>
+            <li><Link href="/kalkulator">Kalkulatory</Link></li>
+            <li><Link href="/kalkulator-hipoteczny">Kalkulator hipoteczny</Link></li>
             <li><Link href="/wspolpraca">Współpraca</Link></li>
           </ul>
         </div>

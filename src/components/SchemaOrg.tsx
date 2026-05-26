@@ -9,7 +9,7 @@ export default function SchemaOrg() {
     sameAs: [
       'https://x.com/Kisielfinanse',
     ],
-    jobTitle: 'Day Trader',
+    jobTitle: 'Twórca portalu KisielFinanse',
     description: 'Trader i analityk finansowy z Wrocławia. Edukacja z zakresu tradingu, krypto, oszczędzania i geopolityki finansowej.',
     knowsAbout: [
       'day trading', 'scalping', 'futures', 'forex', 'krypto',
