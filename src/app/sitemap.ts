@@ -49,7 +49,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${BASE_URL}/kalkulator`,
-      lastModified: new Date('2026-05-21'),
+      lastModified: new Date('2026-05-26'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/kalkulator/procent-skladany`,
+      lastModified: new Date('2026-05-26'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/kalkulator/risk-reward`,
+      lastModified: new Date('2026-05-26'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/kalkulator/fire`,
+      lastModified: new Date('2026-05-26'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/kalkulator/etf`,
+      lastModified: new Date('2026-05-26'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/kalkulator-hipoteczny`,
+      lastModified: new Date('2026-05-26'),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
