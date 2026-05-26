@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -144,15 +145,13 @@ export default function KalkulatorHipotecznyPage() {
 
         {/* ── Hero z zdjęciem domu ─────────────────────────────── */}
         <div style={{ position: 'relative', overflow: 'hidden', minHeight: 320 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/images/kalkulator-hipoteczny/dom.png"
             alt="Dom — kalkulator hipoteczny"
-            style={{
-              position: 'absolute', inset: 0,
-              width: '100%', height: '100%',
-              objectFit: 'cover', objectPosition: 'center 60%',
-            }}
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: 'cover', objectPosition: 'center 60%' }}
           />
           {/* Gradient overlay — ciemny po lewej, lekki po prawej */}
           <div style={{
