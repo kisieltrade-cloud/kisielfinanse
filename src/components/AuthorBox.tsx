@@ -61,7 +61,7 @@ export default function AuthorBox() {
             margin: '0 0 16px',
             maxWidth: 560,
           }}>
-            9 lat na rynkach finansowych — trading, krypto, futures. Twórca KisielFinanse.
+            9 lat na rynkach finansowych. Twórca KisielFinanse.
             Piszę o finansach tak, jak sam chciałem o nich czytać: bez ściemy, bez kursów
             za fortunę i bez obietnic szybkiego wzbogacenia.
           </p>
