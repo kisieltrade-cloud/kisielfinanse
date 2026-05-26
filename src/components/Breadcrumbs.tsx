@@ -9,16 +9,22 @@ interface Crumb {
 
 interface Props {
   items: Crumb[];
+  light?: boolean;
 }
 
-export default function Breadcrumbs({ items }: Props) {
+export default function Breadcrumbs({ items, light }: Props) {
+  const colBase   = light ? '#7a8c7e' : '#c8d4e8';
+  const colSep    = light ? '#a8d8ba' : '#8a9ab5';
+  const colLast   = light ? '#1a2b1e' : '#ffffff';
+  const colHover  = light ? '#1a5c38' : '#c9a227';
+
   return (
     <nav
       aria-label="Breadcrumb"
       style={{
         fontFamily: 'var(--font-mono)',
         fontSize: '0.68rem',
-        color: '#c8d4e8',
+        color: colBase,
         letterSpacing: '0.5px',
         display: 'flex',
         alignItems: 'center',
@@ -32,23 +38,23 @@ export default function Breadcrumbs({ items }: Props) {
         return (
           <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             {i > 0 && (
-              <span style={{ color: '#8a9ab5', userSelect: 'none' }}>›</span>
+              <span style={{ color: colSep, userSelect: 'none' }}>›</span>
             )}
             {crumb.href && !isLast ? (
               <Link
                 href={crumb.href}
                 style={{
-                  color: '#c8d4e8',
+                  color: colBase,
                   textDecoration: 'none',
                   transition: 'color 0.15s',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#c9a227')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#c8d4e8')}
+                onMouseEnter={e => (e.currentTarget.style.color = colHover)}
+                onMouseLeave={e => (e.currentTarget.style.color = colBase)}
               >
                 {crumb.label}
               </Link>
             ) : (
-              <span style={{ color: isLast ? '#ffffff' : '#c8d4e8' }}>
+              <span style={{ color: isLast ? colLast : colBase }}>
                 {crumb.label}
               </span>
             )}

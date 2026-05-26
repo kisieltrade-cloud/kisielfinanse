@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Syne, JetBrains_Mono, Bebas_Neue } from 'next/font/google';
+import { Syne, JetBrains_Mono, Bebas_Neue, Inter } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import CookieConsent from '@/components/CookieConsent';
@@ -26,6 +26,13 @@ const bebas = Bebas_Neue({
   weight: '400',
   display: 'swap',
   variable: '--font-bebas',
+});
+
+const inter = Inter({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-inter',
 });
 
 const BASE_URL = 'https://kisielfinanse.pl';
@@ -114,7 +121,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pl" className={`${syne.variable} ${jetbrains.variable} ${bebas.variable}`}>
+    <html lang="pl" className={`${syne.variable} ${jetbrains.variable} ${bebas.variable} ${inter.variable}`}>
       <head>
         {/* Consent Mode v2 - musi być PRZED tagiem GA */}
         <CookieConsentInit />

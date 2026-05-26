@@ -13,6 +13,7 @@
   --font-display: var(--font-bebas), 'Bebas Neue', sans-serif;
   --font-body: var(--font-syne), 'Syne', sans-serif;
   --font-mono: var(--font-jetbrains), 'JetBrains Mono', monospace;
+  --font-ui: var(--font-inter), 'Inter', system-ui, sans-serif;
 }
 
 *,
@@ -1873,6 +1874,8 @@ a { color: inherit; text-decoration: none; }
   .collab-form { padding: 28px 20px; }
   .collab-form-row { grid-template-columns: 1fr; }
   .collab-submit { width: 100%; text-align: center; }
+  .collab-reader-grid { grid-template-columns: 1fr !important; }
+  .collab-steps-grid  { grid-template-columns: 1fr !important; }
 }
 
 /* ──────────────────────────────────────
