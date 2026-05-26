@@ -8,27 +8,27 @@ import Footer from '@/components/Footer';
 const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Mateusz Kisiel - KisielFinanse' };
 
 export const metadata: Metadata = {
-  title: { absolute: 'Mateusz Kisiel - Trader i twórca KisielFinanse' },
-  description: 'Twórca KisielFinanse. 9 lat na rynkach finansowych - trading, krypto, inwestowanie. Portal o finansach osobistych, rynkach i wolności finansowej. Bez ściemy.',
+  title: { absolute: 'Mateusz Kisiel — O mnie | KisielFinanse' },
+  description: 'Twórca KisielFinanse. Piszę o zarządzaniu pieniędzmi, inwestowaniu, psychologii finansów i rynkach. Bez kursów za fortunę, bez ściemy.',
   keywords: [
     'Mateusz Kisiel', 'KisielFinanse', 'finanse osobiste', 'edukacja finansowa',
-    'trading wrocław', 'kryptowaluty', 'inwestowanie', 'wolność finansowa',
-    'rynki finansowe', 'oszczędzanie', 'kim jest Kisiel',
+    'inwestowanie', 'zarządzanie pieniędzmi', 'psychologia finansów',
+    'wolność finansowa', 'oszczędzanie', 'kim jest Kisiel',
   ],
   alternates: { canonical: 'https://kisielfinanse.pl/o-mnie' },
   openGraph: {
     type: 'profile',
     locale: 'pl_PL',
-    title: 'Mateusz Kisiel - Twórca KisielFinanse',
-    description: '9 lat na rynkach. Portal o finansach, tradingu, krypto i wolności finansowej. Praktyczna wiedza bez ściemy.',
+    title: 'Mateusz Kisiel — Twórca KisielFinanse',
+    description: 'Piszę o zarządzaniu pieniędzmi, inwestowaniu, psychologii finansów i rynkach. Praktyczna wiedza bez ściemy.',
     url: 'https://kisielfinanse.pl/o-mnie',
     siteName: 'KisielFinanse',
     images: [OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mateusz Kisiel - KisielFinanse',
-    description: '9 lat na rynkach. Finanse, trading, krypto i wolność finansowa.',
+    title: 'Mateusz Kisiel — KisielFinanse',
+    description: 'Zarządzanie pieniędzmi, inwestycje, psychologia finansów. Bez ściemy.',
     images: ['/og-image.png'],
   },
 };
@@ -36,38 +36,59 @@ export const metadata: Metadata = {
 const timeline = [
   {
     year: '2017',
-    title: 'Pierwsze konto, pierwsze straty',
-    desc: 'Zacząłem od Bitcoina i pierwszego rachunku forexowego - bez planu, bez zarządzania ryzykiem. Rynek szybko pokazał co o tym myśli. Ale to właśnie te pierwsze straty nauczyły mnie więcej niż jakikolwiek kurs.',
+    title: 'Pierwsze pieniądze, pierwsze błędy',
+    desc: 'Zacząłem od Bitcoina i pierwszego konta inwestycyjnego, bez planu i bez zrozumienia ryzyka. Straciłem pieniądze, ale nauczyłem się czegoś ważniejszego: że w finansach nie ma drogi na skróty i każda decyzja ma konsekwencje.',
     color: '#ff2d78',
   },
   {
-    year: '2018-19',
-    title: 'Nauka przez ból',
-    desc: 'Żadnych mentorów, żadnych kursów. Tylko wykresy, logi transakcji i analiza własnych błędów. Setki godzin przed platformą po godzinach pracy. Zrozumiałem, że jedynym skutecznym nauczycielem jest sam rynek.',
+    year: '2018–19',
+    title: 'Nauka przez własne błędy',
+    desc: 'Żadnych gotowych poradników, które naprawdę działają. Analiza własnych transakcji, budżetów, decyzji. Zrozumiałem, że wiedza finansowa to nawyk myślenia o pieniądzach, nie zasób do zebrania.',
     color: '#f5c518',
   },
   {
     year: '2020',
-    title: 'Przełom - zarządzanie ryzykiem',
-    desc: 'Kluczowe odkrycie: trading to nie przewidywanie kierunku, a zarządzanie ryzykiem i konsekwencja. Zmieniłem podejście z "ile mogę zarobić" na "ile mogę stracić". To był punkt zwrotny.',
+    title: 'Zarządzanie ryzykiem i kapitałem',
+    desc: 'Kluczowy przełom: zmieniłem pytanie z "ile mogę zarobić" na "ile mogę stracić i ile mam zachować". Zacząłem traktować pieniądze systemowo: rezerwa awaryjna, poduszki finansowe, podział kapitału na cele. To zmieniło wszystko.',
     color: '#e8963a',
   },
   {
-    year: '2021-23',
-    title: 'Rynki, krypto i szerszy obraz',
-    desc: 'Rozszerzyłem działalność na futures (US100, złoto, surowce) i kryptowaluty. Zacząłem też głębiej rozumieć powiązania między polityką, geopolityką a rynkami finansowymi. Pieniądze mają kontekst.',
+    year: '2021–23',
+    title: 'Inwestycje i szerszy kontekst',
+    desc: 'Portfel długoterminowy, ETF-y, dywersyfikacja między klasami aktywów. Zacząłem rozumieć powiązania między polityką, geopolityką a rynkami. Pieniądze mają kontekst, a im lepiej go rozumiesz, tym lepsze podejmujesz decyzje.',
     color: '#c9a227',
   },
   {
-    year: '2024-25',
-    title: 'Finanse szerzej niż trading',
-    desc: 'Zrozumiałem, że wolność finansowa to nie tylko trading. To oszczędzanie, inwestowanie, rozumienie świata, w którym żyjemy. Zacząłem systematyzować wiedzę z wielu obszarów finansów.',
-    color: '#60a5fa',
+    year: '2024–25',
+    title: 'Psychologia pieniędzy',
+    desc: 'Odkryłem, że większość problemów finansowych wynika z głowy, nie z braku wiedzy. Emocje, nawyki, błędy poznawcze, prokrastynacja. Zacząłem traktować psychologię jako osobny obszar do pracy.',
+    color: '#a78bfa',
   },
   {
     year: '2026',
-    title: 'KisielFinanse - finanse bez granic',
-    desc: 'Stworzyłem KisielFinanse jako portal o finansach w szerokim sensie. Trading, krypto, oszczędzanie, sytuacje na świecie, wolność finansowa - miejsce, gdzie każdy znajdzie coś dla siebie.',
+    title: 'KisielFinanse',
+    desc: 'Miejsce, gdzie zbieram wszystko razem. Inwestycje, oszczędzanie, zarządzanie pieniędzmi, rynki, psychologia finansów. Dla kogoś, kto chce rozumieć pieniądze, a nie tylko je zarabiać.',
+    color: '#c9a227',
+  },
+];
+
+const pillars = [
+  {
+    num: '01',
+    title: 'Pieniądze i inwestycje',
+    desc: 'Oszczędzanie, ETF-y, IKE, IKZE, OKI, kredyty, konta. Codzienne finanse i budowanie kapitału długoterminowo. Konkretne decyzje, nie teoria.',
+    color: '#f5c518',
+  },
+  {
+    num: '02',
+    title: 'Psychologia i głowa',
+    desc: 'Większość błędów finansowych nie pochodzi z braku wiedzy, tylko z emocji. FOMO, prokrastynacja, awersja do strat. I jak z tym pracować w praktyce.',
+    color: '#a78bfa',
+  },
+  {
+    num: '03',
+    title: 'Rynki i gospodarka',
+    desc: 'Trading, geopolityka, makroekonomia, banki centralne. Jak rozumieć świat finansów i co z tego wynika dla Twojego portfela.',
     color: '#c9a227',
   },
 ];
@@ -77,8 +98,21 @@ const schemaBreadcrumb = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'KisielFinanse', item: 'https://kisielfinanse.pl' },
-    { '@type': 'ListItem', position: 2, name: 'O mnie', item: 'https://kisielfinanse.pl/o-mnie' },
+    { '@type': 'ListItem', position: 2, name: 'O mnie',        item: 'https://kisielfinanse.pl/o-mnie' },
   ],
+};
+
+const schemaPerson = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Mateusz Kisiel',
+  alternateName: 'KisielFinanse',
+  url: 'https://kisielfinanse.pl/o-mnie',
+  jobTitle: 'Twórca portalu KisielFinanse',
+  description: 'Twórca KisielFinanse. 9 lat na rynkach finansowych. Pisze o tradingu, krypto, oszczędzaniu i wolności finansowej.',
+  knowsAbout: ['Trading', 'Forex', 'Futures', 'Kryptowaluty', 'Finanse osobiste', 'Oszczędzanie', 'Inwestowanie', 'Geopolityka', 'Zarządzanie ryzykiem'],
+  address: { '@type': 'PostalAddress', addressLocality: 'Wrocław', addressCountry: 'PL' },
+  sameAs: ['https://kisielfinanse.pl', 'https://x.com/Kisielfinanse'],
 };
 
 export default function OMnie() {
@@ -93,31 +127,17 @@ export default function OMnie() {
           ]} />
         </div>
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Person',
-            name: 'Mateusz Kisiel',
-            alternateName: 'KisielFinanse',
-            url: 'https://kisielfinanse.pl/o-mnie',
-            jobTitle: 'Twórca portalu KisielFinanse',
-            description: 'Twórca KisielFinanse. 9 lat na rynkach finansowych. Pisze o tradingu, krypto, oszczędzaniu i wolności finansowej.',
-            knowsAbout: ['Trading', 'Forex', 'Futures', 'Kryptowaluty', 'Finanse osobiste', 'Oszczędzanie', 'Inwestowanie', 'Geopolityka', 'Zarządzanie ryzykiem'],
-            address: { '@type': 'PostalAddress', addressLocality: 'Wrocław', addressCountry: 'PL' },
-            sameAs: ['https://kisielfinanse.pl', 'https://x.com/Kisielfinanse'],
-          })}}
-        />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }} />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaPerson) }} />
 
-        {/* ── HERO ── */}
+        {/* ── HERO ──────────────────────────────────────────── */}
         <section style={{
           minHeight: '70vh', display: 'flex', alignItems: 'center',
-          padding: '120px 24px 80px', position: 'relative', overflow: 'hidden',
+          padding: '100px 24px 80px', position: 'relative', overflow: 'hidden',
         }}>
+          {/* Grid tło */}
           <div style={{
             position: 'absolute', inset: 0, zIndex: 0,
             backgroundImage: 'linear-gradient(rgba(201,162,39,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,162,39,0.03) 1px, transparent 1px)',
@@ -126,11 +146,12 @@ export default function OMnie() {
           <div style={{
             position: 'absolute', top: '20%', right: '10%',
             width: 500, height: 500, borderRadius: '50%', zIndex: 0,
-            background: 'radial-gradient(circle, rgba(201,162,39,0.06) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(201,162,39,0.07) 0%, transparent 70%)',
           }} />
 
           <div style={{ maxWidth: 1100, margin: '0 auto', width: '100%', position: 'relative', zIndex: 1 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 64, alignItems: 'center' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 64, alignItems: 'center' }}
+              className="about-hero-grid">
 
               <div>
                 <h1 style={{
@@ -144,20 +165,32 @@ export default function OMnie() {
                 </h1>
 
                 <p style={{
-                  fontFamily: 'var(--font-mono)', fontSize: '0.85rem',
-                  color: '#c8d4e8', lineHeight: 1.9, maxWidth: 560,
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
+                  color: '#ffffff',
+                  lineHeight: 1.85,
+                  maxWidth: 520,
+                  margin: '0 0 12px',
+                }}>
+                  Przez lata uczyłem się jak działają pieniądze. Od pierwszych błędów
+                  inwestycyjnych, przez aktywny trading, po zarządzanie majątkiem
+                  i planowanie długoterminowe. Każdy etap kosztował mnie coś konkretnego.
+                </p>
+                <p style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
+                  color: '#ffffff',
+                  lineHeight: 1.85,
+                  maxWidth: 520,
                   margin: '0 0 32px',
                 }}>
-                  9 lat na rynkach nauczyło mnie jednego: pieniądze rządzą się prawami,
-                  które{' '}<span style={{ color: '#ffffff' }}>każdy może zrozumieć</span>.
-                  Trading, krypto, oszczędzanie, geopolityka - wszystko jest ze sobą
-                  połączone. Tworzę <span style={{ color: '#c9a227' }}>KisielFinanse</span>,
-                  żeby tę wiedzę przekazać praktycznie - bez kursów za fortunę,
-                  bez obietnic i bez ściemy.
+                  KisielFinanse to miejsce, gdzie zbieram tę wiedzę: inwestycje,
+                  oszczędzanie, psychologia pieniędzy, rynki, codzienne finanse.{' '}
+                  <span style={{ color: '#c9a227' }}>Bez kursów za fortunę.</span>
                 </p>
 
-                <div style={{ display: 'flex', gap: 12 }}>
-                  <Link href="/blog" style={{
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                  <Link href="/" style={{
                     fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
                     letterSpacing: '2px', background: '#c9a227', color: '#060a10',
                     border: '1px solid #c9a227', padding: '12px 24px',
@@ -165,28 +198,36 @@ export default function OMnie() {
                   }}>
                     ZACZNIJ CZYTAĆ →
                   </Link>
-                  <Link href="/wspolpraca" style={{
-                    fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
-                    letterSpacing: '2px', background: 'none', color: '#c8d4e8',
-                    border: '1px solid #1a2535', padding: '12px 24px',
-                    textDecoration: 'none',
-                  }}>
-                    WSPÓŁPRACA
-                  </Link>
+                  <a
+                    href="https://x.com/Kisielfinanse"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
+                      letterSpacing: '2px', background: 'none', color: '#ffffff',
+                      border: '1px solid rgba(255,255,255,0.15)', padding: '12px 24px',
+                      textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8,
+                    }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.736-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    @KISIELFINANSE
+                  </a>
                 </div>
               </div>
 
-              <div style={{ position: 'relative', width: 320, flexShrink: 0 }}>
+              {/* Zdjęcie */}
+              <div style={{ position: 'relative', width: 300, flexShrink: 0 }}>
                 <div style={{
                   position: 'absolute', inset: -8,
-                  border: '1px solid rgba(201,162,39,0.15)',
+                  border: '1px solid rgba(201,162,39,0.2)',
                   pointerEvents: 'none', zIndex: 1,
                 }} />
                 <Image
                   src="/images/profile.png"
                   alt="Mateusz Kisiel - KisielFinanse"
-                  width={320}
-                  height={430}
+                  width={300}
+                  height={400}
                   priority
                   style={{
                     width: '100%', height: 'auto', display: 'block',
@@ -201,39 +242,27 @@ export default function OMnie() {
           </div>
         </section>
 
-        {/* ── FILOZOFIA ── */}
+        {/* ── O CO MI CHODZI ────────────────────────────────── */}
         <section style={{
           padding: '80px 24px',
           borderTop: '1px solid #0d1a26',
           background: 'linear-gradient(180deg, transparent, rgba(201,162,39,0.02), transparent)',
         }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <h2 style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
+              letterSpacing: '4px', margin: '0 0 40px', color: '#ffffff',
+            }}>
+              O CO MI <span style={{ color: '#c9a227' }}>CHODZI</span>
+            </h2>
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
               gap: 2,
             }}>
-              {[
-                {
-                  num: '01',
-                  title: 'Trading i rynki',
-                  desc: 'Forex, krypto, futures, akcje - jak naprawdę działają rynki finansowe, jak czytać wykresy, zarządzać ryzykiem i nie dać się emocjom. Wiedza z 9 lat praktyki.',
-                  color: '#c9a227',
-                },
-                {
-                  num: '02',
-                  title: 'Finanse i wolność',
-                  desc: 'Oszczędzanie, inwestowanie, budowanie kapitału - droga do finansowej niezależności. Bo wolność finansowa to nie lottery, to świadome decyzje podejmowane każdego dnia.',
-                  color: '#e8963a',
-                },
-                {
-                  num: '03',
-                  title: 'Świat i pieniądze',
-                  desc: 'Geopolityka, inflacja, banki centralne, krypto i technologia - jak to wszystko wpływa na Twój portfel. Kontekst, którego brakuje w większości miejsc finansowych.',
-                  color: '#f5c518',
-                },
-              ].map((p, i) => (
-                <div key={i} style={{
+              {pillars.map((p) => (
+                <div key={p.num} style={{
                   background: '#0a0f1a', border: '1px solid #0d1a26',
                   borderLeft: `3px solid ${p.color}`,
                   padding: '28px 24px',
@@ -251,8 +280,8 @@ export default function OMnie() {
                     {p.title.toUpperCase()}
                   </div>
                   <p style={{
-                    fontFamily: 'var(--font-mono)', fontSize: '0.73rem',
-                    color: '#c8d4e8', lineHeight: 1.8, margin: 0,
+                    fontFamily: 'var(--font-body)', fontSize: '0.85rem',
+                    color: '#ffffff', lineHeight: 1.8, margin: 0,
                   }}>
                     {p.desc}
                   </p>
@@ -262,7 +291,7 @@ export default function OMnie() {
           </div>
         </section>
 
-        {/* ── TIMELINE ── */}
+        {/* ── TIMELINE ──────────────────────────────────────── */}
         <section style={{ padding: '80px 24px', borderTop: '1px solid #0d1a26' }}>
           <div style={{ maxWidth: 760, margin: '0 auto' }}>
             <h2 style={{
@@ -273,6 +302,7 @@ export default function OMnie() {
             </h2>
 
             <div style={{ position: 'relative' }}>
+              {/* Linia pionowa */}
               <div style={{
                 position: 'absolute', left: 100, top: 0, bottom: 0,
                 width: 1, background: '#0d1a26',
@@ -314,8 +344,8 @@ export default function OMnie() {
                         {t.title.toUpperCase()}
                       </div>
                       <p style={{
-                        fontFamily: 'var(--font-mono)', fontSize: '0.73rem',
-                        color: '#c8d4e8', lineHeight: 1.8, margin: 0,
+                        fontFamily: 'var(--font-body)', fontSize: '0.85rem',
+                        color: '#ffffff', lineHeight: 1.8, margin: 0,
                       }}>
                         {t.desc}
                       </p>
@@ -327,7 +357,57 @@ export default function OMnie() {
           </div>
         </section>
 
-        {/* ── CTA ── */}
+        {/* ── CO ZNAJDZIESZ NA KISIELFINANSE ────────────────── */}
+        <section style={{
+          padding: '80px 24px',
+          borderTop: '1px solid #0d1a26',
+          background: 'rgba(201,162,39,0.02)',
+        }}>
+          <div style={{ maxWidth: 760, margin: '0 auto' }}>
+            <h2 style={{
+              fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
+              letterSpacing: '4px', margin: '0 0 24px', color: '#ffffff',
+            }}>
+              CO ZNAJDZIESZ <span style={{ color: '#c9a227' }}>TUTAJ</span>
+            </h2>
+            <p style={{
+              fontFamily: 'var(--font-body)', fontSize: '1rem',
+              color: '#ffffff', lineHeight: 1.85, margin: '0 0 40px', maxWidth: 640,
+            }}>
+              Piszę o finansach tak, jak sam chciałbym to czytać. Bez
+              lania wody, bez clickbaitowych tytułów, bez treści pisanych pod
+              algorytm. Każdy artykuł powstaje z konkretnego powodu: bo temat
+              jest ważny albo sam przez niego przechodziłem.
+            </p>
+
+            <style>{`
+              .about-cat-link { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; background:#0a0f1a; border:1px solid #0d1a26; text-decoration:none; transition:background 0.15s; }
+              .about-cat-link:hover { background:#0d1520; }
+            `}</style>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              {[
+                { href: '/trading',     label: 'Trading',     color: '#c9a227', desc: 'Strategie, analiza, zarządzanie ryzykiem' },
+                { href: '/inwestycje',  label: 'Inwestycje',  color: '#f5c518', desc: 'ETF-y, portfel długoterminowy, OKI' },
+                { href: '/pieniadze',   label: 'Pieniądze',   color: '#e8963a', desc: 'Kredyty, konta, codzienne finanse' },
+                { href: '/psychologia', label: 'Psychologia', color: '#a78bfa', desc: 'Błędy poznawcze, emocje, mindset' },
+                { href: '/gospodarka',  label: 'Gospodarka',  color: '#ff2d78', desc: 'Makroekonomia, geopolityka, globalne trendy' },
+              ].map((cat) => (
+                <Link key={cat.href} href={cat.href}
+                  className="about-cat-link"
+                  style={{ borderLeft: `3px solid ${cat.color}` }}
+                >
+                  <div>
+                    <span style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', letterSpacing: '2px', color: cat.color }}>{cat.label.toUpperCase()}</span>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', marginLeft: 16 }}>{cat.desc}</span>
+                  </div>
+                  <span style={{ color: cat.color, opacity: 0.6 }}>→</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── CTA ───────────────────────────────────────────── */}
         <section style={{
           padding: '80px 24px 120px',
           borderTop: '1px solid #0d1a26',
@@ -342,25 +422,25 @@ export default function OMnie() {
               FINANSE BEZ ŚCIEMY.
             </h2>
             <p style={{
-              fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
-              color: '#c8d4e8', lineHeight: 1.8, margin: '0 0 32px',
+              fontFamily: 'var(--font-body)', fontSize: '0.95rem',
+              color: '#ffffff', lineHeight: 1.85, margin: '0 0 32px',
             }}>
-              Trading, krypto, oszczędzanie, wolność finansowa. Bez kursów za
-              fortunę, bez obietnic i bez lania wody. Tylko to, co naprawdę działa.
+              Inwestycje, oszczędzanie, zarządzanie pieniędzmi, psychologia finansów.
+              Tylko to, co naprawdę działa.
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/blog" style={{
+              <Link href="/" style={{
                 fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
                 letterSpacing: '2px', background: '#c9a227', color: '#060a10',
                 border: '1px solid #c9a227', padding: '14px 32px',
                 textDecoration: 'none', fontWeight: 700,
               }}>
-                PRZEJDŹ DO ARTYKUŁÓW →
+                ARTYKUŁY →
               </Link>
               <Link href="/wspolpraca" style={{
                 fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
-                letterSpacing: '2px', background: 'none', color: '#c8d4e8',
-                border: '1px solid #1a2535', padding: '14px 32px',
+                letterSpacing: '2px', background: 'none', color: '#ffffff',
+                border: '1px solid rgba(255,255,255,0.15)', padding: '14px 32px',
                 textDecoration: 'none',
               }}>
                 WSPÓŁPRACA

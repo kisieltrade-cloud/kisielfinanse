@@ -163,9 +163,9 @@ export default async function CategoryPage({ params }: Props) {
 
             <p
               style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 'clamp(0.78rem, 1.5vw, 0.92rem)',
-                color: 'var(--muted)',
+                fontFamily: 'var(--font-body)',
+                fontSize: 'clamp(0.88rem, 1.5vw, 1rem)',
+                color: '#ffffff',
                 lineHeight: 1.85,
                 maxWidth: 680,
                 margin: '0 0 24px',
