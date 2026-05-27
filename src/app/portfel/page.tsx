@@ -140,7 +140,7 @@ export default function PortfelPage() {
         <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3rem)', color: C.text, marginBottom: 12, lineHeight: 1.1 }}>
           Mój portfel
         </h1>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: C.sub, marginBottom: 48, lineHeight: 1.7, maxWidth: 560 }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: C.text, marginBottom: 48, lineHeight: 1.7, maxWidth: 560 }}>
           Pelna transparentnosc - co kupuje, kiedy, za ile i dlaczego. Bez sciemy.
           Aktualizuje co miesiac.
         </p>
@@ -153,7 +153,7 @@ export default function PortfelPage() {
             { label: 'Zysk / strata',   value: `${totalPnl >= 0 ? '+' : ''}${fmt(totalPnl)} PLN`, sub: `${totalPnlPct >= 0 ? '+' : ''}${totalPnlPct.toFixed(1)}%`, color: totalPnl >= 0 ? C.green : C.red },
           ].map((s, i) => (
             <div key={i} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, padding: '20px' }}>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '2px', color: C.label, textTransform: 'uppercase', marginBottom: 8 }}>
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '2px', color: C.text, textTransform: 'uppercase', marginBottom: 8 }}>
                 {s.label}
               </p>
               <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)', color: s.color ?? C.text, margin: 0, lineHeight: 1 }}>
@@ -170,7 +170,7 @@ export default function PortfelPage() {
 
         {/* Alokacja */}
         <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, padding: '20px 24px', marginBottom: 32 }}>
-          <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '2px', color: C.label, textTransform: 'uppercase', marginBottom: 16 }}>
+          <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '2px', color: C.text, textTransform: 'uppercase', marginBottom: 16 }}>
             Alokacja
           </p>
           <div style={{ display: 'flex', gap: 4, height: 10, borderRadius: 8, overflow: 'hidden', marginBottom: 14 }}>
@@ -193,7 +193,7 @@ export default function PortfelPage() {
         {/* Pozycje */}
         <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, overflow: 'hidden', marginBottom: 32 }}>
           <div style={{ padding: '20px 24px 16px', borderBottom: `1px solid ${C.border}` }}>
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '2px', color: C.label, textTransform: 'uppercase', margin: 0 }}>
+            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '2px', color: C.text, textTransform: 'uppercase', margin: 0 }}>
               Pozycje
             </p>
           </div>
@@ -233,7 +233,7 @@ export default function PortfelPage() {
                       <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 700, color: C.text, margin: 0 }}>
                         {h.ticker}
                       </p>
-                      <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: C.sub, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: C.text, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {h.name}
                       </p>
                     </div>
@@ -242,7 +242,7 @@ export default function PortfelPage() {
                   {/* Data / sztuki */}
                   <div style={{ textAlign: 'right' }}>
                     <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: C.text, margin: 0, fontWeight: 600 }}>{h.buyDate}</p>
-                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: C.sub, margin: 0 }}>{h.shares} szt.</p>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: C.text, margin: 0 }}>{h.shares} szt.</p>
                   </div>
 
                   {/* Wartość */}
@@ -250,7 +250,7 @@ export default function PortfelPage() {
                     <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: C.text, margin: 0, fontWeight: 700 }}>
                       {fmt(h.current)} PLN
                     </p>
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: C.sub, margin: 0 }}>
+                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: C.text, margin: 0 }}>
                       zainw. {fmt(h.invested)}
                     </p>
                   </div>
@@ -280,7 +280,7 @@ export default function PortfelPage() {
                         { k: 'Waluta', v: h.currency },
                       ].map(({ k, v }) => (
                         <div key={k}>
-                          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: C.label, margin: '0 0 2px' }}>{k}</p>
+                          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: C.text, margin: '0 0 2px' }}>{k}</p>
                           <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: C.text, margin: 0, fontWeight: 600 }}>{v}</p>
                         </div>
                       ))}
@@ -313,7 +313,7 @@ export default function PortfelPage() {
                 {u.action}
               </p>
               {/* Dlaczego */}
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: C.sub, margin: 0, lineHeight: 1.75 }}>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: C.text, margin: 0, lineHeight: 1.75 }}>
                 {u.why}
               </p>
             </div>
@@ -321,7 +321,7 @@ export default function PortfelPage() {
         </div>
 
         {/* Disclaimer */}
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: C.sub, lineHeight: 1.7, textAlign: 'center', maxWidth: 560, margin: '0 auto' }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: C.text, lineHeight: 1.7, textAlign: 'center', maxWidth: 560, margin: '0 auto' }}>
           To nie jest rekomendacja inwestycyjna. Pokazuję co sam robię - każdy podejmuje własne decyzje.
         </p>
 
