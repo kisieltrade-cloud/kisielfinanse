@@ -43,7 +43,7 @@ export default function RelatedPosts({ currentSlug, currentTag, allPosts }: Prop
           return (
             <Link key={post.slug} href={postUrl(post)} className="related-card">
               {post.image ? (
-                <div style={{ position: 'relative', width: '100%', height: 120, overflow: 'hidden', borderRadius: '12px 12px 0 0' }}>
+                <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', borderRadius: '12px 12px 0 0' }}>
                   <Image
                     src={post.image}
                     alt={post.title}
