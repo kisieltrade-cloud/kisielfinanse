@@ -1,12 +1,12 @@
 :root {
   /* ── LIGHT MODE (domyślny) ── */
-  --bg:             #f0f4f8;
-  --surface:        #ffffff;
-  --surface2:       #e8eef5;
+  --bg:             #ffffff;
+  --surface:        #f7f9fb;
+  --surface2:       #eef1f5;
   --text:           #1a2230;
   --muted:          #1a2230;
-  --border:         #ccd5e0;
-  --border-subtle:  #e0e8f0;
+  --border:         #dde2ea;
+  --border-subtle:  #edf0f5;
   /* Akcenty (te same w obu motywach) */
   --cyan:   #c9a227;
   --purple: #e8963a;
@@ -20,8 +20,8 @@
   /* Cień kart (wyłączany w ciemnym trybie) */
   --card-shadow: 0 1px 4px rgba(26,34,48,0.08), 0 0 0 1px rgba(0,0,0,0.04);
   /* Hero overlay */
-  --hero-overlay: linear-gradient(90deg, rgba(240,244,248,0.97) 0%, rgba(240,244,248,0.88) 35%, rgba(240,244,248,0.55) 58%, #f0f4f8 78%, #f0f4f8 100%);
-  --hero-fade: linear-gradient(180deg, transparent 60%, #f0f4f8 100%);
+  --hero-overlay: linear-gradient(90deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.88) 35%, rgba(255,255,255,0.55) 58%, #ffffff 78%, #ffffff 100%);
+  --hero-fade: linear-gradient(180deg, transparent 60%, #ffffff 100%);
   /* Noise */
   --noise-opacity: 0;
 }
