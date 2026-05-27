@@ -29,12 +29,28 @@ const HOLDINGS = [
     broker: 'GPW',
     note: 'Wejscie przy wsparciu. Sektor restauracyjny - KFC, Burger King, Pizza Hut w CEE.',
   },
+  {
+    ticker: 'MDV',
+    name: 'Modivo S.A.',
+    type: 'Akcje',
+    buyDate: '9-16 Kwi 2026',
+    buyPrice: 88.59,
+    currentPrice: 80.68,
+    shares: 140,
+    currency: 'PLN',
+    broker: 'GPW',
+    note: '3 wejscia: 81 szt. po 86 zł (9 kwi), 38 szt. po 91 zł (14 kwi), 21 szt. po 94,20 zł (16 kwi). Srednia 88,59 zł.',
+  },
 ];
 
 const UPDATES = [
   {
     date: '15 Maj 2026',
-    text: 'Kupno 485 akcji AmRest po 10,30 zł. Laczna kwota 4995,50 zł.',
+    text: 'Kupno 485 akcji AmRest (EAT) po 10,30 zł. Laczna kwota 4 995,50 zł.',
+  },
+  {
+    date: '9-16 Kwi 2026',
+    text: 'Budowanie pozycji w Modivo (MDV): 81 szt. po 86 zł, 38 szt. po 91 zł, 21 szt. po 94,20 zł. Razem 140 szt. za 12 402 zł. Srednia wejscia 88,59 zł.',
   },
 ];
 
