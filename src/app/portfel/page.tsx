@@ -145,7 +145,7 @@ export default function PortfelPage() {
         <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3rem)', color: C.text, marginBottom: 12, lineHeight: 1.1 }}>
           Mój portfel
         </h1>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: C.muted, marginBottom: 48, lineHeight: 1.7, maxWidth: 560 }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: C.text, marginBottom: 48, lineHeight: 1.7, maxWidth: 560 }}>
           Pełna transparentność - co kupuję, kiedy, za ile i dlaczego. Bez ściemy.
           Aktualizuję co miesiąc.
         </p>
