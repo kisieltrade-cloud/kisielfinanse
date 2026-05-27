@@ -44,12 +44,13 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const {
     slug, title, excerpt, date, tag, readTime, published,
-    content, metaTitle, metaDescription, author, image, gallery, keywords,
+    content, metaTitle, metaDescription, author, image, gallery, keywords, faq,
   } = body as {
     slug: string; title: string; excerpt?: string; date?: string; tag?: string;
     readTime?: string; published?: boolean; content?: string; metaTitle?: string;
     metaDescription?: string; author?: string; image?: string;
     gallery?: string[]; keywords?: string[];
+    faq?: Array<{ q: string; a: string }>;
   };
 
   if (!slug || !title)
@@ -66,6 +67,7 @@ export async function POST(req: NextRequest) {
   if (metaTitle) frontmatterData.metaTitle = metaTitle;
   if (metaDescription) frontmatterData.metaDescription = metaDescription;
   if (keywords?.length) frontmatterData.keywords = keywords;
+  if (faq?.length) frontmatterData.faq = faq;
 
   const fileContent = matter.stringify(content ?? '', frontmatterData);
 

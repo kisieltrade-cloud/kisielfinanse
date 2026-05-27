@@ -5,6 +5,11 @@ import { useRouter } from 'next/navigation';
 import { marked } from 'marked';
 import { CATEGORIES } from '@/lib/categories';
 
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
 interface InitialData {
   slug: string;
   title: string;
@@ -20,6 +25,7 @@ interface InitialData {
   image?: string;
   gallery?: string[];
   keywords?: string;
+  faq?: FaqItem[];
 }
 
 interface Props {
@@ -317,7 +323,7 @@ export default function ArticleEditor({ initialData, mode }: Props) {
   const [title, setTitle] = useState(initialData?.title ?? '');
   const [slug, setSlug] = useState(initialData?.slug ?? '');
   const [author, setAuthor] = useState(initialData?.author ?? 'Mateusz');
-  const [date, setDate] = useState(initialData?.date ?? new Date().toISOString().split('T')[0]);
+  const [date, setDate] = useState(initialData?.date ?? '');
   const [tag, setTag] = useState(initialData?.tag ?? TAGS[0]);
   const [readTime, setReadTime] = useState(initialData?.readTime ?? '5 min');
   const [excerpt, setExcerpt] = useState(initialData?.excerpt ?? '');
@@ -329,6 +335,7 @@ export default function ArticleEditor({ initialData, mode }: Props) {
   const [metaDescAuto, setMetaDescAuto] = useState(!initialData?.metaDescription);
   const [image, setImage] = useState(initialData?.image ?? '');
   const [gallery, setGallery] = useState<string[]>(initialData?.gallery ?? []);
+  const [faq, setFaq] = useState<FaqItem[]>(initialData?.faq ?? []);
   const [galleryOpen, setGalleryOpen] = useState(true);
   const [published, setPublished] = useState(initialData?.published ?? false);
   const [content, setContent] = useState(initialData?.content ?? '');
@@ -415,6 +422,8 @@ export default function ArticleEditor({ initialData, mode }: Props) {
       ? keywords.split(',').map((k) => k.trim()).filter(Boolean)
       : [];
 
+    const cleanFaq = faq.filter(item => item.q.trim() || item.a.trim());
+
     const payload = {
       slug,
       title,
@@ -430,6 +439,7 @@ export default function ArticleEditor({ initialData, mode }: Props) {
       image: image || undefined,
       gallery: gallery.filter(Boolean).length ? gallery.filter(Boolean) : undefined,
       keywords: keywordsArray.length ? keywordsArray : undefined,
+      faq: cleanFaq.length ? cleanFaq : undefined,
     };
 
     try {
@@ -454,7 +464,7 @@ export default function ArticleEditor({ initialData, mode }: Props) {
     }
   }, [
     slug, title, excerpt, date, tag, readTime, published, content,
-    metaTitle, metaDescription, author, image, gallery, keywords, mode, router,
+    metaTitle, metaDescription, author, image, gallery, keywords, faq, mode, router,
   ]);
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -772,6 +782,113 @@ export default function ArticleEditor({ initialData, mode }: Props) {
               onChange={setKeywords}
               placeholder="trading, forex, strategia..."
             />
+          </div>
+
+          {/* Section: FAQ */}
+          <div style={{ marginBottom: '32px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', ...sectionHeaderStyle }}>
+              <span>// FAQ</span>
+              <button
+                onClick={() => setFaq([...faq, { q: '', a: '' }])}
+                style={{
+                  background: 'transparent', border: '1px solid rgba(0,245,212,0.2)',
+                  color: '#00f5d4', cursor: 'pointer', padding: '3px 12px',
+                  fontFamily: "'JetBrains Mono', monospace", fontSize: '0.6rem',
+                  letterSpacing: '1px', borderRadius: 4,
+                }}
+              >
+                + DODAJ PYTANIE
+              </button>
+            </div>
+
+            {faq.length === 0 && (
+              <div style={{ fontSize: '0.65rem', color: '#3a4258', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '1px' }}>
+                // brak pytań FAQ — kliknij &quot;+ DODAJ PYTANIE&quot; żeby dodać
+              </div>
+            )}
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              {faq.map((item, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    background: '#0d1520',
+                    border: '1px solid rgba(0,245,212,0.08)',
+                    borderRadius: 8,
+                    padding: '14px 16px',
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.58rem', color: '#00f5d4', letterSpacing: '2px' }}>
+                      // FAQ #{idx + 1}
+                    </span>
+                    <button
+                      onClick={() => setFaq(faq.filter((_, i) => i !== idx))}
+                      style={{
+                        background: 'transparent', border: 'none', color: '#5a6478',
+                        cursor: 'pointer', fontSize: '0.8rem', padding: '2px 6px',
+                        fontFamily: 'system-ui', lineHeight: 1,
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = '#ff2d78'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = '#5a6478'; }}
+                      title="Usuń to pytanie"
+                    >
+                      ×
+                    </button>
+                  </div>
+
+                  <div style={{ marginBottom: 10 }}>
+                    <label style={{ ...labelStyle, color: '#a0a8bc' }}>PYTANIE (Q)</label>
+                    <input
+                      type="text"
+                      value={item.q}
+                      onChange={(e) => {
+                        const next = [...faq];
+                        next[idx] = { ...next[idx], q: e.target.value };
+                        setFaq(next);
+                      }}
+                      placeholder="Np. Co to jest DCA?"
+                      style={{ ...inputStyle, borderRadius: 4 }}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = 'rgba(0,245,212,0.4)'; }}
+                      onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(0,245,212,0.1)'; }}
+                    />
+                  </div>
+
+                  <div>
+                    <label style={{ ...labelStyle, color: '#a0a8bc' }}>ODPOWIEDŹ (A)</label>
+                    <textarea
+                      value={item.a}
+                      onChange={(e) => {
+                        const next = [...faq];
+                        next[idx] = { ...next[idx], a: e.target.value };
+                        setFaq(next);
+                      }}
+                      rows={3}
+                      placeholder="Pełna odpowiedź na pytanie..."
+                      style={{ ...inputStyle, resize: 'vertical', lineHeight: '1.6', borderRadius: 4 }}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = 'rgba(0,245,212,0.4)'; }}
+                      onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(0,245,212,0.1)'; }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {faq.length > 0 && (
+              <button
+                onClick={() => setFaq([...faq, { q: '', a: '' }])}
+                style={{
+                  marginTop: 12, background: 'transparent', border: 'none',
+                  color: '#5a6478', fontFamily: 'system-ui, sans-serif',
+                  fontSize: '0.78rem', cursor: 'pointer', padding: 0,
+                  display: 'flex', alignItems: 'center', gap: 6,
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#e8edf5'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#5a6478'; }}
+              >
+                <span style={{ fontSize: '1rem' }}>+</span> Dodaj kolejne pytanie
+              </button>
+            )}
           </div>
 
           {/* Section: ZDJĘCIA */}
