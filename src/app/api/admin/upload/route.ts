@@ -16,23 +16,47 @@ function slugifyFilename(original: string): string {
   return `${slug}${ext}`;
 }
 
+function isAuthorized(req: NextRequest): boolean {
+  const cookie = req.cookies.get('admin_session')?.value ?? '';
+  const expected = process.env.ADMIN_PASSWORD ?? '';
+  return expected.length > 0 && cookie === expected;
+}
+
 export async function POST(req: NextRequest) {
-  const formData = await req.formData();
+  if (!isAuthorized(req)) {
+    return NextResponse.json({ error: 'Brak autoryzacji' }, { status: 401 });
+  }
+
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    return NextResponse.json(
+      { error: 'BLOB_READ_WRITE_TOKEN nie jest ustawiony w środowisku Vercel' },
+      { status: 500 },
+    );
+  }
+
+  let formData: FormData;
+  try {
+    formData = await req.formData();
+  } catch {
+    return NextResponse.json({ error: 'Nieprawidłowe dane formularza' }, { status: 400 });
+  }
+
   const file = formData.get('file') as File | null;
   if (!file) return NextResponse.json({ error: 'Brak pliku' }, { status: 400 });
 
   const articleSlug = (formData.get('slug') as string | null)?.trim() ?? '';
   const safeName = slugifyFilename(file.name);
+  const blobPath = articleSlug ? `blog/${articleSlug}/${safeName}` : `blog/${safeName}`;
 
-  // Folder structure: blog/<article-slug>/<filename> or blog/<filename>
-  const blobPath = articleSlug
-    ? `blog/${articleSlug}/${safeName}`
-    : `blog/${safeName}`;
-
-  const blob = await put(blobPath, file, {
-    access: 'public',
-    addRandomSuffix: true, // prevents collisions, e.g. blog/foto-abc123.jpg
-  });
-
-  return NextResponse.json({ url: blob.url });
+  try {
+    const blob = await put(blobPath, file, {
+      access: 'public',
+      addRandomSuffix: true,
+    });
+    return NextResponse.json({ url: blob.url });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Nieznany błąd Vercel Blob';
+    console.error('[upload] Vercel Blob error:', message);
+    return NextResponse.json({ error: `Błąd uploadu: ${message}` }, { status: 500 });
+  }
 }

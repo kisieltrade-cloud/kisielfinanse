@@ -465,11 +465,11 @@ export default function ArticleEditor({ initialData, mode }: Props) {
       const formData = new FormData();
       formData.append('file', file);
       const res = await fetch('/api/admin/upload', { method: 'POST', body: formData });
+      const data = await res.json();
       if (res.ok) {
-        const data = await res.json();
         setImage(data.url);
       } else {
-        alert('Błąd przesyłania zdjęcia');
+        alert(`Błąd przesyłania: ${data.error ?? res.status}`);
       }
     } catch {
       alert('Błąd połączenia przy przesyłaniu');
@@ -488,11 +488,11 @@ export default function ArticleEditor({ initialData, mode }: Props) {
       formData.append('file', file);
       if (slug) formData.append('slug', slug);
       const res = await fetch('/api/admin/upload', { method: 'POST', body: formData });
+      const data = await res.json();
       if (res.ok) {
-        const data = await res.json();
         insertAtCursor(`\n![](${data.url})\n`);
       } else {
-        alert('Błąd przesyłania zdjęcia do treści');
+        alert(`Błąd przesyłania: ${data.error ?? res.status}`);
       }
     } catch {
       alert('Błąd połączenia przy przesyłaniu');
