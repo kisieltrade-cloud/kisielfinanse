@@ -69,20 +69,24 @@ const HOLDINGS = [
 
 const UPDATES = [
   {
-    date: 'Maj 2026',
-    text: 'Kupno 485 akcji AmRest (EAT) po 10,30 zł. Laczna kwota 4 995,50 zł.',
+    date: '15 Maj 2026',
+    action: 'Kupno 485 szt. AmRest (EAT) po 10,30 zł - razem 4 995 zł',
+    why: '[ wpisz dlaczego kupiłeś ]',
+  },
+  {
+    date: '9-16 Kwi 2026',
+    action: 'Budowanie pozycji Modivo (MDV) - 140 szt. w 3 transzach, srednia 88,59 zł, razem 12 402 zł',
+    why: '[ wpisz dlaczego kupiłeś ]',
   },
   {
     date: '8 Kwi 2026',
-    text: 'Kupno 1 173 akcji Police S.A. (PCE) po 7,50 zł. Razem 8 797,50 zł.',
-  },
-  {
-    date: 'Kwi 2026',
-    text: 'Budowanie pozycji w Modivo (MDV): 81 szt. po 86 zł, 38 szt. po 91 zł, 21 szt. po 94,20 zł. Razem 140 szt. za 12 402 zł.',
+    action: 'Kupno 1 173 szt. Police S.A. (PCE) po 7,50 zł - razem 8 797 zł',
+    why: '[ wpisz dlaczego kupiłeś ]',
   },
   {
     date: 'Sie 2024 - teraz',
-    text: 'Amazon DCA: 800 zł co miesiac przez 21 miesiecy. Srednia $213,89. Portfel Amazona +23,4% na ten moment.',
+    action: 'Amazon DCA - 800 zł co miesiac, 21 miesiecy, srednia $213,89, lacznie 20,14 udzialow',
+    why: 'Regularny DCA w najwiekszego sprzedawce e-commerce na swiecie. Niezaleznie od ceny co miesiac.',
   },
 ];
 
@@ -291,24 +295,26 @@ export default function PortfelPage() {
         {/* Dziennik zmian */}
         <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, overflow: 'hidden', marginBottom: 48 }}>
           <div style={{ padding: '20px 24px 16px', borderBottom: `1px solid ${C.border}` }}>
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '2px', color: C.label, textTransform: 'uppercase', margin: 0 }}>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', fontWeight: 700, color: C.text, margin: 0 }}>
               Dziennik zmian
             </p>
           </div>
           {UPDATES.map((u, i) => (
             <div key={i} style={{
-              padding: '18px 24px',
+              padding: '20px 24px',
               borderBottom: i < UPDATES.length - 1 ? `1px solid ${C.border}` : 'none',
-              display: 'grid',
-              gridTemplateColumns: '90px 1fr',
-              gap: 16,
-              alignItems: 'start',
             }}>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: C.gold, paddingTop: 2, fontWeight: 700 }}>
+              {/* Data */}
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', fontWeight: 700, color: C.gold, margin: '0 0 6px' }}>
                 {u.date}
-              </span>
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: C.text, margin: 0, lineHeight: 1.7 }}>
-                {u.text}
+              </p>
+              {/* Co kupiono */}
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.92rem', color: C.text, fontWeight: 600, margin: '0 0 6px', lineHeight: 1.5 }}>
+                {u.action}
+              </p>
+              {/* Dlaczego */}
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: C.sub, margin: 0, lineHeight: 1.65 }}>
+                {u.why}
               </p>
             </div>
           ))}
