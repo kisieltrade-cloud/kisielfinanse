@@ -102,7 +102,7 @@ const TYPE_COLOR: Record<string, string> = {
 export default function PortfelPage() {
   const [expanded, setExpanded] = useState<string | null>(null);
 
-  // Przelicz wartości (uproszczone — EUR/USD traktujemy jako ~4.2 PLN)
+  // Przelicz wartości (uproszczone - EUR/USD traktujemy jako ~4.2 PLN)
   const EUR_PLN = 4.22;
   const USD_PLN = 3.88;
 
@@ -146,7 +146,7 @@ export default function PortfelPage() {
           Mój portfel
         </h1>
         <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: '#8892a4', marginBottom: 48, lineHeight: 1.7, maxWidth: 560 }}>
-          Pełna transparentność — co kupuję, kiedy, za ile i dlaczego. Bez ściemy.
+          Pełna transparentność - co kupuję, kiedy, za ile i dlaczego. Bez ściemy.
           Aktualizuję co miesiąc.
         </p>
 
@@ -343,7 +343,7 @@ export default function PortfelPage() {
 
         {/* Disclaimer */}
         <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: '#8892a4', lineHeight: 1.7, textAlign: 'center', maxWidth: 560, margin: '0 auto' }}>
-          To nie jest rekomendacja inwestycyjna. Pokazuję co sam robię — każdy podejmuje własne decyzje.
+          To nie jest rekomendacja inwestycyjna. Pokazuję co sam robię - każdy podejmuje własne decyzje.
           Wartości przeliczone po kursie orientacyjnym EUR/PLN 4,22 i USD/PLN 3,88.
         </p>
 
