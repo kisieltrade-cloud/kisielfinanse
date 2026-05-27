@@ -71,8 +71,8 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
       <div className="newsletter-card-label">NEWSLETTER</div>
       <h3 className="newsletter-card-title">Bez szumu. Kiedy mam cos wartego wysłania.</h3>
       <p className="newsletter-card-desc">
-        Analizy, strategie i rzeczy ktore sam stosuje — zanim stana sie oczywiste.
-        Bez cotygodniowego przymusu.
+        Analizy rynkowe i strategie ktore sam stosuje.
+        Piszę kiedy mam cos konkretnego — nie ma tu cotygodniowego szumu.
       </p>
 
       {state === 'ok' ? (
