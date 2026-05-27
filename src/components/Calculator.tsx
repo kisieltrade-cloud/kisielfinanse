@@ -463,7 +463,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
               label="Odsetki / wpłaty"
               value={compound.totalContrib > 0
                 ? `${((compound.interest / compound.totalContrib) * 100).toFixed(0)}%`
-                : '—'}
+                : '-'}
             />
 
             {/* Wykres liniowy */}
@@ -513,7 +513,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
               <>
                 <div style={{ marginBottom: 32 }}>
                   <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#c8d4e8', marginBottom: 8 }}>
-                    Stosunek zysku do ryzyka — {rr.isLong ? 'pozycja długa' : 'pozycja krótka'}
+                    Stosunek zysku do ryzyka - {rr.isLong ? 'pozycja długa' : 'pozycja krótka'}
                   </p>
                   <p style={{
                     fontFamily: 'var(--font-display)', fontSize: '3.8rem', lineHeight: 1,
@@ -554,7 +554,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
               fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#c8d4e8', lineHeight: 1.7,
               paddingLeft: 12, borderLeft: '2px solid rgba(201,162,39,0.3)',
             }}>
-              Reguła 4% — Twój cel to 25× rocznych wydatków. Portfel tej wielkości powinien finansować Twoje życie bez uszczuplania kapitału.
+              Reguła 4% - Twój cel to 25x rocznych wydatków. Portfel tej wielkości powinien finansować Twoje życie bez uszczuplania kapitału.
             </p>
             <Field label="Obecne oszczędności (PLN)"        value={fireSavings}         onChange={setFireSavings}         step="5000" />
             <Field label="Miesięczne oszczędności (PLN)"    value={fireMonthlySave}     onChange={setFireMonthlySave}     step="100" />

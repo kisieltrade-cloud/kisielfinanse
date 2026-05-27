@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Image from 'next/image';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Kalkulator Hipoteczny | KisielFinanse',
-    description: 'Oblicz ratę kredytu hipotecznego — raty równe vs malejące. Darmowy kalkulator online.',
+    description: 'Oblicz ratę kredytu hipotecznego - raty równe vs malejące. Darmowy kalkulator online.',
     images: ['/og-image.png'],
   },
 };
@@ -90,10 +90,10 @@ const schemaFaq = {
     },
     {
       '@type': 'Question',
-      name: 'Raty równe czy raty malejące — co wybrać?',
+      name: 'Raty równe czy raty malejące - co wybrać?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Raty malejące są tańsze łącznie — płacisz mniej odsetek przez cały okres kredytowania. Raty równe mają niższą pierwszą ratę i są łatwiejsze w budżetowaniu. Wybór zależy od Twojej zdolności kredytowej i preferencji: jeśli możesz pozwolić sobie na wyższe raty na początku, raty malejące opłacają się bardziej.',
+        text: 'Raty malejące są tańsze łącznie - płacisz mniej odsetek przez cały okres kredytowania. Raty równe mają niższą pierwszą ratę i są łatwiejsze w budżetowaniu. Wybór zależy od Twojej zdolności kredytowej i preferencji: jeśli możesz pozwolić sobie na wyższe raty na początku, raty malejące opłacają się bardziej.',
       },
     },
     {
@@ -109,7 +109,7 @@ const schemaFaq = {
       name: 'Na ile lat można wziąć kredyt hipoteczny w Polsce?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Maksymalny okres kredytu hipotecznego w Polsce to 35 lat. Rekomendacje KNF wskazują, żeby nie przekraczać 25 lat — przy dłuższym okresie rata jest niższa, ale łączny koszt odsetek znacznie wyższy. Większość banków wymaga też, żeby kredyt zakończył się przed 70–75 rokiem życia kredytobiorcy.',
+        text: 'Maksymalny okres kredytu hipotecznego w Polsce to 35 lat. Rekomendacje KNF wskazują, żeby nie przekraczać 25 lat - przy dłuższym okresie rata jest niższa, ale łączny koszt odsetek znacznie wyższy. Większość banków wymaga też, żeby kredyt zakończył się przed 70–75 rokiem życia kredytobiorcy.',
       },
     },
     {
@@ -147,13 +147,13 @@ export default function KalkulatorHipotecznyPage() {
         <div style={{ position: 'relative', overflow: 'hidden', minHeight: 320 }}>
           <Image
             src="/images/kalkulator-hipoteczny/dom.png"
-            alt="Dom — kalkulator hipoteczny"
+            alt="Dom - kalkulator hipoteczny"
             fill
             priority
             sizes="100vw"
             style={{ objectFit: 'cover', objectPosition: 'center 60%' }}
           />
-          {/* Gradient overlay — ciemny po lewej, lekki po prawej */}
+          {/* Gradient overlay - ciemny po lewej, lekki po prawej */}
           <div style={{
             position: 'absolute', inset: 0,
             background: 'linear-gradient(to right, rgba(8,12,18,0.92) 0%, rgba(8,12,18,0.7) 55%, rgba(8,12,18,0.25) 100%)',
@@ -196,7 +196,7 @@ export default function KalkulatorHipotecznyPage() {
 
         <MortgageCalculator />
 
-        {/* Sekcja FAQ — widoczna dla użytkowników */}
+        {/* Sekcja FAQ - widoczna dla użytkowników */}
         <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 80px' }}>
           <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 48 }}>
             <h2 style={{
@@ -212,12 +212,12 @@ export default function KalkulatorHipotecznyPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
               {[
                 {
-                  q: 'Raty równe czy raty malejące — co wybrać?',
-                  a: 'Raty malejące są tańsze łącznie — płacisz mniej odsetek przez cały okres kredytowania. Raty równe mają niższą pierwszą ratę i są wygodniejsze w budżetowaniu. Jeśli możesz pozwolić sobie na wyższe raty na początku — raty malejące się bardziej opłacają. Kalkulator wyżej pokazuje ile dokładnie zaoszczędzisz.',
+                  q: 'Raty równe czy raty malejące - co wybrać?',
+                  a: 'Raty malejące są tańsze łącznie - płacisz mniej odsetek przez cały okres kredytowania. Raty równe mają niższą pierwszą ratę i są wygodniejsze w budżetowaniu. Jeśli możesz pozwolić sobie na wyższe raty na początku - raty malejące się bardziej opłacają. Kalkulator wyżej pokazuje ile dokładnie zaoszczędzisz.',
                 },
                 {
                   q: 'Jakie jest aktualne oprocentowanie kredytu hipotecznego?',
-                  a: 'Oprocentowanie = stopa referencyjna (WIBOR/WIRON) + marża banku. W 2026 roku typowo 7–8%. Wpisz aktualne oprocentowanie z oferty Twojego banku — kalkulator przeliczy ratę na bieżąco.',
+                  a: 'Oprocentowanie = stopa referencyjna (WIBOR/WIRON) + marża banku. W 2026 roku typowo 7–8%. Wpisz aktualne oprocentowanie z oferty Twojego banku - kalkulator przeliczy ratę na bieżąco.',
                 },
                 {
                   q: 'Na ile lat można wziąć kredyt hipoteczny?',

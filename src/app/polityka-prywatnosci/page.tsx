@@ -1,11 +1,11 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: { absolute: 'Polityka Prywatności | KisielFinanse' },
-  description: 'Polityka prywatności serwisu KisielFinanse.pl — informacje o przetwarzaniu danych osobowych, plikach cookies i prawach użytkownika zgodnie z RODO.',
+  description: 'Polityka prywatności serwisu KisielFinanse.pl - informacje o przetwarzaniu danych osobowych, plikach cookies i prawach użytkownika zgodnie z RODO.',
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://kisielfinanse.pl/polityka-prywatnosci' },
   openGraph: {
@@ -49,9 +49,9 @@ const sections = [
     title: '4. Odbiorcy danych',
     content: `Dane osobowe mogą być przekazywane następującym kategoriom odbiorców:`,
     list: [
-      'Dostawcy usług hostingowych — przetwarzający dane w imieniu administratora na podstawie umowy powierzenia',
-      'Dostawcy narzędzi analitycznych (np. Google LLC) — wyłącznie w przypadku ich wdrożenia i po uzyskaniu zgody użytkownika',
-      'Organy publiczne — wyłącznie gdy obowiązek przekazania danych wynika z przepisów prawa',
+      'Dostawcy usług hostingowych - przetwarzający dane w imieniu administratora na podstawie umowy powierzenia',
+      'Dostawcy narzędzi analitycznych (np. Google LLC) - wyłącznie w przypadku ich wdrożenia i po uzyskaniu zgody użytkownika',
+      'Organy publiczne - wyłącznie gdy obowiązek przekazania danych wynika z przepisów prawa',
     ],
     extra: 'Administrator nie sprzedaje danych osobowych podmiotom trzecim ani nie udostępnia ich w celach marketingowych bez zgody użytkownika.',
   },
@@ -69,8 +69,8 @@ const sections = [
     title: '6. Narzędzia analityczne',
     content: `Serwis korzysta z następujących narzędzi analitycznych i usług stron trzecich:`,
     list: [
-      'Google Analytics 4 (GA4) — narzędzie firmy Google LLC służące do analizy ruchu na stronie. Zbiera anonimowe dane o odwiedzinach (zanonimizowany adres IP, przeglądane podstrony, czas sesji, źródło ruchu). Dane przetwarzane są na serwerach Google, w tym poza EOG. Google Analytics uruchamiany jest wyłącznie po udzieleniu zgody przez użytkownika (Consent Mode v2). Więcej informacji: policies.google.com/privacy',
-      'Giscus (system komentarzy) — komentarze obsługiwane są przez serwis Giscus.app z wykorzystaniem GitHub Discussions. Dodanie komentarza wymaga zalogowania kontem GitHub — dane profilowe GitHub (nazwa użytkownika, avatar) są wówczas widoczne publicznie. Dane przechowywane są na serwerach GitHub (Microsoft). Polityka prywatności GitHub: docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement',
+      'Google Analytics 4 (GA4) - narzędzie firmy Google LLC służące do analizy ruchu na stronie. Zbiera anonimowe dane o odwiedzinach (zanonimizowany adres IP, przeglądane podstrony, czas sesji, źródło ruchu). Dane przetwarzane są na serwerach Google, w tym poza EOG. Google Analytics uruchamiany jest wyłącznie po udzieleniu zgody przez użytkownika (Consent Mode v2). Więcej informacji: policies.google.com/privacy',
+      'Giscus (system komentarzy) - komentarze obsługiwane są przez serwis Giscus.app z wykorzystaniem GitHub Discussions. Dodanie komentarza wymaga zalogowania kontem GitHub - dane profilowe GitHub (nazwa użytkownika, avatar) są wówczas widoczne publicznie. Dane przechowywane są na serwerach GitHub (Microsoft). Polityka prywatności GitHub: docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement',
     ],
     extra: 'Możesz zarządzać plikami cookies analitycznych poprzez panel zgód dostępny na stronie lub ustawienia przeglądarki. Rezygnacja z komentowania w Giscus nie wymaga żadnych dodatkowych działań.',
   },

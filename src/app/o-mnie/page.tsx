@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'Mateusz Kisiel - KisielFinanse' };
 
 export const metadata: Metadata = {
-  title: { absolute: 'Mateusz Kisiel — O mnie | KisielFinanse' },
+  title: { absolute: 'Mateusz Kisiel - O mnie | KisielFinanse' },
   description: 'Twórca KisielFinanse. Piszę o zarządzaniu pieniędzmi, inwestowaniu, psychologii finansów i rynkach. Bez kursów za fortunę, bez ściemy.',
   keywords: [
     'Mateusz Kisiel', 'KisielFinanse', 'finanse osobiste', 'edukacja finansowa',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'profile',
     locale: 'pl_PL',
-    title: 'Mateusz Kisiel — Twórca KisielFinanse',
+    title: 'Mateusz Kisiel - Twórca KisielFinanse',
     description: 'Piszę o zarządzaniu pieniędzmi, inwestowaniu, psychologii finansów i rynkach. Praktyczna wiedza bez ściemy.',
     url: 'https://kisielfinanse.pl/o-mnie',
     siteName: 'KisielFinanse',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mateusz Kisiel — KisielFinanse',
+    title: 'Mateusz Kisiel - KisielFinanse',
     description: 'Zarządzanie pieniędzmi, inwestycje, psychologia finansów. Bez ściemy.',
     images: ['/og-image.png'],
   },

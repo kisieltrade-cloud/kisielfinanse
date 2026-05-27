@@ -1,4 +1,4 @@
-import { getAllPosts } from '@/lib/posts';
+﻿import { getAllPosts } from '@/lib/posts';
 import { postUrl } from '@/lib/url';
 
 const BASE_URL = 'https://kisielfinanse.pl';
@@ -31,7 +31,7 @@ export async function GET() {
   <channel>
     <title>KisielFinanse - Blog</title>
     <link>${BASE_URL}/blog</link>
-    <description>Finanse. Wiedza. Wolność. Trading, krypto, oszczędzanie, geopolityka — praktyczna edukacja finansowa bez ściemy.</description>
+    <description>Finanse. Wiedza. Wolność. Trading, krypto, oszczędzanie, geopolityka - praktyczna edukacja finansowa bez ściemy.</description>
     <language>pl-PL</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${BASE_URL}/feed.xml" rel="self" type="application/rss+xml" />

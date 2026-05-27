@@ -40,9 +40,9 @@ const STATS = [
 ];
 
 const PRINCIPLES = [
-  'Memecoin, pump&dump, schematy szybkiego wzbogacenia — odpada bez rozmowy.',
+  'Memecoin, pump&dump, schematy szybkiego wzbogacenia - odpada bez rozmowy.',
   'Każda płatna współpraca jest oznaczona. Czytelnicy wiedzą, że to reklama.',
-  'Treści sugerujące "gwarantowany zysk" lub ukrywające ryzyko inwestycyjne — nie.',
+  'Treści sugerujące "gwarantowany zysk" lub ukrywające ryzyko inwestycyjne - nie.',
   'Nie polecam produktów, których sam nie sprawdziłem i których bym nie użył.',
 ];
 

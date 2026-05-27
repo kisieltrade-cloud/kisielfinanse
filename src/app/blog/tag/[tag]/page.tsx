@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: { canonical: `${BASE_URL}/${tagSlug}` },
     openGraph: {
       title: `${capitalized} | KisielFinanse`,
-      description: `Artykuły o ${tag} — praktyczna edukacja finansowa.`,
+      description: `Artykuły o ${tag} - praktyczna edukacja finansowa.`,
       url: `${BASE_URL}/${tagSlug}`,
       images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     },
@@ -80,7 +80,7 @@ export default async function TagPage({ params }: Props) {
           <h1 className="section-title reveal">
             {capitalized.toUpperCase()}
             <br />
-            <span className="gradient-text-pp">— {posts.length} {posts.length === 1 ? 'artykuł' : posts.length < 5 ? 'artykuły' : 'artykułów'}</span>
+            <span className="gradient-text-pp">- {posts.length} {posts.length === 1 ? 'artykuł' : posts.length < 5 ? 'artykuły' : 'artykułów'}</span>
           </h1>
 
           <BlogList posts={posts} />

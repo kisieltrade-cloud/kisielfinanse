@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useMemo, useEffect, useRef } from 'react';
 
@@ -280,7 +280,7 @@ export default function MortgageCalculator() {
     const capitalPct     = (P / activeTotal) * 100;
     const interestPct    = 100 - capitalPct;
 
-    // Amort — pierwsze 5 lat
+    // Amort - pierwsze 5 lat
     const amortBars: { capital: number; interest: number }[] = [];
     let bal = P;
     for (let yr = 0; yr < Math.min(5, term); yr++) {
@@ -554,7 +554,7 @@ export default function MortgageCalculator() {
             </div>
           </div>
 
-          {/* ── Harmonogram — pełna szerokość ─────────────────── */}
+          {/* ── Harmonogram - pełna szerokość ─────────────────── */}
           <div style={{
             marginTop: 24,
             background: 'rgba(255,255,255,0.75)',
@@ -571,7 +571,7 @@ export default function MortgageCalculator() {
                   Harmonogram spłat
                 </p>
                 <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.72rem', color: C.muted, margin: 0 }}>
-                  Pierwsze {Math.min(5, term)} lata — roczne sumy kapitału i odsetek
+                  Pierwsze {Math.min(5, term)} lata - roczne sumy kapitału i odsetek
                 </p>
               </div>
               <div style={{ display: 'flex', gap: 16 }}>

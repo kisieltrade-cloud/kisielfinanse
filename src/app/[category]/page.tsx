@@ -209,7 +209,7 @@ export default async function CategoryPage({ params }: Props) {
               >
                 Artykuły z tej kategorii są w przygotowaniu.
                 <br />
-                Wróć wkrótce — lub sprawdź inne tematy.
+                Wróć wkrótce - lub sprawdź inne tematy.
               </p>
             </div>
           )}
