@@ -20,12 +20,8 @@ const WELCOME_HTML = `
       Witaj w newsletterze.
     </h1>
 
-    <p style="font-size:15px;color:#c8d0dc;line-height:1.7;margin:0 0 24px;">
-      Dostajesz ten mail bo zapisałeś się na kisielfinanse.pl.<br>
-      Bez bullshitu, bez "gwarantowanych zysków". Praktyczna wiedza finansowa — kiedy mam coś wartego wysłania.
-    </p>
-
     <p style="font-size:15px;color:#c8d0dc;line-height:1.7;margin:0 0 32px;">
+      Dostajesz ten mail bo zapisałeś się na kisielfinanse.pl.<br>
       Piszę kiedy mam coś do powiedzenia. Bez planu wysyłkowego.
     </p>
 
