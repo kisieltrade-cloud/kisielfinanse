@@ -135,17 +135,17 @@ export default function PortfelPage() {
   });
 
   return (
-    <main style={{ minHeight: '80vh', padding: '120px 24px 80px', background: 'var(--bg)' }}>
+    <main style={{ minHeight: '80vh', padding: '120px 24px 80px', background: '#f7f8fa' }}>
       <div style={{ maxWidth: 860, margin: '0 auto' }}>
 
         {/* Header */}
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', letterSpacing: '3px', color: C.gold, textTransform: 'uppercase', marginBottom: 12 }}>
           Transparentność
         </p>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3rem)', color: '#e8eaf6', marginBottom: 12, lineHeight: 1.1 }}>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3rem)', color: C.text, marginBottom: 12, lineHeight: 1.1 }}>
           Mój portfel
         </h1>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: '#8892a4', marginBottom: 48, lineHeight: 1.7, maxWidth: 560 }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: C.muted, marginBottom: 48, lineHeight: 1.7, maxWidth: 560 }}>
           Pełna transparentność - co kupuję, kiedy, za ile i dlaczego. Bez ściemy.
           Aktualizuję co miesiąc.
         </p>
@@ -342,7 +342,7 @@ export default function PortfelPage() {
         </div>
 
         {/* Disclaimer */}
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: '#8892a4', lineHeight: 1.7, textAlign: 'center', maxWidth: 560, margin: '0 auto' }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: C.muted, lineHeight: 1.7, textAlign: 'center', maxWidth: 560, margin: '0 auto' }}>
           To nie jest rekomendacja inwestycyjna. Pokazuję co sam robię - każdy podejmuje własne decyzje.
           Wartości przeliczone po kursie orientacyjnym EUR/PLN 4,22 i USD/PLN 3,88.
         </p>
