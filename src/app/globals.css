@@ -3693,17 +3693,30 @@ a { color: inherit; text-decoration: none; }
   .daily-widget-divider { height: 30px; }
 }
 
-/* ── TOC fixed sidebar ────────────────────────────────────────────────────── */
+/* ── Article layout: flex row — content + sticky TOC ─────────────────────── */
+.blog-article-layout {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+}
+
+.blog-article-body {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── TOC sticky sidebar ───────────────────────────────────────────────────── */
 .blog-toc-aside {
-  position: fixed;
+  position: sticky;
   top: 96px;
-  /* right edge of centered 820px article is at: 50% + 410px, add 24px gap */
-  left: calc(50% + 434px);
+  align-self: flex-start;
   width: 220px;
+  flex-shrink: 0;
   max-height: calc(100vh - 120px);
   overflow-y: auto;
   scrollbar-width: none;
   z-index: 10;
+  padding-top: 8px;
 }
 .blog-toc-aside::-webkit-scrollbar { display: none; }
 

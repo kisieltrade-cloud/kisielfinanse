@@ -61,7 +61,7 @@ export default async function BlogSection() {
             fill
             priority
             className="news-hero-bg"
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'cover', objectPosition: 'top' }}
             sizes="(max-width: 768px) 100vw, 900px"
           />
         ) : (

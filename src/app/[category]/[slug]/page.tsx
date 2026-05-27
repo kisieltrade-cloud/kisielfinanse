@@ -292,33 +292,38 @@ export default async function ArticlePage({ params }: Props) {
           <TableOfContentsMobile items={tocItems} />
         )}
 
-        {/* Content */}
-        <BlogImageLightbox />
-        <div
-          className="blog-post-content"
-          dangerouslySetInnerHTML={{ __html: contentHtml }}
-        />
+        {/* Article body: sticky TOC + content in flex row */}
+        <div className="blog-article-layout">
+          <div className="blog-article-body">
+            {/* Content */}
+            <BlogImageLightbox />
+            <div
+              className="blog-post-content"
+              dangerouslySetInnerHTML={{ __html: contentHtml }}
+            />
 
-        {/* Author */}
-        <AuthorBox />
+            {/* Author */}
+            <AuthorBox />
 
-        {/* Newsletter */}
-        <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 40px' }}>
-          <NewsletterForm />
+            {/* Newsletter */}
+            <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 40px' }}>
+              <NewsletterForm />
+            </div>
+
+            {/* Share buttons */}
+            <ShareButtons title={post.title} url={`/${category}/${slug}`} />
+
+            {/* Comments */}
+            <GiscusComments slug={slug} />
+          </div>
+
+          {/* TOC sidebar — sticky, ends with article body */}
+          {tocItems.length >= 2 && (
+            <aside className="blog-toc-aside">
+              <TableOfContents items={tocItems} />
+            </aside>
+          )}
         </div>
-
-        {/* Share buttons */}
-        <ShareButtons title={post.title} url={`/${category}/${slug}`} />
-
-        {/* Comments */}
-        <GiscusComments slug={slug} />
-
-        {/* TOC sidebar */}
-        {tocItems.length >= 2 && (
-          <aside className="blog-toc-aside">
-            <TableOfContents items={tocItems} />
-          </aside>
-        )}
 
         {/* Related posts */}
         <RelatedPosts
