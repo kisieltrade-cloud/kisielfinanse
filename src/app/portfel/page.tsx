@@ -31,7 +31,7 @@ const HOLDINGS = [
   },
   {
     ticker: 'PCE',
-    name: 'Police S.A.',
+    name: 'Azoty Police S.A.',
     type: 'Akcje',
     buyDate: '8 Kwi 2026',
     buyPrice: 7.50,
@@ -70,23 +70,23 @@ const HOLDINGS = [
 const UPDATES = [
   {
     date: '15 Maj 2026',
-    action: 'Kupno 485 szt. AmRest (EAT) po 10,30 zł - razem 4 995 zł',
-    why: '[ wpisz dlaczego kupiłeś ]',
+    action: 'Kupno AmRest (EAT) - 485 szt. po 10,30 zł, razem 4 995 zł',
+    why: 'Kurs po -35% rok do roku, wycena blisko historycznych minimow. Spolka zapowiedziala wejscie Taco Bell do Polski w Q4 2026 we wspolpracy z AmRest - potencjalny katalizator. Zakup kontrarianski przy slabych wynikach Q1.',
   },
   {
     date: '9-16 Kwi 2026',
     action: 'Budowanie pozycji Modivo (MDV) - 140 szt. w 3 transzach, srednia 88,59 zł, razem 12 402 zł',
-    why: '[ wpisz dlaczego kupiłeś ]',
+    why: 'Akcje po -64% rok do roku mimo poprawy wynikow - zysk netto wzrosl z 78,5 mln do 118,2 mln PLN kwartał do kwartal. Odpis 155,7 mln PLN na worldbox wyczyścił bilans. Kupno w transzach bo duza zmiennosc.',
   },
   {
     date: '8 Kwi 2026',
-    action: 'Kupno 1 173 szt. Police S.A. (PCE) po 7,50 zł - razem 8 797 zł',
-    why: '[ wpisz dlaczego kupiłeś ]',
+    action: 'Kupno Azoty Police (PCE) - 1 173 szt. po 7,50 zł, razem 8 797 zł',
+    why: 'Kilka dni po Nadzwyczajnym Walnym Zgromadzeniu (2 kwi 2026). Kurs przy wieloletnich minimach, spolka przeszla restrukturyzacje. Producent nawozow i dwutlenku tytanu - zalezny od cen gazu, ktore zaczely sprzyjac.',
   },
   {
     date: 'Sie 2024 - teraz',
     action: 'Amazon DCA - 800 zł co miesiac, 21 miesiecy, srednia $213,89, lacznie 20,14 udzialow',
-    why: 'Regularny DCA w najwiekszego sprzedawce e-commerce na swiecie. Niezaleznie od ceny co miesiac.',
+    why: 'Regularny DCA w najwiekszego sprzedawce e-commerce na swiecie i lidera chmury (AWS). Kupuje niezaleznie od ceny co miesiac - nie probuje wybierac dolek.',
   },
 ];
 
@@ -301,19 +301,19 @@ export default function PortfelPage() {
           </div>
           {UPDATES.map((u, i) => (
             <div key={i} style={{
-              padding: '20px 24px',
+              padding: '22px 24px',
               borderBottom: i < UPDATES.length - 1 ? `1px solid ${C.border}` : 'none',
             }}>
               {/* Data */}
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', fontWeight: 700, color: C.gold, margin: '0 0 6px' }}>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 700, color: C.gold, margin: '0 0 6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 {u.date}
               </p>
               {/* Co kupiono */}
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.92rem', color: C.text, fontWeight: 600, margin: '0 0 6px', lineHeight: 1.5 }}>
+              <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', color: C.text, margin: '0 0 10px', lineHeight: 1.25, letterSpacing: '0.3px' }}>
                 {u.action}
               </p>
               {/* Dlaczego */}
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: C.sub, margin: 0, lineHeight: 1.65 }}>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: C.sub, margin: 0, lineHeight: 1.75 }}>
                 {u.why}
               </p>
             </div>
