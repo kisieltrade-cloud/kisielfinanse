@@ -94,7 +94,7 @@ export default function HeroArticleRotator({ posts }: { posts: PostMeta[] }) {
               <span style={{
                 display: 'inline-block', marginBottom: 10,
                 fontFamily: 'var(--font-mono)', fontSize: '0.52rem', letterSpacing: '2px', fontWeight: 700,
-                color: t.color, background: t.bg, border: `1px solid ${t.color}55`,
+                color: '#ffffff', background: 'rgba(0,0,0,0.55)', border: 'none',
                 padding: '3px 9px', borderRadius: 4,
               }}>
                 {post.tag.toUpperCase()}

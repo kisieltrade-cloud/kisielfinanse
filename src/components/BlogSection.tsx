@@ -154,7 +154,7 @@ export default async function BlogSection() {
                   )}
                   <span
                     className="news-card-tag"
-                    style={{ color: t.color, background: t.bg }}
+                    style={{ color: '#ffffff', background: 'rgba(0,0,0,0.55)', border: 'none' }}
                   >
                     {post.tag}
                   </span>

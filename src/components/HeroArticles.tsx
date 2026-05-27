@@ -70,7 +70,7 @@ export default async function HeroArticles() {
         <div className="hero-art-feat-content">
           <div className="hero-art-feat-top">
             <span className="hero-art-tag"
-              style={{ color: ht.color, background: ht.bg, borderColor: ht.color + '55' }}>
+              style={{ color: '#ffffff', background: 'rgba(0,0,0,0.55)', border: 'none' }}>
               {hero.tag.toUpperCase()}
             </span>
             <span className="hero-art-author">
