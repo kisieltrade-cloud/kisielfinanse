@@ -48,7 +48,7 @@ export default function RelatedPosts({ currentSlug, currentTag, allPosts }: Prop
                     src={post.image}
                     alt={post.title}
                     fill
-                    style={{ objectFit: 'cover' }}
+                    style={{ objectFit: 'cover', objectPosition: 'top' }}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 280px"
                   />
                 </div>

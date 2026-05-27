@@ -48,7 +48,7 @@ export default async function HeroArticles() {
             fill
             priority
             className="hero-art-feat-bg"
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'cover', objectPosition: 'top' }}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
           />
         ) : (
@@ -98,7 +98,7 @@ export default async function HeroArticles() {
                       alt={post.title}
                       fill
                       className="hero-art-card-img"
-                      style={{ objectFit: 'cover' }}
+                      style={{ objectFit: 'cover', objectPosition: 'top' }}
                       sizes="(max-width: 640px) 100vw, 200px"
                     />
                   ) : (

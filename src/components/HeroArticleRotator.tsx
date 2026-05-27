@@ -74,7 +74,7 @@ export default function HeroArticleRotator({ posts }: { posts: PostMeta[] }) {
                 alt={post.title}
                 fill
                 priority
-                style={{ objectFit: 'cover' }}
+                style={{ objectFit: 'cover', objectPosition: 'top' }}
                 sizes="(max-width: 768px) 100vw, 420px"
               />
             ) : (
@@ -126,7 +126,7 @@ export default function HeroArticleRotator({ posts }: { posts: PostMeta[] }) {
                       src={p.image}
                       alt={p.title}
                       fill
-                      style={{ objectFit: 'cover' }}
+                      style={{ objectFit: 'cover', objectPosition: 'top' }}
                       sizes="60px"
                     />
                   ) : (
