@@ -30,6 +30,18 @@ const HOLDINGS = [
     note: 'DCA - 800 zł co miesiac przez 21 miesiecy. Srednia cena kupna $213,89. Razem 20,14 ulamkowych udzialow.',
   },
   {
+    ticker: 'ATT',
+    name: 'Grupa Azoty S.A.',
+    type: 'Akcje',
+    buyDate: '8 Kwi 2026',
+    buyPrice: 7.50,
+    currentPrice: 24.32,
+    shares: 1173,
+    currency: 'PLN',
+    broker: 'GPW',
+    note: 'Wejscie przy dnie po restrukturyzacji. 8 800 zł zainwestowane.',
+  },
+  {
     ticker: 'EAT',
     name: 'AmRest Holdings SE',
     type: 'Akcje',
@@ -59,6 +71,10 @@ const UPDATES = [
   {
     date: 'Maj 2026',
     text: 'Kupno 485 akcji AmRest (EAT) po 10,30 zł. Laczna kwota 4 995,50 zł.',
+  },
+  {
+    date: '8 Kwi 2026',
+    text: 'Kupno 1 173 akcji Grupy Azoty (ATT) po 7,50 zł. Razem 8 797,50 zł. Wejscie przy dnie po restrukturyzacji spolki.',
   },
   {
     date: 'Kwi 2026',
