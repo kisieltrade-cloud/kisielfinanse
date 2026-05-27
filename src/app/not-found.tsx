@@ -40,7 +40,7 @@ export default function NotFound() {
           <div style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: '0.65rem',
-            color: '#c8d4e8',
+            color: 'var(--muted)',
             letterSpacing: '3px',
             marginBottom: 32,
           }}>
@@ -50,7 +50,7 @@ export default function NotFound() {
           <p style={{
             fontFamily: 'system-ui, sans-serif',
             fontSize: '1rem',
-            color: '#c8d4e8',
+            color: 'var(--muted)',
             lineHeight: 1.7,
             marginBottom: 40,
           }}>
@@ -76,9 +76,9 @@ export default function NotFound() {
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 padding: '12px 24px', borderRadius: 8,
-                border: '1px solid rgba(255,255,255,0.1)',
-                background: 'rgba(255,255,255,0.04)',
-                color: '#ffffff', fontFamily: 'system-ui, sans-serif',
+                border: '1px solid var(--border)',
+                background: 'var(--surface)',
+                color: 'var(--text)', fontFamily: 'system-ui, sans-serif',
                 fontSize: '0.85rem', fontWeight: 500, textDecoration: 'none',
               }}
             >

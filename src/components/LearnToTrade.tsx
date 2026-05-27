@@ -2,6 +2,14 @@
 
 import { useState } from 'react';
 
+const C = {
+  text:   'var(--text)',
+  sub:    'var(--muted)',
+  border: 'var(--border)',
+  bg:     'var(--surface)',
+  bgAlt:  'var(--bg)',
+};
+
 const STEPS = [
   {
     num: '01',
@@ -100,9 +108,9 @@ const WARNINGS = [
 ];
 
 const TIMELINE = [
-  { months: 'Miesiąc 1–2', label: 'TEORIA', desc: 'Czytaj, oglądaj, ucz się. Świece, wsparcia, trend, ryzyko. Otwórz demo, ogarnij platformę.', accent: '#c9a227' },
-  { months: 'Miesiąc 3–4', label: 'DEMO', desc: 'Wybierz jedną strategię. Traduj codziennie. Prowadź dziennik. Nie zmieniaj strategii.', accent: '#f5c518' },
-  { months: 'Miesiąc 5–6', label: 'OCENA', desc: 'Przejrzyj dziennik. Winrate? Średnie RR? Trzymasz się planu? Jeśli tak - czas na real.', accent: '#e8963a' },
+  { months: 'Miesiąc 1-2', label: 'TEORIA', desc: 'Czytaj, oglądaj, ucz się. Świece, wsparcia, trend, ryzyko. Otwórz demo, ogarnij platformę.', accent: '#c9a227' },
+  { months: 'Miesiąc 3-4', label: 'DEMO', desc: 'Wybierz jedną strategię. Traduj codziennie. Prowadź dziennik. Nie zmieniaj strategii.', accent: '#f5c518' },
+  { months: 'Miesiąc 5-6', label: 'OCENA', desc: 'Przejrzyj dziennik. Winrate? Średnie RR? Trzymasz się planu? Jeśli tak - czas na real.', accent: '#e8963a' },
   { months: 'Miesiąc 7+', label: 'REAL', desc: 'Minimalny depozyt. Dalszy dziennik. Dalsze doskonalenie. Maraton, nie sprint.', accent: '#ff2d78' },
 ];
 
@@ -110,37 +118,28 @@ export default function LearnToTrade() {
   const [openStep, setOpenStep] = useState<number | null>(null);
 
   return (
-    <section
-      style={{
-        padding: 'clamp(60px, 10vw, 120px) 24px',
-        maxWidth: 960,
-        margin: '0 auto',
-      }}
-    >
+    <section style={{ padding: 'clamp(60px, 10vw, 120px) 24px', maxWidth: 960, margin: '0 auto' }}>
+
       {/* Header */}
       <div className="reveal" style={{ marginBottom: 56 }}>
-        <h2
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(1.8rem, 5vw, 3.2rem)',
-            letterSpacing: '3px',
-            margin: '0 0 20px',
-            color: 'var(--text)',
-            lineHeight: 1.15,
-          }}
-        >
-          NAUCZ SIĘ{' '}
-          <span style={{ color: '#c9a227' }}>TRADOWAĆ</span>
+        <h2 style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(1.8rem, 5vw, 3.2rem)',
+          letterSpacing: '3px',
+          margin: '0 0 20px',
+          color: C.text,
+          lineHeight: 1.15,
+        }}>
+          NAUCZ SIĘ <span style={{ color: '#c9a227' }}>TRADOWAĆ</span>
         </h2>
-        <p
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.82rem',
-            color: 'var(--muted)',
-            lineHeight: 1.8,
-            maxWidth: 640,
-          }}
-        >
+        <p style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: '0.85rem',
+          color: C.text,
+          fontWeight: 600,
+          lineHeight: 1.8,
+          maxWidth: 640,
+        }}>
           Trading to nie kasyno i nie magiczny przycisk do zarabiania. To umiejętność,
           której można się nauczyć - ale wymaga czasu, dyscypliny i właściwego podejścia.
           Oto mapa drogowa od kompletnego zera do pierwszego świadomego trade&apos;a.
@@ -156,11 +155,9 @@ export default function LearnToTrade() {
               key={step.num}
               className="reveal"
               style={{
-                background: isOpen
-                  ? `rgba(${hexToRgb(step.accent)}, 0.04)`
-                  : 'rgba(255,255,255,0.015)',
-                border: `1px solid ${isOpen ? `rgba(${hexToRgb(step.accent)}, 0.2)` : 'rgba(255,255,255,0.04)'}`,
-                borderLeft: `3px solid ${isOpen ? step.accent : 'rgba(255,255,255,0.06)'}`,
+                background: isOpen ? `rgba(${hexToRgb(step.accent)}, 0.04)` : C.bg,
+                border: `1px solid ${isOpen ? `rgba(${hexToRgb(step.accent)}, 0.3)` : C.border}`,
+                borderLeft: `3px solid ${isOpen ? step.accent : 'var(--border)'}`,
                 transition: 'all 0.3s ease',
                 overflow: 'hidden',
               }}
@@ -168,107 +165,66 @@ export default function LearnToTrade() {
               <button
                 onClick={() => setOpenStep(isOpen ? null : i)}
                 style={{
-                  width: '100%',
-                  background: 'none',
-                  border: 'none',
-                  padding: '20px 24px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 16,
-                  textAlign: 'left',
+                  width: '100%', background: 'none', border: 'none',
+                  padding: '20px 24px', cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', gap: 16, textAlign: 'left',
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.65rem',
-                    color: step.accent,
-                    opacity: isOpen ? 1 : 0.5,
-                    minWidth: 24,
-                    transition: 'opacity 0.3s',
-                  }}
-                >
+                <span style={{
+                  fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
+                  color: step.accent, opacity: isOpen ? 1 : 0.7,
+                  minWidth: 24, transition: 'opacity 0.3s', fontWeight: 700,
+                }}>
                   {step.num}
                 </span>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(0.95rem, 2.5vw, 1.15rem)',
-                    letterSpacing: '2px',
-                    color: isOpen ? step.accent : 'var(--text)',
-                    flex: 1,
-                    transition: 'color 0.3s',
-                    textTransform: 'uppercase',
-                  }}
-                >
+                <span style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(0.95rem, 2.5vw, 1.15rem)',
+                  letterSpacing: '2px',
+                  color: isOpen ? step.accent : C.text,
+                  flex: 1, transition: 'color 0.3s', textTransform: 'uppercase',
+                }}>
                   {step.title}
                 </span>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.68rem',
-                    color: 'var(--muted)',
-                    display: isOpen ? 'none' : 'block',
-                  }}
-                >
+                <span style={{
+                  fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
+                  color: C.sub, fontWeight: 600,
+                  display: isOpen ? 'none' : 'block',
+                }}>
                   {step.summary}
                 </span>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.75rem',
-                    color: step.accent,
-                    transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
-                    transition: 'transform 0.3s',
-                  }}
-                >
+                <span style={{
+                  fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
+                  color: step.accent, fontWeight: 700,
+                  transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.3s',
+                }}>
                   +
                 </span>
               </button>
 
-              <div
-                style={{
-                  maxHeight: isOpen ? 600 : 0,
-                  opacity: isOpen ? 1 : 0,
-                  transition: 'max-height 0.4s ease, opacity 0.3s ease',
-                  overflow: 'hidden',
-                }}
-              >
+              <div style={{
+                maxHeight: isOpen ? 600 : 0, opacity: isOpen ? 1 : 0,
+                transition: 'max-height 0.4s ease, opacity 0.3s ease', overflow: 'hidden',
+              }}>
                 <div style={{ padding: '0 24px 24px 64px' }}>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.78rem',
-                      color: 'var(--muted)',
-                      lineHeight: 1.85,
-                      margin: '0 0 16px',
-                    }}
-                  >
+                  <p style={{
+                    fontFamily: 'var(--font-mono)', fontSize: '0.8rem',
+                    color: C.text, fontWeight: 500, lineHeight: 1.85, margin: '0 0 16px',
+                  }}>
                     {step.content}
                   </p>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                     {step.points.map((point, j) => (
                       <div key={j} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                        <span
-                          style={{
-                            color: step.accent,
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: '0.55rem',
-                            marginTop: 5,
-                            opacity: 0.6,
-                          }}
-                        >
-                          ▸
-                        </span>
-                        <span
-                          style={{
-                            fontFamily: 'var(--font-mono)',
-                            fontSize: '0.72rem',
-                            color: 'var(--muted)',
-                            lineHeight: 1.7,
-                          }}
-                        >
+                        <span style={{
+                          color: step.accent, fontFamily: 'var(--font-mono)',
+                          fontSize: '0.6rem', marginTop: 4, flexShrink: 0, fontWeight: 700,
+                        }}>▸</span>
+                        <span style={{
+                          fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
+                          color: C.text, fontWeight: 500, lineHeight: 1.7,
+                        }}>
                           {point}
                         </span>
                       </div>
@@ -281,69 +237,69 @@ export default function LearnToTrade() {
         })}
       </div>
 
-      {/* Czego unikać */}
+      {/* Pułapki */}
       <div className="reveal" style={{ marginTop: 64 }}>
-        <h3
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
-            letterSpacing: '2px',
-            color: 'var(--text)',
-            margin: '0 0 20px',
-          }}
-        >
+        <h3 style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
+          letterSpacing: '2px', color: C.text, margin: '0 0 20px',
+        }}>
           PUŁAPKI <span style={{ color: '#ff2d78' }}>POCZĄTKUJĄCYCH</span>
         </h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 48 }}>
           {WARNINGS.map((w, i) => (
             <div key={i} style={{
               display: 'flex', gap: 14, alignItems: 'flex-start',
-              padding: '12px 18px',
-              background: 'rgba(255,45,120,0.03)',
-              border: '1px solid rgba(255,45,120,0.08)',
-              borderLeft: '3px solid rgba(255,45,120,0.4)',
+              padding: '14px 18px',
+              background: 'rgba(255,45,120,0.05)',
+              border: '1px solid rgba(255,45,120,0.18)',
+              borderLeft: '3px solid #ff2d78',
             }}>
-              <span style={{ color: '#ff2d78', fontFamily: 'var(--font-mono)', fontSize: '0.65rem', marginTop: 3, flexShrink: 0 }}>✗</span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--muted)', lineHeight: 1.7 }}>{w}</span>
+              <span style={{
+                color: '#ff2d78', fontFamily: 'var(--font-mono)',
+                fontSize: '0.75rem', marginTop: 2, flexShrink: 0, fontWeight: 700,
+              }}>✗</span>
+              <span style={{
+                fontFamily: 'var(--font-mono)', fontSize: '0.8rem',
+                color: C.text, fontWeight: 600, lineHeight: 1.7,
+              }}>{w}</span>
             </div>
           ))}
         </div>
 
-        <h3
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
-            letterSpacing: '2px',
-            color: 'var(--text)',
-            margin: '0 0 24px',
-          }}
-        >
+        <h3 style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
+          letterSpacing: '2px', color: C.text, margin: '0 0 24px',
+        }}>
           TIMELINE
         </h3>
         <div style={{ display: 'grid', gap: 12 }}>
           {TIMELINE.map((t, i) => (
-            <div
-              key={i}
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'auto 1fr',
-                gap: 20,
-                alignItems: 'start',
-                padding: '16px 20px',
-                background: 'rgba(255,255,255,0.015)',
-                border: '1px solid rgba(255,255,255,0.04)',
-                borderLeft: `3px solid ${t.accent}`,
-              }}
-            >
+            <div key={i} style={{
+              display: 'grid', gridTemplateColumns: 'auto 1fr',
+              gap: 20, alignItems: 'start', padding: '16px 20px',
+              background: C.bg, border: `1px solid ${C.border}`,
+              borderLeft: `3px solid ${t.accent}`,
+            }}>
               <div style={{ minWidth: 100 }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: 'var(--muted)', marginBottom: 4 }}>
+                <div style={{
+                  fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
+                  color: C.sub, fontWeight: 600, marginBottom: 4,
+                }}>
                   {t.months}
                 </div>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: '0.85rem', letterSpacing: '2px', color: t.accent }}>
+                <div style={{
+                  fontFamily: 'var(--font-display)', fontSize: '0.85rem',
+                  letterSpacing: '2px', color: t.accent, fontWeight: 700,
+                }}>
                   {t.label}
                 </div>
               </div>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--muted)', lineHeight: 1.7, margin: 0 }}>
+              <p style={{
+                fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
+                color: C.text, fontWeight: 500, lineHeight: 1.7, margin: 0,
+              }}>
                 {t.desc}
               </p>
             </div>
@@ -353,21 +309,16 @@ export default function LearnToTrade() {
 
       {/* Bottom note */}
       <div className="reveal" style={{ marginTop: 56 }}>
-        <div
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.72rem',
-            color: 'var(--muted)',
-            lineHeight: 1.85,
-            padding: '24px',
-            background: 'rgba(201,162,39,0.03)',
-            border: '1px solid rgba(201,162,39,0.1)',
-            borderLeft: '3px solid #c9a227',
-          }}
-        >
+        <div style={{
+          fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
+          color: C.text, fontWeight: 500, lineHeight: 1.85, padding: '24px',
+          background: 'rgba(201,162,39,0.05)',
+          border: '1px solid rgba(201,162,39,0.22)',
+          borderLeft: '3px solid #c9a227',
+        }}>
           Trading to maraton, nie sprint. Nie ma skrótów, nie ma cheatcodów.
           Jest natomiast sprawdzona ścieżka:{' '}
-          <span style={{ color: '#c9a227' }}>
+          <span style={{ color: '#c9a227', fontWeight: 700 }}>
             nauka → demo → plan → dyscyplina → real → cierpliwość
           </span>
           . Większość osób potrzebuje 1-3 lat, żeby osiągnąć stabilność. Ale jeśli
@@ -377,16 +328,10 @@ export default function LearnToTrade() {
       </div>
 
       {/* Disclaimer */}
-      <p
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: '0.55rem',
-          color: 'rgba(255,255,255,0.2)',
-          textAlign: 'center',
-          marginTop: 48,
-          lineHeight: 1.6,
-        }}
-      >
+      <p style={{
+        fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
+        color: '#1a2230', textAlign: 'center', marginTop: 48, lineHeight: 1.6, fontWeight: 500,
+      }}>
         Treści publikowane na KisielFinanse.pl mają charakter wyłącznie edukacyjny i nie
         stanowią doradztwa inwestycyjnego. Trading wiąże się z ryzykiem utraty kapitału.
       </p>

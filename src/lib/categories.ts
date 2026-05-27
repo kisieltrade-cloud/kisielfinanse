@@ -42,9 +42,9 @@ export const CATEGORIES: CategoryConfig[] = [
     desc: 'Konta bankowe, kredyty, BIK, rankingi, oszczędzanie',
     longDesc:
       'Codzienne finanse - te, o których rzadko ktoś mówi wprost. Jak działa BIK i kiedy warto go wyczyścić. Kiedy kredyt hipoteczny ma sens, a kiedy nie. Konta bankowe, rachunki maklerskie, koszty ukryte w produktach finansowych. Konkrety, które możesz zastosować od razu.',
-    metaTitle: 'Kredyty hipoteczne, konta bankowe i BIK | KisielFinanse',
+    metaTitle: 'Pieniądze w praktyce | KisielFinanse',
     metaDesc:
-      'Rankingi kont bankowych, kredyty hipoteczne, jak wyczyścić BIK, najem vs kupno. Praktyczne poradniki finansowe - stosuj od razu.',
+      'Codzienne finanse bez ściemy: konta bankowe, kredyty, oszczędzanie, budżet domowy. Konkretne porady, które możesz zastosować od razu.',
   },
   {
     name: 'Psychologia',

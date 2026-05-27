@@ -22,7 +22,7 @@ function Field({ label, value, onChange, step, placeholder, hint }: {
     <div>
       <label style={{
         fontFamily: 'var(--font-body)', fontSize: '0.85rem',
-        color: focused ? '#c9a227' : '#c8d4e8',
+        color: focused ? '#c9a227' : 'var(--muted)',
         display: 'block', marginBottom: 6, transition: 'color 0.15s',
       }}>
         {label}
@@ -34,15 +34,15 @@ function Field({ label, value, onChange, step, placeholder, hint }: {
         onBlur={() => setFocused(false)}
         style={{
           background: 'transparent', border: 'none',
-          borderBottom: `1px solid ${focused ? '#c9a227' : 'rgba(255,255,255,0.1)'}`,
-          color: '#e8edf5', fontFamily: 'var(--font-body)',
+          borderBottom: `1px solid ${focused ? '#c9a227' : 'var(--border)'}`,
+          color: 'var(--text)', fontFamily: 'var(--font-body)',
           fontSize: '1.1rem', fontWeight: 500,
           padding: '7px 0', width: '100%', outline: 'none',
           boxSizing: 'border-box', transition: 'border-color 0.15s',
         }}
       />
       {hint && (
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: '#3a4a5a', marginTop: 4 }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'var(--muted)', marginTop: 4 }}>
           {hint}
         </p>
       )}
@@ -57,13 +57,13 @@ function Row({ label, value, color, large }: {
   return (
     <div style={{
       display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
-      padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.05)',
+      padding: '10px 0', borderBottom: '1px solid var(--border-subtle)',
     }}>
-      <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: '#c8d4e8' }}>{label}</span>
+      <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: 'var(--muted)' }}>{label}</span>
       <span style={{
         fontFamily: 'var(--font-body)', fontWeight: 600,
         fontSize: large ? '1.05rem' : '0.95rem',
-        color: color ?? '#e8edf5',
+        color: color ?? 'var(--text)',
       }}>
         {value}
       </span>
@@ -77,17 +77,16 @@ function MainResult({ label, value, color = '#c9a227', sub }: {
 }) {
   return (
     <div style={{ marginBottom: 32 }}>
-      <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#c8d4e8', marginBottom: 8 }}>{label}</p>
+      <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--muted)', marginBottom: 8 }}>{label}</p>
       <p style={{ fontFamily: 'var(--font-display)', fontSize: '2.8rem', color, lineHeight: 1, letterSpacing: '0.5px' }}>
         {value}
       </p>
-      {sub && <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: '#c8d4e8', marginTop: 8 }}>{sub}</p>}
+      {sub && <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: 'var(--muted)', marginTop: 8 }}>{sub}</p>}
     </div>
   );
 }
 
 // ─── Wykres liniowy (procent składany) ───────────────────────────
-// Prosta linia + oś Y z kwotami + delikatny fill
 function LineChart({ points }: {
   points: { year: number; total: number }[];
 }) {
@@ -100,7 +99,6 @@ function LineChart({ points }: {
 
   const maxVal = Math.max(...points.map(p => p.total), 1);
 
-  // ładna skala osi Y: zaokrąglamy do miłych liczb
   const magnitude = Math.pow(10, Math.floor(Math.log10(maxVal)));
   const niceStep  = Math.ceil(maxVal / (magnitude * 4)) * magnitude;
   const niceMax   = niceStep * 4;
@@ -114,7 +112,6 @@ function LineChart({ points }: {
     + points.map((p, i) => `L${toX(i)},${toY(p.total)}`).join(' ')
     + ` L${toX(points.length - 1)},${padT + plotH} Z`;
 
-  // etykiety na osi X — co ile lat
   const xStep = points.length > 20 ? 5 : points.length > 10 ? 3 : points.length > 6 ? 2 : 1;
 
   return (
@@ -132,12 +129,13 @@ function LineChart({ points }: {
           {v > 0 && (
             <line
               x1={padL} y1={toY(v)} x2={W - padR} y2={toY(v)}
-              stroke="rgba(255,255,255,0.05)" strokeWidth="1"
+              style={{ stroke: 'var(--border-subtle)' }} strokeWidth="1"
             />
           )}
           <text
             x={padL - 7} y={toY(v) + 4}
-            textAnchor="end" fontSize="9" fill="#4a5a6a"
+            textAnchor="end" fontSize="9"
+            style={{ fill: 'var(--muted)' }}
             fontFamily="system-ui, sans-serif"
           >
             {short(v)}
@@ -147,7 +145,7 @@ function LineChart({ points }: {
 
       {/* Linia bazowa */}
       <line x1={padL} y1={padT + plotH} x2={W - padR} y2={padT + plotH}
-        stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
+        style={{ stroke: 'var(--border)' }} strokeWidth="1" />
 
       {/* Fill */}
       <path d={area} fill="url(#lc-fill)" />
@@ -164,7 +162,7 @@ function LineChart({ points }: {
         const i = points.indexOf(p);
         return (
           <circle key={i} cx={toX(i)} cy={toY(p.total)} r={2.5}
-            fill="#c9a227" stroke="#030508" strokeWidth="1.5" />
+            fill="#c9a227" stroke="var(--bg)" strokeWidth="1.5" />
         );
       })}
 
@@ -173,7 +171,8 @@ function LineChart({ points }: {
         if (i !== 0 && i % xStep !== 0 && i !== points.length - 1) return null;
         return (
           <text key={i} x={toX(i)} y={H - 6}
-            textAnchor="middle" fontSize="9" fill="#4a5a6a"
+            textAnchor="middle" fontSize="9"
+            style={{ fill: 'var(--muted)' }}
             fontFamily="system-ui, sans-serif">
             {p.year}r
           </text>
@@ -184,7 +183,6 @@ function LineChart({ points }: {
 }
 
 // ─── Wykres słupkowy (ETF vs Lokata) ────────────────────────────
-// Każdy rok: dwie kolumny obok siebie. Czytelne etykiety.
 function CompareChart({ bars }: {
   bars: { year: string; etf: number; lok: number }[];
 }) {
@@ -202,7 +200,7 @@ function CompareChart({ bars }: {
     <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'auto', display: 'block' }}>
       {/* Linia bazowa */}
       <line x1={padL} y1={padT + plotH} x2={W - padR} y2={padT + plotH}
-        stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+        style={{ stroke: 'var(--border-subtle)' }} strokeWidth="1" />
 
       {bars.map((b, i) => {
         const cx   = padL + colW * i + colW / 2;
@@ -237,7 +235,8 @@ function CompareChart({ bars }: {
 
             {/* Rok */}
             <text x={cx} y={H - 7}
-              textAnchor="middle" fontSize="10" fill="#c8d4e8"
+              textAnchor="middle" fontSize="10"
+              style={{ fill: 'var(--muted)' }}
               fontFamily="system-ui, sans-serif">
               {b.year}
             </text>
@@ -247,9 +246,9 @@ function CompareChart({ bars }: {
 
       {/* Legenda */}
       <rect x={padL} y={8} width={10} height={10} fill="#c9a227" rx={2} />
-      <text x={padL + 14} y={17} fontSize="10" fill="#c8d4e8" fontFamily="system-ui, sans-serif">ETF</text>
+      <text x={padL + 14} y={17} fontSize="10" style={{ fill: 'var(--muted)' }} fontFamily="system-ui, sans-serif">ETF</text>
       <rect x={padL + 48} y={8} width={10} height={10} fill="#4a9eff" rx={2} />
-      <text x={padL + 62} y={17} fontSize="10" fill="#c8d4e8" fontFamily="system-ui, sans-serif">Lokata</text>
+      <text x={padL + 62} y={17} fontSize="10" style={{ fill: 'var(--muted)' }} fontFamily="system-ui, sans-serif">Lokata</text>
     </svg>
   );
 }
@@ -264,12 +263,12 @@ function Milestones({ data }: {
       {data.map(d => (
         <div key={d.label}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 5 }}>
-            <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: '#c8d4e8' }}>{d.label}</span>
-            <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: '#e8edf5', fontWeight: 600 }}>
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: 'var(--muted)' }}>{d.label}</span>
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: 'var(--text)', fontWeight: 600 }}>
               {fmt(d.value)} PLN
             </span>
           </div>
-          <div style={{ height: 3, background: 'rgba(255,255,255,0.05)', borderRadius: 99 }}>
+          <div style={{ height: 3, background: 'var(--border-subtle)', borderRadius: 99 }}>
             <div style={{
               height: '100%', borderRadius: 99, background: '#c9a227',
               width: `${Math.round((d.value / max) * 100)}%`,
@@ -277,7 +276,7 @@ function Milestones({ data }: {
             }} />
           </div>
           {d.secondary !== undefined && (
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: '#3a4a5a', marginTop: 3 }}>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)', marginTop: 3 }}>
               z tego wpłaty: {fmt(d.secondary)} PLN
             </p>
           )}
@@ -288,7 +287,7 @@ function Milestones({ data }: {
 }
 
 function Sep() {
-  return <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', margin: '4px 0' }} />;
+  return <div style={{ borderTop: '1px solid var(--border-subtle)', margin: '4px 0' }} />;
 }
 
 function pickYears(max: number, n = 5): number[] {
@@ -423,12 +422,12 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
     <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 80px' }}>
 
       {/* Zakładki */}
-      <div style={{ display: 'flex', marginBottom: 48, borderBottom: '1px solid rgba(255,255,255,0.07)', overflowX: 'auto' }}>
+      <div style={{ display: 'flex', marginBottom: 48, borderBottom: '1px solid var(--border-subtle)', overflowX: 'auto' }}>
         {TABS.map(t => (
           <button key={t.key} onClick={() => setTab(t.key)} style={{
             background: 'none', border: 'none', cursor: 'pointer',
             borderBottom: tab === t.key ? '2px solid #c9a227' : '2px solid transparent',
-            color: tab === t.key ? '#ffffff' : '#c8d4e8',
+            color: tab === t.key ? 'var(--text)' : 'var(--muted)',
             fontFamily: 'var(--font-body)', fontSize: '0.92rem',
             fontWeight: tab === t.key ? 600 : 400,
             padding: '10px 18px 12px', marginBottom: -1,
@@ -468,8 +467,8 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
 
             {/* Wykres liniowy */}
             {compound.linePoints.length >= 2 && (
-              <div style={{ marginTop: 28, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: '#c8d4e8', marginBottom: 12 }}>
+              <div style={{ marginTop: 28, paddingTop: 20, borderTop: '1px solid var(--border-subtle)' }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: 'var(--muted)', marginBottom: 12 }}>
                   Wzrost wartości portfela (PLN)
                 </p>
                 <LineChart points={compound.linePoints} />
@@ -477,8 +476,8 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
             )}
 
             {/* Kamienie milowe */}
-            <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: '#c8d4e8', marginBottom: 14 }}>
+            <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--border-subtle)' }}>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: 'var(--muted)', marginBottom: 14 }}>
                 Szczegółowe wartości
               </p>
               <Milestones
@@ -505,14 +504,14 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
             <Sep />
             <Field label="Wielkość konta (PLN)"     value={accountSize} onChange={setAccountSize} step="1000" />
             <Field label="Ryzyko na transakcję (%)" value={riskPct}     onChange={setRiskPct}     step="0.1"
-              hint="Zalecane: 1–2% kapitału na jedną transakcję." />
+              hint="Zalecane: 1-2% kapitału na jedną transakcję." />
           </div>
 
           <div>
             {rr ? (
               <>
                 <div style={{ marginBottom: 32 }}>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#c8d4e8', marginBottom: 8 }}>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--muted)', marginBottom: 8 }}>
                     Stosunek zysku do ryzyka - {rr.isLong ? 'pozycja długa' : 'pozycja krótka'}
                   </p>
                   <p style={{
@@ -538,7 +537,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
                 )}
               </>
             ) : (
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: '#3a4a5a', lineHeight: 1.8 }}>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: 'var(--muted)', lineHeight: 1.8 }}>
                 Wpisz cenę wejścia, stop loss i take profit po lewej, żeby zobaczyć wyniki.
               </p>
             )}
@@ -551,7 +550,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
         <div className="calc-grid">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
             <p style={{
-              fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#c8d4e8', lineHeight: 1.7,
+              fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.7,
               paddingLeft: 12, borderLeft: '2px solid rgba(201,162,39,0.3)',
             }}>
               Reguła 4% - Twój cel to 25x rocznych wydatków. Portfel tej wielkości powinien finansować Twoje życie bez uszczuplania kapitału.
@@ -566,7 +565,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
           <div>
             {fire ? (
               <>
-                <MainResult label="Twój cel FIRE" value={`${fmt(fire.target)} PLN`} sub="25× rocznych wydatków (reguła 4%)" />
+                <MainResult label="Twój cel FIRE" value={`${fmt(fire.target)} PLN`} sub="25x rocznych wydatków (reguła 4%)" />
                 {fire.achieved ? (
                   <MainResult
                     label="Czas do wolności finansowej" color="#00d4aa"
@@ -589,7 +588,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
                 <Row label="Pasywny dochód po FIRE" value={`${fmt(fire.monthlyPassive)} PLN / mies.`} color="#00d4aa" large />
               </>
             ) : (
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: '#3a4a5a', lineHeight: 1.8 }}>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: 'var(--muted)', lineHeight: 1.8 }}>
                 Wpisz miesięczne wydatki po FIRE, żeby obliczyć swój cel.
               </p>
             )}
@@ -606,7 +605,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
             <Field label="Liczba lat"                     value={etfYears}    onChange={setEtfYears}    step="1" />
             <Sep />
             <Field label="Roczna stopa zwrotu ETF (%)"   value={etfRate}    onChange={setEtfRate}    step="0.5"
-              hint="Np. 7–10% dla szerokiego indeksu globalnego." />
+              hint="Np. 7-10% dla szerokiego indeksu globalnego." />
             <Field label="Oprocentowanie lokaty (%)"     value={lokataRate} onChange={setLokataRate} step="0.5" />
           </div>
 
@@ -617,7 +616,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
                 <p style={{ fontFamily: 'var(--font-display)', fontSize: '2.2rem', color: '#c9a227', lineHeight: 1 }}>
                   {fmt(etf.finalETF)} PLN
                 </p>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: '#c8d4e8', marginTop: 6 }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: 'var(--muted)', marginTop: 6 }}>
                   zysk: +{fmt(etf.etfInterest)} PLN
                 </p>
               </div>
@@ -626,7 +625,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
                 <p style={{ fontFamily: 'var(--font-display)', fontSize: '2.2rem', color: '#4a9eff', lineHeight: 1 }}>
                   {fmt(etf.finalLok)} PLN
                 </p>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: '#c8d4e8', marginTop: 6 }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: 'var(--muted)', marginTop: 6 }}>
                   zysk: +{fmt(etf.lokInterest)} PLN
                 </p>
               </div>
@@ -642,7 +641,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
 
             {/* Wykres porównawczy */}
             {etf.chartYears.length >= 2 && (
-              <div style={{ marginTop: 28, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+              <div style={{ marginTop: 28, paddingTop: 20, borderTop: '1px solid var(--border-subtle)' }}>
                 <CompareChart
                   bars={etf.chartYears
                     .filter(y => etf.byYear[y])
@@ -651,7 +650,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
               </div>
             )}
 
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.76rem', color: '#3a4a5a', lineHeight: 1.65, marginTop: 16 }}>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.76rem', color: 'var(--muted)', lineHeight: 1.65, marginTop: 16 }}>
               Wyniki szacunkowe. Nie uwzględniono podatku Belki (19%), opłat za zarządzanie funduszem ani inflacji.
             </p>
           </div>

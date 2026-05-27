@@ -128,7 +128,7 @@ export default async function CategoryPage({ params }: Props) {
               maxWidth: 1100,
               margin: '0 auto',
               padding: 'clamp(40px, 6vw, 72px) 24px clamp(32px, 4vw, 48px)',
-              borderBottom: '1px solid rgba(255,255,255,0.05)',
+              borderBottom: '1px solid var(--border)',
             }}
           >
             <div
@@ -166,7 +166,7 @@ export default async function CategoryPage({ params }: Props) {
               style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: 'clamp(0.88rem, 1.5vw, 1rem)',
-                color: '#ffffff',
+                color: 'var(--muted)',
                 lineHeight: 1.85,
                 maxWidth: 680,
                 margin: '0 0 24px',

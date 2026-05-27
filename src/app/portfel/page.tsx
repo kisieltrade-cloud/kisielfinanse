@@ -3,12 +3,12 @@
 import { useState } from 'react';
 
 const C = {
-  white:  '#ffffff',
-  bg:     '#f7f8fa',
-  text:   '#1a2230',
-  sub:    '#3d4f63',
-  label:  '#8a9ab0',
-  border: '#e2e8f0',
+  white:  'var(--surface)',
+  bg:     'var(--bg)',
+  text:   'var(--text)',
+  sub:    'var(--muted)',
+  label:  'var(--muted)',
+  border: 'var(--border)',
   gold:   '#b8960a',
   green:  '#16a34a',
   red:    '#dc2626',
@@ -26,8 +26,8 @@ const HOLDINGS = [
     currentPrice: 265.29,
     shares: 20.14,
     currency: 'USD',
-    broker: 'GPW',
-    note: 'DCA - 800 zł co miesiac przez 21 miesiecy. Srednia cena kupna $213,89. Razem 20,14 ulamkowych udzialow.',
+    broker: 'NASDAQ',
+    note: 'DCA - 800 zł co miesiąc przez 21 miesięcy. Średnia cena kupna $213,89. Razem 20,14 ułamkowych udziałów.',
   },
   {
     ticker: 'PCE',
@@ -39,7 +39,7 @@ const HOLDINGS = [
     shares: 1173,
     currency: 'PLN',
     broker: 'GPW',
-    note: 'Zakłady Chemiczne Police - spolka z grupy Azoty. 8 800 zł zainwestowane.',
+    note: 'Zakłady Chemiczne Police - spółka z grupy Azoty. 8 800 zł zainwestowane.',
   },
   {
     ticker: 'EAT',
@@ -51,7 +51,7 @@ const HOLDINGS = [
     shares: 485,
     currency: 'PLN',
     broker: 'GPW',
-    note: 'Wejscie przy wsparciu. Sektor restauracyjny - KFC, Burger King, Pizza Hut w CEE.',
+    note: 'Wejście przy wsparciu. Sektor restauracyjny - KFC, Burger King, Pizza Hut w CEE.',
   },
   {
     ticker: 'MDV',
@@ -63,7 +63,7 @@ const HOLDINGS = [
     shares: 140,
     currency: 'PLN',
     broker: 'GPW',
-    note: '3 wejscia: 81 szt. po 86 zł (9 kwi), 38 szt. po 91 zł (14 kwi), 21 szt. po 94,20 zł (16 kwi). Srednia 88,59 zł.',
+    note: '3 wejścia: 81 szt. po 86 zł (9 kwi), 38 szt. po 91 zł (14 kwi), 21 szt. po 94,20 zł (16 kwi). Średnia 88,59 zł.',
   },
 ];
 
@@ -71,22 +71,22 @@ const UPDATES = [
   {
     date: '15 Maj 2026',
     action: 'Kupno AmRest (EAT) - 485 szt. po 10,30 zł, razem 4 995 zł',
-    why: 'Kurs po -35% rok do roku, wycena blisko historycznych minimow. Spolka zapowiedziala wejscie Taco Bell do Polski w Q4 2026 we wspolpracy z AmRest - potencjalny katalizator. Zakup kontrarianski przy slabych wynikach Q1.',
+    why: 'Kurs po -35% rok do roku, wycena blisko historycznych minimów. Spółka zapowiedziała wejście Taco Bell do Polski w Q4 2026 we współpracy z AmRest - potencjalny katalizator. Zakup kontrariański przy słabych wynikach Q1.',
   },
   {
     date: '9-16 Kwi 2026',
-    action: 'Budowanie pozycji Modivo (MDV) - 140 szt. w 3 transzach, srednia 88,59 zł, razem 12 402 zł',
-    why: 'Akcje po -64% rok do roku mimo poprawy wynikow - zysk netto wzrosl z 78,5 mln do 118,2 mln PLN kwartał do kwartal. Odpis 155,7 mln PLN na worldbox wyczyścił bilans. Kupno w transzach bo duza zmiennosc.',
+    action: 'Budowanie pozycji Modivo (MDV) - 140 szt. w 3 transzach, średnia 88,59 zł, razem 12 402 zł',
+    why: 'Akcje po -64% rok do roku mimo poprawy wyników - zysk netto wzrósł z 78,5 mln do 118,2 mln PLN kwartał do kwartału. Odpis 155,7 mln PLN na Worldbox wyczyścił bilans. Kupno w transzach bo duża zmienność.',
   },
   {
     date: '8 Kwi 2026',
     action: 'Kupno Azoty Police (PCE) - 1 173 szt. po 7,50 zł, razem 8 797 zł',
-    why: 'Kilka dni po Nadzwyczajnym Walnym Zgromadzeniu (2 kwi 2026). Kurs przy wieloletnich minimach, spolka przeszla restrukturyzacje. Producent nawozow i dwutlenku tytanu - zalezny od cen gazu, ktore zaczely sprzyjac.',
+    why: 'Kilka dni po Nadzwyczajnym Walnym Zgromadzeniu (2 kwi 2026). Kurs przy wieloletnich minimach, spółka przeszła restrukturyzację. Producent nawozów i dwutlenku tytanu - zależny od cen gazu, które zaczęły sprzyjać.',
   },
   {
     date: 'Sie 2024 - teraz',
-    action: 'Amazon DCA - 800 zł co miesiac, 21 miesiecy, srednia $213,89, lacznie 20,14 udzialow',
-    why: 'Regularny DCA w najwiekszego sprzedawce e-commerce na swiecie i lidera chmury (AWS). Kupuje niezaleznie od ceny co miesiac - nie probuje wybierac dolek.',
+    action: 'Amazon DCA - 800 zł co miesiąc, 21 miesięcy, średnia $213,89, łącznie 20,14 udziałów',
+    why: 'Regularny DCA w największego sprzedawcę e-commerce na świecie i lidera chmury (AWS). Kupuję niezależnie od ceny co miesiąc - nie próbuję wybierać dołków.',
   },
 ];
 
@@ -130,19 +130,19 @@ export default function PortfelPage() {
   });
 
   return (
-    <main style={{ minHeight: '80vh', padding: '120px 24px 80px', background: '#f7f8fa' }}>
+    <main style={{ minHeight: '80vh', padding: '120px 24px 80px', background: 'var(--bg)' }}>
       <div style={{ maxWidth: 860, margin: '0 auto' }}>
 
         {/* Header */}
         <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.6rem', letterSpacing: '3px', color: C.gold, textTransform: 'uppercase', marginBottom: 12 }}>
-          Transparentnosc
+          Transparentność
         </p>
         <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3rem)', color: C.text, marginBottom: 12, lineHeight: 1.1 }}>
           Mój portfel
         </h1>
         <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', color: C.text, marginBottom: 48, lineHeight: 1.7, maxWidth: 560 }}>
-          Pelna transparentnosc - co kupuje, kiedy, za ile i dlaczego. Bez sciemy.
-          Aktualizuje co miesiac.
+          Pełna transparentność - co kupuję, kiedy, za ile i dlaczego. Bez ściemy.
+          Aktualizuję co miesiąc.
         </p>
 
         {/* Statystyki */}
@@ -192,8 +192,8 @@ export default function PortfelPage() {
 
         {/* Pozycje */}
         <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, overflow: 'hidden', marginBottom: 32 }}>
-          <div style={{ padding: '20px 24px 16px', borderBottom: `1px solid ${C.border}` }}>
-            <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.58rem', letterSpacing: '2px', color: C.text, textTransform: 'uppercase', margin: 0 }}>
+          <div style={{ padding: '22px 28px', borderBottom: `1px solid ${C.border}` }}>
+            <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', fontWeight: 700, color: C.text, margin: 0 }}>
               Pozycje
             </p>
           </div>
@@ -208,32 +208,32 @@ export default function PortfelPage() {
                     display: 'grid',
                     gridTemplateColumns: '1fr auto auto auto',
                     alignItems: 'center',
-                    gap: 16,
-                    padding: '16px 24px',
+                    gap: 20,
+                    padding: '20px 28px',
                     borderBottom: i < holdings.length - 1 || isOpen ? `1px solid ${C.border}` : 'none',
                     cursor: 'pointer',
                     transition: 'background 0.15s',
-                    background: isOpen ? '#f0f4f8' : 'transparent',
+                    background: isOpen ? 'var(--surface2)' : 'transparent',
                   }}
-                  onMouseEnter={e => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = '#f8fafc'; }}
+                  onMouseEnter={e => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = 'var(--surface2)'; }}
                   onMouseLeave={e => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
                 >
                   {/* Lewa strona */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 14, minWidth: 0 }}>
                     <div style={{
-                      width: 36, height: 36, borderRadius: 8, flexShrink: 0,
+                      width: 46, height: 46, borderRadius: 10, flexShrink: 0,
                       background: TYPE_COLOR[h.type] + '20',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontFamily: 'var(--font-display)', fontSize: '0.6rem', fontWeight: 700,
+                      fontFamily: 'var(--font-display)', fontSize: '0.7rem', fontWeight: 700,
                       color: TYPE_COLOR[h.type],
                     }}>
-                      {h.type === 'ETF' ? 'ETF' : h.type === 'Akcje' ? 'PL' : 'OBL'}
+                      {h.type === 'ETF' ? 'ETF' : h.type === 'Obligacje' ? 'OBL' : h.ticker.slice(0, 3)}
                     </div>
                     <div style={{ minWidth: 0 }}>
-                      <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.85rem', fontWeight: 700, color: C.text, margin: 0 }}>
+                      <p style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', fontWeight: 700, color: C.text, margin: '0 0 2px' }}>
                         {h.ticker}
                       </p>
-                      <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.78rem', color: C.text, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.88rem', color: C.text, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {h.name}
                       </p>
                     </div>
@@ -241,26 +241,26 @@ export default function PortfelPage() {
 
                   {/* Data / sztuki */}
                   <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.78rem', color: C.text, margin: 0, fontWeight: 600 }}>{h.buyDate}</p>
-                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', color: C.text, margin: 0 }}>{h.shares} szt.</p>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.88rem', fontWeight: 600, color: C.text, margin: '0 0 2px' }}>{h.buyDate}</p>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.85rem', color: C.text, margin: 0 }}>{h.shares} szt.</p>
                   </div>
 
                   {/* Wartość */}
                   <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', color: C.text, margin: 0, fontWeight: 700 }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', fontWeight: 700, color: C.text, margin: '0 0 2px' }}>
                       {fmt(h.current)} PLN
                     </p>
-                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.65rem', color: C.text, margin: 0 }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.82rem', color: C.text, margin: 0 }}>
                       zainw. {fmt(h.invested)}
                     </p>
                   </div>
 
                   {/* P&L */}
-                  <div style={{ textAlign: 'right', minWidth: 64 }}>
-                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.78rem', fontWeight: 700, color: h.pnl >= 0 ? C.green : C.red, margin: 0 }}>
+                  <div style={{ textAlign: 'right', minWidth: 80 }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', fontWeight: 700, color: h.pnl >= 0 ? C.green : C.red, margin: '0 0 2px' }}>
                       {h.pnlPct >= 0 ? '+' : ''}{h.pnlPct.toFixed(1)}%
                     </p>
-                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.65rem', color: h.pnl >= 0 ? C.green : C.red, margin: 0, fontWeight: 600 }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.82rem', fontWeight: 600, color: h.pnl >= 0 ? C.green : C.red, margin: 0 }}>
                       {h.pnl >= 0 ? '+' : ''}{fmt(h.pnl)} PLN
                     </p>
                   </div>
@@ -268,20 +268,20 @@ export default function PortfelPage() {
 
                 {/* Rozwinięcie */}
                 {isOpen && (
-                  <div style={{ padding: '16px 24px 20px', background: '#f0f4f8', borderBottom: i < holdings.length - 1 ? `1px solid ${C.border}` : 'none' }}>
-                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.88rem', color: C.text, margin: '0 0 16px', lineHeight: 1.7 }}>
+                  <div style={{ padding: '20px 28px 24px', background: 'var(--surface2)', borderBottom: i < holdings.length - 1 ? `1px solid ${C.border}` : 'none' }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', color: C.text, margin: '0 0 18px', lineHeight: 1.7 }}>
                       {h.note}
                     </p>
-                    <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', gap: 36, flexWrap: 'wrap' }}>
                       {[
                         { k: 'Data kupna', v: h.buyDate },
                         { k: 'Cena kupna', v: `${h.buyPrice} ${h.currency}` },
-                        { k: 'Broker', v: h.broker },
+                        { k: 'Giełda', v: h.broker },
                         { k: 'Waluta', v: h.currency },
                       ].map(({ k, v }) => (
                         <div key={k}>
-                          <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.72rem', color: C.text, margin: '0 0 2px' }}>{k}</p>
-                          <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.88rem', color: C.text, margin: 0, fontWeight: 600 }}>{v}</p>
+                          <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.78rem', color: C.text, margin: '0 0 3px' }}>{k}</p>
+                          <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', fontWeight: 700, color: C.text, margin: 0 }}>{v}</p>
                         </div>
                       ))}
                     </div>

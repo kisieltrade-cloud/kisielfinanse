@@ -33,6 +33,18 @@ export const metadata: Metadata = {
   },
 };
 
+// Paleta kolorów - CSS vars dla obsługi dark/light mode
+const C = {
+  bg:      'var(--bg)',
+  surface: 'var(--surface)',
+  surface2:'var(--surface2)',
+  border:  'var(--border)',
+  text:    'var(--text)',
+  muted:   'var(--muted)',
+  subtle:  'var(--muted)',
+  accent:  '#c9a227',
+};
+
 const timeline = [
   {
     year: '2017',
@@ -41,7 +53,7 @@ const timeline = [
     color: '#ff2d78',
   },
   {
-    year: '2018–19',
+    year: '2018-19',
     title: 'Nauka przez własne błędy',
     desc: 'Żadnych gotowych poradników, które naprawdę działają. Analiza własnych transakcji, budżetów, decyzji. Zrozumiałem, że wiedza finansowa to nawyk myślenia o pieniądzach, nie zasób do zebrania.',
     color: '#f5c518',
@@ -53,13 +65,13 @@ const timeline = [
     color: '#e8963a',
   },
   {
-    year: '2021–23',
+    year: '2021-23',
     title: 'Inwestycje i szerszy kontekst',
     desc: 'Portfel długoterminowy, ETF-y, dywersyfikacja między klasami aktywów. Zacząłem rozumieć powiązania między polityką, geopolityką a rynkami. Pieniądze mają kontekst, a im lepiej go rozumiesz, tym lepsze podejmujesz decyzje.',
     color: '#c9a227',
   },
   {
-    year: '2024–25',
+    year: '2024-25',
     title: 'Psychologia pieniędzy',
     desc: 'Odkryłem, że większość problemów finansowych wynika z głowy, nie z braku wiedzy. Emocje, nawyki, błędy poznawcze, prokrastynacja. Zacząłem traktować psychologię jako osobny obszar do pracy.',
     color: '#a78bfa',
@@ -119,7 +131,7 @@ export default function OMnie() {
   return (
     <>
       <Nav />
-      <main style={{ paddingTop: '80px' }}>
+      <main style={{ paddingTop: '80px', background: C.bg }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', padding: '24px 24px 0' }}>
           <Breadcrumbs items={[
             { label: 'KisielFinanse', href: '/' },
@@ -136,11 +148,12 @@ export default function OMnie() {
         <section style={{
           minHeight: '70vh', display: 'flex', alignItems: 'center',
           padding: '100px 24px 80px', position: 'relative', overflow: 'hidden',
+          background: C.bg,
         }}>
           {/* Grid tło */}
           <div style={{
             position: 'absolute', inset: 0, zIndex: 0,
-            backgroundImage: 'linear-gradient(rgba(201,162,39,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,162,39,0.03) 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(rgba(201,162,39,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,162,39,0.04) 1px, transparent 1px)',
             backgroundSize: '60px 60px',
           }} />
           <div style={{
@@ -159,17 +172,18 @@ export default function OMnie() {
                   letterSpacing: '6px', margin: '0 0 32px',
                   lineHeight: 1,
                 }}>
-                  <span style={{ color: '#ffffff', display: 'block', marginBottom: 8 }}>MATEUSZ</span>
-                  <span style={{ color: '#c9a227', display: 'block' }}>KISIEL</span>
+                  <span style={{ color: C.text, display: 'block', marginBottom: 8 }}>MATEUSZ</span>
+                  <span style={{ color: C.accent, display: 'block' }}>KISIEL</span>
                 </h1>
 
                 <p style={{
                   fontFamily: 'var(--font-body)',
                   fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
-                  color: '#ffffff',
+                  color: C.text,
                   lineHeight: 1.85,
                   maxWidth: 520,
                   margin: '0 0 12px',
+                  fontWeight: 500,
                 }}>
                   Przez lata uczyłem się jak działają pieniądze. Od pierwszych błędów
                   inwestycyjnych, przez aktywny trading, po zarządzanie majątkiem
@@ -178,21 +192,22 @@ export default function OMnie() {
                 <p style={{
                   fontFamily: 'var(--font-body)',
                   fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
-                  color: '#ffffff',
+                  color: C.text,
                   lineHeight: 1.85,
                   maxWidth: 520,
                   margin: '0 0 32px',
+                  fontWeight: 500,
                 }}>
                   KisielFinanse to miejsce, gdzie zbieram tę wiedzę: inwestycje,
                   oszczędzanie, psychologia pieniędzy, rynki, codzienne finanse.{' '}
-                  <span style={{ color: '#c9a227' }}>Bez kursów za fortunę.</span>
+                  <span style={{ color: C.accent, fontWeight: 700 }}>Bez kursów za fortunę.</span>
                 </p>
 
                 <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                   <Link href="/" style={{
                     fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
-                    letterSpacing: '2px', background: '#c9a227', color: '#060a10',
-                    border: '1px solid #c9a227', padding: '12px 24px',
+                    letterSpacing: '2px', background: C.accent, color: '#060a10',
+                    border: `1px solid ${C.accent}`, padding: '12px 24px',
                     textDecoration: 'none', fontWeight: 700,
                   }}>
                     ZACZNIJ CZYTAĆ →
@@ -203,9 +218,10 @@ export default function OMnie() {
                     rel="noopener noreferrer"
                     style={{
                       fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
-                      letterSpacing: '2px', background: 'none', color: '#ffffff',
-                      border: '1px solid rgba(255,255,255,0.15)', padding: '12px 24px',
+                      letterSpacing: '2px', background: 'none', color: C.text,
+                      border: `1px solid ${C.border}`, padding: '12px 24px',
                       textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8,
+                      fontWeight: 600,
                     }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.736-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -219,7 +235,7 @@ export default function OMnie() {
               <div style={{ position: 'relative', width: 300, flexShrink: 0 }}>
                 <div style={{
                   position: 'absolute', inset: -8,
-                  border: '1px solid rgba(201,162,39,0.2)',
+                  border: '1px solid rgba(201,162,39,0.25)',
                   pointerEvents: 'none', zIndex: 1,
                 }} />
                 <Image
@@ -232,7 +248,7 @@ export default function OMnie() {
                     width: '100%', height: 'auto', display: 'block',
                     objectFit: 'cover',
                     filter: 'grayscale(10%) contrast(1.05)',
-                    border: '1px solid #1a2535',
+                    border: `1px solid ${C.border}`,
                   }}
                 />
               </div>
@@ -244,16 +260,16 @@ export default function OMnie() {
         {/* ── O CO MI CHODZI ────────────────────────────────── */}
         <section style={{
           padding: '80px 24px',
-          borderTop: '1px solid #0d1a26',
-          background: 'linear-gradient(180deg, transparent, rgba(201,162,39,0.02), transparent)',
+          borderTop: `1px solid ${C.border}`,
+          background: C.surface,
         }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <h2 style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-              letterSpacing: '4px', margin: '0 0 40px', color: '#ffffff',
+              letterSpacing: '4px', margin: '0 0 40px', color: C.text,
             }}>
-              O CO MI <span style={{ color: '#c9a227' }}>CHODZI</span>
+              O CO MI <span style={{ color: C.accent }}>CHODZI</span>
             </h2>
             <div style={{
               display: 'grid',
@@ -262,25 +278,27 @@ export default function OMnie() {
             }}>
               {pillars.map((p) => (
                 <div key={p.num} style={{
-                  background: '#0a0f1a', border: '1px solid #0d1a26',
+                  background: C.bg,
+                  border: `1px solid ${C.border}`,
                   borderLeft: `3px solid ${p.color}`,
                   padding: '28px 24px',
                 }}>
                   <div style={{
                     fontFamily: 'var(--font-display)', fontSize: '2.5rem',
-                    color: '#1a2535', letterSpacing: '4px', marginBottom: 12,
+                    color: '#d8e2ef', letterSpacing: '4px', marginBottom: 12,
                   }}>
                     {p.num}
                   </div>
                   <div style={{
                     fontFamily: 'var(--font-display)', fontSize: '1rem',
-                    letterSpacing: '2px', color: '#ffffff', marginBottom: 12,
+                    letterSpacing: '2px', color: C.text, marginBottom: 12,
+                    fontWeight: 700,
                   }}>
                     {p.title.toUpperCase()}
                   </div>
                   <p style={{
                     fontFamily: 'var(--font-body)', fontSize: '0.85rem',
-                    color: '#ffffff', lineHeight: 1.8, margin: 0,
+                    color: C.muted, lineHeight: 1.8, margin: 0, fontWeight: 500,
                   }}>
                     {p.desc}
                   </p>
@@ -291,20 +309,20 @@ export default function OMnie() {
         </section>
 
         {/* ── TIMELINE ──────────────────────────────────────── */}
-        <section style={{ padding: '80px 24px', borderTop: '1px solid #0d1a26' }}>
+        <section style={{ padding: '80px 24px', borderTop: `1px solid ${C.border}`, background: C.bg }}>
           <div style={{ maxWidth: 760, margin: '0 auto' }}>
             <h2 style={{
               fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-              letterSpacing: '4px', margin: '0 0 48px', color: '#ffffff',
+              letterSpacing: '4px', margin: '0 0 48px', color: C.text,
             }}>
-              9 LAT NA <span style={{ color: '#c9a227' }}>RYNKACH</span>
+              9 LAT NA <span style={{ color: C.accent }}>RYNKACH</span>
             </h2>
 
             <div style={{ position: 'relative' }}>
               {/* Linia pionowa */}
               <div style={{
                 position: 'absolute', left: 100, top: 0, bottom: 0,
-                width: 1, background: '#0d1a26',
+                width: 1, background: C.border,
               }} />
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
@@ -320,6 +338,7 @@ export default function OMnie() {
                       <span style={{
                         fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
                         color: t.color, letterSpacing: '1px', whiteSpace: 'nowrap',
+                        fontWeight: 700,
                       }}>
                         {t.year}
                       </span>
@@ -329,8 +348,8 @@ export default function OMnie() {
                       <div style={{
                         width: 13, height: 13, borderRadius: '50%',
                         background: t.color,
-                        boxShadow: `0 0 12px ${t.color}`,
-                        border: '2px solid #060a10',
+                        boxShadow: `0 0 10px ${t.color}55`,
+                        border: `2px solid ${C.bg}`,
                         flexShrink: 0,
                       }} />
                     </div>
@@ -338,13 +357,14 @@ export default function OMnie() {
                     <div>
                       <div style={{
                         fontFamily: 'var(--font-display)', fontSize: '0.95rem',
-                        letterSpacing: '2px', color: '#ffffff', marginBottom: 8,
+                        letterSpacing: '2px', color: C.text, marginBottom: 8,
+                        fontWeight: 700,
                       }}>
                         {t.title.toUpperCase()}
                       </div>
                       <p style={{
                         fontFamily: 'var(--font-body)', fontSize: '0.85rem',
-                        color: '#ffffff', lineHeight: 1.8, margin: 0,
+                        color: C.muted, lineHeight: 1.8, margin: 0, fontWeight: 500,
                       }}>
                         {t.desc}
                       </p>
@@ -359,19 +379,20 @@ export default function OMnie() {
         {/* ── CO ZNAJDZIESZ NA KISIELFINANSE ────────────────── */}
         <section style={{
           padding: '80px 24px',
-          borderTop: '1px solid #0d1a26',
-          background: 'rgba(201,162,39,0.02)',
+          borderTop: `1px solid ${C.border}`,
+          background: C.surface,
         }}>
           <div style={{ maxWidth: 760, margin: '0 auto' }}>
             <h2 style={{
               fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-              letterSpacing: '4px', margin: '0 0 24px', color: '#ffffff',
+              letterSpacing: '4px', margin: '0 0 24px', color: C.text,
             }}>
-              CO ZNAJDZIESZ <span style={{ color: '#c9a227' }}>TUTAJ</span>
+              CO ZNAJDZIESZ <span style={{ color: C.accent }}>TUTAJ</span>
             </h2>
             <p style={{
               fontFamily: 'var(--font-body)', fontSize: '1rem',
-              color: '#ffffff', lineHeight: 1.85, margin: '0 0 40px', maxWidth: 640,
+              color: C.muted, lineHeight: 1.85, margin: '0 0 40px', maxWidth: 640,
+              fontWeight: 500,
             }}>
               Piszę o finansach tak, jak sam chciałbym to czytać. Bez
               lania wody, bez clickbaitowych tytułów, bez treści pisanych pod
@@ -379,10 +400,6 @@ export default function OMnie() {
               jest ważny albo sam przez niego przechodziłem.
             </p>
 
-            <style>{`
-              .about-cat-link { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; background:#0a0f1a; border:1px solid #0d1a26; text-decoration:none; transition:background 0.15s; }
-              .about-cat-link:hover { background:#0d1520; }
-            `}</style>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               {[
                 { href: '/trading',     label: 'Trading',     color: '#c9a227', desc: 'Strategie, analiza, zarządzanie ryzykiem' },
@@ -391,15 +408,20 @@ export default function OMnie() {
                 { href: '/psychologia', label: 'Psychologia', color: '#a78bfa', desc: 'Błędy poznawcze, emocje, mindset' },
                 { href: '/gospodarka',  label: 'Gospodarka',  color: '#ff2d78', desc: 'Makroekonomia, geopolityka, globalne trendy' },
               ].map((cat) => (
-                <Link key={cat.href} href={cat.href}
-                  className="about-cat-link"
-                  style={{ borderLeft: `3px solid ${cat.color}` }}
-                >
+                <Link key={cat.href} href={cat.href} style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  padding: '16px 20px',
+                  background: C.bg,
+                  border: `1px solid ${C.border}`,
+                  borderLeft: `3px solid ${cat.color}`,
+                  textDecoration: 'none',
+                  transition: 'background 0.15s',
+                }}>
                   <div>
-                    <span style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', letterSpacing: '2px', color: cat.color }}>{cat.label.toUpperCase()}</span>
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', marginLeft: 16 }}>{cat.desc}</span>
+                    <span style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', letterSpacing: '2px', color: cat.color, fontWeight: 700 }}>{cat.label.toUpperCase()}</span>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: C.muted, marginLeft: 16, fontWeight: 500 }}>{cat.desc}</span>
                   </div>
-                  <span style={{ color: cat.color, opacity: 0.6 }}>→</span>
+                  <span style={{ color: cat.color, opacity: 0.7, fontWeight: 700 }}>→</span>
                 </Link>
               ))}
             </div>
@@ -409,20 +431,22 @@ export default function OMnie() {
         {/* ── CTA ───────────────────────────────────────────── */}
         <section style={{
           padding: '80px 24px 120px',
-          borderTop: '1px solid #0d1a26',
+          borderTop: `1px solid ${C.border}`,
           textAlign: 'center',
+          background: C.bg,
         }}>
           <div style={{ maxWidth: 560, margin: '0 auto' }}>
             <h2 style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-              letterSpacing: '4px', margin: '0 0 16px', color: '#ffffff',
+              letterSpacing: '4px', margin: '0 0 16px', color: C.text,
             }}>
               FINANSE BEZ ŚCIEMY.
             </h2>
             <p style={{
               fontFamily: 'var(--font-body)', fontSize: '0.95rem',
-              color: '#ffffff', lineHeight: 1.85, margin: '0 0 32px',
+              color: C.muted, lineHeight: 1.85, margin: '0 0 32px',
+              fontWeight: 500,
             }}>
               Inwestycje, oszczędzanie, zarządzanie pieniędzmi, psychologia finansów.
               Tylko to, co naprawdę działa.
@@ -430,17 +454,17 @@ export default function OMnie() {
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link href="/" style={{
                 fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
-                letterSpacing: '2px', background: '#c9a227', color: '#060a10',
-                border: '1px solid #c9a227', padding: '14px 32px',
+                letterSpacing: '2px', background: C.accent, color: '#060a10',
+                border: `1px solid ${C.accent}`, padding: '14px 32px',
                 textDecoration: 'none', fontWeight: 700,
               }}>
                 ARTYKUŁY →
               </Link>
               <Link href="/wspolpraca" style={{
                 fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
-                letterSpacing: '2px', background: 'none', color: '#ffffff',
-                border: '1px solid rgba(255,255,255,0.15)', padding: '14px 32px',
-                textDecoration: 'none',
+                letterSpacing: '2px', background: 'none', color: C.text,
+                border: `1px solid ${C.border}`, padding: '14px 32px',
+                textDecoration: 'none', fontWeight: 600,
               }}>
                 WSPÓŁPRACA
               </Link>

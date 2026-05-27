@@ -3,17 +3,19 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 
 // ─── Kolory ───────────────────────────────────────────────────────
+// Kalkulator hipoteczny zawsze używa białych paneli (frosted glass),
+// więc kolory tekstu są stałe (ciemne), bez CSS vars.
 const C = {
   dark:   '#1a5c38',
   mid:    '#2d7a4f',
   bright: '#3aaa6a',
   light:  '#a8d8ba',
-  vlight: '#e8f5ee',
-  bg:     '#f0f4f1',
-  white:  '#ffffff',
-  text:   '#1a2b1e',
-  muted:  '#6b7c71',
-  border: '#dce8df',
+  vlight: 'rgba(58,170,106,0.07)',
+  bg:     'var(--bg)',      // tło strony adaptuje się do motywu
+  white:  '#ffffff',        // stały biały panel
+  text:   '#1a2230',        // stały ciemny tekst (na białych panelach)
+  muted:  '#4a5a6a',        // stały szary tekst (na białych panelach)
+  border: '#e2e8f0',        // stały jasny obramowanie
   red:    '#d64045',
   gold:   '#b8860b',
 };

@@ -127,7 +127,7 @@ export default function Disclaimer() {
         <div style={{
           background: 'rgba(255,45,120,0.06)', border: '1px solid rgba(255,45,120,0.2)',
           borderLeft: '3px solid var(--pink)', padding: '16px 20px',
-          fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#e8a0b0',
+          fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text)',
           lineHeight: 1.8, marginBottom: 48,
         }}>
           ⚠ Wyniki historyczne nie gwarantują przyszłych zwrotów. Trading instrumentami finansowymi,

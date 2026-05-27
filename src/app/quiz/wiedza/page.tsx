@@ -199,7 +199,7 @@ export default function QuizWiedza() {
   }
 
   const progress = (current / QUESTIONS.length) * 100;
-  const C = { bg: '#f4f6f8', white: '#ffffff', text: '#1a2230', muted: '#5a6a7a', border: '#dde3ea', blue: '#2563eb' };
+  const C = { bg: '#f4f6f8', white: '#ffffff', text: '#1a2230', muted: '#1a2230', border: '#dde3ea', blue: '#2563eb' };
 
   return (
     <main style={{ minHeight: '80vh', padding: '120px 24px 80px' }}>

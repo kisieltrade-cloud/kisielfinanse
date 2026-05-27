@@ -3,10 +3,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import { CATEGORIES } from '@/lib/categories';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const MAIN_LINKS = [
-  { href: '/',       label: 'Home' },
-  { href: '/o-mnie', label: 'O mnie' },
+  { href: '/',        label: 'Home' },
+  { href: '/o-mnie',  label: 'O mnie' },
+  { href: '/portfel', label: 'Portfel inwestycyjny' },
 ];
 
 const UTIL_LINKS = [
@@ -47,6 +49,7 @@ export default function Nav() {
 
   const isActive = (href: string) => pathname === href;
   const isCalcActive = pathname.startsWith('/kalkulator') && pathname !== '/kalkulator-hipoteczny';
+  const isLight = pathname === '/';
 
   return (
     <>
@@ -148,6 +151,7 @@ export default function Nav() {
         </ul>
 
         <div className="nav-right">
+          <ThemeToggle />
           <button
             className={`nav-burger${open ? ' nav-burger-open' : ''}`}
             onClick={() => setOpen((o) => !o)}
@@ -217,6 +221,8 @@ export default function Nav() {
                 </Link>
               </li>
             ))}
+
+            <li className="mobile-menu-section">Inne</li>
 
             {UTIL_LINKS.map((l) => (
               <li key={l.href}>

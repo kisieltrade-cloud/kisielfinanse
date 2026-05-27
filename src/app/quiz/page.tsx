@@ -7,7 +7,7 @@ const QUIZZES = [
     href: '/quiz/typ-inwestora',
     emoji: '🎯',
     count: '7 pytań',
-    title: 'Jaki typ inwestora jesteś?',
+    title: 'Jakim typem inwestora jesteś?',
     desc: 'Agresywny trader, pasywny inwestor ETF, a może konserwatywny oszczędzający? Sprawdź swój profil.',
     color: '#b8960a',
   },
@@ -21,7 +21,7 @@ const QUIZZES = [
   },
 ];
 
-const C = { white: '#ffffff', text: '#1a2230', muted: '#5a6a7a', border: '#dde3ea', gold: '#b8960a' };
+const C = { white: '#ffffff', text: '#1a2230', muted: '#1a2230', border: '#dde3ea', gold: '#b8960a' };
 
 export default function QuizPage() {
   return (

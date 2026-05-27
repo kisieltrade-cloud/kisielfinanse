@@ -21,21 +21,13 @@ export default async function Hero() {
             width: '100%', height: '100%',
             objectFit: 'cover', objectPosition: 'center right',
             position: 'absolute', inset: 0,
-            opacity: 0.55,
+            opacity: 0.12,
           }}
         />
-        {/* Gradient overlay: dark left (tekst czytelny) → fade → bg right */}
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(90deg, rgba(3,5,8,0.97) 0%, rgba(3,5,8,0.88) 35%, rgba(3,5,8,0.55) 58%, var(--bg) 78%, var(--bg) 100%)',
-          zIndex: 2,
-        }} />
+        {/* Gradient overlay: left → fade right */}
+        <div style={{ position: 'absolute', inset: 0, background: 'var(--hero-overlay)', zIndex: 2 }} />
         {/* Bottom fade */}
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(180deg, transparent 60%, var(--bg) 100%)',
-          zIndex: 3,
-        }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'var(--hero-fade)', zIndex: 3 }} />
       </div>
 
       {/* ── Layer 3: glow accents ── */}

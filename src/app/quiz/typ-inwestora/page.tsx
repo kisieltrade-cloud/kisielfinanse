@@ -153,7 +153,7 @@ export default function QuizTypInwestora() {
 
   const progress = ((current) / QUESTIONS.length) * 100;
 
-  const C = { bg: '#f4f6f8', white: '#ffffff', text: '#1a2230', muted: '#5a6a7a', border: '#dde3ea', gold: '#b8960a' };
+  const C = { bg: '#f4f6f8', white: '#ffffff', text: '#1a2230', muted: '#1a2230', border: '#dde3ea', gold: '#b8960a' };
 
   return (
     <main style={{ minHeight: '80vh', padding: '120px 24px 80px' }}>
@@ -162,7 +162,7 @@ export default function QuizTypInwestora() {
         {!done ? (
           <>
             <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', color: C.text, marginBottom: 8, lineHeight: 1.1 }}>
-              Quiz - Typ Inwestora
+              Jakim typem inwestora jesteś?
             </h1>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: C.muted }}>
