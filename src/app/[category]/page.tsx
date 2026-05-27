@@ -49,13 +49,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
       siteName: 'KisielFinanse',
       locale: 'pl_PL',
-      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: config.metaTitle }],
+      images: [{ url: `${BASE_URL}/${slug}/opengraph-image`, width: 1200, height: 630, alt: config.metaTitle }],
     },
     twitter: {
       card: 'summary_large_image',
       title: config.metaTitle,
       description: config.metaDesc,
-      images: ['/og-image.png'],
+      images: [`${BASE_URL}/${slug}/opengraph-image`],
     },
   };
 }
