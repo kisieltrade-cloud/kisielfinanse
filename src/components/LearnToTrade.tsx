@@ -136,7 +136,7 @@ export default function LearnToTrade() {
           fontFamily: 'var(--font-mono)',
           fontSize: '0.85rem',
           color: C.text,
-          fontWeight: 600,
+          fontWeight: 700,
           lineHeight: 1.8,
           maxWidth: 640,
         }}>
@@ -207,10 +207,10 @@ export default function LearnToTrade() {
                 maxHeight: isOpen ? 600 : 0, opacity: isOpen ? 1 : 0,
                 transition: 'max-height 0.4s ease, opacity 0.3s ease', overflow: 'hidden',
               }}>
-                <div style={{ padding: '0 24px 24px 64px' }}>
+                <div style={{ padding: '0 24px 24px clamp(24px, 8vw, 64px)' }}>
                   <p style={{
                     fontFamily: 'var(--font-mono)', fontSize: '0.8rem',
-                    color: C.text, fontWeight: 500, lineHeight: 1.85, margin: '0 0 16px',
+                    color: C.text, fontWeight: 700, lineHeight: 1.85, margin: '0 0 16px',
                   }}>
                     {step.content}
                   </p>
@@ -223,7 +223,7 @@ export default function LearnToTrade() {
                         }}>▸</span>
                         <span style={{
                           fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
-                          color: C.text, fontWeight: 500, lineHeight: 1.7,
+                          color: C.text, fontWeight: 700, lineHeight: 1.7,
                         }}>
                           {point}
                         </span>
@@ -298,7 +298,7 @@ export default function LearnToTrade() {
               </div>
               <p style={{
                 fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
-                color: C.text, fontWeight: 500, lineHeight: 1.7, margin: 0,
+                color: C.text, fontWeight: 700, lineHeight: 1.7, margin: 0,
               }}>
                 {t.desc}
               </p>
@@ -311,7 +311,7 @@ export default function LearnToTrade() {
       <div className="reveal" style={{ marginTop: 56 }}>
         <div style={{
           fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
-          color: C.text, fontWeight: 500, lineHeight: 1.85, padding: '24px',
+          color: C.text, fontWeight: 700, lineHeight: 1.85, padding: '24px',
           background: 'rgba(201,162,39,0.05)',
           border: '1px solid rgba(201,162,39,0.22)',
           borderLeft: '3px solid #c9a227',
@@ -330,7 +330,7 @@ export default function LearnToTrade() {
       {/* Disclaimer */}
       <p style={{
         fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
-        color: '#1a2230', textAlign: 'center', marginTop: 48, lineHeight: 1.6, fontWeight: 500,
+        color: '#1a2230', textAlign: 'center', marginTop: 48, lineHeight: 1.6, fontWeight: 700,
       }}>
         Treści publikowane na KisielFinanse.pl mają charakter wyłącznie edukacyjny i nie
         stanowią doradztwa inwestycyjnego. Trading wiąże się z ryzykiem utraty kapitału.

@@ -286,7 +286,7 @@ export default function KalkulatorHipotecznyPage() {
                 padding: '10px 20px', borderRadius: 6,
                 border: '1px solid rgba(201,162,39,0.3)',
                 color: '#c9a227', fontFamily: 'var(--font-body)',
-                fontSize: '0.85rem', fontWeight: 500, textDecoration: 'none',
+                fontSize: '0.85rem', fontWeight: 700, textDecoration: 'none',
               }}
             >
               Kalkulator finansowy →

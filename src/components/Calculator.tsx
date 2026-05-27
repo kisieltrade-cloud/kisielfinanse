@@ -36,7 +36,7 @@ function Field({ label, value, onChange, step, placeholder, hint }: {
           background: 'transparent', border: 'none',
           borderBottom: `1px solid ${focused ? '#c9a227' : 'var(--border)'}`,
           color: 'var(--text)', fontFamily: 'var(--font-body)',
-          fontSize: '1.1rem', fontWeight: 500,
+          fontSize: '1.1rem', fontWeight: 700,
           padding: '7px 0', width: '100%', outline: 'none',
           boxSizing: 'border-box', transition: 'border-color 0.15s',
         }}

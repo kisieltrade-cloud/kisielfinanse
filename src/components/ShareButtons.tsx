@@ -46,7 +46,7 @@ export default function ShareButtons({ title, url }: Props) {
     borderRadius: 8,
     fontSize: '0.78rem',
     fontFamily: 'system-ui, sans-serif',
-    fontWeight: 500,
+    fontWeight: 700,
     cursor: 'pointer',
     textDecoration: 'none',
     border: '1px solid var(--border)',

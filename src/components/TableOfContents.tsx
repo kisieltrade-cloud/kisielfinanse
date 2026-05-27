@@ -80,7 +80,7 @@ export default function TableOfContents({ items }: Props) {
                   paddingBottom: isH2 ? 6 : 4,
                   fontFamily: 'system-ui, sans-serif',
                   fontSize: isH2 ? '0.8rem' : '0.74rem',
-                  fontWeight: isH2 ? (isActive ? 600 : 500) : 400,
+                  fontWeight: isH2 ? 700 : 600,
                   color: isActive ? 'var(--cyan)' : isH2 ? 'var(--text)' : 'var(--muted)',
                   textDecoration: 'none',
                   lineHeight: 1.4,

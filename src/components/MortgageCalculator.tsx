@@ -63,7 +63,7 @@ function SliderRow({ label, value, displayValue, min, max, step, onChange, minLa
   return (
     <div style={{ marginBottom: 22 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-        <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.82rem', color: C.muted, fontWeight: 500, letterSpacing: '0.3px' }}>
+        <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.82rem', color: C.muted, fontWeight: 700, letterSpacing: '0.3px' }}>
           {label}
         </span>
         <span style={{
@@ -118,7 +118,7 @@ function StatCard({ label, value, color, sub }: { label: string; value: string; 
         (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
       }}
     >
-      <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.7rem', color: C.muted, marginBottom: 5, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+      <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.7rem', color: C.muted, marginBottom: 5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
         {label}
       </p>
       <p style={{ fontFamily: 'var(--font-ui)', fontSize: '1rem', fontWeight: 700, color: color ?? C.text, margin: 0, lineHeight: 1.2 }}>
@@ -179,7 +179,7 @@ function DonutChart({ capitalPct, interestPct, totalPLN }: { capitalPct: number;
 
       {/* Center */}
       <text x={cx} y={cy - 8} textAnchor="middle"
-        fontSize="10" fill={C.muted} fontFamily="system-ui,sans-serif" fontWeight="500">
+        fontSize="10" fill={C.muted} fontFamily="system-ui,sans-serif" fontWeight="700">
         Kapitał
       </text>
       <text x={cx} y={cy + 8} textAnchor="middle"
@@ -232,7 +232,7 @@ function AmortChart({ bars }: { bars: { capital: number; interest: number }[] })
               fill="url(#capBar)" rx={4} />
             <text x={x + barW / 2} y={H - 8}
               textAnchor="middle" fontSize="9" fill={C.muted}
-              fontFamily="system-ui,sans-serif" fontWeight="500">
+              fontFamily="system-ui,sans-serif" fontWeight="700">
               {i + 1}r
             </text>
           </g>

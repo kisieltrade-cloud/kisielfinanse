@@ -183,7 +183,7 @@ export default function OMnie() {
                   lineHeight: 1.85,
                   maxWidth: 520,
                   margin: '0 0 12px',
-                  fontWeight: 500,
+                  fontWeight: 700,
                 }}>
                   Przez lata uczyłem się jak działają pieniądze. Od pierwszych błędów
                   inwestycyjnych, przez aktywny trading, po zarządzanie majątkiem
@@ -196,7 +196,7 @@ export default function OMnie() {
                   lineHeight: 1.85,
                   maxWidth: 520,
                   margin: '0 0 32px',
-                  fontWeight: 500,
+                  fontWeight: 700,
                 }}>
                   KisielFinanse to miejsce, gdzie zbieram tę wiedzę: inwestycje,
                   oszczędzanie, psychologia pieniędzy, rynki, codzienne finanse.{' '}
@@ -298,7 +298,7 @@ export default function OMnie() {
                   </div>
                   <p style={{
                     fontFamily: 'var(--font-body)', fontSize: '0.85rem',
-                    color: C.muted, lineHeight: 1.8, margin: 0, fontWeight: 500,
+                    color: C.muted, lineHeight: 1.8, margin: 0, fontWeight: 700,
                   }}>
                     {p.desc}
                   </p>
@@ -364,7 +364,7 @@ export default function OMnie() {
                       </div>
                       <p style={{
                         fontFamily: 'var(--font-body)', fontSize: '0.85rem',
-                        color: C.muted, lineHeight: 1.8, margin: 0, fontWeight: 500,
+                        color: C.muted, lineHeight: 1.8, margin: 0, fontWeight: 700,
                       }}>
                         {t.desc}
                       </p>
@@ -392,7 +392,7 @@ export default function OMnie() {
             <p style={{
               fontFamily: 'var(--font-body)', fontSize: '1rem',
               color: C.muted, lineHeight: 1.85, margin: '0 0 40px', maxWidth: 640,
-              fontWeight: 500,
+              fontWeight: 700,
             }}>
               Piszę o finansach tak, jak sam chciałbym to czytać. Bez
               lania wody, bez clickbaitowych tytułów, bez treści pisanych pod
@@ -446,7 +446,7 @@ export default function OMnie() {
             <p style={{
               fontFamily: 'var(--font-body)', fontSize: '0.95rem',
               color: C.muted, lineHeight: 1.85, margin: '0 0 32px',
-              fontWeight: 500,
+              fontWeight: 700,
             }}>
               Inwestycje, oszczędzanie, zarządzanie pieniędzmi, psychologia finansów.
               Tylko to, co naprawdę działa.

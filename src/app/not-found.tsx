@@ -79,7 +79,7 @@ export default function NotFound() {
                 border: '1px solid var(--border)',
                 background: 'var(--surface)',
                 color: 'var(--text)', fontFamily: 'system-ui, sans-serif',
-                fontSize: '0.85rem', fontWeight: 500, textDecoration: 'none',
+                fontSize: '0.85rem', fontWeight: 700, textDecoration: 'none',
               }}
             >
               Blog →
