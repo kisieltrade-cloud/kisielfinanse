@@ -20,16 +20,16 @@ const WELCOME_HTML = `
       Witaj w newsletterze.
     </h1>
 
-    <p style="font-size:15px;color:#8892a4;line-height:1.7;margin:0 0 24px;">
+    <p style="font-size:15px;color:#c8d0dc;line-height:1.7;margin:0 0 24px;">
       Dostajesz ten mail bo zapisałeś się na kisielfinanse.pl.<br>
       Bez bullshitu, bez "gwarantowanych zysków". Praktyczna wiedza finansowa — kiedy mam coś wartego wysłania.
     </p>
 
-    <p style="font-size:15px;color:#8892a4;line-height:1.7;margin:0 0 32px;">
-      Co możesz spodziewać się w mailach:<br>
-      — analizy rynkowe zanim temat stanie się oczywisty<br>
-      — konkretne strategie i narzędzia które sam używam<br>
-      — bez cotygodniowego "musisz wysłać coś" szumu
+    <p style="font-size:15px;color:#c8d0dc;line-height:1.7;margin:0 0 32px;">
+      Co znajdziesz w mailach:<br>
+      — analizy rynkowe i strategie które sam stosuję<br>
+      — konkretne narzędzia z codziennej pracy<br>
+      — piszę kiedy mam coś konkretnego, nie ma tu cotygodniowego szumu
     </p>
 
     <a href="https://kisielfinanse.pl/blog"

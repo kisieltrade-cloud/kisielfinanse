@@ -10,6 +10,7 @@ import BlogSection from '@/components/BlogSection';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
 import RevealOnScroll from '@/components/RevealOnScroll';
+import NewsletterForm from '@/components/NewsletterForm';
 
 const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'KisielFinanse - Edukacja tradingowa' };
 
@@ -48,6 +49,9 @@ export default function HomePage() {
         <LearnToTrade />
         <BlogSection />
         <FAQ />
+        <div style={{ maxWidth: 700, margin: '0 auto', padding: '0 24px 80px' }}>
+          <NewsletterForm />
+        </div>
       </main>
       <Footer />
     </>

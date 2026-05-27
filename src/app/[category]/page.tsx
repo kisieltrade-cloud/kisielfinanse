@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import RevealOnScroll from '@/components/RevealOnScroll';
 import BlogList from '@/components/BlogList';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import NewsletterForm from '@/components/NewsletterForm';
 import { getPostsByTag } from '@/lib/posts';
 import { CATEGORIES, getCategoryBySlug } from '@/lib/categories';
 
@@ -213,6 +214,10 @@ export default async function CategoryPage({ params }: Props) {
               </p>
             </div>
           )}
+
+          <div style={{ maxWidth: 700, margin: '48px auto 0', padding: '0 24px 80px' }}>
+            <NewsletterForm />
+          </div>
 
         </div>
       </main>
