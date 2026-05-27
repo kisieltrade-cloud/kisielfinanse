@@ -15,82 +15,26 @@ const C = {
   blue:   '#2563eb',
 };
 
-/* ── DANE PORTFELA ── zmień na swoje wartości ─────────────────────── */
+/* ── DANE PORTFELA ────────────────────────────────────────────────── */
 const HOLDINGS = [
   {
-    ticker: 'VWCE',
-    name: 'Vanguard FTSE All-World',
-    type: 'ETF',
-    buyDate: 'Sty 2024',
-    buyPrice: 108.20,
-    currentPrice: 124.60,
-    shares: 18,
-    currency: 'EUR',
-    broker: 'XTB',
-    note: 'Rdzen portfela. Trzymam dlugoterminowo.',
-  },
-  {
-    ticker: 'IWDA',
-    name: 'iShares Core MSCI World',
-    type: 'ETF',
-    buyDate: 'Mar 2024',
-    buyPrice: 85.14,
-    currentPrice: 96.40,
-    shares: 24,
-    currency: 'EUR',
-    broker: 'XTB',
-    note: 'Rynki rozwinięte bez EM. Uzupelnienie VWCE.',
-  },
-  {
-    ticker: 'CSPX',
-    name: 'iShares Core S&P 500',
-    type: 'ETF',
-    buyDate: 'Cze 2024',
-    buyPrice: 496.30,
-    currentPrice: 548.70,
-    shares: 4,
-    currency: 'USD',
-    broker: 'XTB',
-    note: 'Wieksza ekspozycja na USA.',
-  },
-  {
-    ticker: 'CDR',
-    name: 'CD Projekt',
+    ticker: 'EAT',
+    name: 'AmRest Holdings SE',
     type: 'Akcje',
-    buyDate: 'Wrz 2024',
-    buyPrice: 138.50,
-    currentPrice: 152.30,
-    shares: 15,
+    buyDate: '15 Maj 2026',
+    buyPrice: 10.30,
+    currentPrice: 10.60,
+    shares: 485,
     currency: 'PLN',
-    broker: 'XTB',
-    note: 'Spekulacyjna czesc portfela. Obserwuje Cyberpunk 2.',
-  },
-  {
-    ticker: 'EDO0634',
-    name: 'Obligacje skarbowe EDO',
-    type: 'Obligacje',
-    buyDate: 'Kwi 2024',
-    buyPrice: 100,
-    currentPrice: 104.2,
-    shares: 100,
-    currency: 'PLN',
-    broker: 'PKO BP',
-    note: 'Poduszka + inflacja. Nie sprzedaje.',
+    broker: 'GPW',
+    note: 'Wejscie przy wsparciu. Sektor restauracyjny - KFC, Burger King, Pizza Hut w CEE.',
   },
 ];
 
 const UPDATES = [
   {
-    date: 'Maj 2026',
-    text: 'Dokupionem 3 jednostki VWCE po kolejnym spadku. Portfel +2.1% w tym miesiącu. Nic nie sprzedaję.',
-  },
-  {
-    date: 'Kwi 2026',
-    text: 'Bez zmian w składzie. Rynek trochę w bok, dokładam co miesiąc zgodnie z planem.',
-  },
-  {
-    date: 'Mar 2026',
-    text: 'Sprzedałem połowę pozycji w CDR po odbiciu do 160 zł. Zysk ok. 22%. Resztę trzymam dalej.',
+    date: '15 Maj 2026',
+    text: 'Kupno 485 akcji AmRest po 10,30 zł. Laczna kwota 4995,50 zł.',
   },
 ];
 
@@ -326,7 +270,6 @@ export default function PortfelPage() {
         {/* Disclaimer */}
         <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: C.sub, lineHeight: 1.7, textAlign: 'center', maxWidth: 560, margin: '0 auto' }}>
           To nie jest rekomendacja inwestycyjna. Pokazuję co sam robię - każdy podejmuje własne decyzje.
-          Wartosci przeliczone po kursie orientacyjnym EUR/PLN 4,22 i USD/PLN 3,88.
         </p>
 
       </div>
