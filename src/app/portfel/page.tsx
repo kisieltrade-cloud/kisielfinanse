@@ -134,13 +134,13 @@ export default function PortfelPage() {
       <div style={{ maxWidth: 860, margin: '0 auto' }}>
 
         {/* Header */}
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', letterSpacing: '3px', color: C.gold, textTransform: 'uppercase', marginBottom: 12 }}>
+        <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.6rem', letterSpacing: '3px', color: C.gold, textTransform: 'uppercase', marginBottom: 12 }}>
           Transparentnosc
         </p>
         <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3rem)', color: C.text, marginBottom: 12, lineHeight: 1.1 }}>
           Mój portfel
         </h1>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: C.text, marginBottom: 48, lineHeight: 1.7, maxWidth: 560 }}>
+        <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', color: C.text, marginBottom: 48, lineHeight: 1.7, maxWidth: 560 }}>
           Pelna transparentnosc - co kupuje, kiedy, za ile i dlaczego. Bez sciemy.
           Aktualizuje co miesiac.
         </p>
@@ -153,14 +153,14 @@ export default function PortfelPage() {
             { label: 'Zysk / strata',   value: `${totalPnl >= 0 ? '+' : ''}${fmt(totalPnl)} PLN`, sub: `${totalPnlPct >= 0 ? '+' : ''}${totalPnlPct.toFixed(1)}%`, color: totalPnl >= 0 ? C.green : C.red },
           ].map((s, i) => (
             <div key={i} style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, padding: '20px' }}>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '2px', color: C.text, textTransform: 'uppercase', marginBottom: 8 }}>
+              <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.58rem', letterSpacing: '2px', color: C.text, textTransform: 'uppercase', marginBottom: 8 }}>
                 {s.label}
               </p>
               <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)', color: s.color ?? C.text, margin: 0, lineHeight: 1 }}>
                 {s.value}
               </p>
               {s.sub && (
-                <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: s.color, margin: '4px 0 0', fontWeight: 700 }}>
+                <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', color: s.color, margin: '4px 0 0', fontWeight: 700 }}>
                   {s.sub}
                 </p>
               )}
@@ -170,7 +170,7 @@ export default function PortfelPage() {
 
         {/* Alokacja */}
         <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, padding: '20px 24px', marginBottom: 32 }}>
-          <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '2px', color: C.text, textTransform: 'uppercase', marginBottom: 16 }}>
+          <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.58rem', letterSpacing: '2px', color: C.text, textTransform: 'uppercase', marginBottom: 16 }}>
             Alokacja
           </p>
           <div style={{ display: 'flex', gap: 4, height: 10, borderRadius: 8, overflow: 'hidden', marginBottom: 14 }}>
@@ -182,7 +182,7 @@ export default function PortfelPage() {
             {Object.entries(byType).map(([type, val]) => (
               <div key={type} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: TYPE_COLOR[type], flexShrink: 0 }} />
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: C.text }}>
+                <span style={{ fontFamily: 'var(--font-display)', fontSize: '0.7rem', color: C.text }}>
                   {type} <span style={{ fontWeight: 700 }}>{((val / totalCurrent) * 100).toFixed(0)}%</span>
                 </span>
               </div>
@@ -193,7 +193,7 @@ export default function PortfelPage() {
         {/* Pozycje */}
         <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, overflow: 'hidden', marginBottom: 32 }}>
           <div style={{ padding: '20px 24px 16px', borderBottom: `1px solid ${C.border}` }}>
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.58rem', letterSpacing: '2px', color: C.text, textTransform: 'uppercase', margin: 0 }}>
+            <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.58rem', letterSpacing: '2px', color: C.text, textTransform: 'uppercase', margin: 0 }}>
               Pozycje
             </p>
           </div>
@@ -224,16 +224,16 @@ export default function PortfelPage() {
                       width: 36, height: 36, borderRadius: 8, flexShrink: 0,
                       background: TYPE_COLOR[h.type] + '20',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontFamily: 'var(--font-mono)', fontSize: '0.6rem', fontWeight: 700,
+                      fontFamily: 'var(--font-display)', fontSize: '0.6rem', fontWeight: 700,
                       color: TYPE_COLOR[h.type],
                     }}>
                       {h.type === 'ETF' ? 'ETF' : h.type === 'Akcje' ? 'PL' : 'OBL'}
                     </div>
                     <div style={{ minWidth: 0 }}>
-                      <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 700, color: C.text, margin: 0 }}>
+                      <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.85rem', fontWeight: 700, color: C.text, margin: 0 }}>
                         {h.ticker}
                       </p>
-                      <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: C.text, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.78rem', color: C.text, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {h.name}
                       </p>
                     </div>
@@ -241,26 +241,26 @@ export default function PortfelPage() {
 
                   {/* Data / sztuki */}
                   <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: C.text, margin: 0, fontWeight: 600 }}>{h.buyDate}</p>
-                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: C.text, margin: 0 }}>{h.shares} szt.</p>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.78rem', color: C.text, margin: 0, fontWeight: 600 }}>{h.buyDate}</p>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', color: C.text, margin: 0 }}>{h.shares} szt.</p>
                   </div>
 
                   {/* Wartość */}
                   <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: C.text, margin: 0, fontWeight: 700 }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', color: C.text, margin: 0, fontWeight: 700 }}>
                       {fmt(h.current)} PLN
                     </p>
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: C.text, margin: 0 }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.65rem', color: C.text, margin: 0 }}>
                       zainw. {fmt(h.invested)}
                     </p>
                   </div>
 
                   {/* P&L */}
                   <div style={{ textAlign: 'right', minWidth: 64 }}>
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', fontWeight: 700, color: h.pnl >= 0 ? C.green : C.red, margin: 0 }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.78rem', fontWeight: 700, color: h.pnl >= 0 ? C.green : C.red, margin: 0 }}>
                       {h.pnlPct >= 0 ? '+' : ''}{h.pnlPct.toFixed(1)}%
                     </p>
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: h.pnl >= 0 ? C.green : C.red, margin: 0, fontWeight: 600 }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.65rem', color: h.pnl >= 0 ? C.green : C.red, margin: 0, fontWeight: 600 }}>
                       {h.pnl >= 0 ? '+' : ''}{fmt(h.pnl)} PLN
                     </p>
                   </div>
@@ -269,7 +269,7 @@ export default function PortfelPage() {
                 {/* Rozwinięcie */}
                 {isOpen && (
                   <div style={{ padding: '16px 24px 20px', background: '#f0f4f8', borderBottom: i < holdings.length - 1 ? `1px solid ${C.border}` : 'none' }}>
-                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: C.text, margin: '0 0 16px', lineHeight: 1.7 }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.88rem', color: C.text, margin: '0 0 16px', lineHeight: 1.7 }}>
                       {h.note}
                     </p>
                     <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap' }}>
@@ -280,8 +280,8 @@ export default function PortfelPage() {
                         { k: 'Waluta', v: h.currency },
                       ].map(({ k, v }) => (
                         <div key={k}>
-                          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: C.text, margin: '0 0 2px' }}>{k}</p>
-                          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: C.text, margin: 0, fontWeight: 600 }}>{v}</p>
+                          <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.72rem', color: C.text, margin: '0 0 2px' }}>{k}</p>
+                          <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.88rem', color: C.text, margin: 0, fontWeight: 600 }}>{v}</p>
                         </div>
                       ))}
                     </div>
@@ -295,7 +295,7 @@ export default function PortfelPage() {
         {/* Dziennik zmian */}
         <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, overflow: 'hidden', marginBottom: 48 }}>
           <div style={{ padding: '20px 24px 16px', borderBottom: `1px solid ${C.border}` }}>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', fontWeight: 700, color: C.text, margin: 0 }}>
+            <p style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', fontWeight: 700, color: C.text, margin: 0 }}>
               Dziennik zmian
             </p>
           </div>
@@ -304,16 +304,13 @@ export default function PortfelPage() {
               padding: '22px 24px',
               borderBottom: i < UPDATES.length - 1 ? `1px solid ${C.border}` : 'none',
             }}>
-              {/* Data */}
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 700, color: C.gold, margin: '0 0 6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', fontWeight: 700, color: C.gold, margin: '0 0 8px', letterSpacing: '1px', textTransform: 'uppercase' }}>
                 {u.date}
               </p>
-              {/* Co kupiono */}
-              <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', color: C.text, margin: '0 0 10px', lineHeight: 1.25, letterSpacing: '0.3px' }}>
+              <p style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', color: C.text, margin: '0 0 10px', lineHeight: 1.3 }}>
                 {u.action}
               </p>
-              {/* Dlaczego */}
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: C.text, margin: 0, lineHeight: 1.75 }}>
+              <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.88rem', color: C.text, margin: 0, lineHeight: 1.6 }}>
                 {u.why}
               </p>
             </div>
@@ -321,7 +318,7 @@ export default function PortfelPage() {
         </div>
 
         {/* Disclaimer */}
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: C.text, lineHeight: 1.7, textAlign: 'center', maxWidth: 560, margin: '0 auto' }}>
+        <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.8rem', color: C.text, lineHeight: 1.7, textAlign: 'center', maxWidth: 560, margin: '0 auto' }}>
           To nie jest rekomendacja inwestycyjna. Pokazuję co sam robię - każdy podejmuje własne decyzje.
         </p>
 
