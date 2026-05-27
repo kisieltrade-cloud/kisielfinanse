@@ -4,6 +4,12 @@ import path from 'path';
 import matter from 'gray-matter';
 import { useGitHub, ghGetFileSha, ghWriteFile } from '@/lib/github-cms';
 
+async function pingGoogle() {
+  try {
+    await fetch('https://www.google.com/ping?sitemap=https://kisielfinanse.pl/sitemap.xml');
+  } catch {}
+}
+
 export const dynamic = 'force-dynamic';
 
 const POSTS_DIR = path.join(process.cwd(), 'src', 'content', 'blog');
@@ -70,6 +76,7 @@ export async function POST(req: NextRequest) {
     // Utwórz nowy plik (sha=null → create)
     const result = await ghWriteFile(filename, fileContent, null, `cms: create ${slug}`);
     if (!result.ok) return NextResponse.json({ error: result.error }, { status: 500 });
+    pingGoogle();
     return NextResponse.json({ ok: true, slug });
   }
 

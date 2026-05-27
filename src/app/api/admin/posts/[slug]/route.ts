@@ -4,6 +4,12 @@ import path from 'path';
 import matter from 'gray-matter';
 import { useGitHub, ghGetFileSha, ghWriteFile, ghDeleteFile } from '@/lib/github-cms';
 
+async function pingGoogle() {
+  try {
+    await fetch('https://www.google.com/ping?sitemap=https://kisielfinanse.pl/sitemap.xml');
+  } catch {}
+}
+
 export const dynamic = 'force-dynamic';
 
 const POSTS_DIR = path.join(process.cwd(), 'src', 'content', 'blog');
@@ -64,6 +70,7 @@ export async function PUT(
     if (!sha) return NextResponse.json({ error: 'Nie znaleziono pliku w repo' }, { status: 404 });
     const result = await ghWriteFile(filename, fileContent, sha, `cms: update ${slug}`);
     if (!result.ok) return NextResponse.json({ error: result.error }, { status: 500 });
+    pingGoogle();
     return NextResponse.json({ ok: true });
   }
 

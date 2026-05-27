@@ -2,12 +2,14 @@ import { MetadataRoute } from 'next';
 import { getAllPosts, tagToSlug } from '@/lib/posts';
 import { postUrl } from '@/lib/url';
 import { CATEGORIES } from '@/lib/categories';
+import { CALCULATOR_SLUGS } from '@/lib/calculators';
 
 const BASE_URL = 'https://kisielfinanse.pl';
 
-// ISR — sitemap regeneruje się automatycznie co godzinę.
-// Po dodaniu nowego artykułu pojawi się w sitemapie w ciągu max 60 minut.
-export const revalidate = 3600;
+// ISR — sitemap regeneruje się automatycznie co 30 minut.
+// Po dodaniu nowego artykułu pojawi się w sitemapie w ciągu max 30 minut.
+// Google jest pingowany natychmiast po publikacji przez CMS.
+export const revalidate = 1800;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllPosts();
@@ -53,30 +55,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
-    {
-      url: `${BASE_URL}/kalkulator/procent-skladany`,
+    ...CALCULATOR_SLUGS.map((slug) => ({
+      url: `${BASE_URL}/kalkulator/${slug}`,
       lastModified: new Date('2026-05-26'),
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/kalkulator/risk-reward`,
-      lastModified: new Date('2026-05-26'),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/kalkulator/fire`,
-      lastModified: new Date('2026-05-26'),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/kalkulator/etf`,
-      lastModified: new Date('2026-05-26'),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
+    })),
     {
       url: `${BASE_URL}/kalkulator-hipoteczny`,
       lastModified: new Date('2026-05-26'),
