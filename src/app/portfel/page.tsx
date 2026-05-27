@@ -18,6 +18,18 @@ const C = {
 /* ── DANE PORTFELA ────────────────────────────────────────────────── */
 const HOLDINGS = [
   {
+    ticker: 'AMZN',
+    name: 'Amazon.com Inc.',
+    type: 'Akcje',
+    buyDate: 'Sie 2024 - Kwi 2026',
+    buyPrice: 213.89,
+    currentPrice: 265.29,
+    shares: 20.14,
+    currency: 'USD',
+    broker: 'GPW',
+    note: 'DCA - 800 zł co miesiac przez 21 miesiecy. Srednia cena kupna $213,89. Razem 20,14 ulamkowych udzialow.',
+  },
+  {
     ticker: 'EAT',
     name: 'AmRest Holdings SE',
     type: 'Akcje',
@@ -45,12 +57,16 @@ const HOLDINGS = [
 
 const UPDATES = [
   {
-    date: '15 Maj 2026',
+    date: 'Maj 2026',
     text: 'Kupno 485 akcji AmRest (EAT) po 10,30 zł. Laczna kwota 4 995,50 zł.',
   },
   {
-    date: '9-16 Kwi 2026',
-    text: 'Budowanie pozycji w Modivo (MDV): 81 szt. po 86 zł, 38 szt. po 91 zł, 21 szt. po 94,20 zł. Razem 140 szt. za 12 402 zł. Srednia wejscia 88,59 zł.',
+    date: 'Kwi 2026',
+    text: 'Budowanie pozycji w Modivo (MDV): 81 szt. po 86 zł, 38 szt. po 91 zł, 21 szt. po 94,20 zł. Razem 140 szt. za 12 402 zł.',
+  },
+  {
+    date: 'Sie 2024 - teraz',
+    text: 'Amazon DCA: 800 zł co miesiac przez 21 miesiecy. Srednia $213,89. Portfel Amazona +23,4% na ten moment.',
   },
 ];
 
