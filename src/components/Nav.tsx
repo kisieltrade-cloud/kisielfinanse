@@ -11,6 +11,7 @@ const MAIN_LINKS = [
 
 const UTIL_LINKS = [
   { href: '/wspolpraca', label: 'Współpraca' },
+  { href: '/quiz', label: 'Quiz' },
 ];
 
 const CALC_ITEMS = [

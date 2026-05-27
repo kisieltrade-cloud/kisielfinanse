@@ -133,7 +133,7 @@ export default async function BlogSection() {
                       alt={post.title}
                       fill
                       className="news-card-thumb-img"
-                      style={{ objectFit: 'cover', objectPosition: 'top' }}
+                      style={{ objectFit: 'cover', objectPosition: 'center' }}
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
                     />
                   ) : (
