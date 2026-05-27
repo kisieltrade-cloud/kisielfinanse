@@ -3,6 +3,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import RevealOnScroll from '@/components/RevealOnScroll';
 import BlogList from '@/components/BlogList';
+import NewsletterForm from '@/components/NewsletterForm';
 import { getAllPosts } from '@/lib/posts';
 
 const BASE_URL = 'https://kisielfinanse.pl';
@@ -80,6 +81,11 @@ export default async function BlogPage() {
             <span className="gradient-text-pp">FINANSOWY</span>
           </h1>
           <BlogList posts={posts} />
+
+          {/* Newsletter pod lista artykulow */}
+          <div style={{ maxWidth: 680, margin: '60px auto 80px', padding: '0 24px' }}>
+            <NewsletterForm />
+          </div>
         </div>
       </main>
       <Footer />

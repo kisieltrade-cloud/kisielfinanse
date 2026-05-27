@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { PostMeta } from '@/lib/posts';
 import { postUrl } from '@/lib/url';
 import ReadTimeRing from '@/components/ReadTimeRing';
+import ViewCounter from '@/components/ViewCounter';
 
 const TAG_CONFIG: Record<string, { color: string; bg: string }> = {
   trading:     { color: '#c9a227', bg: 'rgba(201,162,39,0.10)'  },
@@ -165,6 +166,7 @@ export default function BlogList({ posts }: Props) {
 
                   <div className="blog-meta">
                     <span className="blog-date">{post.date}</span>
+                    <ViewCounter slug={post.slug} />
                     <div className="blog-arrow" style={{ borderColor: `${t.color}44`, color: t.color }}>↗</div>
                   </div>
                 </div>

@@ -21,6 +21,8 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import AuthorBox from '@/components/AuthorBox';
 import NextArticleBar from '@/components/NextArticleBar';
 import GiscusComments from '@/components/GiscusComments';
+import ViewCounter from '@/components/ViewCounter';
+import NewsletterForm from '@/components/NewsletterForm';
 
 // Odświeżaj co godzinę — przyszłe artykuły pojawią się automatycznie po dacie publikacji
 export const revalidate = 3600;
@@ -250,6 +252,8 @@ export default async function ArticlePage({ params }: Props) {
             <span>{post.date}</span>
             <span>·</span>
             <ReadTimeRing readTime={post.readTime} size={38} />
+            <span>·</span>
+            <ViewCounter slug={slug} increment />
           </div>
 
           <div style={{
@@ -297,6 +301,11 @@ export default async function ArticlePage({ params }: Props) {
 
         {/* Author */}
         <AuthorBox />
+
+        {/* Newsletter */}
+        <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 40px' }}>
+          <NewsletterForm />
+        </div>
 
         {/* Share buttons */}
         <ShareButtons title={post.title} url={`/${category}/${slug}`} />
