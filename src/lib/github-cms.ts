@@ -33,6 +33,15 @@ export async function ghGetFileSha(filename: string): Promise<string | null> {
   return data.sha;
 }
 
+/** Pobiera zawartość pliku z GitHub (zwraca zdekodowany string lub null). */
+export async function ghReadFile(filename: string): Promise<string | null> {
+  const res = await fetch(ghUrl(filename), { headers: ghHeaders() });
+  if (!res.ok) return null;
+  const data = await res.json() as { content: string; encoding: string };
+  if (data.encoding !== 'base64') return null;
+  return Buffer.from(data.content, 'base64').toString('utf-8');
+}
+
 /** Tworzy lub aktualizuje plik w repo. */
 export async function ghWriteFile(
   filename: string,

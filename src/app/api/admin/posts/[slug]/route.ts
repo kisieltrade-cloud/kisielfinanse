@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { useGitHub, ghGetFileSha, ghWriteFile, ghDeleteFile } from '@/lib/github-cms';
+import { useGitHub, ghGetFileSha, ghReadFile, ghWriteFile, ghDeleteFile } from '@/lib/github-cms';
 
 async function pingGoogle() {
   try {
@@ -27,9 +27,20 @@ export async function GET(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
-  const filePath = findFile(slug);
-  if (!filePath) return NextResponse.json({ error: 'Nie znaleziono' }, { status: 404 });
-  const raw = fs.readFileSync(filePath, 'utf-8');
+
+  let raw: string;
+
+  if (useGitHub()) {
+    // Produkcja: czytaj bezpośrednio z GitHub żeby zawsze mieć aktualną wersję
+    const ghContent = await ghReadFile(`${slug}.mdx`);
+    if (!ghContent) return NextResponse.json({ error: 'Nie znaleziono' }, { status: 404 });
+    raw = ghContent;
+  } else {
+    const filePath = findFile(slug);
+    if (!filePath) return NextResponse.json({ error: 'Nie znaleziono' }, { status: 404 });
+    raw = fs.readFileSync(filePath, 'utf-8');
+  }
+
   const { data, content } = matter(raw);
   return NextResponse.json({ ...data, slug, content });
 }
