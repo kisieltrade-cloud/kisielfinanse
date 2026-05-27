@@ -63,14 +63,14 @@ export async function POST(req: NextRequest) {
     // Zapisz do Redis
     await addSubscriber(normalised);
 
-    // Wyslij maila powitalnego
+    // Wyslij maila powitalnego — best-effort, nie blokuje zapisu
     if (process.env.RESEND_API_KEY) {
-      await resend.emails.send({
+      resend.emails.send({
         from: FROM,
         to: normalised,
         subject: 'Witaj w newsletterze KisielFinanse',
         html: WELCOME_HTML,
-      });
+      }).catch(err => console.error('[newsletter] resend error:', err));
     }
 
     return NextResponse.json({ ok: true });
