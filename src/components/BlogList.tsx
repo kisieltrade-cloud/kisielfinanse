@@ -32,16 +32,46 @@ interface Props {
 
 export default function BlogList({ posts }: Props) {
   const [active, setActive] = useState('Wszystkie');
+  const [query, setQuery] = useState('');
 
   // Collect unique tags
   const tags = ['Wszystkie', ...Array.from(new Set(posts.map(p => p.tag))).sort()];
 
-  const filtered = active === 'Wszystkie'
-    ? posts
-    : posts.filter(p => p.tag === active);
+  const q = query.trim().toLowerCase();
+
+  const filtered = posts.filter(p => {
+    const matchTag = active === 'Wszystkie' || p.tag === active;
+    const matchQuery = !q ||
+      p.title.toLowerCase().includes(q) ||
+      (p.excerpt ?? '').toLowerCase().includes(q) ||
+      p.tag.toLowerCase().includes(q);
+    return matchTag && matchQuery;
+  });
 
   return (
     <>
+      {/* Search */}
+      <div className="blog-search-wrap">
+        <div className="blog-search-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </div>
+        <input
+          className="blog-search-input"
+          type="search"
+          placeholder="Szukaj artykułów..."
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          aria-label="Szukaj artykułów"
+        />
+        {query && (
+          <button className="blog-search-clear" onClick={() => setQuery('')} aria-label="Wyczyść">
+            ×
+          </button>
+        )}
+      </div>
+
       {/* Tag filters */}
       <div className="blog-filters">
         {tags.map(tag => (
@@ -64,14 +94,17 @@ export default function BlogList({ posts }: Props) {
           </button>
         ))}
         <span className="blog-filter-total">
-          {filtered.length} {filtered.length === 1 ? 'artykuł' : 'artykułów'}
+          {q
+            ? `${filtered.length} ${filtered.length === 1 ? 'wynik' : filtered.length < 5 ? 'wyniki' : 'wyników'}`
+            : `${filtered.length} ${filtered.length === 1 ? 'artykuł' : 'artykułów'}`
+          }
         </span>
       </div>
 
       {/* Grid */}
       {filtered.length === 0 ? (
         <p style={{ color: 'var(--muted)', fontFamily: 'var(--font-mono)', padding: '40px 0' }}>
-          Brak artykułów w tej kategorii.
+          {q ? `Brak wyników dla „${query}".` : 'Brak artykułów w tej kategorii.'}
         </p>
       ) : (
         <div className="blog-all-grid">
