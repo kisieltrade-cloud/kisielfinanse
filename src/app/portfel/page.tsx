@@ -237,8 +237,8 @@ export default function PortfelPage() {
 
                   {/* Data / sztuki */}
                   <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: C.sub, margin: 0 }}>{h.buyDate}</p>
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: C.text, margin: 0, fontWeight: 600 }}>{h.shares} szt.</p>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: C.text, margin: 0, fontWeight: 600 }}>{h.buyDate}</p>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: C.sub, margin: 0 }}>{h.shares} szt.</p>
                   </div>
 
                   {/* Wartość */}
@@ -264,22 +264,21 @@ export default function PortfelPage() {
 
                 {/* Rozwinięcie */}
                 {isOpen && (
-                  <div style={{ padding: '16px 24px 18px', background: '#f0f4f8', borderBottom: i < holdings.length - 1 ? `1px solid ${C.border}` : 'none' }}>
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', letterSpacing: '1.5px', color: C.label, textTransform: 'uppercase', marginBottom: 8 }}>
-                      Dlaczego
-                    </p>
-                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: C.text, margin: '0 0 12px', lineHeight: 1.7 }}>
+                  <div style={{ padding: '16px 24px 20px', background: '#f0f4f8', borderBottom: i < holdings.length - 1 ? `1px solid ${C.border}` : 'none' }}>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: C.text, margin: '0 0 16px', lineHeight: 1.7 }}>
                       {h.note}
                     </p>
-                    <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+                    <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap' }}>
                       {[
+                        { k: 'Data kupna', v: h.buyDate },
+                        { k: 'Cena kupna', v: `${h.buyPrice} ${h.currency}` },
                         { k: 'Broker', v: h.broker },
                         { k: 'Waluta', v: h.currency },
-                        { k: 'Cena kupna', v: `${h.buyPrice} ${h.currency}` },
                       ].map(({ k, v }) => (
-                        <span key={k} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: C.sub }}>
-                          {k}: <span style={{ color: C.text, fontWeight: 700 }}>{v}</span>
-                        </span>
+                        <div key={k}>
+                          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: C.label, margin: '0 0 2px' }}>{k}</p>
+                          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: C.text, margin: 0, fontWeight: 600 }}>{v}</p>
+                        </div>
                       ))}
                     </div>
                   </div>
