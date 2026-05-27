@@ -21,7 +21,6 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import AuthorBox from '@/components/AuthorBox';
 import NextArticleBar from '@/components/NextArticleBar';
 import GiscusComments from '@/components/GiscusComments';
-import ViewCounter from '@/components/ViewCounter';
 import NewsletterForm from '@/components/NewsletterForm';
 
 // Odświeżaj co godzinę — przyszłe artykuły pojawią się automatycznie po dacie publikacji
@@ -252,8 +251,6 @@ export default async function ArticlePage({ params }: Props) {
             <span>{post.date}</span>
             <span>·</span>
             <ReadTimeRing readTime={post.readTime} size={38} />
-            <span>·</span>
-            <ViewCounter slug={slug} increment />
           </div>
 
           <div style={{
@@ -273,7 +270,7 @@ export default async function ArticlePage({ params }: Props) {
               height: 460,
               borderRadius: 12,
               overflow: 'hidden',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--border)',
             }}>
               <Image
                 src={post.image}
@@ -301,29 +298,26 @@ export default async function ArticlePage({ params }: Props) {
               className="blog-post-content"
               dangerouslySetInnerHTML={{ __html: contentHtml }}
             />
-
-            {/* Author */}
-            <AuthorBox />
-
-            {/* Newsletter */}
-            <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 40px' }}>
-              <NewsletterForm />
-            </div>
-
-            {/* Share buttons */}
-            <ShareButtons title={post.title} url={`/${category}/${slug}`} />
-
-            {/* Comments */}
-            <GiscusComments slug={slug} />
           </div>
 
-          {/* TOC sidebar — sticky, ends with article body */}
+          {/* TOC sidebar — sticky through entire article text */}
           {tocItems.length >= 2 && (
             <aside className="blog-toc-aside">
               <TableOfContents items={tocItems} />
             </aside>
           )}
         </div>
+
+        {/* Author, newsletter, comments — outside flex layout so TOC stays sticky above */}
+        <AuthorBox />
+
+        <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 40px' }}>
+          <NewsletterForm />
+        </div>
+
+        <ShareButtons title={post.title} url={`/${category}/${slug}`} />
+
+        <GiscusComments slug={slug} />
 
         {/* Related posts */}
         <RelatedPosts

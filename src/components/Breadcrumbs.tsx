@@ -13,10 +13,10 @@ interface Props {
 }
 
 export default function Breadcrumbs({ items, light }: Props) {
-  const colBase   = light ? '#7a8c7e' : '#c8d4e8';
-  const colSep    = light ? '#a8d8ba' : '#8a9ab5';
-  const colLast   = light ? '#1a2b1e' : '#ffffff';
-  const colHover  = light ? '#1a5c38' : '#c9a227';
+  const colBase   = light ? '#7a8c7e' : 'var(--muted)';
+  const colSep    = light ? '#a8d8ba' : 'var(--muted)';
+  const colLast   = light ? '#1a2b1e' : 'var(--text)';
+  const colHover  = light ? '#1a5c38' : 'var(--cyan)';
 
   return (
     <nav

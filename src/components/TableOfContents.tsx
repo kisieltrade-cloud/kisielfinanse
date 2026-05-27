@@ -15,26 +15,27 @@ export default function TableOfContents({ items }: Props) {
   useEffect(() => {
     if (items.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length > 0) {
-          // pick the topmost visible heading
-          const topEntry = visible.reduce((a, b) =>
-            a.boundingClientRect.top < b.boundingClientRect.top ? a : b
-          );
-          setActiveId(topEntry.target.id);
+    const headingEls = items
+      .map(({ id }) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+
+    if (headingEls.length === 0) return;
+
+    const handleScroll = () => {
+      const offset = 140; // navbar + padding
+
+      let currentId = headingEls[0].id;
+      for (const el of headingEls) {
+        if (el.getBoundingClientRect().top <= offset) {
+          currentId = el.id;
         }
-      },
-      { rootMargin: '-80px 0px -55% 0px', threshold: 0 }
-    );
+      }
+      setActiveId(currentId);
+    };
 
-    items.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [items]);
 
   if (items.length < 2) return null;
@@ -48,7 +49,7 @@ export default function TableOfContents({ items }: Props) {
         <div style={{ width: 3, height: 16, background: 'var(--cyan)', borderRadius: 2, flexShrink: 0 }} />
         <span style={{
           fontFamily: "'JetBrains Mono', monospace",
-          fontSize: '0.58rem', letterSpacing: '3px', color: '#c8d4e8',
+          fontSize: '0.58rem', letterSpacing: '3px', color: 'var(--muted)',
         }}>
           SPIS TREŚCI
         </span>
@@ -80,11 +81,11 @@ export default function TableOfContents({ items }: Props) {
                   fontFamily: 'system-ui, sans-serif',
                   fontSize: isH2 ? '0.8rem' : '0.74rem',
                   fontWeight: isH2 ? (isActive ? 600 : 500) : 400,
-                  color: isActive ? 'var(--cyan)' : isH2 ? '#e0e8f4' : '#c8d4e8',
+                  color: isActive ? 'var(--cyan)' : isH2 ? 'var(--text)' : 'var(--muted)',
                   textDecoration: 'none',
                   lineHeight: 1.4,
                   transition: 'color 0.2s',
-                  borderLeft: '2px solid rgba(255,255,255,0.05)',
+                  borderLeft: '2px solid var(--border)',
                   marginLeft: 0,
                 }}
                 onClick={(e) => {

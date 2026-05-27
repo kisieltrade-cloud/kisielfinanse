@@ -49,9 +49,9 @@ export default function ShareButtons({ title, url }: Props) {
     fontWeight: 500,
     cursor: 'pointer',
     textDecoration: 'none',
-    border: '1px solid rgba(255,255,255,0.1)',
-    background: 'rgba(255,255,255,0.04)',
-    color: '#c8d4e8',
+    border: '1px solid var(--border)',
+    background: 'var(--surface)',
+    color: 'var(--text)',
     transition: 'all 0.15s',
   };
 
@@ -60,7 +60,7 @@ export default function ShareButtons({ title, url }: Props) {
       maxWidth: 860,
       margin: '0 auto',
       padding: '32px 24px 0',
-      borderTop: '1px solid rgba(255,255,255,0.06)',
+      borderTop: '1px solid var(--border)',
     }}>
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
         {/* X / Twitter */}
@@ -75,9 +75,9 @@ export default function ShareButtons({ title, url }: Props) {
             e.currentTarget.style.color = '#1da1f2';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-            e.currentTarget.style.color = '#c8d4e8';
+            e.currentTarget.style.background = 'var(--surface)';
+            e.currentTarget.style.borderColor = 'var(--border)';
+            e.currentTarget.style.color = 'var(--text)';
           }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -98,9 +98,9 @@ export default function ShareButtons({ title, url }: Props) {
             e.currentTarget.style.color = '#1877f2';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-            e.currentTarget.style.color = '#c8d4e8';
+            e.currentTarget.style.background = 'var(--surface)';
+            e.currentTarget.style.borderColor = 'var(--border)';
+            e.currentTarget.style.color = 'var(--text)';
           }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -122,8 +122,8 @@ export default function ShareButtons({ title, url }: Props) {
           }}
           onMouseEnter={(e) => {
             if (!copied) {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
-              e.currentTarget.style.color = '#e8edf5';
+              e.currentTarget.style.background = 'var(--surface2)';
+              e.currentTarget.style.color = 'var(--text)';
             }
           }}
           onMouseLeave={(e) => {

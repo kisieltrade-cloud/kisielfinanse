@@ -14,25 +14,26 @@ export default function TableOfContentsMobile({ items }: Props) {
   useEffect(() => {
     if (items.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length > 0) {
-          const top = visible.reduce((a, b) =>
-            a.boundingClientRect.top < b.boundingClientRect.top ? a : b
-          );
-          setActiveId(top.target.id);
+    const headingEls = items
+      .map(({ id }) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+
+    if (headingEls.length === 0) return;
+
+    const handleScroll = () => {
+      const offset = 140;
+      let currentId = headingEls[0].id;
+      for (const el of headingEls) {
+        if (el.getBoundingClientRect().top <= offset) {
+          currentId = el.id;
         }
-      },
-      { rootMargin: '-80px 0px -55% 0px', threshold: 0 },
-    );
+      }
+      setActiveId(currentId);
+    };
 
-    items.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [items]);
 
   if (items.length < 2) return null;
@@ -54,7 +55,7 @@ export default function TableOfContentsMobile({ items }: Props) {
           transform: open ? 'rotate(180deg)' : 'none',
           transition: 'transform 0.2s',
           fontSize: '0.6rem',
-          color: '#c8d4e8',
+          color: 'var(--muted)',
         }}>▾</span>
       </button>
 
@@ -80,7 +81,7 @@ export default function TableOfContentsMobile({ items }: Props) {
                       paddingLeft: item.level === 2 ? 16 : 28,
                       fontFamily: 'var(--font-mono)',
                       fontSize: item.level === 2 ? '0.72rem' : '0.66rem',
-                      color: isActive ? '#c9a227' : item.level === 2 ? '#e0e8f4' : '#c8d4e8',
+                      color: isActive ? 'var(--cyan)' : item.level === 2 ? 'var(--text)' : 'var(--muted)',
                       fontWeight: isActive ? 600 : 400,
                       textDecoration: 'none',
                       borderLeft: isActive ? '2px solid #c9a227' : '2px solid transparent',

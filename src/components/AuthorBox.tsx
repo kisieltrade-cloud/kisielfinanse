@@ -56,7 +56,7 @@ export default function AuthorBox() {
           <p style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '0.72rem',
-            color: '#c8d4e8',
+            color: 'var(--text)',
             lineHeight: 1.8,
             margin: '0 0 16px',
             maxWidth: 560,
