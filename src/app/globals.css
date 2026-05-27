@@ -2796,7 +2796,7 @@ a { color: inherit; text-decoration: none; }
 .news-card-thumb {
   position: relative;
   width: 100%;
-  height: 190px;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
 }
 
