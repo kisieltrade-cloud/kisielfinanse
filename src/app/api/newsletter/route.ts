@@ -26,10 +26,7 @@ const WELCOME_HTML = `
     </p>
 
     <p style="font-size:15px;color:#c8d0dc;line-height:1.7;margin:0 0 32px;">
-      Co znajdziesz w mailach:<br>
-      — analizy rynkowe i strategie które sam stosuję<br>
-      — konkretne narzędzia z codziennej pracy<br>
-      — piszę kiedy mam coś konkretnego, nie ma tu cotygodniowego szumu
+      Piszę kiedy mam coś do powiedzenia. Bez planu wysyłkowego.
     </p>
 
     <a href="https://kisielfinanse.pl/blog"
