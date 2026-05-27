@@ -30,16 +30,16 @@ const HOLDINGS = [
     note: 'DCA - 800 zł co miesiac przez 21 miesiecy. Srednia cena kupna $213,89. Razem 20,14 ulamkowych udzialow.',
   },
   {
-    ticker: 'ATT',
-    name: 'Grupa Azoty S.A.',
+    ticker: 'PCE',
+    name: 'Police S.A.',
     type: 'Akcje',
     buyDate: '8 Kwi 2026',
     buyPrice: 7.50,
-    currentPrice: 24.32,
+    currentPrice: 7.82,
     shares: 1173,
     currency: 'PLN',
     broker: 'GPW',
-    note: 'Wejscie przy dnie po restrukturyzacji. 8 800 zł zainwestowane.',
+    note: 'Zakłady Chemiczne Police - spolka z grupy Azoty. 8 800 zł zainwestowane.',
   },
   {
     ticker: 'EAT',
@@ -74,7 +74,7 @@ const UPDATES = [
   },
   {
     date: '8 Kwi 2026',
-    text: 'Kupno 1 173 akcji Grupy Azoty (ATT) po 7,50 zł. Razem 8 797,50 zł. Wejscie przy dnie po restrukturyzacji spolki.',
+    text: 'Kupno 1 173 akcji Police S.A. (PCE) po 7,50 zł. Razem 8 797,50 zł.',
   },
   {
     date: 'Kwi 2026',
