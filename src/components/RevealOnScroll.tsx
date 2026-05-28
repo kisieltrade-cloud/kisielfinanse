@@ -6,6 +6,9 @@ export default function RevealOnScroll() {
   const observer = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
+    // Bez tej klasy .reveal jest widoczny — Googlebot i uzytkownicy bez JS widza tresc
+    document.documentElement.classList.add('js-ready');
+
     observer.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
