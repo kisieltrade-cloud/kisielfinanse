@@ -15,7 +15,7 @@ import NewsletterForm from '@/components/NewsletterForm';
 const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'KisielFinanse - Edukacja tradingowa' };
 
 export const metadata: Metadata = {
-  title: { absolute: 'KisielFinanse – Finanse. Wiedza. Wolność.' },
+  title: { absolute: 'KisielFinanse - Finanse. Wiedza. Wolność.' },
   description: 'Trader z Wrocławia z 9-letnim doświadczeniem. Praktyczna wiedza o day tradingu - Forex, krypto, futures. Bez ściemy, bez kursów za fortunę.',
   keywords: [
     'trading', 'day trading', 'forex', 'krypto', 'futures', 'US100', 'NAS100',

@@ -183,7 +183,8 @@ export default function KalkulatorHipotecznyPage() {
             <p style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '0.8rem',
-              color: '#c8d4e8',
+              color: 'var(--muted)',
+              fontWeight: 700,
               lineHeight: 1.8,
               maxWidth: 480,
               margin: 0,
@@ -198,7 +199,7 @@ export default function KalkulatorHipotecznyPage() {
 
         {/* Sekcja FAQ - widoczna dla użytkowników */}
         <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 80px' }}>
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 48 }}>
+          <div style={{ borderTop: '1px solid var(--border)', paddingTop: 48 }}>
             <h2 style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(1.4rem, 3vw, 2rem)',
@@ -233,13 +234,13 @@ export default function KalkulatorHipotecznyPage() {
                 },
               ].map((item, i) => (
                 <div key={i} style={{
-                  borderBottom: '1px solid rgba(255,255,255,0.06)',
+                  borderBottom: '1px solid var(--border)',
                   padding: '20px 0',
                 }}>
                   <h3 style={{
                     fontFamily: 'var(--font-body)',
                     fontSize: '0.95rem',
-                    fontWeight: 600,
+                    fontWeight: 700,
                     color: 'var(--text)',
                     marginBottom: 10,
                   }}>
@@ -248,9 +249,10 @@ export default function KalkulatorHipotecznyPage() {
                   <p style={{
                     fontFamily: 'var(--font-mono)',
                     fontSize: '0.8rem',
-                    color: '#c8d4e8',
+                    color: 'var(--muted)',
                     lineHeight: 1.8,
                     margin: 0,
+                    fontWeight: 700,
                   }}>
                     {item.a}
                   </p>
@@ -264,7 +266,7 @@ export default function KalkulatorHipotecznyPage() {
             marginTop: 48,
             padding: '20px 24px',
             background: 'var(--surface)',
-            border: '1px solid rgba(255,255,255,0.07)',
+            border: '1px solid var(--border)',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -275,7 +277,7 @@ export default function KalkulatorHipotecznyPage() {
               <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--text)', fontWeight: 600, marginBottom: 4 }}>
                 Więcej kalkulatorów finansowych
               </p>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#c8d4e8', margin: 0 }}>
+              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--muted)', fontWeight: 700, margin: 0 }}>
                 Procent składany · Risk/Reward · FIRE · ETF vs Lokata
               </p>
             </div>
