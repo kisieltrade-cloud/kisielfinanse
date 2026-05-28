@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 interface Props {
   variant?: 'inline' | 'card'; // inline = poziomy, card = pelny kafelek
@@ -61,6 +62,13 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
           </>
         )}
         {state === 'error' && <p className="newsletter-err">{msg}</p>}
+        <p style={{ fontSize: '0.7rem', color: 'var(--muted)', margin: '4px 0 0' }}>
+          Zapisujac sie akceptujesz{' '}
+          <Link href="/polityka-prywatnosci" style={{ color: 'inherit', textDecoration: 'underline' }}>
+            politykę prywatności
+          </Link>
+          .
+        </p>
       </form>
     );
   }
@@ -101,7 +109,14 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
         </form>
       )}
 
-      <p className="newsletter-card-fine">Zero spamu. Wypiszesz sie w jednym kliknieciu.</p>
+      <p className="newsletter-card-fine">
+        Zero spamu. Wypiszesz sie w jednym kliknieciu.{' '}
+        Zapisujac sie akceptujesz{' '}
+        <Link href="/polityka-prywatnosci" style={{ color: 'inherit', textDecoration: 'underline' }}>
+          politykę prywatności
+        </Link>
+        .
+      </p>
     </div>
   );
 }

@@ -81,7 +81,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     authors: [{ name: 'Mateusz Kisiel', url: `${BASE_URL}/o-mnie` }],
     alternates: { canonical: canonicalUrl },
     openGraph: {
-      title: post.title,   // OG title: sam tytuł artykułu, bez "| KisielFinanse"
+      title: post.metaTitle ?? post.title,
       description: ogDesc,
       url: canonicalUrl,
       type: 'article',
