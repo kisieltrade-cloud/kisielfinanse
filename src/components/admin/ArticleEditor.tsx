@@ -474,6 +474,7 @@ export default function ArticleEditor({ initialData, mode }: Props) {
     try {
       const formData = new FormData();
       formData.append('file', file);
+      if (slug) formData.append('slug', slug);
       const res = await fetch('/api/admin/upload', { method: 'POST', body: formData });
       const data = await res.json();
       if (res.ok) {

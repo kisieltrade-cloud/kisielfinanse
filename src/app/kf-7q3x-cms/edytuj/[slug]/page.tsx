@@ -49,6 +49,7 @@ export default function EdytujPage() {
         image: (data.image as string) ?? '',
         gallery: (data.gallery as string[]) ?? [],
         keywords: Array.isArray(data.keywords) ? (data.keywords as string[]).join(', ') : ((data.keywords as string) ?? ''),
+        faq: Array.isArray(data.faq) ? (data.faq as { q: string; a: string }[]) : [],
       }}
     />
   );

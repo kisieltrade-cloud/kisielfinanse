@@ -79,9 +79,11 @@ export default function DashboardPage() {
     });
   }, [posts, search, filterStatus, filterTag]);
 
+  const now = new Date();
   const stats = {
     all: posts.length,
-    published: posts.filter((p) => p.published).length,
+    published: posts.filter((p) => p.published && new Date(p.date) <= now).length,
+    scheduled: posts.filter((p) => p.published && p.date && new Date(p.date) > now).length,
     drafts: posts.filter((p) => !p.published).length,
   };
 
@@ -143,10 +145,11 @@ export default function DashboardPage() {
         </div>
 
         {/* Stats cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 28 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
           {[
             { icon: '📄', label: 'Wszystkich', value: stats.all, color: '#6366f1' },
             { icon: '🌐', label: 'Opublikowanych', value: stats.published, color: '#10b981' },
+            { icon: '📅', label: 'Zaplanowanych', value: stats.scheduled, color: '#f5c518' },
             { icon: '✏️', label: 'Szkiców', value: stats.drafts, color: '#f59e0b' },
           ].map((s) => (
             <div key={s.label} style={{
@@ -270,6 +273,11 @@ function ArticleRow({
     } catch { return d; }
   };
 
+  const isScheduled = post.published && post.date && new Date(post.date) > new Date();
+  const statusLabel = isScheduled ? 'Zaplanowany' : post.published ? 'Opublikowany' : 'Szkic';
+  const statusColor = isScheduled ? '#f5c518' : post.published ? '#10b981' : '#f59e0b';
+  const statusBg = isScheduled ? 'rgba(245,197,24,0.12)' : post.published ? 'rgba(16,185,129,0.12)' : 'rgba(245,158,11,0.12)';
+
   return (
     <div
       onMouseEnter={() => setHovered(true)}
@@ -309,15 +317,10 @@ function ArticleRow({
             display: 'inline-flex', alignItems: 'center', gap: 5,
             fontSize: '0.65rem', fontFamily: 'system-ui, sans-serif',
             fontWeight: 600, padding: '2px 8px', borderRadius: 20,
-            background: post.published ? 'rgba(16,185,129,0.12)' : 'rgba(245,158,11,0.12)',
-            color: post.published ? '#10b981' : '#f59e0b',
+            background: statusBg, color: statusColor,
           }}>
-            <span style={{
-              width: 6, height: 6, borderRadius: '50%',
-              background: post.published ? '#10b981' : '#f59e0b',
-              display: 'inline-block',
-            }} />
-            {post.published ? 'Opublikowany' : 'Szkic'}
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: statusColor, display: 'inline-block' }} />
+            {statusLabel}
           </span>
           {/* Tag */}
           {post.tag && (
