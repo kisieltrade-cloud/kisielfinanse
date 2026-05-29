@@ -47,7 +47,7 @@ export default function AuthorBox() {
             fontFamily: 'var(--font-display)',
             fontSize: '1.15rem',
             letterSpacing: '2px',
-            color: '#ffffff',
+            color: 'var(--text)',
             marginBottom: 10,
           }}>
             Mateusz Kisiel

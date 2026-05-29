@@ -1154,6 +1154,9 @@ a { color: inherit; text-decoration: none; }
   border-collapse: collapse;
   margin: 32px 0;
   font-size: 0.95rem;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .blog-post-content th {
@@ -1534,6 +1537,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 1024px) {
   .hero-chart-wrap { display: none; }
   .hero-articles { display: none; }
+  .hero { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .blog-grid { grid-template-columns: 1fr 1fr; }
   .blog-all-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1545,18 +1549,17 @@ a { color: inherit; text-decoration: none; }
   .nav-links { display: none; }
   .hero { padding: 100px 24px 60px; grid-template-columns: 1fr; }
   .wyniki-section, .blog-section, .newsletter-section { padding: 60px 24px; }
-  .footer { padding: 28px 24px; flex-direction: column; gap: 20px; text-align: center; }
-  .footer-disclaimer { text-align: center; max-width: 100%; }
   .stats-grid { grid-template-columns: 1fr; }
   .blog-grid { grid-template-columns: 1fr; }
   .blog-all-grid { grid-template-columns: 1fr; }
   .blog-header { flex-direction: column; gap: 20px; align-items: flex-start; }
   .monthly-grid { grid-template-columns: repeat(6, 1fr); }
   .chart-panel { padding: 24px; }
-  .blog-post-hero, .blog-post-content { padding-left: 24px; padding-right: 24px; }
+  .blog-post-hero { padding-left: 24px; padding-right: 24px; padding-top: 100px; }
+  .blog-post-content { padding-left: 24px; padding-right: 24px; }
   .blog-page { padding: 120px 24px 80px; }
   .newsletter-form { flex-direction: column; }
-  .newsletter-input { border-right: 1px solid var(--border); border-bottom: none; }
+  .newsletter-input { border-right: 1px solid var(--border); }
 }
 
 /* ──────────────────────────────────────
@@ -2310,7 +2313,7 @@ a { color: inherit; text-decoration: none; }
 
 .mobile-menu {
   position: fixed;
-  top: 73px;
+  top: 84px;
   left: 0;
   right: 0;
   bottom: 0;

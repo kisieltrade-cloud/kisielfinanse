@@ -267,7 +267,7 @@ export default async function ArticlePage({ params }: Props) {
             <div style={{
               position: 'relative',
               width: '100%',
-              height: 460,
+              aspectRatio: '16 / 9',
               borderRadius: 12,
               overflow: 'hidden',
               border: '1px solid var(--border)',
