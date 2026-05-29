@@ -15,6 +15,12 @@ const C = {
   blue:   '#2563eb',
 };
 
+interface Props {
+  livePrices: Record<string, number | null>;
+  liveUsdPln: number | null;
+  fetchedAt: string;
+}
+
 /* ── DANE PORTFELA ────────────────────────────────────────────────── */
 const HOLDINGS = [
   {
@@ -23,7 +29,7 @@ const HOLDINGS = [
     type: 'Akcje',
     buyDate: 'Sie 2024 - Kwi 2026',
     buyPrice: 213.89,
-    currentPrice: 265.29,
+    fallbackPrice: 265.29,
     shares: 20.14,
     currency: 'USD',
     broker: 'NASDAQ',
@@ -35,7 +41,7 @@ const HOLDINGS = [
     type: 'Akcje',
     buyDate: '8 Kwi 2026',
     buyPrice: 7.50,
-    currentPrice: 7.82,
+    fallbackPrice: 7.82,
     shares: 1173,
     currency: 'PLN',
     broker: 'GPW',
@@ -47,7 +53,7 @@ const HOLDINGS = [
     type: 'Akcje',
     buyDate: '15 Maj 2026',
     buyPrice: 10.30,
-    currentPrice: 10.60,
+    fallbackPrice: 10.60,
     shares: 485,
     currency: 'PLN',
     broker: 'GPW',
@@ -59,7 +65,7 @@ const HOLDINGS = [
     type: 'Akcje',
     buyDate: '9-16 Kwi 2026',
     buyPrice: 88.59,
-    currentPrice: 80.68,
+    fallbackPrice: 80.68,
     shares: 140,
     currency: 'PLN',
     broker: 'GPW',
@@ -96,11 +102,13 @@ const TYPE_COLOR: Record<string, string> = {
   'Obligacje': '#7c3aed',
 };
 
-export default function PortfelClient() {
+export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Props) {
   const [expanded, setExpanded] = useState<string | null>(null);
 
+  const USD_PLN = liveUsdPln ?? 3.88;
   const EUR_PLN = 4.22;
-  const USD_PLN = 3.88;
+
+  const isLive = Object.values(livePrices).some(v => v !== null);
 
   function toPLN(value: number, currency: string) {
     if (currency === 'EUR') return value * EUR_PLN;
@@ -109,11 +117,12 @@ export default function PortfelClient() {
   }
 
   const holdings = HOLDINGS.map((h) => {
+    const currentPrice = livePrices[h.ticker] ?? h.fallbackPrice;
     const invested  = toPLN(h.buyPrice * h.shares, h.currency);
-    const current   = toPLN(h.currentPrice * h.shares, h.currency);
+    const current   = toPLN(currentPrice * h.shares, h.currency);
     const pnl       = current - invested;
-    const pnlPct    = ((h.currentPrice - h.buyPrice) / h.buyPrice) * 100;
-    return { ...h, invested, current, pnl, pnlPct };
+    const pnlPct    = ((currentPrice - h.buyPrice) / h.buyPrice) * 100;
+    return { ...h, currentPrice, invested, current, pnl, pnlPct };
   });
 
   const totalInvested = holdings.reduce((s, h) => s + h.invested, 0);
@@ -124,9 +133,17 @@ export default function PortfelClient() {
   const fmt = (n: number) =>
     n.toLocaleString('pl-PL', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
+  const fmtPrice = (n: number, decimals = 2) =>
+    n.toLocaleString('pl-PL', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+
   const byType: Record<string, number> = {};
   holdings.forEach((h) => {
     byType[h.type] = (byType[h.type] ?? 0) + h.current;
+  });
+
+  const fetchedDate = new Date(fetchedAt);
+  const fetchedStr = fetchedDate.toLocaleString('pl-PL', {
+    day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit',
   });
 
   return (
@@ -140,10 +157,25 @@ export default function PortfelClient() {
         <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3rem)', color: C.text, marginBottom: 12, lineHeight: 1.1 }}>
           Mój portfel
         </h1>
-        <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', color: C.text, marginBottom: 48, lineHeight: 1.7, maxWidth: 560 }}>
-          Pełna transparentność - co kupuję, kiedy, za ile i dlaczego. Bez ściemy.
-          Aktualizuję co miesiąc.
-        </p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 48, flexWrap: 'wrap' }}>
+          <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', color: C.text, margin: 0, lineHeight: 1.7, maxWidth: 560 }}>
+            Pełna transparentność - co kupuję, kiedy, za ile i dlaczego. Bez ściemy.
+          </p>
+          {/* Live / cache badge */}
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: 5,
+            fontFamily: 'var(--font-mono)', fontSize: '0.6rem', letterSpacing: '1px',
+            padding: '4px 10px',
+            background: isLive ? 'rgba(22,163,74,0.08)' : 'rgba(90,100,120,0.1)',
+            border: `1px solid ${isLive ? 'rgba(22,163,74,0.25)' : 'rgba(90,100,120,0.2)'}`,
+            color: isLive ? C.green : 'var(--muted)',
+            borderRadius: 20,
+            flexShrink: 0,
+          }}>
+            <span style={{ width: 5, height: 5, borderRadius: '50%', background: isLive ? C.green : 'var(--muted)', flexShrink: 0 }} />
+            {isLive ? `LIVE · ${fetchedStr}` : 'dane statyczne'}
+          </span>
+        </div>
 
         {/* Statystyki */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 32 }}>
@@ -167,6 +199,15 @@ export default function PortfelClient() {
             </div>
           ))}
         </div>
+
+        {/* Kurs USD/PLN */}
+        {liveUsdPln && (
+          <div style={{ marginBottom: 16, fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'var(--muted)', letterSpacing: '0.5px' }}>
+            USD/PLN: <span style={{ color: C.text, fontWeight: 700 }}>{fmtPrice(USD_PLN, 4)}</span>
+            <span style={{ margin: '0 8px', opacity: 0.4 }}>·</span>
+            Kursy odświeżane co godzinę
+          </div>
+        )}
 
         {/* Alokacja */}
         <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, padding: '20px 24px', marginBottom: 32 }}>
@@ -200,6 +241,7 @@ export default function PortfelClient() {
 
           {holdings.map((h, i) => {
             const isOpen = expanded === h.ticker;
+            const usingLive = livePrices[h.ticker] !== null && livePrices[h.ticker] !== undefined;
             return (
               <div key={h.ticker}>
                 <div
@@ -230,19 +272,36 @@ export default function PortfelClient() {
                       {h.type === 'ETF' ? 'ETF' : h.type === 'Obligacje' ? 'OBL' : h.ticker.slice(0, 3)}
                     </div>
                     <div style={{ minWidth: 0 }}>
-                      <p style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', fontWeight: 700, color: C.text, margin: '0 0 2px' }}>
-                        {h.ticker}
-                      </p>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
+                        <p style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', fontWeight: 700, color: C.text, margin: 0 }}>
+                          {h.ticker}
+                        </p>
+                        {usingLive && (
+                          <span style={{
+                            fontFamily: 'var(--font-mono)', fontSize: '0.52rem',
+                            color: C.green, letterSpacing: '0.5px',
+                            background: 'rgba(22,163,74,0.08)',
+                            border: '1px solid rgba(22,163,74,0.2)',
+                            padding: '1px 5px', borderRadius: 4,
+                          }}>
+                            LIVE
+                          </span>
+                        )}
+                      </div>
                       <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.88rem', color: C.text, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {h.name}
                       </p>
                     </div>
                   </div>
 
-                  {/* Data / sztuki */}
+                  {/* Aktualny kurs */}
                   <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.88rem', fontWeight: 600, color: C.text, margin: '0 0 2px' }}>{h.buyDate}</p>
-                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.85rem', color: C.text, margin: 0 }}>{h.shares} szt.</p>
+                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.95rem', fontWeight: 700, color: C.text, margin: '0 0 2px' }}>
+                      {fmtPrice(h.currentPrice)} {h.currency}
+                    </p>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.82rem', color: C.text, margin: 0 }}>
+                      kupno: {h.buyPrice} {h.currency}
+                    </p>
                   </div>
 
                   {/* Wartość */}
@@ -276,12 +335,13 @@ export default function PortfelClient() {
                       {[
                         { k: 'Data kupna', v: h.buyDate },
                         { k: 'Cena kupna', v: `${h.buyPrice} ${h.currency}` },
+                        { k: 'Kurs aktualny', v: `${fmtPrice(h.currentPrice)} ${h.currency}${usingLive ? ' ●' : ''}` },
                         { k: 'Giełda', v: h.broker },
                         { k: 'Waluta', v: h.currency },
                       ].map(({ k, v }) => (
                         <div key={k}>
                           <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.78rem', color: C.text, margin: '0 0 3px' }}>{k}</p>
-                          <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', fontWeight: 700, color: C.text, margin: 0 }}>{v}</p>
+                          <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', fontWeight: 700, color: k === 'Kurs aktualny' && usingLive ? C.green : C.text, margin: 0 }}>{v}</p>
                         </div>
                       ))}
                     </div>
@@ -319,7 +379,7 @@ export default function PortfelClient() {
 
         {/* Disclaimer */}
         <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.8rem', color: C.text, lineHeight: 1.7, textAlign: 'center', maxWidth: 560, margin: '0 auto' }}>
-          To nie jest rekomendacja inwestycyjna. Pokazuję co sam robię - każdy podejmuje własne decyzje.
+          To nie jest rekomendacja inwestycyjna. Pokazuję co sam robię — każdy podejmuje własne decyzje.
         </p>
 
       </div>

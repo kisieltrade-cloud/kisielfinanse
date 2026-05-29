@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import PortfelClient from './PortfelClient';
 
+export const revalidate = 3600;
+
 const BASE_URL = 'https://kisielfinanse.pl';
 
 export const metadata: Metadata = {
@@ -32,6 +34,41 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PortfelPage() {
-  return <PortfelClient />;
+async function fetchYahoo(symbol: string): Promise<number | null> {
+  try {
+    const res = await fetch(
+      `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1d&range=1d`,
+      {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (compatible; KisielFinanse/1.0)',
+          'Accept': 'application/json',
+        },
+        next: { revalidate: 3600 },
+      },
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
+    return typeof price === 'number' ? price : null;
+  } catch {
+    return null;
+  }
+}
+
+export default async function PortfelPage() {
+  const [amzn, pce, eat, mdv, usdpln] = await Promise.all([
+    fetchYahoo('AMZN'),
+    fetchYahoo('PCE.WA'),
+    fetchYahoo('EAT.WA'),
+    fetchYahoo('MDV.WA'),
+    fetchYahoo('USDPLN=X'),
+  ]);
+
+  return (
+    <PortfelClient
+      livePrices={{ AMZN: amzn, PCE: pce, EAT: eat, MDV: mdv }}
+      liveUsdPln={usdpln}
+      fetchedAt={new Date().toISOString()}
+    />
+  );
 }
