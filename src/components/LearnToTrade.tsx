@@ -330,7 +330,7 @@ export default function LearnToTrade() {
       {/* Disclaimer */}
       <p style={{
         fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
-        color: '#1a2230', textAlign: 'center', marginTop: 48, lineHeight: 1.6, fontWeight: 700,
+        color: 'var(--muted)', textAlign: 'center', marginTop: 48, lineHeight: 1.6, fontWeight: 700,
       }}>
         Treści publikowane na KisielFinanse.pl mają charakter wyłącznie edukacyjny i nie
         stanowią doradztwa inwestycyjnego. Trading wiąże się z ryzykiem utraty kapitału.

@@ -28,11 +28,11 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
         setEmail('');
       } else {
         setState('error');
-        setMsg(data.error ?? 'Cos poszlo nie tak.');
+        setMsg(data.error ?? 'Coś poszło nie tak.');
       }
     } catch {
       setState('error');
-      setMsg('Blad polaczenia. Sprobuj za chwile.');
+      setMsg('Błąd połączenia. Spróbuj za chwilę.');
     }
   }
 
@@ -40,7 +40,7 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
     return (
       <form onSubmit={handleSubmit} className="newsletter-inline">
         {state === 'ok' ? (
-          <p className="newsletter-ok">Zapisano. Sprawdz skrzynke.</p>
+          <p className="newsletter-ok">Zapisano. Sprawdź skrzynkę.</p>
         ) : (
           <>
             <input
@@ -57,13 +57,13 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
               className="newsletter-btn"
               disabled={state === 'loading'}
             >
-              {state === 'loading' ? '...' : 'Zapisz sie'}
+              {state === 'loading' ? '...' : 'Zapisz się'}
             </button>
           </>
         )}
         {state === 'error' && <p className="newsletter-err">{msg}</p>}
         <p style={{ fontSize: '0.7rem', color: 'var(--muted)', margin: '4px 0 0' }}>
-          Zapisujac sie akceptujesz{' '}
+          Zapisując się akceptujesz{' '}
           <Link href="/polityka-prywatnosci" style={{ color: 'inherit', textDecoration: 'underline' }}>
             politykę prywatności
           </Link>
@@ -77,7 +77,7 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
   return (
     <div className="newsletter-card">
       <div className="newsletter-card-label">NEWSLETTER</div>
-      <h3 className="newsletter-card-title">Bez szumu. Kiedy mam cos wartego wysłania.</h3>
+      <h3 className="newsletter-card-title">Bez szumu. Kiedy mam coś wartego wysłania.</h3>
       <p className="newsletter-card-desc">
         Piszę kiedy mam coś do powiedzenia. Bez planu wysyłkowego.
       </p>
@@ -85,7 +85,7 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
       {state === 'ok' ? (
         <div className="newsletter-card-ok">
           <span style={{ fontSize: '1.4rem' }}>✓</span>
-          <p>Zapisano. Sprawdz skrzynke - wyslałem maila powitalnego.</p>
+          <p>Zapisano. Sprawdź skrzynkę — wysłałem maila powitalnego.</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="newsletter-card-form">
@@ -103,15 +103,15 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
             className="newsletter-btn newsletter-btn-card"
             disabled={state === 'loading'}
           >
-            {state === 'loading' ? 'Wysylam...' : 'Zapisz sie'}
+            {state === 'loading' ? 'Wysyłam...' : 'Zapisz się'}
           </button>
           {state === 'error' && <p className="newsletter-err">{msg}</p>}
         </form>
       )}
 
       <p className="newsletter-card-fine">
-        Zero spamu. Wypiszesz sie w jednym kliknieciu.{' '}
-        Zapisujac sie akceptujesz{' '}
+        Zero spamu. Wypiszesz się w jednym kliknięciu.{' '}
+        Zapisując się akceptujesz{' '}
         <Link href="/polityka-prywatnosci" style={{ color: 'inherit', textDecoration: 'underline' }}>
           politykę prywatności
         </Link>

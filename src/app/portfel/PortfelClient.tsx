@@ -9,7 +9,7 @@ const C = {
   sub:    'var(--muted)',
   label:  'var(--muted)',
   border: 'var(--border)',
-  gold:   '#b8960a',
+  gold:   '#c9a227',
   green:  '#16a34a',
   red:    '#dc2626',
   blue:   '#2563eb',

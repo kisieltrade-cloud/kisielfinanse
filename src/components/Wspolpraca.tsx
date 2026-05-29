@@ -112,7 +112,7 @@ export default function Wspolpraca() {
             Nie piszę dla każdego. Niszowa, zaangażowana publiczność jest dla partnera
             cenniejsza niż masowy ruch z niską intencją zakupową.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14 }}>
+          <div className="collab-reader-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14 }}>
             {READER.map(r => (
               <div key={r.label} style={{
                 background: 'var(--surface)',
@@ -200,7 +200,7 @@ export default function Wspolpraca() {
           <h2 className="collab-subtitle">
             JAK TO <span className="gradient-text-cp">DZIAŁA</span>
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+          <div className="collab-steps-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
             {STEPS.map(s => (
               <div key={s.n} style={{
                 background: 'var(--surface)',
@@ -288,7 +288,7 @@ export default function Wspolpraca() {
 
               {status === 'error' && (
                 <p style={{ fontFamily: 'var(--font-mono)', color: 'var(--pink)', fontSize: '0.75rem', marginTop: -8 }}>
-                  Coś poszło nie tak. Spróbuj ponownie lub napisz bezpośrednio.
+                  Coś poszło nie tak. Napisz bezpośrednio: kisieltrade@gmail.com
                 </p>
               )}
 
