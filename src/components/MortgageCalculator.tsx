@@ -242,14 +242,37 @@ function AmortChart({ bars }: { bars: { capital: number; interest: number }[] })
   );
 }
 
+// ─── Pasek zdolności (poziomy) ────────────────────────────────────
+function CapacityBar({ used, max, color }: { used: number; max: number; color: string }) {
+  const pct = Math.min((used / max) * 100, 100);
+  return (
+    <div style={{ height: 8, background: C.border, borderRadius: 4, overflow: 'hidden', marginTop: 6 }}>
+      <div style={{
+        height: '100%', width: `${pct}%`, background: color,
+        borderRadius: 4, transition: 'width 0.4s cubic-bezier(0.4,0,0.2,1)',
+      }} />
+    </div>
+  );
+}
+
 // ─── GŁÓWNY KOMPONENT ─────────────────────────────────────────────
 export default function MortgageCalculator() {
+  const [activeTab, setActiveTab] = useState<'rata' | 'zdolnosc'>('rata');
+
+  // ── Kalkulator raty ──
   const [propVal,  setPropVal]  = useState(600000);
   const [downPct,  setDownPct]  = useState(20);
   const [term,     setTerm]     = useState(25);
   const [rate,     setRate]     = useState(7.5);
   const [malejace, setMalejace] = useState(false);
   const [arrowHover, setArrowHover] = useState(false);
+
+  // ── Zdolność kredytowa ──
+  const [zdIncome,      setZdIncome]      = useState(8000);
+  const [zdLiabilities, setZdLiabilities] = useState(0);
+  const [zdDown,        setZdDown]        = useState(100000);
+  const [zdTerm,        setZdTerm]        = useState(25);
+  const [zdRate,        setZdRate]        = useState(7.5);
 
   const calc = useMemo(() => {
     const down = propVal * downPct / 100;
@@ -298,6 +321,26 @@ export default function MortgageCalculator() {
 
     return { P, down, M, activeM, activeInterest, activeTotal, annuityInterest, decInterest, decFirst, decLast, saving, capitalPct, interestPct, amortBars, n };
   }, [propVal, downPct, term, rate, malejace]);
+
+  const zdolnosc = useMemo(() => {
+    const r = zdRate / 100 / 12;
+    const n = zdTerm * 12;
+    const dtiOptions = [
+      { label: 'Konserwatywny', pct: 35, color: C.bright,  hint: 'Ostrożne banki, kredyty z wysokim LTV' },
+      { label: 'Standardowy',   pct: 50, color: C.dark,    hint: 'Większość banków w Polsce' },
+      { label: 'Maksymalny',    pct: 65, color: C.mid,     hint: 'KNF limit dla dochodów > 3× med.' },
+    ];
+
+    return dtiOptions.map(opt => {
+      const maxRata   = zdIncome * opt.pct / 100 - zdLiabilities;
+      const maxKredyt = maxRata > 0
+        ? (r > 0 ? maxRata * (1 - Math.pow(1 + r, -n)) / r : maxRata * n)
+        : 0;
+      const maxNieruchomosc = Math.max(0, maxKredyt) + zdDown;
+      const ratioIncome = maxRata / zdIncome * 100;
+      return { ...opt, maxRata: Math.max(0, maxRata), maxKredyt: Math.max(0, maxKredyt), maxNieruchomosc, ratioIncome };
+    });
+  }, [zdIncome, zdLiabilities, zdDown, zdTerm, zdRate]);
 
   const displayM = useCountUp(Math.round(calc.activeM));
   const displayInterest = useCountUp(Math.round(calc.activeInterest));
@@ -389,6 +432,180 @@ export default function MortgageCalculator() {
         }} />
 
         <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
+
+          {/* Zakładki */}
+          <div style={{
+            display: 'flex', marginBottom: 28,
+            background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(12px)',
+            borderRadius: 12, padding: 4, gap: 2,
+            border: '1px solid rgba(255,255,255,0.9)',
+            boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+            width: 'fit-content',
+          }}>
+            {([
+              { key: 'rata',     label: 'Kalkulator raty' },
+              { key: 'zdolnosc', label: 'Zdolność kredytowa' },
+            ] as const).map(t => (
+              <button
+                key={t.key}
+                onClick={() => setActiveTab(t.key)}
+                style={{
+                  padding: '10px 22px', borderRadius: 9, border: 'none', cursor: 'pointer',
+                  fontFamily: 'var(--font-ui)', fontSize: '0.85rem', fontWeight: 600,
+                  transition: 'all 0.2s',
+                  background: activeTab === t.key
+                    ? `linear-gradient(135deg, ${C.dark} 0%, ${C.mid} 100%)`
+                    : 'transparent',
+                  color: activeTab === t.key ? '#fff' : C.muted,
+                  boxShadow: activeTab === t.key ? '0 2px 12px rgba(26,92,56,0.3)' : 'none',
+                }}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+
+          {/* ── ZDOLNOŚĆ KREDYTOWA ─────────────────────────────── */}
+          {activeTab === 'zdolnosc' && (
+            <div className="mtg-grid">
+              {/* Lewa: parametry */}
+              <div style={{
+                background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)', borderRadius: 18, padding: '28px 26px',
+                boxShadow: '0 20px 60px rgba(0,0,0,0.08), 0 1px 0 rgba(255,255,255,0.9) inset',
+                border: '1px solid rgba(255,255,255,0.9)',
+              }}>
+                <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.72rem', fontWeight: 700, color: C.dark, letterSpacing: '1.2px', textTransform: 'uppercase', marginBottom: 24 }}>
+                  Twoja sytuacja finansowa
+                </p>
+
+                <SliderRow label="Dochód netto (PLN/mies.)" value={zdIncome} displayValue={`${fmt(zdIncome)} PLN`}
+                  min={2000} max={30000} step={500} onChange={setZdIncome} minLabel="2 tys." maxLabel="30 tys." />
+                <SliderRow label="Inne raty / zobowiązania (PLN/mies.)" value={zdLiabilities} displayValue={zdLiabilities === 0 ? 'brak' : `${fmt(zdLiabilities)} PLN`}
+                  min={0} max={5000} step={100} onChange={setZdLiabilities} minLabel="0" maxLabel="5 tys." />
+                <SliderRow label="Wkład własny" value={zdDown} displayValue={`${fmtK(zdDown)} PLN`}
+                  min={0} max={500000} step={10000} onChange={setZdDown} minLabel="0" maxLabel="500 tys." />
+
+                <div style={{ height: 1, background: C.border, margin: '8px 0 22px' }} />
+
+                <SliderRow label="Okres kredytowania" value={zdTerm} displayValue={`${zdTerm} lat`}
+                  min={5} max={35} step={1} onChange={setZdTerm} minLabel="5 lat" maxLabel="35 lat" />
+                <SliderRow label="Oprocentowanie roczne" value={zdRate} displayValue={`${zdRate.toFixed(2)}%`}
+                  min={3} max={15} step={0.05} onChange={v => setZdRate(Math.round(v * 20) / 20)} minLabel="3%" maxLabel="15%" />
+
+                {/* Dochód do dyspozycji */}
+                <div style={{
+                  marginTop: 8, padding: '12px 16px',
+                  background: `linear-gradient(135deg, ${C.vlight}, rgba(168,216,186,0.3))`,
+                  borderRadius: 10, border: `1px solid rgba(26,92,56,0.1)`,
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                }}>
+                  <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.78rem', color: C.muted }}>
+                    Wolny dochód po zobowiązaniach
+                  </span>
+                  <span style={{ fontFamily: 'var(--font-ui)', fontSize: '1rem', fontWeight: 800, color: C.dark }}>
+                    {fmt(Math.max(0, zdIncome - zdLiabilities))} PLN
+                  </span>
+                </div>
+              </div>
+
+              {/* Prawa: wyniki */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {zdolnosc.map((s, i) => (
+                  <div key={i} style={{
+                    background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(20px)',
+                    WebkitBackdropFilter: 'blur(20px)', borderRadius: 16, padding: '20px 22px',
+                    boxShadow: i === 1
+                      ? '0 20px 60px rgba(26,92,56,0.12), 0 1px 0 rgba(255,255,255,0.9) inset'
+                      : '0 8px 24px rgba(0,0,0,0.05)',
+                    border: i === 1
+                      ? `1.5px solid rgba(26,92,56,0.25)`
+                      : '1px solid rgba(255,255,255,0.9)',
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 14 }}>
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3 }}>
+                          <span style={{
+                            fontFamily: 'var(--font-ui)', fontSize: '0.78rem', fontWeight: 700, color: s.color,
+                          }}>
+                            {s.label}
+                          </span>
+                          {i === 1 && (
+                            <span style={{
+                              fontFamily: 'var(--font-ui)', fontSize: '0.62rem', fontWeight: 700,
+                              background: C.dark, color: '#fff',
+                              padding: '2px 8px', borderRadius: 20, letterSpacing: '0.5px',
+                            }}>TYPOWY</span>
+                          )}
+                        </div>
+                        <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.68rem', color: C.muted }}>
+                          DTI {s.pct}% · {s.hint}
+                        </span>
+                      </div>
+                      <span style={{
+                        fontFamily: 'var(--font-ui)', fontSize: '0.82rem', fontWeight: 700,
+                        color: s.maxRata > 0 ? s.color : C.border,
+                        background: s.maxRata > 0 ? `rgba(${s.color === C.bright ? '58,170,106' : s.color === C.dark ? '26,92,56' : '45,122,79'},0.08)` : C.vlight,
+                        padding: '4px 12px', borderRadius: 20,
+                      }}>
+                        rata maks. {s.maxRata > 0 ? `${fmt(s.maxRata)} PLN` : '—'}
+                      </span>
+                    </div>
+
+                    {s.maxKredyt > 0 ? (
+                      <>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                          <div>
+                            <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.65rem', color: C.muted, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 4 }}>
+                              Maks. kredyt
+                            </p>
+                            <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', color: s.color, lineHeight: 1, margin: 0 }}>
+                              {fmtK(s.maxKredyt)} PLN
+                            </p>
+                          </div>
+                          <div>
+                            <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.65rem', color: C.muted, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 4 }}>
+                              Maks. nieruchomość
+                            </p>
+                            <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', color: C.text, lineHeight: 1, margin: 0 }}>
+                              {fmtK(s.maxNieruchomosc)} PLN
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Pasek obciążenia dochodu */}
+                        <div style={{ marginTop: 12 }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
+                            <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.68rem', color: C.muted }}>
+                              Obciążenie dochodu
+                            </span>
+                            <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.68rem', color: s.color, fontWeight: 700 }}>
+                              {s.ratioIncome.toFixed(0)}%
+                            </span>
+                          </div>
+                          <CapacityBar used={s.maxRata + zdLiabilities} max={zdIncome} color={s.color} />
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4 }}>
+                            <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.62rem', color: C.muted }}>0</span>
+                            <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.62rem', color: C.muted }}>{fmt(zdIncome)} PLN</span>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.82rem', color: C.red, marginTop: 4 }}>
+                        Zobowiązania przekraczają limit DTI {s.pct}%.
+                      </p>
+                    )}
+                  </div>
+                ))}
+
+                <p style={{ fontFamily: 'var(--font-ui)', fontSize: '0.68rem', color: C.muted, lineHeight: 1.6, textAlign: 'center', marginTop: 4 }}>
+                  Wynik orientacyjny. Banki uwzględniają też historię kredytową, wiek, rodzaj umowy i scoring BIK.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'rata' && (<>
           <div className="mtg-grid">
 
             {/* ── LEWA: Suwaki ───────────────────────────────── */}
@@ -625,6 +842,7 @@ export default function MortgageCalculator() {
             Kalkulator pokazuje wyłącznie ratę kapitałowo-odsetkową przy stałym oprocentowaniu.
             Nie uwzględnia prowizji bankowej, ubezpieczenia nieruchomości ani zmienności stóp procentowych.
           </p>
+          </>)}
         </div>
       </div>
     </>
