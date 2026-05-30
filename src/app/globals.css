@@ -3991,3 +3991,70 @@ a { color: inherit; text-decoration: none; }
 .hero-desc {
   font-weight: 700;
 }
+
+/* ──────────────────────────────────────
+   O-MNIE V2 — RESPONSIVE GRIDS
+────────────────────────────────────── */
+.omnie-hero {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: 0;
+  align-items: stretch;
+  min-height: calc(100vh - 80px);
+}
+@media (max-width: 960px) {
+  .omnie-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .omnie-hero-photo { display: none !important; }
+}
+
+.omnie-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+@media (max-width: 768px) {
+  .omnie-pillars { grid-template-columns: 1fr; }
+}
+
+.omnie-timeline {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0 8px;
+  position: relative;
+}
+@media (max-width: 960px) {
+  .omnie-timeline { grid-template-columns: repeat(3, 1fr); gap: 24px 16px; }
+}
+@media (max-width: 560px) {
+  .omnie-timeline { grid-template-columns: repeat(2, 1fr); }
+}
+
+.omnie-categories {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+@media (max-width: 960px) {
+  .omnie-categories { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 560px) {
+  .omnie-categories { grid-template-columns: repeat(2, 1fr); }
+}
+
+.omnie-cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .omnie-cta-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+  }
+  .omnie-cta-center { display: none !important; }
+}
