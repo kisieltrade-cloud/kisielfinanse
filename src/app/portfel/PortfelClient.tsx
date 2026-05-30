@@ -182,7 +182,7 @@ function DonutChart({ pct = 100, color = '#2563eb', size = 72 }: { pct?: number;
 /* ─── HERO CHART - 3D PLATFORM ──────────────────────────────────────── */
 function HeroChart() {
   return (
-    <div style={{ flexShrink: 0, width: 'clamp(160px, 25vw, 240px)' }}>
+    <div className="portfel-hero-chart" style={{ flexShrink: 0, width: 'clamp(160px, 25vw, 240px)' }}>
       <svg viewBox="0 0 260 200" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto', display: 'block' }}>
         <defs>
           <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
@@ -346,12 +346,7 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
         </div>
 
         {/* ── STATS 4 CARDS ── */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: 12,
-          marginBottom: 28,
-        }}>
+        <div className="portfel-stats-grid">
 
           {/* Wartość portfela */}
           <div style={cardStyle}>
@@ -431,12 +426,8 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
                   onKeyDown={e => e.key === 'Enter' && setExpanded(isExp ? null : h.ticker)}
                   onMouseEnter={e => { if (!isExp) (e.currentTarget as HTMLElement).style.background = 'var(--surface2)'; }}
                   onMouseLeave={e => { if (!isExp) (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
+                  className="portfel-pos-row"
                   style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr auto auto auto auto',
-                    alignItems: 'center',
-                    gap: 16,
-                    padding: '18px 28px',
                     borderBottom: (!isLast || isExp) ? '1px solid var(--border-subtle)' : 'none',
                     cursor: 'pointer',
                     background: isExp ? 'var(--surface2)' : 'transparent',
@@ -462,7 +453,7 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
                   </div>
 
                   {/* Kurs */}
-                  <div style={{ textAlign: 'right' }}>
+                  <div className="portfel-pos-kurs" style={{ textAlign: 'right' }}>
                     <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', fontWeight: 700, color: 'var(--text)', margin: '0 0 4px' }}>
                       {fmtPrice(h.currentPrice)}&nbsp;{h.currency}
                     </p>
@@ -472,7 +463,7 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
                   </div>
 
                   {/* Wartość */}
-                  <div style={{ textAlign: 'right' }}>
+                  <div className="portfel-pos-val" style={{ textAlign: 'right' }}>
                     <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.92rem', fontWeight: 700, color: 'var(--text)', margin: '0 0 4px' }}>
                       {fmt(h.current)}&nbsp;PLN
                     </p>

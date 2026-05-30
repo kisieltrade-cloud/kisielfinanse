@@ -54,7 +54,16 @@ export default function Breadcrumbs({ items, light }: Props) {
                 {crumb.label}
               </Link>
             ) : (
-              <span style={{ color: isLast ? colLast : colBase }}>
+              <span style={{
+                color: isLast ? colLast : colBase,
+                ...(isLast ? {
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                  maxWidth: 'clamp(140px, 40vw, 400px)',
+                  display: 'inline-block',
+                } : {}),
+              }}>
                 {crumb.label}
               </span>
             )}

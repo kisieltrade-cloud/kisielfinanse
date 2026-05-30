@@ -126,7 +126,7 @@ export default function GodzinyPracyCalculator() {
       padding: 'clamp(24px, 5vw, 40px)',
     }}>
       {/* Inputs */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px 32px', marginBottom: 32 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px 32px', marginBottom: 32 }}>
         <Field
           label="Twoja stawka godzinowa netto"
           value={stawka} onChange={setStawka}
