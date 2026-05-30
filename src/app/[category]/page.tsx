@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import RevealOnScroll from '@/components/RevealOnScroll';
@@ -214,6 +215,61 @@ export default async function CategoryPage({ params }: Props) {
               </p>
             </div>
           )}
+
+          {/* Inne kategorie */}
+          <div style={{ maxWidth: 1100, margin: '64px auto 0', padding: '0 24px' }}>
+            <p style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.7rem',
+              fontWeight: 700,
+              color: 'var(--muted)',
+              letterSpacing: '2px',
+              textTransform: 'uppercase',
+              marginBottom: 20,
+            }}>
+              Inne tematy
+            </p>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              {CATEGORIES.filter(c => c.slug !== slug).map(c => (
+                <Link
+                  key={c.slug}
+                  href={`/${c.slug}`}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 6,
+                    padding: '14px 20px',
+                    background: 'var(--surface)',
+                    border: `1px solid ${c.color}33`,
+                    borderRadius: 12,
+                    textDecoration: 'none',
+                    flex: '1 1 180px',
+                    maxWidth: 260,
+                    transition: 'border-color 0.15s, transform 0.15s',
+                  }}
+                >
+                  <span style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.72rem',
+                    fontWeight: 700,
+                    color: c.color,
+                    letterSpacing: '1px',
+                    textTransform: 'uppercase',
+                  }}>
+                    {c.name}
+                  </span>
+                  <span style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '0.78rem',
+                    color: 'var(--muted)',
+                    lineHeight: 1.5,
+                  }}>
+                    {c.desc}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
 
           <div style={{ maxWidth: 700, margin: '48px auto 0', padding: '0 24px 80px' }}>
             <NewsletterForm />

@@ -33,7 +33,7 @@ export default function RelatedPosts({ currentSlug, currentTag, allPosts }: Prop
     <section className="related-section">
       <div className="related-header">
         <h2 className="related-title">
-          POWIĄZANE <span style={{ color: 'var(--cyan)' }}>ARTYKUŁY</span>
+          PRZECZYTAJ <span style={{ color: 'var(--cyan)' }}>TEŻ</span>
         </h2>
       </div>
 

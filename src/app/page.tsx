@@ -13,28 +13,28 @@ import Footer from '@/components/Footer';
 import RevealOnScroll from '@/components/RevealOnScroll';
 import NewsletterForm from '@/components/NewsletterForm';
 
-const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'KisielFinanse - Edukacja tradingowa' };
+const OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: 'KisielFinanse - Finanse. Wiedza. Wolnosc.' };
 
 export const metadata: Metadata = {
   title: { absolute: 'KisielFinanse - Finanse. Wiedza. Wolność.' },
-  description: 'Trader z Wrocławia z 9-letnim doświadczeniem. Praktyczna wiedza o day tradingu - Forex, krypto, futures. Bez ściemy, bez kursów za fortunę.',
+  description: 'Praktyczna wiedza o finansach osobistych, inwestowaniu i tradingu. Kalkulatory, artykuły i portfel inwestycyjny. Bez ściemy, bez kursów za fortunę.',
   keywords: [
-    'trading', 'day trading', 'forex', 'krypto', 'futures', 'US100', 'NAS100',
-    'edukacja tradingowa', 'nauka tradingu', 'scalping', 'zarządzanie ryzykiem',
-    'price action', 'trader wrocław', 'KisielFinanse',
+    'finanse osobiste', 'inwestowanie', 'trading', 'ETF', 'oszczędzanie',
+    'kalkulator finansowy', 'portfel inwestycyjny', 'edukacja finansowa',
+    'forex', 'krypto', 'IKE', 'IKZE', 'KisielFinanse',
   ],
   alternates: { canonical: 'https://kisielfinanse.pl' },
   openGraph: {
     type: 'website',
     url: 'https://kisielfinanse.pl',
-    title: 'KisielFinanse - Edukacja tradingowa',
-    description: 'Trader z Wrocławia z 9-letnim doświadczeniem. Praktyczna wiedza o day tradingu - bez ściemy.',
+    title: 'KisielFinanse - Finanse. Wiedza. Wolność.',
+    description: 'Praktyczna wiedza o finansach osobistych, inwestowaniu i tradingu. Bez ściemy, bez kursów za fortunę.',
     images: [OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'KisielFinanse - Edukacja tradingowa',
-    description: 'Trader z Wrocławia. Forex, futures, krypto. Praktyczna wiedza bez ściemy.',
+    title: 'KisielFinanse - Finanse. Wiedza. Wolność.',
+    description: 'Praktyczna wiedza o finansach osobistych, inwestowaniu i tradingu. Bez ściemy.',
     images: ['/og-image.png'],
   },
 };

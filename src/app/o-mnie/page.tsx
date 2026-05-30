@@ -176,7 +176,7 @@ export default function OMnie() {
           {/* Background image */}
           <Image
             src="/images/o-mnie-hero.jpg"
-            alt=""
+            alt="Mateusz Kisiel - twórca KisielFinanse"
             fill
             priority
             style={{ objectFit: 'cover', objectPosition: 'center 30%' }}
@@ -462,7 +462,7 @@ export default function OMnie() {
           {/* Background image */}
           <Image
             src="/images/o-mnie-cta.jpg"
-            alt=""
+            alt="KisielFinanse - finanse osobiste, inwestowanie i trading"
             fill
             style={{ objectFit: 'cover', objectPosition: 'center 40%' }}
             sizes="100vw"

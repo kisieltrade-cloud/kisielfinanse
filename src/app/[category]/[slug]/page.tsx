@@ -308,6 +308,13 @@ export default async function ArticlePage({ params }: Props) {
           )}
         </div>
 
+        {/* Related posts — zaraz po tresci, przed autorem i komentarzami */}
+        <RelatedPosts
+          currentSlug={slug}
+          currentTag={post.tag}
+          allPosts={allPosts}
+        />
+
         {/* Author, newsletter, comments — outside flex layout so TOC stays sticky above */}
         <AuthorBox />
 
@@ -318,13 +325,6 @@ export default async function ArticlePage({ params }: Props) {
         <ShareButtons title={post.title} url={`/${category}/${slug}`} />
 
         <GiscusComments slug={slug} />
-
-        {/* Related posts */}
-        <RelatedPosts
-          currentSlug={slug}
-          currentTag={post.tag}
-          allPosts={allPosts}
-        />
 
         {/* Next article bar */}
         {nextPost && nextPost.slug !== slug && (

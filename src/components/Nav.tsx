@@ -57,7 +57,7 @@ export default function Nav() {
         {/* Logo */}
         <Link href="/" className="nav-logo">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-k.png" alt="" style={{ width: 48, height: 48, mixBlendMode: 'screen', display: 'block' }} />
+          <img src="/logo-k.png" alt="Logo KisielFinanse" style={{ width: 48, height: 48, mixBlendMode: 'screen', display: 'block' }} />
           <span style={{ color: '#ffffff' }}>Kisiel</span><span style={{ color: '#c9a227' }}>Finanse</span>
         </Link>
 
