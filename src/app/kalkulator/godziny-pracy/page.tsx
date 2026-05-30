@@ -10,7 +10,7 @@ const BASE_URL = 'https://kisielfinanse.pl';
 const URL      = `${BASE_URL}/kalkulator/godziny-pracy`;
 
 export const metadata: Metadata = {
-  title: { absolute: 'Ile godzin pracy kosztuje Cię zakup? Kalkulator | KisielFinanse' },
+  title: { absolute: 'Ile godzin pracy kosztuje zakup? Kalkulator' },
   description: 'Wpisz swoją stawkę godzinową i cenę zakupu — dowiedz się ile godzin (i dni) pracy kosztuje Cię dany produkt. Darmowy kalkulator bez rejestracji.',
   alternates: { canonical: URL },
   openGraph: {
