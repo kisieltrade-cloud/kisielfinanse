@@ -22,6 +22,7 @@ import AuthorBox from '@/components/AuthorBox';
 import NextArticleBar from '@/components/NextArticleBar';
 import GiscusComments from '@/components/GiscusComments';
 import NewsletterForm from '@/components/NewsletterForm';
+import RelatedCalcs from '@/components/RelatedCalcs';
 
 // Odświeżaj co godzinę — przyszłe artykuły pojawią się automatycznie po dacie publikacji
 export const revalidate = 3600;
@@ -307,6 +308,9 @@ export default async function ArticlePage({ params }: Props) {
             </aside>
           )}
         </div>
+
+        {/* Powiązane kalkulatory */}
+        <RelatedCalcs tag={post.tag} slug={slug} />
 
         {/* Related posts — zaraz po tresci, przed autorem i komentarzami */}
         <RelatedPosts
