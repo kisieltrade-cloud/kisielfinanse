@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import RevealOnScroll from '@/components/RevealOnScroll';
 import MortgageCalculator from '@/components/MortgageCalculator';
+import CalcRelated from '@/components/CalcRelated';
 
 const BASE_URL = 'https://kisielfinanse.pl';
 
@@ -297,6 +298,7 @@ export default function KalkulatorHipotecznyPage() {
         </div>
       </main>
 
+      <CalcRelated currentPath="/kalkulator-hipoteczny" />
       <Footer />
     </>
   );

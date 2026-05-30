@@ -74,7 +74,13 @@ export default async function HeroArticles() {
               {hero.tag.toUpperCase()}
             </span>
             <span className="hero-art-author">
-              <span className="hero-art-dot" style={{ background: ht.color }} />
+              <Image
+                src="/images/profile.png"
+                alt="Mateusz"
+                width={40}
+                height={40}
+                className="news-author-avatar"
+              />
               {hero.author ?? 'Mateusz'}
             </span>
           </div>
@@ -113,7 +119,13 @@ export default async function HeroArticles() {
                 {/* Text */}
                 <div className="hero-art-card-body">
                   <span className="hero-art-card-author">
-                    <span className="hero-art-dot" style={{ background: t.color }} />
+                    <Image
+                      src="/images/profile.png"
+                      alt="Mateusz"
+                      width={36}
+                      height={36}
+                      className="news-author-avatar"
+                    />
                     {post.author ?? 'Mateusz'}
                   </span>
                   <p className="hero-art-card-title">{post.title}</p>

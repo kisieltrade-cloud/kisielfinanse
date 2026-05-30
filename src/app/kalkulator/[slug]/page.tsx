@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import Calculator, { type Tab } from '@/components/Calculator';
+import CalcRelated from '@/components/CalcRelated';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import RevealOnScroll from '@/components/RevealOnScroll';
 
@@ -147,7 +148,7 @@ export default async function KalkulatorSlugPage(
           <p style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '0.8rem',
-            color: '#c8d4e8',
+            color: 'var(--muted)',
             lineHeight: 1.8,
             maxWidth: 560,
             marginBottom: 48,
@@ -158,6 +159,7 @@ export default async function KalkulatorSlugPage(
 
         <Calculator initialTab={cfg.tab} />
       </main>
+      <CalcRelated currentPath={`/kalkulator/${slug}`} />
       <Footer />
     </>
   );

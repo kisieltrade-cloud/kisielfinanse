@@ -86,12 +86,24 @@ function IconPie({ color }: { color: string }) {
   );
 }
 
+function IconClock({ color }: { color: string }) {
+  return (
+    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+      <circle cx="28" cy="28" r="18" stroke={color} strokeWidth="3" fill="none" />
+      <line x1="28" y1="16" x2="28" y2="28" stroke={color} strokeWidth="3" strokeLinecap="round" />
+      <line x1="28" y1="28" x2="36" y2="35" stroke={color} strokeWidth="3" strokeLinecap="round" />
+      <circle cx="28" cy="28" r="3" fill={color} />
+    </svg>
+  );
+}
+
 const TOOLS = [
-  { href: '/kalkulator/procent-skladany', label: 'PROCENT SKŁADANY', accent: '#3b82f6', Icon: IconChart   },
-  { href: '/kalkulator/dca',              label: 'DCA',               accent: '#22c55e', Icon: IconRefresh },
-  { href: '/kalkulator/risk-reward',      label: 'RISK / REWARD',     accent: '#f59e0b', Icon: IconScales  },
-  { href: '/kalkulator/fire',             label: 'FIRE',              accent: '#ef4444', Icon: IconFlame   },
-  { href: '/kalkulator/etf',             label: 'ETF VS LOKATA',     accent: '#8b5cf6', Icon: IconPie     },
+  { href: '/kalkulator/procent-skladany', label: 'PROCENT SKŁADANY',   accent: '#3b82f6', Icon: IconChart   },
+  { href: '/kalkulator/dca',              label: 'DCA',                 accent: '#22c55e', Icon: IconRefresh },
+  { href: '/kalkulator/risk-reward',      label: 'RISK / REWARD',       accent: '#f59e0b', Icon: IconScales  },
+  { href: '/kalkulator/fire',             label: 'FIRE',                accent: '#ef4444', Icon: IconFlame   },
+  { href: '/kalkulator/etf',             label: 'ETF VS LOKATA',       accent: '#8b5cf6', Icon: IconPie     },
+  { href: '/kalkulator/godziny-pracy',   label: 'ILE GODZIN PRACY?',   accent: '#c9a227', Icon: IconClock   },
 ];
 
 export default function KalkulatorPage() {

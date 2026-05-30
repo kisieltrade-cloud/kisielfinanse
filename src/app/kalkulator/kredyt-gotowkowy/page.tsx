@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import RevealOnScroll from '@/components/RevealOnScroll';
 import CashLoanCalculator from '@/components/CashLoanCalculator';
+import CalcRelated from '@/components/CalcRelated';
 
 const BASE_URL = 'https://kisielfinanse.pl';
 const URL      = `${BASE_URL}/kalkulator/kredyt-gotowkowy`;
@@ -98,6 +99,7 @@ export default function KredytGotowkowyPage() {
 
         <CashLoanCalculator />
       </main>
+      <CalcRelated currentPath="/kalkulator/kredyt-gotowkowy" />
       <Footer />
     </>
   );

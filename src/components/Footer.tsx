@@ -31,7 +31,6 @@ export default async function Footer() {
         <div className="footer-col">
           <div className="footer-col-title">Nawigacja</div>
           <ul className="footer-col-links">
-            <li><Link href="/">Home</Link></li>
             <li><Link href="/blog">Blog</Link></li>
             <li><Link href="/o-mnie">O mnie</Link></li>
             <li><Link href="/portfel">Portfel inwestycyjny</Link></li>

@@ -6,7 +6,6 @@ import { CATEGORIES } from '@/lib/categories';
 import ThemeToggle from '@/components/ThemeToggle';
 
 const MAIN_LINKS = [
-  { href: '/',        label: 'Home' },
   { href: '/o-mnie',  label: 'O mnie' },
   { href: '/portfel', label: 'Portfel inwestycyjny' },
 ];
@@ -21,6 +20,7 @@ const CALC_ITEMS = [
   { href: '/kalkulator/risk-reward',      label: 'Risk / Reward',    icon: '⚖️' },
   { href: '/kalkulator/fire',             label: 'Kalkulator FIRE',  icon: '🔥' },
   { href: '/kalkulator/etf',             label: 'Symulacja ETF',    icon: '📊' },
+  { href: '/kalkulator/godziny-pracy',   label: 'Ile godzin pracy?', icon: '⏱️' },
 ];
 
 export default function Nav() {

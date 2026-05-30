@@ -103,7 +103,13 @@ export default async function BlogSection() {
               {hero.tag.toUpperCase()}
             </span>
             <span className="news-hero-author">
-              <span className="news-author-dot" style={{ background: heroTag.color }} />
+              <Image
+                src="/images/profile.png"
+                alt="Mateusz"
+                width={40}
+                height={40}
+                className="news-author-avatar"
+              />
               {hero.author ?? 'Mateusz'}
             </span>
           </div>
@@ -163,7 +169,13 @@ export default async function BlogSection() {
                 {/* Text */}
                 <div className="news-card-body">
                   <span className="news-card-author">
-                    <span className="news-author-dot" style={{ background: t.color }} />
+                    <Image
+                      src="/images/profile.png"
+                      alt="Mateusz"
+                      width={36}
+                      height={36}
+                      className="news-author-avatar"
+                    />
                     {post.author ?? 'Mateusz'}
                   </span>
                   <h3 className="news-card-title">{post.title}</h3>
