@@ -70,41 +70,45 @@ const UPDATES = [
 /* ─── LOGOS ─────────────────────────────────────────────────────────── */
 function LogoAmazon() {
   return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-      <rect width="48" height="48" rx="11" fill="#ffffff" stroke="#e2eaf3" strokeWidth="1" />
-      <text x="24" y="31" textAnchor="middle" fontFamily="Georgia,serif" fontSize="22" fontWeight="700" fill="#0f1111">a</text>
-      <path d="M12 36 Q24 43 36 36" stroke="#ff9900" strokeWidth="2.2" fill="none" strokeLinecap="round" />
-      <path d="M32 36 L36 36 L36 33" stroke="#ff9900" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+      <rect width="52" height="52" rx="12" fill="#fff" stroke="#e8edf3" strokeWidth="1" />
+      <text x="26" y="33" textAnchor="middle" fontFamily="Georgia,Times New Roman,serif" fontSize="26" fontWeight="700" fill="#0f1111">a</text>
+      <path d="M13 39 Q26 47 39 39" stroke="#ff9900" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+      <path d="M35 39 L39 39 L39 35" stroke="#ff9900" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
 function LogoAzoty() {
   return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-      <rect width="48" height="48" rx="11" fill="#1a6b35" />
-      <text x="24" y="21" textAnchor="middle" fontFamily="Arial,sans-serif" fontSize="7" fontWeight="600" fill="rgba(255,255,255,0.8)" letterSpacing="0.5">GRUPA</text>
-      <text x="24" y="32" textAnchor="middle" fontFamily="Arial,sans-serif" fontSize="9.5" fontWeight="800" fill="#ffffff" letterSpacing="0.5">AZOTY</text>
+    <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+      <rect width="52" height="52" rx="12" fill="#fff" stroke="#e8edf3" strokeWidth="1" />
+      <rect x="4" y="4" width="44" height="44" rx="9" fill="#1a6b35" />
+      <text x="26" y="23" textAnchor="middle" fontFamily="Arial,Helvetica,sans-serif" fontSize="7.5" fontWeight="600" fill="rgba(255,255,255,0.75)" letterSpacing="0.8">GRUPA</text>
+      <text x="26" y="35" textAnchor="middle" fontFamily="Arial,Helvetica,sans-serif" fontSize="10" fontWeight="800" fill="#fff" letterSpacing="0.6">AZOTY</text>
     </svg>
   );
 }
 
 function LogoAmrest() {
   return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-      <rect width="48" height="48" rx="11" fill="#fff" stroke="#e2eaf3" strokeWidth="1" />
-      <path d="M14 34 L24 14 L34 34" stroke="#e05a1c" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M17.5 27 L30.5 27" stroke="#e05a1c" strokeWidth="2.5" strokeLinecap="round" />
-      <circle cx="24" cy="11.5" r="3" fill="#e05a1c" />
+    <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+      <rect width="52" height="52" rx="12" fill="#fff" stroke="#e8edf3" strokeWidth="1" />
+      {/* Phoenix flame shape */}
+      <path d="M22 38 C20 32 18 26 22 20 C24 16 26 14 26 14 C26 14 28 16 30 20 C34 26 32 32 30 38" fill="#e05a1c" opacity="0.15" />
+      <path d="M26 14 C26 14 24 17 22 21 C20 26 21 30 23 34" stroke="#e05a1c" strokeWidth="2" fill="none" strokeLinecap="round" />
+      <path d="M26 14 C26 14 28 17 30 21 C32 26 31 30 29 34" stroke="#e05a1c" strokeWidth="2" fill="none" strokeLinecap="round" />
+      <path d="M23 34 C24 36 25 37.5 26 38 C27 37.5 28 36 29 34" stroke="#e05a1c" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <text x="26" y="46" textAnchor="middle" fontFamily="Arial,Helvetica,sans-serif" fontSize="6.5" fontWeight="700" fill="#333" letterSpacing="0.3">AmRest</text>
     </svg>
   );
 }
 
 function LogoModivo() {
   return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-      <rect width="48" height="48" rx="11" fill="#fff" stroke="#e2eaf3" strokeWidth="1" />
-      <text x="24" y="27" textAnchor="middle" fontFamily="Arial,sans-serif" fontSize="8.5" fontWeight="800" fill="#0a0a0a" letterSpacing="1.5">MODIVO</text>
+    <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+      <rect width="52" height="52" rx="12" fill="#fff" stroke="#e8edf3" strokeWidth="1" />
+      <text x="26" y="29" textAnchor="middle" fontFamily="Arial,Helvetica,sans-serif" fontSize="9" fontWeight="800" fill="#0a0a0a" letterSpacing="1.8">MODIVO</text>
     </svg>
   );
 }
@@ -117,9 +121,9 @@ const LOGOS: Record<string, () => React.JSX.Element> = {
 };
 
 /* ─── ICONS ─────────────────────────────────────────────────────────── */
-function IcoTrend({ color = '#16a34a' }: { color?: string }) {
+function IcoTrend({ color = '#16a34a', size = 18 }: { color?: string; size?: number }) {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+    <svg width={size} height={size} viewBox="0 0 18 18" fill="none">
       <path d="M2 13 L6 8 L10 11 L16 4" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M13 4 H16 V7" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
@@ -138,73 +142,86 @@ function IcoDatabase() {
 
 function IcoCart() {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M1 1.5H3.2L5 11H13L15 4.5H4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="6" cy="13.5" r="1.2" fill="currentColor" />
-      <circle cx="12" cy="13.5" r="1.2" fill="currentColor" />
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+      <path d="M1 1.5H3L5 10.5H12L14 4.5H4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="6" cy="13" r="1.1" fill="currentColor" />
+      <circle cx="11" cy="13" r="1.1" fill="currentColor" />
     </svg>
   );
 }
 
 function IcoChartLine() {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M1 12 L5 7 L9 10 L13 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="5" cy="7" r="1.3" fill="currentColor" />
-      <circle cx="9" cy="10" r="1.3" fill="currentColor" />
-      <circle cx="13" cy="3" r="1.3" fill="currentColor" />
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+      <path d="M1 11 L5 6.5 L8.5 9.5 L13 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="5" cy="6.5" r="1.2" fill="currentColor" />
+      <circle cx="8.5" cy="9.5" r="1.2" fill="currentColor" />
+      <circle cx="13" cy="3" r="1.2" fill="currentColor" />
     </svg>
   );
 }
 
 /* ─── DONUT CHART ────────────────────────────────────────────────────── */
-function DonutChart({ pct = 100, color = '#2563eb', size = 68 }: { pct?: number; color?: string; size?: number }) {
+function DonutChart({ pct = 100, color = '#2563eb', size = 72 }: { pct?: number; color?: string; size?: number }) {
   const cx = size / 2;
-  const r  = size * 0.36;
-  const sw = size * 0.12;
+  const r  = size * 0.37;
+  const sw = size * 0.13;
   const circ = 2 * Math.PI * r;
   const dash = (pct / 100) * circ;
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
       <circle cx={cx} cy={cx} r={r} fill="none" stroke="#dde3ed" strokeWidth={sw} />
       <circle cx={cx} cy={cx} r={r} fill="none" stroke={color} strokeWidth={sw}
-        strokeDasharray={`${dash} ${circ}`} strokeLinecap="round"
+        strokeDasharray={`${dash} ${circ}`}
+        strokeLinecap="round"
         transform={`rotate(-90 ${cx} ${cx})`} />
     </svg>
   );
 }
 
-/* ─── HERO CHART SVG ────────────────────────────────────────────────── */
+/* ─── HERO CHART - 3D PLATFORM ──────────────────────────────────────── */
 function HeroChart() {
   return (
-    <div style={{ flexShrink: 0, width: 220, opacity: 0.9 }}>
-      <svg viewBox="0 0 240 170" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto' }}>
+    <div style={{ flexShrink: 0, width: 'clamp(160px, 25vw, 240px)' }}>
+      <svg viewBox="0 0 260 200" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto', display: 'block' }}>
         <defs>
-          <linearGradient id="hg1" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#10b981" stopOpacity="0.18" />
+          <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#10b981" stopOpacity="0.15" />
             <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
           </linearGradient>
-          <linearGradient id="hg2" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#dde3ed" />
-            <stop offset="100%" stopColor="#c8d0dc" />
-          </linearGradient>
+          <clipPath id="platClip">
+            <rect x="20" y="30" width="220" height="110" rx="10" />
+          </clipPath>
         </defs>
-        {/* Platform 3D base */}
-        <ellipse cx="120" cy="155" rx="108" ry="13" fill="#c8d0dc" opacity="0.5" />
-        <rect x="18" y="38" width="204" height="112" rx="6" fill="url(#hg2)" opacity="0.35" />
-        <rect x="18" y="38" width="204" height="6" rx="3" fill="#dde3ed" opacity="0.6" />
-        {/* Grid */}
-        {[60, 82, 104, 126].map(y => (
-          <line key={y} x1="32" y1={y} x2="210" y2={y} stroke="#c8d0dc" strokeWidth="0.6" opacity="0.7" />
-        ))}
-        {/* Area */}
-        <path d="M32,118 C52,110 72,102 92,88 C112,72 132,78 152,58 C167,43 188,34 210,24 L210,140 L32,140 Z" fill="url(#hg1)" />
-        {/* Line */}
-        <path d="M32,118 C52,110 72,102 92,88 C112,72 132,78 152,58 C167,43 188,34 210,24"
-          stroke="#10b981" strokeWidth="2.8" fill="none" strokeLinecap="round" />
-        {/* End dot with glow */}
-        <circle cx="210" cy="24" r="5.5" fill="#10b981" opacity="0.25" />
-        <circle cx="210" cy="24" r="3.5" fill="#10b981" />
+
+        {/* Shadow under platform */}
+        <ellipse cx="130" cy="172" rx="105" ry="11" fill="#c8d0dc" opacity="0.45" />
+
+        {/* Platform bottom edge (3D depth) */}
+        <path d="M20 128 L20 145 Q20 152 28 152 L232 152 Q240 152 240 145 L240 128 Z" fill="#d4dce8" />
+
+        {/* Platform main surface */}
+        <rect x="20" y="30" width="220" height="100" rx="10" fill="#f2f5f9" />
+
+        {/* Subtle inner border on top surface */}
+        <rect x="20" y="30" width="220" height="100" rx="10" fill="none" stroke="#e0e8f0" strokeWidth="1" />
+
+        {/* Grid lines */}
+        <line x1="35" y1="60" x2="245" y2="60" stroke="#dde3ed" strokeWidth="0.6" clipPath="url(#platClip)" />
+        <line x1="35" y1="83" x2="245" y2="83" stroke="#dde3ed" strokeWidth="0.6" clipPath="url(#platClip)" />
+        <line x1="35" y1="106" x2="245" y2="106" stroke="#dde3ed" strokeWidth="0.6" clipPath="url(#platClip)" />
+
+        {/* Area fill */}
+        <path d="M35,115 C55,106 75,95 95,80 C115,65 133,72 153,52 C168,37 192,30 228,22 L228,130 L35,130 Z"
+          fill="url(#areaGrad)" clipPath="url(#platClip)" />
+
+        {/* Chart line */}
+        <path d="M35,115 C55,106 75,95 95,80 C115,65 133,72 153,52 C168,37 192,30 228,22"
+          stroke="#10b981" strokeWidth="2.8" fill="none" strokeLinecap="round" clipPath="url(#platClip)" />
+
+        {/* End dot */}
+        <circle cx="228" cy="22" r="6" fill="#10b981" opacity="0.2" clipPath="url(#platClip)" />
+        <circle cx="228" cy="22" r="3.5" fill="#10b981" clipPath="url(#platClip)" />
       </svg>
     </div>
   );
@@ -235,10 +252,19 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
   const totalPnl      = totalCurrent - totalInvested;
   const totalPnlPct   = (totalPnl / totalInvested) * 100;
 
-  const fmt      = (n: number) => n.toLocaleString('pl-PL', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-  const fmtPrice = (n: number, d = 2) => n.toLocaleString('pl-PL', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const fmt = (n: number) =>
+    n.toLocaleString('pl-PL', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  const fmtPrice = (n: number, d = 2) =>
+    n.toLocaleString('pl-PL', { minimumFractionDigits: d, maximumFractionDigits: d });
 
   const pnlColor = (v: number) => (v >= 0 ? '#16a34a' : '#dc2626');
+
+  const cardStyle: React.CSSProperties = {
+    background: 'var(--surface)',
+    border: '1px solid var(--border-subtle)',
+    borderRadius: 14,
+    padding: '18px 20px',
+  };
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
@@ -247,13 +273,13 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
         {/* ── SUB-HEADER ── */}
         <div style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          marginBottom: 28, paddingBottom: 18,
+          marginBottom: 24, paddingBottom: 16,
           borderBottom: '1px solid var(--border-subtle)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M2 13 L6 8 L10 11 L16 4" stroke="var(--cyan)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M13 4 H16 V7" stroke="var(--cyan)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+              <path d="M1.5 12.5 L5.5 7.5 L9.5 10.5 L15.5 3.5" stroke="var(--cyan)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M12.5 3.5 H15.5 V6.5" stroke="var(--cyan)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', fontWeight: 600, color: 'var(--text)' }}>
               Portfel inwestycyjny
@@ -262,11 +288,11 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
           {liveUsdPln && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--muted)' }}>
               USD/PLN:&nbsp;<span style={{ color: 'var(--text)', fontWeight: 700 }}>{fmtPrice(USD_PLN, 4)}</span>
-              <span style={{ margin: '0 4px', opacity: 0.35 }}>·</span>
+              <span style={{ opacity: 0.35, margin: '0 2px' }}>·</span>
               Kursy odświeżane co godzinę
-              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" style={{ marginLeft: 3 }}>
-                <path d="M11 6.5C11 9 9 11 6.5 11C4 11 2 9 2 6.5C2 4 4 2 6.5 2C8 2 9.3 2.7 10.1 3.8" stroke="var(--muted)" strokeWidth="1.3" strokeLinecap="round" />
-                <path d="M9.5 2 L11 3.5 L9.5 5" stroke="var(--muted)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" style={{ marginLeft: 2 }}>
+                <path d="M11 6.5C11 9 9 11 6.5 11C4 11 2 9 2 6.5C2 4 4 2 6.5 2C8.2 2 9.6 2.9 10.4 4.2" stroke="var(--muted)" strokeWidth="1.3" strokeLinecap="round" />
+                <path d="M9 2 L11 4 L9 6" stroke="var(--muted)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
           )}
@@ -278,20 +304,20 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
           border: '1px solid var(--border-subtle)',
           borderRadius: 20,
           padding: 'clamp(28px, 4vw, 44px) clamp(28px, 5vw, 52px)',
-          marginBottom: 20,
+          marginBottom: 16,
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          gap: 24,
+          gap: 32,
           overflow: 'hidden',
         }}>
           <div style={{ flex: 1, minWidth: 0 }}>
             <h1 style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
+              fontSize: 'clamp(3rem, 7vw, 5.2rem)',
               color: 'var(--text)',
               lineHeight: 1.0,
-              margin: '0 0 14px',
+              margin: '0 0 16px',
               letterSpacing: '-0.5px',
             }}>
               Transparentność
@@ -311,9 +337,9 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
               color: 'var(--muted)',
               margin: 0,
               lineHeight: 1.65,
-              maxWidth: 340,
+              maxWidth: 300,
             }}>
-              Pełna transparentność - co kupuję, kiedy, za ile i dlaczego. Bez ściemy.
+              Pełna transparentność - co kupuję, kiedy,<br />za ile i dlaczego. Bez ściemy.
             </p>
           </div>
           <HeroChart />
@@ -326,67 +352,66 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
           gap: 12,
           marginBottom: 28,
         }}>
+
           {/* Wartość portfela */}
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--border-subtle)', borderRadius: 14, padding: '18px 20px' }}>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: 'var(--muted)', margin: '0 0 10px' }}>
+          <div style={cardStyle}>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.68rem', color: 'var(--muted)', margin: '0 0 8px' }}>
               Wartość portfela
             </p>
-            <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1rem, 2vw, 1.45rem)', fontWeight: 700, color: 'var(--text)', margin: '0 0 16px', lineHeight: 1.1 }}>
+            <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.05rem, 2.2vw, 1.55rem)', fontWeight: 700, color: 'var(--text)', margin: '0 0 20px', lineHeight: 1.1 }}>
               {fmt(totalCurrent)}&nbsp;PLN
             </p>
-            <div style={{ width: 34, height: 34, borderRadius: 9, background: 'rgba(22,163,74,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: 36, height: 36, borderRadius: 9, background: 'rgba(22,163,74,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <IcoTrend color="#16a34a" />
             </div>
           </div>
 
           {/* Zainwestowano */}
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--border-subtle)', borderRadius: 14, padding: '18px 20px' }}>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: 'var(--muted)', margin: '0 0 10px' }}>
+          <div style={cardStyle}>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.68rem', color: 'var(--muted)', margin: '0 0 8px' }}>
               Zainwestowano
             </p>
-            <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1rem, 2vw, 1.45rem)', fontWeight: 700, color: 'var(--text)', margin: '0 0 16px', lineHeight: 1.1 }}>
+            <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.05rem, 2.2vw, 1.55rem)', fontWeight: 700, color: 'var(--text)', margin: '0 0 20px', lineHeight: 1.1 }}>
               {fmt(totalInvested)}&nbsp;PLN
             </p>
-            <div style={{ width: 34, height: 34, borderRadius: 9, background: 'rgba(99,102,241,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: 36, height: 36, borderRadius: 9, background: 'rgba(99,102,241,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <IcoDatabase />
             </div>
           </div>
 
           {/* Zysk / strata */}
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--border-subtle)', borderRadius: 14, padding: '18px 20px' }}>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: 'var(--muted)', margin: '0 0 10px' }}>
+          <div style={cardStyle}>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.68rem', color: 'var(--muted)', margin: '0 0 8px' }}>
               Zysk / strata
             </p>
-            <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1rem, 2vw, 1.45rem)', fontWeight: 700, color: pnlColor(totalPnl), margin: '0 0 4px', lineHeight: 1.1 }}>
+            <p style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.05rem, 2.2vw, 1.55rem)', fontWeight: 700, color: pnlColor(totalPnl), margin: '0 0 4px', lineHeight: 1.1 }}>
               {totalPnl >= 0 ? '+' : ''}{fmt(totalPnl)}&nbsp;PLN
             </p>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', fontWeight: 700, color: pnlColor(totalPnl), margin: '0 0 12px' }}>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', fontWeight: 700, color: pnlColor(totalPnl), margin: '0 0 16px' }}>
               {totalPnlPct >= 0 ? '+' : ''}{totalPnlPct.toFixed(1)}%
             </p>
-            <div style={{ width: 34, height: 34, borderRadius: 9, background: totalPnl >= 0 ? 'rgba(22,163,74,0.1)' : 'rgba(220,38,38,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: 36, height: 36, borderRadius: 9, background: totalPnl >= 0 ? 'rgba(22,163,74,0.1)' : 'rgba(220,38,38,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <IcoTrend color={pnlColor(totalPnl)} />
             </div>
           </div>
 
           {/* Alokacja */}
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--border-subtle)', borderRadius: 14, padding: '18px 20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-            <div>
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: 'var(--muted)', margin: '0 0 10px' }}>
-                Alokacja
-              </p>
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text)', margin: 0 }}>
-                Akcje 100%
-              </p>
-            </div>
-            <div style={{ alignSelf: 'flex-end', marginTop: 8 }}>
-              <DonutChart pct={100} color="#2563eb" size={66} />
+          <div style={{ ...cardStyle, display: 'flex', flexDirection: 'column' }}>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.68rem', color: 'var(--muted)', margin: '0 0 8px' }}>
+              Alokacja
+            </p>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', fontWeight: 600, color: 'var(--text)', margin: 0 }}>
+              Akcje 100%
+            </p>
+            <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', marginTop: 8 }}>
+              <DonutChart pct={100} color="#2563eb" size={72} />
             </div>
           </div>
         </div>
 
         {/* ── POZYCJE ── */}
-        <div style={{ background: 'var(--surface)', border: '1px solid var(--border-subtle)', borderRadius: 16, overflow: 'hidden', marginBottom: 28 }}>
-          <div style={{ padding: '18px 26px', borderBottom: '1px solid var(--border-subtle)' }}>
+        <div style={{ background: 'var(--surface)', border: '1px solid var(--border-subtle)', borderRadius: 16, overflow: 'hidden', marginBottom: 32 }}>
+          <div style={{ padding: '18px 28px', borderBottom: '1px solid var(--border-subtle)' }}>
             <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--text)', margin: 0 }}>
               Pozycje
             </p>
@@ -410,17 +435,18 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
                     display: 'grid',
                     gridTemplateColumns: '1fr auto auto auto auto',
                     alignItems: 'center',
-                    gap: 14,
-                    padding: '16px 26px',
+                    gap: 16,
+                    padding: '18px 28px',
                     borderBottom: (!isLast || isExp) ? '1px solid var(--border-subtle)' : 'none',
                     cursor: 'pointer',
                     background: isExp ? 'var(--surface2)' : 'transparent',
                     outline: 'none',
                     userSelect: 'none',
+                    transition: 'background 0.1s',
                   }}
                 >
                   {/* Logo + name */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 13, minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 14, minWidth: 0 }}>
                     {Logo && <Logo />}
                     <div style={{ minWidth: 0 }}>
                       <p style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', fontWeight: 700, color: 'var(--text)', margin: '0 0 2px', lineHeight: 1.2 }}>
@@ -437,7 +463,7 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
 
                   {/* Kurs */}
                   <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.88rem', fontWeight: 700, color: 'var(--text)', margin: '0 0 3px' }}>
+                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', fontWeight: 700, color: 'var(--text)', margin: '0 0 4px' }}>
                       {fmtPrice(h.currentPrice)}&nbsp;{h.currency}
                     </p>
                     <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)', margin: 0 }}>
@@ -447,7 +473,7 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
 
                   {/* Wartość */}
                   <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.9rem', fontWeight: 700, color: 'var(--text)', margin: '0 0 3px' }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.92rem', fontWeight: 700, color: 'var(--text)', margin: '0 0 4px' }}>
                       {fmt(h.current)}&nbsp;PLN
                     </p>
                     <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)', margin: 0 }}>
@@ -456,25 +482,25 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
                   </div>
 
                   {/* P&L */}
-                  <div style={{ textAlign: 'right', minWidth: 78 }}>
-                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', fontWeight: 700, color: pnlColor(h.pnl), margin: '0 0 3px' }}>
+                  <div style={{ textAlign: 'right', minWidth: 82 }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.98rem', fontWeight: 700, color: pnlColor(h.pnl), margin: '0 0 4px' }}>
                       {h.pnlPct >= 0 ? '+' : ''}{h.pnlPct.toFixed(1)}%
                     </p>
-                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.76rem', fontWeight: 600, color: pnlColor(h.pnl), margin: 0 }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.76rem', fontWeight: 700, color: pnlColor(h.pnl), margin: 0 }}>
                       {h.pnl >= 0 ? '+' : ''}{fmt(h.pnl)}&nbsp;PLN
                     </p>
                   </div>
 
                   {/* Chevron */}
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0, transition: 'transform 0.2s', transform: isExp ? 'rotate(180deg)' : 'none' }}>
-                    <path d="M3 5 L7 9 L11 5" stroke="var(--muted)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0, transition: 'transform 0.18s', transform: isExp ? 'rotate(180deg)' : 'none' }}>
+                    <path d="M3 5 L7 9 L11 5" stroke="var(--muted)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
 
                 {/* Expanded */}
                 {isExp && (
                   <div style={{
-                    padding: '18px 26px 22px',
+                    padding: '18px 28px 22px',
                     background: 'var(--surface2)',
                     borderBottom: !isLast ? '1px solid var(--border-subtle)' : 'none',
                   }}>
@@ -482,15 +508,15 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
                       {h.note}
                     </p>
                     <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap' }}>
-                      {[
+                      {([
                         ['Data kupna',    h.buyDate],
                         ['Cena kupna',    `${fmtPrice(h.buyPrice)} ${h.currency}`],
                         ['Kurs aktualny', `${fmtPrice(h.currentPrice)} ${h.currency}${usingLive ? ' ●' : ''}`],
                         ['Waluta',        h.currency],
-                      ].map(([k, v]) => (
+                      ] as [string, string][]).map(([k, v]) => (
                         <div key={k}>
-                          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.68rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.5px', margin: '0 0 3px' }}>{k}</p>
-                          <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.9rem', fontWeight: 700, color: k === 'Kurs aktualny' && usingLive ? '#16a34a' : 'var(--text)', margin: 0 }}>{v}</p>
+                          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.65rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.6px', margin: '0 0 3px' }}>{k}</p>
+                          <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.92rem', fontWeight: 700, color: k === 'Kurs aktualny' && usingLive ? '#16a34a' : 'var(--text)', margin: 0 }}>{v}</p>
                         </div>
                       ))}
                     </div>
@@ -502,51 +528,74 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
         </div>
 
         {/* ── DZIENNIK ZMIAN ── */}
-        <div style={{ marginBottom: 48 }}>
-          <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--text)', margin: '0 0 20px' }}>
+        <div style={{ marginBottom: 52 }}>
+          <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--text)', margin: '0 0 24px' }}>
             Dziennik zmian
           </p>
 
-          <div style={{ position: 'relative', paddingLeft: 48 }}>
-            {/* Vertical line */}
+          {/* Timeline wrapper */}
+          <div style={{ position: 'relative' }}>
+            {/* Vertical line - positioned to align with icon centers */}
             <div style={{
-              position: 'absolute', left: 15, top: 6, bottom: 6,
-              width: 2, background: 'var(--border-subtle)',
+              position: 'absolute',
+              left: 15,
+              top: 16,
+              bottom: 16,
+              width: 2,
+              background: 'var(--border-subtle)',
+              borderRadius: 1,
             }} />
 
             {UPDATES.map((u, i) => {
-              const iconBg = u.icon === 'chart' ? 'rgba(99,102,241,0.12)' : 'rgba(22,163,74,0.12)';
-              const iconColor = u.icon === 'chart' ? '#6366f1' : '#16a34a';
+              const isCart = u.icon === 'cart';
+              const isAmazon = u.icon === 'amazon';
+              const iconBg   = isCart ? 'rgba(22,163,74,0.12)' : isAmazon ? '#fff' : 'rgba(99,102,241,0.12)';
+              const iconClr  = isCart ? '#16a34a' : isAmazon ? '#0f1111' : '#6366f1';
+              const iconBorder = isAmazon ? '1.5px solid #e8edf3' : `1.5px solid ${isCart ? '#16a34a33' : '#6366f133'}`;
+
               return (
-                <div key={i} style={{ position: 'relative', marginBottom: i < UPDATES.length - 1 ? 32 : 0 }}>
-                  {/* Icon bubble */}
+                <div key={i} style={{
+                  display: 'flex',
+                  gap: 0,
+                  alignItems: 'flex-start',
+                  marginBottom: i < UPDATES.length - 1 ? 32 : 0,
+                  position: 'relative',
+                }}>
+                  {/* Icon circle */}
                   <div style={{
-                    position: 'absolute', left: -48, top: 2,
-                    width: 32, height: 32, borderRadius: '50%',
-                    background: u.icon === 'amazon' ? '#fff' : iconBg,
-                    border: `2px solid ${u.icon === 'amazon' ? '#e2eaf3' : iconColor + '33'}`,
+                    width: 32, height: 32, borderRadius: '50%', flexShrink: 0,
+                    background: iconBg,
+                    border: iconBorder,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: iconColor,
+                    color: iconClr,
+                    zIndex: 1,
                     boxShadow: '0 0 0 4px var(--bg)',
                   }}>
-                    {u.icon === 'cart'   && <IcoCart />}
-                    {u.icon === 'chart'  && <IcoChartLine />}
-                    {u.icon === 'amazon' && (
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <text x="8" y="12" textAnchor="middle" fontFamily="Georgia,serif" fontSize="13" fontWeight="700" fill="#0f1111">a</text>
+                    {isCart && <IcoCart />}
+                    {u.icon === 'chart' && <IcoChartLine />}
+                    {isAmazon && (
+                      <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+                        <text x="8.5" y="13" textAnchor="middle" fontFamily="Georgia,serif" fontSize="14" fontWeight="700" fill="#0f1111">a</text>
                       </svg>
                     )}
                   </div>
 
-                  {/* Content */}
-                  <div>
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--muted)', margin: '0 0 6px', letterSpacing: '0.3px' }}>
+                  {/* Date column - fixed width */}
+                  <div style={{
+                    width: 118, flexShrink: 0,
+                    paddingLeft: 14, paddingTop: 6,
+                  }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--muted)', lineHeight: 1.4 }}>
                       {u.date}
-                    </p>
-                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', fontWeight: 700, color: 'var(--text)', margin: '0 0 8px', lineHeight: 1.3 }}>
+                    </span>
+                  </div>
+
+                  {/* Content */}
+                  <div style={{ flex: 1, paddingTop: 2 }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', fontWeight: 700, color: 'var(--text)', margin: '0 0 8px', lineHeight: 1.35 }}>
                       {u.action}
                     </p>
-                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.83rem', color: 'var(--muted)', margin: 0, lineHeight: 1.65 }}>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: 'var(--muted)', margin: 0, lineHeight: 1.65 }}>
                       {u.why}
                     </p>
                   </div>
@@ -557,26 +606,19 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
         </div>
 
         {/* ── DISCLAIMER ── */}
-        <p style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: '0.76rem',
-          color: 'var(--muted)',
-          lineHeight: 1.6,
-          textAlign: 'center',
-          maxWidth: 500,
-          margin: '0 auto 64px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 6,
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
+          maxWidth: 520, margin: '0 auto 64px',
         }}>
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
-            <circle cx="7" cy="7" r="6" stroke="var(--muted)" strokeWidth="1.2" />
-            <path d="M7 6.5 V10" stroke="var(--muted)" strokeWidth="1.2" strokeLinecap="round" />
-            <circle cx="7" cy="4.5" r="0.7" fill="var(--muted)" />
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" style={{ flexShrink: 0 }}>
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="var(--muted)" strokeWidth="1.1" />
+            <path d="M7.5 7 V10.5" stroke="var(--muted)" strokeWidth="1.2" strokeLinecap="round" />
+            <circle cx="7.5" cy="5" r="0.75" fill="var(--muted)" />
           </svg>
-          To nie jest rekomendacja inwestycyjna. Pokazuję co sam robię - każdy podejmuje własne decyzje.
-        </p>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'var(--muted)', lineHeight: 1.6, margin: 0 }}>
+            To nie jest rekomendacja inwestycyjna. Pokazuję co sam robię - każdy podejmuje własne decyzje.
+          </p>
+        </div>
 
         {/* ── NEWSLETTER ── */}
         <PortfelNewsletter />
