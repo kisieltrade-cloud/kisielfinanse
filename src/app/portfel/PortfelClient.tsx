@@ -320,7 +320,7 @@ export default function PortfelClient({ livePrices, liveUsdPln, fetchedAt }: Pro
               margin: '0 0 16px',
               letterSpacing: '-0.5px',
             }}>
-              Transparentność
+              Mój portfel inwestycyjny
             </h1>
             <p style={{
               fontFamily: 'var(--font-display)',

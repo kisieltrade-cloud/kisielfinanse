@@ -12,7 +12,7 @@ const BASE_URL = 'https://kisielfinanse.pl';
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: { absolute: 'Blog Finansowy - Trading, Krypto, Oszczedzanie | KisielFinanse' },
+  title: { absolute: 'Blog Finansowy - Trading, Inwestycje, Finanse' },
   description: 'Artykuly o tradingu, krypto, oszczedzaniu i geopolityce finansowej. Praktyczna wiedza bez sciemy - finanse ktore naprawde robia roznice.',
   keywords: [
     'edukacja finansowa', 'blog finansowy', 'trading artykuly', 'krypto poradnik',

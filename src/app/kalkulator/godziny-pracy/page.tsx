@@ -37,12 +37,27 @@ const schemaBreadcrumb = {
   ],
 };
 
+const schemaApp = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Kalkulator - ile godzin pracy kosztuje zakup?',
+  url: URL,
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'Web',
+  inLanguage: 'pl-PL',
+  isAccessibleForFree: true,
+  description: 'Przelicz cenę dowolnego zakupu na godziny swojej pracy. Wpisz stawkę godzinową netto i cenę produktu - kalkulator pokaże ile dni i tygodni pracy to kosztuje.',
+  author: { '@type': 'Person', name: 'Mateusz Kisiel', url: `${BASE_URL}/o-mnie` },
+  publisher: { '@type': 'Organization', name: 'KisielFinanse', url: BASE_URL },
+};
+
 export default function GodzinyPracyPage() {
   return (
     <>
       <RevealOnScroll />
       <Nav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaApp) }} />
 
       <main style={{ paddingTop: '80px', minHeight: '100vh' }}>
         <div style={{ maxWidth: 760, margin: '0 auto', padding: '28px 24px 0' }}>

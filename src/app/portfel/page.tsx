@@ -64,11 +64,23 @@ export default async function PortfelPage() {
     fetchYahoo('USDPLN=X'),
   ]);
 
+  const schemaBreadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'KisielFinanse', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Mój portfel inwestycyjny', item: `${BASE_URL}/portfel` },
+    ],
+  };
+
   return (
-    <PortfelClient
-      livePrices={{ AMZN: amzn, PCE: pce, EAT: eat, MDV: mdv }}
-      liveUsdPln={usdpln}
-      fetchedAt={new Date().toISOString()}
-    />
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }} />
+      <PortfelClient
+        livePrices={{ AMZN: amzn, PCE: pce, EAT: eat, MDV: mdv }}
+        liveUsdPln={usdpln}
+        fetchedAt={new Date().toISOString()}
+      />
+    </>
   );
 }

@@ -11,7 +11,7 @@ const URL      = `${BASE_URL}/kalkulator/kredyt-gotowkowy`;
 
 export const metadata: Metadata = {
   title: { absolute: 'Kalkulator kredytu gotówkowego - rata i RRSO | KisielFinanse' },
-  description: 'Darmowy kalkulator kredytu gotówkowego. Oblicz ratę miesięczną i RRSO z uwzględnieniem prowizji i ubezpieczenia. Sprawdź prawdziwy koszt kredytu przed podpisaniem umowy.',
+  description: 'Kalkulator kredytu gotówkowego - oblicz ratę miesięczną i RRSO z prowizją i ubezpieczeniem. Sprawdź prawdziwy koszt przed podpisaniem umowy.',
   keywords: [
     'kalkulator kredytu gotówkowego', 'kredyt gotówkowy kalkulator',
     'rata kredytu gotówkowego', 'RRSO kalkulator', 'koszt kredytu',

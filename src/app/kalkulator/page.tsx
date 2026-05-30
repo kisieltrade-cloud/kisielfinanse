@@ -10,7 +10,7 @@ import NewsletterForm from '@/components/NewsletterForm';
 const BASE_URL = 'https://kisielfinanse.pl';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Kalkulatory Finansowe - Procent Składany, FIRE, ETF, Hipoteczny | KisielFinanse' },
+  title: { absolute: 'Kalkulatory finansowe - FIRE, ETF, procent składany' },
   description: 'Darmowe kalkulatory finansowe: procent składany, FIRE, ETF vs lokata, risk/reward, kredyt gotówkowy i hipoteczny. Bez rejestracji.',
   keywords: ['kalkulator finansowy', 'kalkulator procent skladany', 'kalkulator FIRE', 'kalkulator ETF', 'kalkulator risk reward', 'kalkulator hipoteczny'],
   alternates: { canonical: `${BASE_URL}/kalkulator` },
