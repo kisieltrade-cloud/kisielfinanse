@@ -153,6 +153,7 @@ const IcoWarn     = () => <svg width="17" height="17" viewBox="0 0 24 24" {...ic
 const IcoWeight   = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><rect x="4" y="8" width="16" height="13" rx="2"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>;
 const IcoShieldCheck = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><path d="M12 2 4 6v6c0 4 3 7 8 8 5-1 8-4 8-8V6z"/><path d="M9 12l2 2 4-4"/></svg>;
 const IcoTrophy   = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><path d="M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M7 5H4v1a3 3 0 0 0 3 3M17 5h3v1a3 3 0 0 1-3 3"/><path d="M9 21h6M12 17v4"/></svg>;
+const IcoCart     = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/><path d="M2 3h2.5l2 12h11l2-8H6"/></svg>;
 
 // ─── Pole z ikoną (poziome, boxowany input) ──────────────────────
 function FieldBox({ label, value, onChange, step, min, max, icon, hint }: {
@@ -1004,107 +1005,121 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
 
       {/* ── FIRE ─────────────────────────────────────────────────── */}
       {tab === 'fire' && (
-        <div className="calc-grid">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-            <Field label="Obecne oszczędności (PLN)"        value={fireSavings}   onChange={setFireSavings}   step="5000" />
-            <Field label="Miesięczne oszczędności (PLN)"    value={fireSave}      onChange={setFireSave}      step="100" />
-            <Sep />
-            <Field label="Miesięczne wydatki po FIRE (PLN)" value={fireExpenses}  onChange={setFireExpenses}  step="500" />
-            <Field label="Oczekiwana stopa zwrotu (%)"      value={fireReturn}    onChange={setFireReturn}    step="0.5" />
-            <Field label="Inflacja roczna (%)"              value={fireInflation} onChange={setFireInflation} step="0.5"
-              hint="Wpływa na realną wartość pasywnego dochodu." />
+        <>
+          <div className="calc-grid">
+            {/* Karta wejść */}
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '28px 26px', display: 'flex', flexDirection: 'column', gap: 22 }}>
+              <FieldBox icon={<IcoWplaty />}  label="Obecne oszczędności (PLN)" value={fireSavings} onChange={setFireSavings} step="5000" />
+              <FieldBox icon={<IcoCoins />}   label="Miesięczne oszczędności (PLN)" value={fireSave} onChange={setFireSave} step="100" />
+              <FieldBox icon={<IcoCart />}    label="Miesięczne wydatki po FIRE (PLN)" value={fireExpenses} onChange={setFireExpenses} step="500" />
+              <FieldBox icon={<IcoZysk />}    label="Oczekiwana stopa zwrotu (%)" value={fireReturn} onChange={setFireReturn} step="0.5" />
+              <FieldBox icon={<IcoPercent />} label="Inflacja roczna (%)" value={fireInflation} onChange={setFireInflation} step="0.5" hint="Wpływa na realną wartość pasywnego dochodu." />
+            </div>
+
+            {/* Wyniki */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              {fire ? (
+                <>
+                  {/* Cel FIRE */}
+                  <div style={{ position: 'relative', overflow: 'hidden', background: 'rgba(46,125,79,0.06)', border: '1px solid rgba(46,125,79,0.18)', borderRadius: 16, padding: '22px 24px' }}>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--muted)', margin: '0 0 8px' }}>Twój cel FIRE (reguła 4%)</p>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '2.6rem', color: '#2e7d4f', lineHeight: 1, margin: 0 }}>
+                      {fmt(fire.mainTarget)} <span style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', fontWeight: 600, color: 'var(--muted)' }}>PLN</span>
+                    </p>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: 'var(--muted)', margin: '8px 0 0' }}>25× rocznych wydatków</p>
+                    <span style={{ position: 'absolute', right: -6, top: '50%', transform: 'translateY(-50%) scale(4)', color: '#2e7d4f', opacity: 0.1, pointerEvents: 'none' }}><IcoTarget /></span>
+                  </div>
+
+                  {/* Czas + wiersze */}
+                  <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '22px 24px' }}>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--muted)', margin: '0 0 8px' }}>Czas do wolności finansowej</p>
+                    {fire.achieved ? (
+                      <p style={{ fontFamily: 'var(--font-display)', fontSize: '2.6rem', color: '#2e7d4f', lineHeight: 1, margin: '0 0 4px' }}>
+                        {fire.yearsToFire < 1 ? (
+                          <>{Math.ceil(fire.yearsToFire * 12)} <span style={{ fontFamily: 'var(--font-body)', fontSize: '1.1rem', fontWeight: 600, color: 'var(--muted)' }}>mies.</span></>
+                        ) : (
+                          <>{Math.floor(fire.yearsToFire)} <span style={{ fontFamily: 'var(--font-body)', fontSize: '1.1rem', fontWeight: 600, color: 'var(--muted)' }}>lat</span> {Math.round((fire.yearsToFire % 1) * 12)} <span style={{ fontFamily: 'var(--font-body)', fontSize: '1.1rem', fontWeight: 600, color: 'var(--muted)' }}>mies.</span></>
+                        )}
+                      </p>
+                    ) : (
+                      <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#e5484d', lineHeight: 1.6, margin: '0 0 8px' }}>
+                        Przy tych parametrach FIRE nie jest osiągalny w ciągu 50 lat. Zwiększ oszczędności lub stopę zwrotu.
+                      </p>
+                    )}
+                    <div style={{ marginTop: 8 }}>
+                      <Row icon={<IcoWplaty />} iconColor="#2e7d4f" label="Już odłożone" value={`${fmt(fire.savings)} PLN`} color="#2e7d4f" />
+                      <Row icon={<IcoWarn />} iconColor="#e5484d" label="Brakuje do celu (4%)" value={`${fmt(Math.max(0, fire.mainTarget - fire.savings))} PLN`} color="#e5484d" />
+                      <Row icon={<IcoCoins />} iconColor="#2e7d4f" label="Pasywny dochód miesięczny (nominalny)" value={`${fmt(fire.monthlyPassive)} PLN`} color="#2e7d4f" />
+                      <Row icon={<IcoZysk />} iconColor="#2e7d4f" label="Pasywny dochód (w dzisiejszych złotych)" value={`${fmt(fire.realPassive)} PLN`} color="#2e7d4f" />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '28px 26px' }}>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: 'var(--muted)', lineHeight: 1.8, margin: 0 }}>
+                    Wpisz miesięczne wydatki po FIRE, żeby obliczyć swój cel.
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
 
-          <div>
-            {fire ? (
-              <>
-                <MainResult label="Twój cel FIRE (reguła 4%)" value={`${fmt(fire.mainTarget)} PLN`} sub="25× rocznych wydatków" />
-                {fire.achieved ? (
-                  <MainResult
-                    label="Czas do wolności finansowej" color="#10b981"
-                    value={fire.yearsToFire < 1
-                      ? `${Math.ceil(fire.yearsToFire * 12)} miesięcy`
-                      : `${Math.floor(fire.yearsToFire)} lat ${Math.round((fire.yearsToFire % 1) * 12)} mies.`}
-                  />
-                ) : (
-                  <div style={{
-                    background: 'rgba(255,45,120,0.05)', border: '1px solid rgba(255,45,120,0.2)',
-                    padding: '14px 16px', marginBottom: 24,
-                  }}>
-                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#ff2d78', lineHeight: 1.7, margin: 0 }}>
-                      Przy tych parametrach FIRE nie jest osiągalny w ciągu 50 lat.<br />
-                      Zwiększ miesięczne oszczędności lub stopę zwrotu.
-                    </p>
-                  </div>
-                )}
-
-                <Row label="Już odłożone"            value={`${fmt(fire.savings)} PLN`} />
-                <Row label="Brakuje do celu (4%)"    value={`${fmt(Math.max(0, fire.mainTarget - fire.savings))} PLN`} />
-                <Row label="Pasywny dochód miesięczny (nominalny)" value={`${fmt(fire.monthlyPassive)} PLN`} color="#10b981" large />
-                <Row label="Pasywny dochód (w dzisiejszych złotych)" value={`${fmt(fire.realPassive)} PLN`} color="var(--muted)" />
-
-                {/* Porównanie SWR */}
-                <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--border-subtle)' }}>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: 'var(--muted)', marginBottom: 12 }}>
-                    Porównanie różnych bezpiecznych stóp wypłaty (SWR)
-                  </p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    {fire.swrTimes.map(s => (
+          {/* Dolny rząd: SWR + wykres */}
+          {fire && (
+            <div className="calc-grid" style={{ marginTop: 20 }}>
+              <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '22px 24px' }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', fontWeight: 700, color: '#2e7d4f', marginBottom: 12 }}>
+                  Porównanie różnych bezpiecznych stóp wypłaty (SWR)
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {fire.swrTimes.map(s => {
+                    const c = s.swr === 4 ? '#2e7d4f' : s.swr === 5 ? '#e5484d' : '#3b82f6';
+                    return (
                       <div key={s.swr} style={{
-                        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                        padding: '10px 14px',
-                        background: s.swr === 4 ? 'rgba(201,162,39,0.05)' : 'var(--surface)',
-                        border: `1px solid ${s.swr === 4 ? 'rgba(201,162,39,0.3)' : 'var(--border)'}`,
+                        display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10,
+                        padding: '10px 12px', borderRadius: 10,
+                        background: s.swr === 4 ? 'rgba(46,125,79,0.08)' : 'transparent',
+                        border: s.swr === 4 ? '1px solid rgba(46,125,79,0.3)' : '1px solid transparent',
                       }}>
-                        <div>
-                          <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', fontWeight: s.swr === 4 ? 700 : 400, color: 'var(--text)' }}>
-                            SWR {s.swr}%
-                            {s.swr === 4 ? ' ✓' : s.swr === 3 ? ' — konserwatywna' : s.swr === 5 ? ' — agresywna' : ''}
-                          </span>
-                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'var(--muted)' }}>
-                            cel: {fmt(s.target)} PLN
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
+                          <span style={{ width: 32, height: 32, borderRadius: 9, flexShrink: 0, background: `${c}1a`, color: c, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><IcoBelka /></span>
+                          <div style={{ minWidth: 0 }}>
+                            <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', fontWeight: s.swr === 4 ? 700 : 500, color: 'var(--text)' }}>
+                              SWR {s.swr}%{s.swr === 4 ? ' ✓' : s.swr === 3 ? ' — konserwatywna' : s.swr === 5 ? ' — agresywna' : ''}
+                            </div>
+                            <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: 'var(--muted)' }}>cel: {fmt(s.target)} PLN</div>
                           </div>
                         </div>
-                        <span style={{
-                          fontFamily: 'var(--font-body)', fontSize: '0.92rem', fontWeight: 700,
-                          color: s.achieved ? '#10b981' : '#ff2d78',
-                        }}>
-                          {s.achieved
-                            ? `${Math.floor(s.months / 12)}l ${Math.round(s.months % 12)}m`
-                            : '> 50 lat'}
+                        <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.92rem', fontWeight: 700, color: s.achieved ? c : '#e5484d', whiteSpace: 'nowrap' }}>
+                          {s.achieved ? `${Math.floor(s.months / 12)}l ${Math.round(s.months % 12)}m` : '> 50 lat'}
                         </span>
                       </div>
-                    ))}
-                  </div>
+                    );
+                  })}
                 </div>
+              </div>
 
-                {/* Wykres wzrostu portfela */}
-                {fire.chartPts.length >= 2 && (
-                  <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--border-subtle)' }}>
-                    <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 10 }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                        <div style={{ width: 20, height: 2, background: '#2e7d4f' }} />
-                        <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)' }}>Portfel</span>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                        <div style={{ width: 20, height: 2, background: '#ff2d78' }} />
-                        <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)' }}>Cel FIRE (4%)</span>
-                      </div>
+              {fire.chartPts.length >= 2 && (
+                <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '22px 24px' }}>
+                  <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 10 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                      <div style={{ width: 20, height: 2, background: '#2e7d4f' }} />
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)' }}>Portfel</span>
                     </div>
-                    <LineChart series={[
-                      { points: fire.chartPts,    color: '#2e7d4f', label: 'Portfel' },
-                      { points: fire.targetLine,  color: '#ff2d78', label: 'Cel' },
-                    ]} />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                      <div style={{ width: 20, height: 2, background: '#7fae90' }} />
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)' }}>Cel FIRE (4%)</span>
+                    </div>
                   </div>
-                )}
-              </>
-            ) : (
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: 'var(--muted)', lineHeight: 1.8 }}>
-                Wpisz miesięczne wydatki po FIRE, żeby obliczyć swój cel.
-              </p>
-            )}
-          </div>
-        </div>
+                  <LineChart series={[
+                    { points: fire.chartPts,   color: '#2e7d4f', label: 'Portfel' },
+                    { points: fire.targetLine, color: '#7fae90', label: 'Cel', dashed: true },
+                  ]} />
+                </div>
+              )}
+            </div>
+          )}
+        </>
       )}
 
       {/* ── ETF vs LOKATA ────────────────────────────────────────── */}
