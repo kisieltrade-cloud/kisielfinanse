@@ -26,7 +26,7 @@ const LAST_UPDATE = '31.05.2026';
 const sections = [
   {
     title: '1. Administrator danych',
-    content: `Administratorem danych osobowych zbieranych za pośrednictwem serwisu KisielFinanse.pl jest osoba fizyczna prowadząca serwis pod nazwą KisielFinanse (imię i nazwisko dostępne na żądanie), adres e-mail: kisieltrade@gmail.com.`,
+    content: `Administratorem danych osobowych zbieranych za pośrednictwem serwisu KisielFinanse.pl jest Mateusz Kisielewicz, osoba fizyczna prowadząca serwis pod nazwą KisielFinanse, adres e-mail: kisieltrade@gmail.com.`,
   },
   {
     title: '2. Jakie dane zbieramy',

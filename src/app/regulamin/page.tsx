@@ -28,7 +28,7 @@ const sections = [
     title: '1. Postanowienia ogólne',
     content: `Niniejszy regulamin określa zasady korzystania z serwisu internetowego dostępnego pod adresem KisielFinanse.pl oraz zasady świadczenia usług drogą elektroniczną, zgodnie z ustawą z dnia 18 lipca 2002 r. o świadczeniu usług drogą elektroniczną. Użyte w regulaminie pojęcia oznaczają:`,
     list: [
-      'Usługodawca - osoba fizyczna prowadząca serwis pod nazwą KisielFinanse (imię i nazwisko dostępne na żądanie), adres e-mail: kisieltrade@gmail.com',
+      'Usługodawca - Mateusz Kisielewicz, osoba fizyczna prowadząca serwis pod nazwą KisielFinanse, adres e-mail: kisieltrade@gmail.com',
       'Serwis - strona internetowa dostępna pod adresem KisielFinanse.pl wraz ze wszystkimi podstronami',
       'Użytkownik - każda osoba korzystająca z Serwisu',
       'Usługi - usługi świadczone drogą elektroniczną opisane w niniejszym regulaminie',
