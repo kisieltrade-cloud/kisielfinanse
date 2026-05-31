@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, type ReactNode } from 'react';
 
 type Tab = 'compound' | 'rr' | 'fire' | 'etf' | 'dca';
 export type { Tab };
@@ -23,7 +23,7 @@ function Field({ label, value, onChange, step, placeholder, hint, min, max }: {
     <div>
       <label style={{
         fontFamily: 'var(--font-body)', fontSize: '0.85rem',
-        color: focused ? '#c9a227' : 'var(--muted)',
+        color: focused ? '#2e7d4f' : 'var(--muted)',
         display: 'block', marginBottom: 6, transition: 'color 0.15s',
       }}>
         {label}
@@ -36,7 +36,7 @@ function Field({ label, value, onChange, step, placeholder, hint, min, max }: {
         onBlur={() => setFocused(false)}
         style={{
           background: 'transparent', border: 'none',
-          borderBottom: `1px solid ${focused ? '#c9a227' : 'var(--border)'}`,
+          borderBottom: `1px solid ${focused ? '#2e7d4f' : 'var(--border)'}`,
           color: 'var(--text)', fontFamily: 'var(--font-body)',
           fontSize: '1.1rem', fontWeight: 700,
           padding: '7px 0', width: '100%', outline: 'none',
@@ -63,7 +63,7 @@ function Toggle({ label, checked, onChange, hint }: {
           onClick={() => onChange(!checked)}
           style={{
             width: 36, height: 20, borderRadius: 10, flexShrink: 0,
-            background: checked ? '#c9a227' : 'var(--border)',
+            background: checked ? '#2e7d4f' : 'var(--border)',
             position: 'relative', transition: 'background 0.2s', cursor: 'pointer',
           }}
         >
@@ -84,9 +84,35 @@ function Toggle({ label, checked, onChange, hint }: {
 }
 
 // ─── Wiersz wynikowy ─────────────────────────────────────────────
-function Row({ label, value, color, large, sub }: {
-  label: string; value: string; color?: string; large?: boolean; sub?: string;
+function Row({ label, value, color, large, sub, icon }: {
+  label: string; value: string; color?: string; large?: boolean; sub?: string; icon?: ReactNode;
 }) {
+  if (icon) {
+    return (
+      <div style={{
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12,
+        padding: '13px 0', borderBottom: '1px solid var(--border-subtle)',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
+          <span style={{
+            width: 34, height: 34, borderRadius: 9, flexShrink: 0,
+            background: 'rgba(46,125,79,0.1)', color: '#2e7d4f',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>{icon}</span>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: 'var(--text)' }}>{label}</div>
+            {sub && <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)', marginTop: 1 }}>{sub}</div>}
+          </div>
+        </div>
+        <span style={{
+          fontFamily: 'var(--font-body)', fontWeight: 700,
+          fontSize: large ? '1.1rem' : '1rem', color: color ?? 'var(--text)', whiteSpace: 'nowrap',
+        }}>
+          {value}
+        </span>
+      </div>
+    );
+  }
   return (
     <div style={{
       display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
@@ -107,8 +133,16 @@ function Row({ label, value, color, large, sub }: {
   );
 }
 
+// ─── Ikonki do wierszy wynikowych ────────────────────────────────
+const icoStroke = { fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
+const IcoWplaty  = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg>;
+const IcoZysk    = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg>;
+const IcoBelka   = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><path d="M12 2 4 6v6c0 4 3 7 8 8 5-1 8-4 8-8V6z"/></svg>;
+const IcoRealna  = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5.6 5.6 4.2 4.2M19.8 19.8l-1.4-1.4M18.4 5.6l1.4-1.4M4.2 19.8l1.4-1.4"/></svg>;
+const IcoMnoznik = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><path d="M12 2 22 12 12 22 2 12z"/></svg>;
+
 // ─── Główna liczba ───────────────────────────────────────────────
-function MainResult({ label, value, color = '#c9a227', sub }: {
+function MainResult({ label, value, color = '#2e7d4f', sub }: {
   label: string; value: string; color?: string; sub?: string;
 }) {
   return (
@@ -233,9 +267,9 @@ function BarChart({ bars, colors, legend }: {
               const bX = startX + vi * (bW + gap);
               return (
                 <g key={vi}>
-                  <rect x={bX} y={bY} width={bW} height={bH} fill={colors[vi] ?? '#c9a227'} rx={2} />
+                  <rect x={bX} y={bY} width={bW} height={bH} fill={colors[vi] ?? '#2e7d4f'} rx={2} />
                   <text x={bX + bW / 2} y={bY - 5} textAnchor="middle" fontSize="9"
-                    fill={colors[vi] ?? '#c9a227'} fontWeight="600" fontFamily="system-ui, sans-serif">
+                    fill={colors[vi] ?? '#2e7d4f'} fontWeight="600" fontFamily="system-ui, sans-serif">
                     {short(v)}
                   </text>
                 </g>
@@ -285,7 +319,7 @@ function RRBar({ risk, reward }: { risk: number; reward: number }) {
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 5 }}>
         <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: '#ff2d78' }}>Ryzyko</span>
-        <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: '#c9a227' }}>Potencjalny zysk</span>
+        <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: '#2e7d4f' }}>Potencjalny zysk</span>
       </div>
     </div>
   );
@@ -308,7 +342,7 @@ function Milestones({ data }: {
           </div>
           <div style={{ height: 3, background: 'var(--border-subtle)', borderRadius: 99 }}>
             <div style={{
-              height: '100%', borderRadius: 99, background: '#c9a227',
+              height: '100%', borderRadius: 99, background: '#2e7d4f',
               width: `${Math.round((d.value / max) * 100)}%`,
               transition: 'width 0.4s ease',
             }} />
@@ -531,7 +565,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
     // 3 scenariusze: pesymistyczny (rBase-3%), realistyczny (rBase), optymistyczny (rBase+3%)
     const scenarios = [
       { label: `${Math.max(rBase * 100 - 3, 1).toFixed(0)}% (pesymistyczny)`, r: Math.max(rBase - 0.03, 0.01), color: '#ff2d78' },
-      { label: `${(rBase * 100).toFixed(0)}% (realistyczny)`,                   r: rBase,                        color: '#c9a227' },
+      { label: `${(rBase * 100).toFixed(0)}% (realistyczny)`,                   r: rBase,                        color: '#2e7d4f' },
       { label: `${(rBase * 100 + 3).toFixed(0)}% (optymistyczny)`,               r: rBase + 0.03,                 color: '#10b981' },
     ];
 
@@ -588,7 +622,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
         {TABS.map(t => (
           <button key={t.key} onClick={() => setTab(t.key)} style={{
             background: 'none', border: 'none', cursor: 'pointer',
-            borderBottom: tab === t.key ? '2px solid #c9a227' : '2px solid transparent',
+            borderBottom: tab === t.key ? '2px solid #2e7d4f' : '2px solid transparent',
             color: tab === t.key ? 'var(--text)' : 'var(--muted)',
             fontFamily: 'var(--font-body)', fontSize: '0.92rem',
             fontWeight: tab === t.key ? 600 : 400,
@@ -602,92 +636,87 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
 
       {/* ── PROCENT SKŁADANY ─────────────────────────────────────── */}
       {tab === 'compound' && (
-        <div className="calc-grid">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-            <Field label="Kapitał startowy (PLN)" value={principal} onChange={setPrincipal} step="1000" />
-            <Field label="Miesięczna wpłata (PLN)" value={monthly} onChange={setMonthly} step="100" />
-            <Sep />
-            <Field label="Roczna stopa zwrotu (%)" value={rate} onChange={setRate} step="0.5"
-              hint="Średni roczny wynik S&P 500 (z dywidendami) to ok. 10%." />
-            <Field label="Liczba lat" value={years} onChange={setYears} step="1" min="1" max="50" />
-            <Sep />
-            <Field label="Inflacja roczna (%)" value={inflation} onChange={setInflation} step="0.5"
-              hint="Realna wartość pieniądza spada. Historyczna średnia to ok. 2-3%." />
-            <Toggle
-              label="Uwzględnij podatek Belki (19%)"
-              checked={belka}
-              onChange={setBelka}
-              hint="Podatek od zysku kapitałowego w Polsce."
-            />
-          </div>
-
-          <div>
-            <MainResult
-              label={`Wartość portfela po ${years} latach (nominalna)`}
-              value={`${fmt(compound.final)} PLN`}
-              sub={`wpłaty: ${fmt(compound.totalContrib)} PLN · zysk: ${fmt(compound.interest)} PLN`}
-            />
-
-            <Row label="Twoje wpłaty łącznie"   value={`${fmt(compound.totalContrib)} PLN`} />
-            <Row label="Zysk z inwestowania"     value={`${fmt(compound.interest)} PLN`} color="#c9a227" large />
-            {belka && (
-              <Row label="Po podatku Belki (19%)" value={`${fmt(compound.afterTaxFinal)} PLN`}
-                color="#f5c518"
-                sub={`podatek: ${fmt(compound.interest * 0.19)} PLN`} />
-            )}
-            <Row
-              label="Realna wartość (po inflacji)"
-              value={`${fmt(belka ? compound.realAfterTax : compound.realFinal)} PLN`}
-              color="var(--muted)"
-              sub={`siła nabywcza w dzisiejszych złotych`}
-            />
-            <Row
-              label="Mnożnik wpłat"
-              value={compound.totalContrib > 0
-                ? `×${fmtD(compound.final / compound.totalContrib, 1)}`
-                : '-'}
-            />
-
-            {/* Wykres */}
-            {compound.nomPts.length >= 2 && (
-              <div style={{ marginTop: 28, paddingTop: 20, borderTop: '1px solid var(--border-subtle)' }}>
-                <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 10 }}>
-                  {[
-                    { color: '#c9a227', label: 'Nominalna' },
-                    ...(inflation !== '0' ? [{ color: '#4a9eff', label: 'Realna (po inflacji)' }] : []),
-                    ...(belka ? [{ color: '#f5c518', label: 'Po podatku Belki' }] : []),
-                  ].map(s => (
-                    <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                      <div style={{ width: 20, height: 2, background: s.color }} />
-                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)' }}>{s.label}</span>
-                    </div>
-                  ))}
-                </div>
-                <LineChart series={[
-                  { points: compound.nomPts,  color: '#c9a227', label: 'Nominalna' },
-                  ...(inflation !== '0' ? [{ points: compound.realPts, color: '#4a9eff', label: 'Realna' }] : []),
-                  ...(belka ? [{ points: compound.taxPts, color: '#f5c518', label: 'Po Belce' }] : []),
-                ]} />
-              </div>
-            )}
-
-            {/* Kamienie milowe */}
-            <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--border-subtle)' }}>
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: 'var(--muted)', marginBottom: 14 }}>
-                Wartości nominalne w czasie
-              </p>
-              <Milestones
-                data={compound.snapYears
-                  .filter(y => compound.byYear[y])
-                  .map(y => ({
-                    label: `Po ${y} ${y === 1 ? 'roku' : 'latach'}`,
-                    value: compound.byYear[y].total,
-                    secondary: compound.byYear[y].contrib,
-                  }))}
+        <>
+          <div className="calc-grid">
+            {/* Karta wejść */}
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '26px 26px', display: 'flex', flexDirection: 'column', gap: 20 }}>
+              <Field label="Kapitał startowy (PLN)" value={principal} onChange={setPrincipal} step="1000" />
+              <Field label="Miesięczna wpłata (PLN)" value={monthly} onChange={setMonthly} step="100" />
+              <Sep />
+              <Field label="Roczna stopa zwrotu (%)" value={rate} onChange={setRate} step="0.5"
+                hint="Średni roczny wynik S&P 500 (z dywidendami) to ok. 10%." />
+              <Field label="Liczba lat" value={years} onChange={setYears} step="1" min="1" max="50" />
+              <Sep />
+              <Field label="Inflacja roczna (%)" value={inflation} onChange={setInflation} step="0.5"
+                hint="Realna wartość pieniądza spada. Historyczna średnia to ok. 2-3%." />
+              <Toggle
+                label="Uwzględnij podatek Belki (19%)"
+                checked={belka}
+                onChange={setBelka}
+                hint="Podatek od zysku kapitałowego w Polsce."
               />
             </div>
+
+            {/* Panel wyników */}
+            <div style={{ background: 'rgba(46,125,79,0.06)', border: '1px solid rgba(46,125,79,0.18)', borderRadius: 16, padding: '26px 26px' }}>
+              <MainResult
+                label={`Wartość portfela po ${years} latach (nominalna)`}
+                value={`${fmt(compound.final)} PLN`}
+                sub={`wpłaty: ${fmt(compound.totalContrib)} PLN · zysk: ${fmt(compound.interest)} PLN`}
+              />
+
+              <Row icon={<IcoWplaty />}  label="Twoje wpłaty łącznie" value={`${fmt(compound.totalContrib)} PLN`} />
+              <Row icon={<IcoZysk />}    label="Zysk z inwestowania"  value={`${fmt(compound.interest)} PLN`} color="#2e7d4f" large />
+              {belka && (
+                <Row icon={<IcoBelka />} label="Po podatku Belki (19%)" value={`${fmt(compound.afterTaxFinal)} PLN`}
+                  color="#6b9c7e" sub={`podatek: ${fmt(compound.interest * 0.19)} PLN`} />
+              )}
+              <Row icon={<IcoRealna />}  label="Realna wartość (po inflacji)"
+                value={`${fmt(belka ? compound.realAfterTax : compound.realFinal)} PLN`}
+                sub="siła nabywcza w dzisiejszych złotych" />
+              <Row icon={<IcoMnoznik />} label="Mnożnik wpłat"
+                value={compound.totalContrib > 0 ? `×${fmtD(compound.final / compound.totalContrib, 1)}` : '-'} />
+            </div>
           </div>
-        </div>
+
+          {/* Wykres + kamienie milowe (pełna szerokość) */}
+          {compound.nomPts.length >= 2 && (
+            <div style={{ marginTop: 20, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '24px 26px' }}>
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 10 }}>
+                {[
+                  { color: '#2e7d4f', label: 'Nominalna' },
+                  ...(inflation !== '0' ? [{ color: '#8a94a0', label: 'Realna (po inflacji)' }] : []),
+                  ...(belka ? [{ color: '#6b9c7e', label: 'Po podatku Belki' }] : []),
+                ].map(s => (
+                  <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <div style={{ width: 20, height: 2, background: s.color }} />
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)' }}>{s.label}</span>
+                  </div>
+                ))}
+              </div>
+              <LineChart series={[
+                { points: compound.nomPts,  color: '#2e7d4f', label: 'Nominalna' },
+                ...(inflation !== '0' ? [{ points: compound.realPts, color: '#8a94a0', label: 'Realna' }] : []),
+                ...(belka ? [{ points: compound.taxPts, color: '#6b9c7e', label: 'Po Belce' }] : []),
+              ]} />
+
+              <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--border-subtle)' }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: 'var(--muted)', marginBottom: 14 }}>
+                  Wartości nominalne w czasie
+                </p>
+                <Milestones
+                  data={compound.snapYears
+                    .filter(y => compound.byYear[y])
+                    .map(y => ({
+                      label: `Po ${y} ${y === 1 ? 'roku' : 'latach'}`,
+                      value: compound.byYear[y].total,
+                      secondary: compound.byYear[y].contrib,
+                    }))}
+                />
+              </div>
+            </div>
+          )}
+        </>
       )}
 
       {/* ── DCA ──────────────────────────────────────────────────── */}
@@ -730,11 +759,11 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
             </div>
 
             <Row label="Łącznie wpłacono"    value={`${fmt(dca.totalInvested)} PLN`} />
-            <Row label="DCA (realistyczny)"   value={`${fmt(dca.dcaFinals[1])} PLN`}  color="#c9a227" large />
+            <Row label="DCA (realistyczny)"   value={`${fmt(dca.dcaFinals[1])} PLN`}  color="#2e7d4f" large />
             <Row
               label={`Lump sum (całość na start przy ${dcaRate}%)`}
               value={`${fmt(dca.lumpSumFinal)} PLN`}
-              color={dca.lumpSumFinal > dca.dcaFinals[1] ? '#4a9eff' : 'var(--muted)'}
+              color={dca.lumpSumFinal > dca.dcaFinals[1] ? '#8a94a0' : 'var(--muted)'}
               sub={dca.lumpSumFinal > dca.dcaFinals[1] ? 'lump sum wypada lepiej' : 'DCA wypada lepiej'}
             />
 
@@ -810,7 +839,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
                   </p>
                   <p style={{
                     fontFamily: 'var(--font-display)', fontSize: '3.8rem', lineHeight: 1,
-                    color: rr.ratio >= 2 ? '#c9a227' : rr.ratio >= 1 ? '#f5c518' : '#ff2d78',
+                    color: rr.ratio >= 2 ? '#2e7d4f' : rr.ratio >= 1 ? '#6b9c7e' : '#ff2d78',
                   }}>
                     1&thinsp;:&thinsp;{rr.ratio.toFixed(2)}
                   </p>
@@ -820,7 +849,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
                 <RRBar risk={rr.riskPer} reward={rr.rewardPer} />
 
                 <Row label="Kwota ryzyka"       value={`${fmt(rr.riskAmt)} PLN`}   color="#ff2d78" />
-                <Row label="Potencjalny zysk"   value={`${fmt(rr.profitAmt)} PLN`} color="#c9a227" large />
+                <Row label="Potencjalny zysk"   value={`${fmt(rr.profitAmt)} PLN`} color="#2e7d4f" large />
                 <Row label="Ryzyko / jednostka" value={rr.riskPer.toFixed(4)} />
                 <Row label="Zysk / jednostka"   value={rr.rewardPer.toFixed(4)} />
                 <Row label="Wielkość pozycji"   value={`${fmtD(rr.posSize, 2)} jednostek`} />
@@ -832,7 +861,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
                   </p>
                   <p style={{
                     fontFamily: 'var(--font-display)', fontSize: '2rem', lineHeight: 1,
-                    color: rr.beWinRate < 40 ? '#10b981' : rr.beWinRate < 50 ? '#c9a227' : '#ff2d78',
+                    color: rr.beWinRate < 40 ? '#10b981' : rr.beWinRate < 50 ? '#2e7d4f' : '#ff2d78',
                   }}>
                     {rr.beWinRate.toFixed(1)}%
                   </p>
@@ -956,7 +985,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
                   <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--border-subtle)' }}>
                     <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 10 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                        <div style={{ width: 20, height: 2, background: '#c9a227' }} />
+                        <div style={{ width: 20, height: 2, background: '#2e7d4f' }} />
                         <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)' }}>Portfel</span>
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
@@ -965,7 +994,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
                       </div>
                     </div>
                     <LineChart series={[
-                      { points: fire.chartPts,    color: '#c9a227', label: 'Portfel' },
+                      { points: fire.chartPts,    color: '#2e7d4f', label: 'Portfel' },
                       { points: fire.targetLine,  color: '#ff2d78', label: 'Cel' },
                     ]} />
                   </div>
@@ -996,8 +1025,8 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
           <div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, marginBottom: 28 }}>
               <div>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: '#c9a227', marginBottom: 6, fontWeight: 600 }}>ETF</p>
-                <p style={{ fontFamily: 'var(--font-display)', fontSize: '2.2rem', color: '#c9a227', lineHeight: 1 }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: '#2e7d4f', marginBottom: 6, fontWeight: 600 }}>ETF</p>
+                <p style={{ fontFamily: 'var(--font-display)', fontSize: '2.2rem', color: '#2e7d4f', lineHeight: 1 }}>
                   {fmt(etf.finalETF)} PLN
                 </p>
                 <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: 'var(--muted)', marginTop: 6 }}>
@@ -1005,8 +1034,8 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
                 </p>
               </div>
               <div>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: '#4a9eff', marginBottom: 6, fontWeight: 600 }}>Lokata</p>
-                <p style={{ fontFamily: 'var(--font-display)', fontSize: '2.2rem', color: '#4a9eff', lineHeight: 1 }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: '#8a94a0', marginBottom: 6, fontWeight: 600 }}>Lokata</p>
+                <p style={{ fontFamily: 'var(--font-display)', fontSize: '2.2rem', color: '#8a94a0', lineHeight: 1 }}>
                   {fmt(etf.finalLok)} PLN
                 </p>
                 <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: 'var(--muted)', marginTop: 6 }}>
@@ -1019,7 +1048,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
             <Row
               label="ETF zarobi więcej o"
               value={`${etf.diff >= 0 ? '+' : ''}${fmt(etf.diff)} PLN`}
-              color={etf.diff >= 0 ? '#c9a227' : '#ff2d78'}
+              color={etf.diff >= 0 ? '#2e7d4f' : '#ff2d78'}
               large
             />
 
@@ -1029,7 +1058,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
                   bars={etf.chartYears
                     .filter(y => etf.byYear[y])
                     .map(y => ({ label: `${y}r`, values: [etf.byYear[y].etf, etf.byYear[y].lok] }))}
-                  colors={['#c9a227', '#4a9eff']}
+                  colors={['#2e7d4f', '#8a94a0']}
                   legend={['ETF', 'Lokata']}
                 />
               </div>

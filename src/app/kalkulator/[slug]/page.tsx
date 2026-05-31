@@ -143,7 +143,7 @@ export default async function KalkulatorSlugPage(
             lineHeight: 1.05,
           }}>
             {cfg.h1a}<br />
-            <span style={{ color: '#c9a227' }}>{cfg.h1b}</span>
+            <span style={{ color: '#2e7d4f' }}>{cfg.h1b}</span>
           </h1>
           <p style={{
             fontFamily: 'var(--font-mono)',
