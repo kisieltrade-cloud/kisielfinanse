@@ -21,12 +21,12 @@ export const metadata: Metadata = {
   },
 };
 
-const LAST_UPDATE = '03.03.2026';
+const LAST_UPDATE = '31.05.2026';
 
 const sections = [
   {
     title: '1. Charakter publikowanych treści',
-    content: `Wszystkie treści publikowane w serwisie KisielFinanse.pl - w tym wyniki tradingowe, analizy rynkowe, opisy strategii, wpisy blogowe, komentarze tygodniowe oraz wszelkie inne materiały - mają charakter wyłącznie informacyjny i edukacyjny.
+    content: `Wszystkie treści publikowane w serwisie KisielFinanse.pl - w tym analizy rynkowe, opisy strategii, wpisy blogowe, materiały edukacyjne oraz wszelkie inne treści - mają charakter wyłącznie informacyjny i edukacyjny.
 
 Żadna treść opublikowana w serwisie nie stanowi:`,
     list: [
@@ -67,7 +67,7 @@ Serwis nie posiada zezwolenia Komisji Nadzoru Finansowego (KNF) na prowadzenie d
   },
   {
     title: '5. Ryzyko inwestycyjne',
-    content: `Handel instrumentami finansowymi, w szczególności instrumentami pochodnymi (forex, CFD, futures, opcje), wiąże się z wysokim poziomem ryzyka. Statystyki branżowe wskazują, że znaczna większość inwestorów detalicznych traci pieniądze na tych instrumentach. Autor serwisu nie ponosi odpowiedzialności za straty finansowe wynikłe z decyzji inwestycyjnych podjętych przez użytkowników serwisu.`,
+    content: `Handel instrumentami finansowymi, w szczególności instrumentami pochodnymi (forex, CFD, futures, opcje), wiąże się z wysokim poziomem ryzyka. Statystyki branżowe wskazują, że znaczna większość inwestorów detalicznych traci pieniądze na tych instrumentach. W zakresie dozwolonym przez obowiązujące przepisy prawa autor serwisu nie ponosi odpowiedzialności za straty finansowe wynikłe z decyzji inwestycyjnych podjętych przez użytkowników serwisu. Powyższe nie wyłącza ani nie ogranicza odpowiedzialności wobec konsumenta w zakresie, w jakim jej wyłączenie lub ograniczenie jest niedopuszczalne na mocy bezwzględnie obowiązujących przepisów prawa.`,
   },
   {
     title: '6. Linki afiliacyjne i współpraca',
@@ -80,7 +80,7 @@ Serwis nie posiada zezwolenia Komisji Nadzoru Finansowego (KNF) na prowadzenie d
       'Informacje rynkowe mogą ulec dezaktualizacji - rynki finansowe zmieniają się w czasie rzeczywistym',
       'Autor nie gwarantuje kompletności, dokładności ani aktualności żadnej z publikowanych informacji',
       'Wszelkie błędy w prezentowanych danych zostaną poprawione niezwłocznie po ich wykryciu',
-      'Autor nie ponosi odpowiedzialności za decyzje podjęte na podstawie nieaktualnych lub błędnych informacji',
+      'W zakresie dozwolonym przez obowiązujące przepisy prawa autor nie ponosi odpowiedzialności za decyzje podjęte na podstawie nieaktualnych lub błędnych informacji',
     ],
   },
   {
