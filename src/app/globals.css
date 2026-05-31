@@ -28,6 +28,8 @@
   --calc-section: #f4f1ea;
   --calc-text:    #1a2230;
   --calc-muted:   #5d6b7a;
+  /* Nakładka hero /o-mnie (split: tekst po lewej, zdjęcie po prawej) */
+  --omnie-overlay: linear-gradient(to right, rgba(255,255,255,0.96) 20%, rgba(255,255,255,0.75) 52%, rgba(255,255,255,0.18) 100%);
 }
 
 /* ── DARK MODE ── */
@@ -46,6 +48,7 @@
   --calc-section: #0c1117;
   --calc-text:    #e8edf5;
   --calc-muted:   #9aa7b6;
+  --omnie-overlay: linear-gradient(to right, rgba(3,5,8,0.95) 25%, rgba(3,5,8,0.7) 55%, rgba(3,5,8,0.25) 100%);
 }
 
 *,
