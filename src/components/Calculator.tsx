@@ -277,6 +277,26 @@ function LineChart({ series }: {
   );
 }
 
+// ─── Sparkline (mini wykres area, bez osi) ──────────────────────
+function Sparkline({ points, color }: { points: { year: number; val: number }[]; color: string }) {
+  if (points.length < 2) return null;
+  const W = 300, H = 72;
+  const vals = points.map(p => p.val);
+  const max = Math.max(...vals, 1);
+  const min = Math.min(...vals, 0);
+  const span = max - min || 1;
+  const toX = (i: number) => (i / (points.length - 1)) * W;
+  const toY = (v: number) => H - ((v - min) / span) * (H - 6) - 3;
+  const line = points.map((p, i) => `${toX(i)},${toY(p.val)}`).join(' ');
+  const area = `M0,${H} ` + points.map((p, i) => `L${toX(i)},${toY(p.val)}`).join(' ') + ` L${W},${H} Z`;
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" style={{ width: '100%', height: 72, display: 'block' }}>
+      <path d={area} fill={`${color}1f`} />
+      <polyline points={line} fill="none" stroke={color} strokeWidth={2.5} vectorEffect="non-scaling-stroke" strokeLinejoin="round" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 // ─── Wykres słupkowy ─────────────────────────────────────────────
 function BarChart({ bars, colors, legend }: {
   bars: { label: string; values: number[] }[];
@@ -604,18 +624,21 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
     const rL  = (parseFloat(lokataRate) || 0) / 100 / 12;
     const chartYears = pickYears(t, 5);
     const byYear: Record<number, { etf: number; lok: number }> = {};
+    const etfPts: { year: number; val: number }[] = [];
+    const lokPts: { year: number; val: number }[] = [];
     let bE = P, bL = P;
     for (let m = 1; m <= t * 12; m++) {
       bE = bE * (1 + rE) + PMT;
       bL = bL * (1 + rL) + PMT;
       const y = m / 12;
+      if (Number.isInteger(y)) { etfPts.push({ year: y, val: bE }); lokPts.push({ year: y, val: bL }); }
       if (chartYears.includes(y)) byYear[y] = { etf: bE, lok: bL };
     }
     const totalContrib = P + PMT * t * 12;
     return {
       finalETF: bE, finalLok: bL, diff: bE - bL, totalContrib,
       etfInterest: bE - totalContrib, lokInterest: bL - totalContrib,
-      chartYears, byYear,
+      chartYears, byYear, etfPts, lokPts,
     };
   }, [etfCapital, etfMonthly, etfYears, etfRate, lokataRate]);
 
@@ -1124,64 +1147,100 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
 
       {/* ── ETF vs LOKATA ────────────────────────────────────────── */}
       {tab === 'etf' && (
-        <div className="calc-grid">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-            <Field label="Kapitał startowy (PLN)"         value={etfCapital}  onChange={setEtfCapital}  step="1000" />
-            <Field label="Miesięczna wpłata (PLN)"        value={etfMonthly}  onChange={setEtfMonthly}  step="100" />
-            <Field label="Liczba lat"                     value={etfYears}    onChange={setEtfYears}    step="1" />
-            <Sep />
-            <Field label="Roczna stopa zwrotu ETF (%)"   value={etfRate}    onChange={setEtfRate}    step="0.5"
-              hint="Np. 7-10% dla szerokiego indeksu globalnego." />
-            <Field label="Oprocentowanie lokaty (%)"     value={lokataRate} onChange={setLokataRate} step="0.5" />
+        <>
+          <div className="calc-grid">
+            {/* Karta wejść */}
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '28px 26px', display: 'flex', flexDirection: 'column', gap: 22 }}>
+              <FieldBox icon={<IcoWplaty />}   label="Kapitał startowy (PLN)" value={etfCapital} onChange={setEtfCapital} step="1000" />
+              <FieldBox icon={<IcoCoins />}    label="Miesięczna wpłata (PLN)" value={etfMonthly} onChange={setEtfMonthly} step="100" />
+              <FieldBox icon={<IcoCalendar />} label="Liczba lat" value={etfYears} onChange={setEtfYears} step="1" />
+              <FieldBox icon={<IcoZysk />}     label="Roczna stopa zwrotu ETF (%)" value={etfRate} onChange={setEtfRate} step="0.5" hint="Np. 7-10% dla szerokiego indeksu globalnego." />
+              <FieldBox icon={<IcoPercent />}  label="Oprocentowanie lokaty (%)" value={lokataRate} onChange={setLokataRate} step="0.5" />
+            </div>
+
+            {/* Wyniki */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+                {/* ETF */}
+                <div style={{ background: 'rgba(46,125,79,0.06)', border: '1px solid rgba(46,125,79,0.2)', borderRadius: 16, padding: '20px 22px 0', overflow: 'hidden' }}>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#2e7d4f', fontWeight: 600, margin: '0 0 6px' }}>ETF</p>
+                  <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.9rem', color: '#2e7d4f', lineHeight: 1, margin: 0 }}>
+                    {fmt(etf.finalETF)} <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', fontWeight: 600, color: 'var(--muted)' }}>PLN</span>
+                  </p>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.76rem', color: 'var(--muted)', margin: '6px 0 0' }}>
+                    zysk: <span style={{ color: '#2e7d4f', fontWeight: 700 }}>+{fmt(etf.etfInterest)} PLN</span>
+                  </p>
+                  <div style={{ marginTop: 12, marginLeft: -22, marginRight: -22 }}><Sparkline points={etf.etfPts} color="#2e7d4f" /></div>
+                </div>
+                {/* Lokata */}
+                <div style={{ background: 'rgba(59,130,246,0.06)', border: '1px solid rgba(59,130,246,0.2)', borderRadius: 16, padding: '20px 22px 0', overflow: 'hidden' }}>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#3b82f6', fontWeight: 600, margin: '0 0 6px' }}>Lokata</p>
+                  <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.9rem', color: '#3b82f6', lineHeight: 1, margin: 0 }}>
+                    {fmt(etf.finalLok)} <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', fontWeight: 600, color: 'var(--muted)' }}>PLN</span>
+                  </p>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.76rem', color: 'var(--muted)', margin: '6px 0 0' }}>
+                    zysk: <span style={{ color: '#3b82f6', fontWeight: 700 }}>+{fmt(etf.lokInterest)} PLN</span>
+                  </p>
+                  <div style={{ marginTop: 12, marginLeft: -22, marginRight: -22 }}><Sparkline points={etf.lokPts} color="#3b82f6" /></div>
+                </div>
+              </div>
+
+              {/* Statystyki */}
+              <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '22px 24px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <span style={{ display: 'inline-flex', width: 38, height: 38, borderRadius: 10, background: 'rgba(46,125,79,0.1)', color: '#2e7d4f', alignItems: 'center', justifyContent: 'center', marginBottom: 8 }}><IcoWplaty /></span>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: 'var(--muted)', margin: '0 0 4px' }}>Twoje wpłaty łącznie</p>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', color: 'var(--text)', margin: 0 }}>{fmt(etf.totalContrib)} <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 600, color: 'var(--muted)' }}>PLN</span></p>
+                  </div>
+                  <div style={{ textAlign: 'center' }}>
+                    <span style={{ display: 'inline-flex', width: 38, height: 38, borderRadius: 10, background: 'rgba(46,125,79,0.1)', color: '#2e7d4f', alignItems: 'center', justifyContent: 'center', marginBottom: 8 }}><IcoZysk /></span>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: 'var(--muted)', margin: '0 0 4px' }}>ETF zarobi więcej o</p>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', color: etf.diff >= 0 ? '#2e7d4f' : '#e5484d', margin: 0 }}>{etf.diff >= 0 ? '+' : ''}{fmt(etf.diff)} <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 600, color: 'var(--muted)' }}>PLN</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, marginBottom: 28 }}>
-              <div>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: '#2e7d4f', marginBottom: 6, fontWeight: 600 }}>ETF</p>
-                <p style={{ fontFamily: 'var(--font-display)', fontSize: '2.2rem', color: '#2e7d4f', lineHeight: 1 }}>
-                  {fmt(etf.finalETF)} PLN
-                </p>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: 'var(--muted)', marginTop: 6 }}>
-                  zysk: +{fmt(etf.etfInterest)} PLN
-                </p>
+          {/* Dolny: wykres + tabela */}
+          {etf.etfPts.length >= 2 && (
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '24px 26px', marginTop: 20 }}>
+              <div className="calc-grid">
+                <div>
+                  <div style={{ display: 'flex', gap: 16, marginBottom: 10 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}><div style={{ width: 20, height: 2, background: '#2e7d4f' }} /><span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)' }}>ETF</span></div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}><div style={{ width: 20, height: 2, background: '#3b82f6' }} /><span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)' }}>Lokata</span></div>
+                  </div>
+                  <LineChart series={[
+                    { points: etf.etfPts, color: '#2e7d4f', label: 'ETF' },
+                    { points: etf.lokPts, color: '#3b82f6', label: 'Lokata' },
+                  ]} />
+                </div>
+                <div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: '0 4px 8px' }}>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)', fontWeight: 700 }}>Rok</span>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)', fontWeight: 700, textAlign: 'right' }}>ETF</span>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)', fontWeight: 700, textAlign: 'right' }}>Lokata</span>
+                  </div>
+                  {etf.chartYears.filter(y => etf.byYear[y]).map(y => (
+                    <div key={y} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: '11px 4px', borderTop: '1px solid var(--border-subtle)', alignItems: 'center' }}>
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--text)', fontWeight: 600 }}>{y}r</span>
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#2e7d4f', fontWeight: 700, textAlign: 'right' }}>{short(etf.byYear[y].etf)}</span>
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#3b82f6', fontWeight: 700, textAlign: 'right' }}>{short(etf.byYear[y].lok)}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: '#8a94a0', marginBottom: 6, fontWeight: 600 }}>Lokata</p>
-                <p style={{ fontFamily: 'var(--font-display)', fontSize: '2.2rem', color: '#8a94a0', lineHeight: 1 }}>
-                  {fmt(etf.finalLok)} PLN
-                </p>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: 'var(--muted)', marginTop: 6 }}>
-                  zysk: +{fmt(etf.lokInterest)} PLN
+              <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start', marginTop: 16 }}>
+                <span style={{ width: 20, height: 20, borderRadius: '50%', flexShrink: 0, background: 'rgba(46,125,79,0.12)', color: '#2e7d4f', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.65rem', fontWeight: 700, marginTop: 1 }}>i</span>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.76rem', color: 'var(--muted)', lineHeight: 1.65, margin: 0 }}>
+                  Wyniki szacunkowe. Nie uwzględniono podatku Belki (19%), opłat za zarządzanie funduszem ani inflacji.
                 </p>
               </div>
             </div>
-
-            <Row label="Twoje wpłaty łącznie" value={`${fmt(etf.totalContrib)} PLN`} />
-            <Row
-              label="ETF zarobi więcej o"
-              value={`${etf.diff >= 0 ? '+' : ''}${fmt(etf.diff)} PLN`}
-              color={etf.diff >= 0 ? '#2e7d4f' : '#ff2d78'}
-              large
-            />
-
-            {etf.chartYears.length >= 2 && (
-              <div style={{ marginTop: 28, paddingTop: 20, borderTop: '1px solid var(--border-subtle)' }}>
-                <BarChart
-                  bars={etf.chartYears
-                    .filter(y => etf.byYear[y])
-                    .map(y => ({ label: `${y}r`, values: [etf.byYear[y].etf, etf.byYear[y].lok] }))}
-                  colors={['#2e7d4f', '#8a94a0']}
-                  legend={['ETF', 'Lokata']}
-                />
-              </div>
-            )}
-
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.76rem', color: 'var(--muted)', lineHeight: 1.65, marginTop: 16 }}>
-              Wyniki szacunkowe. Nie uwzględniono podatku Belki (19%), opłat za zarządzanie funduszem ani inflacji.
-            </p>
-          </div>
-        </div>
+          )}
+        </>
       )}
     </div>
   );
