@@ -103,6 +103,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'yearly',
       priority: 0.3,
     },
+    {
+      url: `${BASE_URL}/regulamin`,
+      lastModified: new Date('2026-05-31'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ];
 
   // ── Strony kategorii (5 × najwyższy priorytet po stronie głównej) ───────────

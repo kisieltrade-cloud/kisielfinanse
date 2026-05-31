@@ -70,6 +70,7 @@ export default async function Footer() {
 
           <div className="footer-col-title">Prawne</div>
           <ul className="footer-col-links">
+            <li><Link href="/regulamin">Regulamin</Link></li>
             <li><Link href="/polityka-prywatnosci">Polityka prywatności</Link></li>
             <li><Link href="/disclaimer">Disclaimer</Link></li>
           </ul>
