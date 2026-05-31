@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import Breadcrumbs from '@/components/Breadcrumbs';
 import RevealOnScroll from '@/components/RevealOnScroll';
 import CashLoanCalculator from '@/components/CashLoanCalculator';
 import CalcRelated from '@/components/CalcRelated';
@@ -64,40 +64,54 @@ export default function KredytGotowkowyPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaApp) }} />
 
-      <main style={{ paddingTop: '80px' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', padding: '24px 24px 0' }}>
-          <Breadcrumbs items={[
-            { label: 'KisielFinanse', href: '/' },
-            { label: 'Kalkulatory',   href: '/kalkulator' },
-            { label: 'Kredyt gotówkowy' },
-          ]} />
-        </div>
+      <main style={{ paddingTop: 64 }}>
+        <style>{`
+          .kg-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+          @media (max-width: 760px) { .kg-hero { grid-template-columns: 1fr; gap: 20px; } }
+        `}</style>
+        <div style={{ background: '#f4f1ea' }}>
+          <div className="kg-hero" style={{ maxWidth: 1040, margin: '0 auto', padding: '48px 24px 8px' }}>
+            <div>
+              <p style={{
+                fontFamily: 'var(--font-ui)', fontSize: '0.75rem', fontWeight: 700,
+                color: '#2f6b4f', letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 14px',
+              }}>
+                Kredyt gotówkowy
+              </p>
+              <h1 style={{
+                fontFamily: 'Georgia, "Times New Roman", serif',
+                fontWeight: 400,
+                fontSize: 'clamp(2.6rem, 7vw, 4.6rem)',
+                letterSpacing: '-1px',
+                lineHeight: 1.02,
+                color: '#1a2230',
+                margin: '0 0 22px',
+              }}>
+                Kredyt<br />gotówkowy
+              </h1>
+              <p style={{
+                fontFamily: 'var(--font-ui)', fontSize: '1rem', color: '#5d6b7a',
+                lineHeight: 1.7, maxWidth: 480, margin: 0,
+              }}>
+                Rata miesięczna i RRSO z uwzględnieniem prowizji i ubezpieczenia.
+                Sprawdź prawdziwy koszt kredytu zanim podpiszesz umowę.
+              </p>
+            </div>
+            <div style={{ justifySelf: 'end', width: '100%', maxWidth: 520 }}>
+              <Image
+                src="/images/kredyt-gotowkowy-hero-v2.png"
+                alt="Kalkulator z wyświetlaczem 15,1% obok rośliny i książek na biurku"
+                width={1536}
+                height={1024}
+                priority
+                sizes="(max-width: 760px) 100vw, 520px"
+                style={{ width: '100%', height: 'auto', borderRadius: 14 }}
+              />
+            </div>
+          </div>
 
-        <div style={{ maxWidth: 900, margin: '0 auto', padding: '40px 24px 0' }}>
-          <h1 style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(2rem, 5vw, 3.2rem)',
-            letterSpacing: '4px',
-            marginBottom: 12,
-            lineHeight: 1.05,
-          }}>
-            KREDYT<br />
-            <span style={{ color: '#c9a227' }}>GOTÓWKOWY</span>
-          </h1>
-          <p style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.8rem',
-            color: 'var(--muted)',
-            lineHeight: 1.8,
-            maxWidth: 560,
-            marginBottom: 48,
-          }}>
-            Rata miesięczna i RRSO z uwzględnieniem prowizji i ubezpieczenia.
-            Sprawdź prawdziwy koszt kredytu zanim podpiszesz umowę.
-          </p>
+          <CashLoanCalculator />
         </div>
-
-        <CashLoanCalculator />
       </main>
       <CalcRelated currentPath="/kalkulator/kredyt-gotowkowy" />
       <Footer />
