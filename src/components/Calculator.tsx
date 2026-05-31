@@ -2,6 +2,7 @@
 
 import { useState, useMemo, type ReactNode } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Tab = 'compound' | 'rr' | 'fire' | 'etf' | 'dca';
 export type { Tab };
@@ -376,6 +377,15 @@ function pickYears(max: number, n = 5): number[] {
 }
 
 // ─── Hero per zakładka (tytuł, opis, opcjonalne zdjęcie) ─────────
+// Mapowanie zakładka -> adres URL (każdy kalkulator to osobna strona)
+const TAB_SLUG: Record<Tab, string> = {
+  compound: 'procent-skladany',
+  dca:      'dca',
+  rr:       'risk-reward',
+  fire:     'fire',
+  etf:      'etf',
+};
+
 const TAB_META: Record<Tab, { h1a: string; h1b: string; desc: string; heroImage?: string }> = {
   compound: { h1a: 'PROCENT', h1b: 'SKŁADANY', desc: 'Oblicz ile urośnie Twój kapitał przy regularnych wpłatach i zadanej stopie zwrotu. Siła procentu składanego w liczbach.', heroImage: '/images/procent-skladany-hero.png' },
   dca:      { h1a: 'UŚREDNIANIE', h1b: 'DCA', desc: 'Zobacz jak regularne, równe wpłaty (Dollar Cost Averaging) budują kapitał niezależnie od wahań rynku.' },
@@ -386,7 +396,7 @@ const TAB_META: Record<Tab, { h1a: string; h1b: string; desc: string; heroImage?
 
 // ─── GŁÓWNY KOMPONENT ────────────────────────────────────────────
 export default function Calculator({ initialTab = 'compound' }: { initialTab?: Tab }) {
-  const [tab, setTab] = useState<Tab>(initialTab);
+  const tab = initialTab;
   const meta = TAB_META[tab];
 
   // ── Procent składany ──
@@ -667,8 +677,8 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
       {/* Zakładki */}
       <div style={{ display: 'flex', marginBottom: 48, borderBottom: '1px solid var(--border-subtle)', overflowX: 'auto' }}>
         {TABS.map(t => (
-          <button key={t.key} onClick={() => setTab(t.key)} style={{
-            background: 'none', border: 'none', cursor: 'pointer',
+          <Link key={t.key} href={`/kalkulator/${TAB_SLUG[t.key]}`} style={{
+            textDecoration: 'none',
             borderBottom: tab === t.key ? '2px solid #2e7d4f' : '2px solid transparent',
             color: tab === t.key ? 'var(--text)' : 'var(--muted)',
             fontFamily: 'var(--font-body)', fontSize: '0.92rem',
@@ -677,7 +687,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
             transition: 'color 0.15s', whiteSpace: 'nowrap',
           }}>
             {t.label}
-          </button>
+          </Link>
         ))}
       </div>
 

@@ -6,6 +6,7 @@ import NewsletterForm from '@/components/NewsletterForm';
 
 const ALL_CALCS = [
   { href: '/kalkulator/procent-skladany', label: 'Procent składany',   icon: '📈' },
+  { href: '/kalkulator/dca',              label: 'DCA',                 icon: '🔁' },
   { href: '/kalkulator/risk-reward',      label: 'Risk / Reward',       icon: '⚖️' },
   { href: '/kalkulator/fire',             label: 'Kalkulator FIRE',     icon: '🔥' },
   { href: '/kalkulator/etf',             label: 'ETF vs lokata',       icon: '📊' },

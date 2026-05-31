@@ -2,6 +2,7 @@
 // Dodaj tu nowy slug gdy tworzysz nowy kalkulator — sitemap zaktualizuje się automatycznie.
 export const CALCULATOR_SLUGS = [
   'procent-skladany',
+  'dca',
   'risk-reward',
   'fire',
   'etf',

@@ -8,49 +8,40 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import RevealOnScroll from '@/components/RevealOnScroll';
 
 // ── Konfiguracja zakładek ─────────────────────────────────────────
+// Metadane SEO per kalkulator (jedno źródło prawdy). Hero (tytuł/opis/zdjęcie)
+// żyje w komponencie Calculator (TAB_META). Każdy slug = osobna, indeksowana strona.
 const TABS: Record<string, {
   tab: Tab;
-  h1a: string;
-  h1b: string;
-  desc: string;
   metaTitle: string;
   metaDesc: string;
   breadcrumb: string;
-  heroImage?: string;
 }> = {
   'procent-skladany': {
     tab: 'compound',
-    h1a: 'PROCENT',
-    h1b: 'SKŁADANY',
-    desc: 'Oblicz ile urośnie Twój kapitał przy regularnych wpłatach i zadanej stopie zwrotu. Siła procentu składanego w liczbach.',
     metaTitle: 'Kalkulator procentu składanego - ile urośnie kapitał?',
     metaDesc: 'Darmowy kalkulator procentu składanego. Wpisz kapitał startowy, miesięczną wpłatę i stopę zwrotu - zobaczysz ile będziesz mieć za 10, 20 lub 30 lat.',
     breadcrumb: 'Procent składany',
-    heroImage: '/images/procent-skladany-hero.png',
+  },
+  'dca': {
+    tab: 'dca',
+    metaTitle: 'Kalkulator DCA - uśrednianie ceny zakupu | KisielFinanse',
+    metaDesc: 'Kalkulator DCA (Dollar Cost Averaging). Zobacz jak regularne, równe wpłaty budują kapitał niezależnie od wahań rynku i ile zyskujesz względem jednorazowej wpłaty.',
+    breadcrumb: 'DCA',
   },
   'risk-reward': {
     tab: 'rr',
-    h1a: 'RISK',
-    h1b: 'REWARD',
-    desc: 'Policz stosunek risk/reward, wielkość pozycji i potencjalny zysk przed każdą transakcją. Zarządzanie ryzykiem w praktyce.',
     metaTitle: 'Kalkulator Risk/Reward i wielkości pozycji | KisielFinanse',
     metaDesc: 'Darmowy kalkulator risk/reward dla traderów. Wpisz entry, stop loss i take profit - kalkulator wyliczy R:R, wielkość pozycji i potencjalny zysk.',
     breadcrumb: 'Risk / Reward',
   },
   'fire': {
     tab: 'fire',
-    h1a: 'KALKULATOR',
-    h1b: 'FIRE',
-    desc: 'Ile lat zostało Ci do finansowej niezależności? Podaj oszczędności, miesięczne wpłaty i wydatki - kalkulator wyliczy datę FIRE.',
     metaTitle: 'Kalkulator FIRE - kiedy osiągniesz wolność finansową?',
     metaDesc: 'Oblicz swoją datę FIRE (Financial Independence, Retire Early). Kalkulator uwzględnia obecne oszczędności, miesięczne wpłaty, stopę zwrotu i regułę 4%.',
     breadcrumb: 'Kalkulator FIRE',
   },
   'etf': {
     tab: 'etf',
-    h1a: 'SYMULACJA',
-    h1b: 'ETF',
-    desc: 'Porównaj inwestycję w ETF z lokatą bankową. Zobacz różnicę w końcowym kapitale po uwzględnieniu podatku Belki.',
     metaTitle: 'Kalkulator ETF vs lokata - co się bardziej opłaca?',
     metaDesc: 'Symulacja inwestycji w ETF versus lokata bankowa. Oblicz końcowy kapitał po podatku Belki i sprawdź, ile tracisz trzymając pieniądze na lokacie.',
     breadcrumb: 'Symulacja ETF',
