@@ -61,8 +61,8 @@ const sections = [
     title: '4. Newsletter',
     content: `Usługa newslettera polega na przesyłaniu na wskazany przez Użytkownika adres e-mail informacji o nowych treściach, materiałach edukacyjnych oraz informacji od Usługodawcy.`,
     list: [
-      'Zapis na newsletter jest dobrowolny i wymaga podania adresu e-mail oraz wyrażenia zgody na otrzymywanie informacji drogą elektroniczną',
-      'Użytkownik może w każdej chwili i bez podania przyczyny zrezygnować z newslettera, korzystając z linku rezygnacji zawartego w treści wiadomości lub kontaktując się z Usługodawcą',
+      'Zapis na newsletter jest dobrowolny i wymaga podania adresu e-mail; dokonanie zapisu jest równoznaczne z wyrażeniem zgody na otrzymywanie informacji drogą elektroniczną',
+      'Użytkownik może w każdej chwili i bez podania przyczyny zrezygnować z newslettera, odpowiadając na otrzymaną wiadomość e-mail lub kontaktując się z Usługodawcą pod adresem kisieltrade@gmail.com',
       'Rezygnacja z newslettera jest równoznaczna z rozwiązaniem umowy o świadczenie tej usługi',
     ],
     extra: 'Zasady przetwarzania danych osobowych w związku z usługą newslettera określa Polityka Prywatności dostępna w Serwisie.',

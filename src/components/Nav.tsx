@@ -7,7 +7,6 @@ import ThemeToggle from '@/components/ThemeToggle';
 
 const MAIN_LINKS = [
   { href: '/o-mnie',  label: 'O mnie' },
-  { href: '/portfel', label: 'Portfel inwestycyjny' },
 ];
 
 const UTIL_LINKS = [

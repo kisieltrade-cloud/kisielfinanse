@@ -44,12 +44,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     },
     {
-      url: `${BASE_URL}/portfel`,
-      lastModified: new Date('2026-05-28'),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
       url: `${BASE_URL}/wspolpraca`,
       lastModified: new Date('2026-05-21'),
       changeFrequency: 'monthly',

@@ -33,7 +33,6 @@ export default async function Footer() {
           <ul className="footer-col-links">
             <li><Link href="/blog">Blog</Link></li>
             <li><Link href="/o-mnie">O mnie</Link></li>
-            <li><Link href="/portfel">Portfel inwestycyjny</Link></li>
             <li><Link href="/quiz">Quiz</Link></li>
             <li><Link href="/kalkulator">Kalkulatory</Link></li>
             <li><Link href="/kalkulator-hipoteczny">Kalkulator hipoteczny</Link></li>
