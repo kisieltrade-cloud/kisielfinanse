@@ -64,6 +64,10 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
         {state === 'error' && <p className="newsletter-err">{msg}</p>}
         <p style={{ fontSize: '0.7rem', color: 'var(--muted)', margin: '4px 0 0' }}>
           Zapisując się akceptujesz{' '}
+          <Link href="/regulamin" style={{ color: 'inherit', textDecoration: 'underline' }}>
+            regulamin
+          </Link>
+          {' '}i{' '}
           <Link href="/polityka-prywatnosci" style={{ color: 'inherit', textDecoration: 'underline' }}>
             politykę prywatności
           </Link>
@@ -110,8 +114,12 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
       )}
 
       <p className="newsletter-card-fine">
-        Zero spamu. Wypiszesz się w jednym kliknięciu.{' '}
+        Zero spamu. Wypiszesz się w każdej chwili.{' '}
         Zapisując się akceptujesz{' '}
+        <Link href="/regulamin" style={{ color: 'inherit', textDecoration: 'underline' }}>
+          regulamin
+        </Link>
+        {' '}i{' '}
         <Link href="/polityka-prywatnosci" style={{ color: 'inherit', textDecoration: 'underline' }}>
           politykę prywatności
         </Link>
