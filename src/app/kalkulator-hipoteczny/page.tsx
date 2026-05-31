@@ -177,6 +177,7 @@ export default function KalkulatorHipotecznyPage() {
               letterSpacing: '4px',
               marginBottom: 14,
               lineHeight: 1.05,
+              color: '#ffffff',
             }}>
               KALKULATOR<br />
               <span style={{ color: '#c9a227' }}>HIPOTECZNY</span>
@@ -184,7 +185,7 @@ export default function KalkulatorHipotecznyPage() {
             <p style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '0.8rem',
-              color: 'var(--muted)',
+              color: 'rgba(255,255,255,0.82)',
               fontWeight: 700,
               lineHeight: 1.8,
               maxWidth: 480,

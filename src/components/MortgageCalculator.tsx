@@ -196,8 +196,8 @@ function DonutChart({ capitalPct, interestPct, totalPLN }: { capitalPct: number;
 
 // ─── Wykres słupkowy ──────────────────────────────────────────────
 function AmortChart({ bars }: { bars: { capital: number; interest: number }[] }) {
-  const W = 300, H = 140;
-  const padB = 26, padT = 10, padL = 8, padR = 8;
+  const W = 300, H = 152;
+  const padB = 26, padT = 22, padL = 8, padR = 8;
   const plotW = W - padL - padR;
   const plotH = H - padB - padT;
   const n = bars.length;
@@ -407,7 +407,7 @@ export default function MortgageCalculator() {
 
       <div style={{
         position: 'relative',
-        background: C.bg,
+        background: '#edf0f4',
         padding: '48px 0 64px',
         overflow: 'hidden',
       }}>
@@ -803,6 +803,25 @@ export default function MortgageCalculator() {
               </div>
             </div>
             <AmortChart bars={calc.amortBars} />
+
+            {/* Tabela: roczne kwoty kapitału i odsetek */}
+            <div style={{ marginTop: 18, borderTop: `1px solid ${C.border}`, paddingTop: 6 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '48px 1fr 1fr', gap: 8, padding: '8px 2px 6px' }}>
+                <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.68rem', color: C.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Rok</span>
+                <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.68rem', color: C.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', textAlign: 'right' }}>Kapitał</span>
+                <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.68rem', color: C.muted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', textAlign: 'right' }}>Odsetki</span>
+              </div>
+              {calc.amortBars.map((b, i) => (
+                <div key={i} style={{
+                  display: 'grid', gridTemplateColumns: '48px 1fr 1fr', gap: 8,
+                  padding: '8px 2px', borderTop: `1px solid ${C.border}`, alignItems: 'center',
+                }}>
+                  <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.82rem', color: C.text, fontWeight: 700 }}>{i + 1}r</span>
+                  <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.82rem', color: C.dark, fontWeight: 700, textAlign: 'right' }}>{fmt(b.capital)} PLN</span>
+                  <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.82rem', color: C.muted, textAlign: 'right' }}>{fmt(b.interest)} PLN</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* CTA */}
@@ -841,6 +860,9 @@ export default function MortgageCalculator() {
           }}>
             Kalkulator pokazuje wyłącznie ratę kapitałowo-odsetkową przy stałym oprocentowaniu.
             Nie uwzględnia prowizji bankowej, ubezpieczenia nieruchomości ani zmienności stóp procentowych.
+            Wyliczenia mają charakter wyłącznie poglądowy i szacunkowy. Nie stanowią oferty w rozumieniu
+            art. 66 § 1 Kodeksu cywilnego, doradztwa finansowego ani rekomendacji. Wiążące warunki kredytu
+            określa umowa oraz formularz informacyjny przekazywany przez bank zgodnie z ustawą o kredycie hipotecznym.
           </p>
           </>)}
         </div>
