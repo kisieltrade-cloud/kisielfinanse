@@ -86,10 +86,12 @@ function Toggle({ label, checked, onChange, hint }: {
 }
 
 // ─── Wiersz wynikowy ─────────────────────────────────────────────
-function Row({ label, value, color, large, sub, icon }: {
-  label: string; value: string; color?: string; large?: boolean; sub?: string; icon?: ReactNode;
+function Row({ label, value, color, large, sub, icon, iconColor, valueSub }: {
+  label: string; value: string; color?: string; large?: boolean; sub?: string;
+  icon?: ReactNode; iconColor?: string; valueSub?: string;
 }) {
   if (icon) {
+    const ic = iconColor ?? '#2e7d4f';
     return (
       <div style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12,
@@ -98,7 +100,7 @@ function Row({ label, value, color, large, sub, icon }: {
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
           <span style={{
             width: 34, height: 34, borderRadius: 9, flexShrink: 0,
-            background: 'rgba(46,125,79,0.1)', color: '#2e7d4f',
+            background: `${ic}1a`, color: ic,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>{icon}</span>
           <div style={{ minWidth: 0 }}>
@@ -106,12 +108,12 @@ function Row({ label, value, color, large, sub, icon }: {
             {sub && <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)', marginTop: 1 }}>{sub}</div>}
           </div>
         </div>
-        <span style={{
-          fontFamily: 'var(--font-body)', fontWeight: 700,
-          fontSize: large ? '1.1rem' : '1rem', color: color ?? 'var(--text)', whiteSpace: 'nowrap',
-        }}>
-          {value}
-        </span>
+        <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+          <div style={{ fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: large ? '1.15rem' : '1rem', color: color ?? 'var(--text)' }}>
+            {value}
+          </div>
+          {valueSub && <div style={{ fontFamily: 'var(--font-body)', fontSize: '0.74rem', color: color ?? 'var(--muted)', marginTop: 1 }}>{valueSub}</div>}
+        </div>
       </div>
     );
   }
@@ -146,11 +148,16 @@ const IcoCoins    = () => <svg width="17" height="17" viewBox="0 0 24 24" {...ic
 const IcoPercent  = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>;
 const IcoCalendar = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>;
 const IcoClock    = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>;
+const IcoTarget   = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></svg>;
+const IcoWarn     = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><path d="M12 3 22 20H2z"/><line x1="12" y1="9" x2="12" y2="14"/><line x1="12" y1="17.2" x2="12" y2="17.2"/></svg>;
+const IcoWeight   = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><rect x="4" y="8" width="16" height="13" rx="2"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>;
+const IcoShieldCheck = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><path d="M12 2 4 6v6c0 4 3 7 8 8 5-1 8-4 8-8V6z"/><path d="M9 12l2 2 4-4"/></svg>;
+const IcoTrophy   = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><path d="M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M7 5H4v1a3 3 0 0 0 3 3M17 5h3v1a3 3 0 0 1-3 3"/><path d="M9 21h6M12 17v4"/></svg>;
 
 // ─── Pole z ikoną (poziome, boxowany input) ──────────────────────
-function FieldBox({ label, value, onChange, step, min, max, icon }: {
+function FieldBox({ label, value, onChange, step, min, max, icon, hint }: {
   label: string; value: string; onChange: (v: string) => void;
-  step?: string; min?: string; max?: string; icon: ReactNode;
+  step?: string; min?: string; max?: string; icon: ReactNode; hint?: string;
 }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
@@ -159,7 +166,10 @@ function FieldBox({ label, value, onChange, step, min, max, icon }: {
         background: 'rgba(46,125,79,0.1)', color: '#2e7d4f',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>{icon}</span>
-      <label style={{ flex: 1, fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: 'var(--text)', lineHeight: 1.3 }}>{label}</label>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <label style={{ display: 'block', fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: 'var(--text)', lineHeight: 1.3 }}>{label}</label>
+        {hint && <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: 'var(--muted)', margin: '3px 0 0', lineHeight: 1.4 }}>{hint}</p>}
+      </div>
       <input
         type="number" value={value} step={step ?? 'any'} min={min} max={max}
         onChange={e => onChange(e.target.value)}
@@ -439,12 +449,12 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
   const [belka,       setBelka]       = useState(false);
 
   // ── Risk / Reward ──
-  const [entry,       setEntry]       = useState('');
-  const [sl,          setSl]          = useState('');
-  const [tp,          setTp]          = useState('');
+  const [entry,       setEntry]       = useState('100');
+  const [sl,          setSl]          = useState('97.50');
+  const [tp,          setTp]          = useState('107.50');
   const [accountSize, setAccountSize] = useState('10000');
   const [riskPct,     setRiskPct]     = useState('1');
-  const [winRate,     setWinRate]     = useState('');
+  const [winRate,     setWinRate]     = useState('55');
 
   // ── FIRE ──
   const [fireSavings,   setFireSavings]   = useState('50000');
@@ -909,89 +919,84 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
       {/* ── RISK / REWARD ────────────────────────────────────────── */}
       {tab === 'rr' && (
         <div className="calc-grid">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-            <Field label="Cena wejścia"  value={entry} onChange={setEntry} placeholder="np. 100.00" />
-            <Field label="Stop Loss"     value={sl}    onChange={setSl}    placeholder="np. 97.50" />
-            <Field label="Take Profit"   value={tp}    onChange={setTp}    placeholder="np. 107.50" />
-            <Sep />
-            <Field label="Wielkość konta (PLN)"     value={accountSize} onChange={setAccountSize} step="1000" />
-            <Field label="Ryzyko na transakcję (%)" value={riskPct}     onChange={setRiskPct}     step="0.1"
-              hint="Zalecane: 1-2% kapitału na jedną transakcję." />
-            <Sep />
-            <Field label="Twój winrate (%) — opcjonalnie" value={winRate} onChange={setWinRate}
-              placeholder="np. 55" step="1" min="1" max="100"
-              hint="Wpisz swój historyczny % wygranych żeby zobaczyć oczekiwaną wartość (EV)." />
+          {/* Karta wejść */}
+          <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '28px 26px', display: 'flex', flexDirection: 'column', gap: 22 }}>
+            <FieldBox icon={<IcoCoins />}   label="Cena wejścia" value={entry} onChange={setEntry} hint="np. 100.00" />
+            <FieldBox icon={<IcoBelka />}   label="Stop Loss"    value={sl}    onChange={setSl}    hint="np. 97.50" />
+            <FieldBox icon={<IcoTarget />}  label="Take Profit"  value={tp}    onChange={setTp}    hint="np. 107.50" />
+            <FieldBox icon={<IcoWplaty />}  label="Wielkość konta (PLN)" value={accountSize} onChange={setAccountSize} step="1000" />
+            <FieldBox icon={<IcoPercent />} label="Ryzyko na transakcję (%)" value={riskPct} onChange={setRiskPct} step="0.1" hint="Zalecane: 1-2% kapitału na jedną transakcję." />
+            <FieldBox icon={<IcoZysk />}    label="Twój winrate (%) — opcjonalnie" value={winRate} onChange={setWinRate} step="1" min="1" max="100" hint="Wpisz historyczny % wygranych, by zobaczyć oczekiwaną wartość (EV)." />
           </div>
 
+          {/* Wyniki */}
           <div>
             {rr ? (
               <>
-                <div style={{ marginBottom: 24 }}>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--muted)', marginBottom: 8 }}>
-                    Stosunek zysku do ryzyka — {rr.isLong ? 'pozycja długa' : 'pozycja krótka'}
-                  </p>
-                  <p style={{
-                    fontFamily: 'var(--font-display)', fontSize: '3.8rem', lineHeight: 1,
-                    color: rr.ratio >= 2 ? '#2e7d4f' : rr.ratio >= 1 ? '#6b9c7e' : '#ff2d78',
-                  }}>
-                    1&thinsp;:&thinsp;{rr.ratio.toFixed(2)}
-                  </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+                  <span style={{ color: '#2e7d4f', display: 'flex' }}><IcoZysk /></span>
+                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '1.5px', color: 'var(--muted)', textTransform: 'uppercase' }}>Wyniki</span>
                 </div>
 
-                {/* Wizualny pasek R:R */}
-                <RRBar risk={rr.riskPer} reward={rr.rewardPer} />
-
-                <Row label="Kwota ryzyka"       value={`${fmt(rr.riskAmt)} PLN`}   color="#ff2d78" />
-                <Row label="Potencjalny zysk"   value={`${fmt(rr.profitAmt)} PLN`} color="#2e7d4f" large />
-                <Row label="Ryzyko / jednostka" value={rr.riskPer.toFixed(4)} />
-                <Row label="Zysk / jednostka"   value={rr.rewardPer.toFixed(4)} />
-                <Row label="Wielkość pozycji"   value={`${fmtD(rr.posSize, 2)} jednostek`} />
-
-                {/* Break-even winrate */}
-                <div style={{ marginTop: 20, padding: '14px 16px', background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: 'var(--muted)', marginBottom: 4 }}>
-                    Break-even winrate — minimalny % wygranych żeby wychodzić na zero
-                  </p>
-                  <p style={{
-                    fontFamily: 'var(--font-display)', fontSize: '2rem', lineHeight: 1,
-                    color: rr.beWinRate < 40 ? '#10b981' : rr.beWinRate < 50 ? '#2e7d4f' : '#ff2d78',
-                  }}>
-                    {rr.beWinRate.toFixed(1)}%
-                  </p>
+                <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '4px 22px' }}>
+                  <Row icon={<IcoWarn />} iconColor="#e5484d" label="Ryzyko na transakcję" sub="(PLN)"
+                    value={`${fmtD(rr.riskAmt, 2)} PLN`} valueSub={`(${fmtD(Number(riskPct), 2)}%)`} color="#e5484d" />
+                  <Row icon={<IcoWeight />} iconColor="#3b82f6" label="Wielkość pozycji" sub="(jednostek)"
+                    value={fmtD(rr.posSize, 2)} color="#3b82f6" />
+                  <Row icon={<IcoBelka />} iconColor="#e5484d" label="Odległość do SL" sub="(pkt / %)"
+                    value={fmtD(rr.riskPer, 2)}
+                    valueSub={Number(entry) > 0 ? `(${fmtD(rr.riskPer / Number(entry) * 100, 2)}%)` : undefined} color="#e5484d" />
+                  <Row icon={<IcoTarget />} iconColor="#2e7d4f" label="Odległość do TP" sub="(pkt / %)"
+                    value={fmtD(rr.rewardPer, 2)}
+                    valueSub={Number(entry) > 0 ? `(${fmtD(rr.rewardPer / Number(entry) * 100, 2)}%)` : undefined} color="#2e7d4f" />
+                  <Row icon={<IcoShieldCheck />} iconColor="#2e7d4f" label="Risk / Reward"
+                    value={`1 : ${rr.ratio.toFixed(2)}`} large
+                    color={rr.ratio >= 2 ? '#2e7d4f' : rr.ratio >= 1 ? '#6b9c7e' : '#e5484d'} />
+                  <Row icon={<IcoCoins />} iconColor="#2e7d4f" label="Potencjalny zysk" sub="(PLN)"
+                    value={`${fmtD(rr.profitAmt, 2)} PLN`} color="#2e7d4f" />
                 </div>
 
-                {/* Expected Value (jeśli podano winrate) */}
+                {/* EV */}
                 {rr.hasWR && rr.ev !== null && rr.evAmt !== null && (
-                  <div style={{ marginTop: 12, padding: '14px 16px', background: 'var(--surface)', border: `1px solid ${rr.ev >= 0 ? 'rgba(16,185,129,0.3)' : 'rgba(255,45,120,0.3)'}` }}>
-                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: 'var(--muted)', marginBottom: 4 }}>
-                      Oczekiwana wartość (EV) przy winrate {winRate}%
-                    </p>
-                    <p style={{
-                      fontFamily: 'var(--font-display)', fontSize: '1.8rem', lineHeight: 1,
-                      color: rr.ev >= 0 ? '#10b981' : '#ff2d78',
-                    }}>
-                      {rr.ev >= 0 ? '+' : ''}{fmtD(rr.ev, 4)} / jednostkę
-                    </p>
-                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: rr.ev >= 0 ? '#10b981' : '#ff2d78', marginTop: 6, fontWeight: 600 }}>
-                      {rr.ev >= 0 ? '+' : ''}{fmt(rr.evAmt)} PLN na tej transakcji
+                  <div style={{ marginTop: 14, background: 'rgba(46,125,79,0.06)', border: '1px solid rgba(46,125,79,0.25)', borderRadius: 16, padding: '4px 22px' }}>
+                    <Row icon={<IcoTrophy />} iconColor={rr.evAmt >= 0 ? '#2e7d4f' : '#e5484d'}
+                      label="Oczekiwana wartość (EV)" sub={`(przy winrate ${winRate}%)`}
+                      value={`${fmtD(rr.evAmt, 2)} PLN`}
+                      valueSub={Number(accountSize) > 0 ? `(${fmtD(rr.evAmt / Number(accountSize) * 100, 2)}%)` : undefined}
+                      color={rr.evAmt >= 0 ? '#2e7d4f' : '#e5484d'} large />
+                  </div>
+                )}
+
+                {/* Info EV */}
+                {rr.hasWR && (
+                  <div style={{ marginTop: 14, display: 'flex', gap: 12, alignItems: 'flex-start', background: 'var(--surface)', borderRadius: 12, padding: '14px 18px' }}>
+                    <span style={{
+                      width: 22, height: 22, borderRadius: '50%', flexShrink: 0, marginTop: 1,
+                      background: 'rgba(46,125,79,0.12)', color: '#2e7d4f',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 700,
+                    }}>i</span>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', color: 'var(--muted)', lineHeight: 1.65, margin: 0 }}>
+                      EV = (Winrate × Średni zysk) − ((1 − Winrate) × Ryzyko). Dodatnia wartość EV oznacza przewagę statystyczną.
                     </p>
                   </div>
                 )}
 
                 {rr.ratio < 1 && (
                   <p style={{
-                    fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#ff2d78',
-                    lineHeight: 1.65, marginTop: 20, paddingLeft: 12,
-                    borderLeft: '2px solid rgba(255,45,120,0.4)',
+                    fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: '#e5484d',
+                    lineHeight: 1.65, marginTop: 16, paddingLeft: 12,
+                    borderLeft: '2px solid rgba(229,72,77,0.4)',
                   }}>
                     Ryzykujesz więcej niż możesz zyskać. Przesuń take profit lub stop loss.
                   </p>
                 )}
               </>
             ) : (
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: 'var(--muted)', lineHeight: 1.8 }}>
-                Wpisz cenę wejścia, stop loss i take profit po lewej, żeby zobaczyć wyniki.
-              </p>
+              <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '28px 26px' }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: 'var(--muted)', lineHeight: 1.8, margin: 0 }}>
+                  Wpisz cenę wejścia, stop loss i take profit po lewej, żeby zobaczyć wyniki.
+                </p>
+              </div>
             )}
           </div>
         </div>
