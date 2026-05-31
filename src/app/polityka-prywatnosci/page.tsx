@@ -32,7 +32,7 @@ const sections = [
     title: '2. Jakie dane zbieramy',
     content: `Serwis może zbierać następujące dane:`,
     list: [
-      'Dane analityczne - anonimowe dane o ruchu na stronie (liczba odwiedzin, źródła ruchu, przeglądane podstrony)',
+      'Dane analityczne - zanonimizowane dane o ruchu na stronie (liczba odwiedzin, źródła ruchu, przeglądane podstrony)',
       'Dane techniczne - adres IP, typ przeglądarki, system operacyjny - przetwarzane automatycznie przez serwery hostingowe',
       'Dane kontaktowe - adres e-mail wyłącznie w przypadku dobrowolnego kontaktu z administratorem',
       'Dane newslettera - adres e-mail podany dobrowolnie przez użytkownika podczas zapisu na newsletter',
@@ -42,8 +42,8 @@ const sections = [
     title: '3. Cel i podstawa przetwarzania danych',
     content: `Dane przetwarzane są w następujących celach:`,
     list: [
-      'Analiza ruchu i optymalizacja serwisu - na podstawie prawnie uzasadnionego interesu administratora (art. 6 ust. 1 lit. f RODO)',
-      'Obsługa zapytań kontaktowych - na podstawie prawnie uzasadnionego interesu administratora',
+      'Analiza ruchu i optymalizacja serwisu - na podstawie prawnie uzasadnionego interesu administratora (art. 6 ust. 1 lit. f RODO), polegającego na analizie i poprawie funkcjonowania serwisu',
+      'Obsługa zapytań kontaktowych - na podstawie prawnie uzasadnionego interesu administratora (art. 6 ust. 1 lit. f RODO), polegającego na udzielaniu odpowiedzi na kierowane zapytania',
       'Wysyłka newslettera - na podstawie zgody użytkownika wyrażonej przez zapis na newsletter (art. 6 ust. 1 lit. a RODO)',
     ],
   },
@@ -57,7 +57,7 @@ const sections = [
       'Upstash, Inc. - dostawca bazy danych przechowującej adresy e-mail subskrybentów newslettera',
       'Organy publiczne - wyłącznie gdy obowiązek przekazania danych wynika z przepisów prawa',
     ],
-    extra: 'Administrator nie sprzedaje danych osobowych podmiotom trzecim ani nie udostępnia ich w celach marketingowych bez zgody użytkownika.',
+    extra: 'Niektórzy odbiorcy danych (m.in. Google LLC, Resend, Inc.) mają siedzibę poza Europejskim Obszarem Gospodarczym, w tym w Stanach Zjednoczonych. Przekazanie danych do państw trzecich odbywa się na podstawie standardowych klauzul umownych zatwierdzonych przez Komisję Europejską, zapewniających odpowiedni poziom ochrony danych. Administrator nie sprzedaje danych osobowych podmiotom trzecim ani nie udostępnia ich w celach marketingowych bez zgody użytkownika.',
   },
   {
     title: '5. Pliki cookies',
@@ -99,7 +99,7 @@ const sections = [
       'Prawo do ograniczenia przetwarzania - możesz żądać ograniczenia przetwarzania danych',
       'Prawo do przenoszenia danych - możesz otrzymać dane w ustrukturyzowanym formacie',
       'Prawo do sprzeciwu - możesz sprzeciwić się przetwarzaniu danych opartemu na prawnie uzasadnionym interesie',
-      'Prawo do cofnięcia zgody - w zakresie danych przetwarzanych na podstawie zgody',
+      'Prawo do cofnięcia zgody - w zakresie danych przetwarzanych na podstawie zgody; cofnięcie zgody nie wpływa na zgodność z prawem przetwarzania dokonanego przed jej cofnięciem',
     ],
     extra: 'Aby skorzystać z powyższych praw, skontaktuj się pod adresem: kisieltrade@gmail.com. Masz również prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych (UODO), ul. Stawki 2, 00-193 Warszawa.',
   },
@@ -112,7 +112,12 @@ const sections = [
     content: `Serwis może zawierać linki do zewnętrznych stron internetowych. Niniejsza polityka prywatności dotyczy wyłącznie serwisu KisielFinanse.pl. Administrator nie ponosi odpowiedzialności za polityki prywatności innych serwisów.`,
   },
   {
-    title: '11. Zmiany polityki prywatności',
+    title: '11. Dobrowolność podania danych i brak profilowania',
+    content: `Podanie danych osobowych jest dobrowolne. Podanie adresu e-mail jest jednak niezbędne do skorzystania z usługi newslettera lub uzyskania odpowiedzi na zapytanie - brak jego podania uniemożliwia realizację tych usług.`,
+    extra: 'Dane osobowe użytkowników nie są wykorzystywane do zautomatyzowanego podejmowania decyzji, w tym profilowania, wywołującego wobec użytkownika skutki prawne lub w podobny sposób istotnie na niego wpływającego.',
+  },
+  {
+    title: '12. Zmiany polityki prywatności',
     content: `Administrator zastrzega sobie prawo do zmiany niniejszej polityki prywatności. Aktualna wersja polityki jest zawsze dostępna pod adresem KisielFinanse.pl/polityka-prywatnosci. W przypadku istotnych zmian data ostatniej aktualizacji widoczna na górze dokumentu zostanie zaktualizowana.`,
   },
 ];
