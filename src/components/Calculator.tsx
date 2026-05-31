@@ -142,6 +142,37 @@ const IcoZysk    = () => <svg width="17" height="17" viewBox="0 0 24 24" {...ico
 const IcoBelka   = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><path d="M12 2 4 6v6c0 4 3 7 8 8 5-1 8-4 8-8V6z"/></svg>;
 const IcoRealna  = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5.6 5.6 4.2 4.2M19.8 19.8l-1.4-1.4M18.4 5.6l1.4-1.4M4.2 19.8l1.4-1.4"/></svg>;
 const IcoMnoznik = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><path d="M12 2 22 12 12 22 2 12z"/></svg>;
+const IcoCoins    = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg>;
+const IcoPercent  = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>;
+const IcoCalendar = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>;
+const IcoClock    = () => <svg width="17" height="17" viewBox="0 0 24 24" {...icoStroke}><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>;
+
+// ─── Pole z ikoną (poziome, boxowany input) ──────────────────────
+function FieldBox({ label, value, onChange, step, min, max, icon }: {
+  label: string; value: string; onChange: (v: string) => void;
+  step?: string; min?: string; max?: string; icon: ReactNode;
+}) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+      <span style={{
+        width: 36, height: 36, borderRadius: 9, flexShrink: 0,
+        background: 'rgba(46,125,79,0.1)', color: '#2e7d4f',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}>{icon}</span>
+      <label style={{ flex: 1, fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: 'var(--text)', lineHeight: 1.3 }}>{label}</label>
+      <input
+        type="number" value={value} step={step ?? 'any'} min={min} max={max}
+        onChange={e => onChange(e.target.value)}
+        style={{
+          width: 96, flexShrink: 0, background: 'var(--bg)',
+          border: '1px solid var(--border)', borderRadius: 10,
+          color: 'var(--text)', fontFamily: 'var(--font-body)', fontSize: '0.95rem', fontWeight: 700,
+          padding: '10px 12px', outline: 'none', boxSizing: 'border-box',
+        }}
+      />
+    </div>
+  );
+}
 
 // ─── Główna liczba ───────────────────────────────────────────────
 function MainResult({ label, value, color = '#2e7d4f', sub }: {
@@ -160,7 +191,7 @@ function MainResult({ label, value, color = '#2e7d4f', sub }: {
 
 // ─── Wykres liniowy (multi-linia) ────────────────────────────────
 function LineChart({ series }: {
-  series: { points: { year: number; val: number }[]; color: string; label: string }[];
+  series: { points: { year: number; val: number }[]; color: string; label: string; dashed?: boolean }[];
 }) {
   const W = 420, H = 210;
   const padT = 14, padB = 26, padL = 54, padR = 12;
@@ -215,9 +246,9 @@ function LineChart({ series }: {
         return (
           <g key={si}>
             <path d={area} fill={`url(#lc-fill-${si})`} />
-            <polyline points={linePts} fill="none" stroke={s.color} strokeWidth={si === 0 ? 2 : 1.5}
+            <polyline points={linePts} fill="none" stroke={s.color} strokeWidth={2}
               strokeLinejoin="round" strokeLinecap="round"
-              strokeDasharray={si === 1 ? '4 3' : si === 2 ? '2 3' : undefined} />
+              strokeDasharray={s.dashed ? '5 4' : undefined} />
           </g>
         );
       })}
@@ -585,9 +616,9 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
 
     // 3 scenariusze: pesymistyczny (rBase-3%), realistyczny (rBase), optymistyczny (rBase+3%)
     const scenarios = [
-      { label: `${Math.max(rBase * 100 - 3, 1).toFixed(0)}% (pesymistyczny)`, r: Math.max(rBase - 0.03, 0.01), color: '#ff2d78' },
+      { label: `${Math.max(rBase * 100 - 3, 1).toFixed(0)}% (pesymistyczny)`, r: Math.max(rBase - 0.03, 0.01), color: '#8b5cf6' },
       { label: `${(rBase * 100).toFixed(0)}% (realistyczny)`,                   r: rBase,                        color: '#2e7d4f' },
-      { label: `${(rBase * 100 + 3).toFixed(0)}% (optymistyczny)`,               r: rBase + 0.03,                 color: '#10b981' },
+      { label: `${(rBase * 100 + 3).toFixed(0)}% (optymistyczny)`,               r: rBase + 0.03,                 color: '#f59e0b' },
     ];
 
     // DCA końcowe wartości
@@ -753,8 +784,8 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
               </div>
               <LineChart series={[
                 { points: compound.nomPts,  color: '#2e7d4f', label: 'Nominalna' },
-                ...(inflation !== '0' ? [{ points: compound.realPts, color: '#8a94a0', label: 'Realna' }] : []),
-                ...(belka ? [{ points: compound.taxPts, color: '#6b9c7e', label: 'Po Belce' }] : []),
+                ...(inflation !== '0' ? [{ points: compound.realPts, color: '#8a94a0', label: 'Realna', dashed: true }] : []),
+                ...(belka ? [{ points: compound.taxPts, color: '#6b9c7e', label: 'Po Belce', dashed: true }] : []),
               ]} />
 
               <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--border-subtle)' }}>
@@ -778,67 +809,73 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
 
       {/* ── DCA ──────────────────────────────────────────────────── */}
       {tab === 'dca' && (
-        <div className="calc-grid">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-            <Sep />
-            <Field label="Miesięczna wpłata (PLN)" value={dcaMonthly} onChange={setDcaMonthly} step="100" />
-            <Field label="Kapitał startowy (PLN)" value={dcaLump} onChange={setDcaLump} step="1000" />
-            <Sep />
-            <Field label="Oczekiwana stopa zwrotu — realistyczna (%)" value={dcaRate} onChange={setDcaRate} step="0.5" />
-            <Field label="Horyzont inwestycji (lat)" value={dcaYears} onChange={setDcaYears} step="1" min="1" max="50" />
-          </div>
-
-          <div>
-            <MainResult
-              label={`DCA przez ${dcaYears} lat — scenariusz realistyczny`}
-              value={`${fmt(dca.dcaFinals[1])} PLN`}
-              sub={`wpłacono: ${fmt(dca.totalInvested)} PLN · zysk: ${fmt(dca.dcaFinals[1] - dca.totalInvested)} PLN`}
-            />
-
-            {/* Scenariusze */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10, marginBottom: 20 }}>
-              {dca.scenarios.map((s, i) => (
-                <div key={i} style={{
-                  background: 'var(--surface)', border: `1px solid ${s.color}33`,
-                  padding: '12px', borderTop: `2px solid ${s.color}`,
-                }}>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.65rem', color: s.color, marginBottom: 6, fontWeight: 600 }}>
-                    {s.label.split(' ')[0]} %
-                  </p>
-                  <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', color: s.color, lineHeight: 1, margin: '0 0 4px' }}>
-                    {fmt(dca.dcaFinals[i])} PLN
-                  </p>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: 'var(--muted)', margin: 0 }}>
-                    +{fmt(dca.dcaFinals[i] - dca.totalInvested)} zysk
-                  </p>
-                </div>
-              ))}
+        <>
+          <div className="calc-grid">
+            {/* Karta wejść */}
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '28px 26px', display: 'flex', flexDirection: 'column', gap: 22 }}>
+              <FieldBox icon={<IcoWplaty />}   label="Miesięczna wpłata (PLN)" value={dcaMonthly} onChange={setDcaMonthly} step="100" />
+              <FieldBox icon={<IcoCoins />}    label="Kapitał startowy (PLN)" value={dcaLump} onChange={setDcaLump} step="1000" />
+              <FieldBox icon={<IcoPercent />}  label="Oczekiwana stopa zwrotu — realistyczna (%)" value={dcaRate} onChange={setDcaRate} step="0.5" />
+              <FieldBox icon={<IcoCalendar />} label="Horyzont inwestycji (lat)" value={dcaYears} onChange={setDcaYears} step="1" min="1" max="50" />
             </div>
 
-            <Row label="Łącznie wpłacono"    value={`${fmt(dca.totalInvested)} PLN`} />
-            <Row label="DCA (realistyczny)"   value={`${fmt(dca.dcaFinals[1])} PLN`}  color="#2e7d4f" large />
-            <Row
-              label={`Lump sum (całość na start przy ${dcaRate}%)`}
-              value={`${fmt(dca.lumpSumFinal)} PLN`}
-              color={dca.lumpSumFinal > dca.dcaFinals[1] ? '#8a94a0' : 'var(--muted)'}
-              sub={dca.lumpSumFinal > dca.dcaFinals[1] ? 'lump sum wypada lepiej' : 'DCA wypada lepiej'}
-            />
+            {/* Wyniki */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div style={{ background: 'rgba(46,125,79,0.06)', border: '1px solid rgba(46,125,79,0.18)', borderRadius: 16, padding: '22px 24px' }}>
+                <MainResult
+                  label={`DCA przez ${dcaYears} lat — scenariusz realistyczny`}
+                  value={`${fmt(dca.dcaFinals[1])} PLN`}
+                  sub={`wpłacono: ${fmt(dca.totalInvested)} PLN · zysk: ${fmt(dca.dcaFinals[1] - dca.totalInvested)} PLN`}
+                />
+              </div>
 
-            {/* Koszt zwłoki */}
+              {/* 3 scenariusze */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+                {dca.scenarios.map((s, i) => (
+                  <div key={i} style={{ background: `${s.color}12`, border: `1px solid ${s.color}33`, borderRadius: 12, padding: '14px 14px' }}>
+                    <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', color: s.color, lineHeight: 1, margin: '0 0 8px' }}>
+                      {s.label.split(' ')[0]}
+                    </p>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', fontWeight: 700, color: 'var(--text)', margin: '0 0 4px' }}>
+                      {fmt(dca.dcaFinals[i])} PLN
+                    </p>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)', margin: 0 }}>
+                      +{fmt(dca.dcaFinals[i] - dca.totalInvested)} zysk
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Wpłacono / DCA / Lump sum */}
+              <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: '4px 20px' }}>
+                <Row label="Łącznie wpłacono"  value={`${fmt(dca.totalInvested)} PLN`} />
+                <Row label="DCA (realistyczny)" value={`${fmt(dca.dcaFinals[1])} PLN`} color="#2e7d4f" large />
+                <Row
+                  label={`Lump sum (całość na start przy ${dcaRate}%)`}
+                  value={`${fmt(dca.lumpSumFinal)} PLN`}
+                  color="#8b5cf6"
+                  sub={dca.lumpSumFinal > dca.dcaFinals[1] ? '→ lump sum wypada lepiej' : '→ DCA wypada lepiej'}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Dolny rząd: koszt zwłoki + wykres */}
+          <div className="calc-grid" style={{ marginTop: 20 }}>
             {dca.delay.length > 0 && (
-              <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--border-subtle)' }}>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8rem', color: 'var(--muted)', marginBottom: 12 }}>
-                  Koszt zwłoki — ile tracisz zaczynając później
+              <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '22px 24px' }}>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', fontWeight: 700, color: '#2e7d4f', marginBottom: 8 }}>
+                  Koszt zwłoki <span style={{ color: 'var(--muted)', fontWeight: 400 }}>— ile tracisz zaczynając później</span>
                 </p>
                 {dca.delay.map(d => (
-                  <div key={d.delayYears} style={{
-                    display: 'flex', justifyContent: 'space-between', padding: '8px 0',
-                    borderBottom: '1px solid var(--border-subtle)',
-                  }}>
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--muted)' }}>
-                      Zaczynasz za {d.delayYears} {d.delayYears === 1 ? 'rok' : 'lata'}
-                    </span>
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: '#ff2d78', fontWeight: 600 }}>
+                  <div key={d.delayYears} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, padding: '12px 0', borderBottom: '1px solid var(--border-subtle)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                      <span style={{ width: 34, height: 34, borderRadius: 9, background: 'rgba(46,125,79,0.1)', color: '#2e7d4f', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><IcoClock /></span>
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: 'var(--text)' }}>
+                        Zaczynasz za {d.delayYears} {d.delayYears === 1 ? 'rok' : 'lata'}
+                      </span>
+                    </div>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: '#ef4444', fontWeight: 700, whiteSpace: 'nowrap' }}>
                       -{fmt(d.diff)} PLN
                     </span>
                   </div>
@@ -846,15 +883,14 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
               </div>
             )}
 
-            {/* Wykres 3 scenariuszy */}
             {dca.chartPts[0].length >= 2 && (
-              <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--border-subtle)' }}>
+              <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 16, padding: '22px 24px' }}>
                 <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 10 }}>
                   {dca.scenarios.map(s => (
                     <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                       <div style={{ width: 20, height: 2, background: s.color }} />
                       <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--muted)' }}>
-                        {s.label.split(' ')[0]}%
+                        {s.label.split(' ')[0]}
                       </span>
                     </div>
                   ))}
@@ -867,7 +903,7 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
               </div>
             )}
           </div>
-        </div>
+        </>
       )}
 
       {/* ── RISK / REWARD ────────────────────────────────────────── */}
