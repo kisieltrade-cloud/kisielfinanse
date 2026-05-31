@@ -69,7 +69,7 @@ export default function KredytGotowkowyPage() {
           .kg-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
           @media (max-width: 760px) { .kg-hero { grid-template-columns: 1fr; gap: 20px; } }
         `}</style>
-        <div style={{ background: '#f4f1ea' }}>
+        <div style={{ background: 'var(--calc-section)' }}>
           <div className="kg-hero" style={{ maxWidth: 1040, margin: '0 auto', padding: '48px 24px 8px' }}>
             <div>
               <p style={{
@@ -84,13 +84,13 @@ export default function KredytGotowkowyPage() {
                 fontSize: 'clamp(2.6rem, 7vw, 4.6rem)',
                 letterSpacing: '-1px',
                 lineHeight: 1.02,
-                color: '#1a2230',
+                color: 'var(--calc-text)',
                 margin: '0 0 22px',
               }}>
                 Kredyt<br />gotówkowy
               </h1>
               <p style={{
-                fontFamily: 'var(--font-ui)', fontSize: '1rem', color: '#5d6b7a',
+                fontFamily: 'var(--font-ui)', fontSize: '1rem', color: 'var(--calc-muted)',
                 lineHeight: 1.7, maxWidth: 480, margin: 0,
               }}>
                 Rata miesięczna i RRSO z uwzględnieniem prowizji i ubezpieczenia.

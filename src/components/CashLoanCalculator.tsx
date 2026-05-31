@@ -12,7 +12,7 @@ const C = {
   panelCard:'#1b2733',
   panelLine:'rgba(255,255,255,0.09)',
   panelMuted:'#8a98a6',
-  bg:       '#f4f1ea',
+  bg:       'var(--calc-section)',
   white:    '#ffffff',
   text:     '#1a2230',
   muted:    '#5d6b7a',

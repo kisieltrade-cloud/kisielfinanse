@@ -407,7 +407,7 @@ export default function MortgageCalculator() {
 
       <div style={{
         position: 'relative',
-        background: '#edf0f4',
+        background: 'var(--calc-section)',
         padding: '48px 0 64px',
         overflow: 'hidden',
       }}>

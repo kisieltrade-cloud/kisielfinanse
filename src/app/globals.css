@@ -24,6 +24,10 @@
   --hero-fade: linear-gradient(180deg, transparent 60%, #ffffff 100%);
   /* Noise */
   --noise-opacity: 0;
+  /* Tło/teksty sekcji kalkulatorów (adaptują się do motywu) */
+  --calc-section: #f4f1ea;
+  --calc-text:    #1a2230;
+  --calc-muted:   #5d6b7a;
 }
 
 /* ── DARK MODE ── */
@@ -39,6 +43,9 @@
   --hero-overlay:   linear-gradient(90deg, rgba(3,5,8,0.97) 0%, rgba(3,5,8,0.88) 35%, rgba(3,5,8,0.55) 58%, #030508 78%, #030508 100%);
   --hero-fade:      linear-gradient(180deg, transparent 60%, #030508 100%);
   --noise-opacity:  0.35;
+  --calc-section: #0c1117;
+  --calc-text:    #e8edf5;
+  --calc-muted:   #9aa7b6;
 }
 
 *,
