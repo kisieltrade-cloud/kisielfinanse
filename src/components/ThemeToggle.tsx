@@ -4,25 +4,30 @@ import { useState, useEffect } from 'react';
 export default function ThemeToggle() {
   const [dark, setDark] = useState(false);
 
-  // Inicjalizacja z localStorage
+  // Inicjalizacja: zapisany wybór ma priorytet; bez wyboru — podążamy za systemem
+  // (nie ustawiamy atrybutu, żeby zadziałał @media prefers-color-scheme w CSS).
   useEffect(() => {
     const saved = localStorage.getItem('theme');
     if (saved === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
       setDark(true);
+    } else if (saved === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      setDark(false);
+    } else {
+      const prefersDark = typeof window !== 'undefined'
+        && window.matchMedia
+        && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setDark(!!prefersDark);
     }
   }, []);
 
   const toggle = () => {
     const next = !dark;
     setDark(next);
-    if (next) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-      localStorage.setItem('theme', 'light');
-    }
+    // Jawny wybór nadpisuje preferencję systemu
+    document.documentElement.setAttribute('data-theme', next ? 'dark' : 'light');
+    localStorage.setItem('theme', next ? 'dark' : 'light');
   };
 
   return (
