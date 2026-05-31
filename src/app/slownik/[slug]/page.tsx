@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { GLOSSARY, getTermBySlug } from '@/lib/glossary';
+import { articlesForTerm } from '@/lib/glossary-articles';
 
 const BASE_URL = 'https://kisielfinanse.pl';
 const ACCENT = '#c9a227';
@@ -43,6 +44,8 @@ export default async function TermPage({ params }: Props) {
   const related = (term.related ?? [])
     .map((s) => getTermBySlug(s))
     .filter((t): t is NonNullable<typeof t> => Boolean(t));
+
+  const relatedArticles = await articlesForTerm(term.aliases);
 
   const schema = {
     '@context': 'https://schema.org',
@@ -123,6 +126,31 @@ export default async function TermPage({ params }: Props) {
                 </Link>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* Artykuły na ten temat */}
+        {relatedArticles.length > 0 && (
+          <div style={{ marginTop: 48, borderTop: '1px solid var(--border)', paddingTop: 28 }}>
+            <div style={{
+              fontFamily: 'var(--font-mono)', fontSize: '0.7rem', letterSpacing: '2px',
+              color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 14,
+            }}>
+              Artykuły na ten temat
+            </div>
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {relatedArticles.map((a) => (
+                <li key={a.slug}>
+                  <Link href={a.url} style={{
+                    fontFamily: 'var(--font-body)', fontSize: '0.9rem', color: 'var(--text)',
+                    textDecoration: 'none', display: 'inline-flex', alignItems: 'baseline', gap: 8,
+                  }}>
+                    <span style={{ color: ACCENT }}>→</span>
+                    {a.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
 

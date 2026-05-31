@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { getAllTermsSorted } from '@/lib/glossary';
+import SlownikClient from './SlownikClient';
 
 const BASE_URL = 'https://kisielfinanse.pl';
 const ACCENT = '#c9a227';
@@ -58,31 +59,7 @@ export default function SlownikPage() {
           </p>
         </div>
 
-        <div style={{
-          display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16,
-        }}>
-          {terms.map((t) => (
-            <Link key={t.slug} href={`/slownik/${t.slug}`} style={{ textDecoration: 'none' }}>
-              <div style={{
-                height: '100%', background: 'var(--surface)', border: '1px solid var(--border)',
-                borderLeft: `3px solid ${ACCENT}`, padding: '18px 20px',
-              }}>
-                <div style={{
-                  fontFamily: 'var(--font-display)', fontSize: '1.15rem', letterSpacing: '1px',
-                  color: 'var(--text)', marginBottom: 8,
-                }}>
-                  {t.term}
-                </div>
-                <div style={{
-                  fontFamily: 'var(--font-mono)', fontSize: '0.74rem', color: 'var(--muted)',
-                  lineHeight: 1.7,
-                }}>
-                  {t.short}
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <SlownikClient terms={terms.map(({ slug, term, short }) => ({ slug, term, short }))} />
 
         <div style={{ marginTop: 48 }}>
           <Link href="/" style={{
