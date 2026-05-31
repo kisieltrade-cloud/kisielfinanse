@@ -3,6 +3,7 @@ import { getAllPosts, tagToSlug } from '@/lib/posts';
 import { postUrl } from '@/lib/url';
 import { CATEGORIES } from '@/lib/categories';
 import { CALCULATOR_SLUGS } from '@/lib/calculators';
+import { GLOSSARY } from '@/lib/glossary';
 
 const BASE_URL = 'https://kisielfinanse.pl';
 
@@ -126,5 +127,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...categoryPages, ...blogPages];
+  // ── Słownik pojęć ───────────────────────────────────────────────────────────
+  const glossaryPages: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/slownik`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    ...GLOSSARY.map((t) => ({
+      url: `${BASE_URL}/slownik/${t.slug}`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    })),
+  ];
+
+  return [...staticPages, ...categoryPages, ...blogPages, ...glossaryPages];
 }
