@@ -31,9 +31,11 @@ const sections = [
       'Usługodawca - Mateusz Kisielewicz, osoba fizyczna prowadząca serwis pod nazwą KisielFinanse, adres e-mail: kisieltrade@gmail.com',
       'Serwis - strona internetowa dostępna pod adresem KisielFinanse.pl wraz ze wszystkimi podstronami',
       'Użytkownik - każda osoba korzystająca z Serwisu',
+      'Konsument - Użytkownik będący osobą fizyczną, dokonujący czynności niezwiązanej bezpośrednio z jego działalnością gospodarczą lub zawodową',
+      'Newsletter - usługa polegająca na przesyłaniu drogą elektroniczną informacji na podany przez Użytkownika adres e-mail',
       'Usługi - usługi świadczone drogą elektroniczną opisane w niniejszym regulaminie',
     ],
-    extra: 'Rozpoczęcie korzystania z Serwisu oznacza akceptację niniejszego regulaminu. Regulamin jest udostępniany nieodpłatnie i w formie umożliwiającej jego pobranie, utrwalenie i wydrukowanie.',
+    extra: 'Rozpoczęcie korzystania z Serwisu oznacza akceptację niniejszego regulaminu. Regulamin jest udostępniany nieodpłatnie i w formie umożliwiającej jego pobranie, utrwalenie i wydrukowanie. Zakazane jest dostarczanie przez Użytkownika treści o charakterze bezprawnym.',
   },
   {
     title: '2. Rodzaj i zakres usług',
@@ -44,7 +46,7 @@ const sections = [
       'Komentarze - możliwość dodawania komentarzy pod treściami za pośrednictwem zewnętrznego systemu Giscus opartego o GitHub Discussions',
       'Kalkulatory i quizy - interaktywne narzędzia obliczeniowe i edukacyjne dostępne w Serwisie',
     ],
-    extra: 'Wszystkie usługi świadczone są nieodpłatnie. Usługodawca nie pobiera opłat za dostęp do treści Serwisu ani za korzystanie z dostępnych narzędzi.',
+    extra: 'Wszystkie usługi świadczone są nieodpłatnie. Usługodawca nie pobiera opłat za dostęp do treści Serwisu ani za korzystanie z dostępnych narzędzi. Umowa o świadczenie usługi dostępu do treści zawierana jest na czas oznaczony z chwilą wejścia do Serwisu i ulega rozwiązaniu z chwilą jego opuszczenia. Umowa o świadczenie usługi newslettera zawierana jest z chwilą zapisu i może zostać rozwiązana w każdej chwili poprzez rezygnację. Korzystanie z usług jest dobrowolne.',
   },
   {
     title: '3. Warunki techniczne korzystania z Serwisu',
@@ -55,7 +57,7 @@ const sections = [
       'W przypadku newslettera - aktywne konto poczty elektronicznej',
       'W przypadku komentarzy - aktywne konto w serwisie GitHub',
     ],
-    extra: 'Usługodawca nie ponosi odpowiedzialności za problemy techniczne lub ograniczenia sprzętowe i programowe po stronie Użytkownika, które uniemożliwiają korzystanie z Serwisu. Korzystanie z internetu wiąże się z typowymi zagrożeniami, dlatego zaleca się stosowanie aktualnego oprogramowania zabezpieczającego.',
+    extra: 'W zakresie dozwolonym przez obowiązujące przepisy prawa Usługodawca nie ponosi odpowiedzialności za problemy techniczne lub ograniczenia sprzętowe i programowe po stronie Użytkownika, które uniemożliwiają korzystanie z Serwisu. Korzystanie z sieci internet wiąże się z typowymi zagrożeniami (np. złośliwe oprogramowanie, próby nieuprawnionego dostępu do danych), dlatego zaleca się stosowanie aktualnego oprogramowania zabezpieczającego.',
   },
   {
     title: '4. Newsletter',
@@ -86,7 +88,7 @@ const sections = [
       'Decyzje inwestycyjne Użytkownik podejmuje samodzielnie, na własną odpowiedzialność i ryzyko',
       'Inwestowanie oraz trading wiążą się z ryzykiem utraty części lub całości zainwestowanego kapitału',
     ],
-    extra: 'Szczegółowe zastrzeżenia zawiera dokument Disclaimer dostępny w Serwisie. Usługodawca nie ponosi odpowiedzialności za skutki decyzji podjętych przez Użytkownika na podstawie treści zamieszczonych w Serwisie.',
+    extra: 'Szczegółowe zastrzeżenia zawiera dokument Disclaimer dostępny w Serwisie. W zakresie dozwolonym przez obowiązujące przepisy prawa Usługodawca nie ponosi odpowiedzialności za skutki decyzji podjętych przez Użytkownika na podstawie treści zamieszczonych w Serwisie. Powyższe nie wyłącza ani nie ogranicza odpowiedzialności Usługodawcy wobec Konsumenta w zakresie, w jakim jej wyłączenie lub ograniczenie jest niedopuszczalne na mocy bezwzględnie obowiązujących przepisów prawa.',
   },
   {
     title: '7. Prawa autorskie i własność intelektualna',
@@ -116,8 +118,10 @@ const sections = [
     content: `W zakresie funkcjonowania Serwisu obowiązują następujące zasady końcowe:`,
     list: [
       'Usługodawca zastrzega sobie prawo do zmiany regulaminu z ważnych przyczyn, w szczególności zmiany przepisów prawa lub zakresu świadczonych usług',
+      'O zmianie regulaminu Użytkownicy korzystający z usługi newslettera zostaną poinformowani drogą elektroniczną; zmiana wchodzi w życie po upływie wskazanego terminu, a dalsze korzystanie z usługi po tym terminie oznacza jej akceptację',
       'Aktualna wersja regulaminu jest zawsze dostępna pod adresem KisielFinanse.pl/regulamin',
-      'W sprawach nieuregulowanych w niniejszym regulaminie zastosowanie mają przepisy prawa polskiego, w szczególności Kodeksu cywilnego oraz ustawy o świadczeniu usług drogą elektroniczną',
+      'Postanowienia niniejszego regulaminu nie wyłączają ani nie ograniczają praw Konsumenta wynikających z bezwzględnie obowiązujących przepisów prawa',
+      'W sprawach nieuregulowanych w niniejszym regulaminie zastosowanie mają przepisy prawa polskiego, w szczególności Kodeksu cywilnego, ustawy o świadczeniu usług drogą elektroniczną oraz ustawy o prawach konsumenta',
     ],
     extra: 'Regulamin obowiązuje od daty ostatniej aktualizacji wskazanej na górze dokumentu.',
   },
