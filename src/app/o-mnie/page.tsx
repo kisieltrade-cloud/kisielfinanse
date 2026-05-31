@@ -161,7 +161,7 @@ function SectionLabel({ label }: { label: string }) {
 
 export default function OMnie() {
   return (
-    <>
+    <div data-theme="dark" style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <Nav />
 
       <script type="application/ld+json"
@@ -570,6 +570,6 @@ export default function OMnie() {
 
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
