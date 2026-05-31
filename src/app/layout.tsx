@@ -124,6 +124,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pl" className={`${syne.variable} ${jetbrains.variable} ${bebas.variable} ${inter.variable}`}>
       <head>
+        {/* Schemat kolorów: strona sama steruje motywem (data-theme), wyłącza auto-dark przeglądarki */}
+        <meta name="color-scheme" content="light dark" />
+
         {/* Consent Mode v2 - musi być PRZED tagiem GA */}
         <CookieConsentInit />
 
