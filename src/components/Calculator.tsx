@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo, type ReactNode } from 'react';
+import Image from 'next/image';
 
 type Tab = 'compound' | 'rr' | 'fire' | 'etf' | 'dca';
 export type { Tab };
@@ -374,9 +375,19 @@ function pickYears(max: number, n = 5): number[] {
   return [...new Set(out)].sort((a, b) => a - b);
 }
 
+// ─── Hero per zakładka (tytuł, opis, opcjonalne zdjęcie) ─────────
+const TAB_META: Record<Tab, { h1a: string; h1b: string; desc: string; heroImage?: string }> = {
+  compound: { h1a: 'PROCENT', h1b: 'SKŁADANY', desc: 'Oblicz ile urośnie Twój kapitał przy regularnych wpłatach i zadanej stopie zwrotu. Siła procentu składanego w liczbach.', heroImage: '/images/procent-skladany-hero.png' },
+  dca:      { h1a: 'UŚREDNIANIE', h1b: 'DCA', desc: 'Zobacz jak regularne, równe wpłaty (Dollar Cost Averaging) budują kapitał niezależnie od wahań rynku.' },
+  rr:       { h1a: 'RISK', h1b: 'REWARD', desc: 'Policz stosunek risk/reward, wielkość pozycji i potencjalny zysk przed każdą transakcją. Zarządzanie ryzykiem w praktyce.' },
+  fire:     { h1a: 'KALKULATOR', h1b: 'FIRE', desc: 'Ile lat zostało Ci do finansowej niezależności? Podaj oszczędności, miesięczne wpłaty i wydatki - kalkulator wyliczy datę FIRE.' },
+  etf:      { h1a: 'SYMULACJA', h1b: 'ETF', desc: 'Porównaj inwestycję w ETF z lokatą bankową. Zobacz różnicę w końcowym kapitale po uwzględnieniu podatku Belki.' },
+};
+
 // ─── GŁÓWNY KOMPONENT ────────────────────────────────────────────
 export default function Calculator({ initialTab = 'compound' }: { initialTab?: Tab }) {
   const [tab, setTab] = useState<Tab>(initialTab);
+  const meta = TAB_META[tab];
 
   // ── Procent składany ──
   const [principal,   setPrincipal]   = useState('10000');
@@ -615,7 +626,43 @@ export default function Calculator({ initialTab = 'compound' }: { initialTab?: T
   ];
 
   return (
-    <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 80px' }}>
+    <div style={{ maxWidth: 860, margin: '0 auto', padding: '8px 24px 80px' }}>
+
+      {/* Hero — reaguje na aktywną zakładkę */}
+      <style>{`
+        .calc-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+        @media (max-width: 760px) { .calc-hero { grid-template-columns: 1fr; gap: 20px; } }
+      `}</style>
+      <div className={meta.heroImage ? 'calc-hero' : undefined} style={{ marginBottom: 44 }}>
+        <div>
+          <h1 style={{
+            fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3.2rem)',
+            letterSpacing: '4px', marginBottom: 12, lineHeight: 1.05,
+          }}>
+            {meta.h1a}<br />
+            <span style={{ color: '#2e7d4f' }}>{meta.h1b}</span>
+          </h1>
+          <p style={{
+            fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--muted)',
+            lineHeight: 1.8, maxWidth: 560, margin: 0,
+          }}>
+            {meta.desc}
+          </p>
+        </div>
+        {meta.heroImage && (
+          <div style={{ justifySelf: 'end', width: '100%', maxWidth: 540 }}>
+            <Image
+              src={meta.heroImage}
+              alt="Tablet z rosnącym wykresem wartości portfela obok rośliny i książek"
+              width={524}
+              height={290}
+              priority
+              sizes="(max-width: 760px) 100vw, 540px"
+              style={{ width: '100%', height: 'auto', borderRadius: 14 }}
+            />
+          </div>
+        )}
+      </div>
 
       {/* Zakładki */}
       <div style={{ display: 'flex', marginBottom: 48, borderBottom: '1px solid var(--border-subtle)', overflowX: 'auto' }}>

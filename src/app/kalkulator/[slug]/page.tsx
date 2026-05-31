@@ -6,7 +6,6 @@ import Calculator, { type Tab } from '@/components/Calculator';
 import CalcRelated from '@/components/CalcRelated';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import RevealOnScroll from '@/components/RevealOnScroll';
-import Image from 'next/image';
 
 // ── Konfiguracja zakładek ─────────────────────────────────────────
 const TABS: Record<string, {
@@ -135,50 +134,6 @@ export default async function KalkulatorSlugPage(
             { label: 'Kalkulatory',   href: '/kalkulator' },
             { label: cfg.breadcrumb },
           ]} />
-        </div>
-
-        <style>{`
-          .calc-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
-          @media (max-width: 760px) { .calc-hero { grid-template-columns: 1fr; gap: 20px; } }
-        `}</style>
-        <div style={{ maxWidth: 900, margin: '0 auto', padding: '40px 24px 0' }}>
-          <div className={cfg.heroImage ? 'calc-hero' : undefined}>
-            <div>
-              <h1 style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2rem, 5vw, 3.2rem)',
-                letterSpacing: '4px',
-                marginBottom: 12,
-                lineHeight: 1.05,
-              }}>
-                {cfg.h1a}<br />
-                <span style={{ color: '#2e7d4f' }}>{cfg.h1b}</span>
-              </h1>
-              <p style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.8rem',
-                color: 'var(--muted)',
-                lineHeight: 1.8,
-                maxWidth: 560,
-                marginBottom: cfg.heroImage ? 0 : 48,
-              }}>
-                {cfg.desc}
-              </p>
-            </div>
-            {cfg.heroImage && (
-              <div style={{ justifySelf: 'end', width: '100%', maxWidth: 540 }}>
-                <Image
-                  src={cfg.heroImage}
-                  alt="Tablet z rosnącym wykresem wartości portfela obok rośliny i książek"
-                  width={524}
-                  height={290}
-                  priority
-                  sizes="(max-width: 760px) 100vw, 540px"
-                  style={{ width: '100%', height: 'auto', borderRadius: 14 }}
-                />
-              </div>
-            )}
-          </div>
         </div>
 
         <Calculator initialTab={cfg.tab} />
