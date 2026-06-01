@@ -21,7 +21,6 @@ import ReadTimeRing from '@/components/ReadTimeRing';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import AuthorBox from '@/components/AuthorBox';
 import NextArticleBar from '@/components/NextArticleBar';
-import GiscusComments from '@/components/GiscusComments';
 import NewsletterForm from '@/components/NewsletterForm';
 import RelatedCalcs from '@/components/RelatedCalcs';
 
@@ -328,8 +327,6 @@ export default async function ArticlePage({ params }: Props) {
         </div>
 
         <ShareButtons title={post.title} url={`/${category}/${slug}`} />
-
-        <GiscusComments slug={slug} />
 
         {/* Next article bar */}
         {nextPost && nextPost.slug !== slug && (

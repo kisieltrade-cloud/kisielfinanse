@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: { absolute: 'Regulamin | KisielFinanse' },
-  description: 'Regulamin serwisu KisielFinanse.pl - zasady korzystania z serwisu, zakres usług świadczonych drogą elektroniczną, newsletter, komentarze i prawa użytkownika.',
+  description: 'Regulamin serwisu KisielFinanse.pl - zasady korzystania z serwisu, zakres usług świadczonych drogą elektroniczną, newsletter i prawa użytkownika.',
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://kisielfinanse.pl/regulamin' },
   openGraph: {
@@ -43,7 +43,6 @@ const sections = [
     list: [
       'Dostęp do treści - artykuły, poradniki, analizy i materiały edukacyjne z zakresu finansów, inwestowania, tradingu i gospodarki',
       'Newsletter - cykliczne przesyłanie informacji na podany przez Użytkownika adres e-mail',
-      'Komentarze - możliwość dodawania komentarzy pod treściami za pośrednictwem zewnętrznego systemu Giscus opartego o GitHub Discussions',
       'Kalkulatory i quizy - interaktywne narzędzia obliczeniowe i edukacyjne dostępne w Serwisie',
     ],
     extra: 'Wszystkie usługi świadczone są nieodpłatnie. Usługodawca nie pobiera opłat za dostęp do treści Serwisu ani za korzystanie z dostępnych narzędzi. Umowa o świadczenie usługi dostępu do treści zawierana jest na czas oznaczony z chwilą wejścia do Serwisu i ulega rozwiązaniu z chwilą jego opuszczenia. Umowa o świadczenie usługi newslettera zawierana jest z chwilą zapisu i może zostać rozwiązana w każdej chwili poprzez rezygnację. Korzystanie z usług jest dobrowolne.',
@@ -55,7 +54,6 @@ const sections = [
       'Urządzenie z dostępem do sieci internet',
       'Aktualna przeglądarka internetowa z obsługą języka JavaScript i plików cookies',
       'W przypadku newslettera - aktywne konto poczty elektronicznej',
-      'W przypadku komentarzy - aktywne konto w serwisie GitHub',
     ],
     extra: 'W zakresie dozwolonym przez obowiązujące przepisy prawa Usługodawca nie ponosi odpowiedzialności za problemy techniczne lub ograniczenia sprzętowe i programowe po stronie Użytkownika, które uniemożliwiają korzystanie z Serwisu. Korzystanie z sieci internet wiąże się z typowymi zagrożeniami (np. złośliwe oprogramowanie, próby nieuprawnionego dostępu do danych), dlatego zaleca się stosowanie aktualnego oprogramowania zabezpieczającego.',
   },
@@ -70,14 +68,14 @@ const sections = [
     extra: 'Zasady przetwarzania danych osobowych w związku z usługą newslettera określa Polityka Prywatności dostępna w Serwisie.',
   },
   {
-    title: '5. Komentarze i treści Użytkowników',
-    content: `Użytkownik korzystający z funkcji komentarzy zobowiązany jest do korzystania z Serwisu w sposób zgodny z prawem i dobrymi obyczajami, a w szczególności do:`,
+    title: '5. Zasady korzystania z Serwisu',
+    content: `Użytkownik zobowiązany jest do korzystania z Serwisu w sposób zgodny z prawem i dobrymi obyczajami, a w szczególności do:`,
     list: [
-      'Niezamieszczania treści bezprawnych, obraźliwych, wulgarnych, naruszających dobra osobiste lub prawa osób trzecich',
-      'Niezamieszczania niezamówionych treści reklamowych (spamu) ani złośliwego oprogramowania',
+      'Niedostarczania treści o charakterze bezprawnym, obraźliwym ani naruszającym dobra osobiste lub prawa osób trzecich',
+      'Niepodejmowania działań zakłócających działanie Serwisu (np. nieuprawniony dostęp, złośliwe oprogramowanie)',
       'Poszanowania praw autorskich oraz obowiązujących przepisów prawa',
     ],
-    extra: 'Usługodawca zastrzega sobie prawo do usuwania komentarzy naruszających regulamin lub przepisy prawa. Komentarze obsługiwane są przez zewnętrzny system Giscus oparty o GitHub Discussions i podlegają również regulaminom oraz politykom prywatności tych usług.',
+    extra: 'W razie naruszenia powyższych zasad Usługodawca może ograniczyć lub zablokować dostęp do Serwisu w zakresie dozwolonym przez prawo.',
   },
   {
     title: '6. Charakter treści i wyłączenie odpowiedzialności',
