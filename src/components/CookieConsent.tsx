@@ -61,26 +61,18 @@ export default function CookieConsent() {
           to   { opacity: 1; }
         }
         @keyframes modalIn {
-          from { opacity: 0; transform: translate(-50%, -48%) scale(0.96); }
-          to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+          from { opacity: 0; transform: translate(-50%, 24px); }
+          to   { opacity: 1; transform: translate(-50%, 0); }
         }
         .cookie-btn-decline:hover { border-color: #3a4a5a !important; color: #e8edf5 !important; }
         .cookie-btn-accept:hover  { opacity: 0.85; }
       `}</style>
 
-      {/* Overlay - blokuje całą stronę */}
-      <div style={{
-        position: 'fixed', inset: 0, zIndex: 9998,
-        background: 'rgba(6, 10, 16, 0.85)',
-        backdropFilter: 'blur(4px)',
-        animation: 'fadeIn 0.3s ease',
-      }} />
-
-      {/* Modal - centrum ekranu */}
+      {/* Baner cookies - dolny pasek (nie blokuje ani nie przyciemnia strony) */}
       <div style={{
         position: 'fixed',
-        top: '50%', left: '50%',
-        transform: 'translate(-50%, -50%)',
+        bottom: 20, left: '50%',
+        transform: 'translateX(-50%)',
         zIndex: 9999,
         width: 'min(520px, calc(100vw - 32px))',
         background: '#0c1220',
