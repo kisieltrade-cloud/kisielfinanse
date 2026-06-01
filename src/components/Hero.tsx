@@ -2,6 +2,13 @@ import Link from 'next/link';
 import AnimatedCounter from '@/components/AnimatedCounter';
 import HeroArticles from '@/components/HeroArticles';
 
+function IcoStar() {
+  return (
+    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" stroke="#c9a227" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="19,4.5 23.1,14 33.4,14.7 25.9,22 28.3,32.1 19,26.8 9.7,32.1 12.1,22 4.6,14.7 14.9,14" />
+    </svg>
+  );
+}
 
 export default async function Hero() {
   return (
@@ -10,24 +17,30 @@ export default async function Hero() {
       {/* ── Layer 1: grid ── */}
       <div className="hero-grid" />
 
-      {/* ── Layer 2: hero background image ── */}
-      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
+
+
+      {/* ── Layer 2: laptop/phone — między tekstem a artykułami ── */}
+      <div style={{
+        position: 'absolute',
+        top: '50%', left: '24%',
+        transform: 'translate(-50%, -50%)',
+        width: '42%',
+        pointerEvents: 'none', zIndex: 0,
+      }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/hero-bg.png"
+          src="/hero-laptop.png"
           alt=""
           aria-hidden="true"
           style={{
-            width: '100%', height: '100%',
-            objectFit: 'cover', objectPosition: 'center right',
-            position: 'absolute', inset: 0,
-            opacity: 0.12,
+            width: '100%',
+            height: 'auto',
+            opacity: 0.45,
+            display: 'block',
+            maskImage: 'radial-gradient(ellipse 85% 80% at 50% 50%, black 40%, transparent 100%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 85% 80% at 50% 50%, black 40%, transparent 100%)',
           }}
         />
-        {/* Gradient overlay: left → fade right */}
-        <div style={{ position: 'absolute', inset: 0, background: 'var(--hero-overlay)', zIndex: 2 }} />
-        {/* Bottom fade */}
-        <div style={{ position: 'absolute', inset: 0, background: 'var(--hero-fade)', zIndex: 3 }} />
       </div>
 
       {/* ── Layer 3: glow accents ── */}
@@ -75,11 +88,81 @@ export default async function Hero() {
           </Link>
         </div>
 
-        {/* Mini stats */}
-        <div className="hero-mini-stats">
-          <div className="hero-mini-stat">
-            <span className="hero-mini-val"><AnimatedCounter target={9} /></span>
-            <span className="hero-mini-label">Lat doświadczenia</span>
+        {/* Mini stat cards */}
+        <style>{`
+          .hsc-row {
+            display: flex;
+            gap: 14px;
+            margin-top: 36px;
+            animation: fadeInUp 0.8s 0.6s ease both;
+            flex-wrap: wrap;
+          }
+          .hsc-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 22px 22px 20px;
+            border-radius: 18px;
+            overflow: hidden;
+            min-width: 148px;
+            background:
+              radial-gradient(135% 90% at 50% -10%, rgba(var(--hsc), 0.20), transparent 58%),
+              linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0) 42%),
+              #0b0f15;
+            border: 1px solid rgba(255,255,255,0.07);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 12px 34px rgba(0,0,0,0.5);
+            transition: transform 0.25s cubic-bezier(.2,0,0,1), box-shadow 0.25s, border-color 0.25s;
+          }
+          .hsc-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 14%; right: 14%; height: 1px;
+            background: linear-gradient(90deg, transparent, rgb(var(--hsc)), transparent);
+            opacity: 0.9;
+          }
+          .hsc-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(var(--hsc), 0.35);
+            box-shadow: 0 18px 46px rgba(0,0,0,0.55), 0 0 46px rgba(var(--hsc), 0.14);
+          }
+          .hsc-badge {
+            position: absolute; top: 13px; left: 13px;
+            width: 30px; height: 30px; border-radius: 50%;
+            background: rgba(var(--hsc), 0.14);
+            color: rgb(var(--hsc));
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-body); font-size: 0.68rem; font-weight: 700;
+          }
+          .hsc-icon {
+            margin: 20px 0 12px;
+            filter: drop-shadow(0 0 12px rgba(var(--hsc), 0.45));
+          }
+          .hsc-val {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: rgb(var(--hsc));
+            line-height: 1;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+          }
+          .hsc-label {
+            font-family: var(--font-mono);
+            font-size: 0.56rem;
+            color: var(--muted);
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.5;
+          }
+        `}</style>
+        <div className="hsc-row">
+          <div className="hsc-card" style={{ ['--hsc' as string]: '201,162,39' }}>
+            <span className="hsc-badge">01</span>
+            <span className="hsc-icon"><IcoStar /></span>
+            <span className="hsc-val"><AnimatedCounter target={9} /></span>
+            <span className="hsc-label">Lat<br/>doświadczenia</span>
           </div>
         </div>
       </div>
