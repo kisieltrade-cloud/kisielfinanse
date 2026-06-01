@@ -1,61 +1,62 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-function IconChart({ color }: { color: string }) {
+/* Ikony liniowe (stroke) - styl premium z mockupu */
+function IconPie({ color }: { color: string }) {
   return (
-    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-      <rect x="4"  y="34" width="11" height="18" rx="3" fill={color} opacity="0.5" />
-      <rect x="19" y="24" width="11" height="28" rx="3" fill={color} opacity="0.75" />
-      <rect x="34" y="12" width="11" height="40" rx="3" fill={color} />
-      <polyline points="9,32 24,22 39,10" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="39" cy="10" r="3.5" fill={color} />
+    <svg width="54" height="54" viewBox="0 0 56 56" fill="none" stroke={color} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M25 30 L25 8 A22 22 0 1 0 47 30 Z" />
+      <path d="M31 25 L31 6 A22 22 0 0 1 50 25 Z" />
     </svg>
   );
 }
-function IconRefresh({ color }: { color: string }) {
+function IconBars({ color }: { color: string }) {
   return (
-    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-      <path d="M46 28C46 38 38 46 28 46C18 46 10 38 10 28C10 18 18 10 28 10C34 10 39 12.5 42.5 17" stroke={color} strokeWidth="3.5" strokeLinecap="round" fill="none" />
-      <polyline points="42,8 43,18 33,17" stroke={color} strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <svg width="54" height="54" viewBox="0 0 56 56" fill="none" stroke={color} strokeWidth="4.5" strokeLinecap="round">
+      <line x1="14" y1="44" x2="14" y2="34" />
+      <line x1="24" y1="44" x2="24" y2="26" />
+      <line x1="34" y1="44" x2="34" y2="18" />
+      <line x1="44" y1="44" x2="44" y2="10" />
     </svg>
   );
 }
 function IconScales({ color }: { color: string }) {
   return (
-    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-      <line x1="28" y1="8" x2="28" y2="48" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="12" y1="48" x2="44" y2="48" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="28" y1="16" x2="12" y2="23" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="28" y1="16" x2="44" y2="23" stroke={color} strokeWidth="2.5" strokeLinecap="round" />
-      <ellipse cx="12" cy="30" rx="5" ry="7" fill={color} opacity="0.85" />
-      <ellipse cx="44" cy="32" rx="5" ry="7" fill={color} opacity="0.55" />
+    <svg width="54" height="54" viewBox="0 0 56 56" fill="none" stroke={color} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="28" cy="16" r="3" fill={color} stroke="none" />
+      <line x1="28" y1="19" x2="28" y2="22" />
+      <line x1="11" y1="22" x2="45" y2="22" />
+      <path d="M5 36 L17 36 L11 22 Z" />
+      <path d="M39 36 L51 36 L45 22 Z" />
     </svg>
   );
 }
-function IconFlame({ color }: { color: string }) {
+function IconShield({ color }: { color: string }) {
   return (
-    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-      <path d="M28 6C28 6 36 16 34 23C38 18 40 12 40 12C40 12 48 20 48 31C48 41 39 49 28 49C17 49 8 41 8 31C8 22 15 16 18 14C18 21 22 25 22 25C20 18 28 6 28 6Z" fill={color} opacity="0.7" />
-      <path d="M28 34C28 34 32 30 30 26C33 28 33 33 33 33C33 33 37 29 37 25C39 27 40 30 40 33C40 40 34.5 45 28 45C21.5 45 16 40 16 33C16 29 18 26 20 24C19 28 22 31 22 31C20 27 28 18 28 34Z" fill={color} />
+    <svg width="54" height="54" viewBox="0 0 56 56" fill="none" stroke={color} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M28 7 L45 13 V27 C45 38 37.5 45.5 28 49 C18.5 45.5 11 38 11 27 V13 Z" />
+      <path d="M28 21 C30.5 25 33 26.5 31.5 31.5 C31 35 29 37 28 37 C26.5 37 24 35.5 24 31.5 C24 28.5 26 27.5 27 25.5 C27.2 27.5 28 28.5 29 28.5 C30.5 26.5 28 23 28 21 Z" fill={color} stroke="none" />
     </svg>
   );
 }
-function IconPie({ color }: { color: string }) {
+function IconLine({ color }: { color: string }) {
   return (
-    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-      <path d="M28 10 A18 18 0 0 1 46 28 L28 28Z" fill={color} />
-      <path d="M46 28 A18 18 0 0 1 28 46 L28 28Z" fill={color} opacity="0.7" />
-      <path d="M28 46 A18 18 0 1 1 28 10 L28 28Z" fill={color} opacity="0.35" />
+    <svg width="54" height="54" viewBox="0 0 56 56" fill="none" stroke={color} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="9,38 21,25 31,31 47,14" />
+      <circle cx="9" cy="38" r="3.2" fill={color} stroke="none" />
+      <circle cx="21" cy="25" r="3.2" fill={color} stroke="none" />
+      <circle cx="31" cy="31" r="3.2" fill={color} stroke="none" />
+      <circle cx="47" cy="14" r="3.2" fill={color} stroke="none" />
     </svg>
   );
 }
 
 const TOOLS = [
-  { href: '/kalkulator/procent-skladany', label: 'PROCENT SKŁADANY', accent: '#3b82f6', Icon: IconChart   },
-  { href: '/kalkulator/dca',              label: 'DCA',               accent: '#22c55e', Icon: IconRefresh },
-  { href: '/kalkulator/risk-reward',      label: 'RISK / REWARD',     accent: '#f59e0b', Icon: IconScales  },
-  { href: '/kalkulator/fire',             label: 'FIRE',              accent: '#ef4444', Icon: IconFlame   },
-  { href: '/kalkulator/etf',             label: 'ETF VS LOKATA',     accent: '#8b5cf6', Icon: IconPie     },
+  { href: '/kalkulator/procent-skladany', label: 'PROCENT SKŁADANY', desc: 'Oblicz potencjał wzrostu Twojego kapitału.', accent: '#3b82f6', rgb: '59,130,246',  Icon: IconPie    },
+  { href: '/kalkulator/dca',              label: 'DCA',              desc: 'Średnia cena zakupu w czasie.',              accent: '#22c55e', rgb: '34,197,94',   Icon: IconBars   },
+  { href: '/kalkulator/risk-reward',      label: 'RISK / REWARD',    desc: 'Oceń relację zysku do ryzyka.',              accent: '#f59e0b', rgb: '245,158,11',  Icon: IconScales },
+  { href: '/kalkulator/fire',             label: 'FIRE',             desc: 'Sprawdź, kiedy możesz osiągnąć niezależność.', accent: '#ef4444', rgb: '239,68,68',   Icon: IconShield },
+  { href: '/kalkulator/etf',              label: 'ETF VS LOKATA',    desc: 'Porównaj ETF z lokatą bankową.',             accent: '#8b5cf6', rgb: '139,92,246',  Icon: IconLine   },
 ];
 
 export default function CalcSection() {
@@ -101,13 +102,98 @@ export default function CalcSection() {
         .cs-tarrow { border: 1.5px solid #d1d5db; color: #9ca3af; }
         [data-theme="dark"] .cs-tarrow { border-color: rgba(255,255,255,0.12); color: var(--muted); }
 
+        /* ── Premium tool cards (Pozostałe narzędzia) ── */
+        .cs2-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+
+        .cs2-card {
+          position: relative;
+          display: flex; flex-direction: column; align-items: center;
+          padding: 30px 20px 30px;
+          border-radius: 20px;
+          text-decoration: none;
+          overflow: hidden;
+          background:
+            radial-gradient(135% 95% at 50% -12%, rgba(var(--acc), 0.10), transparent 60%),
+            #ffffff;
+          border: 1px solid #e8eaed;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+          transition: transform 0.25s cubic-bezier(.2,0,0,1), box-shadow 0.25s, border-color 0.25s;
+        }
+        [data-theme="dark"] .cs2-card {
+          background:
+            radial-gradient(135% 95% at 50% -12%, rgba(var(--acc), 0.18), transparent 58%),
+            linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0) 42%),
+            #0b0f15;
+          border-color: rgba(255,255,255,0.07);
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 12px 34px rgba(0,0,0,0.45);
+        }
+        .cs2-card::before {
+          content: ''; position: absolute; top: 0; left: 16%; right: 16%; height: 1px;
+          background: linear-gradient(90deg, transparent, rgb(var(--acc)), transparent);
+          opacity: 0.85;
+        }
+        .cs2-card:hover {
+          transform: translateY(-6px);
+          border-color: rgba(var(--acc), 0.45);
+          box-shadow: 0 18px 46px rgba(0,0,0,0.14), 0 0 40px rgba(var(--acc), 0.10);
+        }
+        [data-theme="dark"] .cs2-card:hover {
+          box-shadow: 0 18px 46px rgba(0,0,0,0.55), 0 0 46px rgba(var(--acc), 0.16);
+        }
+
+        .cs2-num {
+          position: absolute; top: 18px; left: 18px;
+          width: 38px; height: 38px; border-radius: 50%;
+          background: rgba(var(--acc), 0.13);
+          color: rgb(var(--acc));
+          display: flex; align-items: center; justify-content: center;
+          font-family: var(--font-body); font-size: 0.8rem; font-weight: 700;
+        }
+        .cs2-icon {
+          margin: 28px 0 20px;
+          filter: drop-shadow(0 0 10px rgba(var(--acc), 0.35));
+        }
+        .cs2-title {
+          font-family: var(--font-body); font-weight: 700;
+          font-size: 1.08rem; letter-spacing: 0.5px; text-transform: uppercase;
+          color: #111827; text-align: center; line-height: 1.25; margin: 0 0 12px;
+        }
+        [data-theme="dark"] .cs2-title { color: #ffffff; }
+        .cs2-desc {
+          font-family: var(--font-body); font-size: 0.82rem; line-height: 1.55;
+          color: #6b7280; text-align: center; margin: 0 0 22px; max-width: 92%;
+        }
+        [data-theme="dark"] .cs2-desc { color: var(--muted); }
+        .cs2-arrow {
+          margin-top: auto;
+          width: 46px; height: 46px; border-radius: 50%;
+          border: 1.5px solid rgba(var(--acc), 0.5);
+          color: rgb(var(--acc));
+          display: flex; align-items: center; justify-content: center; font-size: 1.15rem;
+          transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+        }
+        .cs2-card:hover .cs2-arrow {
+          background: rgba(var(--acc), 0.12);
+          box-shadow: 0 0 22px rgba(var(--acc), 0.25);
+          transform: scale(1.06);
+        }
+
+        .cs2-head {
+          font-family: var(--font-body); font-weight: 700;
+          font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: -0.3px;
+          margin: 0 0 26px; color: #111827;
+        }
+        [data-theme="dark"] .cs2-head { color: #ffffff; }
+
         @media (max-width: 660px) {
           .cs-feat-grid  { grid-template-columns: 1fr !important; }
           .cs-tools-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .cs2-grid      { grid-template-columns: repeat(2, 1fr) !important; }
           .cs-photo      { display: none !important; }
         }
         @media (max-width: 900px) and (min-width: 661px) {
           .cs-tools-grid { grid-template-columns: repeat(3, 1fr) !important; }
+          .cs2-grid      { grid-template-columns: repeat(3, 1fr) !important; }
         }
       `}</style>
 
@@ -193,41 +279,20 @@ export default function CalcSection() {
 
         </div>
 
-        {/* Label */}
-        <p className="cs-t-text" style={{
-          fontFamily: 'var(--font-body)', fontSize: '0.85rem',
-          fontWeight: 700, margin: '0 0 14px',
-        }}>
-          Pozostałe narzędzia
-        </p>
+        {/* Heading */}
+        <h3 className="cs2-head">Pozostałe narzędzia</h3>
 
         {/* Tools */}
-        <div className="cs-tools-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 14 }}>
-          {TOOLS.map(({ href, label, accent, Icon }, i) => (
-            <Link key={href} href={href} className="cs-tool">
-              <div style={{
-                position: 'absolute', top: 14, left: 14,
-                width: 28, height: 28, borderRadius: '50%', background: `${accent}18`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontFamily: 'var(--font-body)', fontSize: '0.65rem', fontWeight: 700, color: accent,
-              }}>
-                {String(i + 1).padStart(2, '0')}
-              </div>
-              <div style={{ marginTop: 20, marginBottom: 14 }}>
+        <div className="cs2-grid">
+          {TOOLS.map(({ href, label, desc, rgb, accent, Icon }, i) => (
+            <Link key={href} href={href} className="cs2-card" style={{ ['--acc' as string]: rgb }}>
+              <span className="cs2-num">{String(i + 1).padStart(2, '0')}</span>
+              <span className="cs2-icon">
                 <Icon color={accent} />
-              </div>
-              <p className="cs-t-text" style={{
-                fontFamily: 'var(--font-body)', fontSize: '0.73rem', fontWeight: 700,
-                letterSpacing: '0.4px', textAlign: 'center', margin: '0 0 10px',
-                lineHeight: 1.3, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                {label}
-              </p>
-              <div style={{ width: 7, height: 7, borderRadius: '50%', background: accent, marginBottom: 14 }} />
-              <div className="cs-tarrow" style={{
-                width: 34, height: 34, borderRadius: '50%',
-                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.95rem',
-              }}>→</div>
+              </span>
+              <span className="cs2-title">{label}</span>
+              <span className="cs2-desc">{desc}</span>
+              <span className="cs2-arrow">→</span>
             </Link>
           ))}
         </div>

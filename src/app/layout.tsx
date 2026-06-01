@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Syne, JetBrains_Mono, Bebas_Neue, Inter } from 'next/font/google';
+import { Syne, JetBrains_Mono, Bebas_Neue, Inter, Playfair_Display } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import CookieConsent from '@/components/CookieConsent';
@@ -33,6 +33,13 @@ const inter = Inter({
   weight: ['400', '500', '600', '700'],
   display: 'swap',
   variable: '--font-inter',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['500', '600', '700'],
+  display: 'swap',
+  variable: '--font-playfair',
 });
 
 const BASE_URL = 'https://kisielfinanse.pl';
@@ -122,7 +129,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pl" className={`${syne.variable} ${jetbrains.variable} ${bebas.variable} ${inter.variable}`}>
+    <html lang="pl" className={`${syne.variable} ${jetbrains.variable} ${bebas.variable} ${inter.variable} ${playfair.variable}`}>
       <head>
         {/* Schemat kolorów: strona sama steruje motywem (data-theme), wyłącza auto-dark przeglądarki */}
         <meta name="color-scheme" content="light dark" />

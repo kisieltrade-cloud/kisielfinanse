@@ -30,166 +30,85 @@ function getFallbackGradient(tag: string) {
 
 export default async function BlogSection() {
   const posts = await getAllPosts();
-  const hero = posts[0];
-  const cards = posts.slice(1, 4);
+  const cards = posts.slice(0, 6);
 
-  if (!hero) return null;
-
-  const heroTag = getTag(hero.tag);
+  if (cards.length === 0) return null;
 
   return (
     <section className="news-section" id="blog">
 
-      {/* Section header */}
-      <div className="news-section-header">
-        <h2 className="news-section-title">
-          OSTATNIE <span style={{ color: '#c9a227' }}>ARTYKUŁY</span>
-        </h2>
-        <Link href="/blog" className="news-view-all">
-          Wszystkie artykuły →
-        </Link>
+      <div className="section-divider">
+        <span>Najnowsze artykuły</span>
       </div>
 
-      {/* ── HERO CARD ── */}
-      <Link href={postUrl(hero)} className="news-hero">
+      <div className="news-cards-grid">
+        {cards.map((post) => {
+          const t = getTag(post.tag);
+          return (
+            <Link key={post.slug} href={postUrl(post)} className="news-card">
 
-        {/* Background */}
-        {hero.image ? (
-          <Image
-            src={hero.image}
-            alt={hero.title}
-            fill
-            priority
-            className="news-hero-bg"
-            style={{ objectFit: 'cover', objectPosition: 'top' }}
-            sizes="(max-width: 768px) 100vw, 900px"
-          />
-        ) : (
-          <div
-            className="news-hero-bg"
-            style={{ background: getFallbackGradient(hero.tag) }}
-          >
-            {/* SVG chart decoration for no-image fallback */}
-            <svg
-              viewBox="0 0 1200 480"
-              preserveAspectRatio="none"
-              style={{ width: '100%', height: '100%', opacity: 0.12 }}
-            >
-              <polyline
-                points="0,380 150,310 300,340 480,230 640,270 800,160 960,190 1100,90 1200,50"
-                fill="none"
-                stroke={heroTag.color}
-                strokeWidth="3"
-              />
-              <path
-                d="M0,380 150,310 300,340 480,230 640,270 800,160 960,190 1100,90 1200,50 L1200,480 L0,480 Z"
-                fill={heroTag.color}
-                opacity="0.08"
-              />
-            </svg>
-          </div>
-        )}
-
-        {/* Gradient overlay */}
-        <div className="news-hero-overlay" />
-
-        {/* Content */}
-        <div className="news-hero-content">
-          <div className="news-hero-meta-top">
-            <span
-              className="news-tag-chip"
-              style={{ color: heroTag.color, background: heroTag.bg, borderColor: heroTag.color + '55' }}
-            >
-              {hero.tag.toUpperCase()}
-            </span>
-            <span className="news-hero-author">
-              <Image
-                src="/images/profile.png"
-                alt="Mateusz"
-                width={40}
-                height={40}
-                className="news-author-avatar"
-              />
-              {hero.author ?? 'Mateusz'}
-            </span>
-          </div>
-
-          <h2 className="news-hero-title">{hero.title}</h2>
-
-          <div className="news-hero-bottom">
-            <span className="news-hero-date">{hero.date}</span>
-            <ReadTimeRing readTime={hero.readTime ?? '7 min'} />
-          </div>
-        </div>
-      </Link>
-
-      {/* ── SMALLER CARDS ── */}
-      {cards.length > 0 && (
-        <div className="news-cards-grid">
-          {cards.map((post) => {
-            const t = getTag(post.tag);
-            return (
-              <Link key={post.slug} href={postUrl(post)} className="news-card">
-
-                {/* Thumbnail */}
-                <div className="news-card-thumb">
-                  {post.image ? (
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      className="news-card-thumb-img"
-                      style={{ objectFit: 'cover', objectPosition: 'center' }}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
-                    />
-                  ) : (
-                    <div
-                      className="news-card-thumb-fallback"
-                      style={{ background: getFallbackGradient(post.tag) }}
-                    >
-                      <svg viewBox="0 0 300 180" style={{ width: '100%', height: '100%', opacity: 0.2 }}>
-                        <polyline
-                          points="0,140 60,110 120,125 180,80 240,95 300,40"
-                          fill="none"
-                          stroke={t.color}
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </div>
-                  )}
-                  <span
-                    className="news-card-tag"
-                    style={{ color: '#ffffff', background: 'rgba(0,0,0,0.55)', border: 'none' }}
+              <div className="news-card-thumb">
+                {post.image ? (
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="news-card-thumb-img"
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 340px"
+                  />
+                ) : (
+                  <div
+                    className="news-card-thumb-fallback"
+                    style={{ background: getFallbackGradient(post.tag) }}
                   >
-                    {post.tag}
-                  </span>
-                </div>
-
-                {/* Text */}
-                <div className="news-card-body">
-                  <span className="news-card-author">
-                    <Image
-                      src="/images/profile.png"
-                      alt="Mateusz"
-                      width={36}
-                      height={36}
-                      className="news-author-avatar"
-                    />
-                    {post.author ?? 'Mateusz'}
-                  </span>
-                  <h3 className="news-card-title">{post.title}</h3>
-                  <div className="news-card-footer">
-                    <span className="news-card-date">{post.date}</span>
-                    <ReadTimeRing readTime={post.readTime ?? '7 min'} />
+                    <svg viewBox="0 0 300 180" style={{ width: '100%', height: '100%', opacity: 0.2 }}>
+                      <polyline
+                        points="0,140 60,110 120,125 180,80 240,95 300,40"
+                        fill="none"
+                        stroke={t.color}
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
                   </div>
-                </div>
+                )}
+                <span
+                  className="news-card-tag"
+                  style={{ color: t.color, background: t.bg, borderColor: t.color + '55' }}
+                >
+                  {post.tag}
+                </span>
+              </div>
 
-              </Link>
-            );
-          })}
-        </div>
-      )}
+              <div className="news-card-body">
+                <span className="news-card-author">
+                  <Image
+                    src="/images/profile.png"
+                    alt="Mateusz"
+                    width={32}
+                    height={32}
+                    className="news-author-avatar"
+                  />
+                  {post.author ?? 'Mateusz'}
+                </span>
+                <h3 className="news-card-title">{post.title}</h3>
+                <div className="news-card-footer">
+                  <span className="news-card-date">{post.date}</span>
+                  <ReadTimeRing readTime={post.readTime ?? '7 min'} />
+                </div>
+              </div>
+
+            </Link>
+          );
+        })}
+      </div>
+
+      <div className="news-cta">
+        <Link href="/blog" className="news-view-all">
+          Zobacz wszystkie artykuły →
+        </Link>
+      </div>
 
     </section>
   );

@@ -2,14 +2,6 @@
 
 import { useState } from 'react';
 
-const C = {
-  text:   'var(--text)',
-  sub:    'var(--muted)',
-  border: 'var(--border)',
-  bg:     'var(--surface)',
-  bgAlt:  'var(--bg)',
-};
-
 const STEPS = [
   {
     num: '01',
@@ -118,115 +110,47 @@ export default function LearnToTrade() {
   const [openStep, setOpenStep] = useState<number | null>(null);
 
   return (
-    <section style={{ padding: 'clamp(60px, 10vw, 120px) 24px', maxWidth: 960, margin: '0 auto' }}>
+    <section className="ltt-section">
 
       {/* Header */}
-      <div className="reveal" style={{ marginBottom: 56 }}>
-        <h2 style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(1.8rem, 5vw, 3.2rem)',
-          letterSpacing: '3px',
-          margin: '0 0 20px',
-          color: C.text,
-          lineHeight: 1.15,
-        }}>
-          NAUCZ SIĘ <span style={{ color: '#c9a227' }}>TRADOWAĆ</span>
+      <div className="reveal" style={{ marginBottom: 8 }}>
+        <h2 className="ltt-title">
+          Naucz się <span className="gold">tradować</span>
         </h2>
-        <p style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: '0.85rem',
-          color: C.text,
-          fontWeight: 700,
-          lineHeight: 1.8,
-          maxWidth: 640,
-        }}>
+        <div className="ltt-accent-bar" />
+        <p className="ltt-intro">
           Trading to nie kasyno i nie magiczny przycisk do zarabiania. To umiejętność,
           której można się nauczyć - ale wymaga czasu, dyscypliny i właściwego podejścia.
           Oto mapa drogowa od kompletnego zera do pierwszego świadomego trade&apos;a.
         </p>
       </div>
 
-      {/* Steps accordion */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      {/* Steps */}
+      <div className="ltt-steps">
         {STEPS.map((step, i) => {
           const isOpen = openStep === i;
           return (
-            <div
-              key={step.num}
-              className="reveal"
-              style={{
-                background: isOpen ? `rgba(${hexToRgb(step.accent)}, 0.04)` : C.bg,
-                border: `1px solid ${isOpen ? `rgba(${hexToRgb(step.accent)}, 0.3)` : C.border}`,
-                borderLeft: `3px solid ${isOpen ? step.accent : 'var(--border)'}`,
-                transition: 'all 0.3s ease',
-                overflow: 'hidden',
-              }}
-            >
+            <div key={step.num} className={`ltt-item reveal${isOpen ? ' is-open' : ''}`}>
               <button
+                className="ltt-step"
                 onClick={() => setOpenStep(isOpen ? null : i)}
-                style={{
-                  width: '100%', background: 'none', border: 'none',
-                  padding: '20px 24px', cursor: 'pointer',
-                  display: 'flex', alignItems: 'center', gap: 16, textAlign: 'left',
-                }}
+                aria-expanded={isOpen}
               >
-                <span style={{
-                  fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
-                  color: step.accent, opacity: isOpen ? 1 : 0.7,
-                  minWidth: 24, transition: 'opacity 0.3s', fontWeight: 700,
-                }}>
-                  {step.num}
-                </span>
-                <span style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(0.95rem, 2.5vw, 1.15rem)',
-                  letterSpacing: '2px',
-                  color: isOpen ? step.accent : C.text,
-                  flex: 1, transition: 'color 0.3s', textTransform: 'uppercase',
-                }}>
-                  {step.title}
-                </span>
-                <span style={{
-                  fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
-                  color: C.sub, fontWeight: 600,
-                  display: isOpen ? 'none' : 'block',
-                }}>
-                  {step.summary}
-                </span>
-                <span style={{
-                  fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
-                  color: step.accent, fontWeight: 700,
-                  transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
-                  transition: 'transform 0.3s',
-                }}>
-                  +
-                </span>
+                <span className="ltt-num">{step.num}</span>
+                <span className="ltt-divider" aria-hidden="true" />
+                <span className="ltt-step-title">{step.title}</span>
+                <span className="ltt-summary">{step.summary}</span>
+                <span className="ltt-chev" aria-hidden="true">›</span>
               </button>
 
-              <div style={{
-                maxHeight: isOpen ? 600 : 0, opacity: isOpen ? 1 : 0,
-                transition: 'max-height 0.4s ease, opacity 0.3s ease', overflow: 'hidden',
-              }}>
-                <div style={{ padding: '0 24px 24px clamp(24px, 8vw, 64px)' }}>
-                  <p style={{
-                    fontFamily: 'var(--font-mono)', fontSize: '0.8rem',
-                    color: C.text, fontWeight: 700, lineHeight: 1.85, margin: '0 0 16px',
-                  }}>
-                    {step.content}
-                  </p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <div className="ltt-step-body">
+                <div className="ltt-body-inner">
+                  <p className="ltt-content">{step.content}</p>
+                  <div className="ltt-points">
                     {step.points.map((point, j) => (
-                      <div key={j} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                        <span style={{
-                          color: step.accent, fontFamily: 'var(--font-mono)',
-                          fontSize: '0.6rem', marginTop: 4, flexShrink: 0, fontWeight: 700,
-                        }}>▸</span>
-                        <span style={{
-                          fontFamily: 'var(--font-mono)', fontSize: '0.75rem',
-                          color: C.text, fontWeight: 700, lineHeight: 1.7,
-                        }}>
-                          {point}
-                        </span>
+                      <div key={j} className="ltt-point">
+                        <span className="ltt-point-mark">▸</span>
+                        <span className="ltt-point-text">{point}</span>
                       </div>
                     ))}
                   </div>
@@ -238,110 +162,55 @@ export default function LearnToTrade() {
       </div>
 
       {/* Pułapki */}
-      <div className="reveal" style={{ marginTop: 64 }}>
-        <h3 style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
-          letterSpacing: '2px', color: C.text, margin: '0 0 20px',
-        }}>
-          PUŁAPKI <span style={{ color: '#ff2d78' }}>POCZĄTKUJĄCYCH</span>
+      <div className="reveal">
+        <h3 className="ltt-h3">
+          PUŁAPKI <span className="pink">POCZĄTKUJĄCYCH</span>
         </h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 48 }}>
-          {WARNINGS.map((w, i) => (
-            <div key={i} style={{
-              display: 'flex', gap: 14, alignItems: 'flex-start',
-              padding: '14px 18px',
-              background: 'rgba(255,45,120,0.05)',
-              border: '1px solid rgba(255,45,120,0.18)',
-              borderLeft: '3px solid #ff2d78',
-            }}>
-              <span style={{
-                color: '#ff2d78', fontFamily: 'var(--font-mono)',
-                fontSize: '0.75rem', marginTop: 2, flexShrink: 0, fontWeight: 700,
-              }}>✗</span>
-              <span style={{
-                fontFamily: 'var(--font-mono)', fontSize: '0.8rem',
-                color: C.text, fontWeight: 600, lineHeight: 1.7,
-              }}>{w}</span>
-            </div>
-          ))}
+        <div className="ltt-warn-list">
+          {WARNINGS.map((w, i) => {
+            const idx = w.indexOf(' - ');
+            const lead = idx === -1 ? w : w.slice(0, idx);
+            const rest = idx === -1 ? '' : w.slice(idx);
+            return (
+              <div key={i} className="ltt-warn">
+                <span className="ltt-warn-lead">{lead}</span>
+                <span className="ltt-warn-rest">{rest}</span>
+              </div>
+            );
+          })}
         </div>
 
-        <h3 style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
-          letterSpacing: '2px', color: C.text, margin: '0 0 24px',
-        }}>
-          TIMELINE
-        </h3>
-        <div style={{ display: 'grid', gap: 12 }}>
+        <h3 className="ltt-h3">TIMELINE</h3>
+        <div className="ltt-tl-list">
           {TIMELINE.map((t, i) => (
-            <div key={i} style={{
-              display: 'grid', gridTemplateColumns: 'auto 1fr',
-              gap: 20, alignItems: 'start', padding: '16px 20px',
-              background: C.bg, border: `1px solid ${C.border}`,
-              borderLeft: `3px solid ${t.accent}`,
-            }}>
-              <div style={{ minWidth: 100 }}>
-                <div style={{
-                  fontFamily: 'var(--font-mono)', fontSize: '0.65rem',
-                  color: C.sub, fontWeight: 600, marginBottom: 4,
-                }}>
-                  {t.months}
-                </div>
-                <div style={{
-                  fontFamily: 'var(--font-display)', fontSize: '0.85rem',
-                  letterSpacing: '2px', color: t.accent, fontWeight: 700,
-                }}>
-                  {t.label}
-                </div>
+            <div key={i} className="ltt-tl-row" style={{ ['--tl-accent' as string]: t.accent }}>
+              <div className="ltt-tl-label">
+                <span className="ltt-tl-months">{t.months}</span>
+                <span className="ltt-tl-stage">{t.label}</span>
               </div>
-              <p style={{
-                fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
-                color: C.text, fontWeight: 700, lineHeight: 1.7, margin: 0,
-              }}>
-                {t.desc}
-              </p>
+              <p className="ltt-tl-desc">{t.desc}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Bottom note */}
-      <div className="reveal" style={{ marginTop: 56 }}>
-        <div style={{
-          fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
-          color: C.text, fontWeight: 700, lineHeight: 1.85, padding: '24px',
-          background: 'rgba(201,162,39,0.05)',
-          border: '1px solid rgba(201,162,39,0.22)',
-          borderLeft: '3px solid #c9a227',
-        }}>
-          Trading to maraton, nie sprint. Nie ma skrótów, nie ma cheatcodów.
-          Jest natomiast sprawdzona ścieżka:{' '}
-          <span style={{ color: '#c9a227', fontWeight: 700 }}>
-            nauka → demo → plan → dyscyplina → real → cierpliwość
-          </span>
-          . Większość osób potrzebuje 1-3 lat, żeby osiągnąć stabilność. Ale jeśli
-          podejdziesz do tego z właściwą postawą, po kilku miesiącach będziesz dalej niż
-          90% ludzi, którzy wrzucili pieniądze na konto w pierwszym tygodniu.
-        </div>
+      <div className="reveal ltt-note">
+        <span className="ltt-note-bold">Trading to maraton, nie sprint.</span>{' '}
+        Nie ma skrótów, nie ma cheatcodów. Jest natomiast sprawdzona ścieżka:
+        <span className="ltt-note-gold">
+          nauka → demo → plan → dyscyplina → real → cierpliwość
+        </span>
+        Większość osób potrzebuje 1-3 lat, żeby osiągnąć stabilność. Ale jeśli
+        podejdziesz do tego z właściwą postawą, po kilku miesiącach będziesz dalej niż
+        90% ludzi, którzy wrzucili pieniądze na konto w pierwszym tygodniu.
       </div>
 
       {/* Disclaimer */}
-      <p style={{
-        fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
-        color: 'var(--muted)', textAlign: 'center', marginTop: 48, lineHeight: 1.6, fontWeight: 700,
-      }}>
+      <p className="ltt-disclaimer">
         Treści publikowane na KisielFinanse.pl mają charakter wyłącznie edukacyjny i nie
         stanowią doradztwa inwestycyjnego. Trading wiąże się z ryzykiem utraty kapitału.
       </p>
     </section>
   );
-}
-
-function hexToRgb(hex: string) {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `${r},${g},${b}`;
 }

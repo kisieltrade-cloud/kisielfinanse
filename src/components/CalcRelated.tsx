@@ -4,15 +4,66 @@ import { getAllPosts } from '@/lib/posts';
 import { postUrl } from '@/lib/url';
 import NewsletterForm from '@/components/NewsletterForm';
 
+/* ── Ikony liniowe ── */
+const IcoChart = ({ c }: { c: string }) => (
+  <svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke={c} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="3,20 10,13 15,17 24,7" /><polyline points="18,7 24,7 24,13" />
+  </svg>
+);
+const IcoCalc = ({ c }: { c: string }) => (
+  <svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke={c} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="6" y="3" width="16" height="22" rx="2.5" /><line x1="9" y1="8" x2="19" y2="8" />
+    <circle cx="10" cy="13" r="0.6" fill={c} /><circle cx="14" cy="13" r="0.6" fill={c} /><circle cx="18" cy="13" r="0.6" fill={c} />
+    <circle cx="10" cy="17" r="0.6" fill={c} /><circle cx="14" cy="17" r="0.6" fill={c} /><circle cx="18" cy="17" r="0.6" fill={c} />
+    <circle cx="10" cy="21" r="0.6" fill={c} /><circle cx="14" cy="21" r="0.6" fill={c} /><circle cx="18" cy="21" r="0.6" fill={c} />
+  </svg>
+);
+const IcoScales = ({ c }: { c: string }) => (
+  <svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke={c} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="14" y1="5" x2="14" y2="23" /><line x1="8" y1="23" x2="20" y2="23" /><line x1="14" y1="7" x2="6" y2="10" /><line x1="14" y1="7" x2="22" y2="10" />
+    <path d="M3 15 L6 9.5 L9 15 Z" /><path d="M19 15 L22 9.5 L25 15 Z" />
+  </svg>
+);
+const IcoFlame = ({ c }: { c: string }) => (
+  <svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke={c} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14 3 C14 8 18 9 17 13 C20 11 20 8 20 8 C22 11 23 14 23 17 C23 22 19 25 14 25 C9 25 5 22 5 17 C5 13 8 10 10 9 C10 13 12 14 12 14 C11 9 14 6 14 3 Z" fill={c} fillOpacity="0.12" />
+  </svg>
+);
+const IcoBars = ({ c }: { c: string }) => (
+  <svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke={c} strokeWidth="3.4" strokeLinecap="round">
+    <line x1="7" y1="22" x2="7" y2="16" /><line x1="14" y1="22" x2="14" y2="11" /><line x1="21" y1="22" x2="21" y2="6" />
+  </svg>
+);
+const IcoTimer = ({ c }: { c: string }) => (
+  <svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke={c} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="14" cy="16" r="9" /><line x1="14" y1="16" x2="14" y2="11" /><line x1="11" y1="3" x2="17" y2="3" /><line x1="14" y1="3" x2="14" y2="7" /><line x1="22" y1="9" x2="24" y2="7" />
+  </svg>
+);
+const IcoCard = ({ c }: { c: string }) => (
+  <svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke={c} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="7" width="22" height="15" rx="2.5" /><line x1="3" y1="11.5" x2="25" y2="11.5" /><line x1="7" y1="18" x2="12" y2="18" />
+  </svg>
+);
+const IcoHouse = ({ c }: { c: string }) => (
+  <svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke={c} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M5 13 L14 5 L23 13" /><path d="M7 12 V23 H21 V12" /><rect x="12" y="17" width="4" height="6" />
+  </svg>
+);
+
+const GREEN = { bg: '#dfe7d2', ic: '#5f7a4a' };
+const GOLD  = { bg: '#ece0c6', ic: '#b3892f' };
+const PEACH = { bg: '#f3ddcf', ic: '#d9633a' };
+const LILAC = { bg: '#e6dced', ic: '#8b6db0' };
+
 const ALL_CALCS = [
-  { href: '/kalkulator/procent-skladany', label: 'Procent składany',   icon: '📈' },
-  { href: '/kalkulator/dca',              label: 'DCA',                 icon: '🔁' },
-  { href: '/kalkulator/risk-reward',      label: 'Risk / Reward',       icon: '⚖️' },
-  { href: '/kalkulator/fire',             label: 'Kalkulator FIRE',     icon: '🔥' },
-  { href: '/kalkulator/etf',             label: 'ETF vs lokata',       icon: '📊' },
-  { href: '/kalkulator/godziny-pracy',   label: 'Ile godzin pracy?',   icon: '⏱️' },
-  { href: '/kalkulator/kredyt-gotowkowy', label: 'Kredyt gotówkowy',    icon: '💳' },
-  { href: '/kalkulator-hipoteczny',       label: 'Kalkulator hipoteczny', icon: '🏠' },
+  { href: '/kalkulator/procent-skladany', label: 'Procent składany',     desc: 'Oblicz, jak procent składany wpływa na Twoje inwestycje.', Icon: IcoChart,  col: GREEN },
+  { href: '/kalkulator/dca',              label: 'DCA',                   desc: 'Sprawdź efekty strategii systematycznego inwestowania.',   Icon: IcoCalc,   col: GREEN },
+  { href: '/kalkulator/risk-reward',      label: 'Risk / Reward',         desc: 'Oceń stosunek zysku do ryzyka w inwestycji.',              Icon: IcoScales, col: GOLD  },
+  { href: '/kalkulator/fire',             label: 'Kalkulator FIRE',       desc: 'Sprawdź, kiedy możesz osiągnąć niezależność finansową.',   Icon: IcoFlame,  col: PEACH },
+  { href: '/kalkulator/etf',              label: 'ETF vs Lokata',         desc: 'Porównaj potencjalne zyski ETF-ów i lokat bankowych.',     Icon: IcoBars,   col: GREEN },
+  { href: '/kalkulator/godziny-pracy',    label: 'Ile godzin pracy?',     desc: 'Zobacz, ile godzin pracy potrzeba na różne cele.',         Icon: IcoTimer,  col: LILAC },
+  { href: '/kalkulator/kredyt-gotowkowy', label: 'Kredyt gotówkowy',      desc: 'Oblicz ratę i RRSO kredytu gotówkowego.',                  Icon: IcoCard,   col: GREEN },
+  { href: '/kalkulator-hipoteczny',       label: 'Kalkulator hipoteczny', desc: 'Oblicz ratę kredytu i całkowity koszt nieruchomości.',     Icon: IcoHouse,  col: GREEN },
 ];
 
 export default async function CalcRelated({ currentPath }: { currentPath: string }) {
@@ -21,101 +72,85 @@ export default async function CalcRelated({ currentPath }: { currentPath: string
   const otherCalcs = ALL_CALCS.filter(c => c.href !== currentPath);
 
   return (
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: '48px 24px 80px' }}>
-
+    <>
       {/* ── Inne kalkulatory ── */}
-      <p style={{
-        fontFamily: 'var(--font-mono)', fontSize: '0.7rem', fontWeight: 700,
-        color: 'var(--muted)', letterSpacing: '2px', textTransform: 'uppercase',
-        marginBottom: 16,
-      }}>
-        Inne kalkulatory
-      </p>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
-        gap: 10,
-        marginBottom: 56,
-      }}>
-        {otherCalcs.map(c => (
-          <Link key={c.href} href={c.href} style={{
-            display: 'flex', alignItems: 'center', gap: 10,
-            padding: '12px 16px',
-            background: 'var(--surface)',
-            border: '1px solid var(--border)',
-            borderRadius: 12,
-            textDecoration: 'none',
-            color: 'var(--text)',
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.72rem',
-            fontWeight: 700,
-            transition: 'border-color 0.15s, transform 0.15s',
-          }}
-          onMouseEnter={undefined}
-          >
-            <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>{c.icon}</span>
-            {c.label}
-          </Link>
-        ))}
-      </div>
+      <section className="kalk-related">
+        <div className="kalk-related-inner">
+          <h2 className="kalk-related-title">Inne kalkulatory</h2>
+          <p className="kalk-related-sub">Przydatne narzędzia do planowania i analizy inwestycji.</p>
 
-      {/* ── Newsletter ── */}
-      <div style={{ marginBottom: 56 }}>
-        <NewsletterForm />
-      </div>
+          <div className="kalk-cards">
+            {otherCalcs.map(({ href, label, desc, Icon, col }) => (
+              <Link key={href} href={href} className="kalk-card">
+                <span className="kalk-ico" style={{ background: col.bg }}>
+                  <Icon c={col.ic} />
+                </span>
+                <h3 className="kalk-card-title">{label}</h3>
+                <p className="kalk-card-desc">{desc}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* ── Polecane artykuły ── */}
-      <p style={{
-        fontFamily: 'var(--font-mono)', fontSize: '0.7rem', fontWeight: 700,
-        color: 'var(--muted)', letterSpacing: '2px', textTransform: 'uppercase',
-        marginBottom: 16,
-      }}>
-        Polecane artykuły
-      </p>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-        gap: 16,
-      }}>
-        {related.map(post => (
-          <Link key={post.slug} href={postUrl(post)} style={{
-            display: 'flex', flexDirection: 'column',
-            background: 'var(--surface)',
-            border: '1px solid var(--border)',
-            borderRadius: 14,
-            overflow: 'hidden',
-            textDecoration: 'none',
-            color: 'var(--text)',
-            transition: 'transform 0.18s, border-color 0.18s',
-          }}>
-            {post.image && (
-              <div style={{ position: 'relative', height: 140, flexShrink: 0 }}>
-                <Image
-                  src={post.image} alt={post.title} fill
-                  style={{ objectFit: 'cover', objectPosition: 'center' }}
-                  sizes="(max-width: 640px) 100vw, 300px"
-                />
+      <div style={{ maxWidth: 900, margin: '0 auto', padding: '56px 24px 80px' }}>
+        {/* ── Newsletter ── */}
+        <div style={{ marginBottom: 56 }}>
+          <NewsletterForm />
+        </div>
+
+        {/* ── Polecane artykuły ── */}
+        <p style={{
+          fontFamily: 'var(--font-mono)', fontSize: '0.7rem', fontWeight: 700,
+          color: 'var(--muted)', letterSpacing: '2px', textTransform: 'uppercase',
+          marginBottom: 16,
+        }}>
+          Polecane artykuły
+        </p>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+          gap: 16,
+        }}>
+          {related.map(post => (
+            <Link key={post.slug} href={postUrl(post)} style={{
+              display: 'flex', flexDirection: 'column',
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
+              borderRadius: 14,
+              overflow: 'hidden',
+              textDecoration: 'none',
+              color: 'var(--text)',
+              transition: 'transform 0.18s, border-color 0.18s',
+            }}>
+              {post.image && (
+                <div style={{ position: 'relative', height: 140, flexShrink: 0 }}>
+                  <Image
+                    src={post.image} alt={post.title} fill
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                    sizes="(max-width: 640px) 100vw, 300px"
+                  />
+                </div>
+              )}
+              <div style={{ padding: '14px 16px 18px' }}>
+                <span style={{
+                  fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
+                  color: '#c9a227', textTransform: 'uppercase', letterSpacing: '1px',
+                }}>
+                  {post.tag}
+                </span>
+                <p style={{
+                  fontFamily: 'var(--font-body)', fontSize: '0.9rem',
+                  fontWeight: 700, margin: '6px 0 0', lineHeight: 1.35,
+                  color: 'var(--text)',
+                }}>
+                  {post.title}
+                </p>
               </div>
-            )}
-            <div style={{ padding: '14px 16px 18px' }}>
-              <span style={{
-                fontFamily: 'var(--font-mono)', fontSize: '0.6rem',
-                color: '#c9a227', textTransform: 'uppercase', letterSpacing: '1px',
-              }}>
-                {post.tag}
-              </span>
-              <p style={{
-                fontFamily: 'var(--font-body)', fontSize: '0.9rem',
-                fontWeight: 700, margin: '6px 0 0', lineHeight: 1.35,
-                color: 'var(--text)',
-              }}>
-                {post.title}
-              </p>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
+        </div>
       </div>
-
-    </div>
+    </>
   );
 }

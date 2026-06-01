@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <>
+    <div data-theme="dark" style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <RevealOnScroll />
       <Nav />
       <main>
@@ -56,6 +56,6 @@ export default function HomePage() {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
