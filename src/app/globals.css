@@ -1615,6 +1615,7 @@ a { color: inherit; text-decoration: none; }
   .cat-hero-imgwrap { display: none; }
   .cat-body { padding: 32px 24px 80px; }
   .cat-other-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-laptop-deco { display: none; }
   .cat-list-img { width: 120px; height: 85px; }
 }
 @media (max-width: 540px) {

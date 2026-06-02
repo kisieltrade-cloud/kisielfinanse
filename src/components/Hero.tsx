@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import AnimatedCounter from '@/components/AnimatedCounter';
 import HeroArticles from '@/components/HeroArticles';
 
@@ -19,19 +20,21 @@ export default async function Hero() {
 
 
 
-      {/* ── Layer 2: laptop/phone — między tekstem a artykułami ── */}
-      <div style={{
+      {/* ── Layer 2: laptop/phone — dekoracja (next/image, ukryta na mobile dla LCP) ── */}
+      <div className="hero-laptop-deco" style={{
         position: 'absolute',
         top: '50%', left: '24%',
         transform: 'translate(-50%, -50%)',
         width: '42%',
         pointerEvents: 'none', zIndex: 0,
       }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src="/hero-laptop.png"
           alt=""
           aria-hidden="true"
+          width={1536}
+          height={1024}
+          sizes="(max-width: 900px) 1px, 45vw"
           style={{
             width: '100%',
             height: 'auto',
