@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-theme="light"] {
   /* Deklaracja schematu kolorów — wyłącza auto-przyciemnianie Chrome (Auto Dark Theme),
      które psuło kontrast na Androidzie/Googlebot. Strona sama steruje motywem przez [data-theme]. */
   color-scheme: light;

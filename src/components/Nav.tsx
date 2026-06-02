@@ -15,11 +15,17 @@ const UTIL_LINKS = [
 ];
 
 const CALC_ITEMS = [
-  { href: '/kalkulator/procent-skladany', label: 'Procent składany', icon: '📈' },
-  { href: '/kalkulator/risk-reward',      label: 'Risk / Reward',    icon: '⚖️' },
-  { href: '/kalkulator/fire',             label: 'Kalkulator FIRE',  icon: '🔥' },
-  { href: '/kalkulator/etf',             label: 'Symulacja ETF',    icon: '📊' },
-  { href: '/kalkulator/godziny-pracy',   label: 'Ile godzin pracy?', icon: '⏱️' },
+  { href: '/kalkulator/wynagrodzenia',      label: 'Wynagrodzenia brutto-netto', icon: '💰' },
+  { href: '/kalkulator/skladka-zdrowotna',  label: 'Składka zdrowotna',          icon: '🩺' },
+  { href: '/kalkulator/zdolnosc-kredytowa', label: 'Zdolność kredytowa',         icon: '🏦' },
+  { href: '/kalkulator-hipoteczny',         label: 'Kalkulator hipoteczny',      icon: '🏠' },
+  { href: '/kalkulator/kredyt-gotowkowy',   label: 'Kredyt gotówkowy',           icon: '💳' },
+  { href: '/kalkulator/procent-skladany',   label: 'Procent składany',           icon: '📈' },
+  { href: '/kalkulator/dca',                label: 'DCA',                        icon: '🔁' },
+  { href: '/kalkulator/risk-reward',        label: 'Risk / Reward',              icon: '⚖️' },
+  { href: '/kalkulator/fire',               label: 'Kalkulator FIRE',            icon: '🔥' },
+  { href: '/kalkulator/etf',                label: 'Symulacja ETF',              icon: '📊' },
+  { href: '/kalkulator/godziny-pracy',      label: 'Ile godzin pracy?',          icon: '⏱️' },
 ];
 
 export default function Nav() {
@@ -101,27 +107,7 @@ export default function Nav() {
           {/* Separator */}
           <li className="nav-sep" aria-hidden="true" />
 
-          {/* Kredyt gotówkowy */}
-          <li>
-            <Link
-              href="/kalkulator/kredyt-gotowkowy"
-              style={{ color: isActive('/kalkulator/kredyt-gotowkowy') ? 'var(--cyan)' : undefined }}
-            >
-              Kredyt gotówkowy
-            </Link>
-          </li>
-
-          {/* Kalkulator hipoteczny — osobny link obok dropdown */}
-          <li>
-            <Link
-              href="/kalkulator-hipoteczny"
-              style={{ color: isActive('/kalkulator-hipoteczny') ? 'var(--cyan)' : undefined }}
-            >
-              Kalkulator hipoteczny
-            </Link>
-          </li>
-
-          {/* Dropdown: Kalkulatory */}
+          {/* Dropdown: Kalkulatory (wszystkie) */}
           <li className="nav-dropdown" ref={calcRef}>
             <button
               className={`nav-dropdown-trigger${pathname === '/kalkulator' ? ' nav-dropdown-trigger--active' : ''}`}
@@ -206,28 +192,6 @@ export default function Nav() {
             ))}
 
             <li className="mobile-menu-section">Kalkulatory</li>
-
-            <li>
-              <Link
-                href="/kalkulator/kredyt-gotowkowy"
-                className="mobile-menu-link"
-                style={{ color: isActive('/kalkulator/kredyt-gotowkowy') ? 'var(--cyan)' : undefined }}
-                onClick={() => setOpen(false)}
-              >
-                Kredyt gotówkowy
-              </Link>
-            </li>
-
-            <li>
-              <Link
-                href="/kalkulator-hipoteczny"
-                className="mobile-menu-link"
-                style={{ color: isActive('/kalkulator-hipoteczny') ? 'var(--cyan)' : undefined }}
-                onClick={() => setOpen(false)}
-              >
-                Kalkulator hipoteczny
-              </Link>
-            </li>
 
             {CALC_ITEMS.map((item) => (
               <li key={item.href}>

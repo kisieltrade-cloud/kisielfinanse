@@ -59,7 +59,7 @@ export default function WynagrodzeniaPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaApp) }} />
 
-      <main style={{ paddingTop: '80px', minHeight: '100vh' }}>
+      <main data-theme="light" style={{ paddingTop: '80px', minHeight: '100vh', background: '#f1ece1', color: 'var(--text)' }}>
         <div style={{ maxWidth: 760, margin: '0 auto', padding: '28px 24px 0' }}>
           <Breadcrumbs items={[
             { label: 'KisielFinanse', href: '/' },
