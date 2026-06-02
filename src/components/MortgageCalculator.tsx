@@ -256,8 +256,8 @@ function CapacityBar({ used, max, color }: { used: number; max: number; color: s
 }
 
 // ─── GŁÓWNY KOMPONENT ─────────────────────────────────────────────
-export default function MortgageCalculator() {
-  const [activeTab, setActiveTab] = useState<'rata' | 'zdolnosc'>('rata');
+export default function MortgageCalculator({ initialTab = 'rata' }: { initialTab?: 'rata' | 'zdolnosc' } = {}) {
+  const [activeTab, setActiveTab] = useState<'rata' | 'zdolnosc'>(initialTab);
 
   // ── Kalkulator raty ──
   const [propVal,  setPropVal]  = useState(600000);

@@ -97,7 +97,29 @@ function IconClock({ color }: { color: string }) {
   );
 }
 
+function IconWallet({ color }: { color: string }) {
+  return (
+    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+      <rect x="8" y="14" width="40" height="30" rx="5" stroke={color} strokeWidth="3" fill="none" />
+      <line x1="8" y1="23" x2="48" y2="23" stroke={color} strokeWidth="3" />
+      <circle cx="40" cy="34" r="3.5" fill={color} />
+    </svg>
+  );
+}
+function IconHealth({ color }: { color: string }) {
+  return (
+    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+      <rect x="10" y="14" width="36" height="30" rx="6" stroke={color} strokeWidth="3" fill="none" />
+      <line x1="28" y1="22" x2="28" y2="36" stroke={color} strokeWidth="3.4" strokeLinecap="round" />
+      <line x1="21" y1="29" x2="35" y2="29" stroke={color} strokeWidth="3.4" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 const TOOLS = [
+  { href: '/kalkulator/wynagrodzenia',    label: 'BRUTTO - NETTO',      accent: '#10b981', Icon: IconWallet  },
+  { href: '/kalkulator/skladka-zdrowotna', label: 'SKŁADKA ZDROWOTNA',  accent: '#2e7d4f', Icon: IconHealth  },
+  { href: '/kalkulator/zdolnosc-kredytowa', label: 'ZDOLNOŚĆ KREDYTOWA', accent: '#e8963a', Icon: IconScales  },
   { href: '/kalkulator/procent-skladany', label: 'PROCENT SKŁADANY',   accent: '#3b82f6', Icon: IconChart   },
   { href: '/kalkulator/dca',              label: 'DCA',                 accent: '#22c55e', Icon: IconRefresh },
   { href: '/kalkulator/risk-reward',      label: 'RISK / REWARD',       accent: '#f59e0b', Icon: IconScales  },

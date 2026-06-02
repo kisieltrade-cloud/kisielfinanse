@@ -86,6 +86,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
+    // Standalone kalkulatory (poza CALCULATOR_SLUGS) — własne strony i komponenty
+    ...['wynagrodzenia', 'skladka-zdrowotna', 'zdolnosc-kredytowa', 'godziny-pracy', 'kredyt-gotowkowy'].map((slug) => ({
+      url: `${BASE_URL}/kalkulator/${slug}`,
+      lastModified: new Date('2026-06-02'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
     {
       url: `${BASE_URL}/disclaimer`,
       lastModified: new Date('2026-05-21'),

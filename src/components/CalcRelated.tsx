@@ -63,7 +63,10 @@ const ALL_CALCS = [
   { href: '/kalkulator/etf',              label: 'ETF vs Lokata',         desc: 'Porównaj potencjalne zyski ETF-ów i lokat bankowych.',     Icon: IcoBars,   col: GREEN },
   { href: '/kalkulator/godziny-pracy',    label: 'Ile godzin pracy?',     desc: 'Zobacz, ile godzin pracy potrzeba na różne cele.',         Icon: IcoTimer,  col: LILAC },
   { href: '/kalkulator/kredyt-gotowkowy', label: 'Kredyt gotówkowy',      desc: 'Oblicz ratę i RRSO kredytu gotówkowego.',                  Icon: IcoCard,   col: GREEN },
+  { href: '/kalkulator/wynagrodzenia',    label: 'Wynagrodzenia brutto-netto', desc: 'Przelicz pensję brutto na netto ze składkami i podatkiem.', Icon: IcoCalc, col: GOLD  },
+  { href: '/kalkulator/skladka-zdrowotna', label: 'Składka zdrowotna 2026', desc: 'Policz składkę zdrowotną na skali, liniowym i ryczałcie.', Icon: IcoScales, col: GREEN },
   { href: '/kalkulator-hipoteczny',       label: 'Kalkulator hipoteczny', desc: 'Oblicz ratę kredytu i całkowity koszt nieruchomości.',     Icon: IcoHouse,  col: GREEN },
+  { href: '/kalkulator/zdolnosc-kredytowa', label: 'Zdolność kredytowa',  desc: 'Oszacuj maksymalną kwotę kredytu hipotecznego.',           Icon: IcoCard,   col: GOLD  },
 ];
 
 export default async function CalcRelated({ currentPath }: { currentPath: string }) {
