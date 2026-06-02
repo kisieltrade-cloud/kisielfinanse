@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ReadingProgress from '@/components/ReadingProgress';
@@ -141,6 +142,9 @@ export default async function ArticlePage({ params }: Props) {
   const tocItems = extractTocItems(post.content);
   const t = TAG_CONFIG[category] ?? TAG_CONFIG['trading'];
   const canonicalUrl = `${BASE_URL}/${category}/${slug}`;
+  const updatedDisplay = post.updatedISO
+    ? new Date(post.updatedISO).toLocaleDateString('pl-PL', { day: '2-digit', month: 'long', year: 'numeric' })
+    : null;
 
   const schemaArticle = {
     '@context': 'https://schema.org',
@@ -244,12 +248,24 @@ export default async function ArticlePage({ params }: Props) {
 
           <div style={{
             display: 'flex',
-            gap: 24,
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: 16,
             fontFamily: 'var(--font-mono)',
             fontSize: '0.72rem',
             color: 'var(--muted)',
           }}>
+            <Link href="/o-mnie" style={{ color: 'var(--text)', textDecoration: 'none', fontWeight: 700 }}>
+              Mateusz Kisiel
+            </Link>
+            <span>·</span>
             <span>{post.date}</span>
+            {updatedDisplay && (
+              <>
+                <span>·</span>
+                <span style={{ color: t.color }}>Zaktualizowano {updatedDisplay}</span>
+              </>
+            )}
             <span>·</span>
             <ReadTimeRing readTime={post.readTime} size={38} />
           </div>

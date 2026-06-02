@@ -28,11 +28,12 @@ const getTag = (tag: string) =>
 
 interface Props {
   posts: PostMeta[];
+  initialQuery?: string;
 }
 
-export default function BlogList({ posts }: Props) {
+export default function BlogList({ posts, initialQuery = '' }: Props) {
   const [active, setActive] = useState('Wszystkie');
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(initialQuery);
 
   // Collect unique tags
   const tags = ['Wszystkie', ...Array.from(new Set(posts.map(p => p.tag))).sort()];

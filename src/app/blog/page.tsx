@@ -65,8 +65,9 @@ const schemaBlog = {
   },
 };
 
-export default async function BlogPage() {
-  const posts = await getAllPosts();
+export default async function BlogPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+  const [posts, sp] = await Promise.all([getAllPosts(), searchParams]);
+  const initialQuery = typeof sp.q === 'string' ? sp.q : '';
 
   return (
     <>
@@ -80,7 +81,7 @@ export default async function BlogPage() {
             BLOG<br />
             <span className="gradient-text-pp">FINANSOWY</span>
           </h1>
-          <BlogList posts={posts} />
+          <BlogList posts={posts} initialQuery={initialQuery} />
 
           {/* Newsletter pod lista artykulow */}
           <div style={{ maxWidth: 680, margin: '60px auto 80px', padding: '0 24px' }}>

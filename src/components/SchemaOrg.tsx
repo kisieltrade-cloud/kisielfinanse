@@ -8,6 +8,8 @@ export default function SchemaOrg() {
     image: 'https://kisielfinanse.pl/images/profile.png',
     sameAs: [
       'https://x.com/Kisielfinanse',
+      'https://www.youtube.com/@Kisielfinanse',
+      'https://www.instagram.com/kisielfinanse',
     ],
     jobTitle: 'Twórca portalu KisielFinanse',
     description: 'Trader i analityk finansowy z Wrocławia. Edukacja z zakresu tradingu, krypto, oszczędzania i geopolityki finansowej.',
@@ -54,6 +56,8 @@ export default function SchemaOrg() {
     },
     sameAs: [
       'https://x.com/Kisielfinanse',
+      'https://www.youtube.com/@Kisielfinanse',
+      'https://www.instagram.com/kisielfinanse',
     ],
     contactPoint: {
       '@type': 'ContactPoint',
