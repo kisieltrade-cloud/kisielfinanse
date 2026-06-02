@@ -27,6 +27,14 @@ const CALC_ITEMS = [
   { href: '/kalkulator/godziny-pracy',      label: 'Ile godzin pracy?',          icon: '⏱️' },
 ];
 
+const EDU_ICONS: Record<string, string> = {
+  trading: '📈',
+  inwestycje: '📊',
+  pieniadze: '💰',
+  psychologia: '🧠',
+  gospodarka: '🏦',
+};
+
 export default function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -116,7 +124,7 @@ export default function Nav() {
                       className="nav-dropdown-item"
                       onClick={() => setEduOpen(false)}
                     >
-                      <span style={{ width: 8, height: 8, borderRadius: '50%', background: cat.color, flexShrink: 0, display: 'inline-block' }} />
+                      <span className="nav-dropdown-item-icon">{EDU_ICONS[cat.slug] ?? '•'}</span>
                       {cat.name}
                     </Link>
                   </li>
