@@ -14,6 +14,7 @@ import { remark } from 'remark';
 import remarkHtml from 'remark-html';
 import remarkGfm from 'remark-gfm';
 import remarkGlossary from '@/lib/remark-glossary';
+import remarkInternalLinks from '@/lib/remark-internal-links';
 import TableOfContents from '@/components/TableOfContents';
 import TableOfContentsMobile from '@/components/TableOfContentsMobile';
 import { extractTocItems, slugifyHeading } from '@/lib/toc';
@@ -131,7 +132,7 @@ export default async function ArticlePage({ params }: Props) {
   const currentIndex = published.findIndex(p => p.slug === slug);
   const nextPost = published[(currentIndex + 1) % published.length];
 
-  const processed = await remark().use(remarkGfm).use(remarkGlossary).use(remarkHtml, { sanitize: false }).process(post.content);
+  const processed = await remark().use(remarkGfm).use(remarkInternalLinks, { currentSlug: slug }).use(remarkGlossary).use(remarkHtml, { sanitize: false }).process(post.content);
   const rawHtml = processed.toString();
 
   const contentHtml = rawHtml.replace(
