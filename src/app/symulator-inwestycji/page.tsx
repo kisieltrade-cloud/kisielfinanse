@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   alternates: { canonical: URL },
   openGraph: {
     title: 'Ile byś zarobił, gdybyś zaczął inwestować lata temu? | KisielFinanse',
-    description: 'Sprawdź na realnych danych: S&P 500, NASDAQ, Bitcoin, złoto, polskie akcje. Podróż w czasie - symulator inwestycji.',
+    description: 'Sprawdź na realnych danych: S&P 500, NASDAQ, Bitcoin, złoto, polskie akcje. Symulator inwestycji od KisielFinanse.',
     url: URL,
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
@@ -38,7 +38,7 @@ const schemaBreadcrumb = {
 const schemaApp = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'Podróż w czasie - symulator inwestycji',
+  name: 'Symulator inwestycji',
   url: URL,
   applicationCategory: 'FinanceApplication',
   operatingSystem: 'Web',
@@ -64,12 +64,15 @@ export default function SymulatorPage() {
 
           <h1 style={{
             fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 5vw, 3.4rem)',
-            letterSpacing: '2px', lineHeight: 1.05, margin: '20px 0 14px', color: 'var(--text)',
+            letterSpacing: '2px', lineHeight: 1.05, margin: '20px 0 12px', color: 'var(--text)',
           }}>
-            PODRÓŻ W CZASIE
+            SYMULATOR INWESTYCJI
           </h1>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(1.05rem, 2vw, 1.25rem)', fontWeight: 700, color: '#c9a227', lineHeight: 1.4, margin: '0 0 12px' }}>
+            Ile byś zarobił, gdybyś zaczął inwestować lata temu?
+          </p>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', color: 'var(--text)', lineHeight: 1.8, maxWidth: 620, margin: 0 }}>
-            Ile miałbyś dziś, gdybyś zaczął inwestować lata temu? Wybierz aktywo, kwotę i rok startu. Liczymy na realnych danych historycznych - i czasem wynik zwala z nóg.
+            Wybierz aktywo, kwotę i rok startu. Liczymy na realnych danych historycznych - i czasem wynik zwala z nóg.
           </p>
         </div>
 

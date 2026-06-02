@@ -363,7 +363,7 @@ export default async function ArticlePage({ params }: Props) {
                   Sprawdź również
                 </span>
                 <span style={{ fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '1rem', color: 'var(--text)' }}>
-                  Podróż w czasie - ile byś zarobił, inwestując regularnie?
+                  Symulator inwestycji - ile byś zarobił, inwestując regularnie?
                 </span>
               </span>
               <span style={{ color: '#c9a227', fontSize: '1.3rem', flexShrink: 0 }} aria-hidden="true">→</span>
