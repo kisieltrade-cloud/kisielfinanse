@@ -24,6 +24,7 @@ import AuthorBox from '@/components/AuthorBox';
 import NextArticleBar from '@/components/NextArticleBar';
 import NewsletterForm from '@/components/NewsletterForm';
 import RelatedCalcs from '@/components/RelatedCalcs';
+import Comments from '@/components/Comments';
 
 // Odświeżaj co godzinę — przyszłe artykuły pojawią się automatycznie po dacie publikacji
 export const revalidate = 3600;
@@ -343,6 +344,9 @@ export default async function ArticlePage({ params }: Props) {
             </aside>
           )}
         </div>
+
+        {/* Komentarze — od razu pod treścią artykułu */}
+        <Comments slug={slug} />
 
         {/* Powiązane kalkulatory */}
         <RelatedCalcs tag={post.tag} slug={slug} />
