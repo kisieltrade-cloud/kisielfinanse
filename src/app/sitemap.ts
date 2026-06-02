@@ -100,6 +100,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/symulator-inwestycji`,
+      lastModified: new Date('2026-06-02'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/disclaimer`,
       lastModified: new Date('2026-05-21'),
       changeFrequency: 'yearly',
