@@ -15,6 +15,7 @@ const UTIL_LINKS = [
 ];
 
 const CALC_ITEMS = [
+  { href: '/symulator-inwestycji',          label: 'Podróż w czasie (symulator)', icon: '⏳' },
   { href: '/kalkulator/wynagrodzenia',      label: 'Wynagrodzenia brutto-netto', icon: '💰' },
   { href: '/kalkulator/skladka-zdrowotna',  label: 'Składka zdrowotna',          icon: '🩺' },
   { href: '/kalkulator/zdolnosc-kredytowa', label: 'Zdolność kredytowa',         icon: '🏦' },

@@ -166,6 +166,11 @@ export default async function ArticlePage({ params }: Props) {
     ? new Date(post.updatedISO).toLocaleDateString('pl-PL', { day: '2-digit', month: 'long', year: 'numeric' })
     : null;
 
+  // Artykuły o inwestowaniu/oszczędzaniu dostają kontekstowy callout do symulatora
+  const investThemed =
+    post.tag === 'Inwestycje' ||
+    /procent-skladany|dca|etf|inwestow|dywersyfik|fire|ike|ppk|obligacj|lokat|oszczed|poduszka/.test(slug);
+
   const schemaArticle = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -344,6 +349,27 @@ export default async function ArticlePage({ params }: Props) {
             </aside>
           )}
         </div>
+
+        {/* Sprawdź również: symulator — w artykułach inwestycyjnych */}
+        {investThemed && (
+          <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 40px' }}>
+            <Link href="/symulator-inwestycji" style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
+              padding: '18px 22px', borderRadius: 14, textDecoration: 'none',
+              background: 'rgba(201,162,39,0.06)', border: '1px solid rgba(201,162,39,0.25)', borderLeft: '3px solid #c9a227',
+            }}>
+              <span>
+                <span style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '0.62rem', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#c9a227', marginBottom: 6 }}>
+                  Sprawdź również
+                </span>
+                <span style={{ fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '1rem', color: 'var(--text)' }}>
+                  Podróż w czasie - ile byś zarobił, inwestując regularnie?
+                </span>
+              </span>
+              <span style={{ color: '#c9a227', fontSize: '1.3rem', flexShrink: 0 }} aria-hidden="true">→</span>
+            </Link>
+          </div>
+        )}
 
         {/* Komentarze — od razu pod treścią artykułu */}
         <Comments slug={slug} />
