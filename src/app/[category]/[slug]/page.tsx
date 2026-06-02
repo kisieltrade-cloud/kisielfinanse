@@ -14,7 +14,6 @@ import { remark } from 'remark';
 import remarkHtml from 'remark-html';
 import remarkGfm from 'remark-gfm';
 import remarkGlossary from '@/lib/remark-glossary';
-import remarkInternalLinks from '@/lib/remark-internal-links';
 import TableOfContents from '@/components/TableOfContents';
 import TableOfContentsMobile from '@/components/TableOfContentsMobile';
 import { extractTocItems, slugifyHeading } from '@/lib/toc';
@@ -132,13 +131,32 @@ export default async function ArticlePage({ params }: Props) {
   const currentIndex = published.findIndex(p => p.slug === slug);
   const nextPost = published[(currentIndex + 1) % published.length];
 
-  const processed = await remark().use(remarkGfm).use(remarkInternalLinks, { currentSlug: slug }).use(remarkGlossary).use(remarkHtml, { sanitize: false }).process(post.content);
+  const processed = await remark().use(remarkGfm).use(remarkGlossary).use(remarkHtml, { sanitize: false }).process(post.content);
   const rawHtml = processed.toString();
 
   const contentHtml = rawHtml.replace(
     /<h([2-4])>(.*?)<\/h\1>/gi,
     (_, level, inner) => `<h${level} id="${slugifyHeading(inner)}">${inner}</h${level}>`,
   );
+
+  // Kafelki "Przeczytaj też" wstawiane między sekcje (po 2. i 5. nagłówku H2).
+  // Najpierw artykuły z tej samej kategorii, potem pozostałe; bez bieżącego.
+  const sameTag = published.filter((p) => p.tag === post.tag && p.slug !== slug);
+  const otherTag = published.filter((p) => p.tag !== post.tag && p.slug !== slug);
+  const suggestions = [...sameTag, ...otherTag].slice(0, 2);
+
+  const calloutHtml = (p: typeof published[number]) =>
+    `<aside class="inline-related"><span class="inline-related-label">Przeczytaj też</span>` +
+    `<a href="${postUrl(p)}" class="inline-related-link"><span>${p.title}</span>` +
+    `<span class="inline-related-arrow" aria-hidden="true">&#8594;</span></a></aside>`;
+
+  let h2seen = 0;
+  const contentWithRelated = contentHtml.replace(/<h2\b/gi, (m) => {
+    h2seen += 1;
+    if (h2seen === 2 && suggestions[0]) return calloutHtml(suggestions[0]) + m;
+    if (h2seen === 5 && suggestions[1]) return calloutHtml(suggestions[1]) + m;
+    return m;
+  });
 
   const tocItems = extractTocItems(post.content);
   const t = TAG_CONFIG[category] ?? TAG_CONFIG['trading'];
@@ -314,7 +332,7 @@ export default async function ArticlePage({ params }: Props) {
             <BlogImageLightbox />
             <div
               className="blog-post-content"
-              dangerouslySetInnerHTML={{ __html: contentHtml }}
+              dangerouslySetInnerHTML={{ __html: contentWithRelated }}
             />
           </div>
 
