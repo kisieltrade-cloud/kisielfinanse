@@ -51,12 +51,46 @@ function IconLine({ color }: { color: string }) {
   );
 }
 
+function IconWallet({ color }: { color: string }) {
+  return (
+    <svg width="54" height="54" viewBox="0 0 56 56" fill="none" stroke={color} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="9" y="16" width="38" height="26" rx="4" />
+      <line x1="9" y1="24" x2="47" y2="24" />
+      <circle cx="39" cy="33" r="2.6" fill={color} stroke="none" />
+    </svg>
+  );
+}
+function IconHealth({ color }: { color: string }) {
+  return (
+    <svg width="54" height="54" viewBox="0 0 56 56" fill="none" stroke={color} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="11" y="14" width="34" height="30" rx="5" />
+      <line x1="28" y1="22" x2="28" y2="36" />
+      <line x1="21" y1="29" x2="35" y2="29" />
+    </svg>
+  );
+}
+function IconBank({ color }: { color: string }) {
+  return (
+    <svg width="54" height="54" viewBox="0 0 56 56" fill="none" stroke={color} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M10 22 L28 10 L46 22" />
+      <line x1="14" y1="25" x2="14" y2="40" />
+      <line x1="23" y1="25" x2="23" y2="40" />
+      <line x1="33" y1="25" x2="33" y2="40" />
+      <line x1="42" y1="25" x2="42" y2="40" />
+      <line x1="10" y1="44" x2="46" y2="44" />
+    </svg>
+  );
+}
+
 const TOOLS = [
   { href: '/kalkulator/procent-skladany', label: 'PROCENT SKŁADANY', desc: 'Oblicz potencjał wzrostu Twojego kapitału.', accent: '#3b82f6', rgb: '59,130,246',  Icon: IconPie    },
   { href: '/kalkulator/dca',              label: 'DCA',              desc: 'Średnia cena zakupu w czasie.',              accent: '#22c55e', rgb: '34,197,94',   Icon: IconBars   },
   { href: '/kalkulator/risk-reward',      label: 'RISK / REWARD',    desc: 'Oceń relację zysku do ryzyka.',              accent: '#f59e0b', rgb: '245,158,11',  Icon: IconScales },
   { href: '/kalkulator/fire',             label: 'FIRE',             desc: 'Sprawdź, kiedy możesz osiągnąć niezależność.', accent: '#ef4444', rgb: '239,68,68',   Icon: IconShield },
   { href: '/kalkulator/etf',              label: 'ETF VS LOKATA',    desc: 'Porównaj ETF z lokatą bankową.',             accent: '#8b5cf6', rgb: '139,92,246',  Icon: IconLine   },
+  { href: '/kalkulator/wynagrodzenia',     label: 'BRUTTO - NETTO',     desc: 'Przelicz pensję brutto na netto.',     accent: '#0ea5a4', rgb: '14,165,164',  Icon: IconWallet },
+  { href: '/kalkulator/skladka-zdrowotna', label: 'SKŁADKA ZDROWOTNA',  desc: 'Policz składkę na działalności.',      accent: '#2e7d4f', rgb: '46,125,79',   Icon: IconHealth },
+  { href: '/kalkulator/zdolnosc-kredytowa', label: 'ZDOLNOŚĆ KREDYTOWA', desc: 'Oszacuj maksymalną kwotę kredytu.',   accent: '#e8963a', rgb: '232,150,58',  Icon: IconBank   },
 ];
 
 export default function CalcSection() {
@@ -103,7 +137,7 @@ export default function CalcSection() {
         [data-theme="dark"] .cs-tarrow { border-color: rgba(255,255,255,0.12); color: var(--muted); }
 
         /* ── Premium tool cards (Pozostałe narzędzia) ── */
-        .cs2-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+        .cs2-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 
         .cs2-card {
           position: relative;
