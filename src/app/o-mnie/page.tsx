@@ -536,6 +536,19 @@ export default function OMnie() {
           </div>
         </section>
 
+        {/* ══ PRYWATNIE / DLACZEGO TO ROBIĘ ════════════════════════════ */}
+        <section style={{ background: 'var(--bg)', padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
+            <SectionLabel label="DLACZEGO TO ROBIĘ" />
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(0.94rem, 1.5vw, 1.1rem)', color: 'var(--text)', lineHeight: 1.85, margin: '0 0 20px' }}>
+              Od dziewięciu lat praktycznie cały wolny czas poświęcam na finanse: inwestycje, trading, zarządzanie pieniędzmi. Nie dla samych liczb, tylko dlatego, że chcę coś w życiu mieć i żyć lepiej. Zaczęło się jako sposób na lepszą przyszłość, a z czasem stało się czymś, czego po prostu chcę uczyć się dalej.
+            </p>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(0.88rem, 1.4vw, 1rem)', color: 'var(--muted)', lineHeight: 1.85, margin: 0 }}>
+              Poza finansami żyję muzyką. Festiwale, zwłaszcza klimaty EDM, to mój sposób na oderwanie się od wykresów i tabelek. Dobrze mieć coś, co przypomina, po co właściwie się to wszystko robi.
+            </p>
+          </div>
+        </section>
+
         {/* ══ 5. FINANSE BEZ ŚCIEMY — 3-COLUMN CTA ════════════════════ */}
         <section style={{ position: 'relative', overflow: 'hidden', padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 60px)' }}>
           {/* Background image */}
