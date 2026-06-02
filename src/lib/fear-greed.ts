@@ -47,26 +47,8 @@ function rsi(closes: number[], period = 14): number {
   return 100 - 100 / (1 + rs);
 }
 
-// ── Krypto: alternative.me ──────────────────────────────────────────────────
-export async function getCryptoFG(): Promise<FGResult> {
-  try {
-    const res = await fetch('https://api.alternative.me/fng/?limit=1', { next: { revalidate: 3600 } });
-    if (!res.ok) throw new Error('http');
-    const json = await res.json();
-    const d = json?.data?.[0];
-    const value = clamp(parseInt(d.value, 10));
-    return {
-      value,
-      label: fgLabel(value),
-      updatedISO: new Date(parseInt(d.timestamp, 10) * 1000).toISOString(),
-      ok: true,
-    };
-  } catch {
-    return { value: 50, label: 'Brak danych', updatedISO: '', ok: false };
-  }
-}
-
-// ── Indeksy giełdowe: Yahoo Finance → policzony indeks ──────────────────────
+// ── Wskaźnik liczony z historii dziennej (Yahoo Finance) ────────────────────
+// Działa dla każdego symbolu z historią: BTC-USD, EPOL, ^NDX itd.
 export async function getIndexFG(symbol: string): Promise<FGResult> {
   try {
     const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?range=1y&interval=1d`;
@@ -113,7 +95,7 @@ export async function getIndexFG(symbol: string): Promise<FGResult> {
 
 // ── Konfiguracja rynków pokazywanych na stronie ─────────────────────────────
 export const FG_MARKETS = [
-  { key: 'krypto', title: 'Krypto', subtitle: 'Bitcoin i rynek kryptowalut', accent: '#f7931a' },
+  { key: 'krypto', title: 'Krypto', subtitle: 'Bitcoin i rynek kryptowalut', symbol: 'BTC-USD', accent: '#f7931a' },
   { key: 'polska', title: 'Polska giełda', subtitle: 'polskie akcje (MSCI Poland)', symbol: 'EPOL', accent: '#ff2d78' },
   { key: 'nasdaq', title: 'USA', subtitle: 'NASDAQ-100 - technologia', symbol: '^NDX', accent: '#5b9bd5' },
 ] as const;

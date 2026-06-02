@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import FearGreedGauge from '@/components/FearGreedGauge';
 import NewsletterForm from '@/components/NewsletterForm';
-import { getCryptoFG, getIndexFG } from '@/lib/fear-greed';
+import { getIndexFG } from '@/lib/fear-greed';
 
 const BASE_URL = 'https://kisielfinanse.pl';
 const URL = `${BASE_URL}/indeks-strachu-i-chciwosci`;
@@ -41,13 +41,13 @@ const schemaBreadcrumb = {
 
 export default async function FearGreedPage() {
   const [krypto, polska, nasdaq] = await Promise.all([
-    getCryptoFG(),
+    getIndexFG('BTC-USD'),
     getIndexFG('EPOL'),
     getIndexFG('^NDX'),
   ]);
 
   return (
-    <div data-theme="dark" style={{ background: 'var(--bg)', minHeight: '100vh' }}>
+    <div data-theme="dark" style={{ background: 'var(--bg)', color: 'var(--text)', minHeight: '100vh' }}>
       <Nav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }} />
 
@@ -62,8 +62,9 @@ export default async function FearGreedPage() {
             fontFamily: 'var(--font-display)',
             fontSize: 'clamp(2rem, 5vw, 3.4rem)',
             letterSpacing: '2px', lineHeight: 1.05, margin: '20px 0 14px',
+            color: 'var(--text)',
           }}>
-            INDEKS STRACHU<br /><span style={{ color: '#c9a227' }}>I CHCIWOŚCI</span>
+            INDEKS STRACHU I CHCIWOŚCI
           </h1>
           <p style={{
             fontFamily: 'var(--font-body)', fontSize: '1rem', color: 'var(--text)',
@@ -84,7 +85,7 @@ export default async function FearGreedPage() {
 
         {/* Jak czytać */}
         <div style={{ maxWidth: 760, margin: '0 auto', padding: '56px 24px 0' }}>
-          <h2 style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 800, letterSpacing: '-0.3px', marginBottom: 18 }}>
+          <h2 style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(1.4rem, 3vw, 2rem)', fontWeight: 800, letterSpacing: '-0.3px', marginBottom: 18, color: 'var(--text)' }}>
             Jak czytać ten wskaźnik
           </h2>
           <div style={{ display: 'grid', gap: 10 }}>
@@ -109,7 +110,7 @@ export default async function FearGreedPage() {
             fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--muted)', lineHeight: 1.7,
           }}>
             <strong style={{ color: 'var(--text)' }}>Jak liczymy?</strong><br />
-            Krypto: indeks z alternative.me. Polska giełda (MSCI Poland) i NASDAQ-100: własny wskaźnik liczony z danych dziennych jako średnia czterech składowych - RSI, momentum względem średniej 125-dniowej, pozycja w zakresie 52 tygodni i zwrot z ostatniego miesiąca. Dane aktualizowane co godzinę. To narzędzie edukacyjne, nie sygnał kupna ani sprzedaży.
+            Nasz autorski wskaźnik dla każdego rynku liczymy z danych dziennych jako średnią czterech składowych: RSI, momentum względem średniej 125-dniowej, pozycja w zakresie 52 tygodni oraz zwrot z ostatniego miesiąca. Krypto liczymy z ceny Bitcoina, polskie akcje z indeksu MSCI Poland, a USA z NASDAQ-100. Dane aktualizowane co godzinę. To narzędzie edukacyjne, nie sygnał kupna ani sprzedaży.
           </div>
 
           <div style={{ margin: '48px 0 80px' }}>
