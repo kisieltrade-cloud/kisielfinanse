@@ -109,6 +109,10 @@ export default function CategoryArticleList({ posts, categoryColor }: Props) {
                   </span>
                 </div>
                 <div className="news-card-body">
+                  <span className="news-card-author">
+                    <Image src="/images/profile.png" alt="Mateusz" width={28} height={28} className="news-author-avatar" />
+                    {post.author ?? 'Mateusz'}
+                  </span>
                   <h3 className="news-card-title">{post.title}</h3>
                   <div className="news-card-footer">
                     <span className="news-card-date">{post.date}</span>

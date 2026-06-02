@@ -70,7 +70,7 @@ export default async function BlogPage({ searchParams }: { searchParams: Promise
   const initialQuery = typeof sp.q === 'string' ? sp.q : '';
 
   return (
-    <>
+    <div data-theme="dark" style={{ background: 'var(--bg)', color: 'var(--text)', minHeight: '100vh' }}>
       <RevealOnScroll />
       <Nav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }} />
@@ -90,6 +90,6 @@ export default async function BlogPage({ searchParams }: { searchParams: Promise
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

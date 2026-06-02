@@ -159,6 +159,11 @@ export default function BlogList({ posts, initialQuery = '' }: Props) {
                     <ReadTimeRing readTime={post.readTime ?? '7 min'} />
                   </div>
 
+                  <span className="news-card-author" style={{ margin: '2px 0 10px' }}>
+                    <Image src="/images/profile.png" alt="Mateusz" width={28} height={28} className="news-author-avatar" />
+                    {post.author ?? 'Mateusz'}
+                  </span>
+
                   <h3 className="blog-card-title" style={{ fontSize: '1.2rem' }}>
                     {post.title}
                   </h3>

@@ -31,8 +31,10 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [calcOpen, setCalcOpen] = useState(false);
   const calcRef = useRef<HTMLLIElement>(null);
+  const [eduOpen, setEduOpen] = useState(false);
+  const eduRef = useRef<HTMLLIElement>(null);
 
-  useEffect(() => { setOpen(false); setCalcOpen(false); }, [pathname]);
+  useEffect(() => { setOpen(false); setCalcOpen(false); setEduOpen(false); }, [pathname]);
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -49,6 +51,18 @@ export default function Nav() {
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, [calcOpen]);
+
+  // zamknij dropdown edukacja po kliknięciu poza nim
+  useEffect(() => {
+    if (!eduOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (eduRef.current && !eduRef.current.contains(e.target as Node)) {
+        setEduOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [eduOpen]);
 
   const isActive = (href: string) => pathname === href;
   const isCalcActive = pathname.startsWith('/kalkulator') && pathname !== '/kalkulator-hipoteczny';
@@ -81,25 +95,39 @@ export default function Nav() {
           {/* Separator */}
           <li className="nav-sep" aria-hidden="true" />
 
-          {/* 5 kategorii z labelką nad grupą */}
-          <li className="nav-cat-group">
-            <span className="nav-cat-label">Artykuły</span>
-            <ul className="nav-cat-items">
-              {CATEGORIES.map((cat) => (
-                <li key={cat.slug}>
-                  <Link
-                    href={`/${cat.slug}`}
-                    className="nav-cat-link"
-                    style={{
-                      color: isActive(`/${cat.slug}`) ? cat.color : undefined,
-                      ['--cat-color' as string]: cat.color,
-                    }}
-                  >
-                    {cat.name}
+          {/* Dropdown: Edukacja (kategorie) */}
+          <li className="nav-dropdown" ref={eduRef}>
+            <button
+              className={`nav-dropdown-trigger${pathname === '/blog' ? ' nav-dropdown-trigger--active' : ''}`}
+              onClick={() => setEduOpen((v) => !v)}
+              aria-expanded={eduOpen}
+            >
+              Edukacja
+              <span className={`nav-dropdown-arrow${eduOpen ? ' nav-dropdown-arrow--open' : ''}`}>▾</span>
+            </button>
+
+            {eduOpen && (
+              <ul className="nav-dropdown-menu">
+                {CATEGORIES.map((cat) => (
+                  <li key={cat.slug}>
+                    <Link
+                      href={`/${cat.slug}`}
+                      className="nav-dropdown-item"
+                      onClick={() => setEduOpen(false)}
+                    >
+                      <span className="nav-dropdown-item-icon" style={{ color: cat.color }}>●</span>
+                      {cat.name}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link href="/blog" className="nav-dropdown-item" onClick={() => setEduOpen(false)}>
+                    <span className="nav-dropdown-item-icon">📚</span>
+                    Wszystkie artykuły
                   </Link>
                 </li>
-              ))}
-            </ul>
+              </ul>
+            )}
           </li>
 
           {/* Separator */}
@@ -194,7 +222,7 @@ export default function Nav() {
               </li>
             ))}
 
-            <li className="mobile-menu-section">Kategorie</li>
+            <li className="mobile-menu-section">Edukacja</li>
 
             {CATEGORIES.map((cat) => (
               <li key={cat.slug}>
