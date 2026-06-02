@@ -142,7 +142,7 @@ export default async function CategoryPage({ params }: Props) {
   };
 
   return (
-    <>
+    <div data-theme="dark" style={{ background: 'var(--bg)', minHeight: '100vh', ['--cat-rgb' as string]: config.rgb }}>
       <RevealOnScroll />
       <Nav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }} />
@@ -176,26 +176,22 @@ export default async function CategoryPage({ params }: Props) {
         </div>
 
         {/* ── PILLAR GUIDE (przewodnik klastra) ── */}
-        {pillar && <PillarGuide pillar={pillar} color={config.color} />}
+        {pillar && <PillarGuide pillar={pillar} />}
 
         {/* ── BODY ── */}
         <div className="cat-body">
+          {posts.length > 0 ? (
+            <CategoryArticleList posts={posts} categoryColor={config.color} />
+          ) : (
+            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.82rem', color: 'var(--muted)', lineHeight: 1.8, padding: '40px 0' }}>
+              Artykuły z tej kategorii są w przygotowaniu. Wróć wkrótce.
+            </p>
+          )}
 
-          {/* Main column */}
-          <div>
-            {posts.length > 0 ? (
-              <CategoryArticleList posts={posts} categoryColor={config.color} />
-            ) : (
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.82rem', color: 'var(--muted)', lineHeight: 1.8, padding: '40px 0' }}>
-                Artykuły z tej kategorii są w przygotowaniu. Wróć wkrótce.
-              </p>
-            )}
-          </div>
-
-          {/* Sidebar */}
-          <aside className="cat-sidebar">
-            <div>
-              <p className="cat-other-label">Inne tematy</p>
+          {/* Inne tematy — siatka kart */}
+          <div style={{ marginTop: 64, paddingTop: 40, borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+            <p className="cat-other-label">Inne tematy</p>
+            <div className="cat-other-grid">
               {otherCats.map(c => (
                 <Link key={c.slug} href={`/${c.slug}`} className="cat-other-item">
                   <span className="cat-other-icon" style={{ background: `${c.color}18`, color: c.color }}>
@@ -208,12 +204,15 @@ export default async function CategoryPage({ params }: Props) {
                 </Link>
               ))}
             </div>
-            <NewsletterForm />
-          </aside>
+          </div>
 
+          {/* Newsletter */}
+          <div style={{ maxWidth: 620, margin: '52px auto 0' }}>
+            <NewsletterForm />
+          </div>
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
