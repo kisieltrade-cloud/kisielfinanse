@@ -10,6 +10,8 @@ import CategoryArticleList from '@/components/CategoryArticleList';
 import NewsletterForm from '@/components/NewsletterForm';
 import { getPostsByTag } from '@/lib/posts';
 import { CATEGORIES, getCategoryBySlug } from '@/lib/categories';
+import { getPillar } from '@/lib/pillars';
+import PillarGuide from '@/components/PillarGuide';
 
 // Odświeżaj co godzinę — nowe artykuły pojawią się automatycznie po dacie publikacji
 export const revalidate = 3600;
@@ -109,6 +111,17 @@ export default async function CategoryPage({ params }: Props) {
   const posts = result?.posts ?? [];
   const otherCats = CATEGORIES.filter(c => c.slug !== slug);
   const heroImg = HERO_IMAGES[slug] ?? '/images/blog/covers/finance-graph.jpg';
+  const pillar = getPillar(slug);
+
+  const schemaFaq = pillar && pillar.faq.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: pillar.faq.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  } : null;
 
   const schemaBreadcrumb = {
     '@context': 'https://schema.org',
@@ -134,6 +147,7 @@ export default async function CategoryPage({ params }: Props) {
       <Nav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaCollectionPage) }} />
+      {schemaFaq && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFaq) }} />}
 
       <main>
         {/* ── HERO ── */}
@@ -160,6 +174,9 @@ export default async function CategoryPage({ params }: Props) {
             </div>
           </div>
         </div>
+
+        {/* ── PILLAR GUIDE (przewodnik klastra) ── */}
+        {pillar && <PillarGuide pillar={pillar} color={config.color} />}
 
         {/* ── BODY ── */}
         <div className="cat-body">
