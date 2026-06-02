@@ -35,6 +35,8 @@ export default function SchemaOrg() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'KisielFinanse',
+    alternateName: ['Kisiel Finanse', 'KisielFinanse.pl'],
+    slogan: 'Finanse. Wiedza. Wolność.',
     url: 'https://kisielfinanse.pl',
     logo: {
       '@type': 'ImageObject',
@@ -48,7 +50,17 @@ export default function SchemaOrg() {
     founder: {
       '@type': 'Person',
       name: 'Mateusz Kisiel',
+      url: 'https://kisielfinanse.pl/o-mnie',
+      sameAs: [
+        'https://x.com/Kisielfinanse',
+        'https://www.youtube.com/@Kisielfinanse',
+        'https://www.instagram.com/kisielfinanse',
+      ],
     },
+    knowsAbout: [
+      'finanse osobiste', 'inwestowanie', 'ETF', 'trading', 'kryptowaluty',
+      'oszczędzanie', 'kredyty hipoteczne', 'podatki', 'emerytura', 'gospodarka',
+    ],
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Wrocław',
