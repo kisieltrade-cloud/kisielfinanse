@@ -116,7 +116,7 @@ export default function Nav() {
                       className="nav-dropdown-item"
                       onClick={() => setEduOpen(false)}
                     >
-                      <span className="nav-dropdown-item-icon" style={{ color: cat.color }}>●</span>
+                      <span style={{ width: 8, height: 8, borderRadius: '50%', background: cat.color, flexShrink: 0, display: 'inline-block' }} />
                       {cat.name}
                     </Link>
                   </li>
