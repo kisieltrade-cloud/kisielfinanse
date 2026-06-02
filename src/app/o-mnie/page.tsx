@@ -96,6 +96,20 @@ const categories = [
   { href: '/gospodarka',  label: 'Gospodarka',  desc: 'Makroekonomia, geopolityka, globalne trendy', img: '/images/blog/covers/gold-circuit.jpg',    color: '#ff2d78' },
 ];
 
+const principles = [
+  { t: 'Piszę o tym, przez co sam przeszedłem', d: 'Bez teorii z drugiej ręki. Każdy temat albo sam przerabiałem, albo dokopuję się do danych i źródeł, zanim cokolwiek opublikuję.' },
+  { t: 'Liczby przed opiniami', d: 'Konkretne kwoty, stawki i przykłady zamiast ogólników. Jeśli coś twierdzę, pokazuję, skąd to się bierze.' },
+  { t: 'Bez kursów za fortunę i clickbaitu', d: 'Nie sprzedaję magicznych systemów ani treści pisanych pod algorytm. Jeśli coś jest ryzykowne albo czegoś nie wiem, mówię to wprost.' },
+  { t: 'To nie są porady inwestycyjne', d: 'Dzielę się wiedzą i własnym doświadczeniem, ale decyzje finansowe podejmujesz sam. Treści mają charakter edukacyjny.' },
+];
+
+const faqItems = [
+  { q: 'Kim jest Mateusz Kisiel?', a: 'Twórca portalu KisielFinanse. Od 2017 roku uczę się rynków i finansów na własnych decyzjach i błędach. Piszę o inwestowaniu, oszczędzaniu, psychologii pieniędzy i gospodarce z perspektywy kogoś, kto sam przez to przechodził.' },
+  { q: 'Czy KisielFinanse to porady inwestycyjne?', a: 'Nie. Treści mają charakter edukacyjny i informacyjny. Pokazuję mechanizmy i własne podejście, ale decyzje finansowe podejmujesz na własną odpowiedzialność.' },
+  { q: 'Czego nie znajdziesz na KisielFinanse?', a: 'Magicznych systemów „zawsze działających", kursów za fortunę ani treści pisanych pod clickbait. Jeśli coś jest ryzykowne albo niepewne, piszę to wprost.' },
+  { q: 'O czym piszesz najczęściej?', a: 'O finansach osobistych, inwestowaniu w ETF-y, oszczędzaniu, kredytach i podatkach, a także o psychologii pieniędzy i tym, jak gospodarka wpływa na portfel zwykłego człowieka.' },
+];
+
 /* ─── SCHEMA ────────────────────────────────────────────────────────── */
 const schemaBreadcrumb = {
   '@context': 'https://schema.org',
@@ -106,17 +120,41 @@ const schemaBreadcrumb = {
   ],
 };
 
-const schemaPerson = {
-  '@context': 'https://schema.org',
+const PERSON = {
   '@type': 'Person',
+  '@id': 'https://kisielfinanse.pl/#mateusz-kisiel',
   name: 'Mateusz Kisiel',
   alternateName: 'KisielFinanse',
   url: 'https://kisielfinanse.pl/o-mnie',
+  image: 'https://kisielfinanse.pl/images/profile.png',
   jobTitle: 'Twórca portalu KisielFinanse',
-  description: 'Twórca KisielFinanse. 9 lat na rynkach finansowych. Pisze o tradingu, inwestycjach, oszczędzaniu i psychologii finansów.',
-  knowsAbout: ['Trading', 'Forex', 'Futures', 'Kryptowaluty', 'Finanse osobiste', 'Oszczędzanie', 'Inwestowanie', 'Geopolityka', 'Zarządzanie ryzykiem'],
+  description: 'Twórca KisielFinanse. Od 2017 roku uczę się rynków i finansów na własnych decyzjach. Piszę o inwestowaniu, oszczędzaniu, psychologii pieniędzy i gospodarce.',
+  knowsAbout: ['Finanse osobiste', 'Inwestowanie', 'ETF', 'Trading', 'Forex', 'Futures', 'Kryptowaluty', 'Oszczędzanie', 'Kredyty', 'Podatki', 'Psychologia finansów', 'Geopolityka', 'Zarządzanie ryzykiem'],
   address: { '@type': 'PostalAddress', addressLocality: 'Wrocław', addressCountry: 'PL' },
-  sameAs: ['https://kisielfinanse.pl', 'https://instagram.com/kisielfinanse'],
+  worksFor: { '@type': 'Organization', name: 'KisielFinanse', url: 'https://kisielfinanse.pl' },
+  sameAs: [
+    'https://x.com/Kisielfinanse',
+    'https://www.youtube.com/@Kisielfinanse',
+    'https://www.instagram.com/kisielfinanse',
+  ],
+};
+
+const schemaProfilePage = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  url: 'https://kisielfinanse.pl/o-mnie',
+  name: 'Mateusz Kisiel - O mnie',
+  mainEntity: PERSON,
+};
+
+const schemaFaq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
 };
 
 /* ─── ICONS ─────────────────────────────────────────────────────────── */
@@ -167,7 +205,9 @@ export default function OMnie() {
       <script type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }} />
       <script type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaPerson) }} />
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaProfilePage) }} />
+      <script type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFaq) }} />
 
       <main>
 
@@ -454,6 +494,45 @@ export default function OMnie() {
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ══ JAK TWORZĘ TREŚCI (E-E-A-T) ══════════════════════════════ */}
+        <section style={{ background: 'var(--bg)', padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div style={{ maxWidth: 1040, margin: '0 auto' }}>
+            <SectionLabel label="JAK TWORZĘ TREŚCI" />
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: 16 }}>
+              {principles.map((p, i) => (
+                <div key={i} style={{ background: 'var(--surface)', border: '1px solid var(--border-subtle)', borderRadius: 14, padding: '26px 24px' }}>
+                  <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', color: '#c9a227', letterSpacing: '2px', display: 'block', marginBottom: 14 }}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.9rem', fontWeight: 700, color: 'var(--text)', letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 10px', lineHeight: 1.3 }}>
+                    {p.t}
+                  </p>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.75, margin: 0 }}>
+                    {p.d}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ══ FAQ O AUTORZE ════════════════════════════════════════════ */}
+        <section style={{ background: 'var(--surface)', padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div style={{ maxWidth: 760, margin: '0 auto' }}>
+            <SectionLabel label="CZĘSTE PYTANIA" />
+            {faqItems.map((f, i) => (
+              <details key={i} style={{ borderBottom: '1px solid var(--border-subtle)', padding: '18px 0' }}>
+                <summary style={{ cursor: 'pointer', fontFamily: 'var(--font-display)', fontSize: '0.95rem', fontWeight: 700, color: 'var(--text)', letterSpacing: '0.5px', listStyle: 'none' }}>
+                  {f.q}
+                </summary>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.88rem', color: 'var(--muted)', lineHeight: 1.8, margin: '12px 0 0' }}>
+                  {f.a}
+                </p>
+              </details>
+            ))}
           </div>
         </section>
 
