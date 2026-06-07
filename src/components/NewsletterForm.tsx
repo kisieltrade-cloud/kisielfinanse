@@ -7,8 +7,6 @@ interface Props {
   variant?: 'inline' | 'card'; // inline = poziomy, card = pelny kafelek
 }
 
-const EBOOK_URL = '/ebook/finansowy-fundament-2026.pdf';
-
 export default function NewsletterForm({ variant = 'card' }: Props) {
   const [email, setEmail] = useState('');
   const [state, setState] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle');
@@ -42,9 +40,7 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
     return (
       <form onSubmit={handleSubmit} className="newsletter-inline">
         {state === 'ok' ? (
-          <p className="newsletter-ok">
-            Zapisano. <a href={EBOOK_URL} target="_blank" rel="noopener" style={{ color: 'var(--cyan)', fontWeight: 700 }}>Pobierz przewodnik →</a> (jest też w mailu).
-          </p>
+          <p className="newsletter-ok">Zapisano. Przewodnik wysłałem na Twojego maila - sprawdź skrzynkę.</p>
         ) : (
           <>
             <input
@@ -94,8 +90,8 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
         <div className="newsletter-card-ok">
           <span style={{ fontSize: '1.4rem' }}>✓</span>
           <p>
-            Zapisano. <a href={EBOOK_URL} target="_blank" rel="noopener" style={{ color: 'var(--cyan)', fontWeight: 700, textDecoration: 'underline' }}>Pobierz przewodnik →</a><br />
-            Wysłałem go też na Twojego maila.
+            Zapisano. Przewodnik wysłałem na Twojego maila.<br />
+            Sprawdź skrzynkę (zajrzyj też do folderu spam).
           </p>
         </div>
       ) : (

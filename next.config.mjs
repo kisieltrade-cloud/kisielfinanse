@@ -63,6 +63,13 @@ const nextConfig = {
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
       },
+      {
+        // Lead magnet (PDF) — dostępny tylko mailem, nie indeksować w wyszukiwarkach
+        source: '/ebook/:path*',
+        headers: [
+          { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
+        ],
+      },
     ];
   },
 };
