@@ -7,6 +7,8 @@ interface Props {
   variant?: 'inline' | 'card'; // inline = poziomy, card = pelny kafelek
 }
 
+const EBOOK_URL = '/ebook/finansowy-fundament-2026.pdf';
+
 export default function NewsletterForm({ variant = 'card' }: Props) {
   const [email, setEmail] = useState('');
   const [state, setState] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle');
@@ -40,7 +42,9 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
     return (
       <form onSubmit={handleSubmit} className="newsletter-inline">
         {state === 'ok' ? (
-          <p className="newsletter-ok">Zapisano. Sprawdź skrzynkę.</p>
+          <p className="newsletter-ok">
+            Zapisano. <a href={EBOOK_URL} target="_blank" rel="noopener" style={{ color: 'var(--cyan)', fontWeight: 700 }}>Pobierz przewodnik →</a> (jest też w mailu).
+          </p>
         ) : (
           <>
             <input
@@ -80,16 +84,19 @@ export default function NewsletterForm({ variant = 'card' }: Props) {
   // card variant
   return (
     <div className="newsletter-card">
-      <div className="newsletter-card-label">NEWSLETTER</div>
-      <h3 className="newsletter-card-title">Bez szumu. Kiedy mam coś wartego wysłania.</h3>
+      <div className="newsletter-card-label">DARMOWY PRZEWODNIK</div>
+      <h3 className="newsletter-card-title">Odbierz „Finansowy Fundament" za darmo.</h3>
       <p className="newsletter-card-desc">
-        Piszę kiedy mam coś do powiedzenia. Bez planu wysyłkowego.
+        Zapisz się i pobierz przewodnik, który układa Twoje pieniądze w 7 krokach: od bilansu, przez poduszkę i konto, po pierwsze inwestycje. Plus mail, kiedy mam coś wartego wysłania.
       </p>
 
       {state === 'ok' ? (
         <div className="newsletter-card-ok">
           <span style={{ fontSize: '1.4rem' }}>✓</span>
-          <p>Zapisano. Sprawdź skrzynkę — wysłałem maila powitalnego.</p>
+          <p>
+            Zapisano. <a href={EBOOK_URL} target="_blank" rel="noopener" style={{ color: 'var(--cyan)', fontWeight: 700, textDecoration: 'underline' }}>Pobierz przewodnik →</a><br />
+            Wysłałem go też na Twojego maila.
+          </p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="newsletter-card-form">
