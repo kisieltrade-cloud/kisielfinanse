@@ -6,9 +6,21 @@ export const runtime = 'nodejs';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM = 'Mateusz | KisielFinanse <newsletter@kisielfinanse.pl>';
+const FROM = 'Mateusz z KisielFinanse <newsletter@kisielfinanse.pl>';
 
 const EBOOK_URL = 'https://kisielfinanse.pl/ebook/finansowy-fundament-2026.pdf';
+
+// Wersja tekstowa (poprawia dostarczalność — maile tylko-HTML częściej trafiają do spamu).
+const WELCOME_TEXT = `Twój przewodnik jest gotowy.
+
+Dzięki, że jesteś. Pobierz "Finansowy Fundament" - przewodnik, który układa Twoje pieniądze w 7 krokach: od bilansu, przez poduszkę i konto, po pierwsze inwestycje.
+
+Pobierz przewodnik (PDF): ${EBOOK_URL}
+
+Piszę, kiedy mam coś wartego wysłania. Bez planu wysyłkowego i bez spamu.
+
+KisielFinanse · kisielfinanse.pl
+Materiał edukacyjny, nie stanowi porady inwestycyjnej. Możesz zrezygnować odpowiadając na tego maila.`;
 
 const WELCOME_HTML = `
 <!DOCTYPE html>
@@ -76,14 +88,23 @@ export async function POST(req: NextRequest) {
     // Zapisz do Redis
     await addSubscriber(normalised);
 
-    // Wyslij maila powitalnego — best-effort, nie blokuje zapisu
+    // Wyslij maila powitalnego — best-effort, nie blokuje zapisu.
+    // UWAGA: Resend NIE rzuca wyjatku przy bledzie API — zwraca { data, error }.
+    // Trzeba sprawdzic `error`, inaczej blad jest polkniety (np. niezweryfikowana domena).
     if (process.env.RESEND_API_KEY) {
       resend.emails.send({
         from: FROM,
         to: normalised,
         subject: 'Twój przewodnik: Finansowy Fundament (KisielFinanse)',
         html: WELCOME_HTML,
-      }).catch(err => console.error('[newsletter] resend error:', err));
+        text: WELCOME_TEXT,
+        replyTo: 'kisieltrade@gmail.com',
+      }).then(({ data, error }) => {
+        if (error) console.error('[newsletter] resend API error:', JSON.stringify(error));
+        else console.log('[newsletter] wyslano, id:', data?.id, 'do:', normalised);
+      }).catch(err => console.error('[newsletter] resend threw:', err));
+    } else {
+      console.error('[newsletter] BRAK RESEND_API_KEY w env — mail nie zostanie wyslany');
     }
 
     return NextResponse.json({ ok: true });
