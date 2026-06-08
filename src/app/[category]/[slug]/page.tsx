@@ -171,9 +171,13 @@ export default async function ArticlePage({ params }: Props) {
     post.tag === 'Inwestycje' ||
     /procent-skladany|dca|etf|inwestow|dywersyfik|fire|ike|ppk|obligacj|lokat|oszczed|poduszka/.test(slug);
 
+  // Newsy mają datę z godziną (np. 2026-06-09T10:00) — oznaczamy je jako NewsArticle,
+  // co jest mocniejszym sygnałem pod Google News/Discover. Materiały evergreen
+  // (sama data YYYY-MM-DD) zostają BlogPosting.
+  const isNews = post.dateISO.includes('T');
   const schemaArticle = {
     '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
+    '@type': isNews ? 'NewsArticle' : 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
     datePublished: post.dateISO,
@@ -182,7 +186,11 @@ export default async function ArticlePage({ params }: Props) {
       '@type': 'Person',
       name: 'Mateusz Kisiel',
       url: `${BASE_URL}/o-mnie`,
-      sameAs: ['https://kisielfinanse.pl', 'https://x.com/Kisielfinanse'],
+      sameAs: [
+        'https://x.com/Kisielfinanse',
+        'https://www.youtube.com/@Kisielfinanse',
+        'https://www.instagram.com/kisielfinanse',
+      ],
     },
     publisher: {
       '@type': 'Organization',
