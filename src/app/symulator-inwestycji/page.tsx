@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     title: 'Ile byś zarobił, gdybyś zaczął inwestować lata temu? | KisielFinanse',
     description: 'Sprawdź na realnych danych: S&P 500, NASDAQ, Bitcoin, złoto, polskie akcje. Symulator inwestycji od KisielFinanse.',
     url: URL,
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: '/symulator-inwestycji/opengraph-image', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Podróż w czasie - symulator inwestycji | KisielFinanse',
     description: 'Ile miałbyś dziś, gdybyś zaczął inwestować lata temu? Sprawdź na realnych danych.',
-    images: ['/og-image.png'],
+    images: ['/symulator-inwestycji/opengraph-image'],
   },
 };
 

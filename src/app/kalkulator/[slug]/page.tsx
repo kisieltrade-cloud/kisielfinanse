@@ -67,13 +67,13 @@ export async function generateMetadata(
       title: cfg.metaTitle,
       description: cfg.metaDesc,
       url,
-      images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+      images: [{ url: '/kalkulator/opengraph-image', width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
       title: cfg.metaTitle,
       description: cfg.metaDesc,
-      images: ['/og-image.png'],
+      images: ['/kalkulator/opengraph-image'],
     },
   };
 }

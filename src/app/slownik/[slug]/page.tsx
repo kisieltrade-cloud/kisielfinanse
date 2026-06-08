@@ -32,6 +32,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: term.short,
       url: `${BASE_URL}/slownik/${slug}`,
       siteName: 'KisielFinanse',
+      images: [{ url: '/slownik/opengraph-image', width: 1200, height: 630, alt: `${term.term} - słownik finansowy KisielFinanse` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} | KisielFinanse`,
+      description: term.short,
+      images: ['/slownik/opengraph-image'],
     },
   };
 }

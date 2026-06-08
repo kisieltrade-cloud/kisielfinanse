@@ -17,13 +17,13 @@ export const metadata: Metadata = {
     title: 'Ile godzin pracy kosztuje Cię zakup? | KisielFinanse',
     description: 'Przelicz cenę zakupu na godziny swojej pracy. Wpisz stawkę godzinową i cenę — zobaczysz prawdziwy koszt.',
     url: URL,
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: '/kalkulator/opengraph-image', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Ile godzin pracy kosztuje Cię zakup? | KisielFinanse',
     description: 'Przelicz cenę zakupu na godziny swojej pracy.',
-    images: ['/og-image.png'],
+    images: ['/kalkulator/opengraph-image'],
   },
 };
 

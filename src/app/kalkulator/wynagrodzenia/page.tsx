@@ -17,13 +17,13 @@ export const metadata: Metadata = {
     title: 'Kalkulator wynagrodzeń brutto-netto 2026 | KisielFinanse',
     description: 'Ile zostaje na rękę z umowy o pracę? Przelicz brutto na netto ze składkami ZUS, zdrowotną, PIT i PPK.',
     url: URL,
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: '/kalkulator/opengraph-image', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Kalkulator wynagrodzeń brutto-netto 2026 | KisielFinanse',
     description: 'Przelicz brutto na netto z pełnym rozbiciem składek i podatku.',
-    images: ['/og-image.png'],
+    images: ['/kalkulator/opengraph-image'],
   },
 };
 

@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     title: 'Kalkulator kredytu gotówkowego | KisielFinanse',
     description: 'Oblicz ratę i RRSO kredytu gotówkowego z prowizją i ubezpieczeniem. Sprawdź prawdziwy koszt przed podpisaniem umowy.',
     url: URL,
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: '/kalkulator/opengraph-image', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Kalkulator kredytu gotówkowego | KisielFinanse',
     description: 'Rata i RRSO kredytu gotówkowego z prowizją i ubezpieczeniem.',
-    images: ['/og-image.png'],
+    images: ['/kalkulator/opengraph-image'],
   },
 };
 

@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     title: 'Indeks Strachu i Chciwości - GPW, NASDAQ, krypto | KisielFinanse',
     description: 'Nastroje na rynku jednym rzutem oka. WIG20, NASDAQ-100 i kryptowaluty. Dane aktualizowane co godzinę.',
     url: URL,
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: '/indeks-strachu-i-chciwosci/opengraph-image', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Indeks Strachu i Chciwości | KisielFinanse',
     description: 'Nastroje na rynku: WIG20, NASDAQ-100, krypto. Dane na żywo.',
-    images: ['/og-image.png'],
+    images: ['/indeks-strachu-i-chciwosci/opengraph-image'],
   },
 };
 

@@ -17,13 +17,13 @@ export const metadata: Metadata = {
     title: 'Kalkulator zdolności kredytowej 2026 | KisielFinanse',
     description: 'Oszacuj maksymalną kwotę kredytu hipotecznego na podstawie dochodu i zobowiązań.',
     url: URL,
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: '/kalkulator/opengraph-image', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Kalkulator zdolności kredytowej 2026 | KisielFinanse',
     description: 'Ile kredytu możesz dostać? Sprawdź swoją zdolność kredytową.',
-    images: ['/og-image.png'],
+    images: ['/kalkulator/opengraph-image'],
   },
 };
 
