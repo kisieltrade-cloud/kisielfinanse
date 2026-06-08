@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
 };
 
-const LAST_UPDATE = '31.05.2026';
+const LAST_UPDATE = '07.06.2026';
 
 const sections = [
   {
@@ -52,7 +52,9 @@ const sections = [
     title: '3. Brak licencji doradcy inwestycyjnego',
     content: `Autor serwisu KisielFinanse.pl nie jest licencjonowanym doradcą inwestycyjnym, maklerem papierów wartościowych ani podmiotem uprawnionym do świadczenia usług doradztwa inwestycyjnego w rozumieniu przepisów prawa polskiego i europejskiego.
 
-Serwis nie posiada zezwolenia Komisji Nadzoru Finansowego (KNF) na prowadzenie działalności w zakresie doradztwa inwestycyjnego ani zarządzania aktywami.`,
+Serwis nie posiada zezwolenia Komisji Nadzoru Finansowego (KNF) na prowadzenie działalności w zakresie doradztwa inwestycyjnego ani zarządzania aktywami.
+
+Serwis nie świadczy również usług pośrednictwa finansowego ani pośrednictwa kredytowego - nie zawiera umów w imieniu banków ani innych dostawców usług finansowych i nie udziela porad dostosowanych do indywidualnej sytuacji użytkownika. Rola Serwisu ogranicza się do publikowania treści informacyjnych i edukacyjnych oraz zamieszczania odsyłających linków (w tym afiliacyjnych) do ofert dostawców.`,
   },
   {
     title: '4. Indywidualna odpowiedzialność inwestora',
@@ -71,7 +73,9 @@ Serwis nie posiada zezwolenia Komisji Nadzoru Finansowego (KNF) na prowadzenie d
   },
   {
     title: '6. Linki afiliacyjne i współpraca',
-    content: `Serwis może zawierać linki afiliacyjne do brokerów, platform tradingowych i innych usług finansowych. Oznacza to, że autor może otrzymać wynagrodzenie prowizyjne w przypadku skorzystania przez użytkownika z polecanych usług. Każdy taki link jest wyraźnie oznaczony jako link partnerski/afiliacyjny. Fakt otrzymywania wynagrodzenia prowizyjnego nie wpływa na rzetelność prezentowanych treści.`,
+    content: `Serwis może zawierać linki afiliacyjne (partnerskie) do banków, brokerów, platform tradingowych oraz innych dostawców usług i produktów finansowych. Oznacza to, że autor może otrzymać wynagrodzenie prowizyjne w przypadku skorzystania przez użytkownika z polecanych usług. Skorzystanie z takiego linku nie wiąże się dla użytkownika z żadnym dodatkowym kosztem - cena i warunki oferty pozostają bez zmian. Każdy taki link jest oznaczony jako link partnerski/afiliacyjny (atrybut "sponsored"). Fakt otrzymywania wynagrodzenia prowizyjnego nie wpływa na rzetelność prezentowanych treści.
+
+W przypadku rankingów i porównań produktów finansowych kolejność oraz oceny ustalane są wyłącznie redakcyjnie, według jawnej metodologii opisanej przy danym zestawieniu, i nie zależą od ewentualnej współpracy afiliacyjnej z danym podmiotem. Rankingi mają charakter informacyjny i edukacyjny, nie stanowią rekomendacji ani oferty w rozumieniu art. 66 § 1 Kodeksu cywilnego. Dane (opłaty, oprocentowanie, warunki) mogą ulec zmianie - przed skorzystaniem z oferty zweryfikuj aktualne warunki bezpośrednio u dostawcy.`,
   },
   {
     title: '7. Dokładność informacji',

@@ -12,6 +12,7 @@ import { getPostsByTag } from '@/lib/posts';
 import { CATEGORIES, getCategoryBySlug } from '@/lib/categories';
 import { getPillar } from '@/lib/pillars';
 import PillarGuide from '@/components/PillarGuide';
+import { getPublishedRankings, withRankingDate } from '@/lib/rankings';
 
 // Odświeżaj co godzinę — nowe artykuły pojawią się automatycznie po dacie publikacji
 export const revalidate = 3600;
@@ -112,6 +113,8 @@ export default async function CategoryPage({ params }: Props) {
   const otherCats = CATEGORIES.filter(c => c.slug !== slug);
   const heroImg = HERO_IMAGES[slug] ?? '/images/blog/covers/finance-graph.jpg';
   const pillar = getPillar(slug);
+  // Rankingi przypisane do tej kategorii (tylko opublikowane → uśpione do publikacji).
+  const categoryRankings = getPublishedRankings().filter((r) => r.category === slug);
 
   const schemaFaq = pillar && pillar.faq.length > 0 ? {
     '@context': 'https://schema.org',
@@ -180,6 +183,23 @@ export default async function CategoryPage({ params }: Props) {
 
         {/* ── BODY ── */}
         <div className="cat-body">
+          {/* Rankingi w tej kategorii (uśpione dopóki brak opublikowanych) */}
+          {categoryRankings.length > 0 && (
+            <section style={{ marginBottom: 56 }}>
+              <p className="cat-other-label" style={{ color: config.color }}>Rankingi i porównania</p>
+              <div className="rk-index-grid" style={{ margin: '18px 0 0' }}>
+                {categoryRankings.map((rk) => (
+                  <Link key={rk.slug} href={`/ranking/${rk.slug}`} className="rk-index-card">
+                    <span className="rk-index-kicker" style={{ color: config.color }}>{withRankingDate(rk.kicker, rk.updated)}</span>
+                    <h2 style={{ fontSize: '1.2rem' }}>{withRankingDate(rk.title, rk.updated)}</h2>
+                    <p>{rk.lead}</p>
+                    <span className="rk-index-cta">Zobacz ranking →</span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
           {posts.length > 0 ? (
             <CategoryArticleList posts={posts} categoryColor={config.color} />
           ) : (

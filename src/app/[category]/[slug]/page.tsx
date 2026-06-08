@@ -171,6 +171,10 @@ export default async function ArticlePage({ params }: Props) {
     post.tag === 'Inwestycje' ||
     /procent-skladany|dca|etf|inwestow|dywersyfik|fire|ike|ppk|obligacj|lokat|oszczed|poduszka/.test(slug);
 
+  // Artykuły o kontach/oszczędzaniu/budżecie dostają kontekstowy link do rankingu kont
+  const accountsThemed =
+    /konto|oszczed|budzet|poduszka|nawyk|odklada|kasy-brak|wyczyscic-bik|lokata-obligacje|pensj/.test(slug);
+
   // Newsy mają datę z godziną (np. 2026-06-09T10:00) — oznaczamy je jako NewsArticle,
   // co jest mocniejszym sygnałem pod Google News/Discover. Materiały evergreen
   // (sama data YYYY-MM-DD) zostają BlogPosting.
@@ -375,6 +379,27 @@ export default async function ArticlePage({ params }: Props) {
                 </span>
               </span>
               <span style={{ color: '#c9a227', fontSize: '1.3rem', flexShrink: 0 }} aria-hidden="true">→</span>
+            </Link>
+          </div>
+        )}
+
+        {/* Sprawdź również: ranking kont — w artykułach o kontach/oszczędzaniu */}
+        {accountsThemed && (
+          <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 24px 40px' }}>
+            <Link href="/ranking/konta-osobiste" style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
+              padding: '18px 22px', borderRadius: 14, textDecoration: 'none',
+              background: 'rgba(232,150,58,0.06)', border: '1px solid rgba(232,150,58,0.25)', borderLeft: '3px solid #e8963a',
+            }}>
+              <span>
+                <span style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '0.62rem', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#e8963a', marginBottom: 6 }}>
+                  Sprawdź również
+                </span>
+                <span style={{ fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '1rem', color: 'var(--text)' }}>
+                  Ranking kont osobistych - konto bez opłat i premia za otwarcie nawet do 1300 zł
+                </span>
+              </span>
+              <span style={{ color: '#e8963a', fontSize: '1.3rem', flexShrink: 0 }} aria-hidden="true">→</span>
             </Link>
           </div>
         )}

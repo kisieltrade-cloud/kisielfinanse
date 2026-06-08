@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
 };
 
-const LAST_UPDATE = '31.05.2026';
+const LAST_UPDATE = '07.06.2026';
 
 const sections = [
   {
@@ -75,7 +75,7 @@ const sections = [
     list: [
       'Google Analytics 4 (GA4) - narzędzie firmy Google LLC służące do analizy ruchu na stronie. Zbiera anonimowe dane o odwiedzinach (zanonimizowany adres IP, przeglądane podstrony, czas sesji, źródło ruchu). Dane przetwarzane są na serwerach Google, w tym poza EOG. Google Analytics uruchamiany jest wyłącznie po udzieleniu zgody przez użytkownika (Consent Mode v2). Więcej informacji: policies.google.com/privacy',
       'Resend (Resend, Inc.) - usługa dostarczania wiadomości e-mail wykorzystywana do obsługi newslettera (wysyłka wiadomości powitalnej oraz kolejnych wiadomości). Przetwarza podany adres e-mail. Dane mogą być przetwarzane na serwerach poza EOG (USA) na podstawie standardowych klauzul umownych. Polityka prywatności: resend.com/legal/privacy-policy',
-      'Upstash (Upstash, Inc.) - dostawca bazy danych, w której przechowywane są adresy e-mail subskrybentów newslettera oraz anonimowe liczniki wyświetleń artykułów. Polityka prywatności: upstash.com/trust/privacy.pdf',
+      'Upstash (Upstash, Inc.) - dostawca bazy danych, w której przechowywane są adresy e-mail subskrybentów newslettera oraz anonimowe, zbiorcze liczniki (wyświetleń artykułów oraz kliknięć w linki partnerskie). Liczniki te nie zawierają danych osobowych ani identyfikujących użytkownika. Polityka prywatności: upstash.com/trust/privacy.pdf',
     ],
     extra: 'Możesz zarządzać plikami cookies analitycznych poprzez panel zgód dostępny na stronie lub ustawienia przeglądarki. Z newslettera możesz zrezygnować w każdej chwili, odpowiadając na otrzymaną wiadomość e-mail lub kontaktując się z administratorem.',
   },
@@ -107,8 +107,14 @@ const sections = [
     content: `Stosujemy odpowiednie środki techniczne i organizacyjne w celu ochrony danych przed nieuprawnionym dostępem, utratą lub zniszczeniem. Serwis korzysta z protokołu HTTPS (szyfrowane połączenie SSL/TLS).`,
   },
   {
-    title: '10. Linki do zewnętrznych serwisów',
-    content: `Serwis może zawierać linki do zewnętrznych stron internetowych. Niniejsza polityka prywatności dotyczy wyłącznie serwisu KisielFinanse.pl. Administrator nie ponosi odpowiedzialności za polityki prywatności innych serwisów.`,
+    title: '10. Linki do zewnętrznych serwisów i linki afiliacyjne',
+    content: `Serwis może zawierać linki do zewnętrznych stron internetowych, w tym linki afiliacyjne (partnerskie) do banków, brokerów i innych dostawców usług finansowych. Niniejsza polityka prywatności dotyczy wyłącznie serwisu KisielFinanse.pl - administrator nie ponosi odpowiedzialności za polityki prywatności innych serwisów.`,
+    list: [
+      'Po kliknięciu w link partnerski możesz zostać przekierowany przez wewnętrzny adres przekierowujący serwisu (np. KisielFinanse.pl/go/...), który zlicza wyłącznie zbiorczą liczbę kliknięć i nie zapisuje danych osobowych ani identyfikujących użytkownika',
+      'Po przejściu na stronę partnera (banku, brokera lub sieci afiliacyjnej) partner ten może zapisać własne pliki cookies służące do rozliczenia prowizji. Cookies te są ustawiane poza naszym serwisem i podlegają politykom prywatności oraz cookie odpowiednich partnerów',
+      'Skorzystanie z linku partnerskiego nie wiąże się dla użytkownika z żadnym dodatkowym kosztem - cena i warunki oferty pozostają takie same',
+    ],
+    extra: 'Korzystanie z linków afiliacyjnych nie wpływa na rzetelność treści ani na kolejność prezentowanych rankingów, która ustalana jest wyłącznie redakcyjnie, według jawnej metodologii.',
   },
   {
     title: '11. Dobrowolność podania danych i brak profilowania',

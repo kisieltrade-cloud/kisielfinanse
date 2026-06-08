@@ -4,6 +4,7 @@ import { postUrl } from '@/lib/url';
 import { CATEGORIES } from '@/lib/categories';
 import { CALCULATOR_SLUGS } from '@/lib/calculators';
 import { GLOSSARY } from '@/lib/glossary';
+import { getPublishedRankings, getPublishedPickSlugs } from '@/lib/rankings';
 
 const BASE_URL = 'https://kisielfinanse.pl';
 
@@ -160,5 +161,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  return [...staticPages, ...categoryPages, ...blogPages, ...glossaryPages];
+  // ── Rankingi / porównania (money pages) ─────────────────────────────────────
+  const published = getPublishedRankings();
+  const rankingPages: MetadataRoute.Sitemap = published.length > 0 ? [
+    {
+      url: `${BASE_URL}/ranking`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    ...published.map((r) => ({
+      url: `${BASE_URL}/ranking/${r.slug}`,
+      lastModified: new Date(r.updated),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    })),
+    // Strony opisowe pojedynczych kont (/konto/[slug]) z opublikowanych rankingów
+    ...getPublishedPickSlugs().map((slug) => ({
+      url: `${BASE_URL}/konto/${slug}`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
+  ] : [];
+
+  return [...staticPages, ...categoryPages, ...blogPages, ...glossaryPages, ...rankingPages];
 }

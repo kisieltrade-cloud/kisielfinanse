@@ -29,6 +29,10 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     minimumCacheTTL: 3600,
+    // Loga banków to nasze własne, zaufane pliki SVG (z /public) — bezpieczne serwowanie
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     // Zewnętrzne domeny dla obrazków jeśli będziesz używać
     remotePatterns: [
       {

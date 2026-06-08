@@ -141,8 +141,17 @@ export default async function Footer() {
           <span className="footer-copy">© {new Date().getFullYear()} <span className="gold">KisielFinanse</span></span>
           <span className="footer-shield"><IcoShield /></span>
           <span className="footer-disclaimer-text">
-            Trading wiąże się z ryzykiem utraty kapitału. Treści mają charakter edukacyjny
-            i nie stanowią doradztwa inwestycyjnego.
+            Wszystkie informacje i dane zamieszczone w serwisie KisielFinanse mają charakter wyłącznie
+            edukacyjny i informacyjny. Nie stanowią oferty, usługi doradztwa inwestycyjnego ani rekomendacji
+            inwestycyjnych w rozumieniu Rozporządzenia Ministra Finansów z dnia 19 października 2005 r.
+            (Dz. U. z 2005 r. Nr 206, poz. 1715); autor nie jest licencjonowanym doradcą i nie podlega
+            w tym zakresie nadzorowi KNF. Inwestowanie, trading i kryptowaluty wiążą się z ryzykiem utraty
+            części lub całości kapitału, a wyniki historyczne nie gwarantują przyszłych. Dokładamy starań,
+            aby informacje były aktualne, a analizy rzetelne, co nie zwalnia użytkownika z obowiązku
+            zapoznania się z regulaminami i materiałami informacyjnymi dotyczącymi opisywanych produktów
+            lub usług przed podjęciem decyzji. Część linków to linki partnerskie, za które możemy otrzymać
+            wynagrodzenie (bez wpływu na cenę dla ciebie). Decyzje finansowe podejmujesz na własną
+            odpowiedzialność. Pełne zastrzeżenia w <a href="/disclaimer">Disclaimerze</a>.
           </span>
         </div>
         <div className="footer-socials">

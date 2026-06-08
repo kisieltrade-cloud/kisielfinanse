@@ -142,6 +142,16 @@ export default function Nav() {
           {/* Separator */}
           <li className="nav-sep" aria-hidden="true" />
 
+          {/* Ranking kont osobistych */}
+          <li>
+            <Link
+              href="/ranking/konta-osobiste"
+              style={{ color: pathname.startsWith('/ranking') ? 'var(--cyan)' : undefined }}
+            >
+              Ranking kont osobistych
+            </Link>
+          </li>
+
           {/* Kredyt gotówkowy */}
           <li>
             <Link
@@ -247,6 +257,17 @@ export default function Nav() {
             ))}
 
             <li className="mobile-menu-section">Kalkulatory</li>
+
+            <li>
+              <Link
+                href="/ranking/konta-osobiste"
+                className="mobile-menu-link"
+                style={{ color: pathname.startsWith('/ranking') ? 'var(--cyan)' : undefined }}
+                onClick={() => setOpen(false)}
+              >
+                Ranking kont osobistych
+              </Link>
+            </li>
 
             <li>
               <Link

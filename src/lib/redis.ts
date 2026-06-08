@@ -68,3 +68,23 @@ export async function commentAllowed(email: string): Promise<boolean> {
   const res = await redis.set(`commentcd:${email}`, '1', { nx: true, ex: 30 });
   return res === 'OK';
 }
+
+// ── Kliknięcia afiliacyjne (/go/[partner]) ─────────────────
+// Pomiar konwersji: ile razy kliknięto link do danego partnera, opcjonalnie
+// z podziałem na źródłową stronę (np. ranking). Nie blokuje przekierowania.
+export async function trackAffiliateClick(partner: string, source?: string): Promise<void> {
+  try {
+    const pipe = redis.pipeline();
+    pipe.incr(`go:${partner}`);
+    pipe.incr(`go:total`);
+    if (source) pipe.incr(`go:${partner}:${source}`);
+    await pipe.exec();
+  } catch {
+    /* pomiar nie może blokować przekierowania */
+  }
+}
+
+export async function getAffiliateClicks(partner: string): Promise<number> {
+  const v = await redis.get<number>(`go:${partner}`);
+  return v ?? 0;
+}

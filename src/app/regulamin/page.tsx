@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
 };
 
-const LAST_UPDATE = '31.05.2026';
+const LAST_UPDATE = '07.06.2026';
 
 const sections = [
   {
@@ -44,8 +44,9 @@ const sections = [
       'Dostęp do treści - artykuły, poradniki, analizy i materiały edukacyjne z zakresu finansów, inwestowania, tradingu i gospodarki',
       'Newsletter - cykliczne przesyłanie informacji na podany przez Użytkownika adres e-mail',
       'Kalkulatory i quizy - interaktywne narzędzia obliczeniowe i edukacyjne dostępne w Serwisie',
+      'Rankingi i porównania produktów finansowych - zestawienia o charakterze informacyjnym i edukacyjnym (np. kont bankowych), przygotowywane na podstawie jawnej metodologii',
     ],
-    extra: 'Wszystkie usługi świadczone są nieodpłatnie. Usługodawca nie pobiera opłat za dostęp do treści Serwisu ani za korzystanie z dostępnych narzędzi. Umowa o świadczenie usługi dostępu do treści zawierana jest na czas oznaczony z chwilą wejścia do Serwisu i ulega rozwiązaniu z chwilą jego opuszczenia. Umowa o świadczenie usługi newslettera zawierana jest z chwilą zapisu i może zostać rozwiązana w każdej chwili poprzez rezygnację. Korzystanie z usług jest dobrowolne.',
+    extra: 'Wszystkie usługi świadczone są nieodpłatnie. Usługodawca nie pobiera opłat za dostęp do treści Serwisu ani za korzystanie z dostępnych narzędzi. Umowa o świadczenie usługi dostępu do treści zawierana jest na czas oznaczony z chwilą wejścia do Serwisu i ulega rozwiązaniu z chwilą jego opuszczenia. Umowa o świadczenie usługi newslettera zawierana jest z chwilą zapisu i może zostać rozwiązana w każdej chwili poprzez rezygnację. Korzystanie z usług jest dobrowolne. Serwis utrzymuje się m.in. z linków afiliacyjnych (partnerskich) - Usługodawca może otrzymywać wynagrodzenie prowizyjne od dostawców usług finansowych, gdy Użytkownik skorzysta z ich oferty za pośrednictwem linku zamieszczonego w Serwisie. Dla Użytkownika korzystanie z Serwisu oraz z takich linków pozostaje nieodpłatne, a cena i warunki oferty dostawcy nie ulegają zmianie. Szczegółowe zasady współpracy afiliacyjnej opisuje dokument Disclaimer dostępny w Serwisie.',
   },
   {
     title: '3. Warunki techniczne korzystania z Serwisu',
@@ -85,6 +86,9 @@ const sections = [
       'Treści nie stanowią doradztwa inwestycyjnego ani oferty w rozumieniu Kodeksu cywilnego',
       'Decyzje inwestycyjne Użytkownik podejmuje samodzielnie, na własną odpowiedzialność i ryzyko',
       'Inwestowanie oraz trading wiążą się z ryzykiem utraty części lub całości zainwestowanego kapitału',
+      'Rankingi i porównania produktów finansowych mają charakter informacyjny i edukacyjny; ich kolejność oraz oceny ustalane są wyłącznie redakcyjnie, według jawnej metodologii opisanej przy danym zestawieniu, i nie zależą od ewentualnej współpracy afiliacyjnej z dostawcą (zgodnie z obowiązkami dotyczącymi plasowania ofert)',
+      'Prezentowane dane o produktach (m.in. opłaty, oprocentowanie, warunki promocji) mogą ulec zmianie; przed skorzystaniem z oferty należy zweryfikować aktualne warunki bezpośrednio u dostawcy',
+      'Usługodawca nie świadczy usług pośrednictwa finansowego ani kredytowego, nie zawiera umów w imieniu dostawców usług finansowych i nie udziela zindywidualizowanych porad finansowych dostosowanych do sytuacji konkretnego Użytkownika',
     ],
     extra: 'Szczegółowe zastrzeżenia zawiera dokument Disclaimer dostępny w Serwisie. W zakresie dozwolonym przez obowiązujące przepisy prawa Usługodawca nie ponosi odpowiedzialności za skutki decyzji podjętych przez Użytkownika na podstawie treści zamieszczonych w Serwisie. Powyższe nie wyłącza ani nie ogranicza odpowiedzialności Usługodawcy wobec Konsumenta w zakresie, w jakim jej wyłączenie lub ograniczenie jest niedopuszczalne na mocy bezwzględnie obowiązujących przepisów prawa.',
   },
