@@ -88,10 +88,10 @@ export default async function AccountPage({ params }: Props) {
   // ── Schema.org: produkt finansowy z oceną (opis, nie recenzja) ────────────────
   const schemaProduct = {
     '@context': 'https://schema.org',
-    '@type': 'FinancialProduct',
+    '@type': 'Product',
     name: pick.name,
     description: pick.highlight,
-    provider: { '@type': 'Organization', name: pick.provider },
+    brand: { '@type': 'Brand', name: pick.provider },
     url,
     aggregateRating: {
       '@type': 'AggregateRating',

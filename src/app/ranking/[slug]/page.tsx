@@ -112,9 +112,9 @@ export default async function RankingPage({ params }: Props) {
       position: p.rank,
       name: p.name,
       item: {
-        '@type': 'FinancialProduct',
+        '@type': 'Product',
         name: p.name,
-        provider: { '@type': 'Organization', name: p.provider },
+        brand: { '@type': 'Brand', name: p.provider },
         review: {
           '@type': 'Review',
           reviewRating: { '@type': 'Rating', ratingValue: p.score, bestRating: 5 },
