@@ -85,20 +85,17 @@ export default async function AccountPage({ params }: Props) {
   const sections = pick.review?.sections ?? [];
   const faq = pick.review?.faq ?? [];
 
-  // ── Schema.org: produkt finansowy z oceną (opis, nie recenzja) ────────────────
+  // ── Schema.org: produkt finansowy (opis usługi) ───────────────────────────────
+  // UWAGA: NIE dodajemy aggregateRating/review do produktu zewnętrznego (konto banku).
+  // Google traktuje ocenę gwiazdkową cudzego produktu jako self-serving i odrzuca ją
+  // ("nieprawidłowy typ obiektu w polu parent_node"). Gwiazdki zostają tylko wizualnie.
   const schemaProduct = {
     '@context': 'https://schema.org',
-    '@type': 'Product',
+    '@type': 'FinancialProduct',
     name: pick.name,
     description: pick.highlight,
     brand: { '@type': 'Brand', name: pick.provider },
     url,
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: pick.score,
-      bestRating: 5,
-      ratingCount: 1,
-    },
   };
 
   const schemaBreadcrumb = {
