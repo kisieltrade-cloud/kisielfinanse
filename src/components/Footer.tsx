@@ -87,6 +87,7 @@ export default async function Footer() {
             <li><Link href="/slownik"><span className="fl-chev">›</span> Słownik pojęć</Link></li>
             <li><Link href="/indeks-strachu-i-chciwosci"><span className="fl-chev">›</span> Indeks strachu i chciwości</Link></li>
             <li><Link href="/symulator-inwestycji"><span className="fl-chev">›</span> Symulator inwestycji</Link></li>
+            <li><Link href="/finansowy-kalendarz-2026"><span className="fl-chev">›</span> Finansowy kalendarz 2026</Link></li>
             <li><Link href="/wspolpraca"><span className="fl-chev">›</span> Współpraca</Link></li>
           </ul>
         </div>
