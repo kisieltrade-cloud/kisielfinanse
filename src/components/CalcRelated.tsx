@@ -56,6 +56,11 @@ const IcoHourglass = ({ c }: { c: string }) => (
     <path d="M11 22 C11 18 17 18 17 22 Z" fill={c} stroke="none" />
   </svg>
 );
+const IcoCompare = ({ c }: { c: string }) => (
+  <svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke={c} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="4" y="16" width="5" height="8" rx="1" /><rect x="11.5" y="11" width="5" height="13" rx="1" /><rect x="19" y="6" width="5" height="18" rx="1" />
+  </svg>
+);
 
 const GREEN = { bg: '#dfe7d2', ic: '#5f7a4a' };
 const GOLD  = { bg: '#ece0c6', ic: '#b3892f' };
@@ -72,6 +77,7 @@ const ALL_CALCS = [
   { href: '/kalkulator/kredyt-gotowkowy', label: 'Kredyt gotówkowy',      desc: 'Oblicz ratę i RRSO kredytu gotówkowego.',                  Icon: IcoCard,   col: GREEN },
   { href: '/kalkulator/wynagrodzenia',    label: 'Wynagrodzenia brutto-netto', desc: 'Przelicz pensję brutto na netto ze składkami i podatkiem.', Icon: IcoCalc, col: GOLD  },
   { href: '/kalkulator/emerytura',        label: 'Kalkulator emerytalny', desc: 'Prognoza emerytury z ZUS, stopa zastąpienia i luka emerytalna.', Icon: IcoHourglass, col: LILAC },
+  { href: '/kalkulator/porownaj-pensje',  label: 'Porównaj swoją pensję', desc: 'Sprawdź, więcej niż ile procent Polaków zarabiasz.', Icon: IcoCompare, col: GOLD },
   { href: '/kalkulator/skladka-zdrowotna', label: 'Składka zdrowotna 2026', desc: 'Policz składkę zdrowotną na skali, liniowym i ryczałcie.', Icon: IcoScales, col: GREEN },
   { href: '/kalkulator-hipoteczny',       label: 'Kalkulator hipoteczny', desc: 'Oblicz ratę kredytu i całkowity koszt nieruchomości.',     Icon: IcoHouse,  col: GREEN },
   { href: '/kalkulator/zdolnosc-kredytowa', label: 'Zdolność kredytowa',  desc: 'Oszacuj maksymalną kwotę kredytu hipotecznego.',           Icon: IcoCard,   col: GOLD  },
