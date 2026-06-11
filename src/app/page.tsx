@@ -6,7 +6,6 @@ import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
 import CategoriesSection from '@/components/CategoriesSection';
 import CalcSection from '@/components/CalcSection';
-import LearnToTrade from '@/components/LearnToTrade';
 import BlogSection from '@/components/BlogSection';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
@@ -48,7 +47,6 @@ export default function HomePage() {
         <Hero />
         <CalcSection />
         <CategoriesSection />
-        <LearnToTrade />
         <BlogSection />
         <FAQ />
         <div style={{ maxWidth: 700, margin: '0 auto', padding: '0 24px 80px' }}>
