@@ -66,6 +66,11 @@ const IcoTrophy = ({ c }: { c: string }) => (
     <path d="M9 5 H19 V11 C19 15 16 17 14 17 C12 17 9 15 9 11 Z" /><path d="M9 7 H5 V9 C5 11 7 12 9 12" /><path d="M19 7 H23 V9 C23 11 21 12 19 12" /><line x1="14" y1="17" x2="14" y2="21" /><path d="M10 24 H18 L17 21 H11 Z" fill={c} stroke="none" />
   </svg>
 );
+const IcoSplit = ({ c }: { c: string }) => (
+  <svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke={c} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="14" cy="14" r="10" /><line x1="14" y1="14" x2="14" y2="4" /><line x1="14" y1="14" x2="22.5" y2="19" />
+  </svg>
+);
 
 const GREEN = { bg: '#dfe7d2', ic: '#5f7a4a' };
 const GOLD  = { bg: '#ece0c6', ic: '#b3892f' };
@@ -84,6 +89,7 @@ const ALL_CALCS = [
   { href: '/kalkulator/emerytura',        label: 'Kalkulator emerytalny', desc: 'Prognoza emerytury z ZUS, stopa zastąpienia i luka emerytalna.', Icon: IcoHourglass, col: LILAC },
   { href: '/kalkulator/porownaj-pensje',  label: 'Porównaj swoją pensję', desc: 'Sprawdź, więcej niż ile procent Polaków zarabiasz.', Icon: IcoCompare, col: GOLD },
   { href: '/kalkulator/milion',           label: 'Kiedy uzbierasz milion?', desc: 'Za ile lat odłożysz milion i ile dorobi procent składany.', Icon: IcoTrophy, col: GREEN },
+  { href: '/kalkulator/gdzie-ida-podatki', label: 'Gdzie idą Twoje podatki?', desc: 'Ile oddajesz państwu i na co idą publiczne pieniądze.', Icon: IcoSplit, col: PEACH },
   { href: '/kalkulator/skladka-zdrowotna', label: 'Składka zdrowotna 2026', desc: 'Policz składkę zdrowotną na skali, liniowym i ryczałcie.', Icon: IcoScales, col: GREEN },
   { href: '/kalkulator-hipoteczny',       label: 'Kalkulator hipoteczny', desc: 'Oblicz ratę kredytu i całkowity koszt nieruchomości.',     Icon: IcoHouse,  col: GREEN },
   { href: '/kalkulator/zdolnosc-kredytowa', label: 'Zdolność kredytowa',  desc: 'Oszacuj maksymalną kwotę kredytu hipotecznego.',           Icon: IcoCard,   col: GOLD  },

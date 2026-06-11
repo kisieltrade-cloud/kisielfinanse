@@ -151,8 +151,19 @@ function IconTrophy({ color }: { color: string }) {
   );
 }
 
+function IconSplit({ color }: { color: string }) {
+  return (
+    <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+      <path d="M28 28 L28 8 A20 20 0 0 1 45 19 Z" fill={color} />
+      <path d="M28 28 L45 19 A20 20 0 0 1 41 44 Z" fill={color} opacity="0.62" />
+      <path d="M28 28 L41 44 A20 20 0 1 1 28 8 Z" fill={color} opacity="0.3" />
+    </svg>
+  );
+}
+
 const TOOLS = [
   { href: '/kalkulator/wynagrodzenia',    label: 'BRUTTO - NETTO',      accent: '#10b981', Icon: IconWallet  },
+  { href: '/kalkulator/gdzie-ida-podatki', label: 'GDZIE IDĄ PODATKI?', accent: '#ff2d78', Icon: IconSplit   },
   { href: '/kalkulator/milion',           label: 'KIEDY MILION?',       accent: '#16a34a', Icon: IconTrophy  },
   { href: '/kalkulator/porownaj-pensje',  label: 'PORÓWNAJ PENSJĘ',     accent: '#6366f1', Icon: IconCompare },
   { href: '/kalkulator/emerytura',        label: 'EMERYTURA Z ZUS',     accent: '#2f80b5', Icon: IconPension },
