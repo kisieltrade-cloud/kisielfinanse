@@ -49,6 +49,13 @@ const IcoHouse = ({ c }: { c: string }) => (
     <path d="M5 13 L14 5 L23 13" /><path d="M7 12 V23 H21 V12" /><rect x="12" y="17" width="4" height="6" />
   </svg>
 );
+const IcoHourglass = ({ c }: { c: string }) => (
+  <svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke={c} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="8" y1="4" x2="20" y2="4" /><line x1="8" y1="24" x2="20" y2="24" />
+    <path d="M9 4 C9 10 14 12 14 14 C14 16 9 18 9 24" /><path d="M19 4 C19 10 14 12 14 14 C14 16 19 18 19 24" />
+    <path d="M11 22 C11 18 17 18 17 22 Z" fill={c} stroke="none" />
+  </svg>
+);
 
 const GREEN = { bg: '#dfe7d2', ic: '#5f7a4a' };
 const GOLD  = { bg: '#ece0c6', ic: '#b3892f' };
@@ -64,6 +71,7 @@ const ALL_CALCS = [
   { href: '/kalkulator/godziny-pracy',    label: 'Ile godzin pracy?',     desc: 'Zobacz, ile godzin pracy potrzeba na różne cele.',         Icon: IcoTimer,  col: LILAC },
   { href: '/kalkulator/kredyt-gotowkowy', label: 'Kredyt gotówkowy',      desc: 'Oblicz ratę i RRSO kredytu gotówkowego.',                  Icon: IcoCard,   col: GREEN },
   { href: '/kalkulator/wynagrodzenia',    label: 'Wynagrodzenia brutto-netto', desc: 'Przelicz pensję brutto na netto ze składkami i podatkiem.', Icon: IcoCalc, col: GOLD  },
+  { href: '/kalkulator/emerytura',        label: 'Kalkulator emerytalny', desc: 'Prognoza emerytury z ZUS, stopa zastąpienia i luka emerytalna.', Icon: IcoHourglass, col: LILAC },
   { href: '/kalkulator/skladka-zdrowotna', label: 'Składka zdrowotna 2026', desc: 'Policz składkę zdrowotną na skali, liniowym i ryczałcie.', Icon: IcoScales, col: GREEN },
   { href: '/kalkulator-hipoteczny',       label: 'Kalkulator hipoteczny', desc: 'Oblicz ratę kredytu i całkowity koszt nieruchomości.',     Icon: IcoHouse,  col: GREEN },
   { href: '/kalkulator/zdolnosc-kredytowa', label: 'Zdolność kredytowa',  desc: 'Oszacuj maksymalną kwotę kredytu hipotecznego.',           Icon: IcoCard,   col: GOLD  },

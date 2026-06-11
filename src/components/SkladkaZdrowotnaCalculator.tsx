@@ -7,12 +7,14 @@ import { useState, useMemo } from 'react';
    Liniowy:  4,9% dochodu, nie mniej niż składka minimalna
    Ryczałt:  9% od 60% / 100% / 180% przeciętnego wynagrodzenia, wg progu przychodu
    Minimalna = 9% minimalnego wynagrodzenia (4 806 zł) = 432,54 zł
-   Przeciętne wynagrodzenie = podstawa ryczałtu (wartość orientacyjna 2026)        */
+   Podstawa ryczałtu = przeciętne wynagrodzenie w sektorze przedsiębiorstw
+   w IV kw. 2025 (z wypłatami z zysku) = 9 228,64 zł (GUS, 22.01.2026).
+   Składki ryczałtu 2026: 498,35 / 830,58 / 1495,04 zł.                            */
 const MIN_SKLADKA = 432.54;
-const PRZECIETNE = 9000; // orientacyjna podstawa ryczałtu 2026
-const RYCZALT_I = PRZECIETNE * 0.6 * 0.09;   // przychód do 60 000 zł/rok
-const RYCZALT_II = PRZECIETNE * 1.0 * 0.09;  // 60 000 - 300 000 zł/rok
-const RYCZALT_III = PRZECIETNE * 1.8 * 0.09; // powyżej 300 000 zł/rok
+const PRZECIETNE = 9228.64; // przeciętne wynagrodzenie IV kw. 2025 (GUS) - podstawa ryczałtu 2026
+const RYCZALT_I = PRZECIETNE * 0.6 * 0.09;   // przychód do 60 000 zł/rok → 498,35 zł
+const RYCZALT_II = PRZECIETNE * 1.0 * 0.09;  // 60 000 - 300 000 zł/rok → 830,58 zł
+const RYCZALT_III = PRZECIETNE * 1.8 * 0.09; // powyżej 300 000 zł/rok → 1495,04 zł
 
 type Forma = 'skala' | 'liniowy' | 'ryczalt';
 

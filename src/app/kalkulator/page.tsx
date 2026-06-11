@@ -116,8 +116,21 @@ function IconHealth({ color }: { color: string }) {
   );
 }
 
+function IconPension({ color }: { color: string }) {
+  return (
+    <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="17" y1="10" x2="39" y2="10" />
+      <line x1="17" y1="46" x2="39" y2="46" />
+      <path d="M19 10 C19 20 28 23 28 28 C28 33 19 36 19 46" fill="none" />
+      <path d="M37 10 C37 20 28 23 28 28 C28 33 37 36 37 46" fill="none" />
+      <path d="M23 43 C23 37 33 37 33 43 Z" fill={color} stroke="none" />
+    </svg>
+  );
+}
+
 const TOOLS = [
   { href: '/kalkulator/wynagrodzenia',    label: 'BRUTTO - NETTO',      accent: '#10b981', Icon: IconWallet  },
+  { href: '/kalkulator/emerytura',        label: 'EMERYTURA Z ZUS',     accent: '#2f80b5', Icon: IconPension },
   { href: '/kalkulator/skladka-zdrowotna', label: 'SKŁADKA ZDROWOTNA',  accent: '#2e7d4f', Icon: IconHealth  },
   { href: '/kalkulator/zdolnosc-kredytowa', label: 'ZDOLNOŚĆ KREDYTOWA', accent: '#e8963a', Icon: IconScales  },
   { href: '/kalkulator/procent-skladany', label: 'PROCENT SKŁADANY',   accent: '#3b82f6', Icon: IconChart   },
