@@ -112,6 +112,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.7,
     },
+    // Dlug publiczny - strona "wychodzi" 20.06.2026 (przed data gated, brak w sitemap)
+    ...(new Date() >= new Date('2026-06-20T00:00:00+02:00') ? [{
+      url: `${BASE_URL}/dlug-publiczny-polski`,
+      lastModified: new Date('2026-06-20'),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }] : []),
     {
       url: `${BASE_URL}/disclaimer`,
       lastModified: new Date('2026-05-21'),
