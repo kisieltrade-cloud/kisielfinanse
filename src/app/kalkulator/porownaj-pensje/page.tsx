@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     title: 'Porównaj swoją pensję na tle Polski | KisielFinanse',
     description: 'Więcej niż ile procent pracujących zarabiasz? Twoja pozycja na tle mediany i średniej krajowej, dane GUS.',
     url: URL,
-    images: [{ url: '/kalkulator/opengraph-image', width: 1200, height: 630 }],
+    images: [{ url: '/kalkulator/porownaj-pensje/opengraph-image', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Porównaj swoją pensję na tle Polski | KisielFinanse',
     description: 'Więcej niż ile procent Polaków zarabiasz? Sprawdź swój percentyl.',
-    images: ['/kalkulator/opengraph-image'],
+    images: ['/kalkulator/porownaj-pensje/opengraph-image'],
   },
 };
 

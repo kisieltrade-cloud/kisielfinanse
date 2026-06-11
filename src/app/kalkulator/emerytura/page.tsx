@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     title: 'Kalkulator emerytalny 2026 - ile dostaniesz z ZUS | KisielFinanse',
     description: 'Prognozowana emerytura z ZUS, stopa zastąpienia i luka emerytalna. Sprawdź, ile dokładać, by nie odczuć spadku standardu życia.',
     url: URL,
-    images: [{ url: '/kalkulator/opengraph-image', width: 1200, height: 630 }],
+    images: [{ url: '/kalkulator/emerytura/opengraph-image', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Kalkulator emerytalny 2026 - ile dostaniesz z ZUS | KisielFinanse',
     description: 'Prognoza emerytury z ZUS, stopa zastąpienia i luka emerytalna.',
-    images: ['/kalkulator/opengraph-image'],
+    images: ['/kalkulator/emerytura/opengraph-image'],
   },
 };
 

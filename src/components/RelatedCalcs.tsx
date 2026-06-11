@@ -1,58 +1,29 @@
 import Link from 'next/link';
 
 const CALCS = [
-  {
-    href: '/kalkulator/procent-skladany',
-    label: 'Procent składany',
-    icon: '📈',
-    desc: 'Ile urośnie twój kapitał przez lata',
-  },
-  {
-    href: '/kalkulator/risk-reward',
-    label: 'Risk / Reward',
-    icon: '⚖️',
-    desc: 'Oceń czy transakcja ma sens',
-  },
-  {
-    href: '/kalkulator/fire',
-    label: 'Kalkulator FIRE',
-    icon: '🔥',
-    desc: 'Kiedy możesz przestać pracować',
-  },
-  {
-    href: '/kalkulator/etf',
-    label: 'ETF vs lokata',
-    icon: '📊',
-    desc: 'Porównaj zwrot z ETF i lokaty',
-  },
-  {
-    href: '/kalkulator/godziny-pracy',
-    label: 'Ile godzin pracy?',
-    icon: '⏱️',
-    desc: 'Prawdziwy koszt każdego zakupu',
-  },
-  {
-    href: '/kalkulator/kredyt-gotowkowy',
-    label: 'Kredyt gotówkowy',
-    icon: '💳',
-    desc: 'Rata i całkowity koszt kredytu',
-  },
-  {
-    href: '/kalkulator-hipoteczny',
-    label: 'Kalkulator hipoteczny',
-    icon: '🏠',
-    desc: 'Rata kredytu i harmonogram spłat',
-  },
+  { href: '/kalkulator/procent-skladany',  label: 'Procent składany',     icon: '📈', desc: 'Ile urośnie twój kapitał przez lata' },
+  { href: '/kalkulator/milion',            label: 'Kiedy milion?',        icon: '🏆', desc: 'Za ile lat odłożysz pierwszy milion' },
+  { href: '/kalkulator/emerytura',         label: 'Emerytura z ZUS',      icon: '⏳', desc: 'Ile dostaniesz i jaka luka emerytalna' },
+  { href: '/kalkulator/porownaj-pensje',   label: 'Porównaj pensję',      icon: '📊', desc: 'Więcej niż ile % Polaków zarabiasz' },
+  { href: '/kalkulator/gdzie-ida-podatki', label: 'Gdzie idą podatki?',   icon: '🧾', desc: 'Ile oddajesz państwu co miesiąc' },
+  { href: '/kalkulator/wynagrodzenia',     label: 'Brutto - netto',       icon: '💰', desc: 'Przelicz pensję na rękę' },
+  { href: '/kalkulator/skladka-zdrowotna', label: 'Składka zdrowotna',    icon: '🩺', desc: 'Składka na działalności 2026' },
+  { href: '/kalkulator/risk-reward',       label: 'Risk / Reward',        icon: '⚖️', desc: 'Oceń czy transakcja ma sens' },
+  { href: '/kalkulator/fire',              label: 'Kalkulator FIRE',      icon: '🔥', desc: 'Kiedy możesz przestać pracować' },
+  { href: '/kalkulator/etf',               label: 'ETF vs lokata',        icon: '📉', desc: 'Porównaj zwrot z ETF i lokaty' },
+  { href: '/kalkulator/godziny-pracy',     label: 'Ile godzin pracy?',    icon: '⏱️', desc: 'Prawdziwy koszt każdego zakupu' },
+  { href: '/kalkulator/kredyt-gotowkowy',  label: 'Kredyt gotówkowy',     icon: '💳', desc: 'Rata i całkowity koszt kredytu' },
+  { href: '/kalkulator-hipoteczny',        label: 'Kalkulator hipoteczny', icon: '🏠', desc: 'Rata kredytu i harmonogram spłat' },
 ] as const;
 
 type CalcHref = (typeof CALCS)[number]['href'];
 
 const TAG_MAP: Record<string, CalcHref[]> = {
   trading:     ['/kalkulator/risk-reward', '/kalkulator/procent-skladany', '/kalkulator/etf'],
-  inwestycje:  ['/kalkulator/etf', '/kalkulator/procent-skladany', '/kalkulator/fire'],
-  pieniadze:   ['/kalkulator-hipoteczny', '/kalkulator/kredyt-gotowkowy', '/kalkulator/procent-skladany', '/kalkulator/godziny-pracy'],
-  psychologia: ['/kalkulator/godziny-pracy', '/kalkulator/procent-skladany', '/kalkulator/fire'],
-  gospodarka:  ['/kalkulator-hipoteczny', '/kalkulator/etf', '/kalkulator/kredyt-gotowkowy'],
+  inwestycje:  ['/kalkulator/milion', '/kalkulator/etf', '/kalkulator/procent-skladany', '/kalkulator/fire'],
+  pieniadze:   ['/kalkulator/porownaj-pensje', '/kalkulator/wynagrodzenia', '/kalkulator/gdzie-ida-podatki', '/kalkulator/milion'],
+  psychologia: ['/kalkulator/godziny-pracy', '/kalkulator/milion', '/kalkulator/procent-skladany'],
+  gospodarka:  ['/kalkulator/gdzie-ida-podatki', '/kalkulator/wynagrodzenia', '/kalkulator/porownaj-pensje'],
 };
 
 const SLUG_KEYWORDS: Array<[string, CalcHref]> = [
@@ -63,15 +34,32 @@ const SLUG_KEYWORDS: Array<[string, CalcHref]> = [
   ['kredyt-gotowkow',   '/kalkulator/kredyt-gotowkowy'],
   ['procent-skladany',  '/kalkulator/procent-skladany'],
   ['dca',               '/kalkulator/procent-skladany'],
-  ['inwestowani',       '/kalkulator/procent-skladany'],
-  ['oszczednosci',      '/kalkulator/procent-skladany'],
+  ['inwestowani',       '/kalkulator/milion'],
+  ['milion',            '/kalkulator/milion'],
+  ['oszczedz',          '/kalkulator/milion'],
   ['etf',               '/kalkulator/etf'],
   ['lokata',            '/kalkulator/etf'],
   ['obligacj',          '/kalkulator/etf'],
   ['fire',              '/kalkulator/fire'],
-  ['ike',               '/kalkulator/fire'],
-  ['ikze',              '/kalkulator/fire'],
-  ['emerytur',          '/kalkulator/fire'],
+  ['ike',               '/kalkulator/emerytura'],
+  ['ikze',              '/kalkulator/emerytura'],
+  ['ppk',               '/kalkulator/emerytura'],
+  ['emerytur',          '/kalkulator/emerytura'],
+  ['zus',               '/kalkulator/emerytura'],
+  ['waloryzacj',        '/kalkulator/emerytura'],
+  ['zarabia',           '/kalkulator/porownaj-pensje'],
+  ['pensj',             '/kalkulator/porownaj-pensje'],
+  ['mediana',           '/kalkulator/porownaj-pensje'],
+  ['srednia-krajowa',   '/kalkulator/porownaj-pensje'],
+  ['wynagrodzeni',      '/kalkulator/wynagrodzenia'],
+  ['placa-minimalna',   '/kalkulator/wynagrodzenia'],
+  ['brutto',            '/kalkulator/wynagrodzenia'],
+  ['netto',             '/kalkulator/wynagrodzenia'],
+  ['podatek',           '/kalkulator/gdzie-ida-podatki'],
+  ['podatk',            '/kalkulator/gdzie-ida-podatki'],
+  ['kwota-wolna',       '/kalkulator/gdzie-ida-podatki'],
+  ['skladka-zdrowotn',  '/kalkulator/skladka-zdrowotna'],
+  ['dzialalnosc',       '/kalkulator/skladka-zdrowotna'],
   ['risk-reward',       '/kalkulator/risk-reward'],
   ['fibonacci',         '/kalkulator/risk-reward'],
   ['trading',           '/kalkulator/risk-reward'],
@@ -80,8 +68,7 @@ const SLUG_KEYWORDS: Array<[string, CalcHref]> = [
   ['budzet',            '/kalkulator/godziny-pracy'],
   ['nawyk',             '/kalkulator/godziny-pracy'],
   ['wydajem',           '/kalkulator/godziny-pracy'],
-  ['poduszka',          '/kalkulator/procent-skladany'],
-  ['ppk',               '/kalkulator/fire'],
+  ['poduszka',          '/kalkulator/milion'],
 ];
 
 function tagToKey(tag: string): string {

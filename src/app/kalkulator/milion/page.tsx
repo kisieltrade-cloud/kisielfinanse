@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     title: 'Kiedy uzbierasz milion? | KisielFinanse',
     description: 'Za ile lat i w jakim wieku uzbierasz milion przy Twoich wpłatach? Sprawdź, ile dorobi procent składany.',
     url: URL,
-    images: [{ url: '/kalkulator/opengraph-image', width: 1200, height: 630 }],
+    images: [{ url: '/kalkulator/milion/opengraph-image', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Kiedy uzbierasz milion? | KisielFinanse',
     description: 'Za ile lat uzbierasz milion przy Twoich wpłatach? Sprawdź.',
-    images: ['/kalkulator/opengraph-image'],
+    images: ['/kalkulator/milion/opengraph-image'],
   },
 };
 

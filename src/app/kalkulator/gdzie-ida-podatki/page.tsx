@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     title: 'Gdzie idą Twoje podatki? | KisielFinanse',
     description: 'Ile co miesiąc oddajesz państwu i na co to idzie? Sprawdź swój klin podatkowy i podział wydatków publicznych.',
     url: URL,
-    images: [{ url: '/kalkulator/opengraph-image', width: 1200, height: 630 }],
+    images: [{ url: '/kalkulator/gdzie-ida-podatki/opengraph-image', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Gdzie idą Twoje podatki? | KisielFinanse',
     description: 'Ile oddajesz państwu co miesiąc i na co to idzie? Sprawdź.',
-    images: ['/kalkulator/opengraph-image'],
+    images: ['/kalkulator/gdzie-ida-podatki/opengraph-image'],
   },
 };
 
