@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getAllPosts } from '@/lib/posts';
 import { postUrl } from '@/lib/url';
+import { getPublishedRankings, withRankingDate } from '@/lib/rankings';
 import NewsletterForm from '@/components/NewsletterForm';
 
 /* ── Ikony liniowe ── */
@@ -99,6 +100,7 @@ export default async function CalcRelated({ currentPath }: { currentPath: string
   const posts = await getAllPosts();
   const related = posts.slice(0, 3);
   const otherCalcs = ALL_CALCS.filter(c => c.href !== currentPath);
+  const ranking = getPublishedRankings()[0];
 
   return (
     <>
@@ -119,6 +121,27 @@ export default async function CalcRelated({ currentPath }: { currentPath: string
               </Link>
             ))}
           </div>
+
+          {ranking && (
+            <Link href={`/ranking/${ranking.slug}`} style={{
+              display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center', justifyContent: 'space-between',
+              marginTop: 22, padding: '22px 26px', borderRadius: 16, textDecoration: 'none',
+              background: 'linear-gradient(180deg, #fffdf6, #fbf4e2)', border: '1px solid rgba(201,162,39,0.4)',
+              boxShadow: '0 6px 22px rgba(201,162,39,0.12)',
+            }}>
+              <span style={{ minWidth: 0 }}>
+                <span style={{ display: 'inline-block', fontFamily: 'var(--font-mono)', fontSize: '0.6rem', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#fff', background: '#c9a227', fontWeight: 800, padding: '3px 10px', borderRadius: 16, marginBottom: 8 }}>
+                  Premia do 1300 zł
+                </span>
+                <span style={{ display: 'block', fontFamily: 'var(--font-body)', fontWeight: 800, fontSize: '1.02rem', color: '#1a1a2e', lineHeight: 1.3 }}>
+                  {withRankingDate(ranking.title, ranking.updated)}
+                </span>
+              </span>
+              <span style={{ flexShrink: 0, fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '0.9rem', color: '#0b0f15', background: 'linear-gradient(180deg, #e0bd49, #c9a227)', padding: '12px 22px', borderRadius: 11, boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.4)' }}>
+                Zobacz ranking →
+              </span>
+            </Link>
+          )}
         </div>
       </section>
 

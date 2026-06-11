@@ -6,6 +6,7 @@ import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
 import CategoriesSection from '@/components/CategoriesSection';
 import CalcSection from '@/components/CalcSection';
+import HomeRanking from '@/components/HomeRanking';
 import BlogSection from '@/components/BlogSection';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
@@ -46,6 +47,7 @@ export default function HomePage() {
       <main>
         <Hero />
         <CalcSection />
+        <HomeRanking />
         <CategoriesSection />
         <BlogSection />
         <FAQ />

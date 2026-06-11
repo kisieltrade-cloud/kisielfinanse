@@ -171,8 +171,10 @@ export default async function ArticlePage({ params }: Props) {
     post.tag === 'Inwestycje' ||
     /procent-skladany|dca|etf|inwestow|dywersyfik|fire|ike|ppk|obligacj|lokat|oszczed|poduszka/.test(slug);
 
-  // Artykuły o kontach/oszczędzaniu/budżecie dostają kontekstowy link do rankingu kont
+  // Artykuły o pieniądzach (cała kategoria) oraz o kontach/oszczędzaniu/budżecie/pensji
+  // dostają kontekstowy link do rankingu kont (lejek do money page).
   const accountsThemed =
+    category === 'pieniadze' ||
     /konto|oszczed|budzet|poduszka|nawyk|odklada|kasy-brak|wyczyscic-bik|lokata-obligacje|pensj/.test(slug);
 
   // Newsy mają datę z godziną (np. 2026-06-09T10:00) — oznaczamy je jako NewsArticle,
