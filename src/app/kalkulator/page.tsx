@@ -139,8 +139,21 @@ function IconCompare({ color }: { color: string }) {
   );
 }
 
+function IconTrophy({ color }: { color: string }) {
+  return (
+    <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 10 H38 V22 C38 30 33 34 28 34 C23 34 18 30 18 22 Z" />
+      <path d="M18 13 H12 V17 C12 21 15 23 18 23" />
+      <path d="M38 13 H44 V17 C44 21 41 23 38 23" />
+      <line x1="28" y1="34" x2="28" y2="42" />
+      <path d="M21 46 H35 L33 42 H23 Z" fill={color} stroke="none" />
+    </svg>
+  );
+}
+
 const TOOLS = [
   { href: '/kalkulator/wynagrodzenia',    label: 'BRUTTO - NETTO',      accent: '#10b981', Icon: IconWallet  },
+  { href: '/kalkulator/milion',           label: 'KIEDY MILION?',       accent: '#16a34a', Icon: IconTrophy  },
   { href: '/kalkulator/porownaj-pensje',  label: 'PORÓWNAJ PENSJĘ',     accent: '#6366f1', Icon: IconCompare },
   { href: '/kalkulator/emerytura',        label: 'EMERYTURA Z ZUS',     accent: '#2f80b5', Icon: IconPension },
   { href: '/kalkulator/skladka-zdrowotna', label: 'SKŁADKA ZDROWOTNA',  accent: '#2e7d4f', Icon: IconHealth  },
