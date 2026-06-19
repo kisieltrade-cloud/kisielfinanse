@@ -15,6 +15,7 @@ export interface GlossaryTerm {
   body: string[];
   related?: string[];
   calc?: { href: string; label: string };
+  noindex?: boolean; // true → pojęcie wyłączone z indeksu Google (meta robots noindex)
 }
 
 export const GLOSSARY: GlossaryTerm[] = [
@@ -897,6 +898,7 @@ export const GLOSSARY: GlossaryTerm[] = [
   {
     slug: 'pkb',
     term: 'PKB',
+    noindex: true, // wyłączone z indeksu Google (decyzja 2026-06-19)
     aliases: ['PKB', 'Produkt Krajowy Brutto', 'wzrost PKB'],
     short: 'PKB (Produkt Krajowy Brutto) to wartość wszystkich dóbr i usług wytworzonych w kraju w danym okresie. Podstawowa miara wielkości i kondycji gospodarki.',
     body: [

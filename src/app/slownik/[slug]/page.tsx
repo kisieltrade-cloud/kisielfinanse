@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: { absolute: `${title} | KisielFinanse` },
     description: term.short.length > 155 ? term.short.slice(0, 152) + '...' : term.short,
-    robots: { index: true, follow: true },
+    robots: term.noindex ? { index: false, follow: true } : { index: true, follow: true },
     alternates: { canonical: `${BASE_URL}/slownik/${slug}` },
     openGraph: {
       title: `${title} | KisielFinanse`,

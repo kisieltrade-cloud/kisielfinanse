@@ -74,6 +74,22 @@ const nextConfig = {
           { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
         ],
       },
+      {
+        // Fonty/media z bundla Next (.woff2 itp.) — to zasoby, nie strony.
+        // noindex NIE blokuje renderowania (Googlebot dalej je pobiera), tylko
+        // wyciąga je z raportu "Crawled - currently not indexed".
+        source: '/_next/static/media/:path*',
+        headers: [
+          { key: 'X-Robots-Tag', value: 'noindex' },
+        ],
+      },
+      {
+        // Manifest PWA — plik techniczny, nie strona do indeksu.
+        source: '/site.webmanifest',
+        headers: [
+          { key: 'X-Robots-Tag', value: 'noindex' },
+        ],
+      },
     ];
   },
 };

@@ -82,6 +82,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: htmlDesc,
     keywords: [...(post.keywords ?? []), post.tag.toLowerCase(), 'KisielFinanse', 'finanse', 'edukacja finansowa'],
     authors: [{ name: 'Mateusz Kisiel', url: `${BASE_URL}/o-mnie` }],
+    // noindex:true w MDX → strona z indeksu wypada (follow zostaje, by Google szedł po linkach)
+    robots: post.noindex ? { index: false, follow: true } : undefined,
     alternates: { canonical: canonicalUrl },
     openGraph: {
       title: post.metaTitle ?? post.title,

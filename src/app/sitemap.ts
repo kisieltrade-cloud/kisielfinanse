@@ -148,7 +148,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // ── Artykuły blogowe ────────────────────────────────────────────────────────
-  const blogPages: MetadataRoute.Sitemap = posts.map((post) => ({
+  // Pomijamy artykuły z noindex (sprzeczny sygnał: sitemap zachęca, robots zabrania)
+  const blogPages: MetadataRoute.Sitemap = posts.filter((post) => !post.noindex).map((post) => ({
     url: `${BASE_URL}${postUrl(post)}`,
     // Jeśli post był aktualizowany, używamy daty aktualizacji
     lastModified: post.updatedISO
@@ -167,7 +168,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     },
-    ...GLOSSARY.map((t) => ({
+    ...GLOSSARY.filter((t) => !t.noindex).map((t) => ({
       url: `${BASE_URL}/slownik/${t.slug}`,
       changeFrequency: 'monthly' as const,
       priority: 0.5,

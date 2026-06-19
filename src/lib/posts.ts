@@ -38,6 +38,7 @@ export interface PostMeta {
   gallery?: string[];
   metaTitle?: string;       // custom SEO title (z CMS); jeśli brak → używamy title
   metaDescription?: string; // custom meta description (z CMS); jeśli brak → używamy excerpt
+  noindex?: boolean;        // frontmatter noindex:true → strona z meta robots noindex (poza Google)
 }
 
 export interface Post extends PostMeta {
@@ -82,6 +83,7 @@ export async function getAllPosts(): Promise<PostMeta[]> {
         gallery: data.gallery ?? [],
         metaTitle: (data.metaTitle as string) || undefined,
         metaDescription: (data.metaDescription as string) || undefined,
+        noindex: data.noindex === true,
         _rawDate: rawDate,
       };
     })
@@ -132,6 +134,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     gallery: data.gallery ?? [],
     metaTitle: (data.metaTitle as string) || undefined,
     metaDescription: (data.metaDescription as string) || undefined,
+    noindex: data.noindex === true,
     faq: Array.isArray(data.faq) ? (data.faq as FaqItem[]) : [],
     content,
   };

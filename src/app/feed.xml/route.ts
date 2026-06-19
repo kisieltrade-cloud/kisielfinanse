@@ -47,6 +47,9 @@ export async function GET() {
     headers: {
       'Content-Type': 'application/rss+xml; charset=utf-8',
       'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400',
+      // Feed RSS nie ma być stroną w Google (czytniki RSS ignorują noindex).
+      // Wyciąga go z raportu "Crawled - currently not indexed" do "Excluded by noindex".
+      'X-Robots-Tag': 'noindex',
     },
   });
 }
