@@ -8,6 +8,7 @@ import RevealOnScroll from '@/components/RevealOnScroll';
 import NewsletterForm from '@/components/NewsletterForm';
 import AuthorBox from '@/components/AuthorBox';
 import BankLogo from '@/components/BankLogo';
+import RankingStickyCTA from '@/components/RankingStickyCTA';
 import { getAllPickSlugs, findPick, rankingMonthYear } from '@/lib/rankings';
 import { getCategoryBySlug } from '@/lib/categories';
 import { goUrl } from '@/lib/providers';
@@ -32,10 +33,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { pick, ranking } = found;
   const fresh = rankingMonthYear(ranking.updated);
   const url = `${BASE_URL}/konto/${slug}`;
-  const title = `${pick.name} - opłaty, warunki i szczegóły oferty ${fresh} | KisielFinanse`;
-  const desc =
-    `${pick.name} (${pick.provider}): ${pick.highlight} Opłaty, zalety, wady i najważniejsze ` +
-    `parametry oferty w jednym miejscu.`;
+  const bonus = pick.review?.bonus;
+  const title = bonus
+    ? `${pick.name} - premia ${bonus.amount}: jak odebrać (${fresh})`
+    : `${pick.name} - opłaty, warunki i szczegóły oferty ${fresh} | KisielFinanse`;
+  const desc = bonus
+    ? `${pick.name}: premia ${bonus.amount} za założenie konta. Jak odebrać krok po kroku, ` +
+      `jakie warunki spełnić i na jakie haczyki w regulaminie uważać, żeby nie stracić bonusu.`
+    : `${pick.name} (${pick.provider}): ${pick.highlight} Opłaty, zalety, wady i najważniejsze ` +
+      `parametry oferty w jednym miejscu.`;
   return {
     title: { absolute: title },
     description: desc,
@@ -68,6 +74,19 @@ function Stars({ score, size }: { score: number; size?: number }) {
   );
 }
 
+// Pasek pilności: data 'YYYY-MM-DD' → "Promocja do 30 czerwca 2026"; wolny tekst
+// przepisujemy 1:1; brak deadline → ogólne "Oferta czasowa".
+function urgencyLabel(deadline?: string): string {
+  if (!deadline) return 'Oferta czasowa - sprawdź aktualny regulamin';
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(deadline)) return deadline;
+  const months = [
+    'stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca',
+    'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia',
+  ];
+  const d = new Date(deadline);
+  return `Promocja do ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
 export default async function AccountPage({ params }: Props) {
   const { slug } = await params;
   const found = findPick(slug);
@@ -84,6 +103,10 @@ export default async function AccountPage({ params }: Props) {
   const intro = pick.review?.intro ?? pick.body;
   const sections = pick.review?.sections ?? [];
   const faq = pick.review?.faq ?? [];
+  const bonus = pick.review?.bonus;
+  const steps = pick.review?.steps ?? [];
+  const proof = pick.review?.proof ?? [];
+  const ctaLabel = bonus ? 'Załóż i odbierz premię' : 'Złóż wniosek';
 
   // ── Schema.org: produkt finansowy (opis usługi) ───────────────────────────────
   // UWAGA: NIE dodajemy aggregateRating/review do produktu zewnętrznego (konto banku).
@@ -137,6 +160,16 @@ export default async function AccountPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }} />
       {schemaFaq && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFaq) }} />}
 
+      <RankingStickyCTA
+        name={pick.name}
+        score={pick.score}
+        goHref={goHref}
+        ctaLabel={ctaLabel}
+        rankLabel="★"
+        subtitle={bonus ? `Premia ${bonus.amount}` : undefined}
+        badge={pick.badge}
+      />
+
       <main className="rk-main">
         {/* ── HERO ── */}
         <header className="rk-hero">
@@ -152,11 +185,29 @@ export default async function AccountPage({ params }: Props) {
           <div className="rv-head">
             <BankLogo id={pick.providerId} size={72} rounded={18} />
             <div className="rv-head-text">
-              <span className="rk-kicker">Szczegóły oferty · {fresh}</span>
+              <span className="rk-kicker">{bonus ? `Promocja · ${fresh}` : `Szczegóły oferty · ${fresh}`}</span>
               <h1 className="rk-title">{pick.name}</h1>
               <span className="rv-provider">{pick.provider}</span>
             </div>
           </div>
+
+          {/* ── BLOK PREMII (prowadzi kwotą, nie funkcją) ── */}
+          {bonus && (
+            <div className="rv-bonus">
+              <div className="rv-bonus-glow" aria-hidden="true" />
+              <div className="rv-bonus-main">
+                <span className="rv-bonus-amount">{bonus.amount}</span>
+                <span className="rv-bonus-label">premia za założenie konta</span>
+              </div>
+              {bonus.sub && <p className="rv-bonus-sub">{bonus.sub}</p>}
+              <div className="rv-bonus-foot">
+                <span className="rv-urgency">{urgencyLabel(bonus.deadline)}</span>
+                <a href={goHref} className="rk-cta rk-cta--glow" rel="sponsored nofollow noopener" target="_blank">
+                  {ctaLabel}
+                </a>
+              </div>
+            </div>
+          )}
 
           <div className="rv-hero-bar">
             <div className="rv-hero-rating">
@@ -165,7 +216,7 @@ export default async function AccountPage({ params }: Props) {
               {pick.badge && <span className="rk-badge">{pick.badge}</span>}
             </div>
             <a href={goHref} className="rk-cta rk-cta--glow" rel="sponsored nofollow noopener" target="_blank">
-              {'Złóż wniosek'}
+              {ctaLabel}
             </a>
           </div>
         </header>
@@ -206,6 +257,37 @@ export default async function AccountPage({ params }: Props) {
           </dl>
         </section>
 
+        {/* ── JAK ODEBRAĆ PREMIĘ KROK PO KROKU ── */}
+        {steps.length > 0 && (
+          <section className="rv-steps-wrap">
+            <div className="rk-section-head">
+              <span className="rk-eyebrow">Krok po kroku</span>
+              <h2 className="rk-h2">Jak odebrać premię {pick.name}</h2>
+            </div>
+            <ol className="rv-steps">
+              {steps.map((s, i) => (
+                <li key={i} className="rv-step">
+                  <span className="rv-step-num">{i + 1}</span>
+                  <span className="rv-step-text">{s}</span>
+                </li>
+              ))}
+            </ol>
+            {bonus && (
+              <a href={goHref} className="rk-cta rk-cta--glow rv-steps-cta" rel="sponsored nofollow noopener" target="_blank">
+                {ctaLabel}
+              </a>
+            )}
+          </section>
+        )}
+
+        {/* ── DOWÓD PIERWSZEJ RĘKI (E-E-A-T) ── */}
+        {proof.length > 0 && (
+          <section className="rv-proof">
+            <span className="rv-proof-label">Sprawdzone przeze mnie</span>
+            {proof.map((p, i) => <p key={i}>{p}</p>)}
+          </section>
+        )}
+
         {/* ── SEKCJE OPISOWE ── */}
         {sections.length > 0 && (
           <section className="rk-card-body" style={{ margin: '8px 0 40px' }}>
@@ -240,7 +322,7 @@ export default async function AccountPage({ params }: Props) {
               <strong>{pick.name}</strong>
             </div>
             <a href={goHref} className="rk-cta rk-cta--glow" rel="sponsored nofollow noopener" target="_blank">
-              {'Złóż wniosek'}
+              {ctaLabel}
             </a>
           </div>
           <p className="rv-verdict-note">

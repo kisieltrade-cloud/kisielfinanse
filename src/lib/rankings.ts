@@ -30,6 +30,11 @@ export interface RankingPick {
   cons: string[];
   scores?: { label: string; value: number }[];  // oceny cząstkowe 0-5 (per kryterium)
   specs: Record<string, string>;  // wartości pod kolumny z `fields`
+  // Dane liczbowe do interaktywnego kalkulatora zysku (ranking lokat / oszczędności).
+  // Gdy WSZYSTKIE pozycje mają `calc`, strona pokazuje kalkulator, który re-rankuje
+  // oferty wg realnego zysku netto dla kwoty i okresu wpisanych przez użytkownika
+  // (kwota objęta promocją = min(kwota, cap); cap = null → bez limitu).
+  calc?: { rate: number; cap: number | null; termMonths: number };
   providerId: string;      // klucz do PROVIDERS (logo marki + link przez /go/[id])
   ctaLabel: string;        // tekst przycisku, np. "Załóż konto"
   body: string[];          // akapity szczegółowego omówienia (na karcie rankingu)
@@ -41,6 +46,16 @@ export interface RankingPick {
   // ale `review` dodaje głębsze sekcje i FAQ per produkt (long-tail "opinie/recenzja").
   review?: {
     intro: string[];
+    // Rama "premia": gdy podane, /konto/[slug] prowadzi KWOTĄ (duży blok premii
+    // w hero + pasek urgency + CTA pod bonus), zamiast neutralnego "szczegóły oferty".
+    // amount = napis kwoty ("do 1000 zł"), sub = co się na nią składa, deadline opcjonalny
+    // ('YYYY-MM-DD' lub wolny tekst). Brak `bonus` → stary, neutralny układ recenzji.
+    bonus?: { amount: string; sub?: string; deadline?: string };
+    // "Jak odebrać premię krok po kroku" — ponumerowana, skanowalna lista (konwersja).
+    steps?: string[];
+    // Dowód pierwszej ręki ("sam testowałem", zrzuty, wypisane haczyki regulaminu) —
+    // E-E-A-T. Slot pod realny materiał autora; nie wypełniamy zmyślonymi testami.
+    proof?: string[];
     sections?: { title: string; body: string[] }[];
     faq?: { q: string; a: string }[];
   };
@@ -124,13 +139,13 @@ export const RANKINGS: Ranking[] = [
       'mBank eKonto opinie',
     ],
     cover: '/images/blog/covers/coins-gold.jpg',
-    updated: '2026-06-08',
+    updated: '2026-06-20',
     summary: [
       'Naszym wyborem #1 jest PKO Konto za Zero - największa sieć bankomatów i oddziałów w Polsce, ' +
         'AllegroKlik (zwroty za zakupy do ~1200 zł rocznie) i stabilność największego banku. Tuż za nim Alior i mBank.',
       'Każde „darmowe" konto jest darmowe pod warunkami: zwykle wpływ wynagrodzenia i kilka ' +
         'płatności kartą miesięcznie. Bez tego bank może naliczyć opłatę.',
-      'Premie za założenie potrafią dziś sięgać 1000-1500 zł, ale zawsze z warunkami (obrót, liczba ' +
+      'Premie za założenie potrafią dziś sięgać 1000-1300 zł, ale zawsze z warunkami (obrót, liczba ' +
         'transakcji, aktywność przez kilka miesięcy). Traktuj je jako dodatek, nie główne kryterium wyboru konta na lata.',
       'Możesz mieć kilka kont naraz - jedno główne do wynagrodzenia, drugie pod promocję lub ' +
         'wysoko oprocentowane konto oszczędnościowe.',
@@ -187,7 +202,7 @@ export const RANKINGS: Ranking[] = [
           oplata: '0 zł (bez warunków)',
           karta: '0 zł (od 350 zł/mies)',
           bankomaty: 'Wszystkie w kraju (od 300 zł)',
-          premia: 'Do ~1000 zł + bony*',
+          premia: 'Do ~1000 zł*',
           aplikacja: 'Bardzo dobra',
         },
         scores: [
@@ -214,6 +229,19 @@ export const RANKINGS: Ranking[] = [
               'nie wymaga kombinowania, to prawdopodobnie najlepszy wybór na start. Poniżej rozkładam ' +
               'ofertę na czynniki pierwsze: co kosztuje naprawdę, co dostajesz w aplikacji i komu ' +
               'eKonto pasuje najbardziej.',
+          ],
+          bonus: {
+            amount: 'do 1000 zł',
+            sub: 'premia za aktywność wypłacana w transzach + 5,3% na koncie oszczędnościowym Moje Cele',
+            deadline: '2026-08-31',
+          },
+          steps: [
+            'Otwórz eKonto online - przez aplikację albo wideoweryfikację, zajmuje kilkanaście minut.',
+            'Zapewnij wpływ wynagrodzenia na konto (wymaganą kwotę podaje regulamin bieżącej edycji).',
+            'Płać kartą lub BLIKIEM - wykonaj wymaganą liczbę transakcji w każdym miesiącu promocji.',
+            'Loguj się do aplikacji mBanku, jeśli dana edycja promocji tego wymaga.',
+            'Utrzymaj aktywność przez kolejne miesiące - premia wpływa transzami, a nie od razu po otwarciu.',
+            'Odbierz bony do Media Expert i włącz 5,3% na koncie oszczędnościowym Moje Cele dla nowych środków.',
           ],
           sections: [
             {
@@ -340,6 +368,19 @@ export const RANKINGS: Ranking[] = [
             'Erste Konto Smart to dawne konto Santandera pod nową marką. Stawia na dwie rzeczy naraz: premię ' +
               'powitalną i realne oprocentowanie oszczędności. Poniżej, jak zgarnąć bonus i co dokładnie dostajesz.',
           ],
+          bonus: {
+            amount: 'do 700 zł',
+            sub: 'premia za aktywność + 4,5% na koncie Pro oszczędnościowym i lokacie powitalnej',
+            deadline: '2026-07-31',
+          },
+          steps: [
+            'Otwórz Konto Smart online - przez aplikację albo wideoweryfikację.',
+            'Zapewnij wpływ min. 1500 zł miesięcznie na konto.',
+            'Wykonaj co najmniej 5 płatności kartą lub BLIKIEM w miesiącu.',
+            'Ustaw cel oszczędnościowy w aplikacji - to jeden z warunków premii.',
+            'Utrzymaj aktywność przez 3 miesiące - do 200 zł miesięcznie plus 100 zł bonusu wpływają transzami.',
+            'Włącz Konto Pro i lokatę powitalną na 4,5%, żeby nadwyżki pracowały.',
+          ],
           sections: [
             {
               title: 'Jak skorzystać z promocji',
@@ -433,6 +474,18 @@ export const RANKINGS: Ranking[] = [
           intro: [
             'Konto Millennium 360° to wygodny rachunek z dobrą aplikacją i regularnymi promocjami zwrotów za ' +
               'płatności. Premia powitalna sięga 700 zł, a prowadzenie jest bezpłatne.',
+          ],
+          bonus: {
+            amount: 'do 700 zł',
+            sub: '200 zł za warunki startowe + 500 zł za aktywność przez 5 miesięcy',
+            deadline: '2026-10-27',
+          },
+          steps: [
+            'Otwórz Konto 360° online wraz z kartą.',
+            'Zrób wpływ min. 3000 zł w ciągu 14 dni (1500 zł dla osób do 26 lat).',
+            'Zarejestruj portfel cyfrowy (BLIK) i wykonaj co najmniej 5 transakcji.',
+            'Odbierz 200 zł za spełnienie warunków startowych.',
+            'Utrzymaj co miesiąc wpływ 3000 zł i 1000 zł wydatków kartą przez 5 miesięcy - zbierzesz kolejne 500 zł.',
           ],
           sections: [
             {
@@ -531,6 +584,18 @@ export const RANKINGS: Ranking[] = [
             'PKO Konto za Zero to podstawowy rachunek największego banku w Polsce: darmowe prowadzenie przy ' +
               'aktywności i program AllegroKlik, który oddaje część pieniędzy za zakupy na Allegro. Poniżej ' +
               'tłumaczę, jak wyciągnąć z promocji maksimum, ile to realnie kosztuje i komu konto się opłaca.',
+          ],
+          bonus: {
+            amount: 'do 600 zł',
+            sub: 'premia z kodem PREMIA + AllegroKlik: zwrot do ~1200 zł za zakupy na Allegro',
+            deadline: '2026-06-30',
+          },
+          steps: [
+            'Otwórz Konto za Zero online i wpisz kod promocyjny PREMIA.',
+            'Zapewnij wpływ i płać kartą lub BLIKIEM zgodnie z warunkami promocji.',
+            'Aktywuj usługę AllegroKlik w aplikacji IKO.',
+            'Płać za zakupy na Allegro - zgarniasz do 3% zwrotu, maks. 100 zł miesięcznie przez 12 miesięcy.',
+            'Utrzymaj aktywność przez wymagany okres - premia i zwroty wpływają transzami, nie od razu.',
           ],
           sections: [
             {
@@ -631,6 +696,17 @@ export const RANKINGS: Ranking[] = [
             'VeloKonto to darmowe konto codzienne, które najmocniej gra w duecie z kontem oszczędnościowym: ' +
               'wysokie oprocentowanie nowych środków plus cashback i program poleceń.',
           ],
+          bonus: {
+            amount: 'do 600 zł',
+            sub: 'do 50 zł miesięcznie przez 12 miesięcy + wysokie oprocentowanie nowych środków',
+          },
+          steps: [
+            'Otwórz VeloKonto online - prowadzenie jest darmowe bez warunków.',
+            'Przystąp do programu VeloKorzyści w aplikacji.',
+            'Płać kartą i utrzymuj aktywność - zgarniasz do 50 zł miesięcznie (do 600 zł w rok).',
+            'Załóż VeloKonto Oszczędnościowe i przelej na nie nowe środki na wysokie oprocentowanie.',
+            'Polecaj znajomych - za każde skuteczne polecenie dostajesz dodatkowy bonus.',
+          ],
           sections: [
             {
               title: 'Jak skorzystać z promocji',
@@ -723,6 +799,18 @@ export const RANKINGS: Ranking[] = [
             'Konto Przekorzystne to rachunek jednego z największych banków w Polsce: premia powitalna, ' +
               'promocyjne oprocentowanie oszczędności i bardzo szeroka sieć oddziałów oraz bankomatów.',
           ],
+          bonus: {
+            amount: 'do 300 zł',
+            sub: 'premia na start i za aktywność + 5% na koncie oszczędnościowym + zwrot w Promocji Podróżnej',
+            deadline: '2026-08-31',
+          },
+          steps: [
+            'Otwórz Konto Przekorzystne online metodą selfie/biometrią - 100 zł na start.',
+            'Wykonaj min. 5 transakcji kartą w każdym z 2 pierwszych miesięcy - kolejne 200 zł.',
+            'Załóż konto oszczędnościowe na 5% i przelej na nie nowe środki.',
+            'Płacisz kartą za granicą? Włącz Promocję Podróżną z cashbackiem.',
+            'Utrzymaj aktywność - premia wpływa po spełnieniu warunków, nie od razu po otwarciu.',
+          ],
           sections: [
             {
               title: 'Jak skorzystać z promocji',
@@ -804,7 +892,7 @@ export const RANKINGS: Ranking[] = [
         body: [
           'Alior Konto to proste konto osobiste z mocnym atutem: prowadzenie kosztuje 0 zł bez żadnych ' +
             'warunków, a do tego dochodzi jedna z najwyższych promocji powitalnych na rynku - łącznie nawet ' +
-            '1300 zł (200 zł na start, do 800 zł za aktywne korzystanie oraz obrączka płatnicza o wartości 500 zł).',
+            '1300 zł (do 800 zł cashbacku za aktywne korzystanie oraz obrączka płatnicza o wartości 500 zł).',
           'Trzeba pamiętać, że część nagrody to nie gotówka (obrączka płatnicza, cashback), a pełną premię ' +
             'zbiera się przez kilka miesięcy aktywności. Alior ma też osobne konto dla młodych (18-25) i bogatą ' +
             'ofertę kredytową, a aplikacja Alior Mobile jest dobrze oceniana.',
@@ -814,14 +902,27 @@ export const RANKINGS: Ranking[] = [
             'Alior Konto łączy dwie rzeczy, które rzadko idą w parze: prowadzenie za 0 zł bez żadnych warunków ' +
               'i jedną z najwyższych premii powitalnych na rynku, łącznie nawet 1300 zł.',
           ],
+          bonus: {
+            amount: 'do 1300 zł',
+            sub: 'obrączka płatnicza ~500 zł + cashback 10% do 800 zł przez 8 miesięcy',
+            deadline: '2026-08-31',
+          },
+          steps: [
+            'Otwórz Alior Konto Plus online z kodem promocyjnym ZYSKAJ2026.',
+            'W ciągu 10 dni wykonaj 5 transakcji kartą lub BLIKIEM, zapisz się do programu Mastercard Bezcenne Chwile i zaloguj w Alior Mobile - to warunek obrączki płatniczej (~500 zł).',
+            'Zapewnij wpływ min. 2000 zł miesięcznie.',
+            'Płać kartą, obrączką lub BLIKIEM w sklepach stacjonarnych - dostajesz 10% zwrotu, do 100 zł miesięcznie.',
+            'Utrzymuj aktywność przez 8 miesięcy - cashback zbiera się do 800 zł.',
+          ],
           sections: [
             {
               title: 'Jak skorzystać z promocji',
               body: [
-                'Otwórz Alior Konto online. Na start dostajesz 200 zł, a kolejną część premii (do 800 zł) zbierasz ' +
-                  'jako cashback za aktywne korzystanie: płatności kartą i BLIKIEM przez kilka miesięcy. Do tego dochodzi ' +
-                  'obrączka płatnicza o wartości około 500 zł. Łącznie daje to nawet 1300 zł. Oferta startowa bywa ' +
-                  'ograniczona terminem, więc sprawdź aktualny regulamin przed założeniem.',
+                'Otwórz Alior Konto Plus online z kodem ZYSKAJ2026. Pierwsza część nagrody to obrączka płatnicza ' +
+                  'o wartości około 500 zł - dostajesz ją za 5 transakcji w ciągu 10 dni, zapis do programu Mastercard ' +
+                  'Bezcenne Chwile i logowanie w Alior Mobile. Druga część to cashback: 10% zwrotu za płatności w sklepach ' +
+                  'stacjonarnych, do 100 zł miesięcznie przez 8 miesięcy (do 800 zł), przy wpływie min. 2000 zł. Łącznie ' +
+                  'daje to nawet 1300 zł. Promocja obowiązuje do 31 sierpnia 2026, ale sprawdź aktualny regulamin przed założeniem.',
               ],
             },
             {
@@ -844,8 +945,8 @@ export const RANKINGS: Ranking[] = [
           faq: [
             {
               q: 'Ile można zyskać w promocji Alior Konta?',
-              a: 'Łącznie nawet 1300 zł: 200 zł na start, do 800 zł cashbacku za aktywne korzystanie przez kilka ' +
-                'miesięcy oraz obrączka płatnicza warta około 500 zł.',
+              a: 'Łącznie do 1300 zł: do 800 zł cashbacku (10% za płatności w sklepach stacjonarnych, do 100 zł ' +
+                'miesięcznie przez 8 miesięcy) oraz obrączka płatnicza warta około 500 zł. Promocja z kodem ZYSKAJ2026 do 31 sierpnia 2026.',
             },
             {
               q: 'Czy cała premia to gotówka?',
@@ -904,6 +1005,17 @@ export const RANKINGS: Ranking[] = [
           intro: [
             'Konto Otwarte na Ciebie to solidny, darmowy rachunek dużego banku z porządną aplikacją GOmobile ' +
               'i regularnymi promocjami zwrotów. Premia powitalna sięga około 700 zł.',
+          ],
+          bonus: {
+            amount: 'do 700 zł',
+            sub: 'za aktywność przez 12 miesięcy + 100 zł przy koncie oszczędnościowym',
+          },
+          steps: [
+            'Otwórz Konto Otwarte na Ciebie online wraz z kartą.',
+            'Zapewnij wpływ min. 1000 zł miesięcznie.',
+            'Wykonaj min. 7 płatności kartą w miesiącu.',
+            'Utrzymaj zgody marketingowe - to warunek wypłaty premii.',
+            'Zbieraj 50 zł miesięcznie przez 12 miesięcy; z kontem oszczędnościowym dodatkowo 100 zł.',
           ],
           sections: [
             {
@@ -995,6 +1107,17 @@ export const RANKINGS: Ranking[] = [
             'Konto dla Ciebie to rachunek dużego banku, który nagradza nie jednorazową premią, lecz zwrotami za ' +
               'płatności (do około 720 zł w skali roku) oraz wysoko oprocentowaną lokatą powitalną.',
           ],
+          bonus: {
+            amount: 'do 720 zł',
+            sub: '4% zwrotu za płatności, do 60 zł miesięcznie przez 12 miesięcy + Lokata Powitalna',
+          },
+          steps: [
+            'Otwórz Konto dla Ciebie online wraz z kartą.',
+            'Zapewnij wpływ około 1500 zł i płać kartą na co dzień.',
+            'Wykonaj min. 10 płatności kartą lub BLIKIEM miesięcznie.',
+            'Wyraź i utrzymaj zgody marketingowe - bez nich zwrot się nie naliczy.',
+            'Zgarniaj 4% zwrotu (do 60 zł/mies przez 12 miesięcy) i włącz Lokatę Powitalną na nowe środki.',
+          ],
           sections: [
             {
               title: 'Jak skorzystać z promocji',
@@ -1081,7 +1204,7 @@ export const RANKINGS: Ranking[] = [
       {
         q: 'Czy warto zakładać konto tylko dla premii?',
         a:
-          'Premie powitalne potrafią dziś sięgać 1000-1500 zł, ale wiążą się z ' +
+          'Premie powitalne potrafią dziś sięgać 1000-1300 zł, ale wiążą się z ' +
           'warunkami: określoną liczbą transakcji, wpływem wynagrodzenia i utrzymaniem aktywności ' +
           'przez kilka miesięcy (część kwoty to często moneyback, nie gotówka). To sensowne, jeśli i tak będziesz konta aktywnie używać. Traktuj ' +
           'premię jako dodatek, nie główny powód wyboru konta na lata.',
@@ -1114,7 +1237,8 @@ export const RANKINGS: Ranking[] = [
       { label: 'Budżet domowy - jak zacząć i utrzymać', href: '/pieniadze/budzet-domowy-jak-zaczac-i-utrzymac' },
     ],
     changelog: [
-      { date: '2026-06-08', note: 'Aktualizacja premii powitalnych (czerwiec 2026): obecnie sięgają 1000-1500 zł. Potwierdzono zakończenie rebrandingu Santander Bank Polska na Erste Bank Polska (od 25.04.2026).' },
+      { date: '2026-06-20', note: 'Weryfikacja promocji bezpośrednio na oficjalnych stronach banków (czerwiec 2026): mBank eKonto do 1000 zł (do 31.08), Alior Konto Plus do 1300 zł, kod ZYSKAJ2026 (do 31.08), Erste Konto Smart do 700 zł plus 4,5% (do 31.07), Millennium 360° do 700 zł (do 27.10), PKO Konto za Zero do 600 zł, kod PREMIA (do 30.06), Pekao Przekorzystne do 300 zł (do 31.08), VeloKonto do 600 zł, BNP do 700 zł, Credit Agricole do 720 zł. Dodano sekcje „jak odebrać krok po kroku" oraz terminy promocji na stronach kont.' },
+      { date: '2026-06-08', note: 'Aktualizacja premii powitalnych (czerwiec 2026): obecnie sięgają 1000-1300 zł. Potwierdzono zakończenie rebrandingu Santander Bank Polska na Erste Bank Polska (od 25.04.2026).' },
       { date: '2026-06-07', note: 'Aktualizacja warunków zwolnienia z opłat i premii powitalnych. Uwzględniono przejęcie Santander Bank Polska przez Erste.' },
     ],
     affiliateNote: AFFILIATE_DISCLOSURE,
@@ -1138,7 +1262,7 @@ export const RANKINGS: Ranking[] = [
     metaTitle: 'Ranking lokat {DATE}: najlepiej oprocentowane lokaty | KisielFinanse',
     metaDesc:
       'Najlepsze lokaty bankowe {DATE} - ranking najwyżej oprocentowanych lokat w Polsce. ' +
-      'Nest, VeloBank, mBank, BOŚ i inne. Oprocentowanie, okres, kwota i warunki w jednym miejscu.',
+      'Bank Nowy, Nest, VeloBank, Raiffeisen, Credit Agricole i inne. Oprocentowanie, okres, kwota i warunki w jednym miejscu.',
     keywords: [
       'ranking lokat',
       'najlepsze lokaty',
@@ -1150,7 +1274,7 @@ export const RANKINGS: Ranking[] = [
       'lokata dla nowych klientów',
     ],
     cover: '/images/blog/covers/coins-gold.jpg',
-    updated: '2026-06-07',
+    updated: '2026-06-10',
     summary: [
       'Najwyższe oprocentowanie dają zwykle lokaty dla nowych klientów lub na nowe środki - to one trafiają na szczyt rankingu.',
       'Wysoka stawka prawie zawsze ma warunek: limit kwoty, krótki okres albo wymóg założenia konta. Czytaj gwiazdki.',
@@ -1188,31 +1312,76 @@ export const RANKINGS: Ranking[] = [
     picks: [
       {
         rank: 1,
-        name: 'Nest Lokata Witaj',
-        provider: 'Nest Bank',
-        slug: 'nest-lokata-witaj',
-        score: 4.4,
-        badge: 'Najwyższe oprocentowanie',
-        bestFor: 'Dla nowych klientów',
-        highlight: 'Najwyższa stawka w zestawieniu dla nowych klientów, z limitem kwoty i krótkim okresem.',
+        name: 'Bank Nowy NOWYdepozyt Wysoki Procent',
+        provider: 'Bank Nowy',
+        slug: 'banknowy-nowydepozyt',
+        score: 4.18,
+        calc: { rate: 7.0, cap: 10000, termMonths: 1 },
+        badge: 'Najwyższa stawka',
+        bestFor: 'Dla małych kwot na krótko',
+        highlight: 'Najwyższa stawka na rynku, ale tylko do 10 000 zł i na miesiąc, więc realny zysk w złotówkach jest niewielki.',
         pros: [
-          'Jedno z najwyższych oprocentowań na rynku dla nowych klientów',
-          'Krótki okres, więc szybko odzyskujesz dostęp do pieniędzy',
+          'Najwyższe oprocentowanie w całym zestawieniu',
+          'Krótki, miesięczny okres, szybko odzyskujesz dostęp',
           'Środki objęte gwarancją BFG',
         ],
         cons: [
-          'Tylko dla nowych klientów banku i ich pierwszych środków',
-          'Limit kwoty objętej najwyższą stawką',
+          'Najwyższa stawka tylko do 10 000 zł',
+          'Wymaga założenia rachunku depozytowego',
+          'Na jeden miesiąc nawet 7% to w złotówkach kilkadziesiąt złotych',
         ],
         scores: [
           { label: 'Oprocentowanie', value: 5.0 },
-          { label: 'Warunki', value: 3.8 },
-          { label: 'Elastyczność', value: 4.0 },
-          { label: 'Zaufanie', value: 3.8 },
+          { label: 'Warunki', value: 2.6 },
+          { label: 'Elastyczność', value: 4.7 },
+          { label: 'Zaufanie', value: 3.0 },
         ],
         specs: {
-          oprocentowanie: '6,0%',
-          okres: '3 mies.',
+          oprocentowanie: '7,00%',
+          okres: '1 mies.',
+          kwota: 'do 10 000 zł',
+          dlaKogo: 'Nowi klienci',
+          kapitalizacja: 'Na koniec',
+        },
+        providerId: 'banknowy',
+        ctaLabel: 'Załóż lokatę',
+        body: [
+          'Bank Nowy trzyma najwyższą reklamową stawkę na rynku, ale trzeba czytać warunki. Siedem procent obejmuje ' +
+            'tylko 10 000 zł i tylko przez miesiąc, więc w portfelu zostaje kilkadziesiąt złotych, nie fortuna. To oferta ' +
+            'pod konkretny cel: maksymalna stawka na małą kwotę, którą chcesz gdzieś sensownie przechować na chwilę.',
+          'Żeby założyć lokatę, musisz otworzyć rachunek depozytowy w banku. Jeśli masz większą sumę, ta pozycja nie jest ' +
+            'dla ciebie, bo nadwyżka ponad 10 000 zł i tak musi wylądować gdzie indziej. Wtedy lepsze są lokaty niżej w rankingu, ' +
+            'które obejmują wyższą kwotę.',
+        ],
+      },
+      {
+        rank: 2,
+        name: 'Nest Lokata Witaj',
+        provider: 'Nest Bank',
+        slug: 'nest-lokata-witaj',
+        score: 4.26,
+        calc: { rate: 6.10, cap: 25000, termMonths: 6 },
+        badge: 'Najlepsza ogólnie',
+        bestFor: 'Dla nowych klientów',
+        highlight: 'Wysokie 6,10% na pół roku z limitem 25 000 zł - najlepszy kompromis między stawką a realną kwotą.',
+        pros: [
+          'Jedna z najwyższych stawek na realny okres sześciu miesięcy',
+          'Limit 25 000 zł obejmuje większe oszczędności niż lokaty na 10 000 zł',
+          'Środki objęte gwarancją BFG',
+        ],
+        cons: [
+          'Tylko dla nowych klientów banku',
+          'Wymaga konta i wpływu min. 2000 zł miesięcznie',
+        ],
+        scores: [
+          { label: 'Oprocentowanie', value: 4.75 },
+          { label: 'Warunki', value: 3.7 },
+          { label: 'Elastyczność', value: 3.7 },
+          { label: 'Zaufanie', value: 3.9 },
+        ],
+        specs: {
+          oprocentowanie: '6,10%',
+          okres: '6 mies.',
           kwota: 'do 25 000 zł',
           dlaKogo: 'Nowi klienci',
           kapitalizacja: 'Na koniec',
@@ -1220,182 +1389,195 @@ export const RANKINGS: Ranking[] = [
         providerId: 'nest',
         ctaLabel: 'Załóż lokatę',
         body: [
-          'Nest Bank regularnie walczy o nowych klientów najwyższą stawką na rynku. Lokata Witaj to klasyczna ' +
-            'oferta powitalna: wysokie oprocentowanie, ale tylko dla pierwszych środków nowego klienta i z limitem kwoty.',
-          'To dobry wybór, jeśli masz wolną gotówkę i nie korzystałeś wcześniej z Nest Banku. Po zakończeniu okresu ' +
-            'warto sprawdzić, czy przedłużenie ma podobnie atrakcyjną stawkę, bo lokaty standardowe są zwykle niżej oprocentowane.',
-        ],
-      },
-      {
-        rank: 2,
-        name: 'mBank Lokata na nowe środki',
-        provider: 'mBank',
-        slug: 'mbank-lokata-nowe-srodki',
-        score: 4.4,
-        badge: 'Duży bank',
-        bestFor: 'Dla dużego banku',
-        highlight: 'Wysoka stawka na nowe środki w jednym z największych i najwygodniejszych banków.',
-        pros: [
-          'Atrakcyjne oprocentowanie na nowe środki',
-          'Wszystko w świetnej aplikacji mBanku, bez papierologii',
-          'Duży, stabilny bank notowany na GPW',
-        ],
-        cons: [
-          'Najwyższa stawka tylko dla nowych środków',
-          'Standardowe lokaty bez promocji znacznie niżej oprocentowane',
-        ],
-        scores: [
-          { label: 'Oprocentowanie', value: 4.7 },
-          { label: 'Warunki', value: 3.9 },
-          { label: 'Elastyczność', value: 4.0 },
-          { label: 'Zaufanie', value: 4.6 },
-        ],
-        specs: {
-          oprocentowanie: '5,5%',
-          okres: '3 mies.',
-          kwota: 'do 200 000 zł',
-          dlaKogo: 'Nowe środki',
-          kapitalizacja: 'Na koniec',
-        },
-        providerId: 'mbank',
-        ctaLabel: 'Załóż lokatę',
-        body: [
-          'mBank łączy konkurencyjną stawkę na nowe środki z wygodą, której brakuje mniejszym bankom. Lokatę założysz ' +
-            'w kilka chwil w aplikacji, bez wizyt i dokumentów, a wszystko widzisz obok konta i oszczędności.',
-          'Jeśli i tak masz lub chcesz mieć konto w mBanku, to jeden z najwygodniejszych sposobów na ulokowanie nadwyżki. ' +
-            'Pamiętaj tylko, że wysoka stawka dotyczy środków nowych dla banku.',
+          'Nest Bank od lat walczy o nowych klientów wysoką stawką powitalną i to jedna z najlepszych pozycji w całym ' +
+            'zestawieniu. W przeciwieństwie do lidera rankingu stawka 6,10% obejmuje 25 000 zł i działa przez pół roku, ' +
+            'więc realny zysk jest dużo większy niż przy miesięcznych lokatach na 10 000 zł.',
+          'Warunek to status nowego klienta, założenie konta osobistego i wpływ co najmniej 2000 zł miesięcznie. Jeśli i tak ' +
+            'planujesz przenieść pensję, to naturalny wybór. Po zakończeniu okresu sprawdź ofertę przedłużenia, bo standardowe ' +
+            'lokaty są wyraźnie niżej oprocentowane.',
         ],
       },
       {
         rank: 3,
-        name: 'VeloLokata na nowe środki',
+        name: 'VeloLokata dla Aktywnych',
         provider: 'VeloBank',
-        slug: 'velolokata-nowe-srodki',
-        score: 4.4,
-        bestFor: 'Dla wysokiej kwoty',
-        highlight: 'Wysokie oprocentowanie na nowe środki z dużym limitem kwoty.',
+        slug: 'velolokata-dla-aktywnych',
+        score: 4.23,
+        calc: { rate: 6.0, cap: 50000, termMonths: 6 },
+        badge: 'Dla większej kwoty',
+        bestFor: 'Dla większych oszczędności',
+        highlight: 'Sześć procent na pół roku z limitem 50 000 zł, czyli dwa razy więcej niż u większości konkurentów.',
         pros: [
-          'Wysoka stawka połączona z hojnym limitem kwoty',
-          'Prosta obsługa online',
+          'Wysoka stawka połączona z limitem 50 000 zł',
+          'Półroczny okres, dobry stosunek stawki do czasu',
           'Środki objęte gwarancją BFG',
         ],
         cons: [
-          'Dotyczy tylko nowych środków',
-          'Najwyższe stawki zwykle czasowe i promocyjne',
+          'Tylko dla nowych klientów',
+          'Wymaga konta, zgód marketingowych i wpływu min. 2000 zł miesięcznie',
         ],
         scores: [
-          { label: 'Oprocentowanie', value: 4.8 },
-          { label: 'Warunki', value: 4.0 },
-          { label: 'Elastyczność', value: 4.0 },
-          { label: 'Zaufanie', value: 3.9 },
+          { label: 'Oprocentowanie', value: 4.6 },
+          { label: 'Warunki', value: 3.8 },
+          { label: 'Elastyczność', value: 3.8 },
+          { label: 'Zaufanie', value: 4.0 },
         ],
         specs: {
-          oprocentowanie: '5,7%',
-          okres: '3 mies.',
-          kwota: 'do 400 000 zł',
-          dlaKogo: 'Nowe środki',
+          oprocentowanie: '6,00%',
+          okres: '6 mies.',
+          kwota: 'do 50 000 zł',
+          dlaKogo: 'Nowi klienci',
           kapitalizacja: 'Na koniec',
         },
         providerId: 'velobank',
         ctaLabel: 'Załóż lokatę',
         body: [
-          'VeloBank konsekwentnie celuje w osoby z większymi nadwyżkami: wysoka stawka obejmuje tu znacznie wyższą kwotę ' +
-            'niż w typowych lokatach powitalnych. To przewaga, jeśli masz do ulokowania kilkadziesiąt tysięcy złotych lub więcej.',
-          'Jak zwykle przy najlepszych stawkach, liczą się nowe środki, a oprocentowanie jest promocyjne i czasowe. ' +
-            'Po okresie sprawdź aktualną ofertę, zanim zdecydujesz o przedłużeniu.',
+          'VeloBank celuje w osoby z większymi nadwyżkami. Stawka 6,00% obejmuje tu 50 000 zł, czyli dwa razy więcej niż ' +
+            'w typowej lokacie powitalnej z limitem 25 000 zł. Przy okresie sześciu miesięcy to jedna z najsensowniejszych ' +
+            'ofert dla kogoś, kto ma do ulokowania kilkadziesiąt tysięcy złotych.',
+          'Warunki są standardowe dla najlepszych stawek: nowy klient, konto osobiste, zgody marketingowe i wpływ co najmniej ' +
+            '2000 zł w każdym pełnym miesiącu. VeloBank działa w pełni online, więc całość ogarniesz z telefonu.',
         ],
       },
       {
         rank: 4,
-        name: 'BOŚ EKOlokata',
-        provider: 'BOŚ Bank',
-        slug: 'bos-ekolokata',
-        score: 4.3,
-        badge: 'Bez limitu kwoty',
-        bestFor: 'Dla wysokich kwot bez limitu',
-        highlight: 'Solidna stawka bez górnego limitu objętej kwoty.',
+        name: 'Raiffeisen Digital - Lokata dla Ciebie',
+        provider: 'Raiffeisen Digital',
+        slug: 'raiffeisen-lokata-dla-ciebie',
+        score: 4.21,
+        calc: { rate: 6.0, cap: 100000, termMonths: 3 },
+        badge: 'Najwyższy limit kwoty',
+        bestFor: 'Dla dużych kwot na krótko',
+        highlight: 'Sześć procent obejmujące aż 100 000 zł, ale środki chroni austriacki system gwarancji, nie polski BFG.',
         pros: [
-          'Brak górnego limitu kwoty na promocyjnej stawce',
-          'Dobra propozycja dla większych oszczędności',
-          'Środki objęte gwarancją BFG',
+          'Stawka 6,00% obejmuje aż 100 000 zł',
+          'Krótki, trzymiesięczny okres',
+          'W pełni cyfrowy bank, konto i lokatę założysz w aplikacji',
         ],
         cons: [
-          'Często wymóg nowych środków lub założenia konta',
-          'Mniejsza sieć i mniej rozbudowana aplikacja niż u gigantów',
+          'Środki chroni austriacki system gwarancji depozytów, nie polski BFG',
+          'Tylko dla nowych klientów, wymaga założenia konta',
         ],
         scores: [
-          { label: 'Oprocentowanie', value: 4.7 },
-          { label: 'Warunki', value: 4.2 },
-          { label: 'Elastyczność', value: 3.8 },
-          { label: 'Zaufanie', value: 3.9 },
+          { label: 'Oprocentowanie', value: 4.6 },
+          { label: 'Warunki', value: 4.0 },
+          { label: 'Elastyczność', value: 4.2 },
+          { label: 'Zaufanie', value: 3.2 },
         ],
         specs: {
-          oprocentowanie: '5,5%',
-          okres: '4 mies.',
-          kwota: 'bez limitu',
-          dlaKogo: 'Nowe środki',
+          oprocentowanie: '6,00%',
+          okres: '3 mies.',
+          kwota: 'do 100 000 zł',
+          dlaKogo: 'Nowi klienci',
           kapitalizacja: 'Na koniec',
         },
-        providerId: 'bos',
+        providerId: 'raiffeisen',
         ctaLabel: 'Załóż lokatę',
         body: [
-          'BOŚ Bank wyróżnia się tym, że promocyjna stawka nie jest ograniczona niskim limitem kwoty. Dla kogoś, kto chce ' +
-            'ulokować większą sumę na jednej lokacie z wysokim oprocentowaniem, to realna przewaga nad ofertami z limitem 25 000 zł.',
-          'W zamian trzeba zwykle spełnić warunek nowych środków lub założenia konta, a obsługa jest mniej dopracowana niż ' +
-            'w największych bankach. To oferta pod konkretny cel: dużo pieniędzy, wysoka stawka, krótki okres.',
+          'Raiffeisen Digital to cyfrowy bank, który wszedł na polski rynek z agresywną stawką. Jego przewaga to limit: ' +
+            'sześć procent obejmuje aż 100 000 zł, więc jako jedyny z czołówki realnie obsługuje duże kwoty na wysokiej stawce, ' +
+            'i to przy krótkim, trzymiesięcznym okresie.',
+          'Jest jedno ale. Depozyty chroni austriacki system gwarancji depozytów, a nie polski Bankowy Fundusz Gwarancyjny. ' +
+            'Ochrona jest porównywalna (do 100 000 euro), ale ewentualna wypłata szłaby przez instytucję zagraniczną. Dla wielu osób ' +
+            'to niuans bez znaczenia, ale warto o nim wiedzieć przed wpłatą większej sumy.',
         ],
       },
       {
         rank: 5,
-        name: 'Pekao Lokata Mobilna',
-        provider: 'Bank Pekao S.A.',
-        slug: 'pekao-lokata-mobilna',
-        score: 4.3,
-        bestFor: 'Dla klientów dużego banku',
-        highlight: 'Przyzwoita stawka na nowe środki w jednym z największych banków w Polsce.',
+        name: 'Credit Agricole Lokata Powitalna',
+        provider: 'Credit Agricole',
+        slug: 'credit-agricole-lokata-powitalna',
+        score: 4.20,
+        calc: { rate: 5.5, cap: 100000, termMonths: 1 },
+        badge: 'Duży limit kwoty',
+        bestFor: 'Dla dużej kwoty na miesiąc',
+        highlight: 'Pięć i pół procent na 100 000 zł w dużym, znanym banku, ale tylko przez miesiąc.',
         pros: [
-          'Wygodne założenie w aplikacji PeoPay',
-          'Duży, stabilny bank z szeroką siecią',
-          'Dobre dla osób, które już bankują w Pekao',
+          'Stawka obejmuje aż 100 000 zł',
+          'Duży, stabilny bank z polskim BFG',
+          'Wygodne założenie online',
         ],
         cons: [
-          'Stawka niższa niż u liderów rankingu',
-          'Najwyższe oprocentowanie tylko na nowe środki',
+          'Tylko miesięczny okres',
+          'Tylko dla nowych klientów, wymaga konta i zgód marketingowych',
         ],
         scores: [
-          { label: 'Oprocentowanie', value: 4.5 },
+          { label: 'Oprocentowanie', value: 4.2 },
           { label: 'Warunki', value: 3.9 },
-          { label: 'Elastyczność', value: 4.0 },
-          { label: 'Zaufanie', value: 4.6 },
+          { label: 'Elastyczność', value: 4.4 },
+          { label: 'Zaufanie', value: 4.4 },
         ],
         specs: {
-          oprocentowanie: '5,2%',
-          okres: '3 mies.',
+          oprocentowanie: '5,50%',
+          okres: '1 mies.',
           kwota: 'do 100 000 zł',
-          dlaKogo: 'Nowe środki',
+          dlaKogo: 'Nowi klienci',
           kapitalizacja: 'Na koniec',
         },
-        providerId: 'pekao',
+        providerId: 'credit',
         ctaLabel: 'Załóż lokatę',
         body: [
-          'Pekao to wybór dla osób, które cenią stabilność i wygodę dużego banku bardziej niż ostatni punkt procentowy. ' +
-            'Lokatę Mobilną założysz w aplikacji PeoPay, a środki masz obok konta i pozostałych produktów.',
-          'Stawka jest niższa niż u liderów zestawienia i dotyczy nowych środków, ale dla obecnych klientów Pekao to ' +
-            'najprostsza droga, żeby nadwyżka nie leżała bezczynnie na koncie.',
+          'Credit Agricole łączy trzy rzeczy, które rzadko idą w parze: przyzwoitą stawkę 5,50%, wysoki limit 100 000 zł i ' +
+            'markę dużego, znanego banku z polską gwarancją BFG. Jeśli masz większą sumę i zależy ci na poczuciu bezpieczeństwa ' +
+            'znanej instytucji, to mocny kandydat.',
+          'Haczyk to okres: lokata trwa tylko miesiąc, więc po wpłacie szybko wracasz do punktu wyjścia i musisz szukać oferty ' +
+            'na kolejny etap. Stawka dotyczy nowych klientów, wymaga konta osobistego i zgód marketingowych.',
         ],
       },
       {
         rank: 6,
-        name: 'Toyota Bank Plan Depozytowy',
+        name: 'Erste Lokata dla Ciebie na dzień dobry',
+        provider: 'Erste Bank Polska (dawniej Santander)',
+        slug: 'erste-lokata-na-dzien-dobry',
+        score: 3.97,
+        calc: { rate: 4.5, cap: 50000, termMonths: 3 },
+        bestFor: 'Dla obecnych klientów',
+        highlight: 'Powitalna lokata 4,50% w dużym banku w trakcie zmiany marki z Santandera na Erste.',
+        pros: [
+          'Stawka obejmuje 50 000 zł',
+          'Duży bank z szeroką siecią i polskim BFG',
+          'Wygodne założenie online',
+        ],
+        cons: [
+          'Stawka wyraźnie niższa niż u liderów',
+          'Tylko dla nowych klientów, weryfikacja przez aplikację lub mObywatela',
+        ],
+        scores: [
+          { label: 'Oprocentowanie', value: 3.9 },
+          { label: 'Warunki', value: 3.8 },
+          { label: 'Elastyczność', value: 4.2 },
+          { label: 'Zaufanie', value: 4.2 },
+        ],
+        specs: {
+          oprocentowanie: '4,50%',
+          okres: '3 mies.',
+          kwota: 'do 50 000 zł',
+          dlaKogo: 'Nowi klienci',
+          kapitalizacja: 'Na koniec',
+        },
+        providerId: 'erste',
+        ctaLabel: 'Załóż lokatę',
+        body: [
+          'To dawny Santander Bank Polska, przechodzący pod markę Erste. Lokata na dzień dobry jest klasyczną ofertą ' +
+            'powitalną: stawka 4,50% obejmuje 50 000 zł na trzy miesiące. Bez fajerwerków, ale w dużym banku z szeroką ' +
+            'siecią i polską gwarancją BFG.',
+          'Stawka jest niższa niż u liderów zestawienia, więc to wybór raczej dla osób, które cenią markę i wygodę dużego ' +
+            'banku niż ostatni punkt procentowy. Przy zmianie właściciela warto śledzić aktualne warunki promocji.',
+        ],
+      },
+      {
+        rank: 7,
+        name: 'Toyota Bank Lokata Standard',
         provider: 'Toyota Bank',
-        slug: 'toyota-plan-depozytowy',
-        score: 4.2,
+        slug: 'toyota-lokata-standard',
+        score: 3.95,
+        calc: { rate: 4.3, cap: 40000, termMonths: 6 },
         badge: 'Bez kombinowania',
         bestFor: 'Dla wszystkich, bez warunków',
-        highlight: 'Uczciwa stawka dostępna dla wszystkich, bez wymogu nowych środków.',
+        highlight: 'Uczciwe 4,30% dla każdego, bez wymogu nowych środków i bez nowego klienta.',
         pros: [
           'Dostępna dla wszystkich, nie tylko dla nowych klientów',
-          'Brak typowych kruczków o nowe środki',
+          'Bez warunku nowych środków i bez wymogu konta',
           'Środki objęte gwarancją BFG',
         ],
         cons: [
@@ -1403,103 +1585,25 @@ export const RANKINGS: Ranking[] = [
           'Mniejszy bank, mniej znana marka',
         ],
         scores: [
-          { label: 'Oprocentowanie', value: 4.4 },
-          { label: 'Warunki', value: 4.5 },
-          { label: 'Elastyczność', value: 3.5 },
-          { label: 'Zaufanie', value: 4.0 },
+          { label: 'Oprocentowanie', value: 3.8 },
+          { label: 'Warunki', value: 4.6 },
+          { label: 'Elastyczność', value: 3.6 },
+          { label: 'Zaufanie', value: 3.9 },
         ],
         specs: {
-          oprocentowanie: '5,0%',
+          oprocentowanie: '4,30%',
           okres: '6 mies.',
-          kwota: 'bez limitu',
+          kwota: 'do 40 000 zł',
           dlaKogo: 'Wszyscy',
-          kapitalizacja: 'Miesięczna',
+          kapitalizacja: 'Na koniec',
         },
         providerId: 'toyota',
         ctaLabel: 'Załóż lokatę',
         body: [
-          'Toyota Bank rzadko wygrywa wyścig o najwyższą reklamową stawkę, za to ma rzecz, której brakuje liderom: ' +
-            'oferta jest dla wszystkich, bez wymogu nowych środków i bez nowego klienta. To, co widzisz, naprawdę dostajesz.',
-          'Jeśli masz dość warunków drobnym druczkiem i wolisz uczciwą stawkę dostępną od ręki, to jedna z najmniej ' +
-            'irytujących lokat na rynku. Dłuższy okres i miesięczna kapitalizacja działają na korzyść składania odsetek.',
-        ],
-      },
-      {
-        rank: 7,
-        name: 'Millennium Lokata Mobilna',
-        provider: 'Bank Millennium',
-        slug: 'millennium-lokata-mobilna',
-        score: 4.2,
-        bestFor: 'Dla wygody w aplikacji',
-        highlight: 'Wygodna lokata na nowe środki dla klientów Millennium.',
-        pros: [
-          'Szybkie założenie w nowoczesnej aplikacji',
-          'Częste promocje powiązane z kontem',
-          'Stabilny bank z dobrą obsługą',
-        ],
-        cons: [
-          'Niższy limit kwoty na najlepszej stawce',
-          'Najwyższe oprocentowanie tylko na nowe środki',
-        ],
-        scores: [
-          { label: 'Oprocentowanie', value: 4.4 },
-          { label: 'Warunki', value: 3.8 },
-          { label: 'Elastyczność', value: 4.0 },
-          { label: 'Zaufanie', value: 4.3 },
-        ],
-        specs: {
-          oprocentowanie: '5,0%',
-          okres: '3 mies.',
-          kwota: 'do 50 000 zł',
-          dlaKogo: 'Nowe środki',
-          kapitalizacja: 'Na koniec',
-        },
-        providerId: 'millennium',
-        ctaLabel: 'Załóż lokatę',
-        body: [
-          'Millennium to solidny środek stawki: przyzwoita lokata na nowe środki, którą bez problemu założysz w aplikacji, ' +
-            'często powiązana z promocją konta. Dla obecnych klientów banku to wygodny sposób na ulokowanie nadwyżki.',
-          'Limit kwoty na najlepszej stawce jest niższy niż u liderów, a oprocentowanie dotyczy nowych środków. ' +
-            'Dla mniejszych sum i osób ceniących wygodną apkę to rozsądny wybór.',
-        ],
-      },
-      {
-        rank: 8,
-        name: 'Erste Lokata Mobilna',
-        provider: 'Erste Bank Polska (dawniej Santander)',
-        slug: 'erste-lokata-mobilna',
-        score: 4.1,
-        bestFor: 'Dla obecnych klientów',
-        highlight: 'Standardowa lokata na nowe środki w banku w trakcie zmiany marki.',
-        pros: [
-          'Wygodne założenie online',
-          'Duży bank z szeroką siecią',
-          'Częste promocje dla nowych środków',
-        ],
-        cons: [
-          'Stawka niższa niż u liderów',
-          'Marka w trakcie rebrandingu (dawniej Santander)',
-        ],
-        scores: [
-          { label: 'Oprocentowanie', value: 4.2 },
-          { label: 'Warunki', value: 3.9 },
-          { label: 'Elastyczność', value: 4.0 },
-          { label: 'Zaufanie', value: 4.2 },
-        ],
-        specs: {
-          oprocentowanie: '4,8%',
-          okres: '3 mies.',
-          kwota: 'do 100 000 zł',
-          dlaKogo: 'Nowe środki',
-          kapitalizacja: 'Na koniec',
-        },
-        providerId: 'erste',
-        ctaLabel: 'Załóż lokatę',
-        body: [
-          'To dawny Santander Bank Polska, przechodzący pod markę Erste. Lokata Mobilna jest standardową ofertą na nowe ' +
-            'środki: bez fajerwerków, ale wygodna i dostępna online, w dużym banku z szeroką siecią.',
-          'Stawka jest niższa niż u liderów zestawienia, a przy zmianie właściciela warto śledzić aktualne warunki ofert. ' +
-            'Dla obecnych klientów to najprostsza droga, żeby nadwyżka pracowała.',
+          'Toyota Bank nie wygrywa wyścigu o najwyższą reklamową stawkę, za to ma rzecz, której brakuje liderom: oferta jest ' +
+            'dla wszystkich, bez wymogu nowych środków i bez zakładania konta. To, co widzisz, naprawdę dostajesz, bez gwiazdek.',
+          'Jeśli masz dość warunków drobnym druczkiem albo nie jesteś już nowym klientem w bankach z czołówki, to jedna z ' +
+            'najmniej irytujących lokat na rynku. Stawka jest niższa, ale dostępna od ręki i bez kombinowania.',
         ],
       },
     ],
@@ -1514,19 +1618,21 @@ export const RANKINGS: Ranking[] = [
         'stawkę i regulamin promocji bezpośrednio w banku przed założeniem lokaty. Datę ostatniej aktualizacji podajemy na górze strony.',
     ],
     verdict: [
-      'Jeśli chcesz po prostu najwyższą stawkę i masz wolne środki nowe dla banku, wybierz Nest Lokatę Witaj. ' +
-        'Gdy zależy ci na wygodzie dużego banku, mBank i Pekao dają dobry kompromis między oprocentowaniem a komfortem.',
-      'Masz większą sumę? BOŚ i VeloBank obejmują wysoką stawką znacznie wyższe kwoty. A jeśli masz dość warunków ' +
-        'drobnym druczkiem, Toyota Bank daje uczciwą stawkę dla wszystkich, bez wymogu nowych środków. Nie ma jednej ' +
-        'najlepszej lokaty, jest najlepiej dopasowana do tego, ile masz i czy jesteś nowym klientem.',
+      'Goła stawka 7% w Banku Nowym wygląda najlepiej, ale obejmuje tylko 10 000 zł na miesiąc, więc w złotówkach to ' +
+        'drobne. Dla realnych pieniędzy najlepszy kompromis daje Nest Lokata Witaj: 6,10% na pół roku i limit 25 000 zł. ' +
+        'Masz więcej? VeloBank obejmuje 50 000 zł, a Raiffeisen Digital nawet 100 000 zł, choć z austriacką gwarancją zamiast BFG.',
+      'Zależy ci na dużej kwocie w znanym banku z polskim BFG? Spójrz na Credit Agricole (100 000 zł, ale tylko miesiąc). ' +
+        'A jeśli masz dość warunków drobnym druczkiem albo nie jesteś już nowym klientem, Toyota Bank daje uczciwe 4,30% ' +
+        'dla wszystkich, bez kombinowania. Nie ma jednej najlepszej lokaty, jest najlepiej dopasowana do tego, ile masz ' +
+        'i czy jesteś nowym klientem.',
     ],
     faq: [
       {
         q: 'Która lokata jest teraz najlepiej oprocentowana?',
         a:
-          'Najwyższe oprocentowanie w tym zestawieniu ma Nest Lokata Witaj, ale dotyczy ono nowych klientów i środków ' +
-          'z limitem kwoty. Dla większych sum bez limitu warto spojrzeć na BOŚ i VeloBank, a dla wygody dużego banku na ' +
-          'mBank. Stawki zmieniają się co miesiąc, dlatego ranking aktualizujemy regularnie.',
+          'Najwyższą stawkę (7%) ma Bank Nowy, ale obejmuje tylko 10 000 zł na miesiąc, więc realny zysk jest mały. Dla ' +
+          'większych pieniędzy najlepszy kompromis daje Nest Lokata Witaj (6,10% na pół roku, 25 000 zł), a dla dużych kwot ' +
+          'VeloBank (50 000 zł) i Raiffeisen Digital (100 000 zł). Stawki zmieniają się co miesiąc, dlatego ranking aktualizujemy regularnie.',
       },
       {
         q: 'Czym różni się lokata od konta oszczędnościowego?',
@@ -1559,10 +1665,10 @@ export const RANKINGS: Ranking[] = [
       },
     ],
     segments: [
-      { label: 'Najwyższe oprocentowanie', slug: 'nest-lokata-witaj', reason: 'Najwyższa stawka w zestawieniu dla nowych klientów i ich pierwszych środków.' },
-      { label: 'Bez kombinowania', slug: 'toyota-plan-depozytowy', reason: 'Uczciwa stawka dla wszystkich, bez wymogu nowych środków i nowego klienta.' },
-      { label: 'Dla wysokich kwot', slug: 'bos-ekolokata', reason: 'Promocyjna stawka bez górnego limitu objętej kwoty.' },
-      { label: 'Dla dużego banku', slug: 'mbank-lokata-nowe-srodki', reason: 'Dobra stawka i wszystko w jednej z najlepszych aplikacji bankowych.' },
+      { label: 'Najwyższa stawka', slug: 'banknowy-nowydepozyt', reason: 'Najwyższe 7% na rynku, ale tylko do 10 000 zł i na miesiąc.' },
+      { label: 'Najlepsza ogólnie', slug: 'nest-lokata-witaj', reason: 'Najlepszy kompromis: 6,10% na pół roku z limitem 25 000 zł.' },
+      { label: 'Dla dużej kwoty', slug: 'velolokata-dla-aktywnych', reason: 'Sześć procent obejmujące 50 000 zł, ze środkami pod gwarancją BFG.' },
+      { label: 'Bez kombinowania', slug: 'toyota-lokata-standard', reason: 'Uczciwa stawka dla wszystkich, bez wymogu nowych środków i konta.' },
     ],
     relatedArticles: [
       { label: 'Konto oszczędnościowe 2026 - czy twoje pieniądze są bezpieczne', href: '/pieniadze/konto-oszczednosciowe-2026-czy-twoje-pieniadze-sa-bezpieczne' },
@@ -1570,6 +1676,7 @@ export const RANKINGS: Ranking[] = [
       { label: 'Ranking kont osobistych - które konto wybrać', href: '/ranking/konta-osobiste' },
     ],
     changelog: [
+      { date: '2026-06-10', note: 'Pełna weryfikacja ofert (Bankier, Moneteo). Nowa czołówka: Bank Nowy 7%, Nest 6,10%, VeloBank i Raiffeisen Digital po 6%. Usunięto nieaktualne pozycje mBank/BOŚ/Pekao/Millennium.' },
       { date: '2026-06-07', note: 'Aktualizacja oprocentowania lokat zgodnie z ofertami banków po obniżkach stóp NBP.' },
     ],
     affiliateNote: AFFILIATE_DISCLOSURE,
@@ -2608,7 +2715,7 @@ export const RANKINGS: Ranking[] = [
     metaTitle: 'Ranking kont firmowych {DATE}: najlepsze konto dla firmy | KisielFinanse',
     metaDesc:
       'Które konto firmowe wybrać w 2026? Porównujemy 8 kont dla działalności - mBank, ING, Nest, ' +
-      'Alior, PKO i inne. Opłaty, darmowe przelewy ZUS/US, księgowość online i premie za otwarcie.',
+      'Alior, PKO i inne. Opłaty, darmowe przelewy ZUS/US, KSeF, księgowość online i premie do 5000 zł.',
     keywords: [
       'ranking kont firmowych 2026',
       'najlepsze konto firmowe',
@@ -2620,9 +2727,9 @@ export const RANKINGS: Ranking[] = [
       'konto firmowe przelewy zus us',
     ],
     cover: '/images/blog/covers/coins-gold.jpg',
-    updated: '2026-06-08',
+    updated: '2026-06-10',
     summary: [
-      'Najlepsze konto firmowe dla większości jednoosobowych działalności to mBank mKonto Biznes - zero opłat przy aktywności, dobra aplikacja i darmowe przelewy do ZUS i US.',
+      'Najlepsze konto firmowe dla większości jednoosobowych działalności to mBank mKonto Biznes - zero opłat na zawsze, dobra aplikacja, darmowe przelewy do ZUS i US oraz integracja z KSeF.',
       'Dla firmy liczą się inne rzeczy niż dla konta osobistego: darmowe przelewy do urzędów, księgowość online, faktury, terminal płatniczy i integracje, nie tylko sama opłata za konto.',
       'Premie za otwarcie konta firmowego bywają wysokie (często 1000-2000 zł), ale zawsze wiążą się z warunkami: określony obrót, liczba transakcji lub utrzymanie aktywności przez kilka miesięcy.',
       'Konto firmowe i prywatne trzymaj osobno. Przy działalności (zwłaszcza VAT i split payment) osobne konto firmowe jest w praktyce niezbędne.',
@@ -2633,10 +2740,15 @@ export const RANKINGS: Ranking[] = [
         'mechanizm podzielonej płatności (split payment), rachunek VAT, integracja z księgowością online, ' +
         'wystawianie faktur, terminal płatniczy i bramka płatnicza. To te elementy decydują, czy konto ' +
         'realnie ułatwia prowadzenie firmy, czy tylko trzyma pieniądze.',
+      'W 2026 doszedł nowy temat: obowiązkowy KSeF, czyli Krajowy System e-Faktur. Od tego roku faktury ' +
+        'wystawiasz i odbierasz przez rządowy system, a banki zaczęły wpinać KSeF wprost w bankowość dla firm. ' +
+        'Część promocji (jak u ING) wręcz wymaga podpięcia konta do KSeF, żeby zgarnąć premię. Przy wyborze konta ' +
+        'warto więc patrzeć, czy bank ma już integrację z e-fakturami, bo to oszczędza skakania między aplikacjami.',
       'Poniżej zestawiam osiem kont firmowych, które warto rozważyć w 2026 roku, głównie pod kątem ' +
         'jednoosobowej działalności. Patrzę na realny koszt (konto, karta, przelewy), darmowość przelewów ' +
-        'do urzędów, narzędzia dla firm oraz premie za założenie. Premie traktuję jako dodatek, bo konto ' +
-        'firmowe zostaje z tobą na lata, a wysoki bonus zwykle wiąże się z warunkami obrotu.',
+        'do urzędów, narzędzia dla firm oraz premie za założenie. Premie potrafią sięgać kilku tysięcy złotych, ' +
+        'ale to zwykle cashback rozłożony na 12-24 miesiące z warunkami obrotu, nie gotówka na start - dlatego ' +
+        'traktuję je jako dodatek, a nie główne kryterium. Konto firmowe zostaje z tobą na lata.',
     ],
     fields: [
       { id: 'oplata', label: 'Opłata za konto', short: 'Konto' },
@@ -2680,11 +2792,11 @@ export const RANKINGS: Ranking[] = [
           'Opłaty wracają, jeśli nie spełnisz warunków aktywności',
         ],
         specs: {
-          oplata: '0 zł (z warunkami)',
-          karta: '0 zł (z warunkami)',
-          zus: 'Darmowe',
-          ksiegowosc: 'mKsięgowość + integracje',
-          premia: 'Okresowo do ~2000 zł*',
+          oplata: '0 zł na zawsze',
+          karta: '0 zł',
+          zus: 'Darmowe, bez limitu',
+          ksiegowosc: 'mKsięgowość + KSeF + integracje',
+          premia: 'do ~1200 zł*',
         },
         scores: [
           { label: 'Opłaty', value: 4.6 },
@@ -2768,11 +2880,11 @@ export const RANKINGS: Ranking[] = [
           'Warunki darmowości trzeba pilnować co miesiąc',
         ],
         specs: {
-          oplata: '0 zł (z warunkami)',
+          oplata: '0 zł przez 24 mies.',
           karta: '0 zł (z warunkami)',
           zus: 'Darmowe',
-          ksiegowosc: 'ING Księgowość + imoje',
-          premia: 'Okresowo do ~1500 zł*',
+          ksiegowosc: 'ING Księgowość + KSeF + imoje',
+          premia: 'do ~4200 zł*',
         },
         scores: [
           { label: 'Opłaty', value: 4.4 },
@@ -2785,11 +2897,73 @@ export const RANKINGS: Ranking[] = [
         body: [
           'ING wygrywa wygodą i narzędziami. Bankowość dla firm jest tak samo prosta jak prywatna, a do tego ' +
             'dochodzą ING Księgowość, wystawianie faktur i bramka płatnicza imoje, która przyda się każdemu, ' +
-            'kto sprzedaje online. Przelewy do ZUS i US są darmowe przy spełnieniu warunków.',
-          'Jak wszędzie, "0 zł" zależy od aktywności, a najbardziej rozbudowane funkcje księgowe bywają ' +
-            'płatne. Dla przedsiębiorcy, który chce ograniczyć papierologię i wygodnie obsługiwać płatności, ' +
-            'to jeden z najlepszych wyborów.',
+            'kto sprzedaje online. ING ma też wpiętą integrację z KSeF, więc e-faktury ogarniasz z poziomu ' +
+            'aplikacji Moje ING. Konto jest darmowe przez 24 miesiące, a przelewy do ZUS i US nie kosztują.',
+          'Bank prowadzi mocną promocję: premia sięga 4200 zł, ale rozłożona na 12 miesięcy (cashback od ' +
+            'przelewów do ZUS i od płatności kartą), z warunkiem podpięcia KSeF i utrzymania salda. Liczy się więc ' +
+            'aktywne korzystanie, a nie jednorazowy bonus. Dla jednoosobowej działalności na uproszczonej ' +
+            'księgowości, która chce ograniczyć papierologię, to dziś jedna z najmocniejszych ofert na rynku.',
         ],
+        review: {
+          intro: [
+            'ING ma dziś jedną z najmocniejszych ofert dla firm, ale nazwa premii potrafi mylić. Te 4200 zł to ' +
+              'nie gotówka na start, tylko cashback rozłożony na cały rok, w dwóch strumieniach. Poniżej tłumaczę, ' +
+              'z czego składa się premia, jakie warunki trzeba spełniać co miesiąc i dla kogo oferta jest dostępna.',
+          ],
+          sections: [
+            {
+              title: 'Z czego składa się premia 4200 zł',
+              body: [
+                'Premia ma dwie części, obie wypłacane przez 12 miesięcy. Pierwsza to 100 zł miesięcznie za ' +
+                  'przelew do ZUS lub KRUS (minimum 300 zł), co daje do 1200 zł rocznie. Druga to 10% zwrotu od ' +
+                  'płatności kartą, maksymalnie 250 zł miesięcznie, czyli do 3000 zł rocznie.',
+                'Żeby zgarnąć pełne 3000 zł zwrotu z karty, musisz wydawać kartą około 2500 zł miesięcznie. ' +
+                  'Realny zwrot zależy więc od Twojego obrotu - przy mniejszych wydatkach premia będzie ' +
+                  'odpowiednio niższa.',
+              ],
+            },
+            {
+              title: 'Warunki, które trzeba spełniać co miesiąc',
+              body: [
+                'W każdym z 12 miesięcy trzeba: podpiąć konto do KSeF w aplikacji Moje ING, utrzymać saldo ' +
+                  'minimum 4000 zł na koniec przynajmniej jednego dnia miesiąca oraz wykonać przelew do ZUS i ' +
+                  'płatności kartą, od których liczy się zwrot.',
+                'Konto jest przy tym darmowe przez 24 miesiące, a przelewy krajowe i do urzędów nie kosztują. ' +
+                  'Podpięcie KSeF jest tu warunkiem promocji, a nie tylko dodatkiem, więc to oferta dla kogoś, kto ' +
+                  'i tak chce ogarnąć e-faktury przez bank.',
+              ],
+            },
+            {
+              title: 'Dla kogo jest ta oferta',
+              body: [
+                'Promocja jest wyłącznie dla jednoosobowych działalności rozliczających się w formie uproszczonej ' +
+                  '(KPiR, ryczałt, karta podatkowa), które na 31 marca 2026 nie miały konta w ING na dany NIP. ' +
+                  'Oferta obowiązuje do 30 czerwca 2026.',
+                'Premia to przychód z działalności i podlega opodatkowaniu. Jeśli prowadzisz pełną księgowość ' +
+                  'albo spółkę, ta konkretna promocja Cię nie obejmie, choć samo konto firmowe ING dalej jest ' +
+                  'dobrym wyborem pod kątem narzędzi.',
+              ],
+            },
+          ],
+          faq: [
+            {
+              q: 'Czy dostanę całe 4200 zł?',
+              a: 'Tylko jeśli przez 12 miesięcy spełnisz wszystkie warunki i będziesz wydawać kartą około 2500 zł ' +
+                'miesięcznie (to daje pełny zwrot 250 zł). Część za przelewy do ZUS (do 1200 zł) jest łatwiejsza. ' +
+                'Przy mniejszych wydatkach kartą realna premia będzie niższa niż 4200 zł.',
+            },
+            {
+              q: 'Po co podpinać konto do KSeF?',
+              a: 'Bo to warunek promocji. Przy okazji od 2026 KSeF jest obowiązkowy, więc integracja w aplikacji ' +
+                'Moje ING pozwala obsługiwać e-faktury z poziomu banku, bez osobnego programu.',
+            },
+            {
+              q: 'Kto może skorzystać?',
+              a: 'Jednoosobowe działalności na uproszczonej księgowości (KPiR, ryczałt, karta podatkowa), które na ' +
+                '31 marca 2026 nie miały konta w ING na ten NIP. Promocja trwa do 30 czerwca 2026.',
+            },
+          ],
+        },
       },
       {
         rank: 3,
@@ -2816,7 +2990,7 @@ export const RANKINGS: Ranking[] = [
           karta: '0 zł (z warunkami)',
           zus: 'Darmowe',
           ksiegowosc: 'Faktury + księgowość',
-          premia: 'Okresowo do ~1800 zł*',
+          premia: 'do ~3000 zł*',
         },
         scores: [
           { label: 'Opłaty', value: 4.7 },
@@ -2834,6 +3008,49 @@ export const RANKINGS: Ranking[] = [
             'gigantów. Dla typowej jednoosobowej działalności rzadko jest to problem, ale większa firma z ' +
             'obrotem gotówkowym powinna sprawdzić dostępność wpłatomatów w okolicy.',
         ],
+        review: {
+          intro: [
+            'Nest Bank to jedno z najtańszych kont firmowych dla jednoosobowej działalności. Jego mocna strona ' +
+              'to nie wysokość premii, tylko niskie, proste koszty i częsty moneyback. Poniżej tłumaczę, na czym ' +
+              'polega oferta i komu się najbardziej opłaca.',
+          ],
+          sections: [
+            {
+              title: 'Jak działa premia i moneyback',
+              body: [
+                'Nest zwykle nagradza nie jednorazową premią, tylko zwrotem za płatności (moneyback): procent od ' +
+                  'transakcji kartą i BLIK przez wiele miesięcy, z miesięcznym limitem. Im więcej płacisz kartą ' +
+                  'firmową, tym większy zwrot, do określonego maksimum.',
+                'To oznacza, że reklamowana kwota to górna granica przy aktywnym używaniu karty, a nie gotówka na ' +
+                  'start. Dla firmy, która i tak płaci kartą za bieżące wydatki, zwrot zbiera się sam. Dokładne ' +
+                  'stawki i limity sprawdź w aktualnym regulaminie promocji.',
+              ],
+            },
+            {
+              title: 'Opłaty i dla kogo',
+              body: [
+                'Konto jest tanie w prowadzeniu, a przelewy do ZUS i urzędu skarbowego są darmowe. To wybór pod ' +
+                  'jednoosobową działalność i mikrofirmę, która ceni niskie koszty i prostotę, a nie potrzebuje ' +
+                  'rozbudowanych narzędzi ani gęstej sieci oddziałów.',
+                'Jeśli obracasz dużą ilością gotówki, sprawdź wcześniej dostępność wpłatomatów w okolicy, bo sieć ' +
+                  'Nest jest mniejsza niż u największych banków.',
+              ],
+            },
+          ],
+          faq: [
+            {
+              q: 'Dlaczego premia w Nest jest niższa niż u konkurencji?',
+              a: 'Bo Nest stawia na niskie, proste koszty i moneyback zamiast efektownych promocji z wieloma ' +
+                'warunkami. Dla małej firmy realna oszczędność na opłatach przez lata bywa cenniejsza niż ' +
+                'jednorazowa wysoka premia obwarowana wymogami obrotu.',
+            },
+            {
+              q: 'Dla kogo jest konto Nest Biznes?',
+              a: 'Dla jednoosobowej działalności i mikrofirmy, która chce niskich kosztów, darmowych przelewów do ' +
+                'urzędów i prostej obsługi online, bez potrzeby gęstej sieci oddziałów.',
+            },
+          ],
+        },
       },
       {
         rank: 4,
@@ -2856,11 +3073,11 @@ export const RANKINGS: Ranking[] = [
           'Marka w trakcie rebrandingu (dawniej Santander)',
         ],
         specs: {
-          oplata: '0 zł (z warunkami)',
-          karta: '0 zł (z warunkami)',
-          zus: 'Darmowe (z warunkami)',
-          ksiegowosc: 'Solidne',
-          premia: 'Okresowo do ~2000 zł*',
+          oplata: '0 zł na zawsze',
+          karta: '0 zł',
+          zus: 'Darmowe',
+          ksiegowosc: 'Mini Firma',
+          premia: 'do ~4500 zł*',
         },
         scores: [
           { label: 'Opłaty', value: 4.3 },
@@ -2878,6 +3095,69 @@ export const RANKINGS: Ranking[] = [
             'przez kilka miesięcy. Przy zmianie właściciela warto śledzić aktualne tabele opłat i regulaminy ' +
             'promocji, bo oferta może się zmieniać w trakcie przejścia na nową markę.',
         ],
+        review: {
+          intro: [
+            'Erste (dawniej Santander) prowadzi jedną z najwyższych promocji firmowych na rynku: do 4500 zł. ' +
+              'To jednak nie jeden przelew na start, tylko trzy transze po 1500 zł, po jednej za każdy z trzech ' +
+              'miesięcy, w których spełnisz komplet warunków. Poniżej rozkładam, jak realnie zgarnąć całą kwotę ' +
+              'i dla kogo to konto się opłaca.',
+          ],
+          sections: [
+            {
+              title: 'Jak zdobyć premię krok po kroku',
+              body: [
+                'Po pierwsze, otwórz Konto Firmowe Online z bankowością Mini Firma w okresie promocji (oferta ' +
+                  'obowiązuje od 1 maja do 30 września 2026). Samo założenie konta to za mało.',
+                'Po drugie, w ciągu 10 dni od złożenia wniosku zarejestruj się do promocji na stronie banku. ' +
+                  'Trzeba znaleźć sekcję promocji i wypełnić formularz (imię, nazwisko, e-mail, NIP) oraz ' +
+                  'zaakceptować regulamin. Bez tej rejestracji premia nie zostanie naliczona, nawet jeśli ' +
+                  'spełnisz wszystkie warunki transakcyjne.',
+              ],
+            },
+            {
+              title: 'Warunki w każdym z trzech miesięcy',
+              body: [
+                'Premię dostajesz w trzech transzach po 1500 zł. Żeby zgarnąć transzę za dany miesiąc, musisz ' +
+                  'w tym miesiącu spełnić trzy rzeczy naraz: wykonać przelew do ZUS na minimum 100 zł z tego ' +
+                  'konta, zrobić co najmniej 5 płatności kartą lub BLIK (każda na minimum 50 zł) oraz zapewnić ' +
+                  'wpływ na konto co najmniej 5000 zł.',
+                'Dobra wiadomość: wpływ 5000 zł może pochodzić z Twojego własnego konta w innym banku, więc ' +
+                  'nie musisz mieć aż takich obrotów z firmy. Powtórz to przez trzy miesiące i masz pełne 4500 zł. ' +
+                  'Opuścisz warunek w którymś miesiącu - tracisz tylko transzę za ten miesiąc.',
+              ],
+            },
+            {
+              title: 'Dla kogo i ile kosztuje konto',
+              body: [
+                'Promocja jest dla nowych klientów firmowych, czyli osób, które nie miały konta firmowego w ' +
+                  'Erste przez ostatnie 12 miesięcy, i wyłącznie dla jednoosobowej działalności (bez spółki ' +
+                  'cywilnej). Samo konto jest darmowe na zawsze, niezależnie od promocji.',
+                'Pamiętaj, że premia to przychód z działalności i podlega opodatkowaniu według Twojej formy ' +
+                  'rozliczenia. Warunki i daty potrafią się zmieniać, więc przed założeniem sprawdź aktualny ' +
+                  'regulamin promocji na stronie banku.',
+              ],
+            },
+          ],
+          faq: [
+            {
+              q: 'Ile realnie dostanę z promocji Erste?',
+              a: 'Do 4500 zł, ale tylko jeśli przez trzy miesiące z rzędu spełnisz komplet warunków: przelew do ' +
+                'ZUS (min. 100 zł), 5 płatności kartą lub BLIK (po min. 50 zł) i wpływ 5000 zł. Każdy spełniony ' +
+                'miesiąc to 1500 zł. Pominiesz miesiąc - przepada tylko transza za ten miesiąc.',
+            },
+            {
+              q: 'Czy wpływ 5000 zł musi pochodzić z firmy?',
+              a: 'Nie. Według warunków promocji wpływ może pochodzić także z Twojego własnego konta w innym ' +
+                'banku, więc nie musisz mieć wysokich obrotów firmowych, żeby spełnić ten warunek.',
+            },
+            {
+              q: 'Kto może skorzystać z promocji?',
+              a: 'Nowi klienci firmowi (bez konta firmowego w Erste przez ostatnie 12 miesięcy), prowadzący ' +
+                'jednoosobową działalność gospodarczą bez spółki cywilnej. Konto trzeba otworzyć w okresie ' +
+                'promocji i zarejestrować się do niej w ciągu 10 dni.',
+            },
+          ],
+        },
       },
       {
         rank: 5,
@@ -2903,7 +3183,7 @@ export const RANKINGS: Ranking[] = [
           karta: '0 zł (z warunkami)',
           zus: 'Darmowe (limit)',
           ksiegowosc: 'Dobre integracje',
-          premia: 'Okresowo',
+          premia: 'do ~4400 zł*',
         },
         scores: [
           { label: 'Opłaty', value: 4.2 },
@@ -2921,6 +3201,48 @@ export const RANKINGS: Ranking[] = [
             'niż w prostych darmowych kontach. Dla kogoś, kto lubi dopasować ofertę pod siebie, to plus; dla ' +
             'kogoś, kto chce maksymalnej prostoty, raczej minus.',
         ],
+        review: {
+          intro: [
+            'Alior iKonto Biznes to elastyczne konto dla firm, które mogą potrzebować finansowania. Reklamowana ' +
+              'premia bywa wysoka, ale jak u konkurencji składa się z kilku warunkowych elementów. Poniżej, na co ' +
+              'realnie zwrócić uwagę.',
+          ],
+          sections: [
+            {
+              title: 'Premia i warunki',
+              body: [
+                'Wysoka premia w Alior to zwykle suma bonusów: za otwarcie i aktywność oraz za skorzystanie z ' +
+                  'dodatkowych produktów (karta, finansowanie). Jak zawsze przy takich kwotach, pełną premię ' +
+                  'zgarnia firma, która faktycznie korzysta z całej oferty, a nie tylko zakłada konto.',
+                'Zwolnienie z opłat za konto i kartę działa przy aktywnym korzystaniu, a darmowe przelewy do ' +
+                  'urzędów bywają objęte limitem. Warunki są bardziej złożone niż w prostych darmowych kontach, ' +
+                  'dlatego przed założeniem warto przejść regulamin promocji punkt po punkcie.',
+              ],
+            },
+            {
+              title: 'Dla kogo to konto',
+              body: [
+                'Alior najlepiej sprawdzi się u przedsiębiorcy, który ceni elastyczność i może potrzebować kredytu ' +
+                  'lub innego finansowania - bank ma tu rozbudowaną ofertę. Aplikacja Alior Mobile jest dobra, a ' +
+                  'integracje dla firm porządne.',
+                'Jeśli zależy Ci na maksymalnej prostocie i przewidywalnych zerowych kosztach bez pilnowania ' +
+                  'warunków, prostsze będą konta mBanku, Nest czy Erste. Aktualne stawki sprawdź u banku.',
+              ],
+            },
+          ],
+          faq: [
+            {
+              q: 'Czy konto Alior jest darmowe?',
+              a: 'Konto i karta są bez opłat przy aktywnym korzystaniu, ale warunki zwolnienia i limity darmowych ' +
+                'przelewów bywają bardziej złożone niż w prostych darmowych kontach. Sprawdź aktualną tabelę opłat.',
+            },
+            {
+              q: 'Dla kogo jest iKonto Biznes?',
+              a: 'Dla firm, które cenią elastyczność i mogą potrzebować finansowania (kredyt, linia, leasing). ' +
+                'Alior ma tu szeroką ofertę. Dla maksymalnej prostoty lepsze będą prostsze darmowe konta.',
+            },
+          ],
+        },
       },
       {
         rank: 6,
@@ -2946,7 +3268,7 @@ export const RANKINGS: Ranking[] = [
           karta: '0 zł przy aktywności',
           zus: 'Darmowe (z warunkami)',
           ksiegowosc: 'Szeroka oferta + terminale',
-          premia: 'Okresowo do ~1500 zł*',
+          premia: 'do ~4200 zł*',
         },
         scores: [
           { label: 'Opłaty', value: 3.9 },
@@ -2965,6 +3287,49 @@ export const RANKINGS: Ranking[] = [
             'czołówki bankowości mobilnej. To konto dla firm, które cenią stabilność i fizyczną obecność banku ' +
             'bardziej niż najnowocześniejszy UX.',
         ],
+        review: {
+          intro: [
+            'PKO BP to największy bank w Polsce, a jego przewagą jest dostępność: oddziały, bankomaty i terminale ' +
+              'niemal wszędzie. Premia bywa wysoka, ale jak u innych dużych banków wiąże się z utrzymaniem ' +
+              'aktywności. Poniżej, na co zwrócić uwagę.',
+          ],
+          sections: [
+            {
+              title: 'Premia i warunki aktywności',
+              body: [
+                'Reklamowana premia (rzędu kilku tysięcy złotych) to zwykle bonus rozłożony w czasie, zależny od ' +
+                  'aktywności na koncie - na przykład utrzymania określonej liczby przelewów w miesiącu (często ' +
+                  'około dziesięciu) oraz korzystania z karty. To nie jednorazowa wypłata na start.',
+                'Konto i karta są bez opłat przy spełnieniu warunków aktywności, a przelewy do ZUS i US darmowe. ' +
+                  'Przy małej liczbie transakcji opłaty potrafią jednak wrócić, dlatego sprawdź aktualny regulamin ' +
+                  'promocji i tabelę opłat.',
+              ],
+            },
+            {
+              title: 'Dla kogo to konto',
+              body: [
+                'PKO najlepiej sprawdzi się u firmy, która ceni fizyczną obecność banku: chce mieć oddział pod ' +
+                  'ręką, korzysta z wpłatomatów albo przyjmuje płatności kartą i potrzebuje terminala. Pod tym ' +
+                  'względem zasięg PKO jest nie do pobicia.',
+                'Jeśli zależy Ci głównie na najnowocześniejszej aplikacji i minimalnych kosztach, czołówka ' +
+                  'bankowości mobilnej (mBank, ING) bywa wygodniejsza. PKO to wybór pod stabilność i dostępność.',
+              ],
+            },
+          ],
+          faq: [
+            {
+              q: 'Jak utrzymać zerowe opłaty w PKO?',
+              a: 'Trzeba spełniać miesięczne warunki aktywności (zwykle określona liczba przelewów i korzystanie z ' +
+                'karty). Przy małej liczbie transakcji opłaty mogą wrócić. Dokładne progi sprawdź w aktualnej ' +
+                'tabeli opłat banku.',
+            },
+            {
+              q: 'Dla kogo jest PKO Konto Firmowe?',
+              a: 'Dla firm, które cenią największą sieć oddziałów, bankomatów i terminali w kraju oraz stabilność ' +
+                'największego banku. Dla najnowocześniejszego UX i minimalnych kosztów lepsze bywają mBank czy ING.',
+            },
+          ],
+        },
       },
       {
         rank: 7,
@@ -2990,7 +3355,7 @@ export const RANKINGS: Ranking[] = [
           karta: '0 zł (z warunkami)',
           zus: 'Darmowe (z warunkami)',
           ksiegowosc: 'Dobre',
-          premia: 'Okresowo',
+          premia: 'do ~5000 zł*',
         },
         scores: [
           { label: 'Opłaty', value: 4.0 },
@@ -3007,6 +3372,47 @@ export const RANKINGS: Ranking[] = [
           'Jak wszędzie, "0 zł" zależy od aktywności, a sieć bankomatów jest mniejsza niż u największych ' +
             'banków. Dla firmy bez dużego obrotu gotówkowego to wygodny, rozsądny wybór.',
         ],
+        review: {
+          intro: [
+            'Millennium reklamuje premię do 5000 zł, ale tę najwyższą kwotę osiągniesz tylko z dodatkowymi ' +
+              'produktami. Sama baza jest niższa, a resztę dokładasz, podpisując umowy na terminal płatniczy i ' +
+              'leasing. Poniżej tłumaczę, jak to się składa i dla kogo ma sens.',
+          ],
+          sections: [
+            {
+              title: 'Jak zbudować premię do 5000 zł',
+              body: [
+                'Podstawową premię dostajesz za założenie konta i aktywne korzystanie (przelewy, płatności ' +
+                  'kartą). Premię można powiększyć o około 2600 zł, jeśli dodatkowo podpiszesz umowy na terminal ' +
+                  'płatniczy i leasing. Stąd reklamowana kwota do 5000 zł.',
+                'Jeśli nie przyjmujesz płatności kartą i nie potrzebujesz leasingu, realnie liczy się tylko ' +
+                  'część bazowa. Terminal ma sens dla firm, które sprzedają stacjonarnie, więc nie dokładaj go ' +
+                  'tylko dla premii, jeśli nie będziesz go używać.',
+              ],
+            },
+            {
+              title: 'Opłaty i dla kogo',
+              body: [
+                'Konto Mój Biznes jest darmowe przez 2 lata na warunkach promocyjnych. Promocja jest dla ' +
+                  'jednoosobowych działalności, które nie miały konta firmowego w Millennium od 1 kwietnia 2024.',
+                'Aplikacja jest nowoczesna i czytelna, a przelewy do ZUS i US bezpłatne przy spełnieniu warunków. ' +
+                  'Kwoty i warunki promocji potrafią się zmieniać, więc sprawdź aktualny regulamin przed założeniem.',
+              ],
+            },
+          ],
+          faq: [
+            {
+              q: 'Czy dostanę 5000 zł za samo konto?',
+              a: 'Nie. Sama baza jest niższa. Do pełnej kwoty (około 5000 zł) dokładasz premię za podpisanie umów ' +
+                'na terminal płatniczy i leasing. Bez tych produktów liczy się tylko premia podstawowa.',
+            },
+            {
+              q: 'Kto może skorzystać z promocji?',
+              a: 'Jednoosobowe działalności, które nie miały konta firmowego w Banku Millennium od 1 kwietnia 2024. ' +
+                'Konto jest darmowe przez 2 lata w ramach promocji.',
+            },
+          ],
+        },
       },
       {
         rank: 8,
@@ -3032,7 +3438,7 @@ export const RANKINGS: Ranking[] = [
           karta: '0 zł (z warunkami)',
           zus: 'Darmowe (z warunkami)',
           ksiegowosc: 'Solidne + terminale',
-          premia: 'Okresowo do ~1500 zł*',
+          premia: 'do ~4200 zł*',
         },
         scores: [
           { label: 'Opłaty', value: 3.9 },
@@ -3050,6 +3456,50 @@ export const RANKINGS: Ranking[] = [
           'Na minus - opłaty potrafią wrócić przy małej liczbie transakcji, a interfejs bywa mniej lekki niż u ' +
             'liderów bankowości mobilnej. To konto pod stabilność i dostępność, nie pod minimalizację kosztów.',
         ],
+        review: {
+          intro: [
+            'Pekao kusi premią do 4200 zł, ale to suma czterech różnych bonusów, a nie jedna wypłata. Część ' +
+              'z nich wymaga produktów, których mała firma może w ogóle nie potrzebować (linia kredytowa, leasing). ' +
+              'Poniżej rozkładam, z czego składa się premia i ile realnie jesteś w stanie zgarnąć.',
+          ],
+          sections: [
+            {
+              title: 'Z czego składa się premia',
+              body: [
+                'Na pełne 4200 zł składają się cztery elementy: 200 zł za zdalne otwarcie konta z kartą, do ' +
+                  '2000 zł zwrotu za płatności zbliżeniowe telefonem (Google Pay, Apple Pay, Garmin Pay) - po ' +
+                  '100 zł miesięcznie przez 10 miesięcy, 600 zł za uruchomienie linii kredytowej na minimum ' +
+                  '5000 zł oraz 600 zł za przelew do Pekao Leasing na ratę leasingową.',
+                'To oznacza, że bez leasingu i linii kredytowej realnie zostaje Ci około 2200 zł (otwarcie plus ' +
+                  'zwroty za płatności telefonem). Pełne 4200 zł zgarnie tylko firma, która i tak korzysta z ' +
+                  'leasingu i finansowania.',
+              ],
+            },
+            {
+              title: 'Opłaty i dla kogo to konto',
+              body: [
+                'Konto Biznes z Żubrem jest darmowe przez 2 lata w ramach promocji dla nowych firm. Przelewy do ' +
+                  'ZUS i US są bezpłatne. To wybór dla przedsiębiorcy, który ceni dużą sieć oddziałów, terminale ' +
+                  'i pełną ofertę dużego banku, a płatności robi głównie telefonem.',
+                'Promocja obowiązuje do 30 czerwca 2026. Warunki i kwoty potrafią się zmieniać między edycjami, ' +
+                  'więc przed założeniem sprawdź aktualny regulamin na stronie banku.',
+              ],
+            },
+          ],
+          faq: [
+            {
+              q: 'Ile premii dostanę bez leasingu i kredytu?',
+              a: 'Około 2200 zł: 200 zł za zdalne otwarcie konta i do 2000 zł zwrotu za płatności telefonem ' +
+                '(100 zł miesięcznie przez 10 miesięcy). Pozostałe 2×600 zł wymaga uruchomienia linii kredytowej ' +
+                'i przelewu do Pekao Leasing.',
+            },
+            {
+              q: 'Jak działa zwrot za płatności?',
+              a: 'Płacisz telefonem (Google Pay, Apple Pay lub Garmin Pay) kartą do konta, a bank zwraca część ' +
+                'wydatków - do 100 zł miesięcznie przez 10 miesięcy, łącznie do 2000 zł.',
+            },
+          ],
+        },
       },
     ],
     methodology: [
@@ -3058,19 +3508,24 @@ export const RANKINGS: Ranking[] = [
         'online, faktury, terminale, integracje - waga 25%) oraz dodatkowe korzyści i premie (waga 15%). Ocena ' +
         'ogólna to średnia ważona tych kryteriów, a kolejność wynika wprost z wyliczenia, nie z subiektywnego wrażenia.',
       'Patrzymy głównie na potrzeby jednoosobowych działalności i mikrofirm. Konta firmowe różnią się też ' +
-        'obsługą rachunku VAT i mechanizmu podzielonej płatności (split payment) - dla czynnych podatników VAT ' +
-        'to istotne. Premie za założenie traktujemy jako dodatek, bo niemal zawsze wiążą się z warunkami obrotu i aktywności.',
+        'obsługą rachunku VAT, mechanizmu podzielonej płatności (split payment) oraz integracją z KSeF - dla ' +
+        'czynnych podatników VAT to istotne. Premie za założenie traktujemy jako dodatek (waga 15%), bo ' +
+        'reklamowane kwoty 4000-5000 zł to niemal zawsze cashback rozłożony na 12-24 miesiące, z warunkami ' +
+        'obrotu i aktywności - realna wartość zależy od tego, ile faktycznie wydasz i przelejesz.',
       'Opłaty, premie i warunki dla firm zmieniają się często i zależą od formy działalności. Zawsze sprawdź ' +
         'aktualną tabelę opłat i regulamin promocji bezpośrednio w banku przed założeniem konta. Datę ostatniej ' +
         'aktualizacji zestawienia podajemy na górze strony.',
     ],
     verdict: [
       'Jeśli chcesz jedno konto firmowe, które po prostu działa - wybierz mBank mKonto Biznes. Łączy zerowe ' +
-        'opłaty przy aktywności, najlepszą w tym zestawieniu aplikację, darmowe przelewy do urzędów i ' +
-        'księgowość online. To bezpieczny wybór dla większości jednoosobowych działalności.',
-      'Zależy ci na narzędziach i sprzedaży online? ING dorzuca ING Księgowość i bramkę imoje. Liczysz każdą ' +
-        'złotówkę przy małej firmie? Nest Bank jest jednym z najtańszych. Polujesz na premię? Sprawdź aktualną ' +
-        'ofertę Erste. Nie ma jednego konta idealnego - jest najlepiej dopasowane do tego, jak działa twoja firma.',
+        'opłaty na zawsze, najlepszą w tym zestawieniu aplikację, darmowe przelewy do urzędów i księgowość ' +
+        'online z KSeF. To bezpieczny wybór dla większości jednoosobowych działalności.',
+      'Zależy ci na narzędziach, sprzedaży online i wysokiej premii? ING dorzuca ING Księgowość, bramkę imoje, ' +
+        'integrację KSeF i promocję sięgającą 4200 zł. Liczysz każdą złotówkę przy małej firmie? Nest Bank jest ' +
+        'jednym z najtańszych. Jedno zastrzeżenie do premii: te najwyższe kwoty (4000-5000 zł) to prawie zawsze ' +
+        'cashback rozłożony na rok lub dwa, z warunkami obrotu, a nie gotówka na start. Policz, ile realnie ' +
+        'zgarniesz przy swoim obrocie, zanim wybierzesz konto tylko dla bonusu. Nie ma jednego konta idealnego, ' +
+        'jest najlepiej dopasowane do tego, jak działa twoja firma.',
     ],
     faq: [
       {
@@ -3099,9 +3554,18 @@ export const RANKINGS: Ranking[] = [
       {
         q: 'Czy warto założyć konto firmowe tylko dla premii?',
         a:
-          'Premie za konto firmowe bywają wysokie (często 1000-2000 zł), ale wiążą się z warunkami: określonym ' +
-          'obrotem, liczbą transakcji albo utrzymaniem aktywności przez kilka miesięcy. To sensowne, jeśli i tak ' +
-          'będziesz konta aktywnie używać. Traktuj premię jako dodatek, nie główny powód wyboru konta na lata.',
+          'Premie potrafią wyglądać imponująco (4000-5000 zł), ale to prawie zawsze cashback rozłożony na 12-24 ' +
+          'miesiące: procent od płatności kartą i od przelewów do ZUS, z miesięcznymi limitami i warunkiem ' +
+          'aktywności. Realnie zgarniesz tyle tylko przy odpowiednio wysokim obrocie. To sensowne, jeśli i tak ' +
+          'będziesz konta intensywnie używać, ale traktuj premię jako dodatek, nie główny powód wyboru konta na lata.',
+      },
+      {
+        q: 'Czy konto firmowe musi obsługiwać KSeF?',
+        a:
+          'Od 2026 roku KSeF (Krajowy System e-Faktur) jest obowiązkowy, więc faktury i tak wystawiasz przez ' +
+          'rządowy system. Konto nie musi mieć własnej integracji z KSeF, ale jeśli ma (np. mBank, ING), ' +
+          'wystawianie i odbieranie e-faktur ogarniesz z poziomu bankowości, bez przeskakiwania między aplikacjami. ' +
+          'Część banków uzależnia od podpięcia KSeF wypłatę premii promocyjnej.',
       },
       {
         q: 'Czy mogę zmienić konto firmowe na nowe?',
@@ -3123,6 +3587,7 @@ export const RANKINGS: Ranking[] = [
       { label: 'Kwota wolna i progi podatkowe 2026', href: '/pieniadze/kwota-wolna-progi-podatkowe-2026' },
     ],
     changelog: [
+      { date: '2026-06-10', note: 'Weryfikacja ofert (Bankier, Moneteo): zaktualizowane premie (ING do 4200 zł, Millennium/BNP do 5000 zł), dodany wątek obowiązkowego KSeF i integracji e-faktur.' },
       { date: '2026-06-08', note: 'Pierwsza publikacja rankingu kont firmowych. Warunki i premie reprezentatywne dla 2026 roku.' },
     ],
     affiliateNote: AFFILIATE_DISCLOSURE,
