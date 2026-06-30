@@ -116,6 +116,7 @@ export default async function Footer() {
           <ul className="footer-col-links">
             <li><Link href="/regulamin"><span className="fl-chev">›</span> Regulamin</Link></li>
             <li><Link href="/polityka-prywatnosci"><span className="fl-chev">›</span> Polityka prywatności</Link></li>
+            <li><Link href="/polityka-redakcyjna"><span className="fl-chev">›</span> Polityka redakcyjna</Link></li>
             <li><Link href="/disclaimer"><span className="fl-chev">›</span> Disclaimer</Link></li>
           </ul>
         </div>
