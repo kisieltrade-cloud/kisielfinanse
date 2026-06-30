@@ -161,6 +161,16 @@ function IconSplit({ color }: { color: string }) {
   );
 }
 
+function IconBond({ color }: { color: string }) {
+  return (
+    <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="8" y="16" width="40" height="24" rx="4" fill="none" />
+      <circle cx="28" cy="28" r="6" fill={color} opacity="0.5" />
+      <line x1="15" y1="22" x2="15" y2="34" /><line x1="41" y1="22" x2="41" y2="34" />
+    </svg>
+  );
+}
+
 const TOOLS = [
   { href: '/kalkulator/wynagrodzenia',    label: 'BRUTTO - NETTO',      accent: '#10b981', Icon: IconWallet  },
   { href: '/kalkulator/gdzie-ida-podatki', label: 'GDZIE IDĄ PODATKI?', accent: '#ff2d78', Icon: IconSplit   },
@@ -169,6 +179,7 @@ const TOOLS = [
   { href: '/kalkulator/emerytura',        label: 'EMERYTURA Z ZUS',     accent: '#2f80b5', Icon: IconPension },
   { href: '/kalkulator/skladka-zdrowotna', label: 'SKŁADKA ZDROWOTNA',  accent: '#2e7d4f', Icon: IconHealth  },
   { href: '/kalkulator/zdolnosc-kredytowa', label: 'ZDOLNOŚĆ KREDYTOWA', accent: '#e8963a', Icon: IconScales  },
+  { href: '/kalkulator/odsetki-obligacje', label: 'ODSETKI OD OBLIGACJI', accent: '#2e7d4f', Icon: IconBond   },
   { href: '/kalkulator/procent-skladany', label: 'PROCENT SKŁADANY',   accent: '#3b82f6', Icon: IconChart   },
   { href: '/kalkulator/dca',              label: 'DCA',                 accent: '#22c55e', Icon: IconRefresh },
   { href: '/kalkulator/risk-reward',      label: 'RISK / REWARD',       accent: '#f59e0b', Icon: IconScales  },

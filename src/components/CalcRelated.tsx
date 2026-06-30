@@ -72,6 +72,11 @@ const IcoSplit = ({ c }: { c: string }) => (
     <circle cx="14" cy="14" r="10" /><line x1="14" y1="14" x2="14" y2="4" /><line x1="14" y1="14" x2="22.5" y2="19" />
   </svg>
 );
+const IcoBond = ({ c }: { c: string }) => (
+  <svg width="26" height="26" viewBox="0 0 28 28" fill="none" stroke={c} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="7" width="22" height="14" rx="2" /><circle cx="14" cy="14" r="3" /><line x1="6" y1="10" x2="6" y2="18" /><line x1="22" y1="10" x2="22" y2="18" />
+  </svg>
+);
 
 const GREEN = { bg: '#dfe7d2', ic: '#5f7a4a' };
 const GOLD  = { bg: '#ece0c6', ic: '#b3892f' };
@@ -94,6 +99,7 @@ const ALL_CALCS = [
   { href: '/kalkulator/skladka-zdrowotna', label: 'Składka zdrowotna 2026', desc: 'Policz składkę zdrowotną na skali, liniowym i ryczałcie.', Icon: IcoScales, col: GREEN },
   { href: '/kalkulator-hipoteczny',       label: 'Kalkulator hipoteczny', desc: 'Oblicz ratę kredytu i całkowity koszt nieruchomości.',     Icon: IcoHouse,  col: GREEN },
   { href: '/kalkulator/zdolnosc-kredytowa', label: 'Zdolność kredytowa',  desc: 'Oszacuj maksymalną kwotę kredytu hipotecznego.',           Icon: IcoCard,   col: GOLD  },
+  { href: '/kalkulator/odsetki-obligacje', label: 'Odsetki od obligacji', desc: 'Policz zysk netto z obligacji EDO, COI, TOS, ROR i DOR.',   Icon: IcoBond,   col: GREEN },
 ];
 
 export default async function CalcRelated({ currentPath }: { currentPath: string }) {
