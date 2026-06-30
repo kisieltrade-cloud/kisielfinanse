@@ -241,6 +241,20 @@ export default async function ArticlePage({ params }: Props) {
     })),
   } : null;
 
+  const schemaHowTo = post.howto && post.howto.steps.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: post.howto.title ?? post.title,
+    description: post.excerpt,
+    inLanguage: 'pl-PL',
+    step: post.howto.steps.map(({ name, text }, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name,
+      text,
+    })),
+  } : null;
+
   return (
     <>
       <ReadingProgress />
@@ -256,6 +270,12 @@ export default async function ArticlePage({ params }: Props) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFaq) }}
+        />
+      )}
+      {schemaHowTo && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaHowTo) }}
         />
       )}
       <Nav />

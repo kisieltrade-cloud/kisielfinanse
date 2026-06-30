@@ -10,6 +10,11 @@ export interface FaqItem {
   a: string;
 }
 
+export interface HowToStep {
+  name: string;
+  text: string;
+}
+
 function calcReadTime(content: string): string {
   const text = content
     .replace(/```[\s\S]*?```/g, '')
@@ -44,6 +49,7 @@ export interface PostMeta {
 export interface Post extends PostMeta {
   content: string;
   faq: FaqItem[];
+  howto?: { title?: string; steps: HowToStep[] };
 }
 
 // ─── Read all posts (sorted by date desc) ────────────────────────────────────
@@ -136,6 +142,9 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     metaDescription: (data.metaDescription as string) || undefined,
     noindex: data.noindex === true,
     faq: Array.isArray(data.faq) ? (data.faq as FaqItem[]) : [],
+    howto: Array.isArray(data.howto) && data.howto.length > 0
+      ? { title: (data.howtoTitle as string) || undefined, steps: data.howto as HowToStep[] }
+      : undefined,
     content,
   };
 }
