@@ -66,22 +66,40 @@ export default function AuthorBox() {
             za fortunę i bez obietnic szybkiego wzbogacenia.
           </p>
 
-          <Link
-            href="/o-mnie"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.65rem',
-              letterSpacing: '1.5px',
-              color: '#c9a227',
-              textDecoration: 'none',
-              border: '1px solid rgba(201,162,39,0.25)',
-              padding: '7px 16px',
-              display: 'inline-block',
-              transition: 'border-color 0.2s, background 0.2s',
-            }}
-          >
-            Więcej o mnie →
-          </Link>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <Link
+              href="/o-mnie"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.65rem',
+                letterSpacing: '1.5px',
+                color: '#c9a227',
+                textDecoration: 'none',
+                border: '1px solid rgba(201,162,39,0.25)',
+                padding: '7px 16px',
+                display: 'inline-block',
+                transition: 'border-color 0.2s, background 0.2s',
+              }}
+            >
+              Więcej o mnie →
+            </Link>
+            <Link
+              href="/polityka-redakcyjna"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.65rem',
+                letterSpacing: '1.5px',
+                color: 'var(--muted)',
+                textDecoration: 'none',
+                border: '1px solid var(--border)',
+                padding: '7px 16px',
+                display: 'inline-block',
+                transition: 'border-color 0.2s, background 0.2s',
+              }}
+            >
+              Jak weryfikujemy treści →
+            </Link>
+          </div>
         </div>
       </div>
     </div>
