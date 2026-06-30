@@ -100,6 +100,7 @@ const ALL_CALCS = [
   { href: '/kalkulator-hipoteczny',       label: 'Kalkulator hipoteczny', desc: 'Oblicz ratę kredytu i całkowity koszt nieruchomości.',     Icon: IcoHouse,  col: GREEN },
   { href: '/kalkulator/zdolnosc-kredytowa', label: 'Zdolność kredytowa',  desc: 'Oszacuj maksymalną kwotę kredytu hipotecznego.',           Icon: IcoCard,   col: GOLD  },
   { href: '/kalkulator/odsetki-obligacje', label: 'Odsetki od obligacji', desc: 'Policz zysk netto z obligacji EDO, COI, TOS, ROR i DOR.',   Icon: IcoBond,   col: GREEN },
+  { href: '/kalkulator/nadplata-kredytu',  label: 'Nadpłata kredytu',     desc: 'Sprawdź, ile zaoszczędzisz na odsetkach przy nadpłacie.',   Icon: IcoHouse,  col: PEACH },
 ];
 
 export default async function CalcRelated({ currentPath }: { currentPath: string }) {

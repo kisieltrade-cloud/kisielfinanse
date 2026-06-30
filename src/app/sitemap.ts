@@ -101,6 +101,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/kalkulator/nadplata-kredytu`,
+      lastModified: new Date('2026-06-30'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/indeks-strachu-i-chciwosci`,
       lastModified: new Date(),
       changeFrequency: 'daily',
