@@ -7,6 +7,7 @@ import ThemeToggle from '@/components/ThemeToggle';
 
 const MAIN_LINKS = [
   { href: '/o-mnie',  label: 'O mnie' },
+  { href: '/naucz-sie-tradowac', label: 'Naucz się tradować' },
 ];
 
 const UTIL_LINKS = [
@@ -117,12 +118,6 @@ export default function Nav() {
 
             {eduOpen && (
               <ul className="nav-dropdown-menu">
-                <li>
-                  <Link href="/naucz-sie-tradowac" className="nav-dropdown-item" onClick={() => setEduOpen(false)}>
-                    <span className="nav-dropdown-item-icon">🎓</span>
-                    Naucz się tradować
-                  </Link>
-                </li>
                 {CATEGORIES.map((cat) => (
                   <li key={cat.slug}>
                     <Link
@@ -248,17 +243,6 @@ export default function Nav() {
             ))}
 
             <li className="mobile-menu-section">Edukacja</li>
-
-            <li>
-              <Link
-                href="/naucz-sie-tradowac"
-                className="mobile-menu-link"
-                style={{ color: isActive('/naucz-sie-tradowac') ? 'var(--cyan)' : undefined }}
-                onClick={() => setOpen(false)}
-              >
-                🎓 Naucz się tradować
-              </Link>
-            </li>
 
             {CATEGORIES.map((cat) => (
               <li key={cat.slug}>

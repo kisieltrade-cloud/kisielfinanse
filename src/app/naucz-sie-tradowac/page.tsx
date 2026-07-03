@@ -3,6 +3,8 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import LearnToTrade from '@/components/LearnToTrade';
+import TradingJournal from '@/components/TradingJournal';
+import JournalDownload from '@/components/JournalDownload';
 import { LEARN_FAQ } from '@/lib/learn-trade-faq';
 import NewsletterForm from '@/components/NewsletterForm';
 
@@ -65,6 +67,10 @@ export default function NauczSieTradowacPage() {
         </div>
 
         <LearnToTrade />
+
+        <TradingJournal />
+
+        <JournalDownload />
 
         <div style={{ maxWidth: 700, margin: '0 auto', padding: '8px 24px 80px' }}>
           <NewsletterForm />

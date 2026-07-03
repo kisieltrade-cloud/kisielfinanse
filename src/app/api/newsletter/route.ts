@@ -9,6 +9,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM = 'Mateusz z KisielFinanse <newsletter@kisielfinanse.pl>';
 
 const EBOOK_URL = 'https://kisielfinanse.pl/ebook/finansowy-fundament-2026.pdf';
+const JOURNAL_URL = 'https://kisielfinanse.pl/pliki/dziennik-transakcji-kisielfinanse.xlsx';
 
 // Wersja tekstowa (poprawia dostarczalność — maile tylko-HTML częściej trafiają do spamu).
 const WELCOME_TEXT = `Twój przewodnik jest gotowy.
@@ -16,6 +17,9 @@ const WELCOME_TEXT = `Twój przewodnik jest gotowy.
 Dzięki, że jesteś. Pobierz "Finansowy Fundament" - przewodnik, który układa Twoje pieniądze w 7 krokach: od bilansu, przez poduszkę i konto, po pierwsze inwestycje.
 
 Pobierz przewodnik (PDF): ${EBOOK_URL}
+
+Bonus dla traderów: gotowy dziennik transakcji w Excelu (sam liczy winrate, R i wynik):
+${JOURNAL_URL}
 
 Piszę, kiedy mam coś wartego wysłania. Bez planu wysyłkowego i bez spamu.
 
@@ -48,6 +52,18 @@ const WELCOME_HTML = `
       Gdyby przycisk nie działał, skopiuj link:<br>
       <a href="${EBOOK_URL}" style="color:#c9a227;word-break:break-all;">${EBOOK_URL}</a>
     </p>
+
+    <hr style="border:none;border-top:1px solid #1e2535;margin:36px 0;">
+
+    <p style="font-size:13px;letter-spacing:1px;color:#c9a227;text-transform:uppercase;margin:0 0 10px;font-weight:700;">Bonus dla traderów</p>
+    <p style="font-size:15px;color:#c8d0dc;line-height:1.7;margin:0 0 16px;">
+      Prowadzisz albo zaczynasz trading? Pobierz gotowy <strong style="color:#e8eaf6;">dziennik transakcji</strong> w Excelu.
+      Sam liczy winrate, wynik w R i krzywą kapitału.
+    </p>
+    <a href="${JOURNAL_URL}"
+       style="display:inline-block;border:1px solid #2a3346;color:#c8d0dc;text-decoration:none;padding:11px 26px;border-radius:6px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">
+      Pobierz dziennik (Excel)
+    </a>
 
     <hr style="border:none;border-top:1px solid #1e2535;margin:36px 0;">
 
