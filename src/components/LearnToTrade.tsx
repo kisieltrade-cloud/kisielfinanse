@@ -311,6 +311,7 @@ const READS = [
   { t: 'Rynki - forex, indeksy, krypto, akcje', s: 'Czym się różnią i który wybrać na start', href: '/trading/rynki-forex-indeksy-krypto-akcje' },
   { t: 'Jak zbudować plan tradingowy', s: 'Złóż całą wiedzę w jeden spójny system', href: '/trading/jak-zbudowac-plan-tradingowy' },
   { t: 'Forex dla początkujących', s: 'Pary, pip, lot, spread i jak zacząć', href: '/trading/forex-dla-poczatkujacych' },
+  { t: 'RSI - jak używać wskaźnika', s: 'Wykupienie, wyprzedanie i dywergencje', href: '/trading/rsi-wskaznik-jak-uzywac' },
   { t: 'Encyklopedia formacji', s: 'Świece i formacje wykresu, narysowane i wyjaśnione', href: '/formacje-tradingowe' },
   { t: 'Narzędzia tradera', s: 'Symulator, kalkulatory i dziennik w jednym miejscu', href: '/narzedzia-tradera' },
   { t: 'Jak zacząć trading od zera', s: 'Kompletny przewodnik dla początkujących', href: '/trading/jak-zaczac-trading-od-zera' },
