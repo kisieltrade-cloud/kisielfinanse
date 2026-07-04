@@ -303,6 +303,7 @@ const GLOSSARY = [
 const READS = [
   { t: 'Świece japońskie - jak czytać wykres', s: 'Budowa świecy i najważniejsze formacje', href: '/trading/swiece-japonskie-jak-czytac-wykres' },
   { t: 'Wsparcie i opór - jak wyznaczać poziomy', s: 'Gdzie rynek reaguje i jak z tego korzystać', href: '/trading/wsparcie-i-opor-jak-wyznaczac-poziomy' },
+  { t: 'Trend i linia trendu', s: 'Jak rozpoznać kierunek rynku i grać z nim', href: '/trading/trend-i-linia-trendu' },
   { t: 'Encyklopedia formacji', s: 'Świece i formacje wykresu, narysowane i wyjaśnione', href: '/formacje-tradingowe' },
   { t: 'Narzędzia tradera', s: 'Symulator, kalkulatory i dziennik w jednym miejscu', href: '/narzedzia-tradera' },
   { t: 'Jak zacząć trading od zera', s: 'Kompletny przewodnik dla początkujących', href: '/trading/jak-zaczac-trading-od-zera' },
