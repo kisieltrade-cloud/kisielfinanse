@@ -301,6 +301,7 @@ const GLOSSARY = [
 ];
 
 const READS = [
+  { t: 'Świece japońskie - jak czytać wykres', s: 'Budowa świecy i najważniejsze formacje', href: '/trading/swiece-japonskie-jak-czytac-wykres' },
   { t: 'Jak zacząć trading od zera', s: 'Kompletny przewodnik dla początkujących', href: '/trading/jak-zaczac-trading-od-zera' },
   { t: 'Dlaczego 90% traderów traci', s: 'Najczęstsze błędy i jak ich uniknąć', href: '/trading/dlaczego-90-procent-traderow-traci' },
   { t: 'Psychologia tradingu', s: 'Jak kontrolować emocje przy wykresie', href: '/psychologia/psychologia-tradingu-jak-kontrolowac-emocje' },
