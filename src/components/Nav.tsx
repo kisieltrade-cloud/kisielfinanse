@@ -24,6 +24,7 @@ const CALC_ITEMS = [
   { href: '/kalkulator/procent-skladany',   label: 'Procent składany',           icon: '📈' },
   { href: '/kalkulator/dca',                label: 'DCA',                        icon: '🔁' },
   { href: '/kalkulator/risk-reward',        label: 'Risk / Reward',              icon: '⚖️' },
+  { href: '/kalkulator/wielkosc-pozycji',   label: 'Wielkość pozycji',           icon: '📐' },
   { href: '/kalkulator/fire',               label: 'Kalkulator FIRE',            icon: '🔥' },
   { href: '/kalkulator/etf',                label: 'Symulacja ETF',              icon: '📊' },
   { href: '/kalkulator/godziny-pracy',      label: 'Ile godzin pracy?',          icon: '⏱️' },

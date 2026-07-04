@@ -107,6 +107,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/kalkulator/wielkosc-pozycji`,
+      lastModified: new Date('2026-07-04'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/indeks-strachu-i-chciwosci`,
       lastModified: new Date(),
       changeFrequency: 'daily',

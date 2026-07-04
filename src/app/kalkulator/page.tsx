@@ -193,6 +193,7 @@ const TOOLS = [
   { href: '/kalkulator/procent-skladany', label: 'PROCENT SKŁADANY',   accent: '#3b82f6', Icon: IconChart   },
   { href: '/kalkulator/dca',              label: 'DCA',                 accent: '#22c55e', Icon: IconRefresh },
   { href: '/kalkulator/risk-reward',      label: 'RISK / REWARD',       accent: '#f59e0b', Icon: IconScales  },
+  { href: '/kalkulator/wielkosc-pozycji', label: 'WIELKOŚĆ POZYCJI',    accent: '#c9a227', Icon: IconScales  },
   { href: '/kalkulator/fire',             label: 'FIRE',                accent: '#ef4444', Icon: IconFlame   },
   { href: '/kalkulator/etf',             label: 'ETF VS LOKATA',       accent: '#8b5cf6', Icon: IconPie     },
   { href: '/kalkulator/godziny-pracy',   label: 'ILE GODZIN PRACY?',   accent: '#c9a227', Icon: IconClock   },

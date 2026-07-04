@@ -87,6 +87,7 @@ const ALL_CALCS = [
   { href: '/kalkulator/procent-skladany', label: 'Procent składany',     desc: 'Oblicz, jak procent składany wpływa na Twoje inwestycje.', Icon: IcoChart,  col: GREEN },
   { href: '/kalkulator/dca',              label: 'DCA',                   desc: 'Sprawdź efekty strategii systematycznego inwestowania.',   Icon: IcoCalc,   col: GREEN },
   { href: '/kalkulator/risk-reward',      label: 'Risk / Reward',         desc: 'Oceń stosunek zysku do ryzyka w inwestycji.',              Icon: IcoScales, col: GOLD  },
+  { href: '/kalkulator/wielkosc-pozycji', label: 'Wielkość pozycji',      desc: 'Policz, ile kupić, żeby ryzykować tylko 1-2% kapitału.',    Icon: IcoScales, col: GOLD  },
   { href: '/kalkulator/fire',             label: 'Kalkulator FIRE',       desc: 'Sprawdź, kiedy możesz osiągnąć niezależność finansową.',   Icon: IcoFlame,  col: PEACH },
   { href: '/kalkulator/etf',              label: 'ETF vs Lokata',         desc: 'Porównaj potencjalne zyski ETF-ów i lokat bankowych.',     Icon: IcoBars,   col: GREEN },
   { href: '/kalkulator/godziny-pracy',    label: 'Ile godzin pracy?',     desc: 'Zobacz, ile godzin pracy potrzeba na różne cele.',         Icon: IcoTimer,  col: LILAC },
