@@ -313,6 +313,7 @@ const READS = [
   { t: 'Forex dla początkujących', s: 'Pary, pip, lot, spread i jak zacząć', href: '/trading/forex-dla-poczatkujacych' },
   { t: 'RSI - jak używać wskaźnika', s: 'Wykupienie, wyprzedanie i dywergencje', href: '/trading/rsi-wskaznik-jak-uzywac' },
   { t: 'MACD - jak używać wskaźnika', s: 'Przecięcia, histogram i dywergencje', href: '/trading/macd-wskaznik-jak-uzywac' },
+  { t: 'Day trading vs swing trading', s: 'Który styl pasuje do Twojego życia', href: '/trading/day-trading-vs-swing-trading' },
   { t: 'Encyklopedia formacji', s: 'Świece i formacje wykresu, narysowane i wyjaśnione', href: '/formacje-tradingowe' },
   { t: 'Narzędzia tradera', s: 'Symulator, kalkulatory i dziennik w jednym miejscu', href: '/narzedzia-tradera' },
   { t: 'Jak zacząć trading od zera', s: 'Kompletny przewodnik dla początkujących', href: '/trading/jak-zaczac-trading-od-zera' },
