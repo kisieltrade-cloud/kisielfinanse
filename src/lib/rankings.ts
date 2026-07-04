@@ -128,9 +128,9 @@ export const RANKINGS: Ranking[] = [
       'Erste i inne): opłaty, darmowe bankomaty, aplikacja i premie za otwarcie nawet do 1300 zł.',
     keywords: [
       'ranking kont osobistych 2026',
-      'ranking kont osobistych czerwiec 2026',
+      'ranking kont osobistych lipiec 2026',
       'ranking kont bankowych 2026',
-      'ranking kont bankowych czerwiec 2026',
+      'ranking kont bankowych lipiec 2026',
       'najlepsze konto osobiste',
       'najlepsze konto bankowe 2026',
       'darmowe konto bankowe',
@@ -139,10 +139,10 @@ export const RANKINGS: Ranking[] = [
       'mBank eKonto opinie',
     ],
     cover: '/images/blog/covers/coins-gold.jpg',
-    updated: '2026-06-20',
+    updated: '2026-07-04',
     summary: [
       'Naszym wyborem #1 jest PKO Konto za Zero - największa sieć bankomatów i oddziałów w Polsce, ' +
-        'AllegroKlik (zwroty za zakupy do ~1200 zł rocznie) i stabilność największego banku. Tuż za nim Alior i mBank.',
+        'AllegroKlik (zwroty za zakupy do ~1200 zł rocznie) i stabilność największego banku. Tuż za nim mBank i Alior.',
       'Każde „darmowe" konto jest darmowe pod warunkami: zwykle wpływ wynagrodzenia i kilka ' +
         'płatności kartą miesięcznie. Bez tego bank może naliczyć opłatę.',
       'Premie za założenie potrafią dziś sięgać 1000-1300 zł, ale zawsze z warunkami (obrót, liczba ' +
@@ -179,12 +179,12 @@ export const RANKINGS: Ranking[] = [
     ],
     picks: [
       {
-        rank: 1,
+        rank: 2,
         name: 'mBank eKonto',
         provider: 'mBank',
         slug: 'mbank-ekonto',
-        score: 4.7,
-        badge: 'Najlepsze ogólnie',
+        score: 4.6,
+        badge: 'Najlepsza aplikacja',
         bestFor: 'Dla większości',
         highlight:
           'Najlepszy balans między niskimi opłatami, świetną aplikacją i szeroką siecią bankomatów.',
@@ -209,7 +209,7 @@ export const RANKINGS: Ranking[] = [
           { label: 'Opłaty', value: 4.5 },
           { label: 'Aplikacja', value: 4.7 },
           { label: 'Bankomaty', value: 4.5 },
-          { label: 'Dodatki', value: 4.2 },
+          { label: 'Dodatki', value: 4.5 },
         ],
         providerId: 'mbank',
         ctaLabel: 'Załóż eKonto',
@@ -318,7 +318,7 @@ export const RANKINGS: Ranking[] = [
         },
       },
       {
-        rank: 3,
+        rank: 4,
         // Erste przejął Santander Bank Polska; rebranding ZAKOŃCZONY (od 25.04.2026,
         // aplikacja „Erste online"). Dokładną nazwę produktu potwierdzić przy linku afiliacyjnym.
         name: 'Erste Konto Smart',
@@ -429,7 +429,7 @@ export const RANKINGS: Ranking[] = [
         },
       },
       {
-        rank: 4,
+        rank: 5,
         name: 'Konto 360°',
         provider: 'Bank Millennium',
         slug: 'millennium-konto-360',
@@ -535,11 +535,12 @@ export const RANKINGS: Ranking[] = [
         },
       },
       {
-        rank: 5,
+        rank: 1,
         name: 'PKO Konto za Zero',
         provider: 'PKO Bank Polski',
         slug: 'pko-konto-za-zero',
-        score: 4.0,
+        score: 4.7,
+        badge: 'Najlepsze ogólnie',
         bestFor: 'Dla sieci oddziałów',
         highlight:
           'Największy bank w Polsce, maksymalna dostępność oddziałów oraz AllegroKlik - zwroty za zakupy na Allegro.',
@@ -587,11 +588,10 @@ export const RANKINGS: Ranking[] = [
           ],
           bonus: {
             amount: 'do 600 zł',
-            sub: 'premia z kodem PREMIA + AllegroKlik: zwrot do ~1200 zł za zakupy na Allegro',
-            deadline: '2026-06-30',
+            sub: 'premia z kodem LATO (Letni Bonus) + AllegroKlik: zwrot do ~1200 zł za zakupy na Allegro',
           },
           steps: [
-            'Otwórz Konto za Zero online i wpisz kod promocyjny PREMIA.',
+            'Otwórz Konto za Zero online i wpisz kod promocyjny LATO (promocja Letni Bonus).',
             'Zapewnij wpływ i płać kartą lub BLIKIEM zgodnie z warunkami promocji.',
             'Aktywuj usługę AllegroKlik w aplikacji IKO.',
             'Płać za zakupy na Allegro - zgarniasz do 3% zwrotu, maks. 100 zł miesięcznie przez 12 miesięcy.',
@@ -649,7 +649,7 @@ export const RANKINGS: Ranking[] = [
         },
       },
       {
-        rank: 6,
+        rank: 8,
         name: 'VeloKonto',
         provider: 'VeloBank',
         slug: 'velobank-velokonto',
@@ -756,7 +756,7 @@ export const RANKINGS: Ranking[] = [
         name: 'Pekao Konto Przekorzystne',
         provider: 'Bank Pekao S.A.',
         slug: 'pekao-konto-przekorzystne',
-        score: 3.8,
+        score: 4.0,
         bestFor: 'Dla dużej sieci i stabilności',
         highlight:
           'Jeden z największych banków w Polsce - bardzo szeroka sieć oddziałów i bankomatów.',
@@ -856,11 +856,12 @@ export const RANKINGS: Ranking[] = [
         },
       },
       {
-        rank: 8,
+        rank: 3,
         name: 'Alior Konto',
         provider: 'Alior Bank',
         slug: 'alior-konto',
-        score: 3.8,
+        score: 4.5,
+        badge: 'Najwyższa premia',
         bestFor: 'Dla prostoty i wysokiej premii',
         highlight:
           'Proste konto za 0 zł bez warunków i jedna z najwyższych premii powitalnych (do 1300 zł).',
@@ -960,11 +961,11 @@ export const RANKINGS: Ranking[] = [
         },
       },
       {
-        rank: 9,
+        rank: 6,
         name: 'BNP Paribas Konto Otwarte na Ciebie',
         provider: 'BNP Paribas Bank Polska',
         slug: 'bnp-paribas-konto-otwarte',
-        score: 3.7,
+        score: 4.0,
         bestFor: 'Dla dużego banku z promocjami',
         highlight:
           'Solidne darmowe konto dużego banku z regularnymi promocjami zwrotów.',
@@ -1061,11 +1062,11 @@ export const RANKINGS: Ranking[] = [
         },
       },
       {
-        rank: 10,
+        rank: 9,
         name: 'Credit Agricole Konto dla Ciebie',
         provider: 'Credit Agricole Bank Polska',
         slug: 'credit-agricole-konto-dla-ciebie',
-        score: 3.6,
+        score: 3.7,
         bestFor: 'Dla oddziałów i oferty ratalnej',
         highlight:
           'Konto dużego banku z rozbudowaną ofertą kart i zakupów na raty.',
@@ -1180,7 +1181,7 @@ export const RANKINGS: Ranking[] = [
     verdict: [
       'Naszym wyborem #1 jest PKO Konto za Zero - największa dostępność (bankomaty i oddziały w całej ' +
         'Polsce), program AllegroKlik ze zwrotami za zakupy i stabilność największego banku. Drugi jest ' +
-        'Alior (najwyższa premia, do 1300 zł), a trzeci mBank (najlepsza w zestawieniu aplikacja).',
+        'mBank (najlepsza w zestawieniu aplikacja), a trzeci Alior (najwyższa premia, do 1300 zł).',
       'Polujesz na premię? Najwięcej daje Alior Konto - łącznie do 1300 zł. A jeśli chcesz, żeby nadwyżki ' +
         'pracowały, załóż VeloKonto pod wysoko oprocentowane konto oszczędnościowe albo postaw na Erste ' +
         '(promocja plus 4,5%). Nie ma jednego konta idealnego dla każdego - jest konto najlepiej dopasowane ' +
@@ -1191,8 +1192,8 @@ export const RANKINGS: Ranking[] = [
         q: 'Które konto osobiste jest najlepsze w 2026 roku?',
         a:
           'Naszym wyborem #1 jest PKO Konto za Zero - ma największą sieć bankomatów i oddziałów w Polsce, ' +
-          'program AllegroKlik (zwroty za zakupy) i stabilność największego banku. Tuż za nim Alior (najwyższa ' +
-          'premia, do 1300 zł) i mBank (najlepsza aplikacja). Jeśli najważniejsza jest premia, najwięcej daje Alior.',
+          'program AllegroKlik (zwroty za zakupy) i stabilność największego banku. Tuż za nim mBank (najlepsza ' +
+          'aplikacja) i Alior (najwyższa premia, do 1300 zł). Jeśli najważniejsza jest premia, najwięcej daje Alior.',
       },
       {
         q: 'Czy darmowe konto osobiste jest naprawdę za darmo?',
@@ -1237,6 +1238,8 @@ export const RANKINGS: Ranking[] = [
       { label: 'Budżet domowy - jak zacząć i utrzymać', href: '/pieniadze/budzet-domowy-jak-zaczac-i-utrzymac' },
     ],
     changelog: [
+      { date: '2026-07-04', note: 'Aktualizacja oceny dodatków mBank eKonto (promocja do 1000 zł, konto oszczędnościowe 5,3%, dom maklerski w aplikacji) - lepiej oddaje siłę oferty. Kolejność: #1 PKO Konto za Zero, #2 mBank eKonto, #3 Alior Konto.' },
+      { date: '2026-07-01', note: 'Weryfikacja lipcowa bezpośrednio na oficjalnych stronach banków. PKO Konto za Zero: edycja „Zakupy z premią" (kod PREMIA) zakończona 30.06 - weszła nowa promocja „Letni Bonus" (kod LATO, do 600 zł). Bez zmian, potwierdzone u źródła: Alior do 1300 zł, kod ZYSKAJ2026 (do 31.08), Erste do 700 zł plus 4,5% (do 31.07), Millennium 360° do 700 zł (do 27.10), mBank do 1000 zł (do 31.08).' },
       { date: '2026-06-20', note: 'Weryfikacja promocji bezpośrednio na oficjalnych stronach banków (czerwiec 2026): mBank eKonto do 1000 zł (do 31.08), Alior Konto Plus do 1300 zł, kod ZYSKAJ2026 (do 31.08), Erste Konto Smart do 700 zł plus 4,5% (do 31.07), Millennium 360° do 700 zł (do 27.10), PKO Konto za Zero do 600 zł, kod PREMIA (do 30.06), Pekao Przekorzystne do 300 zł (do 31.08), VeloKonto do 600 zł, BNP do 700 zł, Credit Agricole do 720 zł. Dodano sekcje „jak odebrać krok po kroku" oraz terminy promocji na stronach kont.' },
       { date: '2026-06-08', note: 'Aktualizacja premii powitalnych (czerwiec 2026): obecnie sięgają 1000-1300 zł. Potwierdzono zakończenie rebrandingu Santander Bank Polska na Erste Bank Polska (od 25.04.2026).' },
       { date: '2026-06-07', note: 'Aktualizacja warunków zwolnienia z opłat i premii powitalnych. Uwzględniono przejęcie Santander Bank Polska przez Erste.' },
