@@ -307,6 +307,7 @@ const READS = [
   { t: 'Stop loss i take profit', s: 'Jak ustawić poziomy, żeby chronić kapitał', href: '/trading/stop-loss-i-take-profit' },
   { t: 'Rodzaje zleceń - market, limit, stop', s: 'Jak faktycznie wchodzisz w rynek', href: '/trading/rodzaje-zlecen-market-limit-stop' },
   { t: 'Dźwignia i margin', s: 'Jak działają i dlaczego nie sama dźwignia jest ryzykiem', href: '/trading/dzwignia-i-margin' },
+  { t: 'Wskaźniki - RSI, MACD, średnie', s: 'Co pokazują i jak ich używać z głową', href: '/trading/wskazniki-w-tradingu-rsi-macd-srednie' },
   { t: 'Encyklopedia formacji', s: 'Świece i formacje wykresu, narysowane i wyjaśnione', href: '/formacje-tradingowe' },
   { t: 'Narzędzia tradera', s: 'Symulator, kalkulatory i dziennik w jednym miejscu', href: '/narzedzia-tradera' },
   { t: 'Jak zacząć trading od zera', s: 'Kompletny przewodnik dla początkujących', href: '/trading/jak-zaczac-trading-od-zera' },
