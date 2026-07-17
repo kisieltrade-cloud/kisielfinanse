@@ -9,6 +9,17 @@ const nextConfig = {
   // Google automatycznie przenosi sygnały SEO ze starego URL na nowy (301 = permanent)
   async redirects() {
     return [
+      // ── Kanonizacja domeny: www → bez www (301) ──────────────────────────────
+      // Bez tego www.kisielfinanse.pl i kisielfinanse.pl serwują tę samą treść z
+      // kodem 200 → duplikat w indeksie Google (potwierdzone w GSC: /slownik/* itd.
+      // zaindeksowane w obu wariantach). Host-based redirect konsoliduje sygnały SEO
+      // na wersję apex. NIE dotyka preview *.vercel.app (dopasowanie po dokładnym hoście).
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.kisielfinanse.pl' }],
+        destination: 'https://kisielfinanse.pl/:path*',
+        permanent: true,
+      },
       // Stare tagi przemianowane podczas rebrandingu
       { source: '/blog/tag/edukacja',    destination: '/trading',     permanent: true },
       { source: '/blog/tag/strategia',   destination: '/trading',     permanent: true },
