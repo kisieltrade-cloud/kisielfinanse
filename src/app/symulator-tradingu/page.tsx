@@ -11,7 +11,7 @@ const URL = `${BASE_URL}/symulator-tradingu`;
 
 export const metadata: Metadata = {
   title: { absolute: 'Symulator tradingu - ćwicz na wykresie bez ryzyka' },
-  description: 'Darmowy symulator tradingu w przeglądarce. Otwieraj pozycje long i short, ustawiaj stop loss i take profit, odsłaniaj świece i patrz, jak radzą sobie Twoje decyzje. Ćwicz cały proces bez ryzykowania pieniędzy.',
+  description: 'Darmowy symulator tradingu w przeglądarce. Otwieraj pozycje long i short, ustawiaj stop loss i take profit, odsłaniaj świece i patrz, jak radzą sobie Twoje decyzje. Tryb wyzwania podsumowuje serię 10 transakcji: trafność, profit factor, seria strat. Ćwicz cały proces bez ryzykowania pieniędzy.',
   keywords: ['symulator tradingu', 'symulator giełdy', 'paper trading', 'trening tradera', 'ćwiczenie tradingu', 'stop loss take profit', 'gra tradingowa'],
   alternates: { canonical: URL },
   openGraph: {
@@ -87,6 +87,12 @@ export default function SymulatorTradinguPage() {
             Zanim klikniesz long albo short, zadaj sobie pytanie, które zadaje sobie każdy trader: co widzę na wykresie i gdzie postawiłbym stop loss.
             Ucz się czytać ruch z <Link href="/trading/swiece-japonskie-jak-czytac-wykres" style={{ color: 'var(--cyan)' }}>świec japońskich</Link> i reagować na
             poziomach <Link href="/trading/wsparcie-i-opor-jak-wyznaczac-poziomy" style={{ color: 'var(--cyan)' }}>wsparcia i oporu</Link>.
+          </p>
+          <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--muted)', margin: '0 0 14px' }}>
+            Pojedyncza transakcja niczego nie dowodzi, bo o jej wyniku decyduje przypadek. Dlatego symulator ma tryb wyzwania:
+            seria dziesięciu transakcji na kolejnych wykresach, po której dostajesz trafność, profit factor i najdłuższą serię strat.
+            Dopiero taki zestaw pokazuje, czy zarabiasz systemem, czy jednym udanym wejściem. Seria kończy się wcześniej, gdy strata
+            przekroczy 10% kapitału, tak samo jak limit obsunięcia w planie tradingowym.
           </p>
           <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--muted)', margin: 0 }}>
             Gdy oswoisz decyzje, przenieś je do realnego planu. Zasady, według których ustawiasz tu stop lossa i take profit,

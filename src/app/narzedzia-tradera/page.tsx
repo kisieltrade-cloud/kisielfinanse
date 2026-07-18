@@ -37,7 +37,7 @@ const schemaBreadcrumb = {
 };
 
 const TOOLS = [
-  { href: '/symulator-tradingu', emoji: '🎮', name: 'Symulator tradingu', desc: 'Otwieraj pozycje long i short na wykresie, odsłaniaj świece i ćwicz decyzje bez ryzyka. Na koniec dostajesz rozbiór, co się wydarzyło.', tag: 'Ćwicz' },
+  { href: '/symulator-tradingu', emoji: '🎮', name: 'Symulator tradingu', desc: 'Otwieraj pozycje long i short na wykresie, odsłaniaj świece i ćwicz decyzje bez ryzyka. Tryb wyzwania podsumowuje serię 10 transakcji: trafność, profit factor, seria strat.', tag: 'Ćwicz' },
   { href: '/formacje-tradingowe', emoji: '📊', name: 'Encyklopedia formacji', desc: '16 formacji świecowych i wykresu, każda narysowana i wyjaśniona: byczy czy niedźwiedzi, odwrócenie czy kontynuacja, jak grać.', tag: 'Referencja' },
   { href: '/trener-formacji', emoji: '🎯', name: 'Trener formacji', desc: 'Sprawdź, czy rozpoznasz formację na wykresie. Dziesięć pytań, dwa poziomy trudności, wyjaśnienie po każdej odpowiedzi.', tag: 'Ćwicz' },
   { href: '/kalkulator/wielkosc-pozycji', emoji: '📐', name: 'Kalkulator wielkości pozycji', desc: 'Kapitał + ryzyko% + stop loss → ile jednostek kupić, żeby ryzykować tylko 1-2% konta. Podstawa zarządzania ryzykiem.', tag: 'Licz' },

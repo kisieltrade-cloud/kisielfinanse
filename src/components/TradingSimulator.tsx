@@ -14,6 +14,13 @@ const WINDOW = 46;
 const START_BALANCE = 10000;
 const STAKE_FRAC = 0.25;
 
+// ── tryb wyzwania ──
+const CH_TRADES = 10;             // seria kończy się po tylu zamkniętych transakcjach
+// Limit straty serii, odpowiednik maksymalnego obsunięcia z planu tradingowego.
+// Przy rozsądnym ryzyku nie zadziała ani razu; bije dopiero w szeroki SL i trzymanie strat.
+const CH_MAXDD = 0.1;
+const CH_KEY = 'kf-symulator-rekord-v1';
+
 const INSTRUMENTS: Instrument[] = [
   { s: 'US100', base: 19500, digits: 0 },
   { s: 'GER40', base: 18400, digits: 0 },
@@ -124,6 +131,51 @@ function plT(n: number): string {
   return 'transakcji';
 }
 
+type ChStats = {
+  pnl: number; balance: number; wins: number; losses: number; winrate: number;
+  best: number | null; worst: number | null; maxLossStreak: number; profitFactor: number | null;
+};
+
+function chStats(trades: TradeLog[]): ChStats {
+  let pnl = 0, wins = 0, losses = 0, zysk = 0, strata = 0;
+  let best: number | null = null, worst: number | null = null;
+  let streak = 0, maxLossStreak = 0;
+  for (const t of trades) {
+    pnl += t.pnl;
+    if (t.pnl > 0) { wins++; zysk += t.pnl; streak = 0; }
+    else if (t.pnl < 0) { losses++; strata += -t.pnl; streak++; if (streak > maxLossStreak) maxLossStreak = streak; }
+    if (best === null || t.pnl > best) best = t.pnl;
+    if (worst === null || t.pnl < worst) worst = t.pnl;
+  }
+  const decided = wins + losses;
+  return {
+    pnl, balance: START_BALANCE + pnl, wins, losses,
+    winrate: decided ? Math.round((wins / decided) * 100) : 0,
+    best, worst, maxLossStreak,
+    profitFactor: strata > 0 ? zysk / strata : null,
+  };
+}
+
+// Komentarz do serii. Uczy tego, co w tradingu decyduje: relacji trafności do wielkości wygranych.
+function ocenaSerii(s: ChStats, stop: boolean): string {
+  if (stop) {
+    return `Seria skończyła się wcześniej, bo strata przekroczyła ${Math.round(CH_MAXDD * 100)}% kapitału. Dokładnie tak działa limit obsunięcia w planie tradingowym: odcina Cię od rynku, zanim zaczniesz odrabiać na siłę. Przy pozycji ${Math.round(STAKE_FRAC * 100)}% salda taki limit da się przebić tylko szerokim stopem albo trzymaniem stratnej pozycji.`;
+  }
+  if (s.pnl > 0 && s.winrate < 50) {
+    return `Wyszedłeś na plus przy trafności ${s.winrate}%, czyli częściej się myliłeś, niż trafiałeś. To jest właśnie mechanizm przewagi: zyski były większe od strat. Dokładnie po to ustawia się take profit dalej niż stop loss.`;
+  }
+  if (s.pnl > 0) {
+    return `Seria na plusie przy trafności ${s.winrate}%. Sprawdź jednak, czy zysk nie wisi na jednej transakcji: najlepsza dała ${fmtZl(s.best ?? 0)}, a cała seria ${fmtZl(s.pnl)}. Jeśli różnica jest mała, to nie system zarobił, tylko jeden udany ruch.`;
+  }
+  if (s.winrate >= 50) {
+    return `Trafiłeś ${s.winrate}% transakcji i mimo to seria jest na minusie. To najczęstszy błąd początkującego: zyski ucinane szybko, straty trzymane długo. Najgorsza transakcja to ${fmtZl(s.worst ?? 0)}, najlepsza ${fmtZl(s.best ?? 0)}.`;
+  }
+  if (s.wins === 0) {
+    return `Dziesięć stratnych transakcji pod rząd wygląda dramatycznie, ale przy losowych wejściach to normalny wynik: stop loss jest bliżej ceny niż take profit, więc rynek trafia w niego częściej. Sens ma dopiero wejście z powodu, nie z ciekawości. Zobacz, po czym rozpoznać sygnał.`;
+  }
+  return `Seria na minusie przy trafności ${s.winrate}%. Zanim zmienisz strategię, zobacz najdłuższą serię strat: ${s.maxLossStreak} pod rząd. Dziesięć transakcji to za mało, żeby ocenić system, ale wystarczy, żeby zobaczyć, jak zachowujesz się po kilku stratach z rzędu.`;
+}
+
 export default function TradingSimulator() {
   // Pierwszy wykres z ziarnem (deterministyczny) - identyczny na serwerze i kliencie.
   const [chart, setChart] = useState<Chart>(() => genChart(mulberry32(20260704)));
@@ -136,6 +188,10 @@ export default function TradingSimulator() {
   const [useSlTp, setUseSlTp] = useState(true);
   const [slPct, setSlPct] = useState(1);
   const [tpPct, setTpPct] = useState(2);
+  // Tryb wyzwania: seria CH_TRADES transakcji na wynik, z osobnym logiem i rekordem.
+  const [chOn, setChOn] = useState(false);
+  const [chLog, setChLog] = useState<TradeLog[]>([]);
+  const [record, setRecord] = useState<number | null>(null);
   // Świece sprawdzone już pod kątem trafienia SL/TP, żeby nie badać ich dwa razy.
   const checkedTo = useRef(START);
 
@@ -151,27 +207,34 @@ export default function TradingSimulator() {
     return pos.stake * (pos.dir === 'long' ? frac : -frac);
   }, [pos, lastClose]);
 
+  // ── wyzwanie: stan pochodny (musi powstać przed open/closeAt, bo wchodzi w ich zależności) ──
+  const ch = useMemo(() => chStats(chLog), [chLog]);
+  const chStop = chOn && ch.balance <= START_BALANCE * (1 - CH_MAXDD);
+  const chOver = chOn && (chLog.length >= CH_TRADES || chStop);
+
   const closeAt = useCallback((price: number, reason: ExitReason) => {
     if (!pos) return;
     const frac = (price - pos.entry) / pos.entry;
     const pnl = pos.stake * (pos.dir === 'long' ? frac : -frac);
+    const trade: TradeLog = { dir: pos.dir, entry: pos.entry, exit: price, pnl, reason };
     setBalance((b) => b + pnl);
-    setLog((l) => [{ dir: pos.dir, entry: pos.entry, exit: price, pnl, reason }, ...l].slice(0, 30));
+    setLog((l) => [trade, ...l].slice(0, 30));
     setChartPnl((p) => p + pnl);
     setChartTrades((n) => n + 1);
+    if (chOn) setChLog((l) => (l.length < CH_TRADES ? [...l, trade] : l));
     setPos(null);
-  }, [pos]);
+  }, [pos, chOn]);
 
   const closePosition = useCallback(() => closeAt(lastClose, 'reczne'), [closeAt, lastClose]);
 
   const open = useCallback((dir: Dir) => {
-    if (pos || ended) return;
+    if (pos || ended || chOver) return;
     const entry = lastClose;
     const sl = useSlTp ? entry * (dir === 'long' ? 1 - slPct / 100 : 1 + slPct / 100) : undefined;
     const tp = useSlTp ? entry * (dir === 'long' ? 1 + tpPct / 100 : 1 - tpPct / 100) : undefined;
     checkedTo.current = revealed; // zlecenia mogą zadziałać dopiero od następnej świecy
     setPos({ dir, entry, stake: Math.max(0, balance * STAKE_FRAC), sl, tp });
-  }, [pos, ended, balance, lastClose, useSlTp, slPct, tpPct, revealed]);
+  }, [pos, ended, chOver, balance, lastClose, useSlTp, slPct, tpPct, revealed]);
 
   // Sprawdzanie zleceń na każdej nowo odsłoniętej świecy, po jej maksimum i minimum.
   useEffect(() => {
@@ -211,6 +274,31 @@ export default function TradingSimulator() {
     setChartTrades(0);
     if (resetAll) { setBalance(START_BALANCE); setLog([]); }
   }, []);
+
+  const startChallenge = useCallback(() => {
+    setChOn(true);
+    setChLog([]);
+    setBalance(START_BALANCE);
+    setLog([]);
+    newChart(false);
+  }, [newChart]);
+
+  const exitChallenge = useCallback(() => { setChOn(false); setChLog([]); }, []);
+
+  // Rekord trzymamy lokalnie. Odczyt w efekcie, żeby nie rozjechać hydracji.
+  useEffect(() => {
+    const raw = window.localStorage.getItem(CH_KEY);
+    if (raw !== null && Number.isFinite(Number(raw))) setRecord(Number(raw));
+  }, []);
+
+  useEffect(() => {
+    if (!chOver) return;
+    const wynik = Math.round(ch.balance);
+    const poprzedni = Number(window.localStorage.getItem(CH_KEY));
+    if (Number.isFinite(poprzedni) && poprzedni >= wynik) return;
+    window.localStorage.setItem(CH_KEY, String(wynik));
+    setRecord(wynik);
+  }, [chOver, ch.balance]);
 
   // skrót: spacja = następna świeca
   useEffect(() => {
@@ -270,6 +358,32 @@ export default function TradingSimulator() {
   return (
     <div className="tsim">
       <style>{CSS}</style>
+
+      <div className="tsim-mode">
+        <div className="tsim-mode-tabs" role="group" aria-label="Tryb symulatora">
+          <button
+            className={`tsim-mode-b${!chOn ? ' on' : ''}`}
+            onClick={exitChallenge} aria-pressed={!chOn}
+          >Trening swobodny</button>
+          <button
+            className={`tsim-mode-b${chOn ? ' on' : ''}`}
+            onClick={() => { if (!chOn) startChallenge(); }} aria-pressed={chOn}
+          >Wyzwanie: {CH_TRADES} transakcji</button>
+        </div>
+
+        {chOn && !chOver && (
+          <span className="tsim-prog">
+            <b>{chLog.length}</b> / {CH_TRADES}
+            <span className="tsim-prog-bar" aria-hidden="true">
+              <i style={{ width: `${(chLog.length / CH_TRADES) * 100}%` }} />
+            </span>
+          </span>
+        )}
+
+        {record !== null && (
+          <span className="tsim-rec">Twój rekord serii: <b>{record.toLocaleString('pl-PL')} zł</b></span>
+        )}
+      </div>
 
       <div className="tsim-stats">
         <div className="tsim-stat"><span className="tsim-stat-l">Saldo</span><span className="tsim-stat-n">{Math.round(balance).toLocaleString('pl-PL')} zł</span></div>
@@ -398,8 +512,8 @@ export default function TradingSimulator() {
       <div className="tsim-controls">
         {!pos ? (
           <>
-            <button className="tsim-btn tsim-long" onClick={() => open('long')} disabled={ended}>▲ Long (kup)</button>
-            <button className="tsim-btn tsim-short" onClick={() => open('short')} disabled={ended}>▼ Short (sprzedaj)</button>
+            <button className="tsim-btn tsim-long" onClick={() => open('long')} disabled={ended || chOver}>▲ Long (kup)</button>
+            <button className="tsim-btn tsim-short" onClick={() => open('short')} disabled={ended || chOver}>▼ Short (sprzedaj)</button>
           </>
         ) : (
           <button className="tsim-btn tsim-close" onClick={closePosition}>Zamknij ręcznie ({fmtZl(unrealized)})</button>
@@ -407,10 +521,57 @@ export default function TradingSimulator() {
         <div className="tsim-spacer" />
         <button className="tsim-btn tsim-step" onClick={() => step(1)} disabled={ended}>Następna ▶</button>
         <button className="tsim-btn tsim-step" onClick={() => step(5)} disabled={ended}>▶▶ x5</button>
-        <button className="tsim-btn tsim-new" onClick={() => newChart(false)}>Nowy wykres</button>
+        <button className="tsim-btn tsim-new" onClick={() => newChart(false)} disabled={chOver}>Nowy wykres</button>
       </div>
 
-      {ended && (
+      {chOver && (
+        <div className={`tsim-result${ch.pnl >= 0 ? ' is-up' : ' is-dn'}`}>
+          <div className="tsim-result-head">
+            <span className="tsim-result-badge">{chStop ? 'Limit straty przekroczony' : 'Seria zakończona'}</span>
+            <strong className="tsim-result-bal">{Math.round(ch.balance).toLocaleString('pl-PL')} zł</strong>
+            <span className="tsim-result-pnl">
+              {fmtZl(ch.pnl)} ({ch.pnl >= 0 ? '+' : ''}{((ch.pnl / START_BALANCE) * 100).toFixed(1)}%)
+              po {chLog.length} {plT(chLog.length)}
+            </span>
+          </div>
+
+          <div className="tsim-result-grid">
+            <div><span>Trafność</span><b>{ch.winrate}%</b></div>
+            <div>
+              <span>Najlepsza</span>
+              <b style={{ color: ch.wins ? 'var(--tsim-up)' : undefined }}>{ch.wins ? fmtZl(ch.best!) : '—'}</b>
+            </div>
+            <div>
+              <span>Najgorsza</span>
+              <b style={{ color: ch.losses ? 'var(--tsim-dn)' : undefined }}>{ch.losses ? fmtZl(ch.worst!) : '—'}</b>
+            </div>
+            <div><span>Serii strat pod rząd</span><b>{ch.maxLossStreak}</b></div>
+            <div>
+              <span>Profit factor</span>
+              <b>{ch.profitFactor === null ? '—' : ch.profitFactor.toFixed(2)}</b>
+            </div>
+          </div>
+
+          <p className="tsim-result-say">{ocenaSerii(ch, chStop)}</p>
+
+          {record !== null && Math.round(ch.balance) >= record && !chStop && (
+            <p className="tsim-result-rec">To Twój najlepszy wynik serii.</p>
+          )}
+
+          <div className="tsim-result-btns">
+            <button className="tsim-btn tsim-new" onClick={startChallenge}>Jeszcze raz →</button>
+            <button className="tsim-btn tsim-step" onClick={exitChallenge}>Wróć do treningu</button>
+          </div>
+
+          <div className="tsim-explain-links">
+            <a href="/kalkulator/wielkosc-pozycji">Kalkulator wielkości pozycji</a>
+            <a href="/trading/stop-loss-i-take-profit">Stop loss i take profit</a>
+            <a href="/kreator-planu-tradingowego">Kreator planu tradingowego</a>
+          </div>
+        </div>
+      )}
+
+      {ended && !chOver && (
         <div className="tsim-explain">
           <div className="tsim-explain-head">
             <span className="tsim-explain-badge">Co to było</span>
@@ -430,7 +591,9 @@ export default function TradingSimulator() {
             <a href="/trading/wsparcie-i-opor-jak-wyznaczac-poziomy">Wsparcie i opór</a>
             <a href="/naucz-sie-tradowac">Pełna nauka tradingu</a>
           </div>
-          <button className="tsim-btn tsim-new" onClick={() => newChart(false)}>Nowy wykres →</button>
+          <button className="tsim-btn tsim-new" onClick={() => newChart(false)}>
+            {chOn ? `Dalej: ${chLog.length}/${CH_TRADES} transakcji →` : 'Nowy wykres →'}
+          </button>
         </div>
       )}
 
@@ -439,7 +602,10 @@ export default function TradingSimulator() {
         ćwiczysz sam proces. Każda pozycja to {Math.round(STAKE_FRAC * 100)}% salda; w realu wielkość dobierasz świadomie wg ryzyka.
         Zlecenia SL i TP sprawdzane są po maksimum i minimum każdej świecy. Gdy jedna świeca obejmie oba poziomy, symulator
         przyjmuje wariant gorszy dla Ciebie, czyli stop loss, bo z samej świecy nie wynika, którą cenę rynek dotknął pierwszy.
-        Skrót: spacja = następna świeca. Chcesz zacząć od zera? <button className="tsim-reset" onClick={() => newChart(true)}>Zresetuj saldo</button>
+        Skrót: spacja = następna świeca.
+        {chOn
+          ? ` W wyzwaniu liczy się seria ${CH_TRADES} zamkniętych transakcji na kolejnych wykresach. Seria kończy się wcześniej, gdy strata przekroczy ${Math.round(CH_MAXDD * 100)}% kapitału, tak jak limit obsunięcia w planie tradingowym.`
+          : <> Chcesz zacząć od zera? <button className="tsim-reset" onClick={() => newChart(true)}>Zresetuj saldo</button></>}
       </p>
 
       {log.length > 0 && (
@@ -460,6 +626,46 @@ export default function TradingSimulator() {
 
 const CSS = `
 .tsim { --tsim-up: #16a34a; --tsim-dn: #ef4453; max-width: 820px; margin: 0 auto; font-family: var(--font-body); color: var(--text); }
+
+/* ── tryb wyzwania ── */
+.tsim-mode { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 0 0 12px; }
+.tsim-mode-tabs { display: flex; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.tsim-mode-b { padding: 8px 14px; font: inherit; font-size: .86rem; font-weight: 600; letter-spacing: .01em;
+  background: transparent; color: var(--muted); border: 0; cursor: pointer; transition: background .15s, color .15s; }
+.tsim-mode-b + .tsim-mode-b { border-left: 1px solid var(--border); }
+.tsim-mode-b:hover { color: var(--text); }
+.tsim-mode-b.on { background: var(--cyan); color: #0b0f15; }
+.tsim-prog { display: inline-flex; align-items: center; gap: 9px; font-size: .84rem; color: var(--muted); }
+.tsim-prog b { color: var(--text); font-size: 1rem; }
+.tsim-prog-bar { display: block; width: 96px; height: 4px; border-radius: 2px; background: var(--border); overflow: hidden; }
+.tsim-prog-bar i { display: block; height: 100%; background: var(--cyan); transition: width .3s ease; }
+.tsim-rec { margin-left: auto; font-size: .82rem; color: var(--muted); }
+.tsim-rec b { color: var(--text); }
+
+.tsim-result { margin-top: 16px; padding: 20px 22px; border: 1px solid var(--border); border-radius: 14px;
+  background: var(--surface); border-top: 3px solid var(--tsim-dn); }
+.tsim-result.is-up { border-top-color: var(--tsim-up); }
+.tsim-result-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.tsim-result-badge { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.tsim-result-bal { font-family: var(--font-display, inherit); font-size: 2rem; line-height: 1; color: var(--text); }
+.tsim-result-pnl { font-size: .88rem; color: var(--muted); }
+.tsim-result.is-up .tsim-result-pnl { color: var(--tsim-up); }
+.tsim-result.is-dn .tsim-result-pnl { color: var(--tsim-dn); }
+.tsim-result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)); gap: 12px;
+  margin: 16px 0; padding: 14px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.tsim-result-grid div { display: flex; flex-direction: column; gap: 3px; }
+.tsim-result-grid span { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.tsim-result-grid b { font-size: 1.06rem; color: var(--text); }
+.tsim-result-say { margin: 0; font-size: .93rem; line-height: 1.65; color: var(--text); }
+.tsim-result-rec { margin: 10px 0 0; font-size: .86rem; font-weight: 600; color: var(--cyan); }
+.tsim-result-btns { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 4px; }
+
+@media (max-width: 560px) {
+  .tsim-mode { gap: 10px; }
+  .tsim-rec { margin-left: 0; width: 100%; }
+  .tsim-result { padding: 16px; }
+  .tsim-result-bal { font-size: 1.6rem; }
+}
 
 .tsim-orders { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin: 12px 0 0; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
 .tsim-toggle { display: inline-flex; align-items: center; gap: 9px; background: none; border: none; color: var(--muted); font-family: var(--font-body); font-size: 0.88rem; font-weight: 700; cursor: pointer; padding: 0; }
