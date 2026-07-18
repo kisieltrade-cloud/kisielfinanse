@@ -10,8 +10,8 @@ const URL = `${BASE_URL}/narzedzia-tradera`;
 
 export const metadata: Metadata = {
   title: { absolute: 'Narzędzia tradera - symulator, kalkulatory, formacje' },
-  description: 'Wszystkie narzędzia dla tradera w jednym miejscu: symulator tradingu, trener formacji, encyklopedia formacji, kalkulator wielkości pozycji i Risk/Reward oraz dziennik transakcji. Za darmo, bez rejestracji.',
-  keywords: ['narzędzia tradera', 'symulator tradingu', 'trener formacji', 'kalkulator wielkości pozycji', 'encyklopedia formacji', 'kalkulator risk reward', 'dziennik transakcji'],
+  description: 'Wszystkie narzędzia dla tradera w jednym miejscu: symulator tradingu, trener formacji, kreator planu tradingowego, encyklopedia formacji, kalkulator wielkości pozycji i Risk/Reward oraz dziennik transakcji. Za darmo, bez rejestracji.',
+  keywords: ['narzędzia tradera', 'symulator tradingu', 'trener formacji', 'plan tradingowy', 'kalkulator wielkości pozycji', 'encyklopedia formacji', 'kalkulator risk reward', 'dziennik transakcji'],
   alternates: { canonical: URL },
   openGraph: {
     title: 'Narzędzia tradera | KisielFinanse',
@@ -41,6 +41,7 @@ const TOOLS = [
   { href: '/formacje-tradingowe', emoji: '📊', name: 'Encyklopedia formacji', desc: '16 formacji świecowych i wykresu, każda narysowana i wyjaśniona: byczy czy niedźwiedzi, odwrócenie czy kontynuacja, jak grać.', tag: 'Referencja' },
   { href: '/trener-formacji', emoji: '🎯', name: 'Trener formacji', desc: 'Sprawdź, czy rozpoznasz formację na wykresie. Dziesięć pytań, dwa poziomy trudności, wyjaśnienie po każdej odpowiedzi.', tag: 'Ćwicz' },
   { href: '/kalkulator/wielkosc-pozycji', emoji: '📐', name: 'Kalkulator wielkości pozycji', desc: 'Kapitał + ryzyko% + stop loss → ile jednostek kupić, żeby ryzykować tylko 1-2% konta. Podstawa zarządzania ryzykiem.', tag: 'Licz' },
+  { href: '/kreator-planu-tradingowego', emoji: '📋', name: 'Kreator planu tradingowego', desc: 'Pięć kroków i masz spisany plan: ryzyko na transakcję, warunki wejścia, stop loss i limity strat. Z policzonymi kwotami, do wydruku lub PDF.', tag: 'Zaplanuj' },
   { href: '/kalkulator/risk-reward', emoji: '⚖️', name: 'Kalkulator Risk/Reward', desc: 'Oceń, czy potencjalny zysk jest wart ryzykowanej kwoty, zanim wejdziesz w pozycję.', tag: 'Licz' },
   { href: '/naucz-sie-tradowac', emoji: '🎓', name: 'Naucz się tradować', desc: 'Pełna mapa nauki od zera do pierwszego trade’a, quiz formacji i dziennik transakcji w Excelu do pobrania.', tag: 'Ucz się' },
 ];
