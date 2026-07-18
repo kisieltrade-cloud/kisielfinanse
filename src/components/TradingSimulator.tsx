@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState, useCallback, useEffect } from 'react';
+import { useMemo, useState, useCallback, useEffect, useRef } from 'react';
 
 // Symulator paper-trading. Świece są GENEROWANE (błądzenie losowe z dryfem),
 // nie są realnymi danymi rynkowymi - to sandbox do ćwiczenia decyzji.
@@ -28,8 +28,16 @@ const INSTRUMENTS: Instrument[] = [
 const TFS = ['M15', 'H1', 'H4', 'D1'];
 
 type Dir = 'long' | 'short';
-type Position = { dir: Dir; entry: number; stake: number };
-type TradeLog = { dir: Dir; entry: number; exit: number; pnl: number };
+type Position = { dir: Dir; entry: number; stake: number; sl?: number; tp?: number };
+type ExitReason = 'sl' | 'tp' | 'reczne' | 'koniec';
+type TradeLog = { dir: Dir; entry: number; exit: number; pnl: number; reason: ExitReason };
+
+const REASON_LABEL: Record<ExitReason, string> = {
+  sl: 'stop loss',
+  tp: 'take profit',
+  reczne: 'ręcznie',
+  koniec: 'koniec wykresu',
+};
 type Chart = { candles: Candle[]; inst: Instrument; tf: string; regime: number };
 
 function mulberry32(a: number): () => number {
@@ -125,6 +133,11 @@ export default function TradingSimulator() {
   const [log, setLog] = useState<TradeLog[]>([]);
   const [chartPnl, setChartPnl] = useState(0);   // wynik na bieżącym wykresie
   const [chartTrades, setChartTrades] = useState(0);
+  const [useSlTp, setUseSlTp] = useState(true);
+  const [slPct, setSlPct] = useState(1);
+  const [tpPct, setTpPct] = useState(2);
+  // Świece sprawdzone już pod kątem trafienia SL/TP, żeby nie badać ich dwa razy.
+  const checkedTo = useRef(START);
 
   const { candles, inst, tf, regime } = chart;
   const dg = inst.digits;
@@ -138,33 +151,61 @@ export default function TradingSimulator() {
     return pos.stake * (pos.dir === 'long' ? frac : -frac);
   }, [pos, lastClose]);
 
-  const closePosition = useCallback(() => {
+  const closeAt = useCallback((price: number, reason: ExitReason) => {
     if (!pos) return;
-    const frac = (lastClose - pos.entry) / pos.entry;
+    const frac = (price - pos.entry) / pos.entry;
     const pnl = pos.stake * (pos.dir === 'long' ? frac : -frac);
     setBalance((b) => b + pnl);
-    setLog((l) => [{ dir: pos.dir, entry: pos.entry, exit: lastClose, pnl }, ...l].slice(0, 30));
+    setLog((l) => [{ dir: pos.dir, entry: pos.entry, exit: price, pnl, reason }, ...l].slice(0, 30));
     setChartPnl((p) => p + pnl);
     setChartTrades((n) => n + 1);
     setPos(null);
-  }, [pos, lastClose]);
+  }, [pos]);
+
+  const closePosition = useCallback(() => closeAt(lastClose, 'reczne'), [closeAt, lastClose]);
 
   const open = useCallback((dir: Dir) => {
     if (pos || ended) return;
-    setPos({ dir, entry: lastClose, stake: Math.max(0, balance * STAKE_FRAC) });
-  }, [pos, ended, balance, lastClose]);
+    const entry = lastClose;
+    const sl = useSlTp ? entry * (dir === 'long' ? 1 - slPct / 100 : 1 + slPct / 100) : undefined;
+    const tp = useSlTp ? entry * (dir === 'long' ? 1 + tpPct / 100 : 1 - tpPct / 100) : undefined;
+    checkedTo.current = revealed; // zlecenia mogą zadziałać dopiero od następnej świecy
+    setPos({ dir, entry, stake: Math.max(0, balance * STAKE_FRAC), sl, tp });
+  }, [pos, ended, balance, lastClose, useSlTp, slPct, tpPct, revealed]);
+
+  // Sprawdzanie zleceń na każdej nowo odsłoniętej świecy, po jej maksimum i minimum.
+  useEffect(() => {
+    if (!pos || (pos.sl === undefined && pos.tp === undefined)) {
+      checkedTo.current = revealed;
+      return;
+    }
+    for (let i = checkedTo.current; i < revealed; i++) {
+      const c = candles[i];
+      const hitSl = pos.sl !== undefined && (pos.dir === 'long' ? c[2] <= pos.sl : c[1] >= pos.sl);
+      const hitTp = pos.tp !== undefined && (pos.dir === 'long' ? c[1] >= pos.tp : c[2] <= pos.tp);
+      if (hitSl || hitTp) {
+        // Gdy jedna świeca obejmuje oba poziomy, nie wiadomo, który cenę dotknęła pierwszy.
+        // Przyjmujemy wariant gorszy dla tradera, czyli stop loss. Tak samo robi się w rzetelnych testach.
+        checkedTo.current = revealed;
+        closeAt(hitSl ? pos.sl! : pos.tp!, hitSl ? 'sl' : 'tp');
+        return;
+      }
+    }
+    checkedTo.current = revealed;
+  }, [revealed, pos, candles, closeAt]);
 
   const step = useCallback((n = 1) => {
     setRevealed((r) => Math.min(TOTAL, r + n));
   }, []);
 
   useEffect(() => {
-    if (ended && pos) closePosition();
-  }, [ended, pos, closePosition]);
+    if (ended && pos) closeAt(lastClose, 'koniec');
+  }, [ended, pos, closeAt, lastClose]);
 
   const newChart = useCallback((resetAll = false) => {
     setChart(genChart());
     setRevealed(START);
+    checkedTo.current = START;
     setPos(null);
     setChartPnl(0);
     setChartTrades(0);
@@ -195,7 +236,20 @@ export default function TradingSimulator() {
   const view = candles.slice(from, revealed);
   let min = Infinity, max = -Infinity;
   view.forEach((c) => { if (c[2] < min) min = c[2]; if (c[1] > max) max = c[1]; });
-  if (pos) { min = Math.min(min, pos.entry); max = Math.max(max, pos.entry); }
+  if (pos) {
+    min = Math.min(min, pos.entry);
+    max = Math.max(max, pos.entry);
+    // Poziomy zleceń dociągamy do widoku, ale najwyżej o połowę zakresu świec.
+    // Bez tego szeroki take profit rozciąga skalę i zgniata wykres do paska na dole.
+    const luz = (max - min) * 0.5;
+    const dolnyLimit = min - luz;
+    const gornyLimit = max + luz;
+    for (const lvl of [pos.sl, pos.tp]) {
+      if (lvl === undefined) continue;
+      if (lvl < min && lvl >= dolnyLimit) min = lvl;
+      if (lvl > max && lvl <= gornyLimit) max = lvl;
+    }
+  }
   const pad = (max - min) * 0.06 || 1;
   min -= pad; max += pad;
   const plotR = W - AXIS;
@@ -243,12 +297,41 @@ export default function TradingSimulator() {
             </g>
           ))}
 
-          {pos && (
-            <g>
-              <line className="tsim-entry" x1={PADX} x2={plotR} y1={yy(pos.entry)} y2={yy(pos.entry)} />
-              <text className="tsim-entry-t" x={PADX + 4} y={yy(pos.entry) - 5}>{pos.dir === 'long' ? 'LONG' : 'SHORT'} @ {fmt(pos.entry, dg)}</text>
-            </g>
-          )}
+          {pos && (() => {
+            // Poziom poza widokiem rysujemy przy krawędzi ze strzałką, zamiast go gubić.
+            const lvlY = (p: number) => Math.max(PADTOP, Math.min(PADTOP + plotH, yy(p)));
+            const poza = (p: number) => p > max || p < min;
+
+            const poziom = (p: number, label: 'TP' | 'SL', kolor: string, cls: string) => {
+              const y = lvlY(p);
+              const out = poza(p);
+              return (
+                <>
+                  <rect
+                    x={PADX} y={Math.min(lvlY(pos.entry), y)} width={plotW}
+                    height={Math.abs(y - lvlY(pos.entry))} fill={kolor} opacity={0.07}
+                  />
+                  <line className={cls} x1={PADX} x2={plotR} y1={y} y2={y} />
+                  <text
+                    className="tsim-lvl-t" x={plotR - 6}
+                    y={label === 'TP' ? y + (out ? 12 : -5) : y + (out ? -5 : 12)}
+                    textAnchor="end" fill={kolor}
+                  >
+                    {label} {fmt(p, dg)}{out ? (label === 'TP' ? ' ↑' : ' ↓') : ''}
+                  </text>
+                </>
+              );
+            };
+
+            return (
+              <g>
+                {pos.tp !== undefined && poziom(pos.tp, 'TP', '#16a34a', 'tsim-tp')}
+                {pos.sl !== undefined && poziom(pos.sl, 'SL', '#ef4453', 'tsim-sl')}
+                <line className="tsim-entry" x1={PADX} x2={plotR} y1={yy(pos.entry)} y2={yy(pos.entry)} />
+                <text className="tsim-entry-t" x={PADX + 4} y={yy(pos.entry) - 5}>{pos.dir === 'long' ? 'LONG' : 'SHORT'} @ {fmt(pos.entry, dg)}</text>
+              </g>
+            );
+          })()}
 
           {view.map((c, i) => {
             const up = c[3] >= c[0];
@@ -278,6 +361,40 @@ export default function TradingSimulator() {
         {ended && <span className="tsim-end">Koniec wykresu</span>}
       </div>
 
+      {!pos && (
+        <div className="tsim-orders">
+          <button
+            className={`tsim-toggle${useSlTp ? ' on' : ''}`}
+            onClick={() => setUseSlTp((v) => !v)}
+            aria-pressed={useSlTp}
+          >
+            <span className="tsim-toggle-box" aria-hidden="true">{useSlTp ? '✓' : ''}</span>
+            Zlecenia obronne (SL / TP)
+          </button>
+
+          {useSlTp && (
+            <div className="tsim-order-fields">
+              <label className="tsim-of">
+                <span>Stop loss</span>
+                <input type="number" min={0.1} max={10} step={0.1} value={slPct}
+                  onChange={(e) => setSlPct(Math.min(10, Math.max(0.1, Number(e.target.value) || 0.1)))} />
+                <em>%</em>
+              </label>
+              <label className="tsim-of">
+                <span>Take profit</span>
+                <input type="number" min={0.1} max={20} step={0.1} value={tpPct}
+                  onChange={(e) => setTpPct(Math.min(20, Math.max(0.1, Number(e.target.value) || 0.1)))} />
+                <em>%</em>
+              </label>
+              <span className="tsim-rr">
+                R/R 1:{(tpPct / slPct).toFixed(2).replace(/\.?0+$/, '')}
+                <small>wyjście na zero przy {Math.round((1 / (1 + tpPct / slPct)) * 100)}% trafień</small>
+              </span>
+            </div>
+          )}
+        </div>
+      )}
+
       <div className="tsim-controls">
         {!pos ? (
           <>
@@ -285,7 +402,7 @@ export default function TradingSimulator() {
             <button className="tsim-btn tsim-short" onClick={() => open('short')} disabled={ended}>▼ Short (sprzedaj)</button>
           </>
         ) : (
-          <button className="tsim-btn tsim-close" onClick={closePosition}>Zamknij pozycję ({fmtZl(unrealized)})</button>
+          <button className="tsim-btn tsim-close" onClick={closePosition}>Zamknij ręcznie ({fmtZl(unrealized)})</button>
         )}
         <div className="tsim-spacer" />
         <button className="tsim-btn tsim-step" onClick={() => step(1)} disabled={ended}>Następna ▶</button>
@@ -320,6 +437,8 @@ export default function TradingSimulator() {
       <p className="tsim-note">
         Świece są generowane losowo do treningu (instrument i interwał są losowane), to nie są realne notowania - dlatego bezpiecznie
         ćwiczysz sam proces. Każda pozycja to {Math.round(STAKE_FRAC * 100)}% salda; w realu wielkość dobierasz świadomie wg ryzyka.
+        Zlecenia SL i TP sprawdzane są po maksimum i minimum każdej świecy. Gdy jedna świeca obejmie oba poziomy, symulator
+        przyjmuje wariant gorszy dla Ciebie, czyli stop loss, bo z samej świecy nie wynika, którą cenę rynek dotknął pierwszy.
         Skrót: spacja = następna świeca. Chcesz zacząć od zera? <button className="tsim-reset" onClick={() => newChart(true)}>Zresetuj saldo</button>
       </p>
 
@@ -329,6 +448,7 @@ export default function TradingSimulator() {
             <div key={i} className="tsim-log-row">
               <span className={`tsim-tag ${t.dir === 'long' ? 'is-long' : 'is-short'}`}>{t.dir === 'long' ? 'Long' : 'Short'}</span>
               <span className="tsim-log-px">{fmt(t.entry, dg)} → {fmt(t.exit, dg)}</span>
+              <span className={`tsim-why is-${t.reason}`}>{REASON_LABEL[t.reason]}</span>
               <span className="tsim-log-pnl" style={{ color: t.pnl >= 0 ? 'var(--tsim-up)' : 'var(--tsim-dn)' }}>{fmtZl(t.pnl)}</span>
             </div>
           ))}
@@ -340,6 +460,25 @@ export default function TradingSimulator() {
 
 const CSS = `
 .tsim { --tsim-up: #16a34a; --tsim-dn: #ef4453; max-width: 820px; margin: 0 auto; font-family: var(--font-body); color: var(--text); }
+
+.tsim-orders { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin: 12px 0 0; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+.tsim-toggle { display: inline-flex; align-items: center; gap: 9px; background: none; border: none; color: var(--muted); font-family: var(--font-body); font-size: 0.88rem; font-weight: 700; cursor: pointer; padding: 0; }
+.tsim-toggle.on { color: var(--text); }
+.tsim-toggle-box { width: 18px; height: 18px; border-radius: 5px; border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #0a0a0a; }
+.tsim-toggle.on .tsim-toggle-box { background: var(--cyan); border-color: var(--cyan); }
+.tsim-order-fields { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.tsim-of { display: inline-flex; align-items: center; gap: 7px; font-size: 0.84rem; color: var(--muted); }
+.tsim-of input { width: 66px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 6px 8px; color: var(--text); font-family: var(--font-mono); font-size: 0.85rem; }
+.tsim-of input:focus { outline: none; border-color: var(--cyan); }
+.tsim-of em { font-style: normal; color: var(--muted); font-size: 0.8rem; }
+.tsim-rr { display: flex; flex-direction: column; font-size: 0.86rem; font-weight: 700; color: var(--cyan); }
+.tsim-rr small { font-size: 0.74rem; font-weight: 400; color: var(--muted); }
+.tsim-sl { stroke: #ef4453; stroke-width: 1.2; stroke-dasharray: 5 4; }
+.tsim-tp { stroke: #16a34a; stroke-width: 1.2; stroke-dasharray: 5 4; }
+.tsim-lvl-t { font-family: var(--font-mono); font-size: 10px; font-weight: 700; }
+.tsim-why { font-size: 0.7rem; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,0.06); color: var(--muted); white-space: nowrap; }
+.tsim-why.is-sl { background: rgba(239,68,83,0.15); color: #ef4453; }
+.tsim-why.is-tp { background: rgba(22,163,74,0.15); color: #16a34a; }
 .tsim-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
 .tsim-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .tsim-stat-l { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); opacity: 0.8; }

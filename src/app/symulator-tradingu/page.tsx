@@ -11,8 +11,8 @@ const URL = `${BASE_URL}/symulator-tradingu`;
 
 export const metadata: Metadata = {
   title: { absolute: 'Symulator tradingu - ćwicz na wykresie bez ryzyka' },
-  description: 'Darmowy symulator tradingu w przeglądarce. Otwieraj pozycje long i short, odsłaniaj świece i patrz, jak radzą sobie Twoje decyzje. Ćwicz wchodzenie i wychodzenie bez ryzykowania pieniędzy.',
-  keywords: ['symulator tradingu', 'symulator giełdy', 'paper trading', 'trening tradera', 'ćwiczenie tradingu', 'gra tradingowa'],
+  description: 'Darmowy symulator tradingu w przeglądarce. Otwieraj pozycje long i short, ustawiaj stop loss i take profit, odsłaniaj świece i patrz, jak radzą sobie Twoje decyzje. Ćwicz cały proces bez ryzykowania pieniędzy.',
+  keywords: ['symulator tradingu', 'symulator giełdy', 'paper trading', 'trening tradera', 'ćwiczenie tradingu', 'stop loss take profit', 'gra tradingowa'],
   alternates: { canonical: URL },
   openGraph: {
     title: 'Symulator tradingu - ćwicz na wykresie bez ryzyka | KisielFinanse',
@@ -89,7 +89,9 @@ export default function SymulatorTradinguPage() {
             poziomach <Link href="/trading/wsparcie-i-opor-jak-wyznaczac-poziomy" style={{ color: 'var(--cyan)' }}>wsparcia i oporu</Link>.
           </p>
           <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--muted)', margin: 0 }}>
-            Gdy oswoisz decyzje, przenieś je do realnego planu. Pełna mapa nauki jest w przewodniku{' '}
+            Gdy oswoisz decyzje, przenieś je do realnego planu. Zasady, według których ustawiasz tu stop lossa i take profit,
+            spiszesz w <Link href="/kreator-planu-tradingowego" style={{ color: 'var(--cyan)' }}>kreatorze planu tradingowego</Link>.
+            Pełna mapa nauki jest w przewodniku{' '}
             <Link href="/naucz-sie-tradowac" style={{ color: 'var(--cyan)' }}>naucz się tradować</Link>, a stosunek zysku do ryzyka policzysz w{' '}
             <Link href="/kalkulator/risk-reward" style={{ color: 'var(--cyan)' }}>kalkulatorze Risk/Reward</Link>.
           </p>
