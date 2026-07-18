@@ -78,8 +78,10 @@ export default function FormacjeTradingowePage() {
             <Link href="/trading/swiece-japonskie-jak-czytac-wykres" style={{ color: 'var(--cyan)' }}>świecach japońskich</Link>.
           </p>
           <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--muted)', margin: 0 }}>
-            Rozpoznawanie formacji poćwiczysz na żywym wykresie w{' '}
-            <Link href="/symulator-tradingu" style={{ color: 'var(--cyan)' }}>symulatorze tradingu</Link>, a całą drogę nauki
+            Rozpoznawanie formacji sprawdzisz od razu w{' '}
+            <Link href="/trener-formacji" style={{ color: 'var(--cyan)' }}>trenerze formacji</Link>, gdzie za każdym razem
+            dostajesz je narysowane trochę inaczej, a potem na żywym wykresie w{' '}
+            <Link href="/symulator-tradingu" style={{ color: 'var(--cyan)' }}>symulatorze tradingu</Link>. Całą drogę nauki
             znajdziesz w przewodniku <Link href="/naucz-sie-tradowac" style={{ color: 'var(--cyan)' }}>naucz się tradować</Link>.
           </p>
         </section>
