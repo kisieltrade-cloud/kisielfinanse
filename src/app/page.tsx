@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
 import CategoriesSection from '@/components/CategoriesSection';
+import TradingToolsSection from '@/components/TradingToolsSection';
 import CalcSection from '@/components/CalcSection';
 import HomeRanking from '@/components/HomeRanking';
 import BlogSection from '@/components/BlogSection';
@@ -46,6 +47,7 @@ export default function HomePage() {
       <Nav />
       <main>
         <Hero />
+        <TradingToolsSection />
         <CalcSection />
         <HomeRanking />
         <CategoriesSection />

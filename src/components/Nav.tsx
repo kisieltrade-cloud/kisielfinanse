@@ -7,7 +7,20 @@ import ThemeToggle from '@/components/ThemeToggle';
 
 const MAIN_LINKS = [
   { href: '/o-mnie',  label: 'O mnie' },
-  { href: '/naucz-sie-tradowac', label: 'Naucz się tradować' },
+];
+
+// Trading ma własne menu, bo jest rdzeniem serwisu, a dwie osobne pozycje najwyższego
+// poziomu (nauka + narzędzia) przepełniały pasek i łamały etykiety na dwie linie.
+const TRADING_ITEMS = [
+  { href: '/naucz-sie-tradowac',            label: 'Naucz się tradować',   icon: '🎓' },
+  { href: '/narzedzia-tradera',             label: 'Narzędzia tradera',    icon: '🧰' },
+  { href: '/symulator-tradingu',            label: 'Symulator tradingu',   icon: '🎮' },
+  { href: '/trener-formacji',               label: 'Trener formacji',      icon: '🎯' },
+  { href: '/formacje-tradingowe',           label: 'Encyklopedia formacji', icon: '📊' },
+  { href: '/kreator-planu-tradingowego',    label: 'Kreator planu',        icon: '📋' },
+  { href: '/dziennik-tradera',              label: 'Dziennik tradera',     icon: '📓' },
+  { href: '/kalkulator/wielkosc-pozycji',   label: 'Wielkość pozycji',     icon: '📐' },
+  { href: '/kalkulator/risk-reward',        label: 'Risk / Reward',        icon: '⚖️' },
 ];
 
 const UTIL_LINKS = [
@@ -15,18 +28,19 @@ const UTIL_LINKS = [
   { href: '/quiz', label: 'Quiz' },
 ];
 
+// Narzędzia tradingowe otwierają listę, bo trading jest rdzeniem serwisu. Kalkulatory
+// kredytowe zjechały tutaj z najwyższego poziomu nawigacji, gdzie zajmowały trzy pozycje.
 const CALC_ITEMS = [
-  { href: '/symulator-inwestycji',          label: 'Symulator inwestycji', icon: '⏳' },
-  { href: '/symulator-tradingu',            label: 'Symulator tradingu', icon: '🎮' },
-  { href: '/kalkulator/wynagrodzenia',      label: 'Wynagrodzenia brutto-netto', icon: '💰' },
-  { href: '/kalkulator/skladka-zdrowotna',  label: 'Składka zdrowotna',          icon: '🩺' },
-  { href: '/kalkulator/zdolnosc-kredytowa', label: 'Zdolność kredytowa',         icon: '🏦' },
+  { href: '/symulator-inwestycji',          label: 'Symulator inwestycji',       icon: '⏳' },
   { href: '/kalkulator/procent-skladany',   label: 'Procent składany',           icon: '📈' },
   { href: '/kalkulator/dca',                label: 'DCA',                        icon: '🔁' },
-  { href: '/kalkulator/risk-reward',        label: 'Risk / Reward',              icon: '⚖️' },
-  { href: '/kalkulator/wielkosc-pozycji',   label: 'Wielkość pozycji',           icon: '📐' },
-  { href: '/kalkulator/fire',               label: 'Kalkulator FIRE',            icon: '🔥' },
   { href: '/kalkulator/etf',                label: 'Symulacja ETF',              icon: '📊' },
+  { href: '/kalkulator/fire',               label: 'Kalkulator FIRE',            icon: '🔥' },
+  { href: '/kalkulator-hipoteczny',         label: 'Kalkulator hipoteczny',      icon: '🏠' },
+  { href: '/kalkulator/kredyt-gotowkowy',   label: 'Kredyt gotówkowy',           icon: '💳' },
+  { href: '/kalkulator/zdolnosc-kredytowa', label: 'Zdolność kredytowa',         icon: '🏦' },
+  { href: '/kalkulator/wynagrodzenia',      label: 'Wynagrodzenia brutto-netto', icon: '💰' },
+  { href: '/kalkulator/skladka-zdrowotna',  label: 'Składka zdrowotna',          icon: '🩺' },
   { href: '/kalkulator/godziny-pracy',      label: 'Ile godzin pracy?',          icon: '⏱️' },
 ];
 
@@ -45,8 +59,10 @@ export default function Nav() {
   const calcRef = useRef<HTMLLIElement>(null);
   const [eduOpen, setEduOpen] = useState(false);
   const eduRef = useRef<HTMLLIElement>(null);
+  const [tradeOpen, setTradeOpen] = useState(false);
+  const tradeRef = useRef<HTMLLIElement>(null);
 
-  useEffect(() => { setOpen(false); setCalcOpen(false); setEduOpen(false); }, [pathname]);
+  useEffect(() => { setOpen(false); setCalcOpen(false); setEduOpen(false); setTradeOpen(false); }, [pathname]);
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -63,6 +79,18 @@ export default function Nav() {
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, [calcOpen]);
+
+  // zamknij dropdown trading po kliknięciu poza nim
+  useEffect(() => {
+    if (!tradeOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (tradeRef.current && !tradeRef.current.contains(e.target as Node)) {
+        setTradeOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [tradeOpen]);
 
   // zamknij dropdown edukacja po kliknięciu poza nim
   useEffect(() => {
@@ -106,6 +134,31 @@ export default function Nav() {
 
           {/* Separator */}
           <li className="nav-sep" aria-hidden="true" />
+
+          {/* Dropdown: Trading (filar, hub i wszystkie narzędzia tradingowe) */}
+          <li className="nav-dropdown" ref={tradeRef}>
+            <button
+              className={`nav-dropdown-trigger${TRADING_ITEMS.some((i) => i.href === pathname) ? ' nav-dropdown-trigger--active' : ''}`}
+              onClick={() => setTradeOpen((v) => !v)}
+              aria-expanded={tradeOpen}
+            >
+              Trading
+              <span className={`nav-dropdown-arrow${tradeOpen ? ' nav-dropdown-arrow--open' : ''}`}>▾</span>
+            </button>
+
+            {tradeOpen && (
+              <ul className="nav-dropdown-menu">
+                {TRADING_ITEMS.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href} className="nav-dropdown-item" onClick={() => setTradeOpen(false)}>
+                      <span className="nav-dropdown-item-icon">{item.icon}</span>
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
 
           {/* Dropdown: Edukacja (kategorie) */}
           <li className="nav-dropdown" ref={eduRef}>
@@ -151,31 +204,11 @@ export default function Nav() {
               href="/ranking/konta-osobiste"
               style={{ color: pathname.startsWith('/ranking') ? 'var(--cyan)' : undefined }}
             >
-              Ranking kont osobistych
+              Ranking kont
             </Link>
           </li>
 
-          {/* Kredyt gotówkowy */}
-          <li>
-            <Link
-              href="/kalkulator/kredyt-gotowkowy"
-              style={{ color: isActive('/kalkulator/kredyt-gotowkowy') ? 'var(--cyan)' : undefined }}
-            >
-              Kredyt gotówkowy
-            </Link>
-          </li>
-
-          {/* Kalkulator hipoteczny — osobny link obok dropdown */}
-          <li>
-            <Link
-              href="/kalkulator-hipoteczny"
-              style={{ color: isActive('/kalkulator-hipoteczny') ? 'var(--cyan)' : undefined }}
-            >
-              Kalkulator hipoteczny
-            </Link>
-          </li>
-
-          {/* Dropdown: Kalkulatory */}
+          {/* Dropdown: Kalkulatory (kredyt gotówkowy i hipoteczny są teraz w środku) */}
           <li className="nav-dropdown" ref={calcRef}>
             <button
               className={`nav-dropdown-trigger${pathname === '/kalkulator' ? ' nav-dropdown-trigger--active' : ''}`}
@@ -244,6 +277,21 @@ export default function Nav() {
               </li>
             ))}
 
+            <li className="mobile-menu-section">Trading</li>
+
+            {TRADING_ITEMS.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="mobile-menu-link"
+                  style={{ color: isActive(item.href) ? 'var(--cyan)' : undefined }}
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+
             <li className="mobile-menu-section">Edukacja</li>
 
             {CATEGORIES.map((cat) => (
@@ -269,28 +317,6 @@ export default function Nav() {
                 onClick={() => setOpen(false)}
               >
                 Ranking kont osobistych
-              </Link>
-            </li>
-
-            <li>
-              <Link
-                href="/kalkulator/kredyt-gotowkowy"
-                className="mobile-menu-link"
-                style={{ color: isActive('/kalkulator/kredyt-gotowkowy') ? 'var(--cyan)' : undefined }}
-                onClick={() => setOpen(false)}
-              >
-                Kredyt gotówkowy
-              </Link>
-            </li>
-
-            <li>
-              <Link
-                href="/kalkulator-hipoteczny"
-                className="mobile-menu-link"
-                style={{ color: isActive('/kalkulator-hipoteczny') ? 'var(--cyan)' : undefined }}
-                onClick={() => setOpen(false)}
-              >
-                Kalkulator hipoteczny
               </Link>
             </li>
 
