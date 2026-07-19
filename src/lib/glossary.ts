@@ -277,8 +277,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['S&P 500', 'S&P500', 'SP500', 'indeks S&P 500'],
     short: 'S&P 500 to indeks 500 największych spółek notowanych w USA. Uważany za najlepszy barometr amerykańskiej giełdy i punkt odniesienia dla inwestorów na całym świecie.',
     body: [
-      'W jego skład wchodzą giganci tacy jak Apple, Microsoft czy Nvidia. Historycznie indeks dawał średnio około 7-10% rocznie w długim terminie (nominalnie), choć z dużymi wahaniami po drodze.',
-      'Najprostszy sposób inwestowania w S&P 500 to ETF odwzorowujący ten indeks. Dla wielu inwestorów pasywnych stanowi fundament portfela.',
+      'Indeks obejmuje pięćset największych spółek notowanych w Stanach Zjednoczonych, wybieranych przez komitet według kryteriów obejmujących kapitalizację, płynność i rentowność. Skład nie jest więc automatyczną listą największych firm, tylko decyzją opartą na regułach, a spółki bywają z niego usuwane i do niego dodawane.',
+      'Największa cecha, którą początkujący przeoczają: indeks jest ważony kapitalizacją. Oznacza to, że największe spółki mają w nim nieproporcjonalnie duży udział, a kilkanaście czołowych firm technologicznych potrafi odpowiadać za znaczną część całości. Kupując ETF na S&P 500, nie kupujesz więc pięciuset równych części, tylko portfel silnie przechylony w stronę kilku gigantów.',
+      'Historyczna stopa zwrotu podawana jest zwykle w przedziale około 7 do 10 procent rocznie w długim terminie, ale ta liczba wymaga trzech zastrzeżeń. Jest nominalna, czyli przed inflacją. Dotyczy okresów wielodziesięcioletnich, wewnątrz których zdarzały się dekady bez zysku. I jest liczona z reinwestowanymi dywidendami, więc sam wykres indeksu cenowego pokazuje mniej.',
+      'Dla polskiego inwestora dochodzi ryzyko walutowe, o którym łatwo zapomnieć. Indeks jest wyceniany w dolarze, więc na Twój wynik w złotych wpływa nie tylko zachowanie amerykańskich spółek, ale też kurs USD/PLN. Umocnienie złotego potrafi zjeść część zysku z rosnącego indeksu, a osłabienie dodać zysk mimo stojącego rynku.',
+      'Najprostszą formą ekspozycji jest fundusz notowany na giełdzie odwzorowujący ten indeks. Dla inwestora z Unii Europejskiej istotny jest domicyl funduszu, najczęściej irlandzki, ze względu na korzystniejsze opodatkowanie dywidend u źródła, oraz wariant akumulujący, który reinwestuje dywidendy zamiast je wypłacać.',
+    ],
+    example: {
+      title: 'Co naprawdę oznacza „500 spółek"',
+      text: 'Ponieważ indeks jest ważony kapitalizacją, udział spółki zależy od jej wielkości, a nie od miejsca na liście. Firma warta bilion dolarów waży w indeksie tyle, co kilkadziesiąt najmniejszych spółek razem wziętych. W praktyce oznacza to, że wynik funduszu na S&P 500 w dużej mierze zależy od kilkunastu największych firm, głównie technologicznych. Dywersyfikacja jest więc mniejsza, niż sugeruje liczba pięćset, i to jest argument za dołożeniem ekspozycji na inne regiony.',
+    },
+    faq: [
+      {
+        q: 'Jak inwestować w S&P 500 z Polski?',
+        a: 'Najprościej przez fundusz notowany na giełdzie odwzorowujący ten indeks, kupowany na zwykłym rachunku maklerskim, w ramach IKE albo IKZE. Zwraca się uwagę na koszty roczne funduszu, jego wielkość oraz domicyl, najczęściej irlandzki ze względu na korzystniejsze rozliczenie podatku od dywidend u źródła.',
+      },
+      {
+        q: 'Ile średnio zarabia S&P 500?',
+        a: 'Długoterminowe zestawienia wskazują na wynik rzędu 7 do 10 procent rocznie nominalnie, z reinwestowanymi dywidendami. To średnia z bardzo długiego okresu, wewnątrz którego zdarzały się kilkuletnie i dłuższe okresy bez zysku, a także spadki przekraczające połowę wartości. Nie jest to stopa, na którą można liczyć w żadnym pojedynczym roku.',
+      },
+      {
+        q: 'Czy S&P 500 wystarczy jako cały portfel?',
+        a: 'Daje ekspozycję na jedną gospodarkę, jedną walutę i portfel mocno przechylony w stronę największych spółek technologicznych. Wielu inwestorów uzupełnia go o rynki rozwinięte spoza Stanów Zjednoczonych, rynki wschodzące oraz część obligacyjną dopasowaną do horyzontu.',
+      },
+      {
+        q: 'Czy kurs dolara wpływa na mój wynik?',
+        a: 'Tak, i bywa to pomijane. Indeks jest wyceniany w dolarze, więc wynik przeliczony na złote zależy również od kursu USD/PLN. Umocnienie złotego obniża zysk wyrażony w złotych, a osłabienie go podnosi, niezależnie od tego, co robią same spółki.',
+      },
     ],
     related: ['indeks-gieldowy', 'etf', 'msci-world'],
   },
@@ -812,8 +837,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['wkład własny', 'wkładu własnego', 'wkładem własnym'],
     short: 'Wkład własny to część wartości nieruchomości, którą pokrywasz z własnych środków przy kredycie hipotecznym. Reszta to kredyt.',
     body: [
-      'Banki zwykle wymagają co najmniej 10-20% wartości nieruchomości. Im wyższy wkład, tym niższe LTV, często niższa marża i większa szansa na kredyt, bo ryzyko banku spada.',
-      'Wkładem mogą być oszczędności, a czasem działka lub inne aktywa. Zbyt niski wkład bywa uzupełniany dodatkowym ubezpieczeniem, które podnosi koszt kredytu.',
+      'Zalecany poziom wkładu własnego to 20 procent wartości nieruchomości. Banki dopuszczają zwykle 10 procent, ale wtedy wymagają dodatkowego zabezpieczenia, najczęściej ubezpieczenia niskiego wkładu własnego, doliczanego do marży albo raty do czasu, aż zadłużenie spadnie poniżej progu.',
+      'Podstawą wyliczenia jest wartość z wyceny rzeczoznawcy, a nie cena z umowy. Gdy wycena wypadnie niżej niż to, co płacisz, różnicę musisz pokryć z własnych środków ponad zakładany wkład. To jedna z częstszych niespodzianek na finiszu procedury kredytowej.',
+      'Wkładem nie muszą być wyłącznie oszczędności. Bank uznaje zwykle działkę, na której ma powstać dom, wcześniej wniesione zadatki, środki z zamknięcia innego kredytu mieszkaniowego, a czasem darowiznę od rodziny. Nie uznaje natomiast pieniędzy pochodzących z pożyczki, bo to podniosłoby Twoje zadłużenie zamiast je ograniczyć.',
+      'Poza formalnym progiem wkład ma znaczenie ekonomiczne. Każde 10 000 zł włożone z własnej kieszeni to 10 000 zł, od których nie zapłacisz odsetek przez cały okres kredytowania. Przy oprocentowaniu rzędu 7 procent i horyzoncie dwudziestu lat oznacza to oszczędność wyraźnie większą niż sama wpłacona kwota.',
+      'Jest jednak granica rozsądku. Wydanie na wkład wszystkich oszczędności, łącznie z poduszką finansową, jest ryzykowne: pierwsza awaria czy utrata dochodu zmusza wtedy do sięgnięcia po drogi kredyt konsumpcyjny. Poduszkę zostawia się poza wkładem, nawet kosztem nieco gorszych warunków kredytu.',
+    ],
+    example: {
+      title: 'Ile realnie oszczędza wyższy wkład własny',
+      text: 'Mieszkanie za 500 000 zł. Przy wkładzie 10 procent bierzesz kredyt 450 000 zł, przy wkładzie 20 procent kredyt 400 000 zł. Przy oprocentowaniu 7 procent na 25 lat rata wynosi odpowiednio około 3181 zł i 2827 zł, a łączna suma odsetek około 504 tys. zł wobec 448 tys. zł. Dodatkowe 50 000 zł wkładu obniża więc odsetki o około 56 tys. zł, czyli oszczędzasz nieco więcej, niż wynosi sama wpłacona kwota. Do tego dochodzi brak ubezpieczenia niskiego wkładu i zwykle niższa marża.',
+    },
+    faq: [
+      {
+        q: 'Ile wynosi minimalny wkład własny?',
+        a: 'Zalecany poziom to 20 procent wartości nieruchomości. W praktyce większość banków akceptuje 10 procent, warunkując to dodatkowym zabezpieczeniem w postaci ubezpieczenia niskiego wkładu, które podnosi koszt kredytu do momentu obniżenia zadłużenia poniżej progu.',
+      },
+      {
+        q: 'Co może być wkładem własnym poza gotówką?',
+        a: 'Bank uznaje najczęściej działkę pod budowę domu, wpłacone wcześniej zadatki i zaliczki, środki z książeczki mieszkaniowej oraz darowiznę od najbliższej rodziny. Nie uzna pieniędzy z pożyczki czy kredytu konsumpcyjnego, ponieważ zwiększałyby one Twoje zadłużenie zamiast obniżać ryzyko banku.',
+      },
+      {
+        q: 'Czy opłaca się wpłacić wyższy wkład własny?',
+        a: 'Zwykle tak, bo każda złotówka wkładu to złotówka, od której nie płacisz odsetek przez cały okres kredytowania, a wyższy wkład oznacza też niższą marżę i brak ubezpieczenia niskiego wkładu. Granicą jest poduszka finansowa: wydanie na wkład wszystkich oszczędności zostawia Cię bez zabezpieczenia na nagłe wydatki.',
+      },
+      {
+        q: 'Co jeśli wycena banku jest niższa od ceny mieszkania?',
+        a: 'Bank liczy kredyt i wskaźnik LTV od wartości z wyceny, nie od ceny transakcyjnej. Różnicę między jedną a drugą musisz pokryć własnymi środkami, ponad planowany wkład. Dlatego przy napiętym budżecie ostrożniej jest założyć rezerwę na taki scenariusz.',
+      },
     ],
     related: ['kredyt-hipoteczny', 'ltv', 'marza-kredytu'],
   },
@@ -870,8 +920,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['nadpłata kredytu', 'nadpłata', 'nadpłaty kredytu', 'nadpłacanie kredytu'],
     short: 'Nadpłata kredytu to wpłata ponad wymaganą ratę, która zmniejsza saldo zadłużenia, a przez to łączne odsetki do zapłaty.',
     body: [
-      'Nadpłacając, możesz skrócić okres kredytu (rata bez zmian, krócej spłacasz) albo obniżyć ratę (ten sam okres, niższa rata). Skrócenie okresu daje zwykle większą oszczędność na odsetkach.',
-      'Przy kredytach hipotecznych prawo mocno ogranicza opłaty za wcześniejszą spłatę. Nadpłata jest szczególnie opłacalna przy wysokim oprocentowaniu, bo wtedy odsetki są największym kosztem.',
+      'Nadpłata trafia bezpośrednio w kapitał, czyli w tę część zadłużenia, od której naliczane są odsetki. Dlatego działa mocniej, niż sugeruje jej wielkość: obniżając saldo dziś, obniżasz odsetki naliczane przez wszystkie pozostałe lata.',
+      'Przy każdej nadpłacie bank pyta o jedną z dwóch opcji i ten wybór ma duże znaczenie finansowe. Skrócenie okresu oznacza, że rata zostaje bez zmian, a kredyt kończy się wcześniej. Obniżenie raty oznacza, że okres pozostaje ten sam, ale płacisz mniej miesięcznie. Pierwsza opcja daje zdecydowanie większą oszczędność na odsetkach, druga poprawia płynność bieżącego budżetu.',
+      'Efekt jest silnie zależny od momentu. W pierwszych latach spłaty rata składa się głównie z odsetek, a kapitał maleje powoli, więc nadpłata zbija wtedy największą przyszłą kwotę odsetek. Ta sama nadpłata wykonana pod koniec kredytu daje wielokrotnie mniejszą korzyść, bo odsetek do zapłacenia zostało już niewiele.',
+      'Kwestia opłat: przy kredytach hipotecznych ze zmiennym oprocentowaniem prawo pozwala bankowi pobrać rekompensatę tylko w pierwszych trzech latach spłaty i ogranicza jej wysokość. Po tym okresie nadpłata jest bezpłatna. Przy kredytach konsumenckich bank zwraca proporcjonalnie część prowizji przypadającą na skrócony okres.',
+      'Nadpłata nie zawsze jest najlepszym zastosowaniem wolnych środków. Ma sens przede wszystkim przy wysokim oprocentowaniu kredytu i wtedy, gdy masz już poduszkę finansową. Jeżeli kredyt jest tani, a Ty nie masz oszczędności na nagłe wydatki, budowanie rezerwy jest ważniejsze, bo nadpłaconych pieniędzy nie da się z kredytu wyjąć z powrotem.',
+    ],
+    example: {
+      title: 'Skrócenie okresu kontra obniżenie raty',
+      text: 'Kredyt 400 000 zł na 25 lat przy 7 procentach daje ratę około 2827 zł i łączne odsetki około 448 tys. zł. Jednorazowa nadpłata 30 000 zł po roku spłaty przy wyborze skrócenia okresu obniża łączne odsetki o około 109 tys. zł i skraca kredyt o ponad 4 lata. Ta sama nadpłata z obniżeniem raty daje spadek raty o około 215 zł, ale oszczędność na odsetkach to tylko około 32 tys. zł. Ponad trzykrotna różnica bierze się wyłącznie z wyboru opcji przy tej samej wpłacie.',
+    },
+    faq: [
+      {
+        q: 'Skrócić okres czy obniżyć ratę?',
+        a: 'Skrócenie okresu daje wielokrotnie większą oszczędność na odsetkach, bo eliminuje najdroższe lata spłaty. Obniżenie raty poprawia natomiast bieżącą płynność i zmniejsza ryzyko problemów przy spadku dochodów. Przy stabilnej sytuacji finansowej korzystniejsze jest skracanie okresu.',
+      },
+      {
+        q: 'Czy bank może pobrać opłatę za nadpłatę?',
+        a: 'Przy kredycie hipotecznym ze zmiennym oprocentowaniem rekompensata jest dopuszczalna tylko w pierwszych trzech latach spłaty i ograniczona co do wysokości. Po tym okresie nadpłata jest bezpłatna. Przy kredycie konsumenckim bank ma obowiązek proporcjonalnie zwrócić część prowizji przypadającą na okres, o który spłatę skrócono.',
+      },
+      {
+        q: 'Kiedy nadpłata daje największy efekt?',
+        a: 'Na początku okresu kredytowania, gdy rata składa się głównie z odsetek, a kapitał maleje najwolniej. Im później nadpłacasz, tym mniejsza korzyść, ponieważ odsetek pozostałych do zapłacenia jest coraz mniej.',
+      },
+      {
+        q: 'Nadpłacać kredyt czy inwestować?',
+        a: 'Porównuje się oprocentowanie kredytu z realnym, czyli po podatku, oczekiwanym zwrotem z inwestycji. Nadpłata daje pewny zysk równy oprocentowaniu kredytu, inwestycja daje zysk niepewny. Przy drogim kredycie nadpłata zwykle wygrywa. Zawsze jednak przed jednym i drugim buduje się poduszkę finansową, bo nadpłaconych środków nie można wycofać.',
+      },
     ],
     related: ['kredyt-hipoteczny', 'refinansowanie'],
   },
@@ -1232,8 +1307,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['analiza techniczna', 'analizy technicznej', 'analizę techniczną'],
     short: 'Analiza techniczna to przewidywanie ruchów cen na podstawie wykresów, formacji i wskaźników, przy założeniu, że historia kursu odzwierciedla psychologię rynku.',
     body: [
-      'Bada wykresy, trendy, poziomy wsparcia i oporu, wolumen oraz wskaźniki. Zakłada, że cena dyskontuje wszystkie informacje, a wzorce zachowań rynku się powtarzają. Dominuje w krótkoterminowym tradingu.',
-      'To narzędzie probabilistyczne, nie magiczne: zwiększa szanse, ale nie daje pewności. Najlepiej działa w połączeniu z zarządzaniem ryzykiem i dyscypliną.',
+      'Analiza techniczna opiera się na trzech założeniach. Pierwsze mówi, że cena dyskontuje wszystko, czyli zawiera już w sobie wszystkie znane informacje i oczekiwania. Drugie, że ceny poruszają się w trendach, które trwają dłużej, niż podpowiada intuicja. Trzecie, że schematy zachowań uczestników rynku powtarzają się, bo powtarza się ludzka psychologia stojąca za decyzjami.',
+      'Narzędzia dzielą się na kilka grup. Poziomy wsparcia i oporu wskazują miejsca, w których cena wcześniej reagowała. Linie i kanały trendu opisują kierunek. Formacje świecowe i wykresu opisują układy zapowiadające kontynuację lub odwrócenie. Wskaźniki, takie jak średnie kroczące, RSI czy MACD, przetwarzają cenę i wolumen na dodatkowy sygnał.',
+      'Najczęstszy błąd początkujących polega na traktowaniu tych narzędzi jak systemu przepowiadania przyszłości. Analiza techniczna nie mówi, co się stanie, tylko porządkuje prawdopodobieństwa i wyznacza konkretne poziomy: gdzie wejść, gdzie przyznać się do pomyłki i gdzie zrealizować zysk. Bez tego trzeciego elementu, czyli zarządzania ryzykiem, nawet trafna analiza nie przekłada się na zarobek.',
+      'Drugi typowy błąd to nadmiar wskaźników. Ponieważ większość z nich liczona jest z tej samej ceny, pięć wskaźników zwykle pokazuje to samo pięć razy i buduje fałszywe poczucie potwierdzenia. Rozsądniej działają dwa narzędzia pełniące różne funkcje, na przykład jedno opisujące trend i jedno opisujące wykupienie rynku.',
+      'Analiza techniczna i fundamentalna nie wykluczają się. Fundamentalna odpowiada na pytanie, co kupić i czy jest to tanie względem wartości spółki. Techniczna odpowiada na pytanie, kiedy to zrobić i gdzie postawić granicę straty. Inwestor długoterminowy używa zwykle pierwszej, trader krótkoterminowy niemal wyłącznie drugiej.',
+    ],
+    example: {
+      title: 'Dlaczego sam sygnał nic nie znaczy bez ryzyka',
+      text: 'Dwóch traderów dostaje ten sam sygnał kupna, który sprawdza się w 40 procentach przypadków. Pierwszy ustawia stop loss na 100 zł, a take profit na 300 zł. Drugi ustawia stop loss na 300 zł, a zysk realizuje przy 100 zł. Po 10 transakcjach pierwszy ma 4 razy po 300 zł zysku i 6 razy po 100 zł straty, czyli 600 zł na plusie. Drugi ma 400 zł zysku i 1800 zł straty, czyli 1400 zł na minusie. Ta sama analiza, ta sama skuteczność, przeciwne wyniki.',
+    },
+    faq: [
+      {
+        q: 'Czy analiza techniczna działa?',
+        a: 'Nie jest metodą przewidywania przyszłości i nie daje pewności co do pojedynczej transakcji. Jej użyteczność polega na porządkowaniu decyzji: wyznaczaniu poziomów wejścia, wyjścia i granicy straty w sposób powtarzalny. O wyniku przesądza połączenie z zarządzaniem ryzykiem, a nie sama trafność sygnałów.',
+      },
+      {
+        q: 'Od czego zacząć naukę analizy technicznej?',
+        a: 'Od czytania samego wykresu: budowy świecy, kierunku trendu oraz poziomów wsparcia i oporu. Wskaźniki dokłada się później, gdy potrafisz już opisać, co robi cena bez nich. Odwrotna kolejność, czyli start od wskaźników, prowadzi do wykresu zasłoniętego liniami, z których nic nie wynika.',
+      },
+      {
+        q: 'Ile wskaźników stosować naraz?',
+        a: 'Zwykle wystarczą dwa, pełniące różne funkcje, na przykład jeden opisujący trend i jeden opisujący wykupienie lub wyprzedanie rynku. Większość wskaźników liczona jest z tej samej ceny, więc ich mnożenie daje pozorne potwierdzenie zamiast nowej informacji.',
+      },
+      {
+        q: 'Czym różni się od analizy fundamentalnej?',
+        a: 'Analiza fundamentalna bada wartość spółki na podstawie wyników finansowych, otoczenia i perspektyw, odpowiadając na pytanie, co kupić. Analiza techniczna bada zachowanie samej ceny i odpowiada na pytanie, kiedy to zrobić oraz gdzie postawić stop loss. Dla inwestora długoterminowego pierwsza jest ważniejsza, dla tradera druga.',
+      },
     ],
     related: ['analiza-fundamentalna', 'trend', 'wsparcie-i-opor'],
   },
@@ -1531,8 +1631,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['QE', 'luzowanie ilościowe', 'quantitative easing', 'dodruk pieniądza'],
     short: 'QE (luzowanie ilościowe) to skup aktywów przez bank centralny za nowo wykreowane pieniądze, by pobudzić gospodarkę, gdy obniżki stóp już nie wystarczają.',
     body: [
-      'Bank centralny kupuje obligacje i inne papiery, wpompowując pieniądz w system, obniżając długoterminowe stopy i zachęcając do pożyczania oraz inwestowania. Stosowano je masowo po 2008 roku i w pandemii.',
-      'QE podbija ceny aktywów (akcji, obligacji, nieruchomości), ale budzi obawy o inflację i bańki. Odwrotność to zacieśnianie ilościowe, czyli ściąganie pieniądza z rynku.',
+      'Luzowanie ilościowe wchodzi do gry wtedy, gdy zwykłe narzędzie banku centralnego, czyli obniżanie stóp procentowych, dobiega do granicy w okolicach zera i przestaje wystarczać. Bank sięga wówczas po działanie nadzwyczajne: tworzy nowy pieniądz i za niego skupuje z rynku aktywa, przede wszystkim obligacje skarbowe, a czasem inne papiery.',
+      'Mechanizm działa dwutorowo. Skup obligacji podbija ich cenę, a że cena obligacji porusza się odwrotnie do rentowności, spadają długoterminowe stopy w gospodarce, czyli koszt kredytów hipotecznych i firmowych. Jednocześnie pieniądz, który trafia do sprzedających obligacje, szuka zysku gdzie indziej, więc płynie w akcje, nieruchomości i inne aktywa, podnosząc ich ceny.',
+      'I tu leży najczęściej pomijana konsekwencja. QE podnosi wyceny aktywów, a te posiadają głównie zamożniejsi, więc polityka pomyślana jako ratunek dla całej gospodarki bywa krytykowana za powiększanie nierówności majątkowych. To jeden z powodów, dla których pozostaje narzędziem kontrowersyjnym, a nie rutynowym.',
+      'Drugim ryzykiem jest inflacja. Zwiększenie ilości pieniądza w systemie nie musi od razu podnosić cen, jeśli gospodarka jest słaba i pieniądz nie krąży, ale w sprzyjających warunkach może to zrobić z opóźnieniem. Dlatego decyzje o skali i czasie trwania takiego programu należą do najtrudniejszych w polityce pieniężnej.',
+      'Operacją odwrotną jest zacieśnianie ilościowe: bank centralny pozwala skupionym obligacjom wygasać albo je sprzedaje, ściągając pieniądz z rynku. Działa to jak podnoszenie długoterminowych stóp i zwykle ciąży wycenom aktywów, które wcześniej rosły dzięki luzowaniu.',
+    ],
+    example: {
+      title: 'Dlaczego skup obligacji obniża oprocentowanie kredytów',
+      text: 'Cena obligacji i jej rentowność poruszają się w przeciwne strony. Gdy bank centralny masowo skupuje obligacje, ich cena rośnie, a rentowność spada, na przykład z 5 do 3 procent. Ponieważ oprocentowanie długoterminowych kredytów jest powiązane z rentownością obligacji skarbowych, tańsze staje się finansowanie hipotek i inwestycji firm. To właśnie tą drogą, a nie bezpośrednim rozdawaniem pieniędzy, luzowanie pobudza gospodarkę.',
+    },
+    faq: [
+      {
+        q: 'Czy QE to dodruk pieniądza?',
+        a: 'W potocznym sensie tak, bo bank centralny tworzy nowy pieniądz, żeby skupić aktywa. Różnica wobec dosłownego drukowania polega na tym, że pieniądz nie trafia bezpośrednio do obywateli, tylko na rynek finansowy w zamian za obligacje, a program można odwrócić, ściągając ten pieniądz z powrotem.',
+      },
+      {
+        q: 'Jak QE wpływa na giełdę?',
+        a: 'Zwykle podbija ceny akcji i innych aktywów. Dzieje się tak, bo spadają rentowności obligacji, przez co akcje stają się relatywnie atrakcyjniejsze, a pieniądz od sprzedających obligacje szuka zysku na rynku. Zacieśnianie ilościowe, czyli operacja odwrotna, działa na wyceny w drugą stronę.',
+      },
+      {
+        q: 'Czy luzowanie ilościowe powoduje inflację?',
+        a: 'Może, ale nie musi. Samo zwiększenie ilości pieniądza nie podnosi cen, jeśli gospodarka jest słaba i pieniądz nie krąży. Ryzyko inflacji rośnie, gdy popyt się odbudowuje, a program trwa długo. Efekt jest opóźniony i zależny od stanu gospodarki, co czyni dozowanie tego narzędzia trudnym.',
+      },
+      {
+        q: 'Co to jest zacieśnianie ilościowe?',
+        a: 'To odwrotność luzowania. Bank centralny zmniejsza swój portfel obligacji, pozwalając im wygasać albo je sprzedając, i w ten sposób ściąga pieniądz z rynku. Podnosi to długoterminowe stopy i zwykle obniża wyceny aktywów, które wcześniej korzystały na luzowaniu.',
+      },
     ],
     related: ['inflacja', 'stopa-procentowa', 'fed'],
   },
