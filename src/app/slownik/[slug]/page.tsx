@@ -5,6 +5,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import { GLOSSARY, getTermBySlug } from '@/lib/glossary';
 import { articlesForTerm } from '@/lib/glossary-articles';
+import { mainPageFor } from '@/lib/glossary-main-pages';
 
 const BASE_URL = 'https://kisielfinanse.pl';
 const ACCENT = '#c9a227';
@@ -22,10 +23,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const term = getTermBySlug(slug);
   if (!term) return {};
   const title = `${term.term} - co to jest? Definicja`;
+  const main = mainPageFor(slug);
+  // Hasło, które dubluje intencję naszej mocniejszej strony, wychodzi z indeksu (follow zostaje,
+  // więc autorytet nadal płynie dalej). Powód i kryteria: src/lib/glossary-main-pages.ts
+  const wylaczZIndeksu = term.noindex || main?.consolidate === true;
   return {
     title: { absolute: `${title} | KisielFinanse` },
     description: term.short.length > 155 ? term.short.slice(0, 152) + '...' : term.short,
-    robots: term.noindex ? { index: false, follow: true } : { index: true, follow: true },
+    robots: wylaczZIndeksu ? { index: false, follow: true } : { index: true, follow: true },
     alternates: { canonical: `${BASE_URL}/slownik/${slug}` },
     openGraph: {
       title: `${title} | KisielFinanse`,
@@ -53,6 +58,7 @@ export default async function TermPage({ params }: Props) {
     .filter((t): t is NonNullable<typeof t> => Boolean(t));
 
   const relatedArticles = await articlesForTerm(term.aliases);
+  const main = mainPageFor(slug);
 
   const schema = {
     '@context': 'https://schema.org',
@@ -100,6 +106,31 @@ export default async function TermPage({ params }: Props) {
             {p}
           </p>
         ))}
+
+        {/* Pełny materiał na ten temat. Stoi zaraz pod definicją, bo czytelnik hasła
+            najczęściej potrzebuje właśnie rozwinięcia, a nie listy pojęć na dole strony. */}
+        {main && (
+          <Link
+            href={main.href}
+            style={{
+              display: 'block', marginTop: 32, padding: '18px 20px',
+              border: '1px solid var(--border)', borderLeft: `3px solid ${ACCENT}`,
+              textDecoration: 'none', background: 'var(--surface)',
+            }}
+          >
+            <span style={{
+              display: 'block', fontFamily: 'var(--font-mono)', fontSize: '0.66rem',
+              letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 6,
+            }}>
+              Pełny przewodnik
+            </span>
+            <span style={{
+              fontFamily: 'var(--font-body)', fontSize: '1rem', fontWeight: 700, color: 'var(--text)',
+            }}>
+              {main.label} <span style={{ color: ACCENT }}>→</span>
+            </span>
+          </Link>
+        )}
 
         {/* Powiązany kalkulator */}
         {term.calc && (

@@ -4,6 +4,7 @@ import { postUrl } from '@/lib/url';
 import { CATEGORIES } from '@/lib/categories';
 import { CALCULATOR_SLUGS } from '@/lib/calculators';
 import { GLOSSARY } from '@/lib/glossary';
+import { mainPageFor } from '@/lib/glossary-main-pages';
 import { getPublishedRankings, getPublishedPickSlugs } from '@/lib/rankings';
 
 const BASE_URL = 'https://kisielfinanse.pl';
@@ -228,7 +229,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     },
-    ...GLOSSARY.filter((t) => !t.noindex).map((t) => ({
+    // Hasła skonsolidowane (noindex, follow) wypadają z sitemapy - zgłaszanie Google
+    // adresu, który sami wyłączyliśmy z indeksu, jest sprzecznym sygnałem.
+    ...GLOSSARY.filter((t) => !t.noindex && !mainPageFor(t.slug)?.consolidate).map((t) => ({
       url: `${BASE_URL}/slownik/${t.slug}`,
       changeFrequency: 'monthly' as const,
       priority: 0.5,
