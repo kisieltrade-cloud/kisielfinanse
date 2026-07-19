@@ -48,7 +48,23 @@ export const MAIN_PAGES: Record<string, MainPageLink> = {
   futures: { href: '/trading/procent-skladany-w-tradingu-futures', label: 'Procent składany w tradingu futures', consolidate: true },
   'day-trading': { href: '/trading/day-trading-vs-swing-trading', label: 'Day trading czy swing trading', consolidate: true },
 
+  // --- uzupełnienie 2026-07-19 ---
+  // Pierwsza analiza kanibalizacji miała błąd: transliterowała tag tylko przez toLowerCase(),
+  // więc kategoria „Pieniądze" (21 artykułów) dawała URL-e /pieniądze/... i nie pasowała
+  // do danych GSC. Po poprawce (ta sama transliteracja co w url.ts) wyszło 8 dodatkowych par.
+  'obligacje-skarbowe': { href: '/pieniadze/obligacje-skarbowe-2026-ktore-wybrac-i-jak-kupic', label: 'Obligacje skarbowe - które wybrać i jak kupić', consolidate: true },
+  'konto-oszczednosciowe': { href: '/pieniadze/konto-oszczednosciowe-2026-czy-twoje-pieniadze-sa-bezpieczne', label: 'Konto oszczędnościowe - czy Twoje pieniądze są bezpieczne', consolidate: true },
+  bik: { href: '/pieniadze/jak-wyczyscic-bik', label: 'Jak wyczyścić BIK', consolidate: true },
+
   // --- tylko odnośnik: hasło rankuje lepiej niż strona docelowa, zostaje w indeksie ---
+  // Lokata i refinansowanie ZOSTAJĄ w indeksie mimo słabej pozycji w danych GSC:
+  // te dane opisują stare, 150-słowowe wersje, a oba hasła zostały właśnie rozbudowane
+  // do 600+ słów z FAQ. Ocenę odkładamy do kolejnego eksportu GSC.
+  lokata: { href: '/pieniadze/lokata-obligacje-konto-oszczednosciowe-porownanie-2026', label: 'Lokata, obligacje czy konto oszczędnościowe' },
+  refinansowanie: { href: '/pieniadze/refinansowanie-kredytu-kiedy-sie-oplaca', label: 'Refinansowanie kredytu - kiedy się opłaca' },
+  rrso: { href: '/pieniadze/rrso-co-to-jest-jak-liczyc', label: 'RRSO - co to jest i jak liczyć' },
+  nbp: { href: '/gospodarka/obnizki-stop-procentowych-nbp-2026-co-oznacza', label: 'Obniżki stóp procentowych NBP' },
+  bitcoin: { href: '/inwestycje/bitcoin-spada-o-polowe-czy-czas-na-dca', label: 'Bitcoin - co robić przy dużych spadkach' },
   ter: { href: '/inwestycje/podatek-od-etf-dywidendy-belka', label: 'Podatek od ETF i koszty funduszu' },
   'risk-reward': { href: '/kalkulator/risk-reward', label: 'Kalkulator Risk/Reward' },
   trend: { href: '/trading/trend-i-linia-trendu', label: 'Trend i linia trendu' },
