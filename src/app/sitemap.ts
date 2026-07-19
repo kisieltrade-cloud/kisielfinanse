@@ -233,6 +233,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // adresu, który sami wyłączyliśmy z indeksu, jest sprzecznym sygnałem.
     ...GLOSSARY.filter((t) => !t.noindex && !mainPageFor(t.slug)?.consolidate).map((t) => ({
       url: `${BASE_URL}/slownik/${t.slug}`,
+      // Hasła rozbudowane o FAQ i przykład dostają lastModified = sygnał świeżości,
+      // dzięki czemu Google wykrywa pogłębioną treść bez ręcznego zgłaszania w GSC.
+      // Hasła jeszcze nietknięte zostają bez daty (nie udajemy zmiany, której nie było).
+      ...(t.faq?.length ? { lastModified: new Date('2026-07-19') } : {}),
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     })),
