@@ -139,7 +139,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     short: 'Inflacja to wzrost ogólnego poziomu cen w czasie, który obniża siłę nabywczą pieniądza, czyli za tę samą kwotę kupujesz mniej.',
     body: [
       'Jeśli inflacja wynosi 5% rocznie, to po roku za 100 zł kupisz tyle, co dziś za około 95 zł. Pieniądze trzymane bez oprocentowania realnie tracą na wartości.',
-      'Dlatego oszczędności warto chronić instrumentami, które dają szansę pobić inflację: lokatami, obligacjami antyinflacyjnymi, a w długim terminie akcjami i ETF-ami. Realna stopa zwrotu to nominalny zysk pomniejszony o inflację.',
+      'Dlatego oszczędności chroni się instrumentami, które dają szansę pobić inflację: lokatami, obligacjami antyinflacyjnymi, a w długim terminie akcjami i ETF-ami. Realna stopa zwrotu to nominalny zysk pomniejszony o inflację.',
     ],
     related: ['procent-skladany', 'wibor'],
   },
@@ -205,8 +205,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['dywidenda', 'dywidendy', 'dywidendę', 'dywidendą', 'dywidend'],
     short: 'Dywidenda to część zysku spółki wypłacana akcjonariuszom, zwykle raz w roku. To jeden z dwóch sposobów zarabiania na akcjach, obok wzrostu kursu.',
     body: [
-      'Spółka decyduje, jaką część zysku przeznaczyć na dywidendę, a jaką zatrzymać na rozwój. Wysokość podaje się jako kwotę na akcję lub jako stopę dywidendy (dywidenda w stosunku do ceny akcji). Od dywidendy pobierany jest 19% podatek Belki.',
-      'Spółki dywidendowe to często dojrzałe, stabilne firmy. Inwestorzy nastawieni na pasywny dochód budują portfele właśnie z takich spółek lub z ETF-ów dywidendowych.',
+      'O wypłacie decyduje walne zgromadzenie akcjonariuszy, dzieląc zysk na część wypłacaną i część zatrzymaną w spółce na dalszy rozwój. Nie ma tu żadnego automatyzmu: spółka może mieć zysk i nie wypłacić nic, jeżeli uzna, że pieniądze lepiej zapracują wewnątrz firmy.',
+      'Dwie daty decydują o tym, komu należy się wypłata. Dzień ustalenia prawa do dywidendy wyznacza, kto musi mieć akcje zapisane na rachunku, żeby ją otrzymać. Dzień wypłaty to moment, w którym pieniądze trafiają na rachunek maklerski. Kupno akcji po dniu ustalenia prawa nie daje już prawa do tej wypłaty.',
+      'Wysokość podaje się na dwa sposoby: jako kwotę na jedną akcję albo jako stopę dywidendy, czyli stosunek rocznej wypłaty do ceny akcji. Ta druga miara bywa myląca, bo rośnie także wtedy, gdy kurs spada. Bardzo wysoka stopa dywidendy jest częściej sygnałem kłopotów spółki niż okazji.',
+      'W dniu odcięcia prawa do dywidendy kurs akcji zwykle spada o mniej więcej wartość wypłaty. To nie jest przypadek ani reakcja rynku, tylko prosta konsekwencja tego, że ze spółki wyszły pieniądze. Dywidenda nie jest więc darmowym dodatkiem do posiadania akcji, lecz przesunięciem części wartości z rachunku spółki na Twój.',
+      'Od dywidendy z polskich spółek podatek 19 procent pobiera automatycznie biuro maklerskie. Przy spółkach zagranicznych sprawa się komplikuje, bo pojawia się podatek u źródła pobierany w kraju spółki i konieczność rozliczenia różnicy w Polsce. To jeden z powodów, dla których inwestorzy długoterminowi wybierają fundusze akumulujące, które reinwestują dywidendy wewnątrz funduszu.',
+    ],
+    example: {
+      title: 'Stopa dywidendy i to, czego nie pokazuje',
+      text: 'Spółka wypłaca 4 zł dywidendy na akcję, a jej kurs wynosi 80 zł. Stopa dywidendy to 5 procent. Po potrąceniu 19 procent podatku otrzymasz 3,24 zł na akcję, czyli realnie 4,05 procent. Jeżeli kurs tej samej spółki spadnie do 50 zł przy niezmienionej wypłacie, stopa dywidendy skoczy do 8 procent, choć spółka nie stała się przez to lepsza. Wysoka stopa bywa więc efektem taniejących akcji, a nie hojności zarządu.',
+    },
+    faq: [
+      {
+        q: 'Kiedy trzeba mieć akcje, żeby dostać dywidendę?',
+        a: 'Trzeba je posiadać w dniu ustalenia prawa do dywidendy. Kupno akcji po tym dniu nie daje prawa do bieżącej wypłaty, nawet jeśli sama wypłata następuje później. Sprzedaż akcji po dniu ustalenia prawa nie odbiera już prawa do dywidendy.',
+      },
+      {
+        q: 'Czy dywidenda to darmowy zysk?',
+        a: 'Nie. W dniu odcięcia prawa kurs akcji spada zwykle mniej więcej o wartość wypłaty, ponieważ z majątku spółki ubyły pieniądze. Dywidenda przenosi część wartości ze spółki do Ciebie, a dodatkowo uruchamia podatek, którego przy samym wzroście kursu byś nie zapłacił.',
+      },
+      {
+        q: 'Jaki podatek płaci się od dywidendy?',
+        a: 'Dziewiętnaście procent. Przy polskich spółkach podatek potrąca automatycznie biuro maklerskie i na rachunek trafia kwota netto. Przy spółkach zagranicznych część podatku pobiera kraj spółki, a różnicę rozlicza się w polskim zeznaniu rocznym.',
+      },
+      {
+        q: 'Czy wysoka stopa dywidendy to dobry sygnał?',
+        a: 'Nie zawsze, a często wręcz przeciwnie. Stopa dywidendy rośnie także wtedy, gdy spada kurs akcji, więc bardzo wysoka wartość bywa oznaką problemów spółki i zapowiedzią obniżenia przyszłych wypłat. Ważniejsze od samej stopy jest to, czy zysk spółki pokrywa dywidendę i czy da się ją utrzymać.',
+      },
     ],
     related: ['akcja', 'podatek-belki', 'etf-dystrybuujacy'],
   },
@@ -365,8 +390,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['rachunek maklerski', 'rachunku maklerskiego', 'konto maklerskie', 'konta maklerskiego'],
     short: 'Rachunek maklerski to konto u brokera, na którym przechowujesz papiery wartościowe i środki przeznaczone na inwestycje oraz z którego składasz zlecenia.',
     body: [
-      'To podstawowe narzędzie inwestora. Standardowy rachunek nie daje ulg podatkowych, więc od zysków płacisz podatek Belki. Konta IKE i IKZE to specjalne rachunki z tarczą podatkową.',
-      'Otwarcie jest zwykle darmowe i odbywa się online w kilkanaście minut. Warto sprawdzić opłaty za prowadzenie i prowizje przed wyborem.',
+      'Rachunek maklerski składa się w praktyce z dwóch części: pieniężnej, na której trzymasz gotówkę przeznaczoną na zakupy, oraz papierów wartościowych, gdzie zapisane są posiadane akcje, obligacje czy jednostki funduszy notowanych na giełdzie. Kupno przenosi środki z jednej części do drugiej, sprzedaż odwrotnie.',
+      'Kupione papiery są Twoją własnością, a nie majątkiem brokera, i to jest podstawowa różnica wobec trzymania pieniędzy w banku. Broker jedynie prowadzi ich ewidencję, dlatego jego ewentualna upadłość nie oznacza utraty portfela, choć może oznaczać czasowe utrudnienia w dostępie.',
+      'Rachunki dzielą się na trzy typy pod względem podatkowym. Zwykły rachunek nie daje żadnych ulg, więc od zrealizowanych zysków rozliczasz 19 procent podatku w zeznaniu PIT-38. Rachunek IKE zwalnia zyski z tego podatku, jeśli spełnisz warunki wieku i lat z wpłatami. Rachunek IKZE pozwala odliczać wpłaty od dochodu, a przy wypłacie stosuje niski zryczałtowany podatek. Nic nie stoi na przeszkodzie, żeby mieć wszystkie trzy naraz.',
+      'Otwarcie jest zwykle bezpłatne i odbywa się w całości online, z potwierdzeniem tożsamości przelewem weryfikacyjnym lub wideoweryfikacją. Cały proces zajmuje zwykle kilkanaście minut, a rachunek bywa gotowy tego samego dnia.',
+      'Przed wyborem sprawdza się cztery rzeczy: prowizję od transakcji razem z jej kwotą minimalną, opłatę za prowadzenie rachunku i warunki jej uniknięcia, koszt przewalutowania przy zakupach zagranicznych oraz to, czy broker wystawia PIT-8C, bo bez tego dokumentu rozliczenie roczne robisz w całości samodzielnie.',
+    ],
+    example: {
+      title: 'Co decyduje o koszcie przy różnych kwotach',
+      text: 'Przy zleceniu na 1000 zł i prowizji 0,39 procent z minimum 5 zł zapłacisz 5 zł, czyli 0,5 procent. Przy zleceniu na 10 000 zł zapłacisz 39 zł, czyli faktycznie 0,39 procent. Jeśli jednak kupujesz aktywa notowane w dolarze, a broker przewalutowuje po kursie z narzutem 0,5 procent, to przy tym samym zleceniu na 10 000 zł koszt przewalutowania wyniesie około 50 zł, czyli więcej niż sama prowizja. Przy inwestowaniu zagranicznym to zwykle przewalutowanie, a nie prowizja, jest największym kosztem.',
+    },
+    faq: [
+      {
+        q: 'Czy rachunek maklerski jest płatny?',
+        a: 'Otwarcie jest zwykle darmowe. Opłata za prowadzenie w wielu biurach wynosi zero albo znika po spełnieniu prostego warunku, na przykład wykonaniu jednej transakcji w roku lub wyrażeniu zgody na elektroniczną korespondencję. Realne koszty pojawiają się przy transakcjach i przewalutowaniu.',
+      },
+      {
+        q: 'Czy mogę mieć IKE i zwykły rachunek jednocześnie?',
+        a: 'Tak i jest to typowe rozwiązanie. Na IKE trafia część długoterminowa, korzystająca ze zwolnienia podatkowego przy wypłacie po spełnieniu warunków, a na zwykłym rachunku trzymasz środki, po które możesz sięgnąć wcześniej. Limity wpłat na IKE dotyczą wyłącznie tego rachunku i nie ograniczają zwykłego.',
+      },
+      {
+        q: 'Co się stanie z moimi akcjami, jeśli broker upadnie?',
+        a: 'Papiery wartościowe pozostają Twoją własnością, ponieważ są ewidencjonowane odrębnie od majątku brokera. W praktyce zostają przeniesione do innego podmiotu prowadzącego rachunki. Środki pieniężne na rachunku objęte są dodatkowo systemem rekompensat do określonego limitu.',
+      },
+      {
+        q: 'Czy broker rozliczy za mnie podatek?',
+        a: 'Nie rozliczy, ale przy polskich biurach maklerskich otrzymasz do końca lutego formularz PIT-8C z zestawieniem przychodów i kosztów. Na jego podstawie samodzielnie składasz PIT-38. Brokerzy zagraniczni zwykle nie wystawiają PIT-8C, więc całe zestawienie transakcji przygotowujesz sam.',
+      },
     ],
     related: ['broker', 'ike', 'ikze'],
   },
@@ -467,8 +517,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['rebalancing', 'rebalansowanie', 'równoważenie portfela'],
     short: 'Rebalancing to okresowe przywracanie portfela do założonych proporcji aktywów, na przykład 70% akcji i 30% obligacji, gdy ruchy rynku je rozjadą.',
     body: [
-      'Gdy akcje mocno wzrosną, ich udział w portfelu rośnie ponad plan, a wraz z nim ryzyko. Rebalancing polega na sprzedaży tego, czego jest za dużo, i dokupieniu tego, czego za mało, by wrócić do założeń.',
-      'To dyscyplina, która zmusza do kupowania taniej i sprzedawania drożej, wbrew emocjom. Najczęściej robi się go raz lub dwa razy w roku albo gdy proporcje odchylą się o ustalony próg.',
+      'Portfel rozjeżdża się sam, bez żadnej Twojej decyzji. Jeżeli akcje rosną szybciej niż obligacje, ich udział pęcznieje ponad założenia, a wraz z nim ryzyko całości. Po kilku dobrych latach portfel zaplanowany jako umiarkowany potrafi stać się agresywny, i to dokładnie w momencie, gdy wyceny są najwyższe.',
+      'Rebalancing przywraca zamierzone proporcje: sprzedajesz część tego, czego jest za dużo, i dokupujesz to, czego brakuje. Efektem ubocznym jest mechanizm, który wymusza sprzedaż drożejących aktywów i zakup tanich, czyli dokładnie odwrotnie, niż podpowiadają emocje.',
+      'Stosuje się dwa podejścia. Kalendarzowe polega na sprawdzeniu proporcji w ustalonym terminie, zwykle raz albo dwa razy w roku. Progowe uruchamia działanie dopiero wtedy, gdy udział klasy aktywów odchyli się od planu o określoną wielkość, na przykład 5 punktów procentowych. Pierwsze jest prostsze, drugie reaguje na to, co faktycznie robi rynek.',
+      'Najczęstszy błąd to robienie tego zbyt często. Każda transakcja kosztuje prowizję, a przy rachunku bez tarczy podatkowej sprzedaż z zyskiem uruchamia podatek, którego przy trzymaniu nie zapłaciłbyś wcale. Rebalancing kwartalny czy miesięczny zwykle kosztuje więcej, niż daje.',
+      'Tańszy wariant polega na rebalancingu wpłatami. Zamiast sprzedawać to, czego jest za dużo, kierujesz kolejne wpłaty wyłącznie do niedoważonej części portfela. Nie generuje to podatku ani kosztów sprzedaży i przy regularnym dokładaniu pieniędzy często wystarcza do utrzymania proporcji.',
+    ],
+    example: {
+      title: 'Jak portfel przestaje być tym, co zaplanowałeś',
+      text: 'Zaczynasz od 100 000 zł w proporcji 70 procent akcji i 30 procent obligacji, czyli 70 000 i 30 000 zł. Po roku, w którym akcje zyskały 25 procent, a obligacje 3 procent, masz 87 500 zł w akcjach i 30 900 zł w obligacjach, razem 118 400 zł. Udział akcji wynosi teraz około 74 procent zamiast 70. Po drugim takim roku sięga już 77,5 procent. Nie zmieniłeś strategii, a ryzyko portfela rośnie samo, bo wygrywająca część rośnie szybciej od reszty.',
+    },
+    faq: [
+      {
+        q: 'Jak często robić rebalancing?',
+        a: 'Dla większości inwestorów wystarczy raz w roku albo po przekroczeniu ustalonego progu odchylenia, na przykład 5 punktów procentowych. Częstsze poprawianie proporcji podnosi koszty transakcyjne i podatkowe, a badania nad różnymi częstotliwościami nie pokazują przewagi rebalancingu kwartalnego nad rocznym.',
+      },
+      {
+        q: 'Czy rebalancing zwiększa zyski?',
+        a: 'Nie jest to jego głównym zadaniem i w długich okresach silnej hossy potrafi wynik obniżyć, bo ogranicza udział najlepiej rosnącej części portfela. Jego rolą jest kontrola ryzyka, czyli pilnowanie, żeby portfel pozostał tym, na co się godziłeś, a nie maksymalizacja stopy zwrotu.',
+      },
+      {
+        q: 'Czy rebalancing kosztuje podatkowo?',
+        a: 'Na zwykłym rachunku tak: sprzedaż z zyskiem oznacza 19 procent podatku, płaconego wcześniej, niż byłoby to konieczne. Na rachunkach IKE i IKZE problem nie występuje, dlatego to właśnie tam rebalancing przez sprzedaż jest najtańszy.',
+      },
+      {
+        q: 'Czy da się rebalansować bez sprzedawania?',
+        a: 'Tak i zwykle jest to najlepsze rozwiązanie przy regularnym oszczędzaniu. Kolejne wpłaty kierujesz w całości do tej części portfela, której jest za mało, aż proporcje wrócą do planu. Nie płacisz wtedy ani prowizji od sprzedaży, ani podatku od zysku.',
+      },
     ],
     related: ['alokacja-aktywow', 'dywersyfikacja', 'obligacja'],
   },
@@ -489,8 +564,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['lokata', 'lokaty', 'lokatę', 'lokatą', 'lokat', 'lokacie'],
     short: 'Lokata to umowa z bankiem, w której powierzasz pieniądze na określony czas w zamian za ustalone z góry oprocentowanie. Po zakończeniu odbierasz kapitał z odsetkami.',
     body: [
-      'Lokata to jedno z najbezpieczniejszych miejsc na pieniądze: środki do równowartości 100 000 EUR na osobę w banku są objęte gwarancją Bankowego Funduszu Gwarancyjnego. Wadą jest to, że oprocentowanie często nie nadąża za inflacją.',
-      'Od odsetek bank automatycznie pobiera 19% podatek Belki. Zerwanie lokaty przed terminem zwykle oznacza utratę części lub całości odsetek.',
+      'Mechanizm jest prosty: blokujesz pieniądze na ustalony okres, a bank z góry zobowiązuje się do konkretnego oprocentowania. Ta pewność jest główną zaletą lokaty i jednocześnie źródłem jej ograniczeń, bo w zamian tracisz dostęp do środków przed terminem.',
+      'Bezpieczeństwo zapewnia Bankowy Fundusz Gwarancyjny. Depozyty do równowartości 100 000 euro na osobę w jednym banku są objęte gwarancją, co oznacza, że nawet w razie upadłości banku odzyskasz swoje pieniądze wraz z naliczonymi odsetkami. Limit liczy się osobno dla każdego banku, więc rozbicie większej kwoty na kilka instytucji zwiększa objętą gwarancją sumę.',
+      'Podstawowa pułapka lokat nie leży w ryzyku, tylko w inflacji. Liczy się nie oprocentowanie nominalne, ale realne, czyli oprocentowanie po odjęciu inflacji i podatku. Gdy inflacja przewyższa oprocentowanie po opodatkowaniu, kapitał rośnie na papierze, a jednocześnie traci siłę nabywczą. Lokata chroni wtedy przed utratą nominalną, nie przed utratą wartości.',
+      'Od odsetek bank automatycznie pobiera 19 procent podatku, więc na konto trafia kwota już pomniejszona i nie musisz nic wykazywać w rocznym zeznaniu. Zerwanie lokaty przed terminem zwykle oznacza utratę części lub całości odsetek, przy czym kapitał pozostaje nienaruszony.',
+      'Lokata sprawdza się jako miejsce na pieniądze o znanym terminie wykorzystania: wkład własny za rok, zaplanowany wydatek, część poduszki finansowej. Do budowania kapitału na kilkanaście lat jest narzędziem słabym, bo z definicji nie daje udziału we wzroście gospodarczym.',
+    ],
+    example: {
+      title: 'Realne oprocentowanie, czyli ile faktycznie zostaje',
+      text: 'Lokata na 10 000 zł z oprocentowaniem 5 procent w skali roku daje 500 zł odsetek brutto. Podatek 19 procent zabiera 95 zł, więc na rękę zostaje 405 zł, co odpowiada 4,05 procent netto. Jeżeli w tym samym czasie inflacja wyniosła 4 procent, realny zysk to około 0,05 procent, czyli praktycznie zero. Przy inflacji 6 procent kapitał urósł nominalnie do 10 405 zł, ale jego siła nabywcza spadła o blisko 2 procent.',
+    },
+    faq: [
+      {
+        q: 'Czy pieniądze na lokacie są bezpieczne?',
+        a: 'Depozyty w bankach działających w Polsce są objęte gwarancją Bankowego Funduszu Gwarancyjnego do równowartości 100 000 euro na osobę w jednym banku, razem z naliczonymi odsetkami. Powyżej tego limitu w jednej instytucji gwarancja nie obowiązuje, dlatego większe kwoty rozkłada się na kilka banków.',
+      },
+      {
+        q: 'Czy od lokaty trzeba rozliczyć podatek?',
+        a: 'Nie musisz nic robić. Bank pobiera 19 procent podatku od odsetek automatycznie przy wypłacie i odprowadza go do urzędu, a na konto wpływa kwota netto. Odsetek z lokaty nie wykazuje się w rocznym zeznaniu podatkowym.',
+      },
+      {
+        q: 'Co się stanie, jeśli zerwę lokatę przed terminem?',
+        a: 'Wpłacony kapitał zawsze otrzymujesz w całości, bo lokata nie może przynieść straty nominalnej. Tracisz natomiast odsetki: w zależności od umowy całość albo ich część naliczoną do dnia zerwania. Warunki wcześniejszego zerwania są zapisane w umowie i różnią się między bankami.',
+      },
+      {
+        q: 'Lokata czy konto oszczędnościowe?',
+        a: 'Lokata daje oprocentowanie ustalone z góry na cały okres, ale kosztem blokady środków. Konto oszczędnościowe pozwala wypłacać pieniądze w każdej chwili, za to bank może zmienić oprocentowanie w dowolnym momencie. Do środków, po które możesz sięgnąć nagle, lepiej pasuje konto oszczędnościowe, do kwot o znanym terminie lokata.',
+      },
     ],
     related: ['konto-oszczednosciowe', 'obligacje-skarbowe', 'podatek-belki'],
   },
@@ -523,7 +623,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     short: 'BIK (Biuro Informacji Kredytowej) to instytucja gromadząca historię kredytową Polaków. Banki sprawdzają w nim, jak spłacałeś dotychczasowe zobowiązania.',
     body: [
       'Twoja historia w BIK wpływa na scoring i decyzję kredytową. Terminowo spłacane kredyty budują pozytywną historię, opóźnienia ją psują. Co ważne, brak jakiejkolwiek historii też bywa problemem, bo bank nie ma Cię jak ocenić.',
-      'Masz prawo raz na pół roku bezpłatnie sprawdzić swój raport BIK. Warto to robić, by wyłapać błędy lub ślady prób wyłudzenia kredytu na Twoje dane.',
+      'Masz prawo raz na pół roku bezpłatnie sprawdzić swój raport BIK. Ten przegląd pozwala wyłapać błędy lub ślady prób wyłudzenia kredytu na Twoje dane.',
     ],
     related: ['scoring', 'zdolnosc-kredytowa', 'kredyt-hipoteczny'],
   },
@@ -567,8 +667,8 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['kredyt gotówkowy', 'kredytu gotówkowego', 'pożyczka gotówkowa'],
     short: 'Kredyt gotówkowy to kredyt na dowolny cel, bez zabezpieczenia nieruchomością, zwykle na krótszy okres i z wyższym oprocentowaniem niż hipoteczny.',
     body: [
-      'Dostajesz pieniądze do ręki i spłacasz w ratach. Brak zabezpieczenia oznacza wyższe ryzyko dla banku, stąd droższy niż hipoteka. Kluczowy do porównania jest tu RRSO, nie samo oprocentowanie.',
-      'Warto uważać na doliczane ubezpieczenia i prowizje, które podnoszą realny koszt. Konsolidacja kilku drogich zobowiązań w jeden tańszy kredyt bywa sensowna, ale tylko gdy realnie obniża RRSO.',
+      'Dostajesz pieniądze do ręki i spłacasz w ratach. Brak zabezpieczenia oznacza wyższe ryzyko dla banku, stąd droższy niż hipoteka. Do porównania ofert służy RRSO, nie samo oprocentowanie.',
+      'Uważaj na doliczane ubezpieczenia i prowizje, które podnoszą realny koszt. Konsolidacja kilku drogich zobowiązań w jeden tańszy kredyt bywa sensowna, ale tylko gdy realnie obniża RRSO.',
     ],
     related: ['rrso', 'kredyt-hipoteczny', 'zdolnosc-kredytowa'],
     calc: { href: '/kalkulator/kredyt-gotowkowy', label: 'Kalkulator kredytu gotówkowego' },
@@ -580,7 +680,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     short: 'Marża kredytu to stała część oprocentowania, którą bank dolicza do stawki bazowej (np. WIBOR). To zarobek banku, niezmienny przez cały okres kredytu.',
     body: [
       'Przy kredycie o zmiennym oprocentowaniu rata to stawka bazowa plus marża. Stawka bazowa się zmienia, marża nie. Dlatego niska marża to jedna z najważniejszych rzeczy do wynegocjowania, bo zostaje z Tobą na 25-30 lat.',
-      'Banki obniżają marżę w zamian za dodatkowe produkty (konto, karta, ubezpieczenie). Warto policzyć, czy te produkty nie kosztują więcej, niż wynosi oszczędność na marży.',
+      'Banki obniżają marżę w zamian za dodatkowe produkty (konto, karta, ubezpieczenie). Policz, czy te produkty nie kosztują więcej, niż wynosi oszczędność na marży.',
     ],
     related: ['kredyt-hipoteczny', 'wibor', 'rrso'],
   },
@@ -770,7 +870,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     short: 'Take profit to zlecenie automatycznie zamykające pozycję po osiągnięciu ustalonego poziomu zysku. Pozwala zrealizować zysk bez ciągłego pilnowania rynku.',
     body: [
       'Take profit zdejmuje z Ciebie emocje: zysk realizuje się sam, zanim chciwość każe czekać na więcej i oddać zarobek. Ustawia się go razem ze stop lossem, definiując z góry oba scenariusze.',
-      'Stosunek odległości take profit do stop loss wyznacza wskaźnik risk/reward, kluczowy dla długoterminowej rentowności strategii.',
+      'Stosunek odległości take profit do stop loss wyznacza wskaźnik risk/reward, od którego zależy długoterminowa rentowność strategii.',
     ],
     related: ['stop-loss', 'risk-reward'],
   },
@@ -848,7 +948,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     short: 'Trend to dominujący kierunek ruchu ceny w czasie: wzrostowy (kolejne szczyty i dołki coraz wyżej), spadkowy (coraz niżej) albo boczny.',
     body: [
       'Powiedzenie, że trend jest twoim przyjacielem, oddaje podejście, w którym handluje się zgodnie z głównym kierunkiem rynku, a nie wbrew niemu. Rozpoznanie trendu to fundament analizy technicznej.',
-      'Trendy występują na różnych horyzontach naraz: długoterminowy wzrostowy może zawierać krótkoterminowe korekty w dół. Dopasowanie horyzontu do strategii jest tu kluczowe.',
+      'Trendy występują na różnych horyzontach naraz: długoterminowy wzrostowy może zawierać krótkoterminowe korekty w dół. Dopasowanie horyzontu do strategii rozstrzyga, który trend Cię obowiązuje.',
     ],
     related: ['analiza-techniczna', 'wsparcie-i-opor', 'korekta'],
   },
@@ -869,7 +969,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['scalping', 'skalpowanie', 'scalper'],
     short: 'Scalping to bardzo krótkoterminowy styl handlu, w którym trader otwiera wiele transakcji dziennie, zarabiając na minimalnych ruchach ceny.',
     body: [
-      'Scalper trzyma pozycje sekundy lub minuty, polując na drobne ruchy z dużą częstotliwością. Kluczowe są niskie spready, szybkie wykonanie zleceń i żelazna dyscyplina.',
+      'Scalper trzyma pozycje sekundy lub minuty, polując na drobne ruchy z dużą częstotliwością. Wymaga niskich spreadów, szybkiego wykonania zleceń i żelaznej dyscypliny.',
       'To najbardziej wymagający i stresujący styl tradingu, w którym koszty transakcyjne i psychika decydują o wyniku. Zdecydowanie nie dla początkujących.',
     ],
     related: ['day-trading', 'spread', 'dzwignia'],
@@ -1001,8 +1101,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['deflacja', 'deflacji', 'deflację', 'deflacją'],
     short: 'Deflacja to trwały spadek ogólnego poziomu cen, czyli odwrotność inflacji. Brzmi dobrze, ale dla gospodarki bywa groźniejsza niż umiarkowana inflacja.',
     body: [
-      'Gdy ceny spadają, konsumenci wstrzymują zakupy, licząc na jeszcze niższe ceny, firmy tną produkcję i pensje, a to nakręca spiralę spadku. Rośnie też realny ciężar długów.',
-      'Banki centralne zwalczają deflację obniżaniem stóp i dodrukiem pieniądza. Łagodny, stabilny wzrost cen uważa się za zdrowszy niż ich spadek.',
+      'Odruchowo deflacja wydaje się korzystna, bo za te same pieniądze kupisz więcej. Problem pojawia się, gdy spadek cen jest trwały i powszechny, bo wtedy zmienia zachowanie całej gospodarki, a nie tylko pojedynczego kupującego.',
+      'Mechanizm spirali wygląda tak: skoro ceny mają spaść, opłaca się odłożyć zakupy na później. Odroczony popyt oznacza mniejsze przychody firm, te tną produkcję, pensje i zatrudnienie, co jeszcze bardziej ogranicza popyt i pcha ceny w dół. Każdy krok jest indywidualnie racjonalny, a wynik zbiorowy destrukcyjny.',
+      'Osobno działa efekt zadłużenia, często poważniejszy od samego spadku popytu. Kwota kredytu jest zapisana nominalnie i nie maleje, natomiast pieniądz, którym go spłacasz, staje się coraz droższy. Realny ciężar długu rośnie sam z siebie, przy niezmienionej racie. Dotyczy to tak samo gospodarstw domowych, jak firm i państw, i dlatego deflacja bywa groźniejsza dla zadłużonej gospodarki niż umiarkowana inflacja.',
+      'Deflacja utrudnia też reagowanie bankom centralnym. Główne narzędzie, czyli obniżanie stóp procentowych, ma naturalną granicę w okolicach zera. Poniżej niej pozostają rozwiązania nadzwyczajne, takie jak skup aktywów, których skuteczność jest ograniczona i rozłożona w czasie.',
+      'Odróżnia się przy tym deflację od zwykłego potanienia pojedynczych dóbr. Spadek cen elektroniki wynikający z postępu technicznego jest zdrowy i nie tworzy spirali. Deflacja to sytuacja, w której przeciętny poziom cen w całej gospodarce spada przez dłuższy czas. Właśnie dlatego banki centralne celują nie w zero, lecz w niewielki dodatni wzrost cen, zwykle około 2 procent.',
+    ],
+    example: {
+      title: 'Dlaczego dług boli bardziej przy spadku cen',
+      text: 'Zaciągasz kredyt na 300 000 zł przy zarobkach 6000 zł miesięcznie, czyli dług odpowiada 50 miesięcznym pensjom. Przy inflacji pensje nominalnie rosną: po kilku latach zarabiasz 8000 zł, a dług to już tylko 37,5 pensji, mimo że kwota kredytu się nie zmieniła. Przy deflacji dzieje się odwrotnie, bo pensje spadają razem z cenami: przy 5000 zł ten sam kredyt odpowiada już 60 pensjom. Nie zmieniło się nic w umowie, a spłata stała się realnie trudniejsza.',
+    },
+    faq: [
+      {
+        q: 'Czy deflacja jest korzystna dla konsumenta?',
+        a: 'Krótkoterminowo i pojedynczo tak, bo rosną realne możliwości zakupu. W dłuższym okresie skutki uboczne zwykle przeważają: spadająca sprzedaż prowadzi do cięć zatrudnienia i pensji, więc ostatecznie konsument traci dochód szybciej, niż zyskuje na niższych cenach.',
+      },
+      {
+        q: 'Czym różni się deflacja od dezinflacji?',
+        a: 'Dezinflacja to spowolnienie tempa wzrostu cen, które nadal rosną, tylko wolniej. Deflacja oznacza, że ceny faktycznie spadają, czyli wskaźnik inflacji jest ujemny. Pierwsze zjawisko jest zwykle celem banku centralnego, drugie jego problemem.',
+      },
+      {
+        q: 'Dlaczego banki centralne nie dążą do zerowej inflacji?',
+        a: 'Zero byłoby zbyt blisko granicy deflacji, a błąd prognozy w dół oznaczałby wejście w spadek cen z bardzo ograniczonym polem do reakcji. Niewielka dodatnia inflacja, zwykle w okolicach 2 procent, tworzy bufor bezpieczeństwa i ułatwia dostosowania w gospodarce.',
+      },
+      {
+        q: 'Co dzieje się z kredytem podczas deflacji?',
+        a: 'Nominalna kwota zadłużenia nie zmienia się, ale realny ciężar rośnie, bo dochody i ceny spadają, a rata pozostaje ta sama. Dla kredytobiorcy deflacja jest więc niekorzystna, odwrotnie niż inflacja, która stopniowo zmniejsza realną wartość długu.',
+      },
     ],
     related: ['inflacja', 'recesja', 'stopa-procentowa'],
   },
@@ -1046,8 +1171,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['stopa procentowa', 'stopy procentowe', 'stóp procentowych', 'stopami procentowymi'],
     short: 'Stopa procentowa to cena pieniądza: określa, ile kosztuje pożyczanie i ile można zarobić na oszczędnościach. Ustalają ją banki centralne.',
     body: [
-      'Wysokie stopy oznaczają droższe kredyty i wyższe oprocentowanie lokat, co schładza gospodarkę i hamuje inflację. Niskie stopy pobudzają wydatki i inwestycje, ale mogą podgrzewać ceny.',
-      'Zmiany stóp przekładają się wprost na raty kredytów (przez WIBOR) i na atrakcyjność akcji wobec obligacji. To jedno z najważniejszych narzędzi polityki pieniężnej.',
+      'W Polsce najważniejsza jest stopa referencyjna Narodowego Banku Polskiego, ustalana przez Radę Polityki Pieniężnej na comiesięcznych posiedzeniach. Wyznacza ona koszt, po jakim banki pożyczają pieniądze od banku centralnego i między sobą, a przez to poziom oprocentowania w całej gospodarce. Aktualną wysokość publikuje NBP.',
+      'Przełożenie na kredyty przebiega przez wskaźnik referencyjny, czyli WIBOR, a docelowo POLSTR. Rata kredytu ze zmiennym oprocentowaniem składa się z tego wskaźnika i stałej marży banku. Gdy stopy rosną, rośnie wskaźnik, a w ślad za nim rata, mimo że marża zapisana w umowie się nie zmienia. Dostosowanie następuje w terminach określonych w umowie, zwykle co trzy lub sześć miesięcy.',
+      'Na oszczędności stopy działają w drugą stronę, ale wolniej i mniej hojnie. Banki podnoszą oprocentowanie lokat i kont oszczędnościowych z opóźnieniem i zwykle w mniejszej skali, niż podnoszą koszt kredytów, ponieważ nie muszą konkurować o depozyty tak mocno jak o kredytobiorców.',
+      'Dla rynku akcji wysokie stopy oznaczają dwa niekorzystne efekty naraz. Rosną koszty finansowania spółek, co obniża ich zyski, a jednocześnie bezpieczne obligacje zaczynają oferować przyzwoity zwrot, przez co akcje muszą konkurować o kapitał z instrumentem pozbawionym ryzyka. Dlatego zapowiedzi zmian stóp poruszają giełdą mocniej niż wiele innych informacji.',
+      'Bank centralny steruje stopami, żeby utrzymać inflację blisko celu. Podnoszenie ich schładza gospodarkę: kredyt drożeje, konsumpcja i inwestycje słabną, presja na ceny maleje. Obniżanie działa odwrotnie. Efekt nie jest natychmiastowy i pojawia się z opóźnieniem liczonym w kwartałach, co jest jednym z najtrudniejszych elementów tej polityki.',
+    ],
+    example: {
+      title: 'Ile zmienia 1 punkt procentowy w racie kredytu',
+      text: 'Kredyt 400 000 zł na 25 lat przy oprocentowaniu 7 procent daje ratę około 2827 zł. Wzrost oprocentowania o 1 punkt procentowy, do 8 procent, podnosi ratę do około 3087 zł, czyli o 260 zł miesięcznie i ponad 3100 zł rocznie. Spadek do 6 procent obniża ją do około 2577 zł. Przy kredycie ze zmiennym oprocentowaniem te 250 zł w każdą stronę pojawiają się bez żadnej zmiany w umowie, wyłącznie w wyniku decyzji o stopach.',
+    },
+    faq: [
+      {
+        q: 'Kto ustala stopy procentowe w Polsce?',
+        a: 'Rada Polityki Pieniężnej działająca przy Narodowym Banku Polskim, na posiedzeniach odbywających się zwykle raz w miesiącu. Decyzje dotyczą kilku stóp, z których najważniejsza jest stopa referencyjna, wpływająca na oprocentowanie w całej gospodarce.',
+      },
+      {
+        q: 'Kiedy zmiana stóp wpłynie na moją ratę?',
+        a: 'Przy kredycie ze zmiennym oprocentowaniem rata zmienia się w terminie aktualizacji wskaźnika referencyjnego zapisanym w umowie, najczęściej co trzy lub sześć miesięcy. Oznacza to opóźnienie między decyzją Rady a odczuwalną zmianą w domowym budżecie. Przy oprocentowaniu stałym rata pozostaje niezmieniona przez cały okres jego obowiązywania.',
+      },
+      {
+        q: 'Dlaczego wyższe stopy szkodzą giełdzie?',
+        a: 'Z dwóch powodów naraz. Spółki płacą więcej za finansowanie, co obniża ich zyski, a jednocześnie obligacje zaczynają oferować atrakcyjny zwrot bez ryzyka, więc kapitał ma dokąd odpłynąć z akcji. Dodatkowo wyższa stopa obniża bieżącą wycenę przyszłych zysków, co uderza najmocniej w spółki wzrostowe.',
+      },
+      {
+        q: 'Czy przy wysokich stopach lepiej oszczędzać niż inwestować?',
+        a: 'Wysokie stopy podnoszą oprocentowanie lokat, ale zwykle towarzyszy im podwyższona inflacja, która to oprocentowanie zjada. Znaczenie ma stopa realna, czyli oprocentowanie po odjęciu inflacji i podatku, a nie sama wysokość odsetek. Decyzję trafniej opiera się na horyzoncie i celu niż na aktualnym poziomie stóp.',
+      },
     ],
     related: ['nbp', 'inflacja', 'wibor'],
   },
@@ -1317,7 +1467,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     short: 'Księgowanie mentalne to traktowanie pieniędzy różnie w zależności od ich pochodzenia, mimo że złotówka jest zawsze warta tyle samo.',
     body: [
       'Wygraną w totka albo premię łatwiej wydajemy lub ryzykujemy niż ciężko zarobione pieniądze, choć ich wartość jest identyczna. Tak samo dzielimy budżet na sztywne koperty, tracąc elastyczność.',
-      'Ten błąd prowadzi do nieracjonalnych decyzji, na przykład trzymania oszczędności na nisko oprocentowanym koncie i jednoczesnego spłacania drogiego długu. Pieniądz warto traktować całościowo.',
+      'Ten błąd prowadzi do nieracjonalnych decyzji, na przykład trzymania oszczędności na nisko oprocentowanym koncie i jednoczesnego spłacania drogiego długu. Pieniądz działa tak samo niezależnie od tego, w której „przegródce” go umieścisz.',
     ],
     related: ['poduszka-finansowa', 'awersja-do-straty'],
   },
@@ -1360,8 +1510,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['stablecoin', 'stablecoiny', 'stabilna kryptowaluta'],
     short: 'Stablecoin to kryptowaluta, której kurs jest powiązany ze stabilnym aktywem, najczęściej dolarem, by uniknąć typowej dla krypto zmienności.',
     body: [
-      'Stablecoiny (np. USDT, USDC) służą jako cyfrowa gotówka na rynku krypto: do parkowania środków i rozliczeń bez wahań cenowych. Ich stabilność zależy od jakości zabezpieczenia.',
-      'Ryzyko polega na tym, że nie każdy stablecoin jest faktycznie i w pełni pokryty rezerwami. Historia zna przypadki utraty parytetu, dlatego liczy się zaufanie do emitenta.',
+      'Stablecoiny pełnią na rynku kryptowalut rolę gotówki. Pozwalają wyjść z pozycji bez przewalutowania na złote czy dolary, rozliczać transakcje między giełdami i przechowywać środki między jedną a drugą inwestycją, bez narażania ich na typową dla krypto zmienność. Najbardziej znane to USDT i USDC, oba powiązane z dolarem.',
+      'Utrzymanie stałego kursu odbywa się na kilka sposobów i to właśnie one decydują o ryzyku. Najpopularniejsze są stablecoiny zabezpieczone rezerwami: emitent deklaruje, że za każdą wyemitowaną jednostkę trzyma odpowiednik w gotówce lub krótkoterminowych obligacjach. Istnieją też konstrukcje zabezpieczone innymi kryptowalutami z nadmiarowym pokryciem oraz, historycznie, tak zwane algorytmiczne, utrzymujące kurs wyłącznie mechanizmem podaży.',
+      'Ten ostatni wariant okazał się najbardziej zawodny. W maju 2022 roku algorytmiczny stablecoin TerraUSD stracił powiązanie z dolarem i w ciągu kilku dni jego wartość praktycznie wyparowała, pociągając za sobą powiązany token i wywołując falę upadłości w całym sektorze. To najczęściej przywoływany dowód na to, że słowo "stable" w nazwie jest deklaracją, a nie gwarancją.',
+      'Przy stablecoinach zabezpieczonych rezerwami ryzyko jest inne, ale realne. Sprowadza się do pytania, czy rezerwy faktycznie istnieją, w czym są trzymane i kto to potwierdza. Utrata parytetu, nazywana depegiem, zdarzała się także dużym emitentom w reakcji na wątpliwości co do jakości zabezpieczenia lub kondycji banku przechowującego środki.',
+      'Od strony prawnej w Unii Europejskiej obowiązują dziś przepisy porządkujące ten rynek, nakładające na emitentów wymogi dotyczące rezerw, ich przechowywania i raportowania. Zmniejsza to ryzyko, ale go nie usuwa: stablecoin pozostaje zobowiązaniem prywatnej firmy, a nie pieniądzem gwarantowanym przez państwo, i nie obejmuje go bankowy system gwarancji depozytów.',
+    ],
+    example: {
+      title: 'Co oznacza depeg w praktyce',
+      text: 'Trzymasz równowartość 20 000 zł w stablecoinie, zakładając kurs 1 do 1 wobec dolara. Jeżeli kurs spadnie do 0,95 dolara, Twoje środki są warte około 19 000 zł, mimo że nie zajmowałeś żadnej pozycji ani nie zmieniła się cena żadnej kryptowaluty. Przy pełnym załamaniu parytetu, jak w przypadku TerraUSD, strata sięga niemal całości. To ryzyko emitenta, nie ryzyko rynkowe, i dlatego nie znika przez samo unikanie zmiennych aktywów.',
+    },
+    faq: [
+      {
+        q: 'Czy stablecoin jest bezpieczny?',
+        a: 'Jest bezpieczniejszy od zwykłych kryptowalut pod względem zmienności kursu, ale niesie własne ryzyko: wypłacalności i wiarygodności emitenta. Nie obejmuje go gwarancja depozytów bankowych, więc w razie problemów emitenta nie ma instytucji, która zwróci środki.',
+      },
+      {
+        q: 'Czym stablecoin różni się od pieniądza w banku?',
+        a: 'Środki na rachunku bankowym są objęte gwarancją do równowartości 100 000 euro i podlegają nadzorowi bankowemu. Stablecoin jest zobowiązaniem prywatnego emitenta, którego pokrycie zależy od rezerw, jakie faktycznie utrzymuje. Wygoda i szybkość rozliczeń są większe, poziom ochrony niższy.',
+      },
+      {
+        q: 'Co to jest depeg?',
+        a: 'To utrata powiązania stablecoina z aktywem bazowym, czyli sytuacja, w której jego kurs przestaje odpowiadać jednemu dolarowi. Bywa przejściowy i sięga ułamków procenta, ale w skrajnych przypadkach, jak upadek TerraUSD w 2022 roku, oznacza praktycznie całkowitą utratę wartości.',
+      },
+      {
+        q: 'Czy trzymanie stablecoinów jest opodatkowane?',
+        a: 'Samo posiadanie nie rodzi podatku. Znaczenie ma moment zamiany na walutę tradycyjną lub zapłaty za towar czy usługę, bo dopiero wtedy powstaje przychód podlegający rozliczeniu. Wymiana jednej kryptowaluty na inną, w tym na stablecoina, jest w polskich przepisach neutralna podatkowo.',
+      },
     ],
     related: ['kryptowaluta', 'bitcoin'],
   },
@@ -1415,8 +1590,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['PIT-38', 'deklaracja PIT-38', 'rozliczenie zysków kapitałowych'],
     short: 'PIT-38 to deklaracja podatkowa, w której rozliczasz zyski kapitałowe z giełdy: ze sprzedaży akcji, ETF-ów i innych papierów wartościowych.',
     body: [
-      'Składa się go raz w roku. Broker przysyła informację PIT-8C z danymi o transakcjach, na podstawie której wyliczasz 19% podatek Belki od zysku. Stratę można rozliczyć w kolejnych latach.',
-      'Konta IKE i IKZE są zwolnione z tego obowiązku w zakresie podatku od zysków, co jest jedną z ich głównych zalet. Przy zwykłym rachunku PIT-38 to coroczna konieczność.',
+      'PIT-38 składa się raz w roku, do końca kwietnia, za rok poprzedni. Podstawą jest informacja PIT-8C, którą polskie biuro maklerskie przysyła zwykle do końca lutego. Zawiera ona sumę przychodów ze sprzedaży i kosztów ich uzyskania, a Twoim zadaniem jest przepisanie tych kwot i wyliczenie 19 procent od różnicy.',
+      'Obowiązek dotyczy wyłącznie zysków zrealizowanych, czyli takich, w których faktycznie sprzedałeś papier. Wzrost wartości portfela, którego nie sprzedałeś, nie pojawia się w zeznaniu, niezależnie od skali. Nie wykazuje się tu również odsetek z lokat ani dywidend z polskich spółek, bo od nich podatek pobrał już bank lub broker.',
+      'Deklarację składa się także wtedy, gdy rok zakończył się stratą, i to jest najczęściej pomijany szczegół. Tylko wykazana strata daje prawo do rozliczenia jej w kolejnych pięciu latach, przy czym w jednym roku odliczysz najwyżej połowę straty z danego roku. Pominięcie deklaracji przy stracie oznacza po prostu utratę tego uprawnienia.',
+      'Osobnego potraktowania wymagają rachunki u brokerów zagranicznych, którzy zwykle nie wystawiają PIT-8C. Zestawienie transakcji przygotowujesz wtedy samodzielnie, przeliczając każdą operację na złote według kursu z dnia poprzedzającego jej realizację. Do tego dochodzi kwestia podatku pobranego za granicą od dywidend, który rozlicza się według właściwej umowy o unikaniu podwójnego opodatkowania.',
+      'Rachunki IKE i IKZE są z tego obowiązku wyłączone. Transakcji zawartych w ich ramach nie wykazuje się w PIT-38, co poza samą korzyścią podatkową oznacza również mniej pracy przy rocznym rozliczeniu.',
+    ],
+    example: {
+      title: 'Jak strata z poprzedniego roku obniża podatek',
+      text: 'W pierwszym roku zamykasz rachunek ze stratą 10 000 zł i wykazujesz ją w PIT-38. W drugim roku osiągasz zysk 12 000 zł. Możesz odliczyć maksymalnie połowę straty z tamtego roku, czyli 5000 zł, więc opodatkowany dochód wynosi 7000 zł, a podatek 1330 zł zamiast 2280 zł. Pozostałe 5000 zł straty czeka na kolejne lata, w ramach pięcioletniego okna. Gdybyś nie złożył deklaracji za stratny rok, zapłaciłbyś pełne 2280 zł.',
+    },
+    faq: [
+      {
+        q: 'Do kiedy trzeba złożyć PIT-38?',
+        a: 'Do 30 kwietnia roku następującego po roku, w którym osiągnąłeś przychód. Informację PIT-8C, na podstawie której wypełniasz deklarację, biuro maklerskie przesyła zwykle do końca lutego.',
+      },
+      {
+        q: 'Czy trzeba składać PIT-38 przy stracie?',
+        a: 'Nie ma takiego przymusu, ale niezłożenie deklaracji oznacza utratę prawa do rozliczenia tej straty w kolejnych latach. Ponieważ stratę można odliczać przez pięć lat od przyszłych zysków, złożenie zeznania przy wyniku ujemnym jest w praktyce decyzją opłacalną.',
+      },
+      {
+        q: 'Czy PIT-38 obejmuje zyski z IKE i IKZE?',
+        a: 'Nie. Transakcje zawierane w ramach rachunków IKE i IKZE pozostają poza tą deklaracją. To jedna z praktycznych zalet tych kont, obok samej korzyści podatkowej.',
+      },
+      {
+        q: 'Co zrobić, gdy broker nie wystawia PIT-8C?',
+        a: 'Dotyczy to zwykle brokerów zagranicznych. Zestawienie przychodów i kosztów przygotowujesz wtedy sam, na podstawie historii transakcji, przeliczając kwoty na złote według kursu średniego z dnia poprzedzającego dzień transakcji. Obowiązek rozliczenia istnieje niezależnie od tego, czy dokument otrzymałeś.',
+      },
     ],
     related: ['podatek-belki', 'rachunek-maklerski', 'ike'],
   },
@@ -1427,7 +1627,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     short: 'Danina solidarnościowa to dodatkowy 4% podatek od nadwyżki rocznych dochodów ponad 1 milion złotych, płacony obok zwykłego podatku dochodowego.',
     body: [
       'Liczy się ją od sumy dochodów ponad milion złotych w roku, w tym z pracy, działalności i części zysków kapitałowych. To realny temat dla wąskiej grupy najlepiej zarabiających.',
-      'Choć większości nie dotyczy, warto ją znać przy bardzo dobrych latach inwestycyjnych albo sprzedaży dużych aktywów, bo łączy się z innymi dochodami.',
+      'Choć większości nie dotyczy, trzeba ją znać przy bardzo dobrych latach inwestycyjnych albo sprzedaży dużych aktywów, bo łączy się z innymi dochodami.',
     ],
     related: ['podatek-belki', 'pit-38'],
   },
