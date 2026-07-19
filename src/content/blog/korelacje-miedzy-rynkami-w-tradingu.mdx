@@ -1,0 +1,134 @@
+---
+title: "Korelacje między rynkami - kiedy trzy pozycje to jedno ryzyko"
+excerpt: "Otwierasz trzy transakcje na trzech różnych instrumentach i masz poczucie, że rozłożyłeś ryzyko. Jeśli wszystkie trzy zależą od tego samego, to nie masz trzech pozycji, tylko jedną potrójnej wielkości. Pokazuję, które rynki poruszają się razem, dlaczego korelacja mnoży ryzyko zamiast je dzielić i jak sprawdzić własne pozycje bez liczenia współczynników."
+date: '2026-07-19'
+updated: '2026-07-19'
+tag: "Trading"
+readTime: "9 min"
+image: /images/blog/covers/multi-screen.jpg
+published: true
+author: Mateusz
+metaTitle: "Korelacje między rynkami w tradingu - jak mnożą ryzyko"
+metaDescription: "Które rynki poruszają się razem i dlaczego kilka skorelowanych pozycji to w praktyce jedna transakcja o wielokrotnym ryzyku. Jak sprawdzić korelację własnych pozycji i wpisać limit na grupę do planu."
+keywords:
+  - korelacje między rynkami
+  - korelacja par walutowych
+  - korelacja w tradingu
+  - skorelowane pozycje
+  - ryzyko portfela tradera
+  - dolar a złoto
+  - ropa a dolar kanadyjski
+  - limit ryzyka na grupę pozycji
+faq:
+  - q: "Czym jest korelacja między rynkami?"
+    a: "Korelacja opisuje, na ile dwa instrumenty poruszają się razem. Dodatnia oznacza, że zwykle idą w tę samą stronę, ujemna, że w przeciwne, a brak korelacji, że ich ruchy nie mają ze sobą związku. W tradingu nie chodzi o dokładny współczynnik, tylko o odpowiedź na jedno pytanie: czy ten sam scenariusz rynkowy zaszkodzi kilku moim pozycjom naraz."
+  - q: "Dlaczego kilka pozycji na różnych instrumentach to nadal jedno ryzyko?"
+    a: "Bo instrument to nie to samo co powód. Jeśli otworzysz trzy transakcje, które wszystkie zarabiają na słabym dolarze, to masz jeden pomysł wyrażony na trzy sposoby. Kiedy dolar zachowa się odwrotnie, wszystkie trzy zaczną tracić w tym samym momencie. Ryzyko sumuje się wtedy zamiast rozkładać, więc pozornie ostrożne trzy transakcje po jednym procencie oznaczają w praktyce trzy procent na jednej decyzji."
+  - q: "Które rynki są ze sobą najczęściej powiązane?"
+    a: "Na forex większość popularnych par zawiera dolara, więc pary z dolarem w mianowniku poruszają się zwykle podobnie, a pary z dolarem w liczniku często przeciwnie. Ropa naftowa bywa powiązana z walutami krajów eksportujących surowce, na przykład dolarem kanadyjskim i koroną norweską. Złoto historycznie reagowało odwrotnie do dolara. Główne indeksy giełdowe poruszają się zwykle w tym samym rytmie, a kryptowaluty w ostatnich latach reagują podobnie do rynku akcji technologicznych."
+  - q: "Czy pozycja przeciwna na skorelowanym instrumencie to zabezpieczenie?"
+    a: "Rzadko. Otwarcie długiej i krótkiej pozycji na dwóch mocno powiązanych instrumentach w dużej mierze znosi ekspozycję, ale nie znosi kosztów. Płacisz spread dwa razy, ponosisz punkty swapowe po obu stronach i blokujesz depozyt zabezpieczający. Efekt bywa taki, że nie masz już pozycji rynkowej, za to nadal tracisz pieniądze. Jeśli nie chcesz ryzyka, prostszym rozwiązaniem jest zamknięcie transakcji."
+  - q: "Czy korelacje są stałe?"
+    a: "Nie i to jest ich najważniejsza cecha praktyczna. Powiązania zmieniają się wraz z tym, czym żyje rynek, a w momentach paniki wiele aktywów zaczyna spadać jednocześnie, nawet takie, które wcześniej uchodziły za niezależne. Dlatego korelacji używa się do wykrywania ukrytego nadmiaru ryzyka, a nie jako gwarancji, że jedna pozycja ochroni drugą."
+  - q: "Jak sprawdzić korelację bez liczenia współczynników?"
+    a: "Nałóż wykresy dwóch instrumentów z tego samego okresu i zobacz, czy większe ruchy wypadają w tych samych miejscach. Potem zadaj pytanie kontrolne przy każdej otwartej pozycji: jaki jeden scenariusz sprawi, że wszystkie moje transakcje będą stratne naraz. Jeśli taki scenariusz istnieje i jest prawdopodobny, masz jedną pozycję, a nie kilka."
+---
+
+**W skrócie: kilka pozycji na różnych instrumentach nie oznacza rozłożonego ryzyka, jeśli wszystkie zależą od tego samego czynnika. Na forex tym czynnikiem jest najczęściej dolar, na indeksach ogólny apetyt na ryzyko. Trzy skorelowane transakcje po jednym procencie ryzyka to w praktyce jedna transakcja z ryzykiem trzech procent. Korelacje nie są stałe i w czasie paniki rosną, więc traktuj je jako narzędzie do wykrywania ukrytego nadmiaru ryzyka, a nie jako zabezpieczenie. Praktyczny wniosek: limit ryzyka ustawiaj na grupę powiązanych pozycji, nie tylko na pojedynczą transakcję.**
+
+Wyobraź sobie taki poranek. Uznajesz, że dolar będzie słabł. Otwierasz długą pozycję na EUR/USD, bo układ wygląda dobrze. Potem widzisz podobny układ na GBP/USD, więc wchodzisz i tam. Na koniec dokładasz złoto, które przy słabym dolarze zwykle rośnie. Trzy instrumenty, trzy różne wykresy, na każdym ryzykujesz jeden procent kapitału. Poczucie: ostrożnie rozłożone ryzyko.
+
+Godzinę później pojawia się odczyt, który umacnia dolara. Wszystkie trzy pozycje tracą jednocześnie i w kilka minut jesteś trzy procent w plecy. Nie miałeś trzech transakcji. Miałeś jeden pomysł, wyrażony trzy razy.
+
+To jest najczęstszy sposób, w jaki trader z porządnym zarządzaniem ryzykiem i tak dostaje serię, której nie planował.
+
+## Korelacja bez wzorów
+
+Formalnie korelacja to liczba od minus jeden do plus jeden, opisująca, jak dwa instrumenty poruszają się względem siebie. W praktyce tradera wystarczą trzy stany.
+
+**Dodatnia korelacja** oznacza, że instrumenty zwykle idą w tę samą stronę. Kupując oba, podwajasz zakład zamiast go rozkładać.
+
+**Ujemna korelacja** oznacza, że idą w przeciwne strony. Długa pozycja na jednym i długa na drugim częściowo się znoszą, więc płacisz koszty za ekspozycję, której nie masz.
+
+**Brak korelacji** oznacza, że ruchy jednego nie mówią nic o drugim. Tylko w tym przypadku dwie pozycje faktycznie są dwiema pozycjami.
+
+Nie musisz znać dokładnej wartości współczynnika. Cała praktyczna zawartość tego pojęcia mieści się w jednym pytaniu, które zadajesz sobie przy otwartych transakcjach: **jaki jeden scenariusz sprawi, że wszystkie będą stratne naraz.** Jeśli odpowiedź przychodzi łatwo, to nie masz kilku pozycji, tylko jedną, większą.
+
+## Co z czym chodzi w parze
+
+Poniższe powiązania są obserwacjami historycznymi, a nie prawami rynku. Zmieniają się i regularnie zawodzą, ale jako mapa punktów wspólnych działają dobrze.
+
+| Powiązanie | Charakter | Wspólny czynnik |
+| --- | --- | --- |
+| EUR/USD i GBP/USD | Zwykle w tę samą stronę | Dolar po tej samej stronie pary |
+| EUR/USD i USD/CHF | Zwykle w przeciwne strony | Dolar po przeciwnych stronach |
+| Dolar i złoto | Historycznie odwrotnie | Złoto wyceniane w dolarze |
+| Ropa i dolar kanadyjski | Zwykle w tę samą stronę | Eksport surowca |
+| Główne indeksy giełdowe | Zwykle razem | Ogólny apetyt na ryzyko |
+| Kryptowaluty i akcje technologiczne | W ostatnich latach podobnie | Apetyt na ryzyko, płynność |
+
+Na forex większość powiązań sprowadza się do jednego: **dolar jest w prawie każdej popularnej parze**. Handlując EUR/USD, GBP/USD i AUD/USD naraz, w dużej mierze handlujesz trzy razy dolarem. Nazwy par sugerują różnorodność, ale wspólny mianownik siedzi w każdej z nich. Jeśli dopiero poznajesz budowę par, wracasz do [podstaw forex](/trading/forex-dla-poczatkujacych), gdzie rozłożyłem parę na walutę bazową i kwotowaną.
+
+Na indeksach mechanizm jest jeszcze prostszy. Gdy rynek ucieka od ryzyka, spadają zwykle wszystkie główne indeksy naraz, bo reagują na ten sam nastrój. Wybór między jednym a drugim jest wtedy wyborem tempa, nie kierunku. Przegląd tego, czym te [rynki się różnią](/trading/rynki-forex-indeksy-krypto-akcje), znajdziesz w osobnym tekście.
+
+## Dlaczego to mnoży ryzyko, zamiast je dzielić
+
+Sedno problemu jest arytmetyczne i dlatego łatwo je przeoczyć w trakcie sesji.
+
+Kiedy liczysz [wielkość pozycji](/kalkulator/wielkosc-pozycji), zwykle przyjmujesz ryzyko rzędu jednego procenta na transakcję. Ta liczba ma sens przy założeniu, że transakcje są od siebie niezależne. Wtedy dwie stratne pod rząd to dwa osobne zdarzenia, a szansa, że wszystkie pójdą źle naraz, jest niewielka.
+
+Przy pozycjach skorelowanych to założenie znika. Trzy transakcje po jednym procencie, zależne od tego samego czynnika, zachowują się jak jedna transakcja z ryzykiem trzech procent. Różnica polega tylko na tym, że w tabelce wyglądają na trzy ostrożne decyzje, a nie na jedną odważną.
+
+Konsekwencja bije w dwa miejsca planu naraz. Po pierwsze, przekraczasz własny [limit dziennej straty](/trading/jak-zbudowac-plan-tradingowy), nie łamiąc żadnej pojedynczej zasady. Po drugie, obsunięcie robi się głębsze, niż wynikało z Twoich obliczeń, więc odrobienie go wymaga większego zysku, niż zakładałeś.
+
+Osobno to jest też problem psychologiczny. Trzy pozycje czerwone w tej samej minucie działają na głowę zupełnie inaczej niż jedna strata o tej samej wartości. Stąd blisko już do [odgrywania się](/trading/overtrading-i-fomo-jak-nad-tym-zapanowac), które kosztuje więcej niż pierwotny błąd.
+
+## Zabezpieczenie, które nim nie jest
+
+Skoro korelacja ujemna oznacza ruch w przeciwne strony, kusi pomysł, żeby użyć jej jako ochrony: długa pozycja tu, długa na instrumencie odwrotnie skorelowanym, i ryzyko zniknie.
+
+Ekspozycja faktycznie w dużej części znika. Nie znikają koszty. Płacisz spread po obu stronach, ponosisz punkty swapowe na obu pozycjach, jeśli trzymasz je przez noc, i blokujesz depozyt zabezpieczający na dwóch transakcjach zamiast jednej. Więcej o tym, jak te [koszty się kumulują](/trading/koszty-tradingu-spread-prowizje-swap), w osobnym artykule.
+
+Efekt końcowy: nie masz już zdania o rynku, ale nadal tracisz pieniądze, tylko wolniej i mniej zauważalnie. Jeżeli nie chcesz ryzyka, najtańszym zabezpieczeniem jest zamknięcie pozycji.
+
+Do tego dochodzi rzecz gorsza. Korelacja ujemna bywa niepełna i zmienna, więc konstrukcja, która miała się znosić, potrafi w nerwowym dniu przynieść stratę po obu stronach jednocześnie.
+
+## Korelacje się zmieniają, i to w najgorszym momencie
+
+Największy błąd to traktowanie powiązań jak stałych własności rynku.
+
+Korelacje wynikają z tego, czym rynek akurat żyje. Kiedy uwaga skupia się na stopach procentowych, waluty poruszają się według różnic w oczekiwaniach wobec banków centralnych. Kiedy dominuje strach, wszystko dzieli się na aktywa ryzykowne i bezpieczne, a wcześniejsze zależności przestają obowiązywać.
+
+W momentach paniki dzieje się rzecz najbardziej nieprzyjemna: **korelacje rosną**. Instrumenty, które zwykle chodzą własnymi drogami, zaczynają spadać razem, bo inwestorzy sprzedają wszystko, co da się sprzedać. Dywersyfikacja przestaje działać dokładnie wtedy, gdy jest najbardziej potrzebna. Ten sam mechanizm opisałem po stronie inwestycyjnej w tekście o [dywersyfikacji portfela](/inwestycje/dywersyfikacja-portfela-inwestycyjnego).
+
+Klasyczny przykład zawodnej reguły to złoto. Utarło się, że rośnie, gdy robi się niebezpiecznie, a jednak zdarzają się okresy, w których zachowuje się inaczej, niż zapowiada podręcznik. Opisałem taki przypadek w artykule o tym, [dlaczego złoto tym razem nie ochroniło](/gospodarka/wojna-a-rynki-ropa-gielda-zloto).
+
+Wniosek praktyczny jest jednostronny. Korelacja jest dobrym narzędziem do wykrywania ryzyka, którego nie widzisz, i złym narzędziem do budowania ochrony, na którą liczysz.
+
+## Jak sprawdzić własne pozycje
+
+Nie potrzebujesz macierzy korelacji ani żadnego dodatkowego oprogramowania. Wystarczą trzy nawyki.
+
+**Nałóż wykresy.** Otwórz dwa instrumenty z tego samego okresu i zobacz, czy większe ruchy wypadają w tych samych miejscach. Jeden rzut oka na kilka miesięcy powie Ci więcej niż liczba, której i tak byś nie zinterpretował.
+
+**Grupuj pozycje po powodzie, nie po nazwie.** Zanim otworzysz kolejną transakcję, przypisz ją do tego, na czym faktycznie zarabia: na słabym dolarze, na wzroście apetytu na ryzyko, na drożejącej ropie. Jeżeli w grupie jest już inna pozycja, nowa transakcja powiększa istniejące ryzyko, a nie tworzy nowe.
+
+**Ustaw limit na grupę.** To jedyna zasada, którą naprawdę trzeba dopisać do planu. Jeżeli Twój limit to jeden procent na transakcję, ustal też sufit dla powiązanych pozycji, na przykład tyle samo lub półtora raza tyle na całą grupę. Wtedy druga transakcja w tej samej grupie oznacza mniejsze pozycje, a nie dołożone ryzyko. Zasadę wpiszesz przy okazji układania reguł w [kreatorze planu](/kreator-planu-tradingowego).
+
+Do tego dochodzi kontrola po fakcie. Jeśli prowadzisz [dziennik](/trading/dziennik-tradera-jak-prowadzic), oznaczaj transakcje otwarte tego samego dnia i sprawdzaj, jak często kończyły się tak samo. Powtarzająca się zgodność wyników to dowód, że handlujesz jednym pomysłem w kilku przebraniach.
+
+## Najczęstsze błędy
+
+**Mylenie liczby instrumentów z dywersyfikacją.** Pięć otwartych transakcji na parach z dolarem to jedna pozycja na dolarze. Liczy się liczba niezależnych powodów, nie liczba tickerów.
+
+**Dokładanie pozycji, bo układ jest ładny.** Drugi dobry układ w tej samej grupie nie jest drugą okazją, tylko powiększeniem pierwszej. Jeśli chcesz w niego wejść, zmniejsz rozmiar obu.
+
+**Zakładanie, że korelacja z zeszłego roku obowiązuje dzisiaj.** Powiązania są zmienne. Sprawdzaj je na bieżącym wykresie, a nie w zapamiętanej regule.
+
+**Liczenie na hedge zamiast na zamknięcie.** Pozycja przeciwna nie usuwa ryzyka, tylko dokłada koszty i utrudnia myślenie o tym, co właściwie masz otwarte.
+
+## Co z tym zrobić dziś
+
+Spójrz na swoje ostatnie dziesięć transakcji i przypisz każdej jeden powód, dla którego miała zarobić. Nie instrument, tylko powód. Potem policz, ile różnych powodów wyszło.
+
+Jeżeli dziesięć transakcji sprowadza się do dwóch czy trzech pomysłów, to Twoje ryzyko przez cały ten czas było wielokrotnie większe, niż pokazywał kalkulator wielkości pozycji. Sama ta świadomość zmienia więcej niż kolejny wskaźnik na wykresie.

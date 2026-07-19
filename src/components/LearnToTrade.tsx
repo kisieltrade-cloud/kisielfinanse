@@ -324,6 +324,7 @@ const READS = [
   { t: 'Dziennik tradera', s: 'Jak notować transakcje i wyciągać wnioski', href: '/trading/dziennik-tradera-jak-prowadzic' },
   { t: 'Testowanie strategii', s: 'Backtest i forward test, zanim zaryzykujesz pieniądze', href: '/trading/jak-testowac-strategie-tradingowa-backtest' },
   { t: 'Kalendarz ekonomiczny', s: 'Dane makro i co robić, gdy zbliża się publikacja', href: '/trading/kalendarz-ekonomiczny-w-tradingu' },
+  { t: 'Korelacje między rynkami', s: 'Kiedy kilka pozycji to w praktyce jedno ryzyko', href: '/trading/korelacje-miedzy-rynkami-w-tradingu' },
   { t: 'Encyklopedia formacji', s: 'Świece i formacje wykresu, narysowane i wyjaśnione', href: '/formacje-tradingowe' },
   { t: 'Narzędzia tradera', s: 'Symulator, kalkulatory i dziennik w jednym miejscu', href: '/narzedzia-tradera' },
   { t: 'Jak zacząć trading od zera', s: 'Kompletny przewodnik dla początkujących', href: '/trading/jak-zaczac-trading-od-zera' },
