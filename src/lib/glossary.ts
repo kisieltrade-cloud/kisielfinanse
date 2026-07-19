@@ -183,8 +183,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['obligacja', 'obligacje', 'obligacji', 'obligacją', 'obligacjami', 'obligacjach'],
     short: 'Obligacja to dłużny papier wartościowy: pożyczasz pieniądze emitentowi (państwu lub firmie), a on zobowiązuje się zwrócić kapitał z odsetkami w określonym terminie.',
     body: [
-      'Kupując obligację, jesteś wierzycielem, nie współwłaścicielem. Dostajesz ustalone odsetki (kupon), a na koniec okresu zwrot wartości nominalnej. Obligacje uchodzą za bezpieczniejsze od akcji, choć dają zwykle niższy zysk.',
-      'Najważniejszy podział to obligacje skarbowe (emitowane przez państwo, najniższe ryzyko) i korporacyjne (emitowane przez firmy, wyższe oprocentowanie i ryzyko). Ceny obligacji spadają, gdy stopy procentowe rosną, i odwrotnie.',
+      'Kupując obligację, jesteś wierzycielem, a nie współwłaścicielem. To zasadnicza różnica wobec akcji i decyduje o wszystkim pozostałym. Nie masz udziału w zyskach, gdy emitentowi idzie świetnie, za to Twoje roszczenie jest zapisane w umowie i w razie kłopotów zaspokajane przed akcjonariuszami.',
+      'Trzy parametry opisują każdą obligację: wartość nominalna, czyli kwota zwracana na koniec, kupon, czyli wysokość odsetek, oraz termin wykupu. Kupon bywa stały przez cały okres, zmienny (powiązany ze wskaźnikiem rynkowym) albo indeksowany inflacją, co przy obligacjach skarbowych jest najpopularniejszym wariantem długoterminowym.',
+      'Podział według emitenta wyznacza poziom ryzyka. Obligacje skarbowe emituje państwo i są uznawane za najbezpieczniejsze dostępne instrumenty w danej walucie. Obligacje korporacyjne emitują firmy, płacą więcej, ale niosą ryzyko niewypłacalności emitenta. Istnieją też obligacje komunalne emitowane przez samorządy.',
+      'Najmniej intuicyjny jest związek ceny ze stopami procentowymi. Cena obligacji na rynku porusza się odwrotnie do stóp: gdy stopy rosną, nowe emisje płacą więcej, więc starsze obligacje ze stałym niższym kuponem tanieją, żeby dorównać im opłacalnością. Gdy stopy spadają, dzieje się odwrotnie. Ta zależność dotyczy tylko obligacji sprzedawanych przed terminem wykupu. Trzymając papier do końca, otrzymasz wartość nominalną niezależnie od tego, co po drodze działo się z ceną.',
+      'Im dłuższy termin do wykupu i im niższy kupon, tym mocniej cena reaguje na zmiany stóp. Dlatego długoterminowe obligacje o stałym oprocentowaniu, uważane potocznie za bezpieczne, potrafią w okresie gwałtownych podwyżek stóp przynieść straty porównywalne z rynkiem akcji, jeśli trzeba je sprzedać przed terminem.',
+    ],
+    example: {
+      title: 'Dlaczego bezpieczna obligacja potrafi stracić na wartości',
+      text: 'Kupujesz obligację o wartości nominalnej 1000 zł ze stałym kuponem 4 procent, czyli 40 zł rocznie, i terminem wykupu za 10 lat. Rok później stopy rynkowe rosną i nowe obligacje płacą 6 procent, czyli 60 zł. Nikt nie kupi Twojej za pełne 1000 zł, skoro obok dostanie więcej, więc jej cena rynkowa spada, żeby wyrównać opłacalność. Trzymając papier do wykupu, i tak odzyskasz 1000 zł plus wszystkie kupony. Strata pojawia się wyłącznie wtedy, gdy musisz sprzedać wcześniej.',
+    },
+    faq: [
+      {
+        q: 'Czy obligacje są bezpieczne?',
+        a: 'Bezpieczniejsze od akcji, ale nie pozbawione ryzyka. Przy obligacjach skarbowych głównym zagrożeniem nie jest niewypłacalność, tylko inflacja zjadająca realną wartość odsetek oraz spadek ceny rynkowej przy wzroście stóp, jeśli trzeba sprzedać przed terminem. Przy obligacjach korporacyjnych dochodzi realne ryzyko upadłości emitenta.',
+      },
+      {
+        q: 'Dlaczego cena obligacji spada, gdy rosną stopy procentowe?',
+        a: 'Ponieważ nowe emisje oferują wtedy wyższe odsetki. Starsza obligacja ze stałym, niższym kuponem musi potanieć, żeby jej opłacalność dla kupującego dorównała nowym papierom. Zależność jest odwrotna i tym silniejsza, im dłuższy pozostały termin do wykupu.',
+      },
+      {
+        q: 'Czym różni się obligacja od lokaty?',
+        a: 'Lokata to umowa z bankiem objęta gwarancją Bankowego Funduszu Gwarancyjnego, o stałym oprocentowaniu i braku ceny rynkowej. Obligacja to papier wartościowy, który można sprzedać przed terminem, ale po cenie ustalonej przez rynek, czyli czasem niższej od nominalnej. Obligacje skarbowe dają zwykle dłuższy horyzont i warianty indeksowane inflacją, których lokata nie oferuje.',
+      },
+      {
+        q: 'Co się stanie, jeśli emitent zbankrutuje?',
+        a: 'Jako wierzyciel jesteś zaspokajany przed akcjonariuszami, ale to nie gwarantuje odzyskania całości. Przy obligacjach korporacyjnych realna wypłata zależy od majątku upadłej firmy i kolejności zaspokajania wierzycieli. Przy obligacjach skarbowych w walucie krajowej ryzyko to jest uznawane za marginalne.',
+      },
     ],
     related: ['obligacje-skarbowe', 'akcja', 'inflacja'],
   },
@@ -379,8 +404,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['GPW', 'Giełda Papierów Wartościowych', 'warszawska giełda', 'GPW w Warszawie'],
     short: 'GPW (Giełda Papierów Wartościowych w Warszawie) to główna giełda w Polsce, na której notowane są akcje spółek, obligacje i inne instrumenty.',
     body: [
-      'To tu handluje się akcjami polskich spółek wchodzących w skład indeksów takich jak WIG20 czy WIG. GPW działa od 1991 roku i podlega nadzorowi KNF.',
-      'Inwestując przez polskiego brokera, kupujesz akcje z GPW w złotych, bez kosztów przewalutowania, w odróżnieniu od giełd zagranicznych.',
+      'GPW powstała w 1991 roku, po transformacji ustrojowej, a pierwsza sesja odbyła się w gmachu dawnego Komitetu Centralnego. Dziś jest największą giełdą w regionie Europy Środkowo-Wschodniej i podlega nadzorowi Komisji Nadzoru Finansowego.',
+      'Handel odbywa się na kilku rynkach. Główny rynek regulowany skupia największe i najbardziej płynne spółki, spełniające najostrzejsze wymogi informacyjne. NewConnect to rynek alternatywny dla mniejszych, często młodych firm, z łagodniejszymi wymogami i wyraźnie wyższym ryzykiem. Catalyst służy obrotowi obligacjami, w tym korporacyjnymi i komunalnymi.',
+      'Zachowanie rynku opisują indeksy. WIG20 obejmuje dwadzieścia największych spółek i to on jest najczęściej cytowany w mediach. mWIG40 i sWIG80 grupują średnie i mniejsze firmy. Najszerszy jest WIG, obejmujący zdecydowaną większość notowanych spółek. Jest tu jednak haczyk: WIG20 to indeks cenowy, czyli nie uwzględnia dywidend, przez co zaniża faktyczny zysk inwestora, w przeciwieństwie do WIG.',
+      'Sesja przebiega w kilku fazach: od przyjmowania zleceń przed otwarciem, przez notowania ciągłe, po fixing zamknięcia, w którym ustalany jest kurs końcowy. Ta ostatnia faza bywa zaskoczeniem dla początkujących, bo cena zamknięcia potrafi odbiegać od ostatniej ceny z notowań ciągłych.',
+      'Dla polskiego inwestora GPW ma dwie praktyczne zalety: kupujesz w złotych, więc nie ponosisz kosztu przewalutowania, a rozliczenie podatkowe jest prostsze, bo polskie biuro maklerskie wystawia PIT-8C. Ograniczeniem jest skala: warszawski rynek to niewielki ułamek światowej kapitalizacji i jest silnie skoncentrowany na kilku sektorach, dlatego oparcie na nim całego portfela oznacza słabą dywersyfikację geograficzną.',
+    ],
+    example: {
+      title: 'Dlaczego WIG20 pokazuje mniej, niż faktycznie zarobiłeś',
+      text: 'WIG20 jest indeksem cenowym i nie uwzględnia wypłacanych dywidend. Jeżeli spółki z indeksu wypłacają średnio 4 procent dywidendy rocznie, to inwestor trzymający ich akcje zarabia o te 4 punkty procentowe więcej rocznie, niż pokazuje wykres indeksu. Przez dekadę różnica staje się ogromna: sam indeks może wyglądać na stojący w miejscu, podczas gdy realny wynik z reinwestowanymi dywidendami jest wyraźnie dodatni. Do oceny własnych wyników służy WIG albo indeks dochodowy, nie WIG20.',
+    },
+    faq: [
+      {
+        q: 'Jak zacząć inwestować na GPW?',
+        a: 'Potrzebujesz rachunku maklerskiego w biurze prowadzącym obrót na warszawskim parkiecie. Otwarcie odbywa się online i zajmuje zwykle kilkanaście minut. Po zasileniu rachunku składasz zlecenia kupna, wybierając spółkę, liczbę akcji i rodzaj zlecenia. Rozliczenie podatku przeprowadzisz na podstawie PIT-8C w zeznaniu PIT-38.',
+      },
+      {
+        q: 'Czym różni się WIG od WIG20?',
+        a: 'WIG20 obejmuje dwadzieścia największych spółek i jest indeksem cenowym, czyli pomija dywidendy. WIG obejmuje zdecydowaną większość notowanych spółek i jest indeksem dochodowym, uwzględniającym wypłacane dywidendy. Do porównywania własnych wyników trafniejszy jest WIG.',
+      },
+      {
+        q: 'W jakich godzinach odbywa się sesja?',
+        a: 'Sesja trwa w dni robocze i dzieli się na fazy: przyjmowanie zleceń przed otwarciem, notowania ciągłe stanowiące główną część dnia oraz fixing zamknięcia ustalający kurs końcowy. Aktualny harmonogram publikuje GPW, ponieważ szczegółowe godziny bywają korygowane.',
+      },
+      {
+        q: 'Czy inwestowanie tylko na GPW wystarczy?',
+        a: 'Do dywersyfikacji zwykle nie. Warszawski rynek odpowiada za niewielki ułamek globalnej kapitalizacji i jest mocno skoncentrowany na kilku sektorach, przede wszystkim finansowym i surowcowym. Portfel oparty wyłącznie na nim jest silnie uzależniony od kondycji jednej gospodarki, dlatego często uzupełnia się go ekspozycją na rynki zagraniczne.',
+      },
     ],
     related: ['wig20', 'akcja', 'dom-maklerski'],
   },
@@ -553,8 +603,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['alokacja aktywów', 'alokacja', 'alokacji aktywów', 'podział portfela'],
     short: 'Alokacja aktywów to sposób, w jaki dzielisz kapitał między klasy aktywów: akcje, obligacje, gotówkę, surowce. To jedna z najważniejszych decyzji inwestora.',
     body: [
-      'Badania pokazują, że to alokacja, a nie wybór pojedynczych spółek, odpowiada za większość wyniku portfela w długim terminie. Im więcej akcji, tym wyższy potencjalny zysk i wyższe wahania.',
-      'Alokację dopasowuje się do horyzontu i tolerancji ryzyka. Popularna zasada mówi, że udział obligacji może rosnąć z wiekiem, by chronić kapitał bliżej celu.',
+      'Badania nad wynikami portfeli konsekwentnie pokazują to samo: o zmienności i o większości długoterminowego wyniku decyduje podział między klasy aktywów, a nie wybór konkretnych spółek ani moment wejścia. Początkujący inwestor poświęca zwykle całą uwagę temu, co kupić, podczas gdy ważniejsze jest, w jakich proporcjach.',
+      'Punktem wyjścia jest horyzont, czyli za ile lat te pieniądze będą potrzebne. Kapitał na wydatek za dwa lata nie powinien stać w akcjach, bo dwuletnie okno bez straty nie jest gwarantowane. Kapitał na trzydzieści lat trzymany w gotówce traci realnie przez inflację, mimo że nominalnie nie spada. Ryzyko zmienia więc znaczenie razem z horyzontem.',
+      'Drugim kryterium jest odporność psychiczna, a nie deklarowana skłonność do ryzyka. Miarą praktyczną jest pytanie, przy jakim spadku wartości portfela zaczniesz podejmować decyzje wbrew planowi. Alokacja, którą wytrzymasz w bessie, jest lepsza od teoretycznie optymalnej, z której uciekniesz na dnie.',
+      'Popularna zasada mówi, żeby udział obligacji odpowiadał mniej więcej wiekowi inwestora, a reszta przypadała akcjom. To uproszczenie, które ignoruje wielkość kapitału, stabilność dochodów i pozostałe źródła zabezpieczenia, ale bywa użytecznym punktem startowym dla kogoś, kto nie wie, od czego zacząć.',
+      'Alokacja nie jest decyzją jednorazową. Rynek sam ją rozjeżdża, bo szybciej rosnące składniki zwiększają swój udział, więc raz do roku przywraca się zamierzone proporcje. Zmienia się ją świadomie wtedy, gdy zmienia się horyzont albo sytuacja życiowa, a nie pod wpływem bieżących nastrojów rynkowych.',
+    ],
+    example: {
+      title: 'Ta sama strata, dwie różne alokacje',
+      text: 'Rynek akcji spada o 40 procent. Portfel złożony w całości z akcji traci 40 procent: ze 100 000 zł zostaje 60 000 zł. Portfel w proporcji 60 procent akcji i 40 procent obligacji, przy założeniu, że obligacje utrzymały wartość, traci 24 procent, czyli zostaje 76 000 zł. Pierwszy portfel potrzebuje wzrostu o około 67 procent, żeby wrócić do punktu wyjścia, drugi o około 32 procent. Cena za tę odporność jest widoczna dopiero w hossie, gdy portfel mieszany rośnie wolniej.',
+    },
+    faq: [
+      {
+        q: 'Jaka alokacja jest odpowiednia dla mnie?',
+        a: 'Zależy przede wszystkim od horyzontu, czyli terminu, w którym pieniądze będą potrzebne, oraz od tego, jaki spadek wartości wytrzymasz bez łamania planu. Im krótszy horyzont, tym większy udział instrumentów bezpiecznych. Przy horyzoncie kilkudziesięcioletnim przeważa zwykle część akcyjna, bo to ona daje realny wzrost ponad inflację.',
+      },
+      {
+        q: 'Czy zasada „udział obligacji równy wiekowi" ma sens?',
+        a: 'Jako punkt wyjścia tak, jako reguła bezwzględna nie. Nie uwzględnia wielkości kapitału, stabilności dochodów, innych zabezpieczeń emerytalnych ani indywidualnej odporności na wahania. Traktuje się ją jako szkic do skorygowania, a nie gotową odpowiedź.',
+      },
+      {
+        q: 'Jak często zmieniać alokację?',
+        a: 'Samych założeń nie zmienia się często, bo wynikają z horyzontu i sytuacji życiowej, a te zmieniają się rzadko. Natomiast raz w roku przywraca się zamierzone proporcje, ponieważ rynek rozjeżdża je samoczynnie. Zmiana alokacji pod wpływem bieżących nastrojów rynkowych jest najczęstszym sposobem na kupowanie drogo i sprzedawanie tanio.',
+      },
+      {
+        q: 'Czy alokacja ważniejsza od wyboru spółek?',
+        a: 'Dla większości inwestorów tak. Badania portfeli wskazują, że to podział między klasy aktywów odpowiada za większość zmienności i długoterminowego wyniku. Wybór pojedynczych spółek ma znaczenie, ale przy szerokiej dywersyfikacji jego wpływ na wynik całości jest mniejszy niż wpływ proporcji akcji do obligacji.',
+      },
     ],
     related: ['dywersyfikacja', 'rebalancing', 'obligacja'],
   },
@@ -667,8 +742,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['kredyt gotówkowy', 'kredytu gotówkowego', 'pożyczka gotówkowa'],
     short: 'Kredyt gotówkowy to kredyt na dowolny cel, bez zabezpieczenia nieruchomością, zwykle na krótszy okres i z wyższym oprocentowaniem niż hipoteczny.',
     body: [
-      'Dostajesz pieniądze do ręki i spłacasz w ratach. Brak zabezpieczenia oznacza wyższe ryzyko dla banku, stąd droższy niż hipoteka. Do porównania ofert służy RRSO, nie samo oprocentowanie.',
-      'Uważaj na doliczane ubezpieczenia i prowizje, które podnoszą realny koszt. Konsolidacja kilku drogich zobowiązań w jeden tańszy kredyt bywa sensowna, ale tylko gdy realnie obniża RRSO.',
+      'Dostajesz pieniądze do dowolnego celu i spłacasz je w miesięcznych ratach, bez zabezpieczenia na majątku. Bank nie ma czego przejąć w razie kłopotów ze spłatą, więc ryzyko wlicza w cenę. Stąd oprocentowanie wyraźnie wyższe niż przy kredycie hipotecznym, przy jednocześnie krótszym okresie spłaty.',
+      'Do porównywania ofert służy wyłącznie RRSO, czyli rzeczywista roczna stopa oprocentowania. Uwzględnia ona nie tylko odsetki, ale też prowizję i inne koszty obowiązkowe, sprowadzając wszystko do jednej liczby. Samo oprocentowanie nominalne nic nie mówi, bo bank może je obniżyć i odzyskać różnicę w prowizji.',
+      'Największą pułapką są produkty dołączane do kredytu. Ubezpieczenie na życie czy od utraty pracy bywa warunkiem niższego oprocentowania, ale jego składka potrafi przewyższyć oszczędność. Jeżeli koszt jest obowiązkowy, wchodzi do RRSO, dlatego porównanie po tym wskaźniku ujawnia takie konstrukcje.',
+      'Prawo ogranicza, ile bank może doliczyć poza odsetkami. Ustawa o kredycie konsumenckim wyznacza maksymalny limit kosztów pozaodsetkowych, czyli prowizji i opłat, zależny od kwoty i okresu kredytowania. Nie chroni to jednak przed kredytem po prostu drogim w warstwie odsetkowej.',
+      'Masz też prawo do wcześniejszej spłaty w każdej chwili, a bank musi wtedy proporcjonalnie zwrócić koszty przypadające na skrócony okres, w tym część prowizji. To istotne przy konsolidacji: łączenie kilku zobowiązań w jedno ma sens tylko wtedy, gdy realnie obniża RRSO i całkowitą kwotę do zapłaty, a nie samą wysokość raty przez wydłużenie okresu.',
+    ],
+    example: {
+      title: 'Dlaczego niższa rata bywa droższym kredytem',
+      text: 'Kredyt 30 000 zł na 3 lata przy oprocentowaniu 12 procent daje ratę około 996 zł i łączny koszt odsetek około 5870 zł. Ten sam kredyt rozłożony na 7 lat to rata około 530 zł, czyli o 466 zł mniej miesięcznie, ale odsetki rosną do około 14 485 zł. Rata spadła o niemal połowę, a zapłacisz prawie dwa i pół raza więcej. Przy ocenie oferty patrz więc na całkowitą kwotę do zapłaty, nie na wysokość raty.',
+    },
+    faq: [
+      {
+        q: 'Czym różni się kredyt gotówkowy od hipotecznego?',
+        a: 'Kredyt gotówkowy nie wymaga zabezpieczenia na nieruchomości, jest udzielany na dowolny cel i na krótszy okres, zwykle do kilku lat. Kredyt hipoteczny jest zabezpieczony na mieszkaniu lub domu, przez co bank ponosi mniejsze ryzyko i oferuje znacznie niższe oprocentowanie, ale procedura jest dłuższa, a okres spłaty liczony w dekadach.',
+      },
+      {
+        q: 'Na co patrzeć przy porównywaniu ofert?',
+        a: 'Na RRSO oraz na całkowitą kwotę do zapłaty. RRSO sprowadza odsetki, prowizję i koszty obowiązkowe do jednej wartości, dzięki czemu oferty są porównywalne. Sama rata jest myląca, bo można ją obniżyć wydłużeniem okresu, co podnosi łączny koszt.',
+      },
+      {
+        q: 'Czy można spłacić kredyt gotówkowy wcześniej?',
+        a: 'Tak, w dowolnym momencie. Bank ma wtedy obowiązek proporcjonalnie obniżyć całkowity koszt kredytu, łącznie ze zwrotem części pobranej prowizji, przypadającej na okres, o który spłatę skrócono.',
+      },
+      {
+        q: 'Czy konsolidacja zawsze się opłaca?',
+        a: 'Nie. Opłaca się wtedy, gdy nowy kredyt ma realnie niższe RRSO i niższą całkowitą kwotę do zapłaty niż suma dotychczasowych zobowiązań. Częstym mechanizmem jest obniżenie raty przez wydłużenie okresu spłaty, co poprawia płynność miesięczną, ale podnosi łączny koszt.',
+      },
     ],
     related: ['rrso', 'kredyt-hipoteczny', 'zdolnosc-kredytowa'],
     calc: { href: '/kalkulator/kredyt-gotowkowy', label: 'Kalkulator kredytu gotówkowego' },
@@ -723,8 +823,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['LTV', 'wskaźnik LTV', 'Loan to Value'],
     short: 'LTV (Loan to Value) to stosunek kwoty kredytu do wartości nieruchomości, podawany w procentach. Pokazuje, jaką część zakupu finansujesz kredytem.',
     body: [
-      'Kredyt 360 000 zł na mieszkanie warte 400 000 zł to LTV 90%. Im niższe LTV (czyli wyższy wkład własny), tym mniejsze ryzyko dla banku i zwykle lepsze warunki kredytu.',
-      'Wysokie LTV oznacza często wyższą marżę i dodatkowe ubezpieczenie niskiego wkładu. LTV zmienia się w czasie, bo spłacasz kapitał, a wartość nieruchomości się waha.',
+      'Wskaźnik liczy się prosto: kwota kredytu podzielona przez wartość nieruchomości. Kredyt 360 000 zł na mieszkanie warte 400 000 zł daje LTV 90 procent, co oznacza wkład własny na poziomie 10 procent. Im niższe LTV, tym mniejsze ryzyko banku, bo w razie problemów ze spłatą łatwiej odzyskać należność ze sprzedaży nieruchomości.',
+      'Wartość nieruchomości do wyliczenia ustala bank na podstawie wyceny rzeczoznawcy, a nie ceny z umowy. Gdy wycena wypadnie niżej niż cena zakupu, LTV rośnie i potrzebny jest wyższy wkład własny. To jedna z częstszych niespodzianek na etapie finalizowania kredytu.',
+      'Zalecenia nadzoru wskazują wkład własny na poziomie 20 procent, czyli LTV do 80 procent. Banki dopuszczają zwykle niższy wkład, około 10 procent, ale wtedy wymagają dodatkowego zabezpieczenia, najczęściej ubezpieczenia niskiego wkładu własnego, doliczanego do marży lub raty do momentu, aż zadłużenie spadnie poniżej progu.',
+      'LTV nie jest wartością stałą. Maleje z każdą ratą, bo spłacasz kapitał, i zmienia się razem z wartością nieruchomości. Wzrost cen na rynku obniża LTV bez żadnego działania z Twojej strony, spadek podnosi. W skrajnym przypadku, gdy ceny mocno spadną, zadłużenie może przekroczyć wartość mieszkania.',
+      'Praktyczne znaczenie ma to przy renegocjacji i refinansowaniu. Po kilku latach spłaty LTV bywa już wyraźnie niższe niż na starcie, co jest konkretnym argumentem za obniżeniem marży albo warunkiem wejścia do lepszej oferty w innym banku.',
+    ],
+    example: {
+      title: 'Jak wycena poniżej ceny zakupu psuje wkład własny',
+      text: 'Kupujesz mieszkanie za 500 000 zł, mając 100 000 zł oszczędności, i zakładasz wkład własny 20 procent. Bank wycenia nieruchomość na 470 000 zł i to od tej kwoty liczy wskaźnik. Potrzebny kredyt to 400 000 zł, więc LTV wynosi około 85 procent, a nie 80. Żeby zejść do zakładanego poziomu, musisz dołożyć jeszcze 24 000 zł albo zgodzić się na gorsze warunki. Różnica bierze się wyłącznie z wyceny, a nie ze zmiany ceny transakcyjnej.',
+    },
+    faq: [
+      {
+        q: 'Jak obliczyć LTV?',
+        a: 'Dzielisz kwotę kredytu przez wartość nieruchomości i mnożysz przez sto. Kredyt 340 000 zł przy nieruchomości wartej 400 000 zł daje LTV 85 procent. Do wyliczenia bank przyjmuje wartość z wyceny rzeczoznawcy, która bywa niższa od ceny zakupu.',
+      },
+      {
+        q: 'Jaki wkład własny jest wymagany?',
+        a: 'Zalecany poziom to 20 procent wartości nieruchomości, czyli LTV do 80 procent. Wiele banków dopuszcza wkład około 10 procent, ale wymaga wtedy dodatkowego zabezpieczenia w postaci ubezpieczenia niskiego wkładu, które podnosi koszt kredytu do czasu obniżenia zadłużenia.',
+      },
+      {
+        q: 'Czy LTV się zmienia w trakcie spłaty?',
+        a: 'Tak, i to w obie strony. Maleje wraz ze spłatą kapitału oraz przy wzroście cen nieruchomości, a rośnie, gdy ceny na rynku spadają. Bank nie przelicza go automatycznie na Twoją korzyść, więc obniżenie marży z tego tytułu wymaga zwykle Twojej inicjatywy.',
+      },
+      {
+        q: 'Dlaczego niższe LTV oznacza tańszy kredyt?',
+        a: 'Ponieważ zmniejsza ryzyko banku. Przy dużym wkładzie własnym nawet spadek cen nieruchomości nie sprawia, że zadłużenie przewyższa wartość zabezpieczenia. Banki odzwierciedlają to niższą marżą i rezygnacją z dodatkowych ubezpieczeń.',
+      },
     ],
     related: ['wklad-wlasny', 'kredyt-hipoteczny'],
   },
@@ -756,8 +881,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['refinansowanie', 'refinansowania', 'refinansować', 'przeniesienie kredytu'],
     short: 'Refinansowanie to przeniesienie kredytu do innego banku na lepszych warunkach, na przykład z niższą marżą, by obniżyć ratę lub całkowity koszt.',
     body: [
-      'Opłaca się, gdy na rynku pojawią się tańsze oferty albo poprawi się Twoja zdolność i historia kredytowa. Trzeba policzyć koszty przeniesienia (prowizje, wycena, opłaty) i porównać je z oszczędnością.',
-      'Refinansowanie kredytu hipotecznego potrafi dać realne oszczędności przy wieloletnim zobowiązaniu, ale wymaga ponownej procedury kredytowej, podobnej do zaciągania nowego kredytu.',
+      'Mechanizm polega na tym, że nowy bank spłaca Twoje dotychczasowe zadłużenie, a Ty od tej pory spłacasz jego. Zmienia się umowa, marża i harmonogram, natomiast sama nieruchomość czy cel kredytu pozostają bez zmian.',
+      'Sens pojawia się w dwóch sytuacjach. Pierwsza to spadek marż na rynku od czasu, gdy podpisywałeś umowę. Druga, częściej pomijana, to poprawa Twojej własnej sytuacji: wyższe dochody, spłacona część zobowiązań albo wzrost wartości nieruchomości, dzięki któremu wskaźnik LTV spadł i kwalifikujesz się do niższej marży.',
+      'Refinansowanie to pełna procedura kredytowa, a nie formalność. Bank ponownie bada zdolność, sprawdza historię w BIK i wymaga wyceny nieruchomości. Może się okazać, że przy obecnych dochodach albo obecnych zasadach liczenia zdolności nowej umowy po prostu nie dostaniesz, mimo że starą spłacasz bez opóźnień.',
+      'Koszty przeniesienia trzeba policzyć zawczasu, bo potrafią zjeść korzyść. Składają się na nie wycena nieruchomości, opłaty sądowe za zmianę wpisu hipoteki, podatek od czynności cywilnoprawnych przy ustanowieniu nowej hipoteki, ewentualna prowizja nowego banku oraz koszt wcześniejszej spłaty w starym, jeśli umowa go przewiduje.',
+      'Zanim złożysz wniosek gdzie indziej, spróbuj renegocjacji we własnym banku. Bank, który widzi konkretną ofertę konkurencji i rzetelnie spłacanego klienta, bywa skłonny obniżyć marżę aneksem. Kosztuje to ułamek tego, co pełne przeniesienie, i nie wymaga ponownej procedury.',
+    ],
+    example: {
+      title: 'Kiedy przeniesienie zwraca się w rozsądnym czasie',
+      text: 'Pozostało Ci 300 000 zł kredytu na 20 lat przy oprocentowaniu 7,5 procent, czyli rata około 2417 zł. Nowy bank proponuje 6,5 procent, co daje ratę około 2237 zł, więc oszczędzasz około 180 zł miesięcznie. Jeżeli koszty przeniesienia wyniosą 3000 zł, zwrócą się po niecałych 17 miesiącach, a przez pozostałe lata oszczędność zostaje w kieszeni: łącznie ponad 40 tys. zł mniej odsetek. Przy dwóch latach do końca spłaty ta sama operacja nie miałaby sensu.',
+    },
+    faq: [
+      {
+        q: 'Kiedy refinansowanie się opłaca?',
+        a: 'Gdy oszczędność na odsetkach wyraźnie przewyższa koszty przeniesienia, a do końca spłaty zostało jeszcze sporo lat. Przy krótkim pozostałym okresie odsetki stanowią niewielką część raty, więc nawet niższa marża nie odrobi opłat. Prostym sprawdzianem jest okres zwrotu: koszty podzielone przez miesięczną oszczędność.',
+      },
+      {
+        q: 'Ile kosztuje przeniesienie kredytu hipotecznego?',
+        a: 'Na koszt składają się wycena nieruchomości, opłaty sądowe związane ze zmianą wpisu hipoteki, podatek od ustanowienia nowej hipoteki, ewentualna prowizja nowego banku i koszt wcześniejszej spłaty w dotychczasowym, jeśli umowa go przewiduje. Sumę trzeba zestawić z policzoną oszczędnością, zanim złoży się wniosek.',
+      },
+      {
+        q: 'Czy bank może odmówić refinansowania?',
+        a: 'Tak, ponieważ jest to zaciągnięcie nowego kredytu i podlega pełnej ocenie zdolności kredytowej. Zmiana dochodów, forma zatrudnienia, inne zobowiązania czy zaostrzone zasady liczenia zdolności mogą sprawić, że nowej umowy nie otrzymasz mimo terminowej spłaty dotychczasowej.',
+      },
+      {
+        q: 'Czym różni się refinansowanie od renegocjacji?',
+        a: 'Renegocjacja to obniżenie marży aneksem w banku, w którym już masz kredyt. Jest szybsza, tańsza i nie wymaga ponownej procedury, ale zależy wyłącznie od dobrej woli banku. Refinansowanie oznacza przeniesienie zobowiązania do innej instytucji, daje większe pole do negocjacji, ale wiąże się z kosztami i pełnym wnioskiem kredytowym.',
+      },
     ],
     related: ['kredyt-hipoteczny', 'marza-kredytu', 'nadplata-kredytu'],
   },
@@ -789,8 +939,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['pozycja krótka', 'short', 'krótka pozycja', 'krótka sprzedaż', 'gra na spadek'],
     short: 'Pozycja krótka (short) to zarabianie na spadku ceny: pożyczasz instrument, sprzedajesz go, a potem odkupujesz taniej i oddajesz, zatrzymując różnicę.',
     body: [
-      'Short pozwala zarobić, gdy rynek spada, ale ryzyko jest większe niż przy pozycji długiej: cena teoretycznie może rosnąć bez końca, więc strata bywa nieograniczona.',
-      'To narzędzie spekulacyjne, zwykle z użyciem dźwigni i instrumentów pochodnych jak CFD. Dla początkujących to obszar wysokiego ryzyka.',
+      'Mechanizm klasycznej krótkiej sprzedaży wygląda tak: pożyczasz akcje od kogoś, kto je posiada, sprzedajesz je natychmiast po bieżącej cenie, a po spadku odkupujesz taniej i oddajesz właścicielowi. Różnica między ceną sprzedaży a ceną odkupu jest Twoim zyskiem. W praktyce detaliczny inwestor rzadko robi to bezpośrednio, częściej korzystając z instrumentów pochodnych, gdzie ten sam efekt osiąga się jednym kliknięciem.',
+      'Ryzyko jest tu zasadniczo inne niż przy zwykłym kupnie i to jest najważniejsza rzecz do zrozumienia. Kupując akcję za 100 zł, ryzykujesz najwyżej te 100 zł, bo cena nie spadnie poniżej zera. Grając na spadek, nie masz takiego ograniczenia od góry: cena może wzrosnąć dwukrotnie, pięciokrotnie albo bardziej, a Twoja strata rośnie razem z nią. Zysk jest ograniczony, strata teoretycznie nie.',
+      'Do tego dochodzą koszty, których przy pozycji długiej nie ma. Za pożyczone papiery płaci się opłatę, a przy instrumentach lewarowanych naliczane są punkty swapowe za każdą dobę utrzymywania pozycji. Grając na spadek, płacisz więc za sam upływ czasu, co przy dłuższym trzymaniu pozycji potrafi pochłonąć znaczną część zysku.',
+      'Osobnym zjawiskiem jest short squeeze. Gdy wiele osób gra na spadek konkretnej spółki, a jej kurs zaczyna rosnąć, grający na spadek muszą odkupywać akcje, żeby ograniczyć straty. To odkupywanie samo w sobie podbija cenę, co zmusza kolejnych do zamykania pozycji i napędza spiralę wzrostu. Kurs potrafi wtedy oderwać się od jakiejkolwiek wyceny fundamentalnej na wiele dni.',
+      'Krótka pozycja ma też zastosowanie niespekulacyjne, jako zabezpieczenie istniejącego portfela przed spadkiem bez jego sprzedawania. Niezależnie od celu jest to narzędzie wymagające ścisłego zarządzania ryzykiem, ponieważ rynek rośnie w długim terminie, czyli działa strukturalnie przeciwko tej stronie transakcji.',
+    ],
+    example: {
+      title: 'Asymetria, która czyni short groźnym',
+      text: 'Otwierasz krótką pozycję na akcji wartej 100 zł. Jeżeli kurs spadnie do zera, zarobisz maksymalnie 100 zł na akcję i to jest Twój sufit. Jeżeli kurs wzrośnie do 300 zł, tracisz 200 zł, czyli dwa razy więcej, niż mogłeś zarobić w najlepszym scenariuszu. Przy pozycji długiej proporcje są odwrotne: ryzykujesz najwyżej wpłaconą kwotę, a potencjalny zysk nie ma górnej granicy.',
+    },
+    faq: [
+      {
+        q: 'Jak zarabia się na spadku ceny?',
+        a: 'Sprzedajesz instrument, którego nie posiadasz, pożyczając go wcześniej, a następnie odkupujesz po niższej cenie i oddajesz. Zyskiem jest różnica między ceną sprzedaży a ceną odkupu. Ten sam efekt uzyskuje się przez instrumenty pochodne, gdzie rozliczana jest wyłącznie różnica cen.',
+      },
+      {
+        q: 'Czy strata na krótkiej pozycji jest nieograniczona?',
+        a: 'Teoretycznie tak, ponieważ cena instrumentu może rosnąć bez górnego limitu, podczas gdy maksymalny zysk to spadek do zera. W praktyce u brokerów podlegających regulacjom unijnym klienta detalicznego chroni mechanizm automatycznego zamykania pozycji oraz ochrona przed ujemnym saldem, ale utrata całego depozytu pozostaje realna.',
+      },
+      {
+        q: 'Co to jest short squeeze?',
+        a: 'To gwałtowny wzrost kursu wywołany masowym zamykaniem krótkich pozycji. Rosnąca cena zmusza grających na spadek do odkupywania instrumentu, co dodatkowo podbija kurs i zmusza kolejnych do tego samego. Powstaje spirala, w której cena potrafi na krótko oderwać się od jakiejkolwiek racjonalnej wyceny.',
+      },
+      {
+        q: 'Czy początkujący powinien grać na spadki?',
+        a: 'Zwykle nie. Poza odwróconą asymetrią ryzyka dochodzą koszty utrzymania pozycji naliczane za każdą dobę oraz fakt, że rynki akcji w długim terminie rosną, co działa przeciwko tej stronie transakcji. To narzędzie dla osób z przetestowaną strategią i ścisłym zarządzaniem ryzykiem.',
+      },
     ],
     related: ['pozycja-dluga', 'dzwignia', 'cfd'],
   },
@@ -1411,8 +1586,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['awersja do straty', 'awersji do straty', 'loss aversion'],
     short: 'Awersja do straty to skłonność psychiki, w której ból straty odczuwamy mocniej niż przyjemność z zysku tej samej wielkości, zwykle około dwukrotnie.',
     body: [
-      'Przez awersję do straty inwestorzy zbyt długo trzymają stratne pozycje (licząc, że odbiją) i zbyt szybko sprzedają zyskowne. To odwrotność rozsądnej strategii.',
-      'To jedno z najlepiej udokumentowanych odkryć ekonomii behawioralnej. Świadomość tego błędu i trzymanie się stop lossów pomaga go neutralizować.',
+      'Zjawisko opisali Daniel Kahneman i Amos Tversky w ramach teorii perspektywy, za którą Kahneman otrzymał później Nagrodę Nobla z ekonomii. Ich badania pokazały, że strata określonej kwoty boli mniej więcej dwa razy mocniej, niż cieszy zysk tej samej wielkości. To nie jest wada charakteru, tylko powszechna cecha ludzkiego umysłu.',
+      'Skutek w inwestowaniu jest bardzo konkretny. Sprzedaż stratnej pozycji oznacza przyznanie się do błędu i domknięcie bolesnego rozdziału, więc odkładamy ją, licząc na powrót ceny. Jednocześnie zysk chcemy zamknąć szybko, żeby go nie stracić. Efekt jest dokładnie odwrotny do tego, czego wymaga rentowna strategia: małe zyski i duże straty.',
+      'Ten sam mechanizm stoi za innymi błędami. Przesuwanie stop lossa dalej, gdy cena się zbliża, to unikanie bólu straty kosztem powiększenia ryzyka. Uśrednianie w dół na stratnej pozycji często nie jest decyzją analityczną, tylko sposobem na obniżenie ceny wejścia, żeby powrót do zera wydawał się bliższy. Odgrywanie się po stracie to próba natychmiastowego zlikwidowania nieprzyjemnego uczucia.',
+      'Awersja do straty tłumaczy też zachowania poza rynkiem: trzymanie oszczędności na nisko oprocentowanym koncie zamiast zainwestowania ich, przywiązanie do przecenionego mieszkania kupionego drożej czy niechęć do sprzedaży samochodu poniżej ceny zakupu. W każdym z tych przypadków punktem odniesienia jest cena, którą sami zapłaciliśmy, choć dla rynku jest ona bez znaczenia.',
+      'Neutralizuje się ją nie siłą woli, tylko konstrukcją decyzji. Poziom wyjścia ustala się przed wejściem, kiedy nie ma jeszcze emocji, i zapisuje razem z uzasadnieniem. Pomaga też pytanie kontrolne: gdybym tej pozycji dziś nie miał, czy otworzyłbym ją po obecnej cenie. Jeśli odpowiedź brzmi nie, to trzymasz ją wyłącznie dlatego, że nie chcesz zaksięgować straty.',
+    ],
+    example: {
+      title: 'Asymetria, która wywraca statystykę strategii',
+      text: 'Trader ma strategię z trafnością 50 procent, planowaną stratą 100 zł i planowanym zyskiem 200 zł na transakcję. Na papierze po 10 transakcjach daje to 500 zł zysku. W praktyce awersja do straty każe mu zamykać zyski przy 80 zł, a stratne pozycje trzymać, aż urosną do 250 zł. Te same 10 transakcji przy tej samej trafności daje wtedy 850 zł straty. Strategia się nie zmieniła, zmieniło się tylko wykonanie.',
+    },
+    faq: [
+      {
+        q: 'Czym jest awersja do straty?',
+        a: 'To udokumentowana skłonność psychiki, w której ból związany ze stratą jest odczuwany około dwukrotnie silniej niż przyjemność z zysku o tej samej wartości. Opisali ją Daniel Kahneman i Amos Tversky w teorii perspektywy, a zjawisko należy do najlepiej potwierdzonych obserwacji ekonomii behawioralnej.',
+      },
+      {
+        q: 'Jak awersja do straty szkodzi inwestorowi?',
+        a: 'Prowadzi do zbyt długiego trzymania stratnych pozycji i zbyt szybkiego zamykania zyskownych, czyli do odwrócenia proporcji, na której opiera się rentowność strategii. Stoi też za przesuwaniem stop lossa, uśrednianiem w dół i odgrywaniem się po stracie.',
+      },
+      {
+        q: 'Czy da się ją wyeliminować?',
+        a: 'Nie da się jej usunąć, bo jest wbudowana w sposób działania umysłu, ale można ograniczyć jej wpływ na decyzje. Skuteczne są rozwiązania mechaniczne: ustalenie poziomu wyjścia przed otwarciem pozycji, zlecenia obronne złożone od razu i prowadzenie dziennika, który pokazuje rozbieżność między planem a wykonaniem.',
+      },
+      {
+        q: 'Czym różni się od efektu dyspozycji?',
+        a: 'Awersja do straty to mechanizm psychologiczny, czyli przyczyna. Efekt dyspozycji to jego obserwowalny skutek na rynku, polegający na realizowaniu zysków wcześniej niż strat. Pierwsze wyjaśnia, dlaczego drugie występuje tak powszechnie.',
+      },
     ],
     related: ['efekt-dyspozycji', 'revenge-trading', 'stop-loss'],
   },
