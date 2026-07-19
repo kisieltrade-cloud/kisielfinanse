@@ -43,6 +43,7 @@ const TOOLS = [
   { href: '/kalkulator/wielkosc-pozycji', emoji: '📐', name: 'Kalkulator wielkości pozycji', desc: 'Kapitał + ryzyko% + stop loss → ile jednostek kupić, żeby ryzykować tylko 1-2% konta. Podstawa zarządzania ryzykiem.', tag: 'Licz' },
   { href: '/kreator-planu-tradingowego', emoji: '📋', name: 'Kreator planu tradingowego', desc: 'Pięć kroków i masz spisany plan: ryzyko na transakcję, warunki wejścia, stop loss i limity strat. Z policzonymi kwotami, do wydruku lub PDF.', tag: 'Zaplanuj' },
   { href: '/kalkulator/risk-reward', emoji: '⚖️', name: 'Kalkulator Risk/Reward', desc: 'Oceń, czy potencjalny zysk jest wart ryzykowanej kwoty, zanim wejdziesz w pozycję.', tag: 'Licz' },
+  { href: '/dziennik-tradera', emoji: '📓', name: 'Dziennik tradera', desc: 'Zapisuj transakcje, a narzędzie policzy profit factor, średnie R, obsunięcie i pokaże osobno, ile zarabiają transakcje zgodne z planem, a ile te wbrew niemu.', tag: 'Analizuj' },
   { href: '/naucz-sie-tradowac', emoji: '🎓', name: 'Naucz się tradować', desc: 'Pełna mapa nauki od zera do pierwszego trade’a, quiz formacji i dziennik transakcji w Excelu do pobrania.', tag: 'Ucz się' },
 ];
 

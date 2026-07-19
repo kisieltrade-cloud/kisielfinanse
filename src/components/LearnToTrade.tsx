@@ -326,6 +326,7 @@ const READS = [
   { t: 'Kalendarz ekonomiczny', s: 'Dane makro i co robić, gdy zbliża się publikacja', href: '/trading/kalendarz-ekonomiczny-w-tradingu' },
   { t: 'Korelacje między rynkami', s: 'Kiedy kilka pozycji to w praktyce jedno ryzyko', href: '/trading/korelacje-miedzy-rynkami-w-tradingu' },
   { t: 'Encyklopedia formacji', s: 'Świece i formacje wykresu, narysowane i wyjaśnione', href: '/formacje-tradingowe' },
+  { t: 'Dziennik tradera', s: 'Zapisuj transakcje i licz statystyki, które coś znaczą', href: '/dziennik-tradera' },
   { t: 'Narzędzia tradera', s: 'Symulator, kalkulatory i dziennik w jednym miejscu', href: '/narzedzia-tradera' },
   { t: 'Jak zacząć trading od zera', s: 'Kompletny przewodnik dla początkujących', href: '/trading/jak-zaczac-trading-od-zera' },
   { t: 'Dlaczego 90% traderów traci', s: 'Najczęstsze błędy i jak ich uniknąć', href: '/trading/dlaczego-90-procent-traderow-traci' },

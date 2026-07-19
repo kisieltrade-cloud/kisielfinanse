@@ -149,6 +149,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/dziennik-tradera`,
+      lastModified: new Date('2026-07-19'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/narzedzia-tradera`,
       lastModified: new Date('2026-07-18'),
       changeFrequency: 'monthly',
