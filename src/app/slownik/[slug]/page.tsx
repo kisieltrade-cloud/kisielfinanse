@@ -69,10 +69,25 @@ export default async function TermPage({ params }: Props) {
     url: `${BASE_URL}/slownik/${slug}`,
   };
 
+  const schemaFaq = term.faq?.length
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: term.faq.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      }
+    : null;
+
   return (
     <>
       <Nav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      {schemaFaq && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFaq) }} />
+      )}
       <main style={{ maxWidth: 760, margin: '0 auto', padding: '80px 24px 120px' }}>
 
         {/* Breadcrumb */}
@@ -106,6 +121,55 @@ export default async function TermPage({ params }: Props) {
             {p}
           </p>
         ))}
+
+        {/* Przykład liczbowy. Dla pojęć finansowych konkret robi więcej niż akapit teorii. */}
+        {term.example && (
+          <div style={{
+            marginTop: 28, padding: '18px 20px',
+            background: 'var(--surface)', border: '1px solid var(--border)',
+          }}>
+            <div style={{
+              fontFamily: 'var(--font-mono)', fontSize: '0.66rem', letterSpacing: '2px',
+              textTransform: 'uppercase', color: ACCENT, marginBottom: 8,
+            }}>
+              {term.example.title}
+            </div>
+            <p style={{
+              fontFamily: 'var(--font-body)', fontSize: '0.94rem', color: 'var(--text)',
+              lineHeight: 1.8, margin: 0,
+            }}>
+              {term.example.text}
+            </p>
+          </div>
+        )}
+
+        {/* FAQ - łapie zapytania wtórne i zasila schema FAQPage */}
+        {term.faq && term.faq.length > 0 && (
+          <div style={{ marginTop: 44, borderTop: '1px solid var(--border)', paddingTop: 28 }}>
+            <h2 style={{
+              fontFamily: 'var(--font-body)', fontSize: '1.15rem', fontWeight: 800,
+              color: 'var(--text)', margin: '0 0 18px',
+            }}>
+              Częste pytania
+            </h2>
+            {term.faq.map((f, i) => (
+              <div key={i} style={{ marginBottom: 18 }}>
+                <h3 style={{
+                  fontFamily: 'var(--font-body)', fontSize: '0.98rem', fontWeight: 700,
+                  color: 'var(--text)', margin: '0 0 6px',
+                }}>
+                  {f.q}
+                </h3>
+                <p style={{
+                  fontFamily: 'var(--font-body)', fontSize: '0.93rem', color: 'var(--muted)',
+                  lineHeight: 1.8, margin: 0,
+                }}>
+                  {f.a}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Pełny materiał na ten temat. Stoi zaraz pod definicją, bo czytelnik hasła
             najczęściej potrzebuje właśnie rozwinięcia, a nie listy pojęć na dole strony. */}

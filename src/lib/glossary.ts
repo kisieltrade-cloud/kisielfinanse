@@ -13,6 +13,14 @@ export interface GlossaryTerm {
   aliases: string[];
   short: string;
   body: string[];
+  /**
+   * Pytania i odpowiedzi pod definicją. Generują schema FAQPage, czyli szansę na
+   * rozszerzony wynik w Google, i łapią zapytania wtórne („czy…", „ile…", „jak…"),
+   * których sama definicja nie obsługuje. Odpowiedzi pełnymi zdaniami, bez odsyłaczy.
+   */
+  faq?: { q: string; a: string }[];
+  /** Przykład liczbowy lub scenariusz. Renderowany jako wyróżniona ramka pod treścią. */
+  example?: { title: string; text: string };
   related?: string[];
   calc?: { href: string; label: string };
   noindex?: boolean; // true → pojęcie wyłączone z indeksu Google (meta robots noindex)
@@ -59,8 +67,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['podatek Belki', 'podatku Belki', 'podatkiem Belki', 'podatek od zysków kapitałowych'],
     short: 'Podatek Belki to potoczna nazwa 19% podatku od zysków kapitałowych: od odsetek, dywidend i zysków ze sprzedaży papierów wartościowych.',
     body: [
-      'Nazwa pochodzi od Marka Belki, ministra finansów, za którego kadencji podatek wprowadzono w 2002 roku. Obejmuje między innymi odsetki z lokat, zyski z akcji, ETF-ów i obligacji oraz dywidendy.',
-      'Legalne sposoby na jego odroczenie lub uniknięcie to konta IKE i IKZE. Przy zwykłym rachunku maklerskim podatek rozliczasz samodzielnie w PIT-38 za rok, w którym zrealizowałeś zysk.',
+      'Nazwa pochodzi od Marka Belki, ministra finansów, za którego kadencji podatek wprowadzono w 2002 roku. Formalnie jest to zryczałtowany podatek od dochodów kapitałowych, a jego stawka wynosi 19 procent.',
+      'Sposób rozliczenia zależy od źródła zysku i to jest najczęstsze źródło nieporozumień. Od odsetek z lokaty i konta oszczędnościowego oraz od dywidend z polskich spółek podatek pobiera automatycznie bank lub biuro maklerskie, więc na konto wpływa kwota już pomniejszona i nic nie musisz robić. Natomiast zyski ze sprzedaży akcji, ETF-ów czy obligacji rozliczasz samodzielnie w zeznaniu PIT-38, na podstawie informacji PIT-8C od brokera, w terminie do końca kwietnia za rok poprzedni.',
+      'Przy inwestowaniu liczy się jeszcze jedna cecha tego podatku: płacisz go dopiero przy realizacji zysku, czyli sprzedaży. Dopóki trzymasz papier, wzrost wartości nie jest opodatkowany. Dlatego częste obracanie portfelem oznacza płacenie podatku wielokrotnie po drodze, zamiast pozwolić całej kwocie dalej pracować.',
+      'Straty nie przepadają. Jeżeli w danym roku zamkniesz rok pod kreską, stratę możesz rozliczyć w kolejnych pięciu latach, obniżając przyszły podatek, przy czym w jednym roku odliczysz nie więcej niż połowę straty z danego roku. Warunkiem jest wykazanie jej w zeznaniu, dlatego PIT-38 składa się także przy wyniku ujemnym.',
+      'Legalne sposoby na odroczenie lub uniknięcie tego podatku to konta emerytalne IKE i IKZE, gdzie zyski są zwolnione lub opodatkowane inaczej przy spełnieniu warunków wieku i stażu wpłat. Przy długim horyzoncie ta różnica bywa większa niż wszystkie prowizje maklerskie razem wzięte.',
+    ],
+    example: {
+      title: 'Ile zostaje z zysku i co daje odroczenie',
+      text: 'Kupujesz ETF za 20 000 zł i sprzedajesz po latach za 35 000 zł. Zysk to 15 000 zł, podatek 19 procent wynosi 2850 zł, więc na rękę zostaje 12 150 zł. Gdyby ten sam zysk powstał na rachunku IKE i spełnione byłyby warunki wypłaty, podatku nie zapłaciłbyś wcale. Przy portfelu budowanym przez dwadzieścia lat te 19 procent zabierane przy każdej sprzedaży po drodze robi z procentu składanego znacznie mniej, niż pokazuje kalkulator liczący zysk brutto.',
+    },
+    faq: [
+      {
+        q: 'Czy muszę sam rozliczyć podatek Belki?',
+        a: 'To zależy od źródła. Od odsetek z lokat i kont oszczędnościowych oraz od dywidend z polskich spółek podatek potrąca automatycznie bank lub broker i nie robisz nic. Zyski ze sprzedaży akcji, ETF-ów i obligacji rozliczasz samodzielnie w PIT-38 na podstawie PIT-8C otrzymanego od biura maklerskiego.',
+      },
+      {
+        q: 'Kiedy płaci się podatek od wzrostu wartości akcji?',
+        a: 'Dopiero w momencie sprzedaży, czyli realizacji zysku. Sam wzrost kursu trzymanego papieru nie rodzi obowiązku podatkowego, niezależnie od tego, jak długo go posiadasz i o ile urósł.',
+      },
+      {
+        q: 'Czy stratę można odliczyć?',
+        a: 'Tak. Stratę z inwestycji rozlicza się w ciągu pięciu kolejnych lat podatkowych, obniżając dochód z tego samego źródła, przy czym w jednym roku odliczysz maksymalnie połowę straty poniesionej w danym roku. Aby móc z tego skorzystać, stratę trzeba wykazać w zeznaniu, więc PIT-38 składa się również przy wyniku ujemnym.',
+      },
+      {
+        q: 'Jak legalnie nie płacić podatku Belki?',
+        a: 'Służą do tego konta emerytalne. Na IKE zyski są zwolnione z podatku, jeśli wypłacisz środki po osiągnięciu wymaganego wieku i przy odpowiedniej liczbie lat z wpłatami. IKZE daje z kolei odliczenie wpłat od dochodu, a przy wypłacie po spełnieniu warunków obowiązuje niski zryczałtowany podatek zamiast dziewiętnastu procent.',
+      },
     ],
     related: ['ike', 'ikze'],
   },
@@ -216,8 +249,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['TER', 'wskaźnik TER', 'Total Expense Ratio'],
     short: 'TER (Total Expense Ratio) to roczny wskaźnik kosztów funduszu lub ETF-u, podawany w procentach. Pokazuje, ile rocznie potrącane jest z Twoich pieniędzy za zarządzanie.',
     body: [
-      'ETF na szerokie indeksy mają zwykle bardzo niski TER, często 0,05-0,30% rocznie. Aktywnie zarządzane fundusze potrafią mieć 1,5-3%, co w długim terminie znacząco zjada zyski przez procent składany.',
-      'Niski TER to jedna z głównych zalet ETF-ów. Przy 30-letnim horyzoncie różnica między 0,2% a 2% kosztów rocznych to dziesiątki procent końcowego kapitału.',
+      'TER obejmuje opłatę za zarządzanie oraz bieżące koszty działania funduszu, takie jak obsługa administracyjna, depozytariusz czy audyt. Podawany jest jako procent w skali roku i naliczany od całej wartości Twojej inwestycji, a nie od zysku. To ważne rozróżnienie: opłatę płacisz również w latach, w których fundusz stracił.',
+      'Nie zobaczysz tego kosztu jako osobnej pozycji na rachunku. Jest potrącany stopniowo z aktywów funduszu, więc odbija się na wycenie jednostki albo ceny ETF-u. Efekt jest niewidoczny na co dzień i właśnie dlatego łatwo go zignorować przy wyborze funduszu.',
+      'Rzędy wielkości są dziś mocno rozwarstwione. Fundusze notowane na giełdzie odwzorowujące szerokie indeksy rozwinięte mieszczą się zwykle w przedziale od 0,05 do 0,30 procent rocznie. Fundusze na rynki wschodzące, sektory branżowe czy strategie tematyczne bywają wyraźnie droższe. Klasyczne fundusze aktywnie zarządzane potrafią pobierać kilka procent rocznie.',
+      'TER nie jest jedynym kosztem, jaki ponosisz. Osobno zapłacisz prowizję maklerską przy zakupie i sprzedaży, a przy aktywach w obcej walucie także spread walutowy. Do tego dochodzi różnica odwzorowania, czyli rozjazd między wynikiem funduszu a wynikiem indeksu, który bywa nieco większy niż sam TER.',
+      'Praktyczna zasada przy porównywaniu dwóch podobnych funduszy na ten sam indeks brzmi: jeśli oba śledzą to samo i mają podobną wielkość oraz płynność, tańszy jest po prostu lepszy. Nie ma tu premii za wyższą cenę.',
+    ],
+    example: {
+      title: 'Ile realnie kosztuje 1 punkt procentowy różnicy',
+      text: 'Przy 50 000 zł zainwestowanych na 25 lat i średniorocznym wyniku brutto 7 procent, fundusz z TER 0,20 procent zostawia około 259 tys. zł, a fundusz z TER 1,20 procent około 205 tys. zł. Jeden punkt procentowy rocznej opłaty kosztuje w tym przykładzie około 54 tys. zł, czyli więcej niż cała pierwotna wpłata. Powód jest prosty: opłata zabiera nie tylko pieniądze, ale też przyszłe zyski, które te pieniądze mogłyby wypracować.',
+    },
+    faq: [
+      {
+        q: 'Czy TER jest pobierany osobno z mojego konta?',
+        a: 'Nie. Koszt jest potrącany bezpośrednio z aktywów funduszu, stopniowo przez cały rok, i odzwierciedla się w wycenie jednostki lub cenie ETF-u. Nie zobaczysz go jako oddzielnej opłaty na wyciągu, przez co bywa niedoceniany.',
+      },
+      {
+        q: 'Jaki TER jest niski?',
+        a: 'Dla funduszy odwzorowujących szerokie indeksy rynków rozwiniętych za niski uznaje się poziom poniżej mniej więcej 0,25 procent rocznie. Dla rynków wschodzących i strategii sektorowych progi są wyższe, bo prowadzenie takiego funduszu kosztuje więcej. Sensowne porównanie robi się zawsze między funduszami na ten sam indeks.',
+      },
+      {
+        q: 'Czy TER to jedyny koszt inwestycji?',
+        a: 'Nie. Poza nim płacisz prowizję maklerską przy każdej transakcji, przy aktywach zagranicznych koszt przewalutowania, a w rozliczeniu rocznym podatek od zysków. Dochodzi też różnica odwzorowania, czyli odchylenie wyniku funduszu od indeksu, które w praktyce bywa nieco większe niż sam wskaźnik kosztów.',
+      },
+      {
+        q: 'Czy droższy fundusz daje lepszy wynik?',
+        a: 'Nie ma takiej zależności, a długoterminowe badania wskazują raczej odwrotnie: koszt jest jedną z niewielu cech funduszu, która przewidywalnie wpływa na wynik netto, i wpływa negatywnie. Wyższa opłata musi zostać najpierw odrobiona, zanim inwestor cokolwiek zyska.',
+      },
     ],
     related: ['etf', 'procent-skladany'],
   },
@@ -249,8 +307,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['broker', 'brokera', 'brokerzy', 'brokerem', 'brokerów', 'brokerom'],
     short: 'Broker to pośrednik, który daje Ci dostęp do giełdy i realizuje Twoje zlecenia kupna i sprzedaży instrumentów finansowych. W Polsce zwykle działa jako dom maklerski.',
     body: [
-      'Brokera wybiera się na lata, więc liczą się prowizje, dostępne rynki, jakość platformy, oferta IKE/IKZE i bezpieczeństwo (regulacje, gwarancje). Różnice w kosztach potrafią znacząco wpłynąć na wynik w długim terminie.',
-      'Brokerzy regulowani w Unii Europejskiej objęci są systemami gwarancji i zasadą oddzielania środków klientów od majątku firmy, co chroni Twoje aktywa w razie kłopotów brokera.',
+      'Sam nie możesz złożyć zlecenia bezpośrednio na giełdzie. Robi to za Ciebie broker, który jest członkiem giełdy, przekazuje Twoje zlecenie do systemu notowań, prowadzi rachunek, przechowuje kupione papiery i rozlicza transakcje. Za tę usługę pobiera prowizję, a czasem także opłaty za prowadzenie rachunku, przewalutowanie czy dostęp do notowań w czasie rzeczywistym.',
+      'Brokerów dzieli się z grubsza na trzy grupy. Domy maklerskie przy polskich bankach są wygodne, bo działają w tej samej aplikacji co konto, ale bywają droższe i mają węższą ofertę zagraniczną. Brokerzy wyspecjalizowani oferują niższe prowizje i szeroki dostęp do rynków zagranicznych. Osobną kategorią są firmy oferujące kontrakty CFD, gdzie nie kupujesz realnych akcji, tylko zawierasz zakład o zmianę ceny z dźwignią.',
+      'Przy wyborze liczy się kilka rzeczy naraz. Prowizja od transakcji i minimalna kwota prowizji, bo przy małych zleceniach to ona decyduje o koszcie. Opłata za przewalutowanie, jeśli kupujesz aktywa w innej walucie, bo bywa większa niż sama prowizja. Dostęp do rynków, na których faktycznie chcesz inwestować. Możliwość prowadzenia rachunku IKE lub IKZE, co przy długim horyzoncie potrafi zaoszczędzić więcej niż wszystkie prowizje razem wzięte. I wreszcie sposób rozliczania podatku, bo polski broker wystawi PIT-8C, a zagraniczny zwykle nie.',
+      'Kwestia bezpieczeństwa sprowadza się do nadzoru. Broker działający w Polsce lub w Unii Europejskiej podlega nadzorowi (w Polsce KNF), musi oddzielać środki klientów od własnego majątku i należy do systemu rekompensat. Oznacza to, że papiery wartościowe kupione przez Ciebie są Twoje, a nie brokera, nawet gdyby ten upadł. Zupełnie inaczej wygląda to u firm spoza nadzoru unijnego, obiecujących wysoką dźwignię i szybkie zyski.',
+      'Zmiana brokera jest możliwa i nie wymaga sprzedawania portfela, bo papiery można przenieść na inny rachunek. Bywa jednak płatna i czasochłonna, dlatego pierwszy wybór lepiej przemyśleć niż odkręcać.',
+    ],
+    example: {
+      title: 'Jak prowizja minimalna zjada małe zlecenia',
+      text: 'Prowizja 0,39 procent brzmi nisko, ale zwykle ma dolny próg, na przykład 5 zł. Przy zleceniu na 500 zł zapłacisz właśnie te 5 zł, czyli realnie 1 procent, a przy kupnie i sprzedaży 2 procent. Przy zleceniu na 5000 zł prowizja procentowa to 19,50 zł, czyli faktycznie 0,39 procent. Wniosek praktyczny: przy regularnym inwestowaniu małych kwot rzadsze i większe zlecenia są tańsze niż częste i drobne.',
+    },
+    faq: [
+      {
+        q: 'Czy pieniądze u brokera są bezpieczne?',
+        a: 'U brokera podlegającego nadzorowi w Unii Europejskiej środki i papiery klientów są prawnie oddzielone od majątku firmy, a rachunki objęte systemem rekompensat. Kupione akcje czy ETF-y pozostają Twoją własnością nawet w razie upadłości brokera. Ryzyko rośnie u podmiotów spoza nadzoru unijnego, zwłaszcza tych reklamujących bardzo wysoką dźwignię.',
+      },
+      {
+        q: 'Ile kosztuje broker?',
+        a: 'Najważniejsze są trzy pozycje: prowizja od transakcji razem z jej kwotą minimalną, opłata za przewalutowanie przy aktywach zagranicznych oraz ewentualna opłata za prowadzenie rachunku. Przy małych, częstych zleceniach decyduje prowizja minimalna, przy zakupach zagranicznych zwykle przewalutowanie.',
+      },
+      {
+        q: 'Czym różni się broker od domu maklerskiego?',
+        a: 'W praktyce w Polsce to często to samo. Dom maklerski to formalna nazwa licencjonowanej instytucji świadczącej usługi maklerskie, a broker to potoczne określenie pośrednika. Różnica pojawia się przy firmach zagranicznych oferujących kontrakty CFD, które nazywają siebie brokerami, choć nie dają dostępu do realnych akcji.',
+      },
+      {
+        q: 'Czy można mieć rachunki u kilku brokerów?',
+        a: 'Tak i bywa to uzasadnione, na przykład gdy jeden ma dobrą ofertę IKE, a drugi tańszy dostęp do rynków zagranicznych. Kosztem jest rozproszenie portfela i trudniejsze rozliczenie podatkowe, zwłaszcza gdy jeden z brokerów nie wystawia PIT-8C.',
+      },
     ],
     related: ['dom-maklerski', 'rachunek-maklerski', 'gpw'],
   },
@@ -326,8 +409,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['TFI', 'Towarzystwo Funduszy Inwestycyjnych', 'fundusz inwestycyjny', 'fundusze inwestycyjne'],
     short: 'TFI (Towarzystwo Funduszy Inwestycyjnych) to instytucja zarządzająca funduszami, które zbierają pieniądze wielu osób i inwestują je według określonej strategii.',
     body: [
-      'Kupując jednostki uczestnictwa funduszu, powierzasz pieniądze zarządzającym. Wygoda kosztuje: aktywnie zarządzane fundusze mają wysokie opłaty (TER), które w długim terminie obniżają wynik.',
-      'Coraz więcej inwestorów wybiera tanie ETF-y zamiast tradycyjnych funduszy TFI właśnie ze względu na koszty. Fundusze TFI bywają sensowne tam, gdzie nie ma dobrego ETF-u.',
+      'Kupując jednostki uczestnictwa, oddajesz pieniądze pod zarząd specjalistom, którzy decydują, co znajdzie się w portfelu funduszu. Nie musisz sam wybierać spółek ani pilnować proporcji. Wartość jednostki (nazywana wyceną) zmienia się razem z wartością aktywów funduszu i jest publikowana zwykle raz dziennie, a nie na bieżąco jak notowania akcji.',
+      'Za tę wygodę płaci się opłatą za zarządzanie, pobieraną co roku od całej zainwestowanej kwoty, niezależnie od wyniku. W polskich funduszach akcyjnych bywa ona rzędu kilku procent rocznie, podczas gdy tanie fundusze ETF na szerokie indeksy mieszczą się często poniżej 0,2 procent. Ta różnica nie brzmi dramatycznie w skali roku, ale przy horyzoncie kilkunastu lat decyduje o dziesiątkach procent końcowego kapitału, bo opłata jest pobierana także od zysków, które mogłyby dalej pracować.',
+      'Do tego dochodzi kwestia skuteczności. Fundusz aktywny obiecuje pobicie rynku, ale badania długoterminowe pokazują konsekwentnie, że większości zarządzających nie udaje się to po uwzględnieniu opłat, a ci, którym udaje się w jednym okresie, rzadko powtarzają wynik w kolejnym. Dlatego przy inwestowaniu w szerokie, płynne rynki tani fundusz indeksowy jest zwykle rozsądniejszym punktem wyjścia.',
+      'Fundusze TFI zachowują sens tam, gdzie trudno o dobry odpowiednik indeksowy: w niszowych klasach aktywów, na rynkach o ograniczonej dostępności albo w rozwiązaniach z dodatkową obsługą. Bywają też domyślną opcją w ramach produktów emerytalnych oferowanych przez banki.',
+      'Przed zakupem sprawdza się trzy rzeczy: całkowite koszty w skali roku, faktyczny skład portfela (bo nazwa funduszu potrafi obiecywać co innego niż zawartość) oraz to, czy podobną ekspozycję da się kupić taniej przez fundusz notowany na giełdzie.',
+    ],
+    example: {
+      title: 'Co robi z kapitałem różnica 2 punktów procentowych opłaty',
+      text: 'Załóżmy 100 000 zł zainwestowane na 20 lat przy średniorocznym wyniku brutto 7 procent. Przy opłacie 0,2 procent rocznie efektywna stopa to około 6,8 procent, co daje w przybliżeniu 373 tys. zł. Przy opłacie 2,2 procent efektywna stopa spada do około 4,8 procent i kapitał rośnie do około 255 tys. zł. Ta sama strategia i ten sam rynek, a różnica sięga blisko 120 tys. zł i bierze się wyłącznie z kosztów.',
+    },
+    faq: [
+      {
+        q: 'Czym różni się fundusz TFI od ETF-u?',
+        a: 'Fundusz TFI kupujesz i sprzedajesz po wycenie ustalanej zwykle raz dziennie, bezpośrednio u towarzystwa lub przez dystrybutora, a jego portfelem aktywnie zarządza zespół. ETF jest notowany na giełdzie i kupujesz go jak akcję, po bieżącej cenie, a najczęściej odwzorowuje indeks zamiast próbować go pobić. Główna praktyczna różnica to koszty roczne, zwykle wyraźnie niższe po stronie ETF-u.',
+      },
+      {
+        q: 'Ile kosztuje fundusz inwestycyjny?',
+        a: 'Podstawowa pozycja to opłata za zarządzanie pobierana rocznie od wartości inwestycji, niezależnie od tego, czy fundusz zarobił. Do tego dochodzić może opłata dystrybucyjna przy zakupie oraz opłata zmienna od wyniku. Całkowity koszt sprawdzisz we wskaźniku kosztów podanym w dokumencie informacyjnym funduszu.',
+      },
+      {
+        q: 'Czy fundusze TFI się opłacają?',
+        a: 'Zależy od alternatywy. Przy inwestowaniu w szerokie rynki rozwinięte tani fundusz indeksowy jest zwykle korzystniejszy, bo aktywne zarządzanie rzadko odrabia swoje koszty w długim terminie. Fundusz TFI bywa uzasadniony tam, gdzie nie ma sensownego odpowiednika indeksowego albo gdy jest to jedyna dostępna forma w ramach konkretnego produktu emerytalnego.',
+      },
+      {
+        q: 'Czy pieniądze w funduszu są bezpieczne?',
+        a: 'Aktywa funduszu są prawnie oddzielone od majątku towarzystwa i przechowuje je niezależny depozytariusz, więc kłopoty samego TFI nie oznaczają utraty wpłaconych środków. Nie chroni to natomiast przed ryzykiem rynkowym: wartość jednostki może spaść i fundusz nie gwarantuje zwrotu kapitału.',
+      },
     ],
     related: ['etf', 'ter', 'akcja'],
   },
@@ -603,8 +711,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['CFD', 'kontrakt CFD', 'kontrakty CFD', 'kontrakt na różnicę'],
     short: 'CFD (kontrakt na różnicę) to instrument pochodny, który pozwala zarabiać na zmianie ceny aktywa bez jego posiadania, zwykle z dźwignią.',
     body: [
-      'Kupując CFD na akcję, nie stajesz się jej właścicielem, tylko zawierasz z brokerem kontrakt o kierunek ceny. Dzięki dźwigni możesz grać w obie strony, ale ryzyko strat jest wysokie.',
-      'CFD to instrumenty dla doświadczonych. Zgodnie z wymogami regulatorów brokerzy ostrzegają, że duży odsetek rachunków detalicznych traci na CFD pieniądze.',
+      'Kupując CFD na akcję czy indeks, nie stajesz się właścicielem instrumentu bazowego. Zawierasz z brokerem umowę, zgodnie z którą rozliczycie różnicę między ceną otwarcia a ceną zamknięcia pozycji. Nie masz więc prawa głosu na walnym zgromadzeniu ani realnych akcji w portfelu, a odpowiednik dywidendy jest jedynie księgowany jako korekta na rachunku.',
+      'Dwie cechy odróżniają CFD od zwykłego kupna. Po pierwsze dźwignia: wykładasz tylko depozyt zabezpieczający, a kontrolujesz pozycję wielokrotnie większą, co proporcjonalnie powiększa zarówno zysk, jak i stratę. Po drugie możliwość gry na spadki, czyli otwarcia pozycji krótkiej bez pożyczania papierów, co przy zwykłym rachunku maklerskim jest trudniejsze.',
+      'Regulacje unijne mocno ograniczyły ten instrument dla klientów detalicznych. Obowiązują limity dźwigni zależne od klasy aktywów, ochrona przed ujemnym saldem, czyli zakaz wpędzania klienta w dług wobec brokera, oraz automatyczne zamykanie pozycji przy spadku depozytu do ustalonego progu. Firmy oferujące CFD mają też obowiązek podawać w materiałach reklamowych odsetek rachunków detalicznych, które tracą pieniądze. Ten odsetek wynosi zwykle od około 60 do ponad 80 procent i jest przeliczany co kwartał.',
+      'Koszty bywają niedoszacowane, bo nie sprowadzają się do prowizji. Płacisz spread, czyli różnicę między ceną kupna a sprzedaży, a przy pozycjach trzymanych przez noc także punkty swapowe naliczane codziennie. Przy dłuższym utrzymywaniu pozycji sam koszt finansowania potrafi przewyższyć zakładany zysk.',
+      'Praktyczny wniosek: CFD są narzędziem krótkoterminowym dla osób, które rozumieją dźwignię i zarządzają ryzykiem. Do długoterminowego budowania kapitału służą inne instrumenty, bo koszty finansowania i mechanika dźwigni działają tu przeciwko cierpliwości.',
+    ],
+    example: {
+      title: 'Jak dźwignia zamienia mały ruch w dużą stratę',
+      text: 'Otwierasz pozycję o wartości 20 000 zł, wykładając 1000 zł depozytu, czyli z dźwignią 20 do 1. Ruch ceny o 1 procent w Twoją stronę daje 200 zł zysku, czyli 20 procent depozytu. Ten sam ruch o 1 procent przeciwko Tobie zabiera 200 zł, czyli jedną piątą depozytu. Spadek o 5 procent oznacza już utratę całej wpłaconej kwoty. Dźwignia nie zmienia szans na trafienie kierunku, zmienia wyłącznie to, jak szybko kończy się Twój kapitał.',
+    },
+    faq: [
+      {
+        q: 'Czy kupując CFD, posiadam akcje?',
+        a: 'Nie. CFD to umowa z brokerem o rozliczenie różnicy cen, a nie zakup instrumentu bazowego. Nie masz praw akcjonariusza ani papierów zapisanych na rachunku, a wypłacona przez spółkę dywidenda odzwierciedla się jedynie jako korekta rozliczeniowa.',
+      },
+      {
+        q: 'Jaka dźwignia jest dostępna dla klienta detalicznego w Unii Europejskiej?',
+        a: 'Limity zależą od klasy aktywów i są ustawione znacznie niżej niż przed regulacją. Najwyższe dopuszczalne poziomy dotyczą głównych par walutowych, a najniższe kryptowalut i pojedynczych akcji. Oferta dźwigni wielokrotnie wyższej niż unijne limity oznacza zwykle podmiot spoza nadzoru unijnego i jest sygnałem ostrzegawczym.',
+      },
+      {
+        q: 'Czy mogę stracić więcej, niż wpłaciłem?',
+        a: 'Klient detaliczny u brokera podlegającego regulacjom unijnym jest objęty ochroną przed ujemnym saldem, więc nie powinien zostać z długiem wobec brokera. Nadal można natomiast stracić całość wpłaconych środków, i to szybko, bo pozycje są zamykane automatycznie przy spadku depozytu do określonego poziomu.',
+      },
+      {
+        q: 'Ile kosztuje trzymanie pozycji CFD przez dłuższy czas?',
+        a: 'Poza spreadem i ewentualną prowizją naliczane są punkty swapowe za każdą dobę utrzymywania pozycji. Przy pozycji trzymanej tygodniami koszt finansowania kumuluje się i potrafi zjeść znaczną część zysku, dlatego CFD słabo nadają się do długiego horyzontu.',
+      },
     ],
     related: ['dzwignia', 'pozycja-krotka', 'spread'],
   },
@@ -968,8 +1101,33 @@ export const GLOSSARY: GlossaryTerm[] = [
     aliases: ['hossa', 'hossy', 'rynek byka', 'bull market'],
     short: 'Hossa to długotrwały wzrost cen na rynku, okres dominacji optymizmu i kupujących. Nazywana też rynkiem byka.',
     body: [
-      'W czasie hossy kolejne szczyty padają wyżej, a spadki są płytkie i krótkie. Rośnie apetyt na ryzyko, a media pełne są dobrych wiadomości, co bywa zwodnicze.',
-      'Hossa to okazja do budowania kapitału, ale i czas, gdy łatwo o nadmierną pewność siebie i kupowanie na szczycie pod wpływem chciwości. Przeciwieństwem jest bessa.',
+      'Technicznie za początek hossy przyjmuje się zwykle wzrost indeksu o co najmniej 20 procent od dołka, choć jest to umowna granica, a nie ścisła definicja. Ważniejsza jest struktura rynku: kolejne szczyty i dołki wypadają coraz wyżej, spadki są płytkie i szybko wykupywane, a powroty do wcześniejszych poziomów nie następują.',
+      'Hossa trwa zwykle dłużej niż bessa, choć rośnie wolniej. Bessa jest gwałtowna i emocjonalna, hossa rozciąga się latami i przez większość czasu wygląda nudno. Ta asymetria ma praktyczną konsekwencję: inwestor, który wychodzi z rynku przy każdym niepokoju, częściej wypada z powolnych wzrostów, niż unika szybkich spadków.',
+      'Charakterystyczne dla dojrzałej hossy jest przesuwanie się uwagi. Na początku rosną spółki o solidnych fundamentach, bo są tanie po bessie. Później kapitał przechodzi do aktywów bardziej ryzykownych i spekulacyjnych, pojawiają się nowe emisje, rośnie zainteresowanie mediów i osób, które wcześniej nie inwestowały. Powszechne przekonanie, że tym razem jest inaczej, historycznie pojawiało się blisko końca cyklu.',
+      'Największym zagrożeniem w hossie nie jest sam rynek, tylko wnioski, jakie inwestor z niej wyciąga o sobie. Rosnący rynek podnosi prawie wszystko, więc łatwo pomylić sprzyjające warunki z własną umiejętnością. Stąd bierze się zwiększanie pozycji, rezygnacja z zasad ryzyka i kupowanie coraz droższych aktywów w przekonaniu, że spadki się skończyły.',
+      'Rozsądne zachowanie w hossie jest nudne i sprowadza się do trzymania planu: regularne wpłaty niezależnie od nastroju, okresowe przywracanie zamierzonych proporcji portfela i niepowiększanie ryzyka tylko dlatego, że ostatnie miesiące były udane.',
+    ],
+    example: {
+      title: 'Dlaczego wychodzenie z rynku „na chwilę" tyle kosztuje',
+      text: 'Wzrosty w czasie hossy rozkładają się bardzo nierówno i koncentrują w krótkich okresach. Portfel wart 100 000 zł rosnący średnio 8 procent rocznie osiąga po 20 latach około 466 tys. zł. Ten sam portfel przy stopie obniżonej do 5 procent, bo część najlepszych okresów spędził poza rynkiem, kończy z około 265 tys. zł. Trzy punkty procentowe różnicy, wynikające z kilku decyzji o przeczekaniu, kosztują w tym przykładzie około 200 tys. zł.',
+    },
+    faq: [
+      {
+        q: 'Kiedy zaczyna się hossa?',
+        a: 'Umownie przyjmuje się wzrost głównego indeksu o co najmniej 20 procent od dołka, ale w praktyce początek hossy rozpoznaje się dopiero z perspektywy czasu. W momencie, w którym się zaczyna, nastroje są zwykle złe, a wiadomości gospodarcze nadal negatywne.',
+      },
+      {
+        q: 'Ile trwa hossa?',
+        a: 'Historycznie hossy trwały dłużej niż bessy, często kilka lat, choć rozpiętość jest duża i żaden cykl nie powtarza poprzedniego. Nie ma kalendarza, który pozwalałby przewidzieć koniec, dlatego strategie oparte na zgadywaniu momentu wyjścia zawodzą częściej, niż pomagają.',
+      },
+      {
+        q: 'Czy w czasie hossy można jeszcze kupować?',
+        a: 'Tak, przy czym rosnące wyceny oznaczają niższe oczekiwane stopy zwrotu w przyszłości. Dla inwestora długoterminowego rozwiązaniem jest regularność wpłat zamiast prób trafienia w idealny moment, bo próba przeczekania hossy poza rynkiem historycznie kosztowała więcej niż kupowanie po wyższych cenach.',
+      },
+      {
+        q: 'Czym hossa różni się od bańki?',
+        a: 'Hossa to wzrost wynikający z poprawy wyników i warunków gospodarczych. Bańka to sytuacja, w której ceny oderwały się od tego, co uzasadniają zyski spółek, a wzrost napędza głównie oczekiwanie dalszego wzrostu. Granica bywa czytelna dopiero po fakcie, ale sygnałem ostrzegawczym jest rosnąca rola dźwigni i argument, że stare miary wyceny przestały obowiązywać.',
+      },
     ],
     related: ['bessa', 'korekta', 'banka-spekulacyjna'],
   },
@@ -999,10 +1157,35 @@ export const GLOSSARY: GlossaryTerm[] = [
     slug: 'krach',
     term: 'Krach giełdowy',
     aliases: ['krach', 'krachu', 'krach giełdowy', 'krach na giełdzie'],
-    short: 'Krach to gwałtowny, paniczny spadek cen na giełdzie w bardzo krótkim czasie, często o kilkanaście procent w ciągu dni.',
+    short: 'Krach to gwałtowny, paniczny spadek cen na giełdzie w bardzo krótkim czasie, często o kilkanaście procent w ciągu kilku dni albo nawet jednej sesji.',
     body: [
-      'Krachy napędza panika i masowa wyprzedaż, czasem spotęgowana dźwignią i automatycznymi zleceniami. Przykłady to lata 1929, 1987 czy krach pandemiczny w 2020 roku.',
-      'Choć przerażające, krachy historycznie okazywały się przejściowe. Najgorsze decyzje to sprzedaż w panice na dnie. Poduszka finansowa i plan pomagają zachować zimną krew.',
+      'Krach różni się od zwykłego spadku tempem, a nie samą skalą. Przyjęło się, że cofnięcie rynku o około 10 procent to korekta, spadek o 20 procent i więcej rozciągnięty w czasie to bessa, a krach to sytuacja, w której podobna przecena dzieje się w dni albo godziny. To rozróżnienie ma znaczenie praktyczne: korekta zdarza się niemal co roku, bessa co kilka lat, a krach jest rzadki i zwykle zapamiętywany z nazwy.',
+      'Mechanizm jest za każdym razem podobny. Zaczyna się od wydarzenia, które podważa wcześniejsze założenia rynku, ale prawdziwe przyspieszenie daje dopiero sprzężenie zwrotne. Inwestorzy z dźwignią dostają wezwania do uzupełnienia depozytu i muszą sprzedawać, żeby je pokryć. Sprzedaż zbija ceny niżej, co uruchamia kolejne wezwania i kolejne zlecenia obronne. Do tego dochodzą systemy automatyczne, które reagują na zmienność, oraz zwykła ludzka panika. Rynek przestaje wyceniać wartość spółek, a zaczyna wyceniać to, kto musi sprzedać natychmiast.',
+      'Najczęściej przywoływane przykłady to październik 1929 roku, który otworzył wielki kryzys, Czarny Poniedziałek 19 października 1987 roku z jednodniowym spadkiem indeksu Dow Jones o ponad 22 procent, kryzys finansowy 2008 roku oraz krach pandemiczny z marca 2020 roku, kiedy amerykański rynek przeszedł do bessy w tempie najszybszym w swojej historii.',
+      'Dla inwestora ważniejsze od samego spadku jest to, co działo się potem. Krach z marca 2020 roku został odrobiony w kilka miesięcy. Spadki z 2008 roku wymagały kilku lat. Po 1929 roku powrót do poprzedniego poziomu zajął ponad dwie dekady. Historia nie obiecuje więc szybkiego odbicia, pokazuje za to regułę odwrotną: im większa dźwignia i im krótszy horyzont, tym mniejsza szansa, że doczekasz odrobienia straty.',
+      'Najdroższą decyzją w krachu jest zwykle sprzedaż na dnie, po tym jak strata stała się nie do zniesienia psychicznie. Zapobiega się temu przed krachem, a nie w jego trakcie: poduszką finansową, która zdejmuje przymus sprzedaży, wielkością pozycji dopasowaną do własnej odporności i spisanym planem, który mówi, co robisz przy spadku o 20 czy 30 procent.',
+    ],
+    example: {
+      title: 'Dlaczego odrabianie boli bardziej, niż się wydaje',
+      text: 'Spadek nie jest symetryczny ze wzrostem, który go odrabia. Portfel wart 100 000 zł po przecenie o 30 procent jest wart 70 000 zł. Żeby wrócić do punktu wyjścia, musi zyskać nie 30, lecz około 43 procent. Przy spadku o 50 procent potrzeba już wzrostu o 100 procent. To arytmetyka, która tłumaczy, dlaczego ochrona kapitału jest ważniejsza od pogoni za ostatnimi procentami zysku.',
+    },
+    faq: [
+      {
+        q: 'Czym różni się krach od bessy?',
+        a: 'Różnicą jest tempo. Bessa to długotrwały spadek rynku, zwykle o 20 procent i więcej, rozłożony na miesiące. Krach to gwałtowna przecena o podobnej lub większej skali, która dzieje się w ciągu dni albo jednej sesji. Krach często rozpoczyna bessę, ale nie musi: w 1987 roku po jednodniowym załamaniu rynek wrócił do wzrostów stosunkowo szybko.',
+      },
+      {
+        q: 'Ile trwa odrobienie krachu?',
+        a: 'Nie ma jednej odpowiedzi i to jest sedno ryzyka. Spadek z marca 2020 roku amerykański rynek odrobił w kilka miesięcy, straty z kryzysu 2008 roku wymagały kilku lat, a po krachu z 1929 roku powrót do poprzedniego poziomu zajął ponad dwadzieścia lat. Dlatego pieniądze potrzebne w krótkim horyzoncie nie powinny leżeć na rynku akcji.',
+      },
+      {
+        q: 'Czy da się przewidzieć krach?',
+        a: 'Co do dnia nie. Można natomiast rozpoznać warunki, w których ryzyko rośnie: wysokie wyceny oderwane od zysków spółek, powszechny optymizm, dużo kapitału na kredyt i przekonanie, że spadki się skończyły. To sygnały do ostrożniejszego doboru wielkości pozycji, a nie do próby trafienia w szczyt.',
+      },
+      {
+        q: 'Co robić, gdy krach już trwa?',
+        a: 'Przede wszystkim nie podejmować decyzji, których nie przewidziałeś wcześniej. Jeśli inwestujesz długoterminowo i nie musisz sięgać po te pieniądze, sprzedaż po dużym spadku zamienia stratę papierową w rzeczywistą. Jeśli handlujesz z dźwignią, priorytetem jest ograniczenie ryzyka, bo w krachu poślizgi rosną i zlecenia obronne realizują się gorzej niż zwykle.',
+      },
     ],
     related: ['bessa', 'banka-spekulacyjna', 'recesja'],
   },
