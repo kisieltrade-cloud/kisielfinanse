@@ -14,6 +14,5 @@ export default function robots(): MetadataRoute.Robots {
         // Google nie indeksuje tych plików jako stron — blokowanie tylko szkodzi SEO.
       ],
     },
-    sitemap: 'https://kisielfinanse.pl/sitemap.xml',
   };
 }

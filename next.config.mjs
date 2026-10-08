@@ -69,6 +69,9 @@ const nextConfig = {
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'X-Frame-Options', value: 'DENY' },
           { key: 'X-XSS-Protection', value: '1; mode=block' },
+          // Cała strona wyłączona z wyszukiwarek (decyzja 2026-10-09).
+          // Nagłówek wygrywa z per-page metadata index:true. Żeby przywrócić — usuń tę linię.
+          { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
         ],
       },
       {
